@@ -1,5 +1,5 @@
 // Copyright ${year} ${name_of_copyright_owner}
-// 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 // Licensed under the Solderpad Hardware License v 2.1 (the "License"); you may not use this file except in compliance
 // with the License, or, at your option, the Apache License version 2.0.  You may obtain a copy of the License at
@@ -7,6 +7,7 @@
 // Unless required by applicable law or agreed to in writing, any work distributed under the License is distributed on
 // an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the
 // specific language governing permissions and limitations under the License.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 `ifndef __UVMT_${tb_name_uppercase}_${name_uppercase}_TEST_SV__
@@ -22,6 +23,7 @@ class uvmt_${tb_name}_${name}_test_c extends uvmt_${tb_name}_${base_test}_test_c
    
    
    `uvm_component_utils(uvmt_${tb_name}_${name}_test_c)
+   
    
    /**
     * Creates ${name}_vseq.
@@ -40,7 +42,7 @@ function uvmt_${tb_name}_${name}_test_c::new(string name="uvmt_${tb_name}_${name
    
    super.new(name, parent);
    
-   ${vseq_name}_vseq = uvme_${tb_name}_${name}_vseq_c::type_id::create("${name}_vseq");
+   ${vseq_name}_vseq = uvme_${tb_name}_${vseq_name}_vseq_c::type_id::create("${vseq_name}_vseq");
    
 endfunction : new
 

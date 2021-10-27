@@ -1,5 +1,5 @@
 // Copyright ${year} ${name_of_copyright_owner}
-// 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 // Licensed under the Solderpad Hardware License v 2.1 (the "License"); you may not use this file except in compliance
 // with the License, or, at your option, the Apache License version 2.0.  You may obtain a copy of the License at
@@ -7,6 +7,7 @@
 // Unless required by applicable law or agreed to in writing, any work distributed under the License is distributed on
 // an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the
 // specific language governing permissions and limitations under the License.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 `ifndef __${name_uppercase}_REG_ADAPTER_SV__
@@ -14,8 +15,7 @@
 
 
 /**
- * Object that converts between abstract register operations (UVM) and
- * ${name_normal_case} operations.
+ * Object that converts between abstract register operations (UVM) and ${name_normal_case} operations.
  */
 class ${name}_reg_adapter_c extends ${base_class};
    
@@ -38,9 +38,6 @@ class ${name}_reg_adapter_c extends ${base_class};
    extern virtual function void bus2reg(uvm_sequence_item bus_item, ref uvm_reg_bus_op rw);
    
 endclass : ${name}_reg_adapter_c
-
-
-`pragma protect begin
 
 
 function ${name}_reg_adapter_c::new(string name="${name}_reg_adapter");
@@ -79,9 +76,6 @@ function void ${name}_reg_adapter_c::bus2reg(uvm_sequence_item bus_item, ref uvm
    //          rw.status = UVM_IS_OK;
    
 endfunction : bus2reg
-
-
-`pragma protect end
 
 
 `endif // __${name_uppercase}_REG_ADAPTER_SV__
