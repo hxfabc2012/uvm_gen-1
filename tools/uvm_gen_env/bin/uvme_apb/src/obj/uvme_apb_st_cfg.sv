@@ -1,4 +1,4 @@
-// Copyright ${year} ${name_of_copyright_owner}
+// Copyright 2021 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 // Licensed under the Solderpad Hardware License v 2.1 (the "License"); you may not use this file except in compliance
@@ -10,14 +10,14 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVME_${name_uppercase}_ST_CFG_SV__
-`define __UVME_${name_uppercase}_ST_CFG_SV__
+`ifndef __UVME_APB_ST_CFG_SV__
+`define __UVME_APB_ST_CFG_SV__
 
 
 /**
- * Object encapsulating all parameters for creating, connecting and running ${name_normal_case} Self-Testing Environment (uvme_${name}_st_env_c) components.
+ * Object encapsulating all parameters for creating, connecting and running APB Self-Testing Environment (uvme_apb_st_env_c) components.
  */
-class uvme_${name}_st_cfg_c extends uvm_object;
+class uvme_apb_st_cfg_c extends uvm_object;
    
    // Integrals
    rand bit                      enabled              ;
@@ -27,20 +27,20 @@ class uvme_${name}_st_cfg_c extends uvm_object;
    rand bit                      trn_log_enabled      ;
    
    // Objects
-   rand uvma_${name}_cfg_c  ${name_1}_cfg;
-   rand uvma_${name}_cfg_c  ${name_2}_cfg;
-   rand uvml_sb_simplex_cfg_c  sb_cfg;
+   rand uvma_apb_cfg_c  mstr_cfg;
+   rand uvma_apb_cfg_c  slv_cfg;
+   rand uvml_sb_cfg_c       sb_cfg;
    
    
-   `uvm_object_utils_begin(uvme_${name}_st_cfg_c)
+   `uvm_object_utils_begin(uvme_apb_st_cfg_c)
       `uvm_field_int (                         enabled              , UVM_DEFAULT)
       `uvm_field_enum(uvm_active_passive_enum, is_active            , UVM_DEFAULT)
       `uvm_field_int (                         scoreboarding_enabled, UVM_DEFAULT)
       `uvm_field_int (                         cov_model_enabled    , UVM_DEFAULT)
       `uvm_field_int (                         trn_log_enabled      , UVM_DEFAULT)
       
-      `uvm_field_object(${name_1}_cfg, UVM_DEFAULT)
-      `uvm_field_object(${name_2}_cfg, UVM_DEFAULT)
+      `uvm_field_object(mstr_cfg, UVM_DEFAULT)
+      `uvm_field_object(slv_cfg, UVM_DEFAULT)
       `uvm_field_object(sb_cfg       , UVM_DEFAULT)
    `uvm_object_utils_end
    
@@ -55,46 +55,24 @@ class uvme_${name}_st_cfg_c extends uvm_object;
    
    constraint agent_cfg_cons {
       if (enabled) {
-         ${name_1}_cfg.enabled == 1;
-         ${name_2}_cfg.enabled == 1;
-      }
-      else {
-         ${name_1}_cfg.enabled == 0;
-         ${name_2}_cfg.enabled == 0;
+         mstr_cfg.enabled == 1;
+         slv_cfg.enabled == 1;
       }
       
       if (is_active == UVM_ACTIVE) {
-         ${name_1}_cfg.is_active == UVM_ACTIVE;
-         ${name_2}_cfg.is_active == UVM_ACTIVE;
-      }
-      else {
-         ${name_1}_cfg.is_active == UVM_PASSIVE;
-         ${name_2}_cfg.is_active == UVM_PASSIVE;
+         mstr_cfg.is_active == UVM_ACTIVE;
+         slv_cfg.is_active == UVM_ACTIVE;
       }
       
       if (trn_log_enabled) {
-         ${name_1}_cfg.trn_log_enabled == 1;
-         ${name_2}_cfg.trn_log_enabled == 1;
-      }
-      else {
-         ${name_1}_cfg.trn_log_enabled == 0;
-         ${name_2}_cfg.trn_log_enabled == 0;
-      }
-      
-      if (cov_model_enabled) {
-         ${name_1}_cfg.cov_model_enabled == 1;
-         ${name_2}_cfg.cov_model_enabled == 1;
-      }
-      else {
-         ${name_1}_cfg.cov_model_enabled == 0;
-         ${name_2}_cfg.cov_model_enabled == 0;
+         soft mstr_cfg.trn_log_enabled == 1;
+         soft slv_cfg.trn_log_enabled == 1;
       }
    }
    
    constraint sb_cfg_cons {
-      sb_cfg.mode == UVML_SB_MODE_IN_ORDER;
       if (scoreboarding_enabled) {
-         sb_cfg.enabled == 1;
+         soft sb_cfg.enabled == 1;
       }
       else {
          sb_cfg.enabled == 0;
@@ -105,20 +83,20 @@ class uvme_${name}_st_cfg_c extends uvm_object;
    /**
     * Creates sub-configuration objects.
     */
-   extern function new(string name="uvme_${name}_st_cfg");
+   extern function new(string name="uvme_apb_st_cfg");
    
-endclass : uvme_${name}_st_cfg_c
+endclass : uvme_apb_st_cfg_c
 
 
-function uvme_${name}_st_cfg_c::new(string name="uvme_${name}_st_cfg");
+function uvme_apb_st_cfg_c::new(string name="uvme_apb_st_cfg");
    
    super.new(name);
    
-   ${name_1}_cfg  = uvma_${name}_cfg_c::type_id::create("${name_1}_cfg");
-   ${name_2}_cfg  = uvma_${name}_cfg_c::type_id::create("${name_2}_cfg");
-   sb_cfg = uvml_sb_simplex_cfg_c::type_id::create("sb_cfg");
+   mstr_cfg  = uvma_apb_cfg_c::type_id::create("mstr_cfg");
+   slv_cfg  = uvma_apb_cfg_c::type_id::create("slv_cfg");
+   sb_cfg         = uvml_sb_cfg_c::type_id::create("sb_cfg");
    
 endfunction : new
 
 
-`endif // __UVME_${name_uppercase}_ST_CFG_SV__
+`endif // __UVME_APB_ST_CFG_SV__

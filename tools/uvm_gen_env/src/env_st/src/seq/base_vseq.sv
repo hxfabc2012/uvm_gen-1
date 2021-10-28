@@ -16,8 +16,7 @@
 
 /**
  * Abstract object from which all other ${name_normal_case} virtual sequences extend.
- * Does not generate any sequence items of its own. Subclasses must be run on
- * ${name_normal_case} Virtual Sequencer (uvme_${name}_st_vsqr_c) instance.
+ * Does not generate any sequence items of its own. Subclasses must be run on ${name_normal_case} Virtual Sequencer (uvme_${name}_st_vsqr_c) instance.
  */
 class uvme_${name}_st_base_vseq_c extends uvm_sequence #(
    .REQ(uvm_sequence_item),

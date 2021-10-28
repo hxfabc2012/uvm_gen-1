@@ -79,6 +79,10 @@ endclass : uvme_${name}_st_cov_model_c
 function uvme_${name}_st_cov_model_c::new(string name="uvme_${name}_st_cov_model", uvm_component parent=null);
    
    super.new(name, parent);
+   ${name}_st_cfg_cg      = new();
+   ${name}_st_cntxt_cg    = new();
+   ${name}_st_seq_item_cg = new();
+   ${name}_st_mon_trn_cg  = new();
    
 endfunction : new
 

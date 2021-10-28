@@ -186,26 +186,26 @@ def prompt_user_values():
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
     
-    name = input("Please enter the package name for this environment (ex: 'dp'); this name will be used for all environment types (ex: 'uvme_dp_env_c'):\n").lower().strip()
+    name = input("Please enter the package name for this Environment (ex: 'dp'); this name will be used for all Environment types (ex: 'uvme_dp_env_c'):\n").lower().strip()
     if name == "":
         sys.exit("ERROR: package name cannot be empty.  Exiting.")
     else:
         parameters["name"] = name
         parameters["name_uppercase"] = name.upper()
     
-    name_normal_case = input("Please enter the (descriptive) name for this environment (ex: 'Data Plane'):\n").strip()
+    name_normal_case = input("Please enter the (descriptive) name for this Environment (ex: 'Data Plane'):\n").strip()
     if name_normal_case == "":
         sys.exit("ERROR: descriptive name cannot be empty.  Exiting.")
     else:
         parameters["name_normal_case"] = name_normal_case
     
-    clk_agent_name = input("Please enter the type for the clock generator agent (default: 'clk'):\n").strip()
+    clk_agent_name = input("Please enter the type for the Clock Agent (default: 'clk'):\n").strip()
     if clk_agent_name == "":
         parameters["clk_agent_type"] = "clk"
     else:
         parameters["clk_agent_type"] = clk_agent_name
     
-    clk_agent_name = input("Please enter the name of the clock generator agent (default: 'sys_clk'):\n").strip()
+    clk_agent_name = input("Please enter the name of the Clock Agent (default: 'sys_clk'):\n").strip()
     if clk_agent_name == "":
         parameters["clk_agent_name"] = "sys_clk"
         parameters["clk_agent_name_uppercase"] = "SYS_CLK"
@@ -213,13 +213,13 @@ def prompt_user_values():
         parameters["clk_agent_name"] = clk_agent_name
         parameters["clk_agent_name_uppercase"] = clk_agent_name.upper()
     
-    reset_agent_name = input("Please enter the type for the reset agent (default: 'reset'):\n").strip()
+    reset_agent_name = input("Please enter the type for the Reset Agent (default: 'reset'):\n").strip()
     if reset_agent_name == "":
         parameters["reset_agent_type"] = "reset"
     else:
         parameters["reset_agent_type"] = reset_agent_name
     
-    reset_agent_name = input("Please enter the name of the reset agent (default: 'sys_reset'):\n").strip()
+    reset_agent_name = input("Please enter the name of the Reset Agent (default: 'sys_reset'):\n").strip()
     if reset_agent_name == "":
         parameters["reset_agent_name"] = "sys_reset"
         parameters["reset_agent_name_uppercase"] = "SYS_RESET"
@@ -227,13 +227,13 @@ def prompt_user_values():
         parameters["reset_agent_name"] = reset_agent_name
         parameters["reset_agent_name_uppercase"] = reset_agent_name.upper()
     
-    ral_agent_type = input("Please enter the type for the RAL agent (default: 'axil'):\n").strip()
+    ral_agent_type = input("Please enter the type for the RAL Agent (default: 'axil'):\n").strip()
     if ral_agent_type == "":
         parameters["ral_agent_type"] = "axil"
     else:
         parameters["ral_agent_type"] = ral_agent_type
     
-    ral_agent_name = input("Please enter the name of the RAL agent (default: 'axil'):\n").strip()
+    ral_agent_name = input("Please enter the name of the RAL Agent (default: 'axil'):\n").strip()
     if ral_agent_name == "":
         parameters["ral_agent_name"] = "axil"
         parameters["ral_agent_name_uppercase"] = "AXIL"

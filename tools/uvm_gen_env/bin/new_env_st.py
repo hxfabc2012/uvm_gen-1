@@ -169,28 +169,28 @@ def prompt_user_values():
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
     
-    name = input("Please enter the package name for this environment (ex: 'dp'); this name will be used for all environment types (ex: 'uvme_dp_env_c'):\n").lower().strip()
+    name = input("Please enter the name of the Agent/Library for this Self-Testing Environment (ex: 'apb'); this name will be used for all Environment types (ex: 'uvme_apb_st_env_c'):\n").lower().strip()
     if name == "":
         sys.exit("ERROR: package name cannot be empty.  Exiting.")
     else:
         parameters["name"] = name
         parameters["name_uppercase"] = name.upper()
     
-    name_normal_case = input("Please enter the (descriptive) name for this environment (ex: 'Data Plane'):\n").strip()
+    name_normal_case = input("Please enter the (descriptive) name for this Agent/Library (ex: 'Advanced Peripheral Bus (APB)'):\n").strip()
     if name_normal_case == "":
         sys.exit("ERROR: descriptive name cannot be empty.  Exiting.")
     else:
         parameters["name_normal_case"] = name_normal_case
     
-    name_1 = input("Please enter the name for the first agent (default: 'egress'):\n").strip()
+    name_1 = input("Please enter the name for the first agent instance (default: 'mstr'):\n").strip()
     if name_1 == "":
-        parameters["name_1"] = "egress"
+        parameters["name_1"] = "mstr"
     else:
         parameters["name_1"] = name_1
     
-    name_2 = input("Please enter the name for the second agent (default: 'ingress'):\n").strip()
+    name_2 = input("Please enter the name for the second agent instance (default: 'slv'):\n").strip()
     if name_2 == "":
-        parameters["name_2"] = "ingress"
+        parameters["name_2"] = "slv"
     else:
         parameters["name_2"] = name_2
     

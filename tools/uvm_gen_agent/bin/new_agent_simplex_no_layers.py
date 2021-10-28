@@ -162,14 +162,14 @@ def prompt_user_values():
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
     
-    name = input("Please enter the package name for this agent (ex: 'pcie'); this name will be used for all agent types (ex: 'uvma_pcie_agent_c'):\n").lower().strip()
+    name = input("Please enter the package name for this agent (ex: 'apb'); this name will be used for all agent types (ex: 'uvma_apb_agent_c'):\n").lower().strip()
     if name == "":
         sys.exit("ERROR: package name cannot be empty.  Exiting.")
     else:
         parameters["name"] = name
         parameters["name_uppercase"] = name.upper()
     
-    name_normal_case = input("Please enter the (descriptive) name for this agent (ex: 'PCI Express'):\n").strip()
+    name_normal_case = input("Please enter the (descriptive) name for this agent (ex: 'Advanced Peripheral Bus (APB)'):\n").strip()
     if name_normal_case == "":
         sys.exit("ERROR: descriptive name cannot be empty.  Exiting.")
     else:
