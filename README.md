@@ -23,6 +23,7 @@ cd ./tools/uvm_gen_agent/bin
 
 
 **2. Run Generator Script**
+
 The python scripts are self-contained and run via CLI.  You will be prompted for parameter values:
 
 ```
@@ -31,6 +32,7 @@ The python scripts are self-contained and run via CLI.  You will be prompted for
 
 
 **3. List tasks**
+
 Templates leave behind `TODO` comments through the code, usually with examples, for the user to fill in.  Usually, templates will not simulate properly without these tasks being finished first:
 
 ```
