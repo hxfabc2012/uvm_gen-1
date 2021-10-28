@@ -15,8 +15,7 @@
 
 
 /**
- * Component encapsulating scoreboards which compare ${name_normal_case}
- * DUT's expected (from predictor) vs. actual (monitored) transactions.
+ * Component encapsulating scoreboards which compare ${name_normal_case} DUT's expected (from predictor) vs. actual (monitored) transactions.
  */
 class uvme_${name}_sb_c extends uvm_scoreboard;
    

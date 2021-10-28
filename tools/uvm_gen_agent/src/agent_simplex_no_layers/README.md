@@ -21,6 +21,5 @@ TODO Describe ${name_normal_case}
 It is dependent on the following packages:
 
 * `uvm_pkg`
-* `uvml_hrtbt_pkg`
-* `uvml_trn_pkg`
+* `uvml_pkg`
 * `uvml_logs_pkg`

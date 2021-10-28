@@ -21,11 +21,7 @@ module uvme_${name}_chkr (
    // TODO Add interfaces to uvme_${name}_chkr
 );
    
-   `pragma protect begin
-   
    // TODO Add assertions to uvme_$[name}_chkr
-   
-   `pragma protect end
    
 endmodule : uvme_${name}_chkr
 

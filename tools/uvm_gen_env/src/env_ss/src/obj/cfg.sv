@@ -76,7 +76,7 @@ class uvme_${name}_cfg_c extends uvm_object;
       soft scoreboarding_enabled        == 1;
       soft cov_model_enabled            == 0;
       soft trn_log_enabled              == 1;
-      soft ral_base_address             == uvme_${name}_default_ral_base_address;
+      soft ral_base_address             == uvme_${name}_default_reg_block_base_address;
       soft ${clk_agent_name}_period     == uvme_${name}_default_${clk_agent_name}_period;
    }
    

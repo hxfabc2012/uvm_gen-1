@@ -91,7 +91,7 @@ task uvme_${name}_reg_hw_reset_vseq_c::run_all_blocks();
    //                      automatic int unsigned ii = _ii;
    //                      
    //                      begin
-   //                         all_blocks_hw_reset_seq[ii].model = cfg.ral.channels[ii];
+   //                         all_blocks_hw_reset_seq[ii].model = cfg.${name}_reg_block.channels[ii];
    //                         `uvm_send(all_blocks_hw_reset_seq[ii])
    //                      end
    //                   join_none

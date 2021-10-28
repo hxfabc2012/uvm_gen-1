@@ -45,7 +45,6 @@ parameters = {
     "name_uppercase"          : "",
     "name_normal_case"        : "",
     "name_of_copyright_owner" : "",
-    "year"                    : date.today().year
 }
 
 files = {
@@ -61,6 +60,7 @@ files = {
     "src/comps/vsqr.sv"                   : "uvme_${name}/src/comps/uvme_${name}_vsqr.sv",
     "src/obj/cfg.sv"                      : "uvme_${name}/src/obj/uvme_${name}_cfg.sv",
     "src/obj/cntxt.sv"                    : "uvme_${name}/src/obj/uvme_${name}_cntxt.sv",
+    "src/reg/reg_block.sv"                : "uvme_${name}/src/reg/uvme_${name}_reg_block.sv",
     "src/seq/base_vseq.sv"                : "uvme_${name}/src/seq/uvme_${name}_base_vseq.sv",
     "src/seq/clk_vseq.sv"                 : "uvme_${name}/src/seq/uvme_${name}_clk_vseq.sv",
     "src/seq/reg_base_vseq.sv"            : "uvme_${name}/src/seq/uvme_${name}_reg_base_vseq.sv",
@@ -75,6 +75,7 @@ files = {
     "src/constants.sv"                    : "uvme_${name}/src/uvma_${name}_constants.sv",
     "src/macros.sv"                       : "uvme_${name}/src/uvma_${name}_macros.sv",
     "src/pkg.flist"                       : "uvme_${name}/src/uvma_${name}_pkg.flist",
+    "src/pkg.flist.xsim"                  : "uvme_${name}/src/uvma_${name}_pkg.flist.xsim",
     "src/pkg.sv"                          : "uvme_${name}/src/uvma_${name}_pkg.sv",
     "src/tdefs.sv"                        : "uvme_${name}/src/uvma_${name}_tdefs.sv",
     "../LICENSE_solderpad_v2p1.md"        : "uvme_${name}/LICENSE.md",
@@ -82,15 +83,15 @@ files = {
 }
 
 directories = [
-    "uvma_${name}",
-    "uvma_${name}/bin",
-    "uvma_${name}/docs",
-    "uvma_${name}/examples",
-    "uvma_${name}/src",
-    "uvma_${name}/src/comps",
-    "uvma_${name}/src/obj",
-    "uvma_${name}/src/reg",
-    "uvma_${name}/src/seq"
+    "uvme_${name}",
+    "uvme_${name}/bin",
+    "uvme_${name}/docs",
+    "uvme_${name}/examples",
+    "uvme_${name}/src",
+    "uvme_${name}/src/comps",
+    "uvme_${name}/src/obj",
+    "uvme_${name}/src/reg",
+    "uvme_${name}/src/seq"
 ]
 
 
@@ -174,6 +175,12 @@ def prompt_user_values():
         if out_path == "":
             out_path = "."
     
+    parameters = {
+        "name"          : name,
+        "name_uppercase": name.upper(),
+        "year"          : date.today().year
+    }
+    
     name_of_copyright_owner = input("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
     if name_of_copyright_owner == "":
         name_of_copyright_owner = default_copyright_owner
@@ -234,13 +241,6 @@ def prompt_user_values():
         parameters["ral_agent_name"] = ral_agent_name
         parameters["ral_agent_name_uppercase"] = ral_agent_name.upper()
     
-    parameters = {
-    "name"                    : name,
-    "name_uppercase"          : name.upper(),
-    "name_normal_case"        : name_normal_case,
-    "name_of_copyright_owner" : name_of_copyright_owner,
-    "year"                    : date.today().year
-}
 
 
 ########################################################################################################################

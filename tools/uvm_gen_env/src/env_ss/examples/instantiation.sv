@@ -11,8 +11,8 @@
 
 
 /**
- * This file contains sample code that demonstrates how to add an instance of the ${name_normal_case} UVM Agent
- * to a UVM environment.
+ * This file contains sample code that demonstrates how to add an instance of the ${name_normal_case} UVM Environment
+ * to another UVM environment.
  * NOTE It is recommended to split up class member declaration and definition.  These classes are all inline to keep the
  * example short.
  */
@@ -23,7 +23,7 @@
  */
 class my_env_cfg_c extends uvm_object;
    
-   rand uvma_${name}_cfg_c  ${name}_cfg;
+   rand uvme_${name}_cfg_c  ${name}_cfg;
    
    `uvm_object_utils_begin(my_env_cfg_c)
       `uvm_field_object(${name}_cfg, UVM_DEFAULT)
@@ -35,7 +35,7 @@ class my_env_cfg_c extends uvm_object;
    
    function new(uvm_component parent=null, string name="my_env");
       super.new(parent, name);
-      cfg = uvma_${name}_cfg_c::type_id::create("${name}_cfg");
+      cfg = uvme_${name}_cfg_c::type_id::create("${name}_cfg");
    endfunction : new
    
 endclass : my_env_cfg_c
@@ -47,7 +47,7 @@ endclass : my_env_cfg_c
 class my_env_c extends uvm_env;
    
    rand my_env_cfg_c  cfg;
-   uvma_${name}_agent_c  ${name}_agent;
+   uvme_${name}_env_c  ${name}_env;
    
    `uvm_component_utils_begin(my_env_c)
       `uvm_field_object(cfg, UVM_DEFAULT)
@@ -63,8 +63,8 @@ class my_env_c extends uvm_env;
          `uvm_fatal("MY_ENV", "cfg is null")
       end
       else begin
-         uvm_config_db#(uvma_${name}_cfg_c)::set(this, "${name}_agent", "cfg", cfg.${name}_cfg);
-         ${name}_agent = uvma_${name}_agent_c::type_id::create("${name}_agent", this);
+         uvm_config_db#(uvme_${name}_cfg_c)::set(this, "${name}_env", "cfg", cfg.${name}_cfg);
+         ${name}_env = uvme_${name}_env_c::type_id::create("${name}_env", this);
       end
    endfunction : build_phase
    

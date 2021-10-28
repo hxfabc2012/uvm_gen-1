@@ -91,7 +91,7 @@ task uvme_${name}_reg_bit_bash_vseq_c::run_all_blocks();
    //                      automatic int unsigned ii = _ii;
    //                      
    //                      begin
-   //                         all_blocks_bit_bash_seq[ii].model = cfg.ral.channels[ii];
+   //                         all_blocks_bit_bash_seq[ii].model = cfg.${name}_reg_block.channels[ii];
    //                         `uvm_send(all_blocks_bit_bash_seq[ii])
    //                      end
    //                   join_none

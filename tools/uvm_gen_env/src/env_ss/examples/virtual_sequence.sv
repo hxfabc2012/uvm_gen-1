@@ -11,24 +11,24 @@
 
 
 /**
- * This file contains sample code that demonstrates how to add a new sequence to the ${name_normal_case} UVM Agent.
+ * This file contains sample code that demonstrates how to add a new virtual sequence to the ${name_normal_case} UVM Environment.
  */
 
 
-`ifndef __UVMA_${name_uppercase}_MY_SEQ_SV__
-`define __UVMA_${name_uppercase}_MY_SEQ_SV__
+`ifndef __UVME_${name_uppercase}_MY_VSEQ_SV__
+`define __UVME_${name_uppercase}_MY_VSEQ_SV__
 
 
 /**
  * Sample sequence that runs 5 fully random items by default.
  */
-class uvma_${name}_my_seq_c extends uvma_${name}_base_seq_c;
+class uvme_${name}_my_vseq_c extends uvme_${name}_base_vseq_c;
    
    // Fields
    rand int unsigned  num_items;
    
    
-   `uvm_object_utils_begin(uvma_${name}_my_seq_c)
+   `uvm_object_utils_begin(uvme_${name}_my_vseq_c)
       `uvm_field_int(num_items, UVM_DEFAULT)
    `uvm_object_utils_end
    
@@ -44,30 +44,30 @@ class uvma_${name}_my_seq_c extends uvma_${name}_base_seq_c;
    /**
     * Default constructor.
     */
-   extern function new(string name="uvma_${name}_my_seq");
+   extern function new(string name="uvme_${name}_my_seq");
    
    /**
     * Generates num_items of fully random reqs.
     */
    extern virtual task body();
    
-endclass : uvma_${name}_my_seq_c
+endclass : uvme_${name}_my_vseq_c
 
 
-function uvma_${name}_my_seq_c::new(string name="uvma_${name}_my_seq");
+function uvme_${name}_my_vseq_c::new(string name="uvme_${name}_my_seq");
    
    super.new(name);
    
 endfunction : new
 
 
-task uvma_${name}_my_seq_c::body();
+task uvme_${name}_my_vseq_c::body();
    
    repeat (num_items) begin
-      `uvm_do(req)
+      `uvm_do_on(req, p_sequencer.sub_sequencer)
    end
    
 endtask : body
 
 
-`endif __UVMA_${name_uppercase}_MY_SEQ_SV__
+`endif __UVME_${name_uppercase}_MY_VSEQ_SV__

@@ -17,7 +17,7 @@
 /**
  * Top-level object encapsulating ${name_normal_case} Register Block.
  */
-class uvme_${name}_reg_block_c extends uvml_reg_block_reg_block_c;
+class uvme_${name}_reg_block_c extends uvm_reg_block;
    
    // Objects
    uvme_${name}_cfg_c    cfg;

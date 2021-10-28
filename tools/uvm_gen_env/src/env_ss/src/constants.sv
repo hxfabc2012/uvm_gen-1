@@ -15,8 +15,8 @@
 
 
 const int unsigned      uvme_${name}_default_${clk_agent_name}_period = 10_000; // 10ns
-const longint unsigned  uvme_${name}_default_ral_base_address = 64'h0000_0000_0000_0000;
-const int unsigned      uvme_${name}_ral_reg_n_bytes  = 4; // bytes (B)
+const longint unsigned  uvme_${name}_default_reg_block_base_address = 64'h0000_0000_0000_0000;
+const int unsigned      uvme_${name}_reg_block_reg_n_bytes  = 4; // bytes (B)
 
 
 `endif // __UVME_${name_uppercase}_CONSTANTS_SV__
