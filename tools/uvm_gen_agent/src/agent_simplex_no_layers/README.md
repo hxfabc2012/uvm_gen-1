@@ -8,7 +8,7 @@ TODO Describe ${name_normal_case}
 
 
 # Block Diagram
-![alt text](./docs/agent_block_diagram.png "${name_normal_case} UVM Agent Block Diagram")
+![alt text](./docs/agent_block_diagram.svg "${name_normal_case} UVM Agent Block Diagram")
 
 # Directory Structure
 * `bin` - Scripts, metadata and other miscellaneous files
