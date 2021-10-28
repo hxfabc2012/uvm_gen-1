@@ -1,5 +1,7 @@
 #!/usr/bin/python3
+########################################################################################################################
 # Copyright 2021 Datum Technology Corporation
+########################################################################################################################
 # SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 ########################################################################################################################
 # Licensed under the Solderpad Hardware License v 2.1 (the "License"); you may not use this file except in compliance
@@ -23,12 +25,18 @@ import sys
 # GLOBALS
 ########################################################################################################################
 dbg = False
-relative_path_to_template = os.getcwd() + "/templates/tb_ss/"
+relative_path_to_template = os.getcwd() + "/templates/env_ss/"
 out_path = ""
 default_copyright_owner = ""
 name_of_copyright_owner = ""
 name = ""
 name_normal_case = ""
+clk_agent_name = ""
+clk_agent_type = ""
+ral_agent_name = ""
+ral_agent_type = ""
+reset_agent_name = ""
+reset_agent_type = ""
 
 
 ########################################################################################################################
@@ -39,43 +47,54 @@ parameters = {
     "name_uppercase"          : "",
     "name_normal_case"        : "",
     "name_of_copyright_owner" : "",
-    "year"                    : date.today().year
 }
 
 files = {
     #              SRC                                 DST
-    "bin/package.py"                     : "uvmt_${name}/bin/package.py",
-    "docs/tb_block_diagram.svg"          : "uvmt_${name}/docs/tb_block_diagram.svg",
-    "examples/test.sv"                   : "uvmt_${name}/examples/test.sv",
-    "src/tb/probe_if.sv"                 : "uvmt_${name}/src/tb/uvmt_${name}_probe_if.sv",
-    "src/tb/dut_chkr.sv"                 : "uvmt_${name}/src/tb/uvmt_${name}_dut_chkr.sv",
-    "src/tb/dut_wrap.sv"                 : "uvmt_${name}/src/tb/uvmt_${name}_dut_wrap.sv",
-    "src/tb/tb.sv"                       : "uvmt_${name}/src/tb/uvmt_${name}_tb.sv",
-    "src/tests/reg_base_test.sv"         : "uvmt_${name}/src/tests/uvmt_${name}_reg_base_test.sv",
-    "src/tests/reg_bit_bash_test.sv"     : "uvmt_${name}/src/tests/uvmt_${name}_reg_bit_bash_test.sv",
-    "src/tests/reg_hw_reset_test.sv"     : "uvmt_${name}/src/tests/uvmt_${name}_reg_hw_reset_test.sv",
-    "src/tests/base_test_workarounds.sv" : "uvmt_${name}/src/tests/uvmt_${name}_base_test_workarounds.sv",
-    "src/tests/base_test.sv"             : "uvmt_${name}/src/tests/uvmt_${name}_base_test.sv",
-    "src/tests/test_cfg.sv"              : "uvmt_${name}/src/tests/uvmt_${name}_test_cfg.sv",
-    "src/constants.sv"                   : "uvmt_${name}/src/uvmt_${name}_constants.sv",
-    "src/macros.sv"                      : "uvmt_${name}/src/uvmt_${name}_macros.sv",
-    "src/pkg.flist"                      : "uvmt_${name}/src/uvmt_${name}_pkg.flist",
-    "src/pkg.flist.xsim"                 : "uvmt_${name}/src/uvmt_${name}_pkg.flist.xsim",
-    "src/pkg.sv"                         : "uvmt_${name}/src/uvmt_${name}_pkg.sv",
-    "src/tdefs.sv"                       : "uvmt_${name}/src/uvmt_${name}_tdefs.sv",
-    "../.gitignore"                      : "uvmt_${name}/.gitignore",
-    "../LICENSE_solderpad_v2p1.md"       : "uvmt_${name}/LICENSE.md",
-    "README.md"                          : "uvmt_${name}/README.md"
+    "bin/package.py"                           : "uvme_${name}/bin/package.py",
+    "docs/env_block_diagram.svg"               : "uvme_${name}/docs/env_block_diagram.svg",
+    "examples/instantiation.sv"                : "uvme_${name}/examples/instantiation.sv",
+    "examples/virtual_sequence.sv"             : "uvme_${name}/examples/virtual_sequence.sv",
+    "src/comps/cov_model.sv"                   : "uvme_${name}/src/comps/uvme_${name}_cov_model.sv",
+    "src/comps/env.sv"                         : "uvme_${name}/src/comps/uvme_${name}_env.sv",
+    "src/comps/prd.sv"                         : "uvme_${name}/src/comps/uvme_${name}_prd.sv",
+    "src/comps/sb.sv"                          : "uvme_${name}/src/comps/uvme_${name}_sb.sv",
+    "src/comps/vsqr.sv"                        : "uvme_${name}/src/comps/uvme_${name}_vsqr.sv",
+    "src/obj/cfg.sv"                           : "uvme_${name}/src/obj/uvme_${name}_cfg.sv",
+    "src/obj/cntxt.sv"                         : "uvme_${name}/src/obj/uvme_${name}_cntxt.sv",
+    "src/reg/reg_block.sv"                     : "uvme_${name}/src/reg/uvme_${name}_reg_block.sv",
+    "src/seq/base_vseq.sv"                     : "uvme_${name}/src/seq/uvme_${name}_base_vseq.sv",
+    "src/seq/clk_vseq.sv"                      : "uvme_${name}/src/seq/uvme_${name}_${clk_agent_name}_vseq.sv",
+    "src/seq/reg_base_vseq.sv"                 : "uvme_${name}/src/seq/uvme_${name}_reg_base_vseq.sv",
+    "src/seq/reg_base_vseq_ignore_list.sv"     : "uvme_${name}/src/seq/uvme_${name}_reg_base_vseq_ignore_list.sv",
+    "src/seq/reg_bit_bash_vseq.sv"             : "uvme_${name}/src/seq/uvme_${name}_reg_bit_bash_vseq.sv",
+    "src/seq/reg_bit_bash_vseq_ignore_list.sv" : "uvme_${name}/src/seq/uvme_${name}_reg_bit_bash_vseq_ignore_list.sv",
+    "src/seq/reg_hw_reset_vseq.sv"             : "uvme_${name}/src/seq/uvme_${name}_reg_hw_reset_vseq.sv",
+    "src/seq/reg_hw_reset_vseq_ignore_list.sv" : "uvme_${name}/src/seq/uvme_${name}_reg_hw_reset_vseq_ignore_list.sv",
+    "src/seq/reset_vseq.sv"                    : "uvme_${name}/src/seq/uvme_${name}_${reset_agent_name}_vseq.sv",
+    "src/seq/vseq_lib.sv"                      : "uvme_${name}/src/seq/uvme_${name}_vseq_lib.sv",
+    "src/chkr.sv"                              : "uvme_${name}/src/uvma_${name}_chkr.sv",
+    "src/constants.sv"                         : "uvme_${name}/src/uvma_${name}_constants.sv",
+    "src/macros.sv"                            : "uvme_${name}/src/uvma_${name}_macros.sv",
+    "src/pkg.flist"                            : "uvme_${name}/src/uvma_${name}_pkg.flist",
+    "src/pkg.flist.xsim"                       : "uvme_${name}/src/uvma_${name}_pkg.flist.xsim",
+    "src/pkg.sv"                               : "uvme_${name}/src/uvma_${name}_pkg.sv",
+    "src/tdefs.sv"                             : "uvme_${name}/src/uvma_${name}_tdefs.sv",
+    "../.gitignore"                            : "uvme_${name}/.gitignore",
+    "../LICENSE_solderpad_v2p1.md"             : "uvme_${name}/LICENSE.md",
+    "README.md"                                : "uvme_${name}/README.md"
 }
 
 directories = [
-    "uvmt_${name}",
-    "uvmt_${name}/bin",
-    "uvmt_${name}/docs",
-    "uvmt_${name}/examples",
-    "uvmt_${name}/src",
-    "uvmt_${name}/src/tb",
-    "uvmt_${name}/src/tests"
+    "uvme_${name}",
+    "uvme_${name}/bin",
+    "uvme_${name}/docs",
+    "uvme_${name}/examples",
+    "uvme_${name}/src",
+    "uvme_${name}/src/comps",
+    "uvme_${name}/src/obj",
+    "uvme_${name}/src/reg",
+    "uvme_${name}/src/seq"
 ]
 
 
@@ -139,13 +158,19 @@ def prompt_user_values():
     global out_path
     global name
     global name_normal_case
+    global clk_agent_name
+    global clk_agent_type
+    global ral_agent_name
+    global ral_agent_type
+    global reset_agent_name
+    global reset_agent_type
     global name_of_copyright_owner
     global default_copyright_owner
     global parameters
     
-    print("Moore.io Template Generator: Sub-System Test Bench and UVM Test Library (v1p0)")
-    print("******************************************************************************")
-    print("The answers to the following questionnaire will be used to generate the code for your new UVM Test Bench")
+    print("Moore.io Template Generator: UVM Environment - Sub-System (SS) (v1p0)")
+    print("*********************************************************************")
+    print("The answers to the following questionnaire will be used to generate the code for your new UVM Environment")
     print("")
     
     if out_path == "":
@@ -164,14 +189,14 @@ def prompt_user_values():
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
     
-    name = input("Please enter the package name for this Test Bench (ex: 'dp'); this name will be used for all Test Bench types (ex: 'uvmt_dp_tb'):\n").lower().strip()
+    name = input("Please enter the package name for this Environment (ex: 'dp'); this name will be used for all Environment types (ex: 'uvme_dp_env_c'):\n").lower().strip()
     if name == "":
         sys.exit("ERROR: package name cannot be empty.  Exiting.")
     else:
         parameters["name"] = name
         parameters["name_uppercase"] = name.upper()
     
-    name_normal_case = input("Please enter the (descriptive) name for this Test Bench (ex: 'Data Plane'):\n").strip()
+    name_normal_case = input("Please enter the (descriptive) name for this Environment (ex: 'Data Plane'):\n").strip()
     if name_normal_case == "":
         sys.exit("ERROR: descriptive name cannot be empty.  Exiting.")
     else:
@@ -180,44 +205,45 @@ def prompt_user_values():
     clk_agent_name = input("Please enter the type for the Clock Agent (default: 'clk'):\n").strip()
     if clk_agent_name == "":
         parameters["clk_agent_type"] = "clk"
-        parameters["clk_agent_type_uppercase"] = "CLK"
     else:
         parameters["clk_agent_type"] = clk_agent_name
-        parameters["clk_agent_type_uppercase"] = clk_agent_name.upper()
     
     clk_agent_name = input("Please enter the name of the Clock Agent (default: 'sys_clk'):\n").strip()
     if clk_agent_name == "":
         parameters["clk_agent_name"] = "sys_clk"
+        parameters["clk_agent_name_uppercase"] = "SYS_CLK"
     else:
         parameters["clk_agent_name"] = clk_agent_name
+        parameters["clk_agent_name_uppercase"] = clk_agent_name.upper()
     
     reset_agent_name = input("Please enter the type for the Reset Agent (default: 'reset'):\n").strip()
     if reset_agent_name == "":
         parameters["reset_agent_type"] = "reset"
-        parameters["reset_agent_type_uppercase"] = "RESET"
     else:
         parameters["reset_agent_type"] = reset_agent_name
-        parameters["reset_agent_type_uppercase"] = reset_agent_name.upper()
     
     reset_agent_name = input("Please enter the name of the Reset Agent (default: 'sys_reset'):\n").strip()
     if reset_agent_name == "":
         parameters["reset_agent_name"] = "sys_reset"
+        parameters["reset_agent_name_uppercase"] = "SYS_RESET"
     else:
         parameters["reset_agent_name"] = reset_agent_name
+        parameters["reset_agent_name_uppercase"] = reset_agent_name.upper()
     
     ral_agent_type = input("Please enter the type for the RAL Agent (default: 'axil'):\n").strip()
     if ral_agent_type == "":
         parameters["ral_agent_type"] = "axil"
-        parameters["ral_agent_type_uppercase"] = "AXIL"
     else:
         parameters["ral_agent_type"] = ral_agent_type
-        parameters["ral_agent_type_uppercase"] = ral_agent_type.upper()
     
     ral_agent_name = input("Please enter the name of the RAL Agent (default: 'axil'):\n").strip()
     if ral_agent_name == "":
         parameters["ral_agent_name"] = "axil"
+        parameters["ral_agent_name_uppercase"] = "AXIL"
     else:
         parameters["ral_agent_name"] = ral_agent_name
+        parameters["ral_agent_name_uppercase"] = ral_agent_name.upper()
+    
 
 
 ########################################################################################################################
