@@ -10,27 +10,9 @@ The Moore.io UVM Generator Suite is a complete set of code templates for any con
 
 
 # Generation
-**1. Run Generator Script**
-
-The python scripts are self-contained and are run via CLI (you will be prompted for parameter values).  For instance,
-to run the "Agent - Simplex, no Layer" generator:
+To run the "Agent - Simplex, no Layer" generator:
 
 ```
+cd ./tools/uvm_gen
 ./src/new_agent_simplex_no_layers.py
 ```
-
-The Singleton (i.e. single file) generators share the same script:
-
-```
-./src/new.py
-```
-
-
-**2. List tasks**
-
-Templates leave behind `TODO` comments throughout the code, usually with examples, for the user to fill in.  Usually, templates will not simulate properly without these tasks being finished first:
-
-```
-grep -nr TODO ./uvma_apb > my_new_agent_tasks.txt
-```
-
