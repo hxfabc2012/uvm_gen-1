@@ -14,7 +14,7 @@ The Moore.io UVM Generator Suite is a complete set of code templates for any con
 
 
 # Generation
-**1. Change directory to `tools/uvm_gen<template>/bin`**
+**1. Change directory to `tools/uvm_gen_<template>/bin`**
 
 This is from where all jobs will be launched.
 ```
