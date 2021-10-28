@@ -23,12 +23,18 @@ import sys
 # GLOBALS
 ########################################################################################################################
 dbg = False
-relative_path_to_template = os.getcwd() + "/../src/tb_st/"
+relative_path_to_template = os.getcwd() + "/templates/env_st/"
 out_path = ""
 default_copyright_owner = ""
 name_of_copyright_owner = ""
 name = ""
 name_normal_case = ""
+clk_agent_name = ""
+clk_agent_type = ""
+ral_agent_name = ""
+ral_agent_type = ""
+reset_agent_name = ""
+reset_agent_type = ""
 
 
 ########################################################################################################################
@@ -39,40 +45,42 @@ parameters = {
     "name_uppercase"          : "",
     "name_normal_case"        : "",
     "name_of_copyright_owner" : "",
-    "year"                    : date.today().year
 }
 
 files = {
     #              SRC                                 DST
-    "bin/package.py"                     : "uvmt_${name}_st/bin/package.py",
-    "docs/tb_block_diagram.svg"          : "uvmt_${name}_st/docs/tb_block_diagram.svg",
-    "examples/test.sv"                   : "uvmt_${name}_st/examples/test.sv",
-    "src/tb/clknrst_gen_if.sv"           : "uvmt_${name}_st/src/tb/uvmt_${name}_st_clknrst_gen_if.sv",
-    "src/tb/dut_chkr.sv"                 : "uvmt_${name}_st/src/tb/uvmt_${name}_st_dut_chkr.sv",
-    "src/tb/dut_wrap.sv"                 : "uvmt_${name}_st/src/tb/uvmt_${name}_st_dut_wrap.sv",
-    "src/tb/tb.sv"                       : "uvmt_${name}_st/src/tb/uvmt_${name}_st_tb.sv",
-    "src/tests/base_test_workarounds.sv" : "uvmt_${name}_st/src/tests/uvmt_${name}_st_base_test_workarounds.sv",
-    "src/tests/base_test.sv"             : "uvmt_${name}_st/src/tests/uvmt_${name}_st_base_test.sv",
-    "src/tests/test_cfg.sv"              : "uvmt_${name}_st/src/tests/uvmt_${name}_st_test_cfg.sv",
-    "src/constants.sv"                   : "uvmt_${name}_st/src/uvmt_${name}_st_constants.sv",
-    "src/macros.sv"                      : "uvmt_${name}_st/src/uvmt_${name}_st_macros.sv",
-    "src/pkg.flist"                      : "uvmt_${name}_st/src/uvmt_${name}_st_pkg.flist",
-    "src/pkg.flist.xsim"                 : "uvmt_${name}_st/src/uvmt_${name}_st_pkg.flist.xsim",
-    "src/pkg.sv"                         : "uvmt_${name}_st/src/uvmt_${name}_st_pkg.sv",
-    "src/tdefs.sv"                       : "uvmt_${name}_st/src/uvmt_${name}_st_tdefs.sv",
-    "../.gitignore"                      : "uvmt_${name}_st/.gitignore",
-    "../LICENSE_solderpad_v2p1.md"       : "uvmt_${name}_st/LICENSE.md",
-    "README.md"                          : "uvmt_${name}_st/README.md"
+    "bin/package.py"                      : "uvme_${name}_st/bin/package.py",
+    "docs/env_block_diagram.svg"          : "uvme_${name}_st/docs/env_block_diagram.svg",
+    "examples/virtual_sequence.sv"        : "uvme_${name}_st/examples/virtual_sequence.sv",
+    "src/comps/cov_model.sv"              : "uvme_${name}_st/src/comps/uvme_${name}_st_cov_model.sv",
+    "src/comps/env.sv"                    : "uvme_${name}_st/src/comps/uvme_${name}_st_env.sv",
+    "src/comps/prd.sv"                    : "uvme_${name}_st/src/comps/uvme_${name}_st_prd.sv",
+    "src/comps/vsqr.sv"                   : "uvme_${name}_st/src/comps/uvme_${name}_st_vsqr.sv",
+    "src/obj/cfg.sv"                      : "uvme_${name}_st/src/obj/uvme_${name}_st_cfg.sv",
+    "src/obj/cntxt.sv"                    : "uvme_${name}_st/src/obj/uvme_${name}_st_cntxt.sv",
+    "src/seq/base_vseq.sv"                : "uvme_${name}_st/src/seq/uvme_${name}_st_base_vseq.sv",
+    "src/seq/vseq_lib.sv"                 : "uvme_${name}_st/src/seq/uvme_${name}_st_vseq_lib.sv",
+    "src/chkr.sv"                         : "uvme_${name}_st/src/uvma_${name}_st_chkr.sv",
+    "src/constants.sv"                    : "uvme_${name}_st/src/uvma_${name}_st_constants.sv",
+    "src/macros.sv"                       : "uvme_${name}_st/src/uvma_${name}_st_macros.sv",
+    "src/pkg.flist"                       : "uvme_${name}_st/src/uvma_${name}_st_pkg.flist",
+    "src/pkg.flist.xsim"                  : "uvme_${name}_st/src/uvma_${name}_st_pkg.flist.xsim",
+    "src/pkg.sv"                          : "uvme_${name}_st/src/uvma_${name}_st_pkg.sv",
+    "src/tdefs.sv"                        : "uvme_${name}_st/src/uvma_${name}_st_tdefs.sv",
+    "../.gitignore"                       : "uvme_${name}_st/.gitignore",
+    "../LICENSE_solderpad_v2p1.md"        : "uvme_${name}_st/LICENSE.md",
+    "README.md"                           : "uvme_${name}_st/README.md"
 }
 
 directories = [
-    "uvmt_${name}_st",
-    "uvmt_${name}_st/bin",
-    "uvmt_${name}_st/docs",
-    "uvmt_${name}_st/examples",
-    "uvmt_${name}_st/src",
-    "uvmt_${name}_st/src/tb",
-    "uvmt_${name}_st/src/tests"
+    "uvme_${name}_st",
+    "uvme_${name}_st/bin",
+    "uvme_${name}_st/docs",
+    "uvme_${name}_st/examples",
+    "uvme_${name}_st/src",
+    "uvme_${name}_st/src/comps",
+    "uvme_${name}_st/src/obj",
+    "uvme_${name}_st/src/seq"
 ]
 
 
@@ -136,13 +144,14 @@ def prompt_user_values():
     global out_path
     global name
     global name_normal_case
+    global reset_agent_type
     global name_of_copyright_owner
     global default_copyright_owner
     global parameters
     
-    print("Moore.io Template Generator: Self-Test Bench and UVM Test Library (v1p0)")
+    print("Moore.io Template Generator: UVM Environment - Self-Testing (ST) (v1p0)")
     print("***********************************************************************")
-    print("The answers to the following questionnaire will be used to generate the code for your new UVM Test Bench")
+    print("The answers to the following questionnaire will be used to generate the code for your new UVM Environment")
     print("")
     
     if out_path == "":
@@ -161,7 +170,7 @@ def prompt_user_values():
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
     
-    name = input("Please enter the name of the Agent/Library for this Self-Test Bench (ex: 'apb'); this name will be used for all Test Bench types (ex: 'uvmt_apb_st_tb'):\n").lower().strip()
+    name = input("Please enter the name of the Agent/Library for this Self-Testing Environment (ex: 'apb'); this name will be used for all Environment types (ex: 'uvme_apb_st_env_c'):\n").lower().strip()
     if name == "":
         sys.exit("ERROR: package name cannot be empty.  Exiting.")
     else:
@@ -185,6 +194,7 @@ def prompt_user_values():
         parameters["name_2"] = "slv"
     else:
         parameters["name_2"] = name_2
+    
 
 
 ########################################################################################################################

@@ -305,6 +305,7 @@ endfunction: connect_scoreboard
 function void uvme_${name}_env_c::connect_reg_block();
    
    reg_block.cntxt = cntxt;
+   reg_block.connect();
    reg_block.default_map.set_sequencer(${ral_agent_name}_agent.sequencer, reg_adapter);
    reg_block.default_map.set_auto_predict(1);
    

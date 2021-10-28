@@ -10,8 +10,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVME_${name_uppercase}_REG_IGNORE_BIT_BASH_LIST_SV__
-`define __UVME_${name_uppercase}_REG_IGNORE_BIT_BASH_LIST_SV__
+`ifndef __UVME_${name_uppercase}_REG_BIT_BASH_VSEQ_IGNORE_LIST_SV__
+`define __UVME_${name_uppercase}_REG_BIT_BASH_VSEQ_IGNORE_LIST_SV__
 
 
 string  ignore_list[$] = '{
@@ -21,4 +21,4 @@ string  ignore_list[$] = '{
 };
 
 
-`endif // __UVME_${name_uppercase}_REG_IGNORE_BIT_BASH_LIST_SV__
+`endif // __UVME_${name_uppercase}_REG_BIT_BASH_VSEQ_IGNORE_LIST_SV__

@@ -86,8 +86,6 @@ endfunction : new
 
 function void uvme_${name}_reg_block_c::build();
    
-   super.build();
-   
    create_blocks  ();
    create_regs    ();
    create_reg_map ();
@@ -96,8 +94,6 @@ endfunction: build
 
 
 function void uvme_${name}_reg_block_c::connect();
-   
-   super.build();
    
    add_regs_to_map();
    lock_model     ();

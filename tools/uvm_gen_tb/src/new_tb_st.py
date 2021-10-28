@@ -23,7 +23,7 @@ import sys
 # GLOBALS
 ########################################################################################################################
 dbg = False
-relative_path_to_template = os.getcwd() + "/../src/agent_simplex_no_layers/"
+relative_path_to_template = os.getcwd() + "/templates/tb_st/"
 out_path = ""
 default_copyright_owner = ""
 name_of_copyright_owner = ""
@@ -44,43 +44,35 @@ parameters = {
 
 files = {
     #              SRC                                 DST
-    "bin/package.py"               : "uvma_${name}/bin/package.py",
-    "docs/agent_block_diagram.svg" : "uvma_${name}/docs/agent_block_diagram.svg",
-    "examples/instantiation.sv"    : "uvma_${name}/examples/instantiation.sv",
-    "examples/sequence.sv"         : "uvma_${name}/examples/sequence.sv",
-    "src/comps/agent.sv"           : "uvma_${name}/src/comps/uvma_${name}_agent.sv",
-    "src/comps/cov_model.sv"       : "uvma_${name}/src/comps/uvma_${name}_cov_model.sv",
-    "src/comps/drv.sv"             : "uvma_${name}/src/comps/uvma_${name}_drv.sv",
-    "src/comps/mon_trn_logger.sv"  : "uvma_${name}/src/comps/uvma_${name}_mon_trn_logger.sv",
-    "src/comps/mon.sv"             : "uvma_${name}/src/comps/uvma_${name}_mon.sv",
-    "src/comps/seq_item_logger.sv" : "uvma_${name}/src/comps/uvma_${name}_seq_item_logger.sv",
-    "src/comps/sqr.sv"             : "uvma_${name}/src/comps/uvma_${name}_sqr.sv",
-    "src/obj/cfg.sv"               : "uvma_${name}/src/obj/uvma_${name}_cfg.sv",
-    "src/obj/cntxt.sv"             : "uvma_${name}/src/obj/uvma_${name}_cntxt.sv",
-    "src/obj/mon_trn.sv"           : "uvma_${name}/src/obj/uvma_${name}_mon_trn.sv",
-    "src/seq/base_seq.sv"          : "uvma_${name}/src/seq/uvma_${name}_base_seq.sv",
-    "src/seq/seq_item.sv"          : "uvma_${name}/src/seq/uvma_${name}_seq_item.sv",
-    "src/constants.sv"             : "uvma_${name}/src/uvma_${name}_constants.sv",
-    "src/if_chkr.sv"               : "uvma_${name}/src/uvma_${name}_if_chkr.sv",
-    "src/if.sv"                    : "uvma_${name}/src/uvma_${name}_if.sv",
-    "src/macros.sv"                : "uvma_${name}/src/uvma_${name}_macros.sv",
-    "src/pkg.flist"                : "uvma_${name}/src/uvma_${name}_pkg.flist",
-    "src/pkg.sv"                   : "uvma_${name}/src/uvma_${name}_pkg.sv",
-    "src/tdefs.sv"                 : "uvma_${name}/src/uvma_${name}_tdefs.sv",
-    "../.gitignore"                : "uvmt_${name}/.gitignore",
-    "../LICENSE_solderpad_v2p1.md" : "uvma_${name}/LICENSE.md",
-    "README.md"                    : "uvma_${name}/README.md"
+    "bin/package.py"                     : "uvmt_${name}_st/bin/package.py",
+    "docs/tb_block_diagram.svg"          : "uvmt_${name}_st/docs/tb_block_diagram.svg",
+    "examples/test.sv"                   : "uvmt_${name}_st/examples/test.sv",
+    "src/tb/clknrst_gen_if.sv"           : "uvmt_${name}_st/src/tb/uvmt_${name}_st_clknrst_gen_if.sv",
+    "src/tb/dut_chkr.sv"                 : "uvmt_${name}_st/src/tb/uvmt_${name}_st_dut_chkr.sv",
+    "src/tb/dut_wrap.sv"                 : "uvmt_${name}_st/src/tb/uvmt_${name}_st_dut_wrap.sv",
+    "src/tb/tb.sv"                       : "uvmt_${name}_st/src/tb/uvmt_${name}_st_tb.sv",
+    "src/tests/base_test_workarounds.sv" : "uvmt_${name}_st/src/tests/uvmt_${name}_st_base_test_workarounds.sv",
+    "src/tests/base_test.sv"             : "uvmt_${name}_st/src/tests/uvmt_${name}_st_base_test.sv",
+    "src/tests/test_cfg.sv"              : "uvmt_${name}_st/src/tests/uvmt_${name}_st_test_cfg.sv",
+    "src/constants.sv"                   : "uvmt_${name}_st/src/uvmt_${name}_st_constants.sv",
+    "src/macros.sv"                      : "uvmt_${name}_st/src/uvmt_${name}_st_macros.sv",
+    "src/pkg.flist"                      : "uvmt_${name}_st/src/uvmt_${name}_st_pkg.flist",
+    "src/pkg.flist.xsim"                 : "uvmt_${name}_st/src/uvmt_${name}_st_pkg.flist.xsim",
+    "src/pkg.sv"                         : "uvmt_${name}_st/src/uvmt_${name}_st_pkg.sv",
+    "src/tdefs.sv"                       : "uvmt_${name}_st/src/uvmt_${name}_st_tdefs.sv",
+    "../.gitignore"                      : "uvmt_${name}_st/.gitignore",
+    "../LICENSE_solderpad_v2p1.md"       : "uvmt_${name}_st/LICENSE.md",
+    "README.md"                          : "uvmt_${name}_st/README.md"
 }
 
 directories = [
-    "uvma_${name}",
-    "uvma_${name}/bin",
-    "uvma_${name}/docs",
-    "uvma_${name}/examples",
-    "uvma_${name}/src",
-    "uvma_${name}/src/comps",
-    "uvma_${name}/src/obj",
-    "uvma_${name}/src/seq"
+    "uvmt_${name}_st",
+    "uvmt_${name}_st/bin",
+    "uvmt_${name}_st/docs",
+    "uvmt_${name}_st/examples",
+    "uvmt_${name}_st/src",
+    "uvmt_${name}_st/src/tb",
+    "uvmt_${name}_st/src/tests"
 ]
 
 
@@ -148,41 +140,51 @@ def prompt_user_values():
     global default_copyright_owner
     global parameters
     
-    print("Moore.io Template Generator: UVM Agent - Simplex, no layers (v1p0)")
-    print("******************************************************************")
-    print("The answers to the following questionnaire will be used to generate the code for your new UVM Agent")
+    print("Moore.io Template Generator: Self-Test Bench and UVM Test Library (v1p0)")
+    print("***********************************************************************")
+    print("The answers to the following questionnaire will be used to generate the code for your new UVM Test Bench")
     print("")
     
     if out_path == "":
-        out_path = input("Please enter the destination path for this new agent:\n").strip()
+        out_path = input("Please enter the destination path for this new agent (default: '.'):\n").strip()
         if out_path == "":
             out_path = "."
+    
+    parameters = {
+        "name"          : name,
+        "name_uppercase": name.upper(),
+        "year"          : date.today().year
+    }
     
     name_of_copyright_owner = input("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
     if name_of_copyright_owner == "":
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
     
-    name = input("Please enter the package name for this agent (ex: 'apb'); this name will be used for all agent types (ex: 'uvma_apb_agent_c'):\n").lower().strip()
+    name = input("Please enter the name of the Agent/Library for this Self-Test Bench (ex: 'apb'); this name will be used for all Test Bench types (ex: 'uvmt_apb_st_tb'):\n").lower().strip()
     if name == "":
         sys.exit("ERROR: package name cannot be empty.  Exiting.")
     else:
         parameters["name"] = name
         parameters["name_uppercase"] = name.upper()
     
-    name_normal_case = input("Please enter the (descriptive) name for this agent (ex: 'Advanced Peripheral Bus (APB)'):\n").strip()
+    name_normal_case = input("Please enter the (descriptive) name for this Agent/Library (ex: 'Advanced Peripheral Bus (APB)'):\n").strip()
     if name_normal_case == "":
         sys.exit("ERROR: descriptive name cannot be empty.  Exiting.")
     else:
         parameters["name_normal_case"] = name_normal_case
     
-    parameters = {
-    "name"                    : name,
-    "name_uppercase"          : name.upper(),
-    "name_normal_case"        : name_normal_case,
-    "name_of_copyright_owner" : name_of_copyright_owner,
-    "year"                    : date.today().year
-}
+    name_1 = input("Please enter the name for the first agent instance (default: 'mstr'):\n").strip()
+    if name_1 == "":
+        parameters["name_1"] = "mstr"
+    else:
+        parameters["name_1"] = name_1
+    
+    name_2 = input("Please enter the name for the second agent instance (default: 'slv'):\n").strip()
+    if name_2 == "":
+        parameters["name_2"] = "slv"
+    else:
+        parameters["name_2"] = name_2
 
 
 ########################################################################################################################

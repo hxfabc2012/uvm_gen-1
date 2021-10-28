@@ -20,7 +20,7 @@
  */
 class uvme_${name}_reg_bit_bash_vseq_c extends uvme_${name}_reg_base_vseq_c;
    
-   `include "uvme_${name}_reg_ignore_bit_bash_list.sv"
+   `include "uvme_${name}_reg_bit_bash_vseq_ignore_list.sv"
    
    // Sub-sequences
    rand uvm_reg_bit_bash_seq  single_block_bit_bash_seq;

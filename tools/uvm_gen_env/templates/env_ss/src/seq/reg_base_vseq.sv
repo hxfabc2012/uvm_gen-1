@@ -15,12 +15,11 @@
 
 
 /**
- * Abstract object from which all other ${name_normal_case}
- * register-oriented virtual sequences must extend.
+ * Abstract object from which all other ${name_normal_case} register-oriented virtual sequences must extend.
  */
 class uvme_${name}_reg_base_vseq_c extends uvme_${name}_base_vseq_c;
    
-   `include "uvme_${name}_reg_ignore_all_list.sv"
+   `include "uvme_${name}_reg_base_vseq_ignore_list.sv"
    
    // Knobs
    rand bit       single_block_mode;

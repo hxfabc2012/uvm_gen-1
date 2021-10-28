@@ -15,12 +15,11 @@
 
 
 /**
- * Virtual sequence that checks that the hardware reset value specified in the
- * RAL (uvme_${name}_ral_c) matches the DUT's.
+ * Virtual sequence that checks that the hardware reset value specified in the register block (uvme_${name}_reg_block_c) matches the DUT's.
  */
 class uvme_${name}_reg_hw_reset_vseq_c extends uvme_${name}_reg_base_vseq_c;
    
-   `include "uvme_${name}_reg_ignore_hw_reset_list.sv"
+   `include "uvme_${name}_reg_bit_hw_reset_ignore_list.sv"
    
    // Sub-sequences
    rand uvm_reg_hw_reset_seq  single_block_hw_reset_seq;

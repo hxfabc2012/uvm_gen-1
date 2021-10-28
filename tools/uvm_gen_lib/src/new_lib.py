@@ -23,7 +23,7 @@ import sys
 # GLOBALS
 ########################################################################################################################
 dbg = False
-relative_path_to_template = os.getcwd() + "/../src/lib/"
+relative_path_to_template = os.getcwd() + "/templates/lib/"
 out_path = ""
 default_copyright_owner = ""
 name_of_copyright_owner = ""
@@ -64,10 +64,10 @@ files = {
 }
 
 directories = [
-    "uvme_${name}",
-    "uvme_${name}/bin",
-    "uvme_${name}/examples",
-    "uvme_${name}/src",
+    "uvml_${name}",
+    "uvml_${name}/bin",
+    "uvml_${name}/examples",
+    "uvml_${name}/src",
 ]
 
 

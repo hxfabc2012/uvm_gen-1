@@ -23,7 +23,7 @@ import sys
 # GLOBALS
 ########################################################################################################################
 dbg = False
-relative_path_to_template = os.getcwd() + "/../src/agent_simplex_no_layers/"
+relative_path_to_template = os.getcwd() + "/templates/agent_simplex_no_layers/"
 out_path = ""
 default_copyright_owner = ""
 name_of_copyright_owner = ""
@@ -67,6 +67,7 @@ files = {
     "src/pkg.flist"                : "uvma_${name}/src/uvma_${name}_pkg.flist",
     "src/pkg.sv"                   : "uvma_${name}/src/uvma_${name}_pkg.sv",
     "src/tdefs.sv"                 : "uvma_${name}/src/uvma_${name}_tdefs.sv",
+    "../.gitignore"                : "uvma_${name}/.gitignore",
     "../LICENSE_solderpad_v2p1.md" : "uvma_${name}/LICENSE.md",
     "README.md"                    : "uvma_${name}/README.md"
 }
@@ -148,23 +149,28 @@ def prompt_user_values():
     global parameters
     
     print("Moore.io Template Generator: UVM Agent - Simplex, no layers (v1p0)")
+    print("******************************************************************")
+    print("The answers to the following questionnaire will be used to generate the code for your new UVM Agent")
+    print("")
     
     if out_path == "":
-        out_path = input("Please enter the destination path for this new agent\n").strip()
+        out_path = input("Please enter the destination path for this new agent (default: '.'):\n").strip()
+        if out_path == "":
+            out_path = "."
     
     name_of_copyright_owner = input("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
     if name_of_copyright_owner == "":
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
     
-    name = input("Please enter the package name for this agent (ex: 'pcie'); this name will be used for all agent types (ex: 'uvma_pcie_agent_c'):\n").lower().strip()
+    name = input("Please enter the package name for this agent (ex: 'apb'); this name will be used for all agent types (ex: 'uvma_apb_agent_c'):\n").lower().strip()
     if name == "":
         sys.exit("ERROR: package name cannot be empty.  Exiting.")
     else:
         parameters["name"] = name
         parameters["name_uppercase"] = name.upper()
     
-    name_normal_case = input("Please enter the (descriptive) name for this agent (ex: 'PCI Express'):\n").strip()
+    name_normal_case = input("Please enter the (descriptive) name for this agent (ex: 'Advanced Peripheral Bus (APB)'):\n").strip()
     if name_normal_case == "":
         sys.exit("ERROR: descriptive name cannot be empty.  Exiting.")
     else:
