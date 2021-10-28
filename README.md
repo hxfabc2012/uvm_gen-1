@@ -19,7 +19,7 @@ to run the "Agent - Simplex, no Layer" generator:
 ./src/new_agent_simplex_no_layers.py
 ```
 
-The Singleton generators share the same script:
+The Singleton (i.e. single file) generators share the same script:
 
 ```
 ./src/new.py
