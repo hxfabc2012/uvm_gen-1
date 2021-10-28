@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sv_template>
-                                                                                                                
+                                                                                                                    
   
   
   
@@ -308,1313 +308,7 @@
   
   
   
-  <template category="datum_uvm_set" id="datum_uvm_env_st_duplex" name="Environment - Self-Testing (Duplex)">
-                                                                                                                                                                                        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <description/>
-                                                                                                                                                                                        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <parameters>
-                                                                                                                                                                                                                                                                                    
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-                                                                                                                                                                                                                        
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <parameter default="" name="name_normal_case" type="id"/>
-                                                                                                                                                                                                                                                                                    
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <parameter default="" name="name_uppercase" type="id"/>
-                                                                                                                                                                                                                                                                                  
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <parameter default="" name="name_1" type="id"/>
-                                                                                                                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <parameter default="" name="name_2" type="id"/>
-                                                                                                                                                          
-    
-    
-    
-    
-    
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <parameter default="" name="direction_rx" type="id"/>
-                                                                                                                        
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <parameter default="" name="direction_tx" type="id"/>
-                                                                                                                      
-    
-    
-    
-    
-    
-    
-    
-    
-    
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <parameter default="2021" name="year" type="int"/>
-                                                          
-    
-    
-    
-    
-    
-    
-    
-    
-    </parameters>
-                                                                                                                                                                                        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <files>
-                                                                                                                                                                                                                                                                                    
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-                  
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/bin/.gitignore" template="env_st_duplex/bin/.gitignore"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/docs/.gitignore" template="env_st_duplex/docs/.gitignore"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/examples/.gitignore" template="env_st_duplex/examples/.gitignore"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/comps/.gitignore" template="env_st_duplex/src/comps/.gitignore"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/comps/uvme_${name}_st_cov_model.sv" template="env_st_duplex/src/comps/cov_model.sv"/>
-                                                                                                                                                                                                                                                                                    
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-                                                                                                                                                                                                                        
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-                                                                                                                                                                                                                        
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/comps/uvme_${name}_st_env.sv" template="env_st_duplex/src/comps/env.sv"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/comps/uvme_${name}_st_prd.sv" template="env_st_duplex/src/comps/prd.sv"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/comps/uvme_${name}_st_sb.sv" template="env_st_duplex/src/comps/sb.sv"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/comps/uvme_${name}_st_vsqr.sv" template="env_st_duplex/src/comps/vsqr.sv"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/obj/.gitignore" template="env_st_duplex/src/obj/.gitignore"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/obj/uvme_${name}_st_cfg.sv" template="env_st_duplex/src/obj/cfg.sv"/>
-                                                                                                                                                                                                                                                                                    
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-                                                                                                                        
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/obj/uvme_${name}_st_cntxt.sv" template="env_st_duplex/src/obj/cntxt.sv"/>
-                                                                                                                                                                                                                                                                                    
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/seq/.gitignore" template="env_st_duplex/src/seq/.gitignore"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/seq/uvme_${name}_st_base_vseq.sv" template="env_st_duplex/src/seq/base_vseq.sv"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/.gitignore" template="env_st_duplex/src/.gitignore"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-            
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_chkr.sv" template="env_st_duplex/src/chkr.sv"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_constants.sv" template="env_st_duplex/src/constants.sv"/>
-                                                                                                                                                                                                                                                                                    
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-                                                                                                                                                                                                                        
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_macros.sv" template="env_st_duplex/src/macros.sv"/>
-                                                                                                                                                                                                                                                                                    
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_pkg.flist" template="env_st_duplex/src/pkg.flist"/>
-                                                                                                                                                                                                                                                                                    
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_pkg.flist.xsim" template="env_st_duplex/src/pkg.flist.xsim"/>
-                                                                              
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_pkg.sv" template="env_st_duplex/src/pkg.sv"/>
-                                                                                                                                                                                                                                                                                    
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-                                                                                                                                                                                                                        
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-                                                                                                                                                                                                                        
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_tdefs.sv" template="env_st_duplex/src/tdefs.sv"/>
-                                                                                                                                                                                                                                                                                    
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-                                                                                                                                                                                                                      
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/.gitignore" template="env_st_duplex/.gitignore"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/ip.yml" template="env_st_duplex/ip.yml"/>
-            
-      <file executable="false" name="uvme_${name}_st/LICENSE.md" template="LICENSE_solderpad_v2p1.md"/>
-                                                            
-      
-      
-      
-      
-      
-                                    
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/README.md" template="env_st_duplex/README.md"/>
-                                                          
-    
-    
-    
-    
-    
-    
-    
-    
-    </files>
-                                                                                                                                                                                      
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  </template>
                                                                                             
   
   
@@ -1661,8 +355,12 @@
   
   
   
-  <template category="datum_uvm_set" id="datum_uvm_env_st_simplex" name="Environment - Self-Testing (Simplex)">
-                                                                                
+  
+  
+  <template category="datum_uvm_set" id="datum_uvm_env_st" name="Environment - Self-Testing (Simplex and Half-Duplex)">
+                                                                                        
+    
+    
     
     
     
@@ -1682,7 +380,9 @@
     
     
     <description/>
-                                                                                
+                                                                                        
+    
+    
     
     
     
@@ -1702,7 +402,7 @@
     
     
     <parameters>
-                                                                                                                        
+                                                                                                                                    
       
       
       
@@ -1713,6 +413,8 @@
       
       
                                                             
+      
+      
       
       
       
@@ -1732,7 +434,9 @@
       
       
       <parameter default="" name="name_normal_case" type="id"/>
-                                                                                                                        
+                                                                                                                                    
+      
+      
       
       
       
@@ -1752,7 +456,9 @@
       
       
       <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
-                                                            
+                                                                        
+      
+      
       
       
       
@@ -1762,7 +468,9 @@
       
       
       <parameter default="" name="name_uppercase" type="id"/>
-                                                                                                                        
+                                                                                                                                    
+      
+      
       
       
       
@@ -1782,7 +490,9 @@
       
       
       <parameter default="" name="name_1" type="id"/>
-                                                                                                                        
+                                                                                                                                    
+      
+      
       
       
       
@@ -1802,7 +512,7 @@
       
       
       <parameter default="" name="name_2" type="id"/>
-                                                                                                                      
+                                                                                                                                  
     
     
     
@@ -1812,6 +522,8 @@
     
     
     
+      
+      
       
       
       
@@ -1822,7 +534,9 @@
       
       
       <parameter default="2021" name="year" type="int"/>
-                                                          
+                                                                      
+    
+    
     
     
     
@@ -1832,7 +546,9 @@
     
     
     </parameters>
-                                                                                
+                                                                                        
+    
+    
     
     
     
@@ -1852,7 +568,7 @@
     
     
     <files>
-                                                                                                                        
+                                                                                                                                    
       
       
       
@@ -1874,128 +590,67 @@
       
       
       
-      <file executable="false" name="uvme_${name}_st/bin/.gitignore" template="env_st_simplex/bin/.gitignore"/>
+      
+      
+      <file executable="false" name="uvme_${name}_st/bin/package.py" template="env_st/bin/package.py"/>
+                                                                        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <file executable="false" name="uvme_${name}_st/docs/env_block_diagram.svg" template="env_st/docs/env_block_diagram.svg"/>
+                                                                        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <file executable="false" name="uvme_${name}_st/examples/virtual_sequence.sv" template="env_st/examples/virtual_sequence.sv"/>
+                                                                        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+                                                                  
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <file executable="false" name="uvme_${name}_st/src/comps/uvme_${name}_st_cov_model.sv" template="env_st/src/comps/cov_model.sv"/>
+                                                                                                                                    
+      
+      
+      
+      
+      
+      
+      
+      
+      
                                                             
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/docs/.gitignore" template="env_st_simplex/docs/.gitignore"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/examples/.gitignore" template="env_st_simplex/examples/.gitignore"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/comps/.gitignore" template="env_st_simplex/src/comps/.gitignore"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/comps/uvme_${name}_st_cov_model.sv" template="env_st_simplex/src/comps/cov_model.sv"/>
-                                                                                                                        
-      
-      
-      
-      
-      
-      
-      
-      
-      
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/comps/uvme_${name}_st_env.sv" template="env_st_simplex/src/comps/env.sv"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/comps/uvme_${name}_st_prd.sv" template="env_st_simplex/src/comps/prd.sv"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/comps/uvme_${name}_st_vsqr.sv" template="env_st_simplex/src/comps/vsqr.sv"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/obj/.gitignore" template="env_st_simplex/src/obj/.gitignore"/>
-                                                            
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvme_${name}_st/src/obj/uvme_${name}_st_cfg.sv" template="env_st_simplex/src/obj/cfg.sv"/>
-                                                                                                                        
       
       
       
@@ -2024,7 +679,66 @@
       
       
       
-      <file executable="false" name="uvme_${name}_st/src/obj/uvme_${name}_st_cntxt.sv" template="env_st_simplex/src/obj/cntxt.sv"/>
+      
+      
+      <file executable="false" name="uvme_${name}_st/src/comps/uvme_${name}_st_env.sv" template="env_st/src/comps/env.sv"/>
+                                                                        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <file executable="false" name="uvme_${name}_st/src/comps/uvme_${name}_st_prd.sv" template="env_st/src/comps/prd.sv"/>
+                                                                        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <file executable="false" name="uvme_${name}_st/src/comps/uvme_${name}_st_vsqr.sv" template="env_st/src/comps/vsqr.sv"/>
+                                                                        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+                                                                  
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <file executable="false" name="uvme_${name}_st/src/obj/uvme_${name}_st_cfg.sv" template="env_st/src/obj/cfg.sv"/>
+                                                                                                                                    
+      
+      
+      
+      
+      
+      
+      
+      
+      
                                                             
       
       
@@ -2034,8 +748,6 @@
       
       
       
-      <file executable="false" name="uvme_${name}_st/src/seq/.gitignore" template="env_st_simplex/src/seq/.gitignore"/>
-                                                            
       
       
       
@@ -2044,8 +756,12 @@
       
       
       
-      <file executable="false" name="uvme_${name}_st/src/seq/uvme_${name}_st_base_vseq.sv" template="env_st_simplex/src/seq/base_vseq.sv"/>
-                                                            
+      
+      
+      
+      
+      <file executable="false" name="uvme_${name}_st/src/obj/uvme_${name}_st_cntxt.sv" template="env_st/src/obj/cntxt.sv"/>
+                                                                        
       
       
       
@@ -2054,8 +770,32 @@
       
       
       
-      <file executable="false" name="uvme_${name}_st/src/.gitignore" template="env_st_simplex/src/.gitignore"/>
-                                                            
+      
+      
+                                                                  
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <file executable="false" name="uvme_${name}_st/src/seq/uvme_${name}_st_base_vseq.sv" template="env_st/src/seq/base_vseq.sv"/>
+                                                                        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+                                                                  
       
       
       
@@ -2066,8 +806,11 @@
             
       
       
-      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_chkr.sv" template="env_st_simplex/src/chkr.sv"/>
-                                                                                                                        
+      
+      
+      <file executable="false" name="uvme_${name}_st/src/seq/uvme_${name}_st_vseq_lib.sv" template="env_st/src/seq/vseq_lib.sv"/>
+      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_chkr.sv" template="env_st/src/chkr.sv"/>
+                                                                                                                                    
       
       
       
@@ -2086,8 +829,10 @@
       
       
       
-      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_constants.sv" template="env_st_simplex/src/constants.sv"/>
-                                                                                                                        
+      
+      
+      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_constants.sv" template="env_st/src/constants.sv"/>
+                                                                                                                                    
       
       
       
@@ -2116,8 +861,10 @@
       
       
       
-      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_macros.sv" template="env_st_simplex/src/macros.sv"/>
-                                                                                                                        
+      
+      
+      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_macros.sv" template="env_st/src/macros.sv"/>
+                                                                                                                                    
       
       
       
@@ -2136,8 +883,10 @@
       
       
       
-      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_pkg.flist" template="env_st_simplex/src/pkg.flist"/>
-                                                                                                                        
+      
+      
+      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_pkg.flist" template="env_st/src/pkg.flist"/>
+                                                                                                                                    
       
       
       
@@ -2156,8 +905,10 @@
       
       
       
-      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_pkg.flist.xsim" template="env_st_simplex/src/pkg.flist.xsim"/>
-                                                                              
+      
+      
+      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_pkg.flist.xsim" template="env_st/src/pkg.flist.xsim"/>
+                                                                                          
       
       
       
@@ -2169,8 +920,10 @@
       
       
       
-      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_pkg.sv" template="env_st_simplex/src/pkg.sv"/>
-                                                                                                                        
+      
+      
+      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_pkg.sv" template="env_st/src/pkg.sv"/>
+                                                                                                                                    
       
       
       
@@ -2199,8 +952,10 @@
       
       
       
-      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_tdefs.sv" template="env_st_simplex/src/tdefs.sv"/>
-                                                                                                                        
+      
+      
+      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_tdefs.sv" template="env_st/src/tdefs.sv"/>
+                                                                                                                                    
       
       
       
@@ -2229,8 +984,10 @@
       
       
       
-      <file executable="false" name="uvme_${name}_st/.gitignore" template="env_st_simplex/.gitignore"/>
-                                                            
+      
+      
+      <file executable="false" name="uvme_${name}_st/.gitignore" template="env_st/.gitignore"/>
+                                                                        
       
       
       
@@ -2239,10 +996,14 @@
       
       
       
-      <file executable="false" name="uvme_${name}_st/ip.yml" template="env_st_simplex/ip.yml"/>
-            
+      
+      
+      <file executable="false" name="uvme_${name}_st/ip.yml" template="env_st/ip.yml"/>
+                        
+      
+      
       <file executable="false" name="uvme_${name}_st/LICENSE.md" template="LICENSE_solderpad_v2p1.md"/>
-                                                            
+                                                                        
       
       
       
@@ -2257,8 +1018,12 @@
       
       
       
-      <file executable="false" name="uvme_${name}_st/README.md" template="env_st_simplex/README.md"/>
-                                                          
+      
+      
+      <file executable="false" name="uvme_${name}_st/README.md" template="env_st/README.md"/>
+                                                                      
+    
+    
     
     
     
@@ -2268,7 +1033,9 @@
     
     
     </files>
-                                                                              
+                                                                                      
+  
+  
   
   
   
@@ -2288,7 +1055,9 @@
   
   
   </template>
-                                        
+                                            
+  
+  
   
   
   
@@ -2308,7 +1077,9 @@
   
   
   <template category="datum_uvm_set" id="datum_uvm_env_ss" name="Environment - Sub-System">
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                        
+    
+    
     
     
     
@@ -2364,7 +1135,9 @@
     
     
     <description/>
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                        
+    
+    
     
     
     
@@ -2420,7 +1193,7 @@
     
     
     <parameters>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                            
       
       
       
@@ -2517,8 +1290,12 @@
       
       
       
+      
+      
       <parameter default="" name="name_normal_case" type="id"/>
-                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                    
+      
+      
       
       
       
@@ -2570,7 +1347,9 @@
       
       
       <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
-                                                            
+                                                                        
+      
+      
       
       
       
@@ -2580,7 +1359,9 @@
       
       
       <parameter default="" name="name_uppercase" type="id"/>
-                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                          
+      
+      
       
       
       
@@ -2636,35 +1417,45 @@
       
       
       <parameter default="sys_clk" name="clk_agent_name" type="id"/>
-                                          
+                                                      
+      
+      
       
       
       
       
       
       <parameter default="SYS_CLK" name="clk_agent_name_uppercase" type="id"/>
-                                          
+                                                      
+      
+      
       
       
       
       
       
       <parameter default="clk" name="clk_agent_type" type="id"/>
-                                          
+                                                      
+      
+      
       
       
       
       
       
       <parameter default="apb_master" name="ral_agent_name" type="id"/>
-                                          
+                                                      
+      
+      
       
       
       
       
       
       <parameter default="apb" name="ral_agent_type" type="id"/>
-                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                      
+      
+      
       
       
       
@@ -2719,21 +1510,25 @@
       
       
       <parameter default="sys_reset" name="reset_agent_name" type="id"/>
-                                          
+                                                      
+      
+      
       
       
       
       
       
       <parameter default="SYS_RESET" name="reset_agent_name_uppercase" type="id"/>
-                                          
+                                                      
+      
+      
       
       
       
       
       
       <parameter default="reset" name="reset_agent_type" type="id"/>
-                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                    
     
     
     
@@ -2778,6 +1573,8 @@
     
     
     
+      
+      
       
       
       
@@ -2788,7 +1585,9 @@
       
       
       <parameter default="2021" name="year" type="int"/>
-                                                          
+                                                                      
+    
+    
     
     
     
@@ -2798,7 +1597,9 @@
     
     
     </parameters>
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                        
+    
+    
     
     
     
@@ -2854,7 +1655,7 @@
     
     
     <files>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                            
       
       
       
@@ -2912,8 +1713,10 @@
       
       
       
-      <file executable="false" name="uvme_${name}/bin/.gitignore" template="env_ss/bin/.gitignore"/>
-                                                            
+      
+      
+      <file executable="false" name="uvme_${name}/bin/package.py" template="env_ss/bin/package.py"/>
+                                                                        
       
       
       
@@ -2922,8 +1725,10 @@
       
       
       
-      <file executable="false" name="uvme_${name}/docs/.gitignore" template="env_ss/docs/.gitignore"/>
-                                                            
+      
+      
+      <file executable="false" name="uvme_${name}/docs/env_block_diagram.svg" template="env_ss/docs/env_block_diagram.svg"/>
+                                                                        
       
       
       
@@ -2932,8 +1737,10 @@
       
       
       
-      <file executable="false" name="uvme_${name}/examples/.gitignore" template="env_ss/examples/.gitignore"/>
-                                                            
+      
+      
+      <file executable="false" name="uvme_${name}/examples/instantiation.sv" template="env_ss/examples/instantiation.sv"/>
+                                                                        
       
       
       
@@ -2942,8 +1749,11 @@
       
       
       
-      <file executable="false" name="uvme_${name}/src/comps/.gitignore" template="env_ss/src/comps/.gitignore"/>
-                                                            
+      
+      
+                                                                  
+      
+      
       
       
       
@@ -2953,7 +1763,7 @@
       
       
       <file executable="false" name="uvme_${name}/src/comps/uvme_${name}_cov_model.sv" template="env_ss/src/comps/cov_model.sv"/>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                            
       
       
       
@@ -2964,6 +1774,8 @@
       
       
                                                             
+      
+      
       
       
       
@@ -3019,7 +1831,9 @@
       
       
       <file executable="false" name="uvme_${name}/src/comps/uvme_${name}_env.sv" template="env_ss/src/comps/env.sv"/>
-                                                            
+                                                                        
+      
+      
       
       
       
@@ -3029,7 +1843,9 @@
       
       
       <file executable="false" name="uvme_${name}/src/comps/uvme_${name}_prd.sv" template="env_ss/src/comps/prd.sv"/>
-                                                            
+                                                                        
+      
+      
       
       
       
@@ -3039,7 +1855,9 @@
       
       
       <file executable="false" name="uvme_${name}/src/comps/uvme_${name}_sb.sv" template="env_ss/src/comps/sb.sv"/>
-                                                            
+                                                                        
+      
+      
       
       
       
@@ -3049,7 +1867,7 @@
       
       
       <file executable="false" name="uvme_${name}/src/comps/uvme_${name}_vsqr.sv" template="env_ss/src/comps/vsqr.sv"/>
-                                                            
+                                                                        
       
       
       
@@ -3058,8 +1876,11 @@
       
       
       
-      <file executable="false" name="uvme_${name}/src/obj/.gitignore" template="env_ss/src/obj/.gitignore"/>
-                                                            
+      
+      
+                                                                  
+      
+      
       
       
       
@@ -3069,7 +1890,9 @@
       
       
       <file executable="false" name="uvme_${name}/src/obj/uvme_${name}_cfg.sv" template="env_ss/src/obj/cfg.sv"/>
-                                                            
+                                                                        
+      
+      
       
       
       
@@ -3079,7 +1902,7 @@
       
       
       <file executable="false" name="uvme_${name}/src/obj/uvme_${name}_cntxt.sv" template="env_ss/src/obj/cntxt.sv"/>
-                                                            
+                                                                        
       
       
       
@@ -3088,8 +1911,11 @@
       
       
       
-      <file executable="false" name="uvme_${name}/src/reg/.gitignore" template="env_ss/src/reg/.gitignore"/>
-                                                            
+      
+      
+                                                                  
+      
+      
       
       
       
@@ -3099,7 +1925,7 @@
       
       
       <file executable="false" name="uvme_${name}/src/reg/uvme_${name}_reg_block.sv" template="env_ss/src/reg/reg_block.sv"/>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                            
       
       
       
@@ -3154,8 +1980,11 @@
       
       
       
-      <file executable="false" name="uvme_${name}/src/seq/.gitignore" template="env_ss/src/seq/.gitignore"/>
-                                                            
+      
+      
+                                                                  
+      
+      
       
       
       
@@ -3165,7 +1994,9 @@
       
       
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_base_vseq.sv" template="env_ss/src/seq/base_vseq.sv"/>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                            
+      
+      
       
       
       
@@ -3221,14 +2052,18 @@
       
       
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_${clk_agent_name}_vseq.sv" template="env_ss/src/seq/clk_vseq.sv"/>
-                                          
+                                                      
+      
+      
       
       
       
       
       
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_reg_base_vseq.sv" template="env_ss/src/seq/reg_base_vseq.sv"/>
-                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                    
+      
+      
       
       
       
@@ -3264,7 +2099,9 @@
       
       
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_reg_bit_bash_vseq.sv" template="env_ss/src/seq/reg_bit_bash_vseq.sv"/>
-                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                    
+      
+      
       
       
       
@@ -3300,7 +2137,9 @@
       
       
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_reg_hw_reset_vseq.sv" template="env_ss/src/seq/reg_hw_reset_vseq.sv"/>
-                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                    
+      
+      
       
       
       
@@ -3336,7 +2175,9 @@
       
       
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_reg_ignore_all_list.sv" template="env_ss/src/seq/reg_ignore_all_list.sv"/>
-                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                    
+      
+      
       
       
       
@@ -3372,7 +2213,9 @@
       
       
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_reg_ignore_bit_bash_list.sv" template="env_ss/src/seq/reg_ignore_bit_bash_list.sv"/>
-                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                    
+      
+      
       
       
       
@@ -3408,7 +2251,9 @@
       
       
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_reg_ignore_hw_reset_list.sv" template="env_ss/src/seq/reg_ignore_hw_reset_list.sv"/>
-                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                    
+      
+      
       
       
       
@@ -3444,7 +2289,7 @@
       
       
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_${reset_agent_name}_vseq.sv" template="env_ss/src/seq/reset_vseq.sv"/>
-                                                                                                                                                                                                
+                                                                                                                                                                                                            
       
       
       
@@ -3557,15 +2402,19 @@
       
       
       
-      <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_seq_lib.sv" template="env_ss/src/seq/seq_lib.sv"/>
-                              
+      
+      
+      <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_vseq_lib.sv" template="env_ss/src/seq/vseq_lib.sv"/>
+                                          
       
       
             
       
       
+      
+      
       <file executable="false" name="uvme_${name}/src/uvme_${name}_chkr.sv" template="env_ss/src/chkr.sv"/>
-                                                                                                                                                                                          
+                                                                                                                                                                                                      
       
       
       
@@ -3587,6 +2436,8 @@
       
       
                                                                                                                                                                                                                         
+      
+      
       
       
       
@@ -3632,7 +2483,7 @@
       
       
       <file executable="false" name="uvme_${name}/src/uvme_${name}_constants.sv" template="env_ss/src/constants.sv"/>
-                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                
       
       
       
@@ -3713,6 +2564,8 @@
       
       
                                                                   
+      
+      
       
       
       
@@ -3768,7 +2621,9 @@
       
       
       <file executable="false" name="uvme_${name}/src/uvme_${name}_macros.sv" template="env_ss/src/macros.sv"/>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                            
+      
+      
       
       
       
@@ -3824,7 +2679,9 @@
       
       
       <file executable="false" name="uvme_${name}/src/uvme_${name}_pkg.flist" template="env_ss/src/pkg.flist"/>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                            
+      
+      
       
       
       
@@ -3880,7 +2737,9 @@
       
       
       <file executable="false" name="uvme_${name}/src/uvme_${name}_pkg.flist.xsim" template="env_ss/src/pkg.flist.xsim"/>
-                                                                              
+                                                                                          
+      
+      
       
       
       
@@ -3893,7 +2752,7 @@
       
       
       <file executable="false" name="uvme_${name}/src/uvme_${name}_pkg.sv" template="env_ss/src/pkg.sv"/>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                            
       
       
       
@@ -4032,8 +2891,10 @@
       
       
       
+      
+      
       <file executable="false" name="uvme_${name}/src/uvme_${name}_tdefs.sv" template="env_ss/src/tdefs.sv"/>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                            
       
       
       
@@ -4134,8 +2995,12 @@
       
       
       
+      
+      
       <file executable="false" name="uvme_${name}/.gitignore" template="env_ss/.gitignore"/>
-                                                            
+                                                                        
+      
+      
       
       
       
@@ -4145,9 +3010,11 @@
       
       
       <file executable="false" name="uvme_${name}/ip.yml" template="env_ss/ip.yml"/>
-            
+                        
+      
+      
       <file executable="false" name="uvme_${name}/LICENSE.md" template="LICENSE_solderpad_v2p1.md"/>
-                                                            
+                                                                        
       
       
       
@@ -4162,8 +3029,12 @@
       
       
       
+      
+      
       <file executable="false" name="uvme_${name}/README.md" template="env_ss/README.md"/>
-                                                          
+                                                                      
+    
+    
     
     
     
@@ -4173,7 +3044,9 @@
     
     
     </files>
-                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                      
+  
+  
   
   
   
@@ -4229,7 +3102,7 @@
   
   
   </template>
-                  
+                      
   
   
   
@@ -4644,8 +3517,12 @@
   
   
   
+  
+  
   <category category="category.id" id="datum_uvm_set" name="Datum UVM Set">
-                                                                                                                                                                                        
+                                                                                                                                                                                                
+    
+    
     
     
     
@@ -4691,7 +3568,9 @@
     
     
     <description/>
-                                                                                                                                                                                      
+                                                                                                                                                                                              
+  
+  
   
   
   
@@ -4737,7 +3616,7 @@
   
   
   </category>
-                                                                                            
+                                                                                                
   
   
   
@@ -4907,6 +3786,8 @@
   
   
                                                                                                             
+
+
 
 
 

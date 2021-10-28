@@ -1,0 +1,10 @@
+/uvme_dp_base_vseq.sv
+/uvme_dp_clk_vseq.sv
+/uvme_dp_reg_base_vseq.sv
+/uvme_dp_reg_bit_bash_vseq.sv
+/uvme_dp_reg_hw_reset_vseq.sv
+/uvme_dp_reg_ignore_all_list.sv.sv
+/uvme_dp_reg_ignore_bit_bash_list.sv
+/uvme_dp_reg_ignore_hw_reset_list.sv
+/uvme_dp_reset_vseq.sv
+/uvme_dp_vseq_lib.sv
