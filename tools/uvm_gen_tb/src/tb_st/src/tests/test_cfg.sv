@@ -29,8 +29,7 @@ class uvmt_${name}_st_test_cfg_c extends uvm_object;
    
    // Command line arguments
    // TODO Add command line argument descriptors
-   //      Ex: string        cli_num_pkts_str      = "NPKTS";
-   //          bit           cli_num_pkts_override = 0;
+   //      Ex: bit           cli_num_pkts_override = 0;
    //          int unsigned  cli_num_pkts_parsed;
    
    
@@ -44,11 +43,11 @@ class uvmt_${name}_st_test_cfg_c extends uvm_object;
    
    
    constraint defaults_cons {
-      soft clk_period         == uvmt_${name}_st_default_clk_period        ;
-      soft reset_period       == uvmt_${name}_st_default_reset_period      ;
-      soft startup_timeout    == uvmt_${name}_st_default_startup_timeout   ;
-      soft heartbeat_period   == uvmt_${name}_st_default_heartbeat_period  ;
-      soft simulation_timeout == uvmt_${name}_st_default_simulation_timeout;
+      clk_period         == uvmt_${name}_st_default_clk_period        ;
+      reset_period       == uvmt_${name}_st_default_reset_period      ;
+      startup_timeout    == uvmt_${name}_st_default_startup_timeout   ;
+      heartbeat_period   == uvmt_${name}_st_default_heartbeat_period  ;
+      simulation_timeout == uvmt_${name}_st_default_simulation_timeout;
    }
    
    
@@ -76,7 +75,7 @@ function void uvmt_${name}_st_test_cfg_c::process_cli_args();
    
    // TODO Process command line arguments
    //      Ex: string  cli_num_pkts_parsed_str  = "";
-   //          if (uvm_cmdline_proc.get_arg_value({"+", cli_num_pkts_str, "="}, cli_num_pkts_parsed_str)) begin
+   //          if ($value$plusargs("NUM_PKTS=", cli_num_pkts_parsed_str)) begin
    //             if (cli_num_pkts_parsed_str != "") begin
    //                cli_num_pkts_override = 1;
    //                cli_num_pkts_parsed = cli_num_pkts_parsed_str.atoi();

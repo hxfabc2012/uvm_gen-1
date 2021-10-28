@@ -15,8 +15,7 @@
 
 
 /**
- * Interface providing clock and reset signals to all other interfaces used by
- * ${name_normal_case} VIP Self-Testing Test Bench (uvmt_${name}_st_tb).
+ * Interface providing clock and reset signals to all other interfaces used by ${name_normal_case} Self-Test Bench (uvmt_${name}_st_tb).
  * Managed by test cases.
  */
 interface uvmt_${name}_st_clknrst_gen_if;

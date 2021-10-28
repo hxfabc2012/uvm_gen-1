@@ -15,9 +15,7 @@
 
 
 /**
- * Module encapsulating the ${name_normal_case} VIP Self-Test DUT wrapper,
- * agents and clock generating interfaces. The clock and reset interface only
- * feeds into the ${name_normal_case} VIP interfaces.
+ * Module encapsulating the ${name_normal_case} Self-Test DUT wrapper, agents and clock generating interfaces.
  */
 module uvmt_${name}_st_tb;
    
@@ -48,9 +46,9 @@ module uvmt_${name}_st_tb;
       );
       
       // Add interfaces to uvm_config_db
-      uvm_config_db#(virtual uvmt_${name}_st_clknrst_gen_if)::set(null, "*"                    , "clknrst_gen_vif", clknrst_gen_if);
-      uvm_config_db#(virtual uvma_${name}_if               )::set(null, "*.env.${name_1}_agent", "vif"            , ${name_1}_if  );
-      uvm_config_db#(virtual uvma_${name}_if               )::set(null, "*.env.${name_2}_agent", "vif"            , ${name_2}_if  );
+      uvm_config_db#(virtual uvmt_${name}_st_clknrst_gen_if)::set(null, "*", "clknrst_gen_vif", clknrst_gen_if);
+      uvm_config_db#(virtual uvma_${name}_if)::set(null, "*.env.${name_1}_agent", "vif", ${name_1}_if);
+      uvm_config_db#(virtual uvma_${name}_if)::set(null, "*.env.${name_2}_agent", "vif", ${name_2}_if);
       
       // Run test
       uvm_top.enable_print_topology = 1;

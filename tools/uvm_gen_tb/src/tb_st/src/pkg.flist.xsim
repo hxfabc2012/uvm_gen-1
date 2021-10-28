@@ -11,14 +11,13 @@
 
 
 // Libraries
--f ${DV_UVM_SRC_PATH}/uvm_pkg.flist.xsim
--f ${DV_UVML_HRTBT_SRC_PATH}/uvml_hrtbt_pkg.flist.xsim
--f ${DV_UVML_TRN_SRC_PATH}/uvml_trn_pkg.flist.xsim
+//-f ${DV_UVM_SRC_PATH}/uvm_pkg.flist.xsim
+-f ${DV_UVML_SRC_PATH}/uvml_pkg.flist.xsim
 -f ${DV_UVML_LOGS_SRC_PATH}/uvml_logs_pkg.flist.xsim
 -f ${DV_UVML_SB_SRC_PATH}/uvml_sb_pkg.flist.xsim
 
 // Agents
--f ${DV_UVMA_${name_uppercase}_SRC_PATH}/uvma_${name}_pkg.flist.xsim
+// TODO Add dependencies
 
 // Environments
 -f ${DV_UVME_${name_uppercase}_ST_SRC_PATH}/uvme_${name}_st_pkg.flist.xsim

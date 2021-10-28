@@ -15,19 +15,14 @@
 
 
 /**
- * Module encapsulating assertions for ${name_normal_case} VIP
- * Self-Testing DUT wrapper (uvmt_${name}_st_dut_wrap).
+ * Module encapsulating assertions for ${name_normal_case} Self-Test DUT wrapper (uvmt_${name}_st_dut_wrap).
  */
-module uvmt_${name}_st_dut_chkr(
+module uvmt_${name}_st_dut_chkr (
    uvma_${name}_if  ${name_1}_if,
    uvma_${name}_if  ${name_2}_if
 );
    
-   `pragma protect begin
-   
    // TODO Add assertions to uvmt_${name}_st_dut_chkr
-   
-   `pragma protect end
    
 endmodule : uvmt_${name}_st_dut_chkr
 

@@ -28,4 +28,4 @@ It is dependent on the following packages:
 * `uvm_pkg`
 * `uvml_pkg`
 * `uvml_logs_pkg`
-* TODO Add ${name_normal_case} dependency
+* TODO Add ${name_normal_case} dependencies

@@ -16,11 +16,9 @@
 
 // Pre-processor macros
 `include "uvm_macros.svh"
-`include "uvml_hrtbt_macros.sv"
+`include "uvml_macros.sv"
 `include "uvml_logs_macros.sv"
 `include "uvml_sb_macros.sv"
-`include "uvml_trn_macros.sv"
-`include "uvma_${name}_macros.sv"
 `include "uvme_${name}_st_macros.sv"
 `include "uvmt_${name}_st_macros.sv"
 
@@ -33,24 +31,19 @@ timeprecision  1ps;
 
 
 /**
- * Encapsulates all the types and test cases for self-testing an
- * ${name_normal_case} VIP.
+ * Encapsulates all the types and test cases for self-testing ${name_normal_case}.
  */
 package uvmt_${name}_st_pkg;
    
    import uvm_pkg       ::*;
-   import uvml_hrtbt_pkg::*;
+   import uvml_pkg      ::*;
    import uvml_logs_pkg ::*;
    import uvml_sb_pkg   ::*;
-   import uvml_trn_pkg  ::*;
-   import uvma_${name}_pkg::*;
    import uvme_${name}_st_pkg::*;
    
    // Constants / Structs / Enums
-   `include "uvmt_${name}_st_constants.sv"
    `include "uvmt_${name}_st_tdefs.sv"
-   
-   // Sequences
+   `include "uvmt_${name}_st_constants.sv"
    
    // Base test
    `include "uvmt_${name}_st_test_cfg.sv"
@@ -64,7 +57,9 @@ endpackage : uvmt_${name}_st_pkg
 
 // Module(s) / Checker(s)
 `include "uvmt_${name}_st_dut_wrap.sv"
+`ifdef UVMT_${name_uppercase}_ST_INC_CHKR
 `include "uvmt_${name}_st_dut_chkr.sv"
+`endif
 `include "uvmt_${name}_st_tb.sv"
 
 

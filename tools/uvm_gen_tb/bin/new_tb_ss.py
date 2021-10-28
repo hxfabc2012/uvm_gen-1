@@ -23,7 +23,7 @@ import sys
 # GLOBALS
 ########################################################################################################################
 dbg = False
-relative_path_to_template = os.getcwd() + "/../src/agent_simplex_no_layers/"
+relative_path_to_template = os.getcwd() + "/../src/tb_ss/"
 out_path = ""
 default_copyright_owner = ""
 name_of_copyright_owner = ""
@@ -45,28 +45,16 @@ parameters = {
 files = {
     #              SRC                                 DST
     "bin/package.py"               : "uvma_${name}/bin/package.py",
-    "docs/agent_block_diagram.svg" : "uvma_${name}/docs/agent_block_diagram.svg",
-    "examples/instantiation.sv"    : "uvma_${name}/examples/instantiation.sv",
-    "examples/sequence.sv"         : "uvma_${name}/examples/sequence.sv",
-    "src/comps/agent.sv"           : "uvma_${name}/src/comps/uvma_${name}_agent.sv",
-    "src/comps/cov_model.sv"       : "uvma_${name}/src/comps/uvma_${name}_cov_model.sv",
-    "src/comps/drv.sv"             : "uvma_${name}/src/comps/uvma_${name}_drv.sv",
-    "src/comps/mon_trn_logger.sv"  : "uvma_${name}/src/comps/uvma_${name}_mon_trn_logger.sv",
-    "src/comps/mon.sv"             : "uvma_${name}/src/comps/uvma_${name}_mon.sv",
-    "src/comps/seq_item_logger.sv" : "uvma_${name}/src/comps/uvma_${name}_seq_item_logger.sv",
-    "src/comps/sqr.sv"             : "uvma_${name}/src/comps/uvma_${name}_sqr.sv",
-    "src/obj/cfg.sv"               : "uvma_${name}/src/obj/uvma_${name}_cfg.sv",
-    "src/obj/cntxt.sv"             : "uvma_${name}/src/obj/uvma_${name}_cntxt.sv",
-    "src/obj/mon_trn.sv"           : "uvma_${name}/src/obj/uvma_${name}_mon_trn.sv",
-    "src/seq/base_seq.sv"          : "uvma_${name}/src/seq/uvma_${name}_base_seq.sv",
-    "src/seq/seq_item.sv"          : "uvma_${name}/src/seq/uvma_${name}_seq_item.sv",
-    "src/constants.sv"             : "uvma_${name}/src/uvma_${name}_constants.sv",
-    "src/if_chkr.sv"               : "uvma_${name}/src/uvma_${name}_if_chkr.sv",
-    "src/if.sv"                    : "uvma_${name}/src/uvma_${name}_if.sv",
-    "src/macros.sv"                : "uvma_${name}/src/uvma_${name}_macros.sv",
-    "src/pkg.flist"                : "uvma_${name}/src/uvma_${name}_pkg.flist",
-    "src/pkg.sv"                   : "uvma_${name}/src/uvma_${name}_pkg.sv",
-    "src/tdefs.sv"                 : "uvma_${name}/src/uvma_${name}_tdefs.sv",
+    "docs/tb_block_diagram.svg"    : "uvma_${name}/docs/tb_block_diagram.svg",
+    "examples/test.sv"             : "uvma_${name}/examples/test.sv",
+    "src/tb/" : "uvma_${name}/tb/",
+    "src/constants.sv"             : "uvma_${name}/src/uvmt_${name}_constants.sv",
+    "src/if_chkr.sv"               : "uvma_${name}/src/uvmt_${name}_if_chkr.sv",
+    "src/if.sv"                    : "uvma_${name}/src/uvmt_${name}_if.sv",
+    "src/macros.sv"                : "uvma_${name}/src/uvmt_${name}_macros.sv",
+    "src/pkg.flist"                : "uvma_${name}/src/uvmt_${name}_pkg.flist",
+    "src/pkg.sv"                   : "uvma_${name}/src/uvmt_${name}_pkg.sv",
+    "src/tdefs.sv"                 : "uvma_${name}/src/uvmt_${name}_tdefs.sv",
     "../LICENSE_solderpad_v2p1.md" : "uvma_${name}/LICENSE.md",
     "README.md"                    : "uvma_${name}/README.md"
 }
@@ -77,9 +65,8 @@ directories = [
     "uvma_${name}/docs",
     "uvma_${name}/examples",
     "uvma_${name}/src",
-    "uvma_${name}/src/comps",
-    "uvma_${name}/src/obj",
-    "uvma_${name}/src/seq"
+    "uvma_${name}/src/tb",
+    "uvma_${name}/src/tests"
 ]
 
 

@@ -49,37 +49,37 @@ parameters = {
 
 files = {
     #              SRC                                 DST
-    "bin/package.py"                      : "uvme_${name}/bin/package.py",
-    "docs/env_block_diagram.svg"          : "uvme_${name}/docs/env_block_diagram.svg",
-    "examples/virtual_sequence.sv"        : "uvme_${name}/examples/virtual_sequence.sv",
-    "src/comps/cov_model.sv"              : "uvme_${name}/src/comps/uvme_${name}_st_cov_model.sv",
-    "src/comps/env.sv"                    : "uvme_${name}/src/comps/uvme_${name}_st_env.sv",
-    "src/comps/prd.sv"                    : "uvme_${name}/src/comps/uvme_${name}_st_prd.sv",
-    "src/comps/vsqr.sv"                   : "uvme_${name}/src/comps/uvme_${name}_st_vsqr.sv",
-    "src/obj/cfg.sv"                      : "uvme_${name}/src/obj/uvme_${name}_st_cfg.sv",
-    "src/obj/cntxt.sv"                    : "uvme_${name}/src/obj/uvme_${name}_st_cntxt.sv",
-    "src/seq/base_vseq.sv"                : "uvme_${name}/src/seq/uvme_${name}_st_base_vseq.sv",
-    "src/seq/vseq_lib.sv"                 : "uvme_${name}/src/seq/uvme_${name}_st_vseq_lib.sv",
-    "src/chkr.sv"                         : "uvme_${name}/src/uvma_${name}_st_chkr.sv",
-    "src/constants.sv"                    : "uvme_${name}/src/uvma_${name}_st_constants.sv",
-    "src/macros.sv"                       : "uvme_${name}/src/uvma_${name}_st_macros.sv",
-    "src/pkg.flist"                       : "uvme_${name}/src/uvma_${name}_st_pkg.flist",
-    "src/pkg.flist.xsim"                  : "uvme_${name}/src/uvma_${name}_st_pkg.flist.xsim",
-    "src/pkg.sv"                          : "uvme_${name}/src/uvma_${name}_st_pkg.sv",
-    "src/tdefs.sv"                        : "uvme_${name}/src/uvma_${name}_st_tdefs.sv",
-    "../LICENSE_solderpad_v2p1.md"        : "uvme_${name}/LICENSE.md",
-    "README.md"                           : "uvme_${name}/README.md"
+    "bin/package.py"                      : "uvme_${name}_st/bin/package.py",
+    "docs/env_block_diagram.svg"          : "uvme_${name}_st/docs/env_block_diagram.svg",
+    "examples/virtual_sequence.sv"        : "uvme_${name}_st/examples/virtual_sequence.sv",
+    "src/comps/cov_model.sv"              : "uvme_${name}_st/src/comps/uvme_${name}_st_cov_model.sv",
+    "src/comps/env.sv"                    : "uvme_${name}_st/src/comps/uvme_${name}_st_env.sv",
+    "src/comps/prd.sv"                    : "uvme_${name}_st/src/comps/uvme_${name}_st_prd.sv",
+    "src/comps/vsqr.sv"                   : "uvme_${name}_st/src/comps/uvme_${name}_st_vsqr.sv",
+    "src/obj/cfg.sv"                      : "uvme_${name}_st/src/obj/uvme_${name}_st_cfg.sv",
+    "src/obj/cntxt.sv"                    : "uvme_${name}_st/src/obj/uvme_${name}_st_cntxt.sv",
+    "src/seq/base_vseq.sv"                : "uvme_${name}_st/src/seq/uvme_${name}_st_base_vseq.sv",
+    "src/seq/vseq_lib.sv"                 : "uvme_${name}_st/src/seq/uvme_${name}_st_vseq_lib.sv",
+    "src/chkr.sv"                         : "uvme_${name}_st/src/uvma_${name}_st_chkr.sv",
+    "src/constants.sv"                    : "uvme_${name}_st/src/uvma_${name}_st_constants.sv",
+    "src/macros.sv"                       : "uvme_${name}_st/src/uvma_${name}_st_macros.sv",
+    "src/pkg.flist"                       : "uvme_${name}_st/src/uvma_${name}_st_pkg.flist",
+    "src/pkg.flist.xsim"                  : "uvme_${name}_st/src/uvma_${name}_st_pkg.flist.xsim",
+    "src/pkg.sv"                          : "uvme_${name}_st/src/uvma_${name}_st_pkg.sv",
+    "src/tdefs.sv"                        : "uvme_${name}_st/src/uvma_${name}_st_tdefs.sv",
+    "../LICENSE_solderpad_v2p1.md"        : "uvme_${name}_st/LICENSE.md",
+    "README.md"                           : "uvme_${name}_st/README.md"
 }
 
 directories = [
-    "uvme_${name}",
-    "uvme_${name}/bin",
-    "uvme_${name}/docs",
-    "uvme_${name}/examples",
-    "uvme_${name}/src",
-    "uvme_${name}/src/comps",
-    "uvme_${name}/src/obj",
-    "uvme_${name}/src/seq"
+    "uvme_${name}_st",
+    "uvme_${name}_st/bin",
+    "uvme_${name}_st/docs",
+    "uvme_${name}_st/examples",
+    "uvme_${name}_st/src",
+    "uvme_${name}_st/src/comps",
+    "uvme_${name}_st/src/obj",
+    "uvme_${name}_st/src/seq"
 ]
 
 

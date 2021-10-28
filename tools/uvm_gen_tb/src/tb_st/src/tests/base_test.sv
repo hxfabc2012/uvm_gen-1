@@ -15,10 +15,8 @@
 
 
 /**
- * Abstract component from which all other ${name_normal_case} test cases must
- * ultimately extend.
- * Subclasses must provide stimulus via the virtual sequencer by implementing
- * UVM runtime phases.
+ * Abstract component from which all other ${name_normal_case} test cases must ultimately extend.
+ * Subclasses must provide stimulus via the virtual sequencer by implementing UVM runtime phases.
  */
 class uvmt_${name}_st_base_test_c extends uvm_test;
    
@@ -26,7 +24,7 @@ class uvmt_${name}_st_base_test_c extends uvm_test;
    rand uvmt_${name}_st_test_cfg_c  test_cfg ;
    rand uvme_${name}_st_cfg_c       env_cfg  ;
    uvme_${name}_st_cntxt_c          env_cntxt;
-   uvml_logs_rs_text_c              rs       ;
+   uvml_logs_rs_text_c              rs;
    
    // Components
    uvme_${name}_st_env_c   env       ;
@@ -44,9 +42,11 @@ class uvmt_${name}_st_base_test_c extends uvm_test;
    
    
    constraint env_cfg_cons {
-      env_cfg.enabled         == 1;
-      env_cfg.is_active       == UVM_ACTIVE;
-      env_cfg.trn_log_enabled == 1;
+      env_cfg.enabled               == 1;
+      env_cfg.is_active             == UVM_ACTIVE;
+      env_cfg.trn_log_enabled       == 1;
+      env_cfg.scoreboarding_enabled == 1;
+      env_cfg.coverage_enabled      == 0;
    }
    
    
@@ -156,18 +156,12 @@ class uvmt_${name}_st_base_test_c extends uvm_test;
     */
    extern task start_clk();
    
-   /**
-    * Fatals out after simulation_timeout has elapsed.
-    */
-   extern task simulation_timeout();
-   
 endclass : uvmt_${name}_st_base_test_c
 
 
 function uvmt_${name}_st_base_test_c::new(string name="uvmt_${name}_st_base_test", uvm_component parent=null);
    
    super.new(name, parent);
-   
    rs = new("rs");
    uvm_report_server::set_server(rs);
    
@@ -194,7 +188,6 @@ endfunction : build_phase
 function void uvmt_${name}_st_base_test_c::connect_phase(uvm_phase phase);
    
    super.connect_phase(phase);
-   
    vsequencer = env.vsequencer;
    
 endfunction : connect_phase
@@ -203,9 +196,7 @@ endfunction : connect_phase
 task uvmt_${name}_st_base_test_c::run_phase(uvm_phase phase);
    
    super.run_phase(phase);
-   
    start_clk();
-   simulation_timeout();
    
 endtask : run_phase
 
@@ -227,11 +218,8 @@ endtask : reset_phase
 
 function void uvmt_${name}_st_base_test_c::phase_started(uvm_phase phase);
    
-   string  phase_name = phase.get_name();
-   
    super.phase_started(phase);
-   
-   print_banner($sformatf("start of %s phase", phase_name));
+   print_banner($sformatf("start of %s phase", phase.get_name()));
    
 endfunction : phase_started
 
@@ -283,6 +271,7 @@ function void uvmt_${name}_st_base_test_c::cfg_hrtbt_monitor();
    
    `uvml_hrtbt_set_cfg(startup_timeout , test_cfg.startup_timeout)
    `uvml_hrtbt_set_cfg(heartbeat_period, test_cfg.heartbeat_period)
+   `uvml_watchdog_set_cfg(timeout, test_cfg.simulation_timeout)
    
 endfunction : cfg_hrtbt_monitor
 
@@ -338,18 +327,6 @@ task uvmt_${name}_st_base_test_c::start_clk();
    clknrst_gen_vif.start_clk();
    
 endtask : start_clk
-
-
-task uvmt_${name}_st_base_test_c::simulation_timeout();
-   
-   fork
-      begin
-         #(test_cfg.simulation_timeout * 1ns);
-         `uvm_fatal("TIMEOUT", $sformatf("Global timeout after %0dns. Heartbeat list:\n%s", test_cfg.simulation_timeout, uvml_default_hrtbt.print_comp_names()))
-      end
-   join_none
-   
-endtask : simulation_timeout
 
 
 `endif // __UVMT_${name_uppercase}_ST_BASE_TEST_SV__
