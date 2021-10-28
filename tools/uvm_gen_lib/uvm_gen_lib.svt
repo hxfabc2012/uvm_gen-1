@@ -732,7 +732,7 @@
       
       
       
-      <file executable="false" name="uvml_${name}/bin/package.py" template="lib/bin/package.py"/>
+      <file executable="false" name="uvml_${name}/bin/package.py" template="templates/lib/bin/package.py"/>
                                                             
       
       
@@ -751,7 +751,7 @@
       
       
       
-      <file executable="false" name="uvml_${name}/examples/component.sv" template="lib/examples/component.sv"/>
+      <file executable="false" name="uvml_${name}/examples/component.sv" template="templates/lib/examples/component.sv"/>
                                                             
       
       
@@ -790,8 +790,8 @@
       
       
       
-      <file executable="false" name="uvml_${name}/examples/object.sv" template="lib/examples/object.sv"/>
-      <file executable="false" name="uvml_${name}/src/uvml_${name}_constants.sv" template="lib/src/constants.sv"/>
+      <file executable="false" name="uvml_${name}/examples/object.sv" template="templates/lib/examples/object.sv"/>
+      <file executable="false" name="uvml_${name}/src/uvml_${name}_constants.sv" template="templates/lib/src/constants.sv"/>
                                                                                                                                                                                                                                                             
       
       
@@ -833,7 +833,7 @@
       
       
       
-      <file executable="false" name="uvml_${name}/src/uvml_${name}_macros.sv" template="lib/src/macros.sv"/>
+      <file executable="false" name="uvml_${name}/src/uvml_${name}_macros.sv" template="templates/lib/src/macros.sv"/>
                                                                                                                                                                                                                                                             
       
       
@@ -875,7 +875,7 @@
       
       
       
-      <file executable="false" name="uvml_${name}/src/uvml_${name}_pkg.flist" template="lib/src/pkg.flist"/>
+      <file executable="false" name="uvml_${name}/src/uvml_${name}_pkg.flist" template="templates/lib/src/pkg.flist"/>
                                                                                                                                                                                                                                                             
       
       
@@ -917,7 +917,7 @@
       
       
       
-      <file executable="false" name="uvml_${name}/src/uvml_${name}_pkg.flist.xsim" template="lib/src/pkg.flist.xsim"/>
+      <file executable="false" name="uvml_${name}/src/uvml_${name}_pkg.flist.xsim" template="templates/lib/src/pkg.flist.xsim"/>
                                                                                     
       
       
@@ -931,7 +931,7 @@
       
       
       
-      <file executable="false" name="uvml_${name}/src/uvml_${name}_pkg.sv" template="lib/src/pkg.sv"/>
+      <file executable="false" name="uvml_${name}/src/uvml_${name}_pkg.sv" template="templates/lib/src/pkg.sv"/>
                                                                                                                                                                                                                                                             
       
       
@@ -973,7 +973,7 @@
       
       
       
-      <file executable="false" name="uvml_${name}/src/uvml_${name}_tdefs.sv" template="lib/src/tdefs.sv"/>
+      <file executable="false" name="uvml_${name}/src/uvml_${name}_tdefs.sv" template="templates/lib/src/tdefs.sv"/>
                                                                                                                                                                                                                                                           
     
     
@@ -1015,7 +1015,7 @@
       
       
       
-      <file executable="false" name="uvml_${name}/.gitignore" template="lib/.gitignore"/>
+      <file executable="false" name="uvml_${name}/.gitignore" template="templates/lib/.gitignore"/>
                                                             
       
       
@@ -1025,10 +1025,10 @@
       
       
       
-      <file executable="false" name="uvml_${name}/ip.yml" template="lib/ip.yml"/>
+      <file executable="false" name="uvml_${name}/ip.yml" template="templates/lib/ip.yml"/>
                   
       
-      <file executable="false" name="uvml_${name}/LICENSE.md" template="LICENSE_solderpad_v2p1.md"/>
+      <file executable="false" name="uvml_${name}/LICENSE.md" template="templates/LICENSE_solderpad_v2p1.md"/>
                                                             
       
       
@@ -1043,7 +1043,7 @@
       
       
       
-      <file executable="false" name="uvml_${name}/README.md" template="lib/README.md"/>
+      <file executable="false" name="uvml_${name}/README.md" template="templates/lib/README.md"/>
                                                           
     
     

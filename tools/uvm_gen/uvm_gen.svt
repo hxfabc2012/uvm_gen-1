@@ -1101,7 +1101,7 @@
       
       
       
-      <file executable="false" name="${pkg_name}_${name}.sv" template="component.sv"/>
+      <file executable="false" name="${pkg_name}_${name}.sv" template="templates/component.sv"/>
                                                                                                                                                                                                                                                                                                                                               
     
     
@@ -1748,7 +1748,7 @@
       
       
       
-      <file executable="false" name="${pkg_name}_${name}.sv" template="object.sv"/>
+      <file executable="false" name="${pkg_name}_${name}.sv" template="templates/object.sv"/>
                                                                                                                                                                                                                                                                                                                                               
     
     
@@ -2339,7 +2339,7 @@
       
       
       
-      <file executable="false" name="${name}_reg_adapter.sv" template="reg_adapter.sv"/>
+      <file executable="false" name="${name}_reg_adapter.sv" template="templates/reg_adapter.sv"/>
                                                                                                                                                                                                                                                                                   
     
     
@@ -2953,7 +2953,7 @@
       
       
       
-      <file executable="false" name="${pkg_name}_${name}_reg_block.sv" template="reg_block.sv"/>
+      <file executable="false" name="${pkg_name}_${name}_reg_block.sv" template="templates/reg_block.sv"/>
                                                                                                                                                                                                                                                                                                                                               
     
     
@@ -3592,7 +3592,7 @@
       
       
       
-      <file executable="false" name="${pkg_name}_${name}_reg.sv" template="reg.sv"/>
+      <file executable="false" name="${pkg_name}_${name}_reg.sv" template="templates/reg.sv"/>
                                                                                                                                                                                                                                                                                                                                               
     
     
@@ -3848,7 +3848,7 @@
       
       
       
-      <file executable="false" name="${pkg_name}_${name}_seq_lib.sv" template="seq_lib.sv"/>
+      <file executable="false" name="${pkg_name}_${name}_seq_lib.sv" template="templates/seq_lib.sv"/>
                                                     
     
     
@@ -4384,7 +4384,7 @@
       
       
       
-      <file executable="false" name="${pkg_name}_${name}_seq.sv" template="seq.sv"/>
+      <file executable="false" name="${pkg_name}_${name}_seq.sv" template="templates/seq.sv"/>
                                                                                                                                                                                                                                                                                                                                               
     
     
@@ -5147,7 +5147,7 @@
       
       
       
-      <file executable="false" name="uvmt_${tb_name}_${name}_test.sv" template="test.sv"/>
+      <file executable="false" name="uvmt_${tb_name}_${name}_test.sv" template="templates/test.sv"/>
                                                                                                                                                                                                                                                                                                                                               
     
     
@@ -5853,7 +5853,7 @@
       
       
       
-      <file executable="false" name="${pkg_name}_${name}_vseq.sv" template="vseq.sv"/>
+      <file executable="false" name="${pkg_name}_${name}_vseq.sv" template="templates/vseq.sv"/>
                                                                                                                                                                                                                                                                                                                                               
     
     
@@ -6031,7 +6031,7 @@
       <parameter default="2021" name="year" type="int"/>
     </parameters>
     <files>
-      <file executable="false" name="${pkg_name}_${name}_vseq_lib.sv" template="vseq_lib.sv"/>
+      <file executable="false" name="${pkg_name}_${name}_vseq_lib.sv" template="templates/vseq_lib.sv"/>
     </files>
   </template>
 </sv_template>

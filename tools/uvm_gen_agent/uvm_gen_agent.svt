@@ -808,7 +808,7 @@
       
       
       
-      <file executable="false" name="uvma_${name}/bin/package.py" template="agent_simplex_no_layers/bin/package.py"/>
+      <file executable="false" name="uvma_${name}/bin/package.py" template="templates/agent_simplex_no_layers/bin/package.py"/>
                                                                               
       
       
@@ -821,7 +821,7 @@
       
       
       
-      <file executable="false" name="uvma_${name}/docs/agent_block_diagram.svg" template="agent_simplex_no_layers/docs/agent_block_diagram.svg"/>
+      <file executable="false" name="uvma_${name}/docs/agent_block_diagram.svg" template="templates/agent_simplex_no_layers/docs/agent_block_diagram.svg"/>
                                                                               
       
       
@@ -834,111 +834,8 @@
       
       
       
-      <file executable="false" name="uvma_${name}/examples/instantiation.sv" template="agent_simplex_no_layers/examples/instantiation.sv"/>
-      <file executable="false" name="uvma_${name}/examples/virtual_sequence.sv" template="agent_simplex_no_layers/examples/virtual_sequence.sv"/>
-                                                                              
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-                                                                        
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvma_${name}/src/comps/uvma_${name}_agent.sv" template="agent_simplex_no_layers/src/comps/agent.sv"/>
-                                                                              
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvma_${name}/src/comps/uvma_${name}_cov_model.sv" template="agent_simplex_no_layers/src/comps/cov_model.sv"/>
-                                                                              
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvma_${name}/src/comps/uvma_${name}_drv.sv" template="agent_simplex_no_layers/src/comps/drv.sv"/>
-                                                                              
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvma_${name}/src/comps/uvma_${name}_mon.sv" template="agent_simplex_no_layers/src/comps/mon.sv"/>
-                                                                              
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvma_${name}/src/comps/uvma_${name}_mon_trn_logger.sv" template="agent_simplex_no_layers/src/comps/mon_trn_logger.sv"/>
-                                                                              
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvma_${name}/src/comps/uvma_${name}_seq_item_logger.sv" template="agent_simplex_no_layers/src/comps/seq_item_logger.sv"/>
-                                                                              
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="uvma_${name}/src/comps/uvma_${name}_sqr.sv" template="agent_simplex_no_layers/src/comps/sqr.sv"/>
+      <file executable="false" name="uvma_${name}/examples/instantiation.sv" template="templates/agent_simplex_no_layers/examples/instantiation.sv"/>
+      <file executable="false" name="uvma_${name}/examples/virtual_sequence.sv" template="templates/agent_simplex_no_layers/examples/virtual_sequence.sv"/>
                                                                               
       
       
@@ -963,7 +860,7 @@
       
       
       
-      <file executable="false" name="uvma_${name}/src/obj/uvma_${name}_cfg.sv" template="agent_simplex_no_layers/src/obj/cfg.sv"/>
+      <file executable="false" name="uvma_${name}/src/comps/uvma_${name}_agent.sv" template="templates/agent_simplex_no_layers/src/comps/agent.sv"/>
                                                                               
       
       
@@ -976,7 +873,7 @@
       
       
       
-      <file executable="false" name="uvma_${name}/src/obj/uvma_${name}_cntxt.sv" template="agent_simplex_no_layers/src/obj/cntxt.sv"/>
+      <file executable="false" name="uvma_${name}/src/comps/uvma_${name}_cov_model.sv" template="templates/agent_simplex_no_layers/src/comps/cov_model.sv"/>
                                                                               
       
       
@@ -989,7 +886,59 @@
       
       
       
-      <file executable="false" name="uvma_${name}/src/obj/uvma_${name}_mon_trn.sv" template="agent_simplex_no_layers/src/obj/mon_trn.sv"/>
+      <file executable="false" name="uvma_${name}/src/comps/uvma_${name}_drv.sv" template="templates/agent_simplex_no_layers/src/comps/drv.sv"/>
+                                                                              
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <file executable="false" name="uvma_${name}/src/comps/uvma_${name}_mon.sv" template="templates/agent_simplex_no_layers/src/comps/mon.sv"/>
+                                                                              
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <file executable="false" name="uvma_${name}/src/comps/uvma_${name}_mon_trn_logger.sv" template="templates/agent_simplex_no_layers/src/comps/mon_trn_logger.sv"/>
+                                                                              
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <file executable="false" name="uvma_${name}/src/comps/uvma_${name}_seq_item_logger.sv" template="templates/agent_simplex_no_layers/src/comps/seq_item_logger.sv"/>
+                                                                              
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <file executable="false" name="uvma_${name}/src/comps/uvma_${name}_sqr.sv" template="templates/agent_simplex_no_layers/src/comps/sqr.sv"/>
                                                                               
       
       
@@ -1014,7 +963,58 @@
       
       
       
-      <file executable="false" name="uvma_${name}/src/seq/uvma_${name}_base_seq.sv" template="agent_simplex_no_layers/src/seq/base_seq.sv"/>
+      <file executable="false" name="uvma_${name}/src/obj/uvma_${name}_cfg.sv" template="templates/agent_simplex_no_layers/src/obj/cfg.sv"/>
+                                                                              
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <file executable="false" name="uvma_${name}/src/obj/uvma_${name}_cntxt.sv" template="templates/agent_simplex_no_layers/src/obj/cntxt.sv"/>
+                                                                              
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <file executable="false" name="uvma_${name}/src/obj/uvma_${name}_mon_trn.sv" template="templates/agent_simplex_no_layers/src/obj/mon_trn.sv"/>
+                                                                              
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+                                                                        
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <file executable="false" name="uvma_${name}/src/seq/uvma_${name}_base_seq.sv" template="templates/agent_simplex_no_layers/src/seq/base_seq.sv"/>
                                                                                                                                                                                                                                                                                                                                                       
       
       
@@ -1071,7 +1071,7 @@
       
       
       
-      <file executable="false" name="uvma_${name}/src/seq/uvma_${name}_seq_item.sv" template="agent_simplex_no_layers/src/seq/seq_item.sv"/>
+      <file executable="false" name="uvma_${name}/src/seq/uvma_${name}_seq_item.sv" template="templates/agent_simplex_no_layers/src/seq/seq_item.sv"/>
                                                                                                                                                                                                                                                                                                                                                       
       
       
@@ -1362,7 +1362,7 @@
       
       
       
-      <file executable="false" name="uvma_${name}/src/uvma_${name}_constants.sv" template="agent_simplex_no_layers/src/constants.sv"/>
+      <file executable="false" name="uvma_${name}/src/uvma_${name}_constants.sv" template="templates/agent_simplex_no_layers/src/constants.sv"/>
                                                                                                                                                                                                                                                                                                                                                       
       
       
@@ -1463,7 +1463,7 @@
       
       
       
-      <file executable="false" name="uvma_${name}/src/uvma_${name}_if.sv" template="agent_simplex_no_layers/src/if.sv"/>
+      <file executable="false" name="uvma_${name}/src/uvma_${name}_if.sv" template="templates/agent_simplex_no_layers/src/if.sv"/>
                                                                                                                                                                                                                                                                                                                                                       
       
       
@@ -1520,7 +1520,7 @@
       
       
       
-      <file executable="false" name="uvma_${name}/src/uvma_${name}_if_chkr.sv" template="agent_simplex_no_layers/src/if_chkr.sv"/>
+      <file executable="false" name="uvma_${name}/src/uvma_${name}_if_chkr.sv" template="templates/agent_simplex_no_layers/src/if_chkr.sv"/>
                                                                                                                                                                                                                                                                                                                                                       
       
       
@@ -1577,7 +1577,7 @@
       
       
       
-      <file executable="false" name="uvma_${name}/src/uvma_${name}_macros.sv" template="agent_simplex_no_layers/src/macros.sv"/>
+      <file executable="false" name="uvma_${name}/src/uvma_${name}_macros.sv" template="templates/agent_simplex_no_layers/src/macros.sv"/>
                                                                                                                                                                                                                                                                                                                                                       
       
       
@@ -1766,7 +1766,7 @@
       
       
       
-      <file executable="false" name="uvma_${name}/src/uvma_${name}_pkg.flist" template="agent_simplex_no_layers/src/pkg.flist"/>
+      <file executable="false" name="uvma_${name}/src/uvma_${name}_pkg.flist" template="templates/agent_simplex_no_layers/src/pkg.flist"/>
                                                                                                                                                                                                                                                                                                                                                       
       
       
@@ -1824,7 +1824,7 @@
       
       
       
-      <file executable="false" name="uvma_${name}/src/uvma_${name}_pkg.flist.xsim" template="agent_simplex_no_layers/src/pkg.flist.xsim"/>
+      <file executable="false" name="uvma_${name}/src/uvma_${name}_pkg.flist.xsim" template="templates/agent_simplex_no_layers/src/pkg.flist.xsim"/>
                                                                                           
       
       
@@ -1839,7 +1839,7 @@
       
       
       
-      <file executable="false" name="uvma_${name}/src/uvma_${name}_pkg.sv" template="agent_simplex_no_layers/src/pkg.sv"/>
+      <file executable="false" name="uvma_${name}/src/uvma_${name}_pkg.sv" template="templates/agent_simplex_no_layers/src/pkg.sv"/>
                                                                                                                                                                                                                                                                                                                                                       
       
       
@@ -1941,7 +1941,7 @@
       
       
       
-      <file executable="false" name="uvma_${name}/src/uvma_${name}_tdefs.sv" template="agent_simplex_no_layers/src/tdefs.sv"/>
+      <file executable="false" name="uvma_${name}/src/uvma_${name}_tdefs.sv" template="templates/agent_simplex_no_layers/src/tdefs.sv"/>
                                                                                                                                                                                                                                                                                                                                                     
     
     
@@ -1998,7 +1998,7 @@
       
       
       
-      <file executable="false" name="uvma_${name}/.gitignore" template="agent_simplex_no_layers/.gitignore"/>
+      <file executable="false" name="uvma_${name}/.gitignore" template="templates/agent_simplex_no_layers/.gitignore"/>
                                                                               
       
       
@@ -2011,10 +2011,10 @@
       
       
       
-      <file executable="false" name="uvma_${name}/ip.yml" template="agent_simplex_no_layers/ip.yml"/>
+      <file executable="false" name="uvma_${name}/ip.yml" template="templates/agent_simplex_no_layers/ip.yml"/>
                   
       
-      <file executable="false" name="uvma_${name}/LICENSE.md" template="LICENSE_solderpad_v2p1.md"/>
+      <file executable="false" name="uvma_${name}/LICENSE.md" template="templates/LICENSE_solderpad_v2p1.md"/>
                                                                               
       
       
@@ -2035,7 +2035,7 @@
       
       
       
-      <file executable="false" name="uvma_${name}/README.md" template="agent_simplex_no_layers/README.md"/>
+      <file executable="false" name="uvma_${name}/README.md" template="templates/agent_simplex_no_layers/README.md"/>
                                                                             
     
     
