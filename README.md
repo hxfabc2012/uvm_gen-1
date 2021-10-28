@@ -41,7 +41,7 @@ to run the "Agent - Simplex, no Layer" generator:
 
 **3. List tasks**
 
-Templates leave behind `TODO` comments through the code, usually with examples, for the user to fill in.  Usually, templates will not simulate properly without these tasks being finished first:
+Templates leave behind `TODO` comments throughout the code, usually with examples, for the user to fill in.  Usually, templates will not simulate properly without these tasks being finished first:
 
 ```
 grep -nr TODO ./uvma_my_new_agent > uvma_my_new_agent_tasks.txt
