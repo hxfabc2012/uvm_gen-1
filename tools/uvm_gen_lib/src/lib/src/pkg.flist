@@ -12,8 +12,6 @@
 
 // Directories
 +incdir+${DV_UVML_${name_uppercase}_SRC_PATH}
-+incdir+${DV_UVML_${name_uppercase}_SRC_PATH}/comps
-+incdir+${DV_UVML_${name_uppercase}_SRC_PATH}/obj
 
 // Files
 ${DV_UVML_${name_uppercase}_SRC_PATH}/uvml_${name}_pkg.sv

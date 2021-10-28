@@ -16,7 +16,6 @@
 
 // Pre-processor macros
 `include "uvm_macros.svh"
-`include "uvml_${name}_macros.sv"
 
 
 /**
@@ -27,8 +26,8 @@ package uvml_${name}_pkg;
    import uvm_pkg::*;
    
    // Constants / Structs / Enums
-   `include "uvml_${name}_constants.sv"
    `include "uvml_${name}_tdefs.sv"
+   `include "uvml_${name}_constants.sv"
    
 endpackage : uvml_${name}_pkg
 

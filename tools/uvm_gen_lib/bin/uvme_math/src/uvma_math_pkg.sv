@@ -1,4 +1,4 @@
-// Copyright ${year} ${name_of_copyright_owner}
+// Copyright 2021 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 // Licensed under the Solderpad Hardware License v 2.1 (the "License"); you may not use this file except in compliance
@@ -10,8 +10,26 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-// Directories
--i ${DV_UVML_${name_uppercase}_SRC_PATH}
+`ifndef __UVML_MATH_PKG_SV__
+`define __UVML_MATH_PKG_SV__
 
-// Files
-${DV_UVML_${name_uppercase}_SRC_PATH}/uvml_${name}_pkg.sv
+
+// Pre-processor macros
+`include "uvm_macros.svh"
+
+
+/**
+ * Encapsulates all the types needed for the Mathematical Objects library.
+ */
+package uvml_math_pkg;
+   
+   import uvm_pkg::*;
+   
+   // Constants / Structs / Enums
+   `include "uvml_math_tdefs.sv"
+   `include "uvml_math_constants.sv"
+   
+endpackage : uvml_math_pkg
+
+
+`endif // __UVML_MATH_PKG_SV__

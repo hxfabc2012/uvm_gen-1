@@ -23,7 +23,7 @@ import sys
 # GLOBALS
 ########################################################################################################################
 dbg = False
-relative_path_to_template = os.getcwd() + "/../src/env_st/"
+relative_path_to_template = os.getcwd() + "/../src/lib/"
 out_path = ""
 default_copyright_owner = ""
 name_of_copyright_owner = ""
@@ -49,37 +49,24 @@ parameters = {
 
 files = {
     #              SRC                                 DST
-    "bin/package.py"                      : "uvme_${name}/bin/package.py",
-    "docs/env_block_diagram.svg"          : "uvme_${name}/docs/env_block_diagram.svg",
-    "examples/virtual_sequence.sv"        : "uvme_${name}/examples/virtual_sequence.sv",
-    "src/comps/cov_model.sv"              : "uvme_${name}/src/comps/uvme_${name}_st_cov_model.sv",
-    "src/comps/env.sv"                    : "uvme_${name}/src/comps/uvme_${name}_st_env.sv",
-    "src/comps/prd.sv"                    : "uvme_${name}/src/comps/uvme_${name}_st_prd.sv",
-    "src/comps/vsqr.sv"                   : "uvme_${name}/src/comps/uvme_${name}_st_vsqr.sv",
-    "src/obj/cfg.sv"                      : "uvme_${name}/src/obj/uvme_${name}_st_cfg.sv",
-    "src/obj/cntxt.sv"                    : "uvme_${name}/src/obj/uvme_${name}_st_cntxt.sv",
-    "src/seq/base_vseq.sv"                : "uvme_${name}/src/seq/uvme_${name}_st_base_vseq.sv",
-    "src/seq/vseq_lib.sv"                 : "uvme_${name}/src/seq/uvme_${name}_st_vseq_lib.sv",
-    "src/chkr.sv"                         : "uvme_${name}/src/uvma_${name}_st_chkr.sv",
-    "src/constants.sv"                    : "uvme_${name}/src/uvma_${name}_st_constants.sv",
-    "src/macros.sv"                       : "uvme_${name}/src/uvma_${name}_st_macros.sv",
-    "src/pkg.flist"                       : "uvme_${name}/src/uvma_${name}_st_pkg.flist",
-    "src/pkg.flist.xsim"                  : "uvme_${name}/src/uvma_${name}_st_pkg.flist.xsim",
-    "src/pkg.sv"                          : "uvme_${name}/src/uvma_${name}_st_pkg.sv",
-    "src/tdefs.sv"                        : "uvme_${name}/src/uvma_${name}_st_tdefs.sv",
-    "../LICENSE_solderpad_v2p1.md"        : "uvme_${name}/LICENSE.md",
-    "README.md"                           : "uvme_${name}/README.md"
+    "bin/package.py"               : "uvme_${name}/bin/package.py",
+    "examples/component.sv"        : "uvme_${name}/examples/component.sv",
+    "examples/object.sv"           : "uvme_${name}/examples/object.sv",
+    "src/constants.sv"             : "uvme_${name}/src/uvma_${name}_constants.sv",
+    "src/macros.sv"                : "uvme_${name}/src/uvma_${name}_macros.sv",
+    "src/pkg.flist"                : "uvme_${name}/src/uvma_${name}_pkg.flist",
+    "src/pkg.flist.xsim"           : "uvme_${name}/src/uvma_${name}_pkg.flist.xsim",
+    "src/pkg.sv"                   : "uvme_${name}/src/uvma_${name}_pkg.sv",
+    "src/tdefs.sv"                 : "uvme_${name}/src/uvma_${name}_tdefs.sv",
+    "../LICENSE_solderpad_v2p1.md" : "uvme_${name}/LICENSE.md",
+    "README.md"                    : "uvme_${name}/README.md"
 }
 
 directories = [
     "uvme_${name}",
     "uvme_${name}/bin",
-    "uvme_${name}/docs",
     "uvme_${name}/examples",
     "uvme_${name}/src",
-    "uvme_${name}/src/comps",
-    "uvme_${name}/src/obj",
-    "uvme_${name}/src/seq"
 ]
 
 
@@ -148,13 +135,13 @@ def prompt_user_values():
     global default_copyright_owner
     global parameters
     
-    print("Moore.io Template Generator: UVM Environment - Self-Testing (ST) (v1p0)")
+    print("Moore.io Template Generator: UVM Library (v1p0)")
     print("***********************************************************************")
-    print("The answers to the following questionnaire will be used to generate the code for your new UVM Environment")
+    print("The answers to the following questionnaire will be used to generate the code for your new UVM Library")
     print("")
     
     if out_path == "":
-        out_path = input("Please enter the destination path for this new agent (default: '.'):\n").strip()
+        out_path = input("Please enter the destination path for this new Library (default: '.'):\n").strip()
         if out_path == "":
             out_path = "."
     
@@ -169,30 +156,18 @@ def prompt_user_values():
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
     
-    name = input("Please enter the name of the Agent/Library for this Self-Testing Environment (ex: 'apb'); this name will be used for all Environment types (ex: 'uvme_apb_st_env_c'):\n").lower().strip()
+    name = input("Please enter the name of this new Library (ex: 'math'); this name will be used for all Library types (ex: 'uvml_math_c'):\n").lower().strip()
     if name == "":
         sys.exit("ERROR: package name cannot be empty.  Exiting.")
     else:
         parameters["name"] = name
         parameters["name_uppercase"] = name.upper()
     
-    name_normal_case = input("Please enter the (descriptive) name for this Agent/Library (ex: 'Advanced Peripheral Bus (APB)'):\n").strip()
+    name_normal_case = input("Please enter the (descriptive) name for this new Library (ex: 'Mathematical Objects'):\n").strip()
     if name_normal_case == "":
         sys.exit("ERROR: descriptive name cannot be empty.  Exiting.")
     else:
         parameters["name_normal_case"] = name_normal_case
-    
-    name_1 = input("Please enter the name for the first agent instance (default: 'mstr'):\n").strip()
-    if name_1 == "":
-        parameters["name_1"] = "mstr"
-    else:
-        parameters["name_1"] = name_1
-    
-    name_2 = input("Please enter the name for the second agent instance (default: 'slv'):\n").strip()
-    if name_2 == "":
-        parameters["name_2"] = "slv"
-    else:
-        parameters["name_2"] = name_2
     
 
 
