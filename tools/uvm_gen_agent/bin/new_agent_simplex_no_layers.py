@@ -67,6 +67,7 @@ files = {
     "src/pkg.flist"                : "uvma_${name}/src/uvma_${name}_pkg.flist",
     "src/pkg.sv"                   : "uvma_${name}/src/uvma_${name}_pkg.sv",
     "src/tdefs.sv"                 : "uvma_${name}/src/uvma_${name}_tdefs.sv",
+    "../.gitignore"                : "uvmt_${name}/.gitignore",
     "../LICENSE_solderpad_v2p1.md" : "uvma_${name}/LICENSE.md",
     "README.md"                    : "uvma_${name}/README.md"
 }

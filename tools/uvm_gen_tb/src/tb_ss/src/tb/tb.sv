@@ -15,10 +15,7 @@
 
 
 /**
- * Module encapsulating the ${name_normal_case} DUT wrapper, agents and clock
- * generating interfaces. The clock and reset interfaces only feed into the
- * ${name_normal_case} and ${ral_agent_type} interfaces as their
- * clocks and resets, respectively.
+ * Module encapsulating the ${name_normal_case} DUT wrapper, agents and clock generating interfaces.
  */
 module uvmt_${name}_tb;
    
@@ -61,7 +58,7 @@ module uvmt_${name}_tb;
       uvm_config_db#(virtual uvmt_${name}_probe_if)::set(null, "*", "probe_vif", probe_if);
       
       // Run test
-      uvm_top.enable_print_topology = 1;
+      uvm_top.enable_print_topology = 0;
       uvm_top.finish_on_completion  = 1;
       uvm_top.run_test();
    end

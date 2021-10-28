@@ -15,10 +15,8 @@
 
 
 /**
- * Abstract component from which all other ${name_normal_case} test cases must
- * ultimately extend.
- * Subclasses must provide stimulus via the virtual sequencer by implementing
- * UVM runtime phases.
+ * Abstract component from which all other ${name_normal_case} test cases must ultimately extend.
+ * Subclasses must provide stimulus via the virtual sequencer by implementing UVM runtime phases.
  */
 class uvmt_${name}_base_test_c extends uvm_test;
    
@@ -26,7 +24,7 @@ class uvmt_${name}_base_test_c extends uvm_test;
    rand uvmt_${name}_test_cfg_c  test_cfg ;
    rand uvme_${name}_cfg_c       env_cfg  ;
    uvme_${name}_cntxt_c          env_cntxt;
-   uvme_${name}_ral_c            ral      ;
+   uvme_${name}_reg_block_c      reg_block;
    uvml_logs_rs_text_c           rs       ;
    uvml_logs_reg_logger_cbs_c    reg_cbs  ;
    
@@ -50,9 +48,11 @@ class uvmt_${name}_base_test_c extends uvm_test;
    
    
    constraint env_cfg_cons {
-      env_cfg.enabled         == 1;
-      env_cfg.is_active       == UVM_ACTIVE;
-      env_cfg.trn_log_enabled == 1;
+      env_cfg.enabled               == 1;
+      env_cfg.is_active             == UVM_ACTIVE;
+      env_cfg.trn_log_enabled       == 1;
+      env_cfg.scoreboarding_enabled == 1;
+      env_cfg.coverage_enabled      == 0;
    }
    
    
@@ -82,12 +82,6 @@ class uvmt_${name}_base_test_c extends uvm_test;
     * 2. Add register callback (reg_cbs) to all registers & fields.
     */
    extern virtual function void connect_phase(uvm_phase phase);
-   
-   /**
-    * 1. Triggers the start of clock generation via start_clk()
-    * 2. Starts the simulation timeout via simulation_timeout()
-    */
-   extern virtual task run_phase(uvm_phase phase);
    
    /**
     * Runs ${clk_agent_name}_vseq.
@@ -121,7 +115,7 @@ class uvmt_${name}_base_test_c extends uvm_test;
    extern function void retrieve_probe_vif();
    
    /**
-    * Creates test_cfg and env_cfg. Assigns ral handle to env_cfg's.
+    * Creates test_cfg and env_cfg. Assigns reg_block handle to env_cfg's.
     */
    extern function void create_cfg();
    
@@ -168,11 +162,6 @@ class uvmt_${name}_base_test_c extends uvm_test;
     */
    extern function void print_banner(string text);
    
-   /**
-    * Fatals out after simulation_timeout has elapsed.
-    */
-   extern task simulation_timeout();
-   
 endclass : uvmt_${name}_base_test_c
 
 
@@ -215,15 +204,6 @@ function void uvmt_${name}_base_test_c::connect_phase(uvm_phase phase);
 endfunction : connect_phase
 
 
-task uvmt_${name}_base_test_c::run_phase(uvm_phase phase);
-   
-   super.run_phase(phase);
-   
-   simulation_timeout();
-   
-endtask : run_phase
-
-
 task uvmt_${name}_base_test_c::pre_reset_phase(uvm_phase phase);
    
    super.pre_reset_phase(phase);
@@ -252,8 +232,8 @@ task uvmt_${name}_base_test_c::configure_phase(uvm_phase phase);
    
    super.configure_phase(phase);
    
-   `uvm_info("TEST", $sformatf("Starting to update DUT with RAL contents:\n%s", ral.sprint()), UVM_NONE)
-   ral.update(status);
+   `uvm_info("TEST", $sformatf("Starting to update DUT with RAL contents:\n%s", reg_block.sprint()), UVM_NONE)
+   reg_block.update(status);
    `uvm_info("TEST", "Finished updating DUT with RAL contents", UVM_NONE)
    
 endtask : configure_phase
@@ -261,11 +241,8 @@ endtask : configure_phase
 
 function void uvmt_${name}_base_test_c::phase_started(uvm_phase phase);
    
-   string  phase_name = phase.get_name();
-   
    super.phase_started(phase);
-   
-   print_banner($sformatf("start of %s phase", phase_name));
+   print_banner($sformatf("start of %s phase", phase.get_name()));
    
 endfunction : phase_started
 
@@ -296,9 +273,9 @@ endfunction : retrieve_probe_vif
 
 function void uvmt_${name}_base_test_c::create_cfg();
    
-   test_cfg = uvmt_${name}_test_cfg_c::type_id::create("test_cfg");
-   env_cfg  = uvme_${name}_cfg_c     ::type_id::create("env_cfg" );
-   ral      = env_cfg.${name}_ral;
+   test_cfg  = uvmt_${name}_test_cfg_c::type_id::create("test_cfg");
+   env_cfg   = uvme_${name}_cfg_c     ::type_id::create("env_cfg" );
+   reg_block = env.reg_block;
    
 endfunction : create_cfg
 
@@ -318,6 +295,7 @@ function void uvmt_${name}_base_test_c::cfg_hrtbt_monitor();
    
    `uvml_hrtbt_set_cfg(startup_timeout , test_cfg.startup_timeout)
    `uvml_hrtbt_set_cfg(heartbeat_period, test_cfg.heartbeat_period)
+   `uvml_watchdog_set_cfg(timeout, test_cfg.simulation_timeout)
    
 endfunction : cfg_hrtbt_monitor
 
@@ -365,18 +343,6 @@ function void uvmt_${name}_base_test_c::print_banner(string text);
    $display("*******************************************************************************");
    
 endfunction : print_banner
-
-
-task uvmt_${name}_base_test_c::simulation_timeout();
-   
-   fork
-      begin
-         #(test_cfg.simulation_timeout * 1ns);
-         `uvm_fatal("TIMEOUT", $sformatf("Global timeout after %0dns. Heartbeat list:\n%s", test_cfg.simulation_timeout, uvml_default_hrtbt.print_comp_names()))
-      end
-   join_none
-   
-endtask : simulation_timeout
 
 
 `endif // __UVMT_${name_uppercase}_BASE_TEST_SV__

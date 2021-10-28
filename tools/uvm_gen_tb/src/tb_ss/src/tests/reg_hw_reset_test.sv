@@ -15,8 +15,7 @@
 
 
 /**
- * Checks that the reset value specified for registers in the RAL matches what
- * is in the DUT.
+ * Checks that the reset value specified for registers in the RAL matches what is in the DUT.
  */
 class uvmt_${name}_hw_reset_test_c extends uvmt_${name}_reg_base_test_c;
    

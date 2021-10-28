@@ -16,7 +16,12 @@
 
 // Pre-processor macros
 `include "uvm_macros.svh"
-`include "uvml_hrtbt_macros.sv"
+`include "uvml_macros.sv"
+`include "uvml_logs_macros.sv"
+`include "uvma_${clk_agent_type}_macros.sv"
+`include "uvma_${reset_agent_type}_macros.sv"
+`include "uvma_${ral_agent_type}_macros.sv"
+`include "uvme_${name}_macros.sv"
 `include "uvmt_${name}_macros.sv"
 
 // Time units and precision for this test bench
@@ -28,24 +33,21 @@ timeprecision  1ps;
 
 
 /**
- * Encapsulates all the types and test cases for the verification of an
- * ${name_normal_case} RTL design.
+ * Encapsulates all the types and test cases for the verification of a ${name_normal_case} RTL design.
  */
 package uvmt_${name}_pkg;
    
-   import uvm_pkg       ::*;
-   import uvml_hrtbt_pkg::*;
-   import uvml_logs_pkg ::*;
+   import uvm_pkg      ::*;
+   import uvml_pkg     ::*;
+   import uvml_logs_pkg::*;
    import uvma_${clk_agent_type}_pkg::*;
    import uvma_${reset_agent_type}_pkg::*;
    import uvma_${ral_agent_type}_pkg::*;
    import uvme_${name}_pkg::*;
    
    // Constants / Structs / Enums
-   `include "uvmt_${name}_constants.sv"
    `include "uvmt_${name}_tdefs.sv"
-   
-   // Sequences
+   `include "uvmt_${name}_constants.sv"
    
    // Base tests
    `include "uvmt_${name}_test_cfg.sv"

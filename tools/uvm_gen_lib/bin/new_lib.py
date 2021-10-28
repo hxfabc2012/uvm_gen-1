@@ -49,17 +49,18 @@ parameters = {
 
 files = {
     #              SRC                                 DST
-    "bin/package.py"               : "uvme_${name}/bin/package.py",
-    "examples/component.sv"        : "uvme_${name}/examples/component.sv",
-    "examples/object.sv"           : "uvme_${name}/examples/object.sv",
-    "src/constants.sv"             : "uvme_${name}/src/uvma_${name}_constants.sv",
-    "src/macros.sv"                : "uvme_${name}/src/uvma_${name}_macros.sv",
-    "src/pkg.flist"                : "uvme_${name}/src/uvma_${name}_pkg.flist",
-    "src/pkg.flist.xsim"           : "uvme_${name}/src/uvma_${name}_pkg.flist.xsim",
-    "src/pkg.sv"                   : "uvme_${name}/src/uvma_${name}_pkg.sv",
-    "src/tdefs.sv"                 : "uvme_${name}/src/uvma_${name}_tdefs.sv",
-    "../LICENSE_solderpad_v2p1.md" : "uvme_${name}/LICENSE.md",
-    "README.md"                    : "uvme_${name}/README.md"
+    "bin/package.py"               : "uvml_${name}/bin/package.py",
+    "examples/component.sv"        : "uvml_${name}/examples/component.sv",
+    "examples/object.sv"           : "uvml_${name}/examples/object.sv",
+    "src/constants.sv"             : "uvml_${name}/src/uvml_${name}_constants.sv",
+    "src/macros.sv"                : "uvml_${name}/src/uvml_${name}_macros.sv",
+    "src/pkg.flist"                : "uvml_${name}/src/uvml_${name}_pkg.flist",
+    "src/pkg.flist.xsim"           : "uvml_${name}/src/uvml_${name}_pkg.flist.xsim",
+    "src/pkg.sv"                   : "uvml_${name}/src/uvml_${name}_pkg.sv",
+    "src/tdefs.sv"                 : "uvml_${name}/src/uvml_${name}_tdefs.sv",
+    "../.gitignore"                : "uvml_${name}/.gitignore",
+    "../LICENSE_solderpad_v2p1.md" : "uvml_${name}/LICENSE.md",
+    "README.md"                    : "uvml_${name}/README.md"
 }
 
 directories = [

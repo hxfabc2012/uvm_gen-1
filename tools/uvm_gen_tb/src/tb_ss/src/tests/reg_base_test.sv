@@ -15,8 +15,7 @@
 
 
 /**
- * Test from which all other ${name_normal_case} register-oriented tests must
- * extend.
+ * Test from which all other ${name_normal_case} register-oriented tests must extend.
  */
 class uvmt_${name}_reg_base_test_c extends uvmt_${name}_base_test_c;
    
@@ -53,7 +52,7 @@ function void uvmt_${name}_reg_base_test_c::connect_phase(uvm_phase phase);
    super.connect_phase(phase);
    
    if (test_cfg.cli_block_name_override) begin
-      test_cfg.selected_reg_block = ral.get_block_by_name(test_cfg.cli_block_name_parsed_str);
+      test_cfg.selected_reg_block = reg_block.get_block_by_name(test_cfg.cli_block_name_parsed_str);
    end
    
 endfunction : connect_phase

@@ -57,9 +57,7 @@ endpackage : uvmt_${name}_st_pkg
 
 // Module(s) / Checker(s)
 `include "uvmt_${name}_st_dut_wrap.sv"
-`ifdef UVMT_${name_uppercase}_ST_INC_CHKR
 `include "uvmt_${name}_st_dut_chkr.sv"
-`endif
 `include "uvmt_${name}_st_tb.sv"
 
 

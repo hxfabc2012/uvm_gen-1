@@ -15,8 +15,7 @@
 
 
 /**
- * Object encapsulating configuration parameters common to most if not all tests
- * extending from uvmt_${name}_base_test_c.
+ * Object encapsulating configuration parameters common to most if not all tests extending from uvmt_${name}_base_test_c.
  */
 class uvmt_${name}_test_cfg_c extends uvm_object;
    
@@ -29,7 +28,6 @@ class uvmt_${name}_test_cfg_c extends uvm_object;
    uvm_reg_block  selected_reg_block;
    
    // Command line arguments
-   string  cli_block_name_str      = "BLKNM";
    bit     cli_block_name_override = 0;
    string  cli_block_name_parsed_str;
    
@@ -46,7 +44,7 @@ class uvmt_${name}_test_cfg_c extends uvm_object;
    
    
    constraint timeouts_default_cons {
-      soft startup_timeout    == uvmt_${name}_default_startup_timeout   ; 
+      soft startup_timeout    == uvmt_${name}_default_startup_timeout   ;
       soft heartbeat_period   == uvmt_${name}_default_heartbeat_period  ;
       soft simulation_timeout == uvmt_${name}_default_simulation_timeout;
    }
@@ -74,7 +72,7 @@ endfunction : new
 
 function void uvmt_${name}_test_cfg_c::process_cli_args();
    
-   if (uvm_cmdline_proc.get_arg_value({"+", cli_block_name_str, "="}, cli_block_name_parsed_str)) begin
+   if (uvm_cmdline_proc.get_arg_value("BLKNM=", cli_block_name_parsed_str)) begin
       if (cli_block_name_parsed_str != "") begin
          cli_block_name_override = 1;
       end

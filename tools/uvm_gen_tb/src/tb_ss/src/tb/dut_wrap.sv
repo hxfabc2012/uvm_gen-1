@@ -15,7 +15,7 @@
 
 
 /**
- * Module wrapper for ${name_normal_case} RTL DUT. All ports are SV interfaces.
+ * Module wrapper for ${name_normal_case} RTL DUT.  All ports are SV interfaces.
  */
 module uvmt_${name}_dut_wrap(
    uvma_${ral_agent_type}_if  ${ral_agent_type}_if,

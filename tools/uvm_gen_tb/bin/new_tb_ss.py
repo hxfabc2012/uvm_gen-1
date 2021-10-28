@@ -44,29 +44,38 @@ parameters = {
 
 files = {
     #              SRC                                 DST
-    "bin/package.py"               : "uvma_${name}/bin/package.py",
-    "docs/tb_block_diagram.svg"    : "uvma_${name}/docs/tb_block_diagram.svg",
-    "examples/test.sv"             : "uvma_${name}/examples/test.sv",
-    "src/tb/" : "uvma_${name}/tb/",
-    "src/constants.sv"             : "uvma_${name}/src/uvmt_${name}_constants.sv",
-    "src/if_chkr.sv"               : "uvma_${name}/src/uvmt_${name}_if_chkr.sv",
-    "src/if.sv"                    : "uvma_${name}/src/uvmt_${name}_if.sv",
-    "src/macros.sv"                : "uvma_${name}/src/uvmt_${name}_macros.sv",
-    "src/pkg.flist"                : "uvma_${name}/src/uvmt_${name}_pkg.flist",
-    "src/pkg.sv"                   : "uvma_${name}/src/uvmt_${name}_pkg.sv",
-    "src/tdefs.sv"                 : "uvma_${name}/src/uvmt_${name}_tdefs.sv",
-    "../LICENSE_solderpad_v2p1.md" : "uvma_${name}/LICENSE.md",
-    "README.md"                    : "uvma_${name}/README.md"
+    "bin/package.py"                     : "uvmt_${name}/bin/package.py",
+    "docs/tb_block_diagram.svg"          : "uvmt_${name}/docs/tb_block_diagram.svg",
+    "examples/test.sv"                   : "uvmt_${name}/examples/test.sv",
+    "src/tb/probe_if.sv"                 : "uvmt_${name}/src/tb/uvmt_${name}_probe_if.sv",
+    "src/tb/dut_chkr.sv"                 : "uvmt_${name}/src/tb/uvmt_${name}_dut_chkr.sv",
+    "src/tb/dut_wrap.sv"                 : "uvmt_${name}/src/tb/uvmt_${name}_dut_wrap.sv",
+    "src/tb/tb.sv"                       : "uvmt_${name}/src/tb/uvmt_${name}_tb.sv",
+    "src/tests/reg_base_test.sv"         : "uvmt_${name}/src/tests/uvmt_${name}_reg_base_test.sv",
+    "src/tests/reg_bit_bash_test.sv"     : "uvmt_${name}/src/tests/uvmt_${name}_reg_bit_bash_test.sv",
+    "src/tests/reg_hw_reset_test.sv"     : "uvmt_${name}/src/tests/uvmt_${name}_reg_hw_reset_test.sv",
+    "src/tests/base_test_workarounds.sv" : "uvmt_${name}/src/tests/uvmt_${name}_base_test_workarounds.sv",
+    "src/tests/base_test.sv"             : "uvmt_${name}/src/tests/uvmt_${name}_base_test.sv",
+    "src/tests/test_cfg.sv"              : "uvmt_${name}/src/tests/uvmt_${name}_test_cfg.sv",
+    "src/constants.sv"                   : "uvmt_${name}/src/uvmt_${name}_constants.sv",
+    "src/macros.sv"                      : "uvmt_${name}/src/uvmt_${name}_macros.sv",
+    "src/pkg.flist"                      : "uvmt_${name}/src/uvmt_${name}_pkg.flist",
+    "src/pkg.flist.xsim"                 : "uvmt_${name}/src/uvmt_${name}_pkg.flist.xsim",
+    "src/pkg.sv"                         : "uvmt_${name}/src/uvmt_${name}_pkg.sv",
+    "src/tdefs.sv"                       : "uvmt_${name}/src/uvmt_${name}_tdefs.sv",
+    "../.gitignore"                      : "uvmt_${name}/.gitignore",
+    "../LICENSE_solderpad_v2p1.md"       : "uvmt_${name}/LICENSE.md",
+    "README.md"                          : "uvmt_${name}/README.md"
 }
 
 directories = [
-    "uvma_${name}",
-    "uvma_${name}/bin",
-    "uvma_${name}/docs",
-    "uvma_${name}/examples",
-    "uvma_${name}/src",
-    "uvma_${name}/src/tb",
-    "uvma_${name}/src/tests"
+    "uvmt_${name}",
+    "uvmt_${name}/bin",
+    "uvmt_${name}/docs",
+    "uvmt_${name}/examples",
+    "uvmt_${name}/src",
+    "uvmt_${name}/src/tb",
+    "uvmt_${name}/src/tests"
 ]
 
 
@@ -134,36 +143,81 @@ def prompt_user_values():
     global default_copyright_owner
     global parameters
     
-    print("Moore.io Template Generator: UVM Agent - Simplex, no layers (v1p0)")
+    print("Moore.io Template Generator: Sub-System Test Bench and UVM Test Library (v1p0)")
+    print("******************************************************************************")
+    print("The answers to the following questionnaire will be used to generate the code for your new UVM Test Bench")
+    print("")
     
     if out_path == "":
-        out_path = input("Please enter the destination path for this new agent\n").strip()
+        out_path = input("Please enter the destination path for this new agent (default: '.'):\n").strip()
+        if out_path == "":
+            out_path = "."
+    
+    parameters = {
+        "name"          : name,
+        "name_uppercase": name.upper(),
+        "year"          : date.today().year
+    }
     
     name_of_copyright_owner = input("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
     if name_of_copyright_owner == "":
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
     
-    name = input("Please enter the package name for this agent (ex: 'pcie'); this name will be used for all agent types (ex: 'uvma_pcie_agent_c'):\n").lower().strip()
+    name = input("Please enter the package name for this Test Bench (ex: 'dp'); this name will be used for all Test Bench types (ex: 'uvmt_dp_tb'):\n").lower().strip()
     if name == "":
         sys.exit("ERROR: package name cannot be empty.  Exiting.")
     else:
         parameters["name"] = name
         parameters["name_uppercase"] = name.upper()
     
-    name_normal_case = input("Please enter the (descriptive) name for this agent (ex: 'PCI Express'):\n").strip()
+    name_normal_case = input("Please enter the (descriptive) name for this Test Bench (ex: 'Data Plane'):\n").strip()
     if name_normal_case == "":
         sys.exit("ERROR: descriptive name cannot be empty.  Exiting.")
     else:
         parameters["name_normal_case"] = name_normal_case
     
-    parameters = {
-    "name"                    : name,
-    "name_uppercase"          : name.upper(),
-    "name_normal_case"        : name_normal_case,
-    "name_of_copyright_owner" : name_of_copyright_owner,
-    "year"                    : date.today().year
-}
+    clk_agent_name = input("Please enter the type for the Clock Agent (default: 'clk'):\n").strip()
+    if clk_agent_name == "":
+        parameters["clk_agent_type"] = "clk"
+        parameters["clk_agent_type_uppercase"] = "CLK"
+    else:
+        parameters["clk_agent_type"] = clk_agent_name
+        parameters["clk_agent_type_uppercase"] = clk_agent_name.upper()
+    
+    clk_agent_name = input("Please enter the name of the Clock Agent (default: 'sys_clk'):\n").strip()
+    if clk_agent_name == "":
+        parameters["clk_agent_name"] = "sys_clk"
+    else:
+        parameters["clk_agent_name"] = clk_agent_name
+    
+    reset_agent_name = input("Please enter the type for the Reset Agent (default: 'reset'):\n").strip()
+    if reset_agent_name == "":
+        parameters["reset_agent_type"] = "reset"
+        parameters["reset_agent_type_uppercase"] = "RESET"
+    else:
+        parameters["reset_agent_type"] = reset_agent_name
+        parameters["reset_agent_type_uppercase"] = reset_agent_name.upper()
+    
+    reset_agent_name = input("Please enter the name of the Reset Agent (default: 'sys_reset'):\n").strip()
+    if reset_agent_name == "":
+        parameters["reset_agent_name"] = "sys_reset"
+    else:
+        parameters["reset_agent_name"] = reset_agent_name
+    
+    ral_agent_type = input("Please enter the type for the RAL Agent (default: 'axil'):\n").strip()
+    if ral_agent_type == "":
+        parameters["ral_agent_type"] = "axil"
+        parameters["ral_agent_type_uppercase"] = "AXIL"
+    else:
+        parameters["ral_agent_type"] = ral_agent_type
+        parameters["ral_agent_type_uppercase"] = ral_agent_type.upper()
+    
+    ral_agent_name = input("Please enter the name of the RAL Agent (default: 'axil'):\n").strip()
+    if ral_agent_name == "":
+        parameters["ral_agent_name"] = "axil"
+    else:
+        parameters["ral_agent_name"] = ral_agent_name
 
 
 ########################################################################################################################

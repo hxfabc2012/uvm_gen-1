@@ -15,19 +15,14 @@
 
 
 /**
- * Module encapsulating assertions for ${name_normal_case} RTL DUT wrapper.
- * All ports are SV interfaces.
+ * Module encapsulating assertions for ${name_normal_case} RTL DUT wrapper.  All ports are SV interfaces.
  */
 module uvmt_${name}_dut_chkr(
    uvma_${ral_agent_type}_if  ${ral_agent_type}_if,
    uvmt_${name}_probe_if  probe_if
 );
    
-   `pragma protect begin
-   
    // TODO Add assertions to uvmt_${name}_dut_chkr
-   
-   `pragma protect end
    
 endmodule : uvmt_${name}_dut_chkr
 

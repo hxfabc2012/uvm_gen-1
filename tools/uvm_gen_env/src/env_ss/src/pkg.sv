@@ -28,8 +28,8 @@
 
 
  /**
- * Encapsulates all the types needed for an UVM environment capable of driving/
- * monitoring and verifying the behavior of an ${name_normal_case} design.
+ * Encapsulates all the types needed for an UVM environment capable of driving/monitoring and verifying the behavior of
+ * a ${name_normal_case} design.
  */
 package uvme_${name}_pkg;
    

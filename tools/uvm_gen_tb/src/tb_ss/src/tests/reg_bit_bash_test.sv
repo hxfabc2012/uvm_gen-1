@@ -15,8 +15,7 @@
 
 
 /**
- * Checks that all writable registers specified in the RAL are writable in the
- * DUT.
+ * Checks that all writable registers specified in the RAL are writable in the DUT.
  */
 class uvmt_${name}_bit_bash_test_c extends uvmt_${name}_reg_base_test_c;
    
