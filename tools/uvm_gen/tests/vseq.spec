@@ -1,4 +1,4 @@
 
 basic_access
-uvmt_misc_st
+uvme_misc_st
 uvm_sequence

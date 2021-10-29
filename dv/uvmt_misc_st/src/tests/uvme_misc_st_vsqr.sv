@@ -10,19 +10,44 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-// Libraries
-//-f ${DV_UVM_SRC_PATH}/uvm_pkg.flist.xsim
--f ${DV_UVML_SRC_PATH}/uvml_pkg.flist.xsim
--f ${DV_UVML_LOGS_SRC_PATH}/uvml_logs_pkg.flist.xsim
--f ${DV_UVML_SB_SRC_PATH}/uvml_sb_pkg.flist.xsim
--f ${DV_UVML_RAL_SRC_PATH}/uvml_ral_pkg.flist.xsim
--f ${DV_UVML_MATH_SRC_PATH}/uvml_math_pkg.flist.xsim
+`ifndef __UVME_MISC_ST_VSQR_SV__
+`define __UVME_MISC_ST_VSQR_SV__
 
-// Miscellaneous test bench Directories
--i ${DV_UVMT_MISC_ST_SRC_PATH}
--i ${DV_UVMT_MISC_ST_SRC_PATH}/seq
--i ${DV_UVMT_MISC_ST_SRC_PATH}/tb
--i ${DV_UVMT_MISC_ST_SRC_PATH}/tests
 
-// Miscellaneous tests (includes constants/macros/types meant for test bench)
-${DV_UVMT_MISC_ST_SRC_PATH}/uvmt_misc_st_pkg.sv
+/**
+ * TODO Describe uvme_misc_st_vsqr_c
+ */
+class uvme_misc_st_vsqr_c extends uvm_sequencer #(uvmt_misc_st_seq_item_c);
+   
+   // Fields
+   
+   
+   
+   `uvm_component_utils_begin(uvme_misc_st_vsqr_c)
+      // UVM Field Util Macros
+   `uvm_component_utils_end
+   
+   
+   // Constraints
+   
+   
+   
+   /**
+    * Default constructor.
+    */
+   extern function new(string name="uvme_misc_st_vsqr", uvm_component parent=null);
+   
+   // Methods
+   
+   
+endclass : uvme_misc_st_vsqr_c
+
+
+function uvme_misc_st_vsqr_c::new(string name="uvme_misc_st_vsqr", uvm_component parent=null);
+   
+   super.new(name, parent);
+   
+endfunction : new
+
+
+`endif // __UVME_MISC_ST_VSQR_SV__

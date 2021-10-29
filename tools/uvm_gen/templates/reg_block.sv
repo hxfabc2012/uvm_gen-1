@@ -19,6 +19,8 @@
  */
 class ${pkg_name}_${name}_reg_block_c extends ${base_class};
    
+   longint unsigned  base_address;
+   
    // Sub-Blocks
    // TODO Add sub-block(s)
    //      Ex: rand ${pkg_name}_${name}_abc_reg_block_c  abc;

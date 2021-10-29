@@ -10,19 +10,44 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-// Libraries
-//-f ${DV_UVM_SRC_PATH}/uvm_pkg.flist.xsim
--f ${DV_UVML_SRC_PATH}/uvml_pkg.flist.xsim
--f ${DV_UVML_LOGS_SRC_PATH}/uvml_logs_pkg.flist.xsim
--f ${DV_UVML_SB_SRC_PATH}/uvml_sb_pkg.flist.xsim
--f ${DV_UVML_RAL_SRC_PATH}/uvml_ral_pkg.flist.xsim
--f ${DV_UVML_MATH_SRC_PATH}/uvml_math_pkg.flist.xsim
+`ifndef __UVMT_MISC_ST_SEQ_ITEM_SV__
+`define __UVMT_MISC_ST_SEQ_ITEM_SV__
 
-// Miscellaneous test bench Directories
--i ${DV_UVMT_MISC_ST_SRC_PATH}
--i ${DV_UVMT_MISC_ST_SRC_PATH}/seq
--i ${DV_UVMT_MISC_ST_SRC_PATH}/tb
--i ${DV_UVMT_MISC_ST_SRC_PATH}/tests
 
-// Miscellaneous tests (includes constants/macros/types meant for test bench)
-${DV_UVMT_MISC_ST_SRC_PATH}/uvmt_misc_st_pkg.sv
+/**
+ * TODO Describe uvmt_misc_st_seq_item_c
+ */
+class uvmt_misc_st_seq_item_c extends uvm_sequence_item;
+   
+   // Fields
+   
+   
+   
+   `uvm_object_utils_begin(uvmt_misc_st_seq_item_c)
+      // UVM Field Util Macros
+   `uvm_object_utils_end
+   
+   
+   // Constraints
+   
+   
+   
+   /**
+    * Default constructor.
+    */
+   extern function new(string name="uvmt_misc_st_seq_item");
+   
+   // Methods
+   
+   
+endclass : uvmt_misc_st_seq_item_c
+
+
+function uvmt_misc_st_seq_item_c::new(string name="uvmt_misc_st_seq_item");
+   
+   super.new(name);
+   
+endfunction : new
+
+
+`endif // __UVMT_MISC_ST_SEQ_ITEM_SV__

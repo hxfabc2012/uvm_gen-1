@@ -25,13 +25,6 @@ module uvmt_misc_st_tb;
    // Clocking & Reset
    uvmt_misc_st_clknrst_gen_if  clknrst_gen_if();
    
-   // Agent interfaces
-   uvma_misc_if  abc_if(.clk(clknrst_gen_if.clk), .reset_n(clknrst_gen_if.reset_n));
-   uvma_misc_if  def_if(.clk(clknrst_gen_if.clk), .reset_n(clknrst_gen_if.reset_n));
-   
-   // DUT instance
-   uvmt_misc_st_dut_wrap  dut_wrap(.*);
-   
    
    /**
     * Test bench entry point.
@@ -47,8 +40,6 @@ module uvmt_misc_st_tb;
       
       // Add interfaces to uvm_config_db
       uvm_config_db#(virtual uvmt_misc_st_clknrst_gen_if)::set(null, "*", "clknrst_gen_vif", clknrst_gen_if);
-      uvm_config_db#(virtual uvma_misc_if)::set(null, "*.env.abc_agent", "vif", abc_if);
-      uvm_config_db#(virtual uvma_misc_if)::set(null, "*.env.def_agent", "vif", def_if);
       
       // Run test
       uvm_top.enable_print_topology = 0;

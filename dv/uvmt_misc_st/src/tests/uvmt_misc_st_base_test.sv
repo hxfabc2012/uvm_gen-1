@@ -21,33 +21,28 @@
 class uvmt_misc_st_base_test_c extends uvm_test;
    
    // Objects
-   rand uvmt_misc_st_test_cfg_c  test_cfg ;
-   rand uvme_misc_st_cfg_c       env_cfg  ;
-   uvme_misc_st_cntxt_c          env_cntxt;
-   uvml_logs_rs_text_c              rs;
+   rand uvmt_misc_st_test_cfg_c  test_cfg;
+   uvml_logs_rs_text_c           rs      ;
    
    // Components
-   uvme_misc_st_env_c   env       ;
    uvme_misc_st_vsqr_c  vsequencer;
+   
+   // Generated code
+   uvmt_misc_st_my_obj_c         my_obj       ;
+   uvmt_misc_st_my_comp_c        my_comp      ;
+   uvmt_misc_st_reg_adapter_c    reg_adapter  ;
+   uvmt_misc_st_status_reg_c     status_reg   ;
+   uvmt_misc_st_top_reg_block_c  top_reg_block;
+   uvmt_misc_st_traffic_seq_c    seq          ;
+   
    
    // Handle to clock generation interface
    virtual uvmt_misc_st_clknrst_gen_if  clknrst_gen_vif;
    
    
    `uvm_component_utils_begin(uvmt_misc_st_base_test_c)
-      `uvm_field_object(test_cfg , UVM_DEFAULT)
-      `uvm_field_object(env_cfg  , UVM_DEFAULT)
-      `uvm_field_object(env_cntxt, UVM_DEFAULT)
+      `uvm_field_object(test_cfg, UVM_DEFAULT)
    `uvm_component_utils_end
-   
-   
-   constraint env_cfg_cons {
-      env_cfg.enabled               == 1;
-      env_cfg.is_active             == UVM_ACTIVE;
-      env_cfg.trn_log_enabled       == 1;
-      env_cfg.scoreboarding_enabled == 1;
-      env_cfg.coverage_enabled      == 0;
-   }
    
    
    // Additional, temporary constraints to get around known design bugs/constraints
@@ -120,28 +115,6 @@ class uvmt_misc_st_base_test_c extends uvm_test;
    extern function void cfg_hrtbt_monitor();
    
    /**
-    * Assigns environment configuration (env_cfg) handle to environment (env)
-    * using UVM Configuration Database.
-    */
-   extern function void assign_cfg();
-   
-   /**
-    * Creates env_cntxt.
-    */
-   extern function void create_cntxt();
-   
-   /**
-    * Assigns environment context (env_cntxt) handle to environment (env) using
-    * UVM Configuration Database.
-    */
-   extern function void assign_cntxt();
-   
-   /**
-    * Creates env.
-    */
-   extern function void create_env();
-   
-   /**
     * Creates additional (non-environment) components (and objects).
     */
    extern function void create_components();
@@ -176,10 +149,6 @@ function void uvmt_misc_st_base_test_c::build_phase(uvm_phase phase);
    create_cfg              ();
    randomize_test          ();
    cfg_hrtbt_monitor       ();
-   assign_cfg              ();
-   create_cntxt            ();
-   assign_cntxt            ();
-   create_env              ();
    create_components       ();
    
 endfunction : build_phase
@@ -188,7 +157,6 @@ endfunction : build_phase
 function void uvmt_misc_st_base_test_c::connect_phase(uvm_phase phase);
    
    super.connect_phase(phase);
-   vsequencer = env.vsequencer;
    
 endfunction : connect_phase
 
@@ -251,7 +219,6 @@ endfunction : retrieve_clknrst_gen_vif
 function void uvmt_misc_st_base_test_c::create_cfg();
    
    test_cfg = uvmt_misc_st_test_cfg_c::type_id::create("test_cfg");
-   env_cfg  = uvme_misc_st_cfg_c     ::type_id::create("env_cfg" );
    
 endfunction : create_cfg
 
@@ -262,7 +229,6 @@ function void uvmt_misc_st_base_test_c::randomize_test();
    if (!this.randomize()) begin
       `uvm_fatal("TEST", "Failed to randomize test");
    end
-   `uvm_info("TEST", $sformatf("Top-level environment configuration:\n%s", env_cfg.sprint()), UVM_NONE)
    
 endfunction : randomize_test
 
@@ -276,37 +242,15 @@ function void uvmt_misc_st_base_test_c::cfg_hrtbt_monitor();
 endfunction : cfg_hrtbt_monitor
 
 
-function void uvmt_misc_st_base_test_c::assign_cfg();
-   
-   uvm_config_db#(uvme_misc_st_cfg_c)::set(this, "env", "cfg", env_cfg);
-   
-endfunction : assign_cfg
-
-
-function void uvmt_misc_st_base_test_c::create_cntxt();
-   
-   env_cntxt = uvme_misc_st_cntxt_c::type_id::create("env_cntxt");
-   
-endfunction : create_cntxt
-
-
-function void uvmt_misc_st_base_test_c::assign_cntxt();
-   
-   uvm_config_db#(uvme_misc_st_cntxt_c)::set(this, "env", "cntxt", env_cntxt);
-   
-endfunction : assign_cntxt
-
-
-function void uvmt_misc_st_base_test_c::create_env();
-   
-   env = uvme_misc_st_env_c::type_id::create("env", this);
-   
-endfunction : create_env
-
-
 function void uvmt_misc_st_base_test_c::create_components();
    
-   // TODO Implement uvmt_misc_st_base_test_c::create_components()
+   vsequencer = uvme_misc_st_vsqr_c::type_id::create("vsequencer", this);
+   
+   my_obj        = uvmt_misc_st_my_obj_c       ::type_id::create("my_obj");
+   my_comp       = uvmt_misc_st_my_comp_c      ::type_id::create("my_comp", this);
+   reg_adapter   = uvmt_misc_st_reg_adapter_c  ::type_id::create("reg_adapter");
+   status_reg    = uvmt_misc_st_status_reg_c   ::type_id::create("status_reg");
+   top_reg_block = uvmt_misc_st_top_reg_block_c::type_id::create("top_reg_block");
    
 endfunction : create_components
 

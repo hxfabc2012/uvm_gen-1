@@ -11,3 +11,5 @@ results/*
 /history.yaml
 /results.html
 /results.xml
+*.html
+*.xml

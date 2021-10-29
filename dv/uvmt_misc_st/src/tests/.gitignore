@@ -1,0 +1,6 @@
+uvmt_misc_st_my_comp.sv
+uvmt_misc_st_my_obj.sv
+uvmt_misc_st_reg_adapter.sv
+uvmt_misc_st_status_reg.sv
+uvmt_misc_st_top_reg_block.sv
+uvmt_misc_st_smoke_test.sv
