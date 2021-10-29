@@ -1,0 +1,4 @@
+
+smoke
+misc_st
+uvmt_misc_st_base_test_c

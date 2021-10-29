@@ -19,7 +19,7 @@
  */
 class uvme_${name}_reg_hw_reset_vseq_c extends uvme_${name}_reg_base_vseq_c;
    
-   `include "uvme_${name}_reg_bit_hw_reset_ignore_list.sv"
+   `include "uvme_${name}_reg_hw_reset_vseq_ignore_list.sv"
    
    // Sub-sequences
    rand uvm_reg_hw_reset_seq  single_block_hw_reset_seq;

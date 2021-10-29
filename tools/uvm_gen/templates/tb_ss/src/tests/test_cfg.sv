@@ -38,15 +38,13 @@ class uvmt_${name}_test_cfg_c extends uvm_object;
       `uvm_field_int(simulation_timeout, UVM_DEFAULT + UVM_DEC)
       
       `uvm_field_object(selected_reg_block, UVM_DEFAULT)
-      
-      `uvm_field_object(cli_selected_block, UVM_DEFAULT)
    `uvm_object_utils_end
    
    
    constraint timeouts_default_cons {
-      soft startup_timeout    == uvmt_${name}_default_startup_timeout   ;
-      soft heartbeat_period   == uvmt_${name}_default_heartbeat_period  ;
-      soft simulation_timeout == uvmt_${name}_default_simulation_timeout;
+      startup_timeout    == uvmt_${name}_default_startup_timeout   ;
+      heartbeat_period   == uvmt_${name}_default_heartbeat_period  ;
+      simulation_timeout == uvmt_${name}_default_simulation_timeout;
    }
    
    

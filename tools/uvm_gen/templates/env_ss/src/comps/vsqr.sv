@@ -17,7 +17,7 @@
 /**
  * Component on which all ${name_normal_case} virtual sequences are run.
  */
-class uvme_${name}_vsqr_c extends uvm_sequencer#(
+class uvme_${name}_vsqr_c extends uvm_sequencer #(
    .REQ(uvm_sequence_item),
    .RSP(uvm_sequence_item)
 );

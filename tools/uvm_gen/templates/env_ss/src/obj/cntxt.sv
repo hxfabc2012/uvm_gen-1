@@ -15,8 +15,7 @@
 
 
 /**
- * Object encapsulating all state variables for ${name_normal_case} environment
- * (uvme_${name}_env_c) components.
+ * Object encapsulating all state variables for ${name_normal_case} environment (uvme_${name}_env_c) components.
  */
 class uvme_${name}_cntxt_c extends uvm_object;
    
@@ -91,9 +90,7 @@ endfunction : new
 
 function void uvme_${name}_cntxt_c::reset();
    
-   ${clk_agent_name}_cntxt  .reset();
-   ${reset_agent_name}_cntxt.reset();
-   ${ral_agent_name}_cntxt  .reset();
+   ${ral_agent_name}_cntxt.reset();
    
 endfunction : reset
 

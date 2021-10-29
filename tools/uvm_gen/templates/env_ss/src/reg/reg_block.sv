@@ -98,7 +98,7 @@ function void uvme_${name}_reg_block_c::connect();
    add_regs_to_map();
    lock_model     ();
    
-endfunction: build
+endfunction: connect
 
 
 function void uvme_${name}_reg_block_c::create_blocks();

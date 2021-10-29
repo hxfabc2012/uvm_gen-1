@@ -1,4 +1,4 @@
-// Copyright ${year} ${name_of_copyright_owner}
+// Copyright 2021 Datum Technology Corporation
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 // Licensed under the Solderpad Hardware License v 2.1 (the "License"); you may not use this file except in compliance
@@ -10,37 +10,31 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMT_${name_uppercase}_BASE_TEST_SV__
-`define __UVMT_${name_uppercase}_BASE_TEST_SV__
+`ifndef __UVMT_MISC_ST_BASE_TEST_SV__
+`define __UVMT_MISC_ST_BASE_TEST_SV__
 
 
 /**
- * Abstract component from which all other ${name_normal_case} test cases must ultimately extend.
+ * Abstract component from which all other Miscellaneous test cases must ultimately extend.
  * Subclasses must provide stimulus via the virtual sequencer by implementing UVM runtime phases.
  */
-class uvmt_${name}_base_test_c extends uvm_test;
+class uvmt_misc_st_base_test_c extends uvm_test;
    
    // Objects
-   rand uvmt_${name}_test_cfg_c  test_cfg ;
-   rand uvme_${name}_cfg_c       env_cfg  ;
-   uvme_${name}_cntxt_c          env_cntxt;
-   uvme_${name}_reg_block_c      reg_block;
-   uvml_logs_rs_text_c           rs       ;
-   uvml_logs_reg_logger_cbs_c    reg_cbs  ;
+   rand uvmt_misc_st_test_cfg_c  test_cfg ;
+   rand uvme_misc_st_cfg_c       env_cfg  ;
+   uvme_misc_st_cntxt_c          env_cntxt;
+   uvml_logs_rs_text_c              rs;
    
    // Components
-   uvme_${name}_env_c   env       ;
-   uvme_${name}_vsqr_c  vsequencer;
+   uvme_misc_st_env_c   env       ;
+   uvme_misc_st_vsqr_c  vsequencer;
    
-   // Handle to design probe interface
-   virtual uvmt_${name}_probe_if  probe_vif;
-   
-   // Default sequences
-   rand uvme_${name}_${clk_agent_name}_vseq_c  ${clk_agent_name}_vseq;
-   rand uvme_${name}_${reset_agent_name}_vseq_c  ${reset_agent_name}_vseq;
+   // Handle to clock generation interface
+   virtual uvmt_misc_st_clknrst_gen_if  clknrst_gen_vif;
    
    
-   `uvm_component_utils_begin(uvmt_${name}_base_test_c)
+   `uvm_component_utils_begin(uvmt_misc_st_base_test_c)
       `uvm_field_object(test_cfg , UVM_DEFAULT)
       `uvm_field_object(env_cfg  , UVM_DEFAULT)
       `uvm_field_object(env_cntxt, UVM_DEFAULT)
@@ -50,21 +44,20 @@ class uvmt_${name}_base_test_c extends uvm_test;
    constraint env_cfg_cons {
       env_cfg.enabled               == 1;
       env_cfg.is_active             == UVM_ACTIVE;
-      env_cfg.scoreboarding_enabled == 1;
       env_cfg.trn_log_enabled       == 1;
-      env_cfg.cov_model_enabled     == 1;
+      env_cfg.scoreboarding_enabled == 1;
+      env_cfg.coverage_enabled      == 0;
    }
    
    
    // Additional, temporary constraints to get around known design bugs/constraints
-   `include "uvmt_${name}_base_test_workarounds.sv"
+   `include "uvmt_misc_st_base_test_workarounds.sv"
    
    
    /**
-    * 1. Replaces default report server with rs.
-    * 2. Creates reset_vseq.
+    * Replaces default report server with rs.
     */
-   extern function new(string name="uvmt_${name}_base_test", uvm_component parent=null);
+   extern function new(string name="uvmt_misc_st_base_test", uvm_component parent=null);
    
    /**
     * 1. Builds test_cfg & env_cfg via create_cfg()
@@ -84,19 +77,15 @@ class uvmt_${name}_base_test_c extends uvm_test;
    extern virtual function void connect_phase(uvm_phase phase);
    
    /**
-    * Runs ${clk_agent_name}_vseq.
+    * 1. Triggers the start of clock generation via start_clk()
+    * 2. Starts the simulation timeout via simulation_timeout()
     */
-   extern virtual task pre_reset_phase(uvm_phase phase);
+   extern virtual task run_phase(uvm_phase phase);
    
    /**
-    * Runs ${reset_agent_name}_vseq.
+    * Asserts & de-asserts reset via clknrst_vif.
     */
    extern virtual task reset_phase(uvm_phase phase);
-   
-   /**
-    * Writes contents of RAL to the DUT.
-    */
-   extern virtual task configure_phase(uvm_phase phase);
    
    /**
     * Prints out start of phase banners.
@@ -104,18 +93,18 @@ class uvmt_${name}_base_test_c extends uvm_test;
    extern virtual function void phase_started(uvm_phase phase);
    
    /**
-    * Indicates to the test bench (uvmt_${name}_tb) that the test has completed.
+    * Indicates to the test bench (uvmt_misc_st_tb) that the test has completed.
     * This is done by checking the properties of the phase argument.
     */
    extern virtual function void phase_ended(uvm_phase phase);
    
    /**
-    * Retrieves probe_vif from UVM configuration database.
+    * Retrieves clknrst_gen_vif from UVM configuration database.
     */
-   extern function void retrieve_probe_vif();
+   extern function void retrieve_clknrst_gen_vif();
    
    /**
-    * Creates test_cfg and env_cfg. Assigns reg_block handle to env_cfg's.
+    * Creates test_cfg and env_cfg.
     */
    extern function void create_cfg();
    
@@ -162,85 +151,72 @@ class uvmt_${name}_base_test_c extends uvm_test;
     */
    extern function void print_banner(string text);
    
-endclass : uvmt_${name}_base_test_c
+   /**
+    * Starts clock generation via clknrst_gen_vif functions.
+    */
+   extern task start_clk();
+   
+endclass : uvmt_misc_st_base_test_c
 
 
-function uvmt_${name}_base_test_c::new(string name="uvmt_${name}_base_test", uvm_component parent=null);
+function uvmt_misc_st_base_test_c::new(string name="uvmt_misc_st_base_test", uvm_component parent=null);
    
    super.new(name, parent);
-   
    rs = new("rs");
    uvm_report_server::set_server(rs);
-   ${clk_agent_name}_vseq = uvme_${name}_${clk_agent_name}_vseq_c::type_id::create("${clk_agent_name}_vseq");
-   ${reset_agent_name}_vseq = uvme_${name}_${reset_agent_name}_vseq_c::type_id::create("${reset_agent_name}_vseq");
    
 endfunction : new
 
 
-function void uvmt_${name}_base_test_c::build_phase(uvm_phase phase);
+function void uvmt_misc_st_base_test_c::build_phase(uvm_phase phase);
    
    super.build_phase(phase);
    
-   retrieve_probe_vif();
-   create_cfg        ();
-   randomize_test    ();
-   cfg_hrtbt_monitor ();
-   assign_cfg        ();
-   create_cntxt      ();
-   assign_cntxt      ();
-   create_env        ();
-   create_components ();
+   retrieve_clknrst_gen_vif();
+   create_cfg              ();
+   randomize_test          ();
+   cfg_hrtbt_monitor       ();
+   assign_cfg              ();
+   create_cntxt            ();
+   assign_cntxt            ();
+   create_env              ();
+   create_components       ();
    
 endfunction : build_phase
 
 
-function void uvmt_${name}_base_test_c::connect_phase(uvm_phase phase);
+function void uvmt_misc_st_base_test_c::connect_phase(uvm_phase phase);
    
    super.connect_phase(phase);
-   
    vsequencer = env.vsequencer;
-   reg_block  = env.reg_block;
-   uvm_reg_cb::add(null, reg_cbs);
    
 endfunction : connect_phase
 
 
-task uvmt_${name}_base_test_c::pre_reset_phase(uvm_phase phase);
+task uvmt_misc_st_base_test_c::run_phase(uvm_phase phase);
    
-   super.pre_reset_phase(phase);
+   super.run_phase(phase);
+   start_clk();
    
-   `uvm_info("TEST", $sformatf("Starting ${clk_agent_name} virtual sequence:\n%s", ${clk_agent_name}_vseq.sprint()), UVM_NONE)
-   ${clk_agent_name}_vseq.start(vsequencer);
-   `uvm_info("TEST", "Finished ${clk_agent_name} virtual sequence", UVM_NONE)
-   
-endtask : pre_reset_phase
+endtask : run_phase
 
 
-task uvmt_${name}_base_test_c::reset_phase(uvm_phase phase);
+task uvmt_misc_st_base_test_c::reset_phase(uvm_phase phase);
    
    super.reset_phase(phase);
    
-   `uvm_info("TEST", $sformatf("Starting ${reset_agent_name} virtual sequence:\n%s", ${reset_agent_name}_vseq.sprint()), UVM_NONE)
-   ${reset_agent_name}_vseq.start(vsequencer);
-   `uvm_info("TEST", "Finished ${reset_agent_name} virtual sequence", UVM_NONE)
+   `uvm_info("TEST", $sformatf("Asserting reset for %0t", (test_cfg.reset_period * 1ns)), UVM_NONE)
+   clknrst_gen_vif.assert_reset();
+   `uvml_hrtbt()
+   #(test_cfg.reset_period * 1ns);
+   clknrst_gen_vif.deassert_reset();
+   `uvml_hrtbt()
+   `uvm_info("TEST", "De-asserted reset", UVM_NONE)
    
 endtask : reset_phase
 
 
-task uvmt_${name}_base_test_c::configure_phase(uvm_phase phase);
-   
-   uvm_status_e status;
-   
-   super.configure_phase(phase);
-   
-   `uvm_info("TEST", $sformatf("Starting to update DUT with RAL contents:\n%s", reg_block.sprint()), UVM_NONE)
-   reg_block.update(status);
-   `uvm_info("TEST", "Finished updating DUT with RAL contents", UVM_NONE)
-   
-endtask : configure_phase
-
-
-function void uvmt_${name}_base_test_c::phase_started(uvm_phase phase);
+function void uvmt_misc_st_base_test_c::phase_started(uvm_phase phase);
    
    super.phase_started(phase);
    print_banner($sformatf("start of %s phase", phase.get_name()));
@@ -248,39 +224,39 @@ function void uvmt_${name}_base_test_c::phase_started(uvm_phase phase);
 endfunction : phase_started
 
 
-function void uvmt_${name}_base_test_c::phase_ended(uvm_phase phase);
+function void uvmt_misc_st_base_test_c::phase_ended(uvm_phase phase);
    
    super.phase_ended(phase);
    
    if (phase.is(uvm_final_phase::get())) begin
-     uvm_config_db#(bit)::set(null, "", "sim_finished", 1);
-     print_banner("test finished");
+      uvm_config_db#(bit)::set(null, "", "sim_finished", 1);
+      print_banner("test finished");
    end
    
 endfunction : phase_ended
 
 
-function void uvmt_${name}_base_test_c::retrieve_probe_vif();
+function void uvmt_misc_st_base_test_c::retrieve_clknrst_gen_vif();
    
-   if (!uvm_config_db#(virtual uvmt_${name}_probe_if)::get(this, "", "probe_vif", probe_vif)) begin
-      `uvm_fatal("VIF", $sformatf("Could not find probe_vif handle of type %s in uvm_config_db", $typename(probe_vif)))
+   if (!uvm_config_db#(virtual uvmt_misc_st_clknrst_gen_if)::get(this, "", "clknrst_gen_vif", clknrst_gen_vif)) begin
+      `uvm_fatal("VIF", $sformatf("Could not find clknrst_gen_vif handle of type %s in uvm_config_db", $typename(clknrst_gen_vif)))
    end
    else begin
-      `uvm_info("VIF", $sformatf("Found probe_vif handle of type %s in uvm_config_db", $typename(probe_vif)), UVM_DEBUG)
+      `uvm_info("VIF", $sformatf("Found clknrst_gen_vif handle of type %s in uvm_config_db", $typename(clknrst_gen_vif)), UVM_DEBUG)
    end
    
-endfunction : retrieve_probe_vif
+endfunction : retrieve_clknrst_gen_vif
 
 
-function void uvmt_${name}_base_test_c::create_cfg();
+function void uvmt_misc_st_base_test_c::create_cfg();
    
-   test_cfg  = uvmt_${name}_test_cfg_c::type_id::create("test_cfg");
-   env_cfg   = uvme_${name}_cfg_c     ::type_id::create("env_cfg" );
+   test_cfg = uvmt_misc_st_test_cfg_c::type_id::create("test_cfg");
+   env_cfg  = uvme_misc_st_cfg_c     ::type_id::create("env_cfg" );
    
 endfunction : create_cfg
 
 
-function void uvmt_${name}_base_test_c::randomize_test();
+function void uvmt_misc_st_base_test_c::randomize_test();
    
    test_cfg.process_cli_args();
    if (!this.randomize()) begin
@@ -291,7 +267,7 @@ function void uvmt_${name}_base_test_c::randomize_test();
 endfunction : randomize_test
 
 
-function void uvmt_${name}_base_test_c::cfg_hrtbt_monitor();
+function void uvmt_misc_st_base_test_c::cfg_hrtbt_monitor();
    
    `uvml_hrtbt_set_cfg(startup_timeout , test_cfg.startup_timeout)
    `uvml_hrtbt_set_cfg(heartbeat_period, test_cfg.heartbeat_period)
@@ -300,42 +276,42 @@ function void uvmt_${name}_base_test_c::cfg_hrtbt_monitor();
 endfunction : cfg_hrtbt_monitor
 
 
-function void uvmt_${name}_base_test_c::assign_cfg();
+function void uvmt_misc_st_base_test_c::assign_cfg();
    
-   uvm_config_db#(uvme_${name}_cfg_c)::set(this, "env", "cfg", env_cfg);
+   uvm_config_db#(uvme_misc_st_cfg_c)::set(this, "env", "cfg", env_cfg);
    
 endfunction : assign_cfg
 
 
-function void uvmt_${name}_base_test_c::create_cntxt();
+function void uvmt_misc_st_base_test_c::create_cntxt();
    
-   env_cntxt = uvme_${name}_cntxt_c::type_id::create("env_cntxt");
+   env_cntxt = uvme_misc_st_cntxt_c::type_id::create("env_cntxt");
    
 endfunction : create_cntxt
 
 
-function void uvmt_${name}_base_test_c::assign_cntxt();
+function void uvmt_misc_st_base_test_c::assign_cntxt();
    
-   uvm_config_db#(uvme_${name}_cntxt_c)::set(this, "env", "cntxt", env_cntxt);
+   uvm_config_db#(uvme_misc_st_cntxt_c)::set(this, "env", "cntxt", env_cntxt);
    
 endfunction : assign_cntxt
 
 
-function void uvmt_${name}_base_test_c::create_env();
+function void uvmt_misc_st_base_test_c::create_env();
    
-   env = uvme_${name}_env_c::type_id::create("env", this);
+   env = uvme_misc_st_env_c::type_id::create("env", this);
    
 endfunction : create_env
 
 
-function void uvmt_${name}_base_test_c::create_components();
+function void uvmt_misc_st_base_test_c::create_components();
    
-   reg_cbs = uvml_logs_reg_logger_cbs_c::type_id::create("reg_cbs");
+   // TODO Implement uvmt_misc_st_base_test_c::create_components()
    
 endfunction : create_components
 
 
-function void uvmt_${name}_base_test_c::print_banner(string text);
+function void uvmt_misc_st_base_test_c::print_banner(string text);
    
    $display("");
    $display("*******************************************************************************");
@@ -345,4 +321,12 @@ function void uvmt_${name}_base_test_c::print_banner(string text);
 endfunction : print_banner
 
 
-`endif // __UVMT_${name_uppercase}_BASE_TEST_SV__
+task uvmt_misc_st_base_test_c::start_clk();
+   
+   clknrst_gen_vif.set_clk_period(test_cfg.clk_period);
+   clknrst_gen_vif.start_clk();
+   
+endtask : start_clk
+
+
+`endif // __UVMT_MISC_ST_BASE_TEST_SV__

@@ -463,9 +463,9 @@ def gen_test():
         parameters["name"] = name
         parameters["name_uppercase"] = name.upper()
     
-    vseq_name = input("Please enter the Virtual Sequence name for this Test (ex: 'basic_access'):\n").lower().strip()
+    vseq_name = input("Please enter the Test name for this Test (ex: 'basic_access'):\n").lower().strip()
     if name == "":
-        sys.exit("ERROR: Virtual Sequence name cannot be empty.  Exiting.")
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
     else:
         parameters["vseq_name"] = vseq_name
     
@@ -504,7 +504,7 @@ def gen_vseq():
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
     
-    name = input("Please enter the name for this Virtual Sequence (ex: 'traffic'):\n").lower().strip()
+    name = input("Please enter the name for this Virtual Sequence (ex: 'basic_access'):\n").lower().strip()
     if name == "":
         sys.exit("ERROR: name cannot be empty.  Exiting.")
     else:

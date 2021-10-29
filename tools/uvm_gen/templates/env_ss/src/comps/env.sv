@@ -210,7 +210,7 @@ function void uvme_${name}_env_c::assign_cfg();
    
    uvm_config_db#(uvme_${name}_cfg_c)::set(this, "*", "cfg", cfg);
    uvm_config_db#(uvma_${clk_agent_type}_cfg_c)::set(this, "${clk_agent_name}_agent", "cfg", cfg.${clk_agent_name}_cfg);
-   uvm_config_db#(uvma_${reset_agent_type}_cfg_c)::set(this, "${reset_agent_name}_agent", "cfg", cfg.${reset_agent_name}_agent_cfg);
+   uvm_config_db#(uvma_${reset_agent_type}_cfg_c)::set(this, "${reset_agent_name}_agent", "cfg", cfg.${reset_agent_name}_cfg);
    uvm_config_db#(uvma_${ral_agent_type}_cfg_c)::set(this, "${ral_agent_name}_agent", "cfg", cfg.${ral_agent_name}_cfg);
    
    // TODO Assign sub-environment cfg handle

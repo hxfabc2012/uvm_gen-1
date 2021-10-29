@@ -1,4 +1,4 @@
-// Copyright ${year} ${name_of_copyright_owner}
+// Copyright 2021 Datum Technology Corporation
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 // Licensed under the Solderpad Hardware License v 2.1 (the "License"); you may not use this file except in compliance
@@ -10,33 +10,27 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMT_${name_uppercase}_TB_SV__
-`define __UVMT_${name_uppercase}_TB_SV__
+`ifndef __UVMT_MISC_ST_TB_SV__
+`define __UVMT_MISC_ST_TB_SV__
 
 
 /**
- * Module encapsulating the ${name_normal_case} DUT wrapper, agents and clock generating interfaces.
+ * Module encapsulating the Miscellaneous Self-Test DUT wrapper, agents and clock generating interfaces.
  */
-module uvmt_${name}_tb;
+module uvmt_misc_st_tb;
    
    import uvm_pkg::*;
-   import uvmt_${name}_pkg::*;
+   import uvmt_misc_st_pkg::*;
+   
+   // Clocking & Reset
+   uvmt_misc_st_clknrst_gen_if  clknrst_gen_if();
    
    // Agent interfaces
-   uvma_${clk_agent_type}_if  ${clk_agent_name}_if();
-   uvma_${reset_agent_type}_if  ${reset_agent_name}_if(
-      .clk(${clk_agent_name}_if.clk)
-   );
-   uvma_${ral_agent_type}_if  ${ral_agent_type}_if(
-      .clk(${clk_agent_name}_if.clk),
-      .reset_n(${reset_agent_name}_if.reset_n)
-   );
-   
-   // Misc. interfaces
-   uvmt_${name}_probe_if  probe_if();
+   uvma_misc_if  abc_if(.clk(clknrst_gen_if.clk), .reset_n(clknrst_gen_if.reset_n));
+   uvma_misc_if  def_if(.clk(clknrst_gen_if.clk), .reset_n(clknrst_gen_if.reset_n));
    
    // DUT instance
-   uvmt_${name}_dut_wrap  dut_wrap(.*);
+   uvmt_misc_st_dut_wrap  dut_wrap(.*);
    
    
    /**
@@ -52,10 +46,9 @@ module uvmt_${name}_tb;
       );
       
       // Add interfaces to uvm_config_db
-      uvm_config_db#(virtual uvma_${clk_agent_type}_if)::set(null, "*.env.${clk_agent_name}_agent", "vif", ${clk_agent_name}_if);
-      uvm_config_db#(virtual uvma_${reset_agent_type}_if)::set(null, "*.env.${reset_agent_name}_agent", "vif", ${reset_agent_name}_if);
-      uvm_config_db#(virtual uvma_${ral_agent_type}_if)::set(null, "*.env.${ral_agent_name}_agent", "vif", ${ral_agent_type}_if);
-      uvm_config_db#(virtual uvmt_${name}_probe_if)::set(null, "*", "probe_vif", probe_if);
+      uvm_config_db#(virtual uvmt_misc_st_clknrst_gen_if)::set(null, "*", "clknrst_gen_vif", clknrst_gen_if);
+      uvm_config_db#(virtual uvma_misc_if)::set(null, "*.env.abc_agent", "vif", abc_if);
+      uvm_config_db#(virtual uvma_misc_if)::set(null, "*.env.def_agent", "vif", def_if);
       
       // Run test
       uvm_top.enable_print_topology = 0;
@@ -120,7 +113,7 @@ module uvmt_${name}_tb;
       end
    end
    
-endmodule : uvmt_${name}_tb
+endmodule : uvmt_misc_st_tb
 
 
-`endif // __UVMT_${name_uppercase}_TB_SV__
+`endif // __UVMT_MISC_ST_TB_SV__

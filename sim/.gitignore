@@ -3,6 +3,11 @@
 /xsim.dir/*/*.*
 /xsim.dir/*.*
 /xsim.dir/*
-/*.jou
+*.jou
 /*.wdb
-results/
+/out/
+results/*/*
+results/*
+/history.yaml
+/results.html
+/results.xml
