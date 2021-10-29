@@ -25,4 +25,4 @@ source ./setup_terminal.sh
 ../tools/.imports/dvm/src/dvm.py sim  uvmt_abc_st -t base -s 1
 
 # 3. Gather sim results
-../tools/dvm/src/dvm.py results uvmt_abc_st tb_st
+../tools/.imports/dvm/src/dvm.py results uvmt_abc_st tb_st
