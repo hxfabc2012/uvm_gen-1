@@ -1,4 +1,4 @@
-// Copyright ${year} ${name_of_copyright_owner}
+// Copyright 2021 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 // Licensed under the Solderpad Hardware License v 2.1 (the "License"); you may not use this file except in compliance
@@ -10,35 +10,35 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMT_${tb_name_uppercase}_${name_uppercase}_TEST_SV__
-`define __UVMT_${tb_name_uppercase}_${name_uppercase}_TEST_SV__
+`ifndef __UVMT_${tb_name_uppercase}_SMOKE_TEST_SV__
+`define __UVMT_${tb_name_uppercase}_SMOKE_TEST_SV__
 
 
 /**
- * TODO Describe uvmt_${tb_name}_${name}_test_c
+ * TODO Describe uvmt_${tb_name}_smoke_test_c
  */
-class uvmt_${tb_name}_${name}_test_c extends ${base_class};
+class uvmt_${tb_name}_smoke_test_c extends uvm_test;
    
    rand uvme_${tb_name}_${vseq_name}_vseq_c  ${vseq_name}_vseq;
    
    
-   `uvm_component_utils(uvmt_${tb_name}_${name}_test_c)
+   `uvm_component_utils(uvmt_${tb_name}_smoke_test_c)
    
    
    /**
-    * Creates ${name}_vseq.
+    * Creates smoke_vseq.
     */
-   extern function new(string name="uvmt_${tb_name}_${name}_test", uvm_component parent=null);
+   extern function new(string name="uvmt_${tb_name}_smoke_test", uvm_component parent=null);
    
    /**
-    * Runs ${name}_vseq on vsequencer.
+    * Runs smoke_vseq on vsequencer.
     */
    extern virtual task main_phase(uvm_phase phase);
    
-endclass : uvmt_${tb_name}_${name}_test_c
+endclass : uvmt_${tb_name}_smoke_test_c
 
 
-function uvmt_${tb_name}_${name}_test_c::new(string name="uvmt_${tb_name}_${name}_test", uvm_component parent=null);
+function uvmt_${tb_name}_smoke_test_c::new(string name="uvmt_${tb_name}_smoke_test", uvm_component parent=null);
    
    super.new(name, parent);
    
@@ -47,7 +47,7 @@ function uvmt_${tb_name}_${name}_test_c::new(string name="uvmt_${tb_name}_${name
 endfunction : new
 
 
-task uvmt_${tb_name}_${name}_test_c::main_phase(uvm_phase phase);
+task uvmt_${tb_name}_smoke_test_c::main_phase(uvm_phase phase);
    
    super.main_phase(phase);
    
@@ -60,4 +60,4 @@ task uvmt_${tb_name}_${name}_test_c::main_phase(uvm_phase phase);
 endtask : main_phase
 
 
-`endif // __UVMT_${tb_name_uppercase}_${name_uppercase}_TEST_SV__
+`endif // __UVMT_${tb_name_uppercase}_SMOKE_TEST_SV__

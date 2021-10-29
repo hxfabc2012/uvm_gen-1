@@ -17,7 +17,7 @@
 /**
  * TODO Describe ${pkg_name}_${name}_vseq_c
  */
-class ${pkg_name}_${name}_vseq_c extends ${pkg_name}_base_vseq_c;
+class ${pkg_name}_${name}_vseq_c extends ${base_class};
    
    
    

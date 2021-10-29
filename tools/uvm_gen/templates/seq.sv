@@ -17,7 +17,7 @@
 /**
  * TODO Describe ${pkg_name}_${name}_seq_c
  */
-class ${pkg_name}_${name}_seq_c extends ${pkg_name}_base_seq_c;
+class ${pkg_name}_${name}_seq_c extends ${base_class};
    
    // Fields
    

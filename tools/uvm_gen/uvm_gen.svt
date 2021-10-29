@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sv_template>
-                                                                                                                
+                                                                                                                  
+  
   
   
   
@@ -56,7 +57,8 @@
   
   
   <category category="category.id" id="datum_uvm_single_file" name="Datum UVM Single File">
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -112,7 +114,8 @@
     
     
     <description/>
-                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                  
+  
   
   
   
@@ -168,7 +171,7 @@
   
   
   </category>
-                                                                                                                
+                                                                                                                  
   
   
   
@@ -630,8 +633,10 @@
   
   
   
+  
   <template category="datum_uvm_single_file" id="datum_uvm_comp" name="Component">
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -687,7 +692,8 @@
     
     
     <description/>
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -743,7 +749,7 @@
     
     
     <parameters>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                      
       
       
       
@@ -802,8 +808,9 @@
       
       
       
+      
       <parameter default="uvm_component" name="base_class" type="class"/>
-                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                    
     
     
     
@@ -901,8 +908,10 @@
       
       
       
+      
       <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -911,7 +920,7 @@
       
       
       <parameter default="" name="name_uppercase" type="id"/>
-                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                            
     
     
     
@@ -954,6 +963,7 @@
     
     
     
+      
       
       
       
@@ -963,7 +973,8 @@
       
       
       <parameter default="uvma" name="pkg_name" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -972,7 +983,8 @@
       
       
       <parameter default="UVMA" name="pkg_name_uppercase" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -981,7 +993,8 @@
       
       
       <parameter default="2021" name="year" type="int"/>
-                                                    
+                                                          
+    
     
     
     
@@ -990,7 +1003,8 @@
     
     
     </parameters>
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -1046,7 +1060,8 @@
     
     
     <files>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                      
+      
       
       
       
@@ -1102,7 +1117,8 @@
       
       
       <file executable="false" name="${pkg_name}_${name}.sv" template="templates/component.sv"/>
-                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                    
+    
     
     
     
@@ -1158,7 +1174,8 @@
     
     
     </files>
-                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                  
+  
   
   
   
@@ -1214,7 +1231,7 @@
   
   
   </template>
-                                                                                                                
+                                                                                                                  
   
   
   
@@ -1275,8 +1292,10 @@
   
   
   
+  
   <template category="datum_uvm_single_file" id="datum_uvm_object" name="Object">
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -1332,7 +1351,8 @@
     
     
     <description/>
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -1388,7 +1408,8 @@
     
     
     <parameters>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                      
+      
       
       
       
@@ -1445,7 +1466,7 @@
       
       
       <parameter default="uvm_object" name="base_class" type="class"/>
-                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                    
       
       
       
@@ -1540,8 +1561,10 @@
       
       
       
+      
       <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -1550,7 +1573,7 @@
       
       
       <parameter default="" name="name_uppercase" type="id"/>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                      
       
       
       
@@ -1609,8 +1632,10 @@
       
       
       
+      
       <parameter default="uvma" name="pkg_name" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -1619,7 +1644,8 @@
       
       
       <parameter default="UVMA" name="pkg_name_uppercase" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -1628,7 +1654,8 @@
       
       
       <parameter default="2021" name="year" type="int"/>
-                                                    
+                                                          
+    
     
     
     
@@ -1637,7 +1664,8 @@
     
     
     </parameters>
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -1693,7 +1721,8 @@
     
     
     <files>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                      
+      
       
       
       
@@ -1749,7 +1778,8 @@
       
       
       <file executable="false" name="${pkg_name}_${name}.sv" template="templates/object.sv"/>
-                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                    
+    
     
     
     
@@ -1805,7 +1835,8 @@
     
     
     </files>
-                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                  
+  
   
   
   
@@ -1861,7 +1892,8 @@
   
   
   </template>
-                                                                                                                
+                                                                                                                  
+  
   
   
   
@@ -1917,7 +1949,8 @@
   
   
   <template category="datum_uvm_single_file" id="datum_uvm_reg_adapter" name="Register Adapter">
-                                                                                                                                                                                        
+                                                                                                                                                                                            
+    
     
     
     
@@ -1963,7 +1996,8 @@
     
     
     <description/>
-                                                                                                                                                                                        
+                                                                                                                                                                                            
+    
     
     
     
@@ -2009,7 +2043,8 @@
     
     
     <parameters>
-                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                          
+      
       
       
       
@@ -2055,7 +2090,7 @@
       
       
       <parameter default="uvml_ral_reg_adapter_c" name="base_class" type="class"/>
-                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                          
       
       
       
@@ -2137,8 +2172,10 @@
       
       
       
+      
       <parameter default="" name="name_normal_case" type="id"/>
-                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                          
+      
       
       
       
@@ -2184,7 +2221,8 @@
       
       
       <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -2193,7 +2231,7 @@
       
       
       <parameter default="" name="name_uppercase" type="id"/>
-                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                        
     
     
     
@@ -2230,6 +2268,7 @@
     
     
     
+      
       
       
       
@@ -2239,7 +2278,8 @@
       
       
       <parameter default="2021" name="year" type="int"/>
-                                                    
+                                                          
+    
     
     
     
@@ -2248,7 +2288,8 @@
     
     
     </parameters>
-                                                                                                                                                                                        
+                                                                                                                                                                                            
+    
     
     
     
@@ -2294,7 +2335,8 @@
     
     
     <files>
-                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                          
+      
       
       
       
@@ -2340,7 +2382,8 @@
       
       
       <file executable="false" name="${name}_reg_adapter.sv" template="templates/reg_adapter.sv"/>
-                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                        
+    
     
     
     
@@ -2386,7 +2429,8 @@
     
     
     </files>
-                                                                                                                                                                                      
+                                                                                                                                                                                          
+  
   
   
   
@@ -2432,7 +2476,8 @@
   
   
   </template>
-                                                                                            
+                                                                                              
+  
   
   
   
@@ -2478,7 +2523,8 @@
   
   
   <template category="datum_uvm_single_file" id="datum_uvm_register_block" name="Register Block">
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -2534,7 +2580,8 @@
     
     
     <description/>
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -2590,7 +2637,7 @@
     
     
     <parameters>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                      
       
       
       
@@ -2688,8 +2735,10 @@
       
       
       
+      
       <parameter default="uvml_ral_reg_block_c" name="base_class" type="class"/>
-                                                      
+                                                            
+      
       
       
       
@@ -2698,7 +2747,8 @@
       
       
       <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -2707,7 +2757,7 @@
       
       
       <parameter default="" name="name_uppercase" type="id"/>
-                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                    
     
     
     
@@ -2754,6 +2804,7 @@
     
     
     
+      
       
       
       
@@ -2763,7 +2814,8 @@
       
       
       <parameter default="uvme" name="pkg_name" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -2772,7 +2824,8 @@
       
       
       <parameter default="UVME" name="pkg_name_uppercase" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -2781,7 +2834,8 @@
       
       
       <parameter default="2021" name="year" type="int"/>
-                                                    
+                                                          
+    
     
     
     
@@ -2790,7 +2844,8 @@
     
     
     </parameters>
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -2846,7 +2901,8 @@
     
     
     <parameter default="" name="copyright_header" type="id"/>
-                                                                                                                                                                                                                
+                                                                                                                                                                                                                    
+    
     
     
     
@@ -2898,7 +2954,8 @@
     
     
     <files>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                      
+      
       
       
       
@@ -2954,7 +3011,8 @@
       
       
       <file executable="false" name="${pkg_name}_${name}_reg_block.sv" template="templates/reg_block.sv"/>
-                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                    
+    
     
     
     
@@ -3010,7 +3068,8 @@
     
     
     </files>
-                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                  
+  
   
   
   
@@ -3066,7 +3125,7 @@
   
   
   </template>
-                                                                                                                
+                                                                                                                  
   
   
   
@@ -3168,8 +3227,10 @@
   
   
   
+  
   <template category="datum_uvm_single_file" id="datum_uvm_register" name="Register">
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -3225,7 +3286,8 @@
     
     
     <description/>
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -3281,7 +3343,7 @@
     
     
     <parameters>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                      
       
       
       
@@ -3379,8 +3441,10 @@
       
       
       
+      
       <parameter default="uvml_ral_reg_c" name="base_class" type="class"/>
-                                                      
+                                                            
+      
       
       
       
@@ -3389,7 +3453,8 @@
       
       
       <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -3398,7 +3463,7 @@
       
       
       <parameter default="" name="name_uppercase" type="id"/>
-                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                    
     
     
     
@@ -3445,6 +3510,7 @@
     
     
     
+      
       
       
       
@@ -3454,7 +3520,8 @@
       
       
       <parameter default="uvme" name="pkg_name" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -3463,7 +3530,8 @@
       
       
       <parameter default="UVME" name="pkg_name_uppercase" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -3472,7 +3540,8 @@
       
       
       <parameter default="2021" name="year" type="int"/>
-                                                    
+                                                          
+    
     
     
     
@@ -3481,7 +3550,8 @@
     
     
     </parameters>
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -3537,7 +3607,8 @@
     
     
     <files>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                      
+      
       
       
       
@@ -3593,7 +3664,8 @@
       
       
       <file executable="false" name="${pkg_name}_${name}_reg.sv" template="templates/reg.sv"/>
-                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                    
+    
     
     
     
@@ -3649,7 +3721,8 @@
     
     
     </files>
-                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                  
+  
   
   
   
@@ -3705,7 +3778,7 @@
   
   
   </template>
-                  
+                    
   
   
   
@@ -3758,125 +3831,10 @@
   
   
   
-  <template category="datum_uvm_single_file" id="datum_uvm_seq_lib" name="Sequence Library">
-                                    
-    
-    
-    
-    
-    
-    
-    
-    <description/>
-                                    
-    
-    
-    
-    
-    
-    
-    
-    <parameters>
-                                                      
-      
-      
-      
-      
-      
-      
-      
-      <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
-                                                      
-      
-      
-      
-      
-      
-      
-      
-      <parameter default="" name="name_uppercase" type="id"/>
-                                                      
-      
-      
-      
-      
-      
-      
-      
-      <parameter default="uvma" name="pkg_name" type="id"/>
-                                                      
-      
-      
-      
-      
-      
-      
-      
-      <parameter default="UVMA" name="pkg_name_uppercase" type="id"/>
-                                                      
-      
-      
-      
-      
-      
-      
-      
-      <parameter default="2021" name="year" type="int"/>
-                                                    
-    
-    
-    
-    
-    
-    
-    
-    </parameters>
-                                    
-    
-    
-    
-    
-    
-    
-    
-    <files>
-                                                      
-      
-      
-      
-      
-      
-      
-      
-      <file executable="false" name="${pkg_name}_${name}_seq_lib.sv" template="templates/seq_lib.sv"/>
-                                                    
-    
-    
-    
-    
-    
-    
-    
-    </files>
-                                  
-  
-  
-  
-  
-  
-  
-  
-  </template>
-                  
-  
-  
-  
-  
-  
-  
   
   <template category="datum_uvm_single_file" id="datum_uvm_seq" name="Sequence">
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -3932,7 +3890,8 @@
     
     
     <description/>
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -3988,7 +3947,7 @@
     
     
     <parameters>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                      
       
       
       
@@ -4184,8 +4143,10 @@
       
       
       
+      
       <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -4194,7 +4155,7 @@
       
       
       <parameter default="" name="name_uppercase" type="id"/>
-                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                            
     
     
     
@@ -4237,6 +4198,7 @@
     
     
     
+      
       
       
       
@@ -4246,7 +4208,8 @@
       
       
       <parameter default="uvma" name="pkg_name" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -4255,7 +4218,8 @@
       
       
       <parameter default="UVMA" name="pkg_name_uppercase" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -4264,7 +4228,7 @@
       
       
       <parameter default="2021" name="year" type="int"/>
-                                                    
+                                                          
     
     
     
@@ -4272,8 +4236,11 @@
     
     
     
+    
+      <parameter default="" name="base_class" type="id"/>
     </parameters>
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -4329,7 +4296,8 @@
     
     
     <files>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                      
+      
       
       
       
@@ -4385,7 +4353,8 @@
       
       
       <file executable="false" name="${pkg_name}_${name}_seq.sv" template="templates/seq.sv"/>
-                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                    
+    
     
     
     
@@ -4441,7 +4410,8 @@
     
     
     </files>
-                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                  
+  
   
   
   
@@ -4497,6 +4467,136 @@
   
   
   </template>
+  <template category="datum_uvm_single_file" id="datum_uvm_seq_lib" name="Sequence Library">
+                                        
+    
+    
+    
+    
+    
+    
+    
+    
+    <description/>
+                                        
+    
+    
+    
+    
+    
+    
+    
+    
+    <parameters>
+                                                            
+      
+      
+      
+      
+      
+      
+      
+      
+      <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
+                                                            
+      
+      
+      
+      
+      
+      
+      
+      
+      <parameter default="" name="name_uppercase" type="id"/>
+                                                            
+      
+      
+      
+      
+      
+      
+      
+      
+      <parameter default="uvma" name="pkg_name" type="id"/>
+                                                            
+      
+      
+      
+      
+      
+      
+      
+      
+      <parameter default="UVMA" name="pkg_name_uppercase" type="id"/>
+                                                            
+      
+      
+      
+      
+      
+      
+      
+      
+      <parameter default="2021" name="year" type="int"/>
+                                                          
+    
+    
+    
+    
+    
+    
+    
+    
+    </parameters>
+                                        
+    
+    
+    
+    
+    
+    
+    
+    
+    <files>
+                                                            
+      
+      
+      
+      
+      
+      
+      
+      
+      <file executable="false" name="${pkg_name}_${name}_seq_lib.sv" template="templates/seq_lib.sv"/>
+                                                          
+    
+    
+    
+    
+    
+    
+    
+    
+    </files>
+                                      
+  
+  
+  
+  
+  
+  
+  
+  
+  </template>
+                    
+  
+  
+  
+  
+  
+  
+  
+  
                                                                                                                 
   
   
@@ -4556,8 +4656,10 @@
   
   
   
+  
   <template category="datum_uvm_single_file" id="datum_uvm_test" name="Test">
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -4613,7 +4715,8 @@
     
     
     <description/>
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -4669,7 +4772,7 @@
     
     
     <parameters>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                      
       
       
       
@@ -4767,8 +4870,10 @@
       
       
       
-      <parameter default="base" name="base_test" type="class"/>
-                                                      
+      
+      <parameter default="base" name="base_class" type="class"/>
+                                                            
+      
       
       
       
@@ -4777,7 +4882,8 @@
       
       
       <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -4786,7 +4892,7 @@
       
       
       <parameter default="" name="name_uppercase" type="id"/>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                      
       
       
       
@@ -4849,8 +4955,10 @@
       
       
       
+      
       <parameter default="" name="tb_name" type="id"/>
-                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                      
+      
       
       
       
@@ -4898,7 +5006,7 @@
       
       
       <parameter default="" name="tb_name_uppercase" type="id"/>
-                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                      
       
       
       
@@ -5010,14 +5118,16 @@
       
       
       
+      
       <parameter default="" name="vseq_name" type="id"/>
-                                                                                              
+                                                                                                    
     
     
     
     
     
     
+      
       
       
       
@@ -5027,7 +5137,8 @@
       
       
       <parameter default="2021" name="year" type="int"/>
-                                                    
+                                                          
+    
     
     
     
@@ -5036,7 +5147,8 @@
     
     
     </parameters>
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -5092,7 +5204,8 @@
     
     
     <files>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                      
+      
       
       
       
@@ -5148,7 +5261,7 @@
       
       
       <file executable="false" name="uvmt_${tb_name}_${name}_test.sv" template="templates/test.sv"/>
-                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                    
     
     
     
@@ -5230,8 +5343,10 @@
     
     
     
+    
     </files>
-                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                  
+  
   
   
   
@@ -5287,7 +5402,8 @@
   
   
   </template>
-                                                                                                                
+                                                                                                                  
+  
   
   
   
@@ -5345,7 +5461,8 @@
   
   
   <template category="datum_uvm_single_file" id="datum_uvm_vseq" name="Virtual Sequence">
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -5401,7 +5518,8 @@
     
     
     <description/>
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -5457,7 +5575,7 @@
     
     
     <parameters>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                      
       
       
       
@@ -5653,8 +5771,10 @@
       
       
       
+      
       <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -5663,7 +5783,7 @@
       
       
       <parameter default="" name="name_uppercase" type="id"/>
-                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                            
     
     
     
@@ -5706,6 +5826,7 @@
     
     
     
+      
       
       
       
@@ -5715,7 +5836,8 @@
       
       
       <parameter default="uvme" name="pkg_name" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -5724,7 +5846,8 @@
       
       
       <parameter default="UVME" name="pkg_name_uppercase" type="id"/>
-                                                      
+                                                            
+      
       
       
       
@@ -5733,7 +5856,7 @@
       
       
       <parameter default="2021" name="year" type="int"/>
-                                                    
+                                                          
     
     
     
@@ -5741,8 +5864,11 @@
     
     
     
+    
+      <parameter default="" name="base_class" type="id"/>
     </parameters>
-                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                    
+    
     
     
     
@@ -5798,7 +5924,8 @@
     
     
     <files>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                      
+      
       
       
       
@@ -5854,7 +5981,8 @@
       
       
       <file executable="false" name="${pkg_name}_${name}_vseq.sv" template="templates/vseq.sv"/>
-                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                    
+    
     
     
     
@@ -5910,7 +6038,8 @@
     
     
     </files>
-                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                  
+  
   
   
   
@@ -5966,7 +6095,7 @@
   
   
   </template>
-                                                                                                              
+                                                                                                                
 
 
 
@@ -6021,17 +6150,32 @@
 
 
 
+  
   <template category="datum_uvm_single_file" id="datum_uvm_vseq_lib" name="Virtual Sequence Library">
+        
     <description/>
+        
     <parameters>
+            
       <parameter default="" name="name_of_copyright_owner" type="id"/>
+            
+      <parameter default="" name="base_class" type="id"/>
       <parameter default="" name="name_uppercase" type="id"/>
+            
       <parameter default="" name="pkg_name" type="id"/>
+            
       <parameter default="" name="pkg_name_uppercase" type="id"/>
+            
       <parameter default="2021" name="year" type="int"/>
+          
     </parameters>
+        
     <files>
+            
       <file executable="false" name="${pkg_name}_${name}_vseq_lib.sv" template="templates/vseq_lib.sv"/>
+          
     </files>
+      
   </template>
+  
 </sv_template>

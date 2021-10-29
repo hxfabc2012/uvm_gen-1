@@ -20,7 +20,7 @@
 class ${pkg_name}_${name}_reg_c extends ${base_class};
    
    // TODO Add register fields
-   //      Ex: rand uvml_ral_reg_field_c  xyz;
+   //      Ex: rand uvm_reg_field  xyz;
    
    
    `uvm_object_utils_begin(${pkg_name}_${name}_reg_c)
@@ -52,7 +52,7 @@ endfunction : new
 function void ${pkg_name}_${name}_reg_c::build();
    
    // TODO Create and configure register fields
-   //      Ex: xyz = uvml_ral_reg_field_c::type_id::create("xyz");
+   //      Ex: xyz = uvm_reg_field::type_id::create("xyz");
    //          xyz.configure(
    //             .parent                 (this),
    //             .size                   (   1),
