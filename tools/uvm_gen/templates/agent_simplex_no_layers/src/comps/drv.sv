@@ -58,22 +58,22 @@ class uvma_${name}_drv_c extends uvm_driver #(
    /**
     * Called by run_phase() while agent is in pre-reset state.
     */
-   extern virtual task drv_pre_reset(uvm_phase phase);
+   extern virtual task drv_pre_reset();
    
    /**
     * Called by run_phase() while agent is in reset state.
     */
-   extern virtual task drv_in_reset(uvm_phase phase);
+   extern virtual task drv_in_reset();
    
    /**
     * Called by run_phase() while agent is in post-reset state.
     */
-   extern virtual task drv_post_reset(uvm_phase phase);
+   extern virtual task drv_post_reset();
    
    /**
     * Appends cfg, prints out trn and issues heartbeat.
     */
-   extern virtual function void process(ref uvma_${name}_seq_item_c req);
+   extern virtual function void process_req(ref uvma_${name}_seq_item_c req);
    
    /**
     * Drives the virtual interface's (cntxt.vif) signals using req's contents.
@@ -119,9 +119,9 @@ task uvma_${name}_drv_c::run_phase(uvm_phase phase);
    if (cfg.enabled && cfg.is_active) begin
       forever begin
          case (cntxt.reset_state)
-            UVMA_${name_uppercase}_RESET_STATE_PRE_RESET : drv_pre_reset (phase);
-            UVMA_${name_uppercase}_RESET_STATE_IN_RESET  : drv_in_reset  (phase);
-            UVMA_${name_uppercase}_RESET_STATE_POST_RESET: drv_post_reset(phase);
+            UVML_RESET_STATE_PRE_RESET : drv_pre_reset ();
+            UVML_RESET_STATE_IN_RESET  : drv_in_reset  ();
+            UVML_RESET_STATE_POST_RESET: drv_post_reset();
          endcase
       end
    end
@@ -129,27 +129,21 @@ task uvma_${name}_drv_c::run_phase(uvm_phase phase);
 endtask : run_phase
 
 
-task uvma_${name}_drv_c::drv_pre_reset(uvm_phase phase);
+task uvma_${name}_drv_c::drv_pre_reset();
    
-   // TODO Implement uvma_${name}_drv_c::drv_pre_reset()
-   //      Ex: @(mp.drv_cb);
-   
-   // WARNING If no time is consumed by this task, a zero-delay oscillation loop will occur and stall simulation
+   @(mp.drv_cb);
    
 endtask : drv_pre_reset
 
 
-task uvma_${name}_drv_c::drv_in_reset(uvm_phase phase);
+task uvma_${name}_drv_c::drv_in_reset();
    
-   // TODO Implement uvma_${name}_drv_c::drv_in_reset()
-   //      Ex: @(mp.drv_cb);
-   
-   // WARNING If no time is consumed by this task, a zero-delay oscillation loop will occur and stall simulation
+   @(mp.drv_cb);
    
 endtask : drv_in_reset
 
 
-task uvma_${name}_drv_c::drv_post_reset(uvm_phase phase);
+task uvma_${name}_drv_c::drv_post_reset();
    
    seq_item_port.get_next_item(req);
    process_req                (req);

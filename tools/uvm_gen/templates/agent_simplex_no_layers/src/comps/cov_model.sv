@@ -20,9 +20,9 @@
 class uvma_${name}_cov_model_c extends uvm_component;
    
    // Objects
-   uvma_${name}_cfg_c       cfg;
-   uvma_${name}_cntxt_c     cntxt;
-   uvma_${name}_mon_trn_c   mon_trn;
+   uvma_${name}_cfg_c       cfg     ;
+   uvma_${name}_cntxt_c     cntxt   ;
+   uvma_${name}_mon_trn_c   mon_trn ;
    uvma_${name}_seq_item_c  seq_item;
    
    // TLM
@@ -34,34 +34,6 @@ class uvma_${name}_cov_model_c extends uvm_component;
       `uvm_field_object(cfg  , UVM_DEFAULT)
       `uvm_field_object(cntxt, UVM_DEFAULT)
    `uvm_component_utils_end
-   
-   
-   // TODO Add covergroup(s) to uvma_${name}_cov_model_c
-   //      Ex: covergroup ${name}_cfg_cg;
-   //             abc_cpt : coverpoint cfg.abc;
-   //             xyz_cpt : coverpoint cfg.xyz;
-   //          endgroup : ${name}_cfg_cg
-   //          
-   //          covergroup ${name}_cntxt_cg;
-   //             abc_cpt : coverpoint cntxt.abc;
-   //             xyz_cpt : coverpoint cntxt.xyz;
-   //          endgroup : ${name}_cntxt_cg
-   //          
-   //          covergroup ${name}_mon_trn_cg;
-   //             address : coverpoint mon_trn.address {
-   //                bins low   = {16'h0000_0000, 16'h4FFF_FFFF};
-   //                bins med   = {16'h5000_0000, 16'h9FFF_FFFF};
-   //                bins high  = {16'hA000_0000, 16'hFFFF_FFFF};
-   //             }
-   //          endgroup : ${name}_mon_trn_cg
-   //          
-   //          covergroup ${name}_seq_item_cg;
-   //             address : coverpoint seq_item.address {
-   //                bins low   = {16'h0000_0000, 16'h5FFF_FFFF};
-   //                bins med   = {16'h6000_0000, 16'hAFFF_FFFF};
-   //                bins high  = {16'hB000_0000, 16'hFFFF_FFFF};
-   //             }
-   //          endgroup : ${name}_seq_item_trn_cg
    
    
    /**
@@ -167,28 +139,28 @@ endtask : run_phase
 
 function void uvma_${name}_cov_model_c::sample_cfg();
    
-   // TODO Implement uvma_${name}_cov_model_c::sample_cfg();
+   
    
 endfunction : sample_cfg
 
 
 function void uvma_${name}_cov_model_c::sample_cntxt();
    
-   // TODO Implement uvma_${name}_cov_model_c::sample_cntxt();
+   
    
 endfunction : sample_cntxt
 
 
 function void uvma_${name}_cov_model_c::sample_mon_trn();
    
-   // TODO Implement uvma_${name}_cov_model_c::sample_mon_trn();
+   
    
 endfunction : sample_mon_trn
 
 
 function void uvma_${name}_cov_model_c::sample_seq_item();
    
-   // TODO Implement uvma_${name}_cov_model_c::sample_seq_item();
+   
    
 endfunction : sample_seq_item
 

@@ -31,7 +31,7 @@ interface uvma_${name}_if (
    /**
     * Used by target DUT.
     */
-   clocking dut_cb @(posedge clk or reset_n);
+   clocking dut_cb @(posedge clk);
       // TODO Implement uvma_${name}_if::dut_cb()
       //      Ex: input  enable,
       //                 data  ;
@@ -40,7 +40,7 @@ interface uvma_${name}_if (
    /**
     * Used by uvma_${name}_drv_c.
     */
-   clocking drv_cb @(posedge clk or reset_n);
+   clocking drv_cb @(posedge clk);
       // TODO Implement uvma_${name}_if::drv_cb()
       //      Ex: output  enable,
       //                  data  ;
@@ -49,7 +49,7 @@ interface uvma_${name}_if (
    /**
     * Used by uvma_${name}_mon_c.
     */
-   clocking mon_cb @(posedge clk or reset_n);
+   clocking mon_cb @(posedge clk);
       // TODO Implement uvma_${name}_if::mon_cb()
       //      Ex: input  enable,
       //                 data  ;
@@ -67,7 +67,7 @@ interface uvma_${name}_if (
    /**
     * Used by uvma_${name}_drv_c.
     */
-   modport active_mp (
+   modport drv_mp (
       clocking drv_cb ,
       input    clk    ,
       input    reset_n
@@ -76,7 +76,7 @@ interface uvma_${name}_if (
    /**
     * Used by uvma_${name}_mon_c.
     */
-   modport passive_mp(
+   modport mon_mp (
       clocking mon_cb ,
       input    clk    ,
       input    reset_n

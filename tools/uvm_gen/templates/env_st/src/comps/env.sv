@@ -28,9 +28,9 @@ class uvme_${name}_st_env_c extends uvm_env;
    uvma_${name}_agent_c  ${name_2}_agent;
    
    // Components
-   uvme_${name}_st_prd_c   predictor;
-   uvml_sb_simplex_c       sb;
-   uvme_${name}_st_vsqr_c  vsequencer;
+   uvme_${name}_st_prd_c         predictor ;
+   uvme_${name}_st_sb_simplex_c  sb        ;
+   uvme_${name}_st_vsqr_c        vsequencer;
    
    
    `uvm_component_utils_begin(uvme_${name}_st_env_c)
@@ -107,11 +107,10 @@ function uvme_${name}_st_env_c::new(string name="uvme_${name}_st_env", uvm_compo
    
    super.new(name, parent);
    
-   // TODO Override agent/lib coverage model(s)
-   //      Ex: set_type_override_by_type(
-   //             uvma_${name}_cov_model_c   ::get_type(),
-   //             uvme_${name}_st_cov_model_c::get_type(),
-   //          );
+   set_type_override_by_type(
+      uvma_${name}_cov_model_c   ::get_type(),
+      uvme_${name}_st_cov_model_c::get_type(),
+   );
    
 endfunction : new
 
@@ -143,10 +142,6 @@ function void uvme_${name}_st_env_c::build_phase(uvm_phase phase);
       if (cfg.is_active) begin
          create_vsequencer();
       end
-      
-      if (cfg.cov_model_enabled) begin
-         create_cov_model();
-      end
    end
    
 endfunction : build_phase
@@ -165,10 +160,6 @@ function void uvme_${name}_st_env_c::connect_phase(uvm_phase phase);
       if (cfg.is_active) begin
          assemble_vsequencer();
       end
-      
-      if (cfg.cov_model_enabled) begin
-         connect_coverage_model();
-      end
    end
    
 endfunction: connect_phase
@@ -179,7 +170,7 @@ function void uvme_${name}_st_env_c::assign_cfg();
    uvm_config_db#(uvme_${name}_st_cfg_c)::set(this, "*", "cfg", cfg);
    uvm_config_db#(uvma_${name}_cfg_c   )::set(this, "${name_1}_agent", "cfg", cfg.${name_1}_cfg);
    uvm_config_db#(uvma_${name}_cfg_c   )::set(this, "${name_2}_agent", "cfg", cfg.${name_2}_cfg);
-   uvm_config_db#(uvml_sb_simplex_cfg_c)::set(this, "sb", "cfg", cfg.sb_cfg;
+   uvm_config_db#(uvml_sb_simplex_cfg_c)::set(this, "sb", "cfg", cfg.sb_cfg);
    
 endfunction: assign_cfg
 
@@ -205,8 +196,8 @@ endfunction: create_agents
 function void uvme_${name}_st_env_c::create_env_components();
    
    if (cfg.scoreboarding_enabled) begin
-      predictor = uvme_${name}_st_prd_c::type_id::create("predictor", this);
-      sb = uvml_sb_simplex_c::type_id::create("sb", this);
+      predictor = uvme_${name}_st_prd_c       ::type_id::create("predictor", this);
+      sb        = uvme_${name}_st_sb_simplex_c::type_id::create("sb"       , this);
    end
    
 endfunction: create_env_components

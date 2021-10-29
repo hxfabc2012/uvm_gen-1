@@ -62,13 +62,13 @@ files = {
     "src/obj/cntxt.sv"                    : "uvme_${name}_st/src/obj/uvme_${name}_st_cntxt.sv",
     "src/seq/base_vseq.sv"                : "uvme_${name}_st/src/seq/uvme_${name}_st_base_vseq.sv",
     "src/seq/vseq_lib.sv"                 : "uvme_${name}_st/src/seq/uvme_${name}_st_vseq_lib.sv",
-    "src/chkr.sv"                         : "uvme_${name}_st/src/uvma_${name}_st_chkr.sv",
-    "src/constants.sv"                    : "uvme_${name}_st/src/uvma_${name}_st_constants.sv",
-    "src/macros.sv"                       : "uvme_${name}_st/src/uvma_${name}_st_macros.sv",
-    "src/pkg.flist"                       : "uvme_${name}_st/src/uvma_${name}_st_pkg.flist",
-    "src/pkg.flist.xsim"                  : "uvme_${name}_st/src/uvma_${name}_st_pkg.flist.xsim",
-    "src/pkg.sv"                          : "uvme_${name}_st/src/uvma_${name}_st_pkg.sv",
-    "src/tdefs.sv"                        : "uvme_${name}_st/src/uvma_${name}_st_tdefs.sv",
+    "src/chkr.sv"                         : "uvme_${name}_st/src/uvme_${name}_st_chkr.sv",
+    "src/constants.sv"                    : "uvme_${name}_st/src/uvme_${name}_st_constants.sv",
+    "src/macros.sv"                       : "uvme_${name}_st/src/uvme_${name}_st_macros.sv",
+    "src/pkg.flist"                       : "uvme_${name}_st/src/uvme_${name}_st_pkg.flist",
+    "src/pkg.flist.xsim"                  : "uvme_${name}_st/src/uvme_${name}_st_pkg.flist.xsim",
+    "src/pkg.sv"                          : "uvme_${name}_st/src/uvme_${name}_st_pkg.sv",
+    "src/tdefs.sv"                        : "uvme_${name}_st/src/uvme_${name}_st_tdefs.sv",
     "../.gitignore"                       : "uvme_${name}_st/.gitignore",
     "../LICENSE_solderpad_v2p1.md"        : "uvme_${name}_st/LICENSE.md",
     "README.md"                           : "uvme_${name}_st/README.md"
@@ -172,26 +172,26 @@ def prompt_user_values():
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
     
-    name = input("Please enter the name of the Agent/Library for this Self-Testing Environment (ex: 'apb'); this name will be used for all Environment types (ex: 'uvme_apb_st_env_c'):\n").lower().strip()
+    name = input("Please enter the name of the Agent for this Self-Testing Environment (ex: 'apb'); this name will be used for all Environment types (ex: 'uvme_apb_st_env_c'):\n").lower().strip()
     if name == "":
         sys.exit("ERROR: package name cannot be empty.  Exiting.")
     else:
         parameters["name"] = name
         parameters["name_uppercase"] = name.upper()
     
-    name_normal_case = input("Please enter the (descriptive) name for this Agent/Library (ex: 'Advanced Peripheral Bus (APB)'):\n").strip()
+    name_normal_case = input("Please enter the (descriptive) name for this Agent (ex: 'Advanced Peripheral Bus (APB)'):\n").strip()
     if name_normal_case == "":
         sys.exit("ERROR: descriptive name cannot be empty.  Exiting.")
     else:
         parameters["name_normal_case"] = name_normal_case
     
-    name_1 = input("Please enter the name for the first agent instance (default: 'mstr'):\n").strip()
+    name_1 = input("Please enter the name for the first Agent instance (default: 'mstr'):\n").strip()
     if name_1 == "":
         parameters["name_1"] = "mstr"
     else:
         parameters["name_1"] = name_1
     
-    name_2 = input("Please enter the name for the second agent instance (default: 'slv'):\n").strip()
+    name_2 = input("Please enter the name for the second Agent instance (default: 'slv'):\n").strip()
     if name_2 == "":
         parameters["name_2"] = "slv"
     else:

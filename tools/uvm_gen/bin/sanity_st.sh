@@ -21,7 +21,8 @@ cat ./tests/tb_st.spec  | ./src/new_tb_st.py                   ../../dv/
 cd ../../sim
 ./setup_project.py
 source ./setup_terminal.sh
-dvm all uvmt_st -t base -s 1
+../tools/.imports/dvm/src/dvm.py cpel uvmt_abc_st
+../tools/.imports/dvm/src/dvm.py sim  uvmt_abc_st -t base -s 1
 
 # 3. Gather sim results
-../tools/dvm/src/dvm.py results uvmt_st tb_st
+../tools/dvm/src/dvm.py results uvmt_abc_st tb_st

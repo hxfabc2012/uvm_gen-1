@@ -20,18 +20,18 @@
 class uvma_${name}_cfg_c extends uvm_object;
    
    // Generic options
-   rand bit                           enabled          ; ///< 
-   rand uvm_active_passive_enum       is_active        ; ///< 
-   rand uvma_${name}_reset_mode_enum  reset_mode       ; ///< 
-   rand uvm_sequencer_arb_mode        sqr_arb_mode     ; ///< 
-   rand bit                           cov_model_enabled; ///< 
-   rand bit                           trn_log_enabled  ; ///< 
+   rand bit                      enabled          ;
+   rand uvm_active_passive_enum  is_active        ;
+   rand uvml_reset_type_enum     reset_type       ;
+   rand uvm_sequencer_arb_mode   sqr_arb_mode     ;
+   rand bit                      cov_model_enabled;
+   rand bit                      trn_log_enabled  ;
    
    
    `uvm_object_utils_begin(uvma_${name}_cfg_c)
       `uvm_field_int (                         enabled          , UVM_DEFAULT)
       `uvm_field_enum(uvm_active_passive_enum, is_active        , UVM_DEFAULT)
-      `uvm_field_enum(uvml_reset_mode_enum   , reset_mode       , UVM_DEFAULT)
+      `uvm_field_enum(uvml_reset_type_enum   , reset_type       , UVM_DEFAULT)
       `uvm_field_enum(uvm_sequencer_arb_mode , sqr_arb_mode     , UVM_DEFAULT)
       `uvm_field_int (                         cov_model_enabled, UVM_DEFAULT)
       `uvm_field_int (                         trn_log_enabled  , UVM_DEFAULT)
@@ -41,7 +41,7 @@ class uvma_${name}_cfg_c extends uvm_object;
    constraint defaults_cons {
       soft enabled           == 1;
       soft is_active         == UVM_PASSIVE;
-      soft reset_mode        == UVML_RESET_MODE_SYNCHRONOUS;
+      soft reset_type        == UVML_RESET_TYPE_SYNCHRONOUS;
       soft sqr_arb_mode      == UVM_SEQ_ARB_FIFO;
       soft cov_model_enabled == 0;
       soft trn_log_enabled   == 1;

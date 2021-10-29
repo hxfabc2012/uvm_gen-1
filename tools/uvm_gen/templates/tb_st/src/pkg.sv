@@ -19,6 +19,7 @@
 `include "uvml_macros.sv"
 `include "uvml_logs_macros.sv"
 `include "uvml_sb_macros.sv"
+`include "uvma_${name}_macros.sv"
 `include "uvme_${name}_st_macros.sv"
 `include "uvmt_${name}_st_macros.sv"
 
@@ -27,7 +28,7 @@ timeunit       1ns;
 timeprecision  1ps;
 
 // Interface(s)
-`include "uvmt_${name}_clknrst_gen_if.sv"
+`include "uvmt_${name}_st_clknrst_gen_if.sv"
 
 
 /**
@@ -39,6 +40,7 @@ package uvmt_${name}_st_pkg;
    import uvml_pkg      ::*;
    import uvml_logs_pkg ::*;
    import uvml_sb_pkg   ::*;
+   import uvma_${name}_pkg::*;
    import uvme_${name}_st_pkg::*;
    
    // Constants / Structs / Enums

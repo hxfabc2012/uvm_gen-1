@@ -67,6 +67,7 @@ files = {
     "src/if.sv"                    : "uvma_${name}/src/uvma_${name}_if.sv",
     "src/macros.sv"                : "uvma_${name}/src/uvma_${name}_macros.sv",
     "src/pkg.flist"                : "uvma_${name}/src/uvma_${name}_pkg.flist",
+    "src/pkg.flist.xsim"           : "uvma_${name}/src/uvma_${name}_pkg.flist.xsim",
     "src/pkg.sv"                   : "uvma_${name}/src/uvma_${name}_pkg.sv",
     "src/tdefs.sv"                 : "uvma_${name}/src/uvma_${name}_tdefs.sv",
     "../.gitignore"                : "uvma_${name}/.gitignore",

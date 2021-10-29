@@ -17,7 +17,7 @@
 /**
  * Object created by ${name_normal_case} agent sequences extending uvma_${name}_seq_base_c.
  */
-class uvma_${name}_seq_item_c extends uvml_trn_seq_item_c;
+class uvma_${name}_seq_item_c extends uvml_seq_item_c;
    
    // TODO Add uvma_${name}_seq_item_c fields
    //      Ex: rand bit [7:0]  abc;

@@ -45,8 +45,8 @@ class uvmt_${name}_st_base_test_c extends uvm_test;
       env_cfg.enabled               == 1;
       env_cfg.is_active             == UVM_ACTIVE;
       env_cfg.trn_log_enabled       == 1;
-      env_cfg.scoreboarding_enabled == 1;
-      env_cfg.coverage_enabled      == 0;
+      env_cfg.scoreboarding_enabled == 0;
+      env_cfg.cov_model_enabled     == 1;
    }
    
    
@@ -77,8 +77,7 @@ class uvmt_${name}_st_base_test_c extends uvm_test;
    extern virtual function void connect_phase(uvm_phase phase);
    
    /**
-    * 1. Triggers the start of clock generation via start_clk()
-    * 2. Starts the simulation timeout via simulation_timeout()
+    * Triggers the start of clock generation via start_clk()
     */
    extern virtual task run_phase(uvm_phase phase);
    

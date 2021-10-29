@@ -133,9 +133,9 @@ task uvma_${name}_mon_c::run_phase(uvm_phase phase);
          begin
             forever begin
                case (cntxt.reset_state)
-                  UVMA_${name_uppercase}_RESET_STATE_PRE_RESET : mon_pre_reset ();
-                  UVMA_${name_uppercase}_RESET_STATE_IN_RESET  : mon_in_reset  ();
-                  UVMA_${name_uppercase}_RESET_STATE_POST_RESET: mon_post_reset();
+                  UVML_RESET_STATE_PRE_RESET : mon_pre_reset ();
+                  UVML_RESET_STATE_IN_RESET  : mon_in_reset  ();
+                  UVML_RESET_STATE_POST_RESET: mon_post_reset();
                endcase
             end
          end
@@ -147,12 +147,12 @@ endtask : run_phase
 
 task uvma_${name}_mon_c::observe_reset();
    
-   case (cfg.reset_mode)
-      UVMA_${name_uppercase}_RESET_MODE_SYNCHRONOUS : observe_reset_sync ();
-      UVMA_${name_uppercase}_RESET_MODE_ASYNCHRONOUS: observe_reset_async();
+   case (cfg.reset_type)
+      UVML_RESET_TYPE_SYNCHRONOUS : observe_reset_sync ();
+      UVML_RESET_TYPE_ASYNCHRONOUS: observe_reset_async();
       
       default: begin
-         `uvm_fatal("${name_uppercase}_MON", $sformatf("Illegal cfg.reset_mode: %s", cfg.reset_mode.name()))
+         `uvm_fatal("${name_uppercase}_MON", $sformatf("Illegal cfg.reset_type: %s", cfg.reset_type.name()))
       end
    endcase
    
@@ -167,14 +167,14 @@ task uvma_${name}_mon_c::observe_reset_sync();
    //                wait (mp.clk === 1);
    //                wait (mp.clk === 0);
    //             end
-   //             cntxt.reset_state = UVMA_${name_uppercase}_RESET_STATE_IN_RESET;
+   //             cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
    //             `uvm_info("${name_uppecase}_MON", "Entered IN_RESET state", UVM_MEDIUM)
    //             
    //             while (mp.reset_n !== 1'b1) begin
    //                wait (mp.clk === 1);
    //                wait (mp.clk === 0);
    //             end
-   //             cntxt.reset_state = UVMA_${name_uppercase}_RESET_STATE_POST_RESET;
+   //             cntxt.reset_state = UVML_RESET_STATE_POST_RESET;
    //             `uvm_info("${name_uppecase}_MON", "Entered POST_RESET state", UVM_MEDIUM)
    //          end
    
@@ -186,11 +186,11 @@ task uvma_${name}_mon_c::observe_reset_async();
    // TODO Implement uvma_${name}_mon_c::observe_reset_async();
    //      Ex: forever begin
    //             wait (mp.reset_n === 0);
-   //             cntxt.reset_state = UVMA_${name_uppercase}_RESET_STATE_IN_RESET;
+   //             cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
    //             `uvm_info("${name_uppecase}_MON", "Entered IN_RESET state", UVM_MEDIUM)
    //
    //             wait (mp.reset_n === 1);
-   //             cntxt.reset_state = UVMA_${name_uppercase}_RESET_STATE_POST_RESET;
+   //             cntxt.reset_state = UVML_RESET_STATE_POST_RESET;
    //             `uvm_info("${name_uppecase}_MON", "Entered POST_RESET state", UVM_MEDIUM)
    //          end
    
@@ -199,20 +199,14 @@ endtask : observe_reset_async
 
 task uvma_${name}_mon_c::mon_pre_reset();
    
-   // TODO Implement uvma_${name}_mon_c::mon_pre_reset()
-   //      Ex: @(mp.mon_cb);
-   
-   // WARNING If no time is consumed by this task, a zero-delay oscillation loop will occur and stall simulation
+   @(mp.mon_cb);
    
 endtask : mon_pre_reset
 
 
 task uvma_${name}_mon_c::mon_in_reset();
    
-   // TODO Implement uvma_${name}_mon_c::mon_in_reset()
-   //      Ex: @(mp.mon_cb);
-   
-   // WARNING If no time is consumed by this task, a zero-delay oscillation loop will occur and stall simulation
+   @(mp.mon_cb);
    
 endtask : mon_in_reset
 

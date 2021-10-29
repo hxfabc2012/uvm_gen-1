@@ -103,14 +103,14 @@ endfunction : sample_cntxt
 
 function void uvme_${name}_st_cov_model_c::sample_${name}_seq_item();
    
-   ${name}_st_${name}_seq_item_cg.sample();
+   ${name}_st_seq_item_cg.sample();
    
 endfunction : sample_${name}_seq_item
 
 
 function void uvme_${name}_st_cov_model_c::sample_${name}_mon_trn();
    
-   ${name}_st_${name}_mon_trn_cg.sample();
+   ${name}_st_mon_trn_cg.sample();
    
 endfunction : sample_${name}_mon_trn
 

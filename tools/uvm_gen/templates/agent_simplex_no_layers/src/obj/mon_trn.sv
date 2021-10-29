@@ -17,7 +17,7 @@
 /**
  * Object rebuilt from the ${name_normal_case} monitor.  Analog of uvma_${name}_seq_item_c.
  */
-class uvma_${name}_mon_trn_c extends uvml_trn_mon_trn_c;
+class uvma_${name}_mon_trn_c extends uvml_mon_trn_c;
    
    // Data
    // TODO Add uvma_${name}_mon_trn_c data fields
