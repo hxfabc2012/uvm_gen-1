@@ -15,26 +15,26 @@
 
 """Moore.io UVM Singleton Generator
    Generates single files of UVM code.
+   
 Usage:
-   new.py component   [<out_dir>] [<copyright_owner>]  # Invokes 'Component' generator
-   new.py object      [<out_dir>] [<copyright_owner>]  # Invokes 'Object' generator
-   new.py reg_adapter [<out_dir>] [<copyright_owner>]  # Invokes 'Register Adapter' generator
-   new.py reg         [<out_dir>] [<copyright_owner>]  # Invokes 'Register' generator
-   new.py reg_block   [<out_dir>] [<copyright_owner>]  # Invokes 'Register Block' generator
-   new.py seq         [<out_dir>] [<copyright_owner>]  # Invokes 'Sequence' generator
-   new.py seq_lib     [<out_dir>] [<copyright_owner>]  # Invokes 'Sequence Library' generator
-   new.py test        [<out_dir>] [<copyright_owner>]  # Invokes 'Test' generator
-   new.py vseq        [<out_dir>] [<copyright_owner>]  # Invokes 'Virtual Sequence' generator
-   new.py vseq_lib    [<out_dir>] [<copyright_owner>]  # Invokes 'Virtual Sequence Library' generator
-   new.py (-h | --help)                                # Prints this help message
+   new.py component    [-c <copyright_owner>] [<out_path>]
+   new.py object       [-c <copyright_owner>] [<out_path>]
+   new.py reg_adapter  [-c <copyright_owner>] [<out_path>]
+   new.py reg          [-c <copyright_owner>] [<out_path>]
+   new.py reg_block    [-c <copyright_owner>] [<out_path>]
+   new.py seq          [-c <copyright_owner>] [<out_path>]
+   new.py seq_lib      [-c <copyright_owner>] [<out_path>]
+   new.py test         [-c <copyright_owner>] [<out_path>]
+   new.py vseq         [-c <copyright_owner>] [<out_path>]
+   new.py vseq_lib     [-c <copyright_owner>] [<out_path>]
+   
+   new.py (-h | --help)  # Prints this message and exits
+   new.py -v             # Prints version and exits
    
 Examples:
-   mio component ~/my_proj/src                # Deletes latest artifacts for Default IP
-   mio clean --all                            # Deletes all artifacts for Default IP
-   mio clean my_ip my_other_ip --sim --lint   # Deletes sim and lint artifacts for 2 IPs
-   mio clean * --force -slf                   # Delete sim, lint and formal artifacts for all IPs (with force)
-   mio clean * --all                          # Delete all artifacts for all IPs
-   mio clean * -AF                            # Delete all artifacts for all IPs, overriding all access rights!"""
+   new.py seq                                        # Create new sequence
+   new.py component ~/my_proj/src                    # Create new component in specific directory
+   new.py test      ~/my_proj/tb/tests/ 'Acme Inc.'  # Create new test in specific directory with default copyright holder"""
 
 
 ########################################################################################################################
@@ -73,7 +73,7 @@ files = {
     },
     'reg_adapter' : {
         'in' : 'reg_adapter.sv',
-        'out' : '${pkg_name}_reg_adapter.sv'
+        'out' : '${name}_reg_adapter.sv'
     },
     'reg_block' : {
         'in' : 'reg_block.sv',
@@ -93,7 +93,7 @@ files = {
     },
     'test' : {
         'in' : 'test.sv',
-        'out' : 'uvmt_${pkg_name}_${name}_test.sv'
+        'out' : 'uvmt_${tb_name}_${name}_test.sv'
     },
     'vseq_lib' : {
         'in' : 'vseq_lib.sv',
@@ -142,47 +142,431 @@ def pick_out_path():
     global args
     global out_path
     global default_copyright_owner
-    if (args['<out_dir>']):
-        out_path = args['<out_dir>']
+    if (args['<out_path>']):
+        out_path = args['<out_path>']
         print("Code will be output to " + out_path)
-    if (args['<copyright_owner>']):
+    if (args['-c']):
         default_copyright_owner = args['<copyright_owner>']
         print("Default copyright owner is " + default_copyright_owner)
 
 def gen_component():
     global out_path
     global default_copyright_owner
-    
+    parameters = {}
     print("Moore.io Template Generator: Component (v1p0)")
     
     if out_path == "":
-        out_path = input("Please enter the destination path for this new agent\n").strip()
+        out_path = input("Please enter the destination path for this new Component (default: '.'):\n").strip()
+        if out_path == "":
+            out_path = "."
+    
+    parameters = {
+        "year" : date.today().year
+    }
     
     name_of_copyright_owner = input("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
     if name_of_copyright_owner == "":
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
     
-    name = input("Please enter the package name for this Component (ex: 'my_comp'); this name will be used for all agent types (ex: 'uvma_pcie_agent_c'):\n").lower().strip()
+    name = input("Please enter the name for this Component (ex: 'my_comp'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
+    else:
+        parameters["name"] = name
+        parameters["name_uppercase"] = name.upper()
+    
+    pkg_name = input("Please enter the package name for this Component (ex: 'uvma_apb'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
+    else:
+        parameters["pkg_name"] = pkg_name
+        parameters["pkg_name_uppercase"] = pkg_name.upper()
+    
+    base_class = input("Please enter the base class type for this Component (default: 'uvm_component'):\n").lower().strip()
+    if base_class == "":
+        parameters["base_class"] = "uvm_component"
+    else:
+        parameters["base_class"] = base_class
+    
+    process_file(parameters, files['component']['in'], files['component']['out'])
+
+def gen_object():
+    global out_path
+    global default_copyright_owner
+    parameters = {}
+    print("Moore.io Template Generator: Object (v1p0)")
+    
+    if out_path == "":
+        out_path = input("Please enter the destination path for this new Object (default: '.'):\n").strip()
+        if out_path == "":
+            out_path = "."
+    
+    parameters = {
+        "year" : date.today().year
+    }
+    
+    name_of_copyright_owner = input("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
+    if name_of_copyright_owner == "":
+        name_of_copyright_owner = default_copyright_owner
+    parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    name = input("Please enter the name for this Object (ex: 'my_obj'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
+    else:
+        parameters["name"] = name
+        parameters["name_uppercase"] = name.upper()
+    
+    pkg_name = input("Please enter the package name for this Object (ex: 'uvma_apb'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
+    else:
+        parameters["pkg_name"] = pkg_name
+        parameters["pkg_name_uppercase"] = pkg_name.upper()
+    
+    base_class = input("Please enter the base class type for this Object (default: 'uvm_object'):\n").lower().strip()
+    if base_class == "":
+        parameters["base_class"] = "uvm_object"
+    else:
+        parameters["base_class"] = base_class
+    
+    process_file(parameters, files['object']['in'], files['object']['out'])
+
+def gen_reg_adapter():
+    global out_path
+    global default_copyright_owner
+    parameters = {}
+    print("Moore.io Template Generator: Register Adapter (v1p0)")
+    
+    if out_path == "":
+        out_path = input("Please enter the destination path for this new Register Adapter (default: '.'):\n").strip()
+        if out_path == "":
+            out_path = "."
+    
+    parameters = {
+        "year" : date.today().year
+    }
+    
+    name_of_copyright_owner = input("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
+    if name_of_copyright_owner == "":
+        name_of_copyright_owner = default_copyright_owner
+    parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    name = input("Please enter the package name for this Register Adapter (ex: 'uvma_apb'):\n").lower().strip()
     if name == "":
         sys.exit("ERROR: package name cannot be empty.  Exiting.")
     else:
         parameters["name"] = name
         parameters["name_uppercase"] = name.upper()
     
-    name_normal_case = input("Please enter the (descriptive) name for this agent (ex: 'PCI Express'):\n").strip()
-    if name_normal_case == "":
-        sys.exit("ERROR: descriptive name cannot be empty.  Exiting.")
+    base_class = input("Please enter the base class type for this Register Adapter (default: 'uvm_reg_adapter'):\n").lower().strip()
+    if base_class == "":
+        parameters["base_class"] = "uvm_reg_adapter"
     else:
-        parameters["name_normal_case"] = name_normal_case
+        parameters["base_class"] = base_class
+    
+    process_file(parameters, files['reg_adapter']['in'], files['reg_adapter']['out'])
+
+def gen_reg_block():
+    global out_path
+    global default_copyright_owner
+    parameters = {}
+    print("Moore.io Template Generator: Register Block (v1p0)")
+    
+    if out_path == "":
+        out_path = input("Please enter the destination path for this new Register Block (default: '.'):\n").strip()
+        if out_path == "":
+            out_path = "."
     
     parameters = {
-    "name"                    : name,
-    "name_uppercase"          : name.upper(),
-    "name_normal_case"        : name_normal_case,
-    "name_of_copyright_owner" : name_of_copyright_owner,
-    "year"                    : date.today().year
-}
+        "year" : date.today().year
+    }
+    
+    name_of_copyright_owner = input("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
+    if name_of_copyright_owner == "":
+        name_of_copyright_owner = default_copyright_owner
+    parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    name = input("Please enter the name for this Register Block (ex: 'top'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
+    else:
+        parameters["name"] = name
+        parameters["name_uppercase"] = name.upper()
+    
+    pkg_name = input("Please enter the package name for this Register Block (ex: 'uvme_my_ss'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
+    else:
+        parameters["pkg_name"] = pkg_name
+        parameters["pkg_name_uppercase"] = pkg_name.upper()
+    
+    base_class = input("Please enter the base class type for this Register Block (default: 'uvm_reg_block'):\n").lower().strip()
+    if base_class == "":
+        parameters["base_class"] = "uvm_reg_block"
+    else:
+        parameters["base_class"] = base_class
+    
+    process_file(parameters, files['reg_block']['in'], files['reg_block']['out'])
+
+def gen_reg():
+    global out_path
+    global default_copyright_owner
+    parameters = {}
+    print("Moore.io Template Generator: Register (v1p0)")
+    
+    if out_path == "":
+        out_path = input("Please enter the destination path for this new Register (default: '.'):\n").strip()
+        if out_path == "":
+            out_path = "."
+    
+    parameters = {
+        "year" : date.today().year
+    }
+    
+    name_of_copyright_owner = input("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
+    if name_of_copyright_owner == "":
+        name_of_copyright_owner = default_copyright_owner
+    parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    name = input("Please enter the name for this Register (ex: 'status'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
+    else:
+        parameters["name"] = name
+        parameters["name_uppercase"] = name.upper()
+    
+    pkg_name = input("Please enter the package name for this Register (ex: 'uvme_my_ss'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
+    else:
+        parameters["pkg_name"] = pkg_name
+        parameters["pkg_name_uppercase"] = pkg_name.upper()
+    
+    base_class = input("Please enter the base class type for this Register (default: 'uvm_reg'):\n").lower().strip()
+    if base_class == "":
+        parameters["base_class"] = "uvm_reg"
+    else:
+        parameters["base_class"] = base_class
+    
+    process_file(parameters, files['reg']['in'], files['reg']['out'])
+
+def gen_seq():
+    global out_path
+    global default_copyright_owner
+    parameters = {}
+    print("Moore.io Template Generator: Sequence (v1p0)")
+    
+    if out_path == "":
+        out_path = input("Please enter the destination path for this new Sequence (default: '.'):\n").strip()
+        if out_path == "":
+            out_path = "."
+    
+    parameters = {
+        "year" : date.today().year
+    }
+    
+    name_of_copyright_owner = input("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
+    if name_of_copyright_owner == "":
+        name_of_copyright_owner = default_copyright_owner
+    parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    name = input("Please enter the name for this Sequence (ex: 'traffic'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
+    else:
+        parameters["name"] = name
+        parameters["name_uppercase"] = name.upper()
+    
+    pkg_name = input("Please enter the package name for this Sequence (ex: 'uvma_apb'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
+    else:
+        parameters["pkg_name"] = pkg_name
+        parameters["pkg_name_uppercase"] = pkg_name.upper()
+    
+    base_class = input("Please enter the base class type for this Sequence (ex: 'uvma_apb_base_seq_c'):\n").lower().strip()
+    if base_class == "":
+        sys.exit("ERROR: base class type cannot be empty.  Exiting.")
+    else:
+        parameters["base_class"] = base_class
+    
+    process_file(parameters, files['seq']['in'], files['seq']['out'])
+
+def gen_seq_lib():
+    global out_path
+    global default_copyright_owner
+    parameters = {}
+    print("Moore.io Template Generator: Sequence Library (v1p0)")
+    
+    if out_path == "":
+        out_path = input("Please enter the destination path for this new Sequence Library (default: '.'):\n").strip()
+        if out_path == "":
+            out_path = "."
+    
+    parameters = {
+        "year" : date.today().year
+    }
+    
+    name_of_copyright_owner = input("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
+    if name_of_copyright_owner == "":
+        name_of_copyright_owner = default_copyright_owner
+    parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    name = input("Please enter the name for this Sequence Library (ex: 'mstr'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
+    else:
+        parameters["name"] = name
+        parameters["name_uppercase"] = name.upper()
+    
+    pkg_name = input("Please enter the package name for this Sequence Library (ex: 'uvma_apb'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
+    else:
+        parameters["pkg_name"] = pkg_name
+        parameters["pkg_name_uppercase"] = pkg_name.upper()
+    
+    base_class = input("Please enter the base class type for this Sequence Library (ex: 'uvm_sequence_library #(uvm_sequence_item)'):\n").lower().strip()
+    if base_class == "":
+        parameters["base_class"] = "uvm_sequence_library #(uvm_sequence_item)"
+    else:
+        parameters["base_class"] = base_class
+    
+    process_file(parameters, files['seq_lib']['in'], files['seq_lib']['out'])
+
+def gen_test():
+    global out_path
+    global default_copyright_owner
+    parameters = {}
+    print("Moore.io Template Generator: Test (v1p0)")
+    
+    if out_path == "":
+        out_path = input("Please enter the destination path for this new Test (default: '.'):\n").strip()
+        if out_path == "":
+            out_path = "."
+    
+    parameters = {
+        "year" : date.today().year
+    }
+    
+    name_of_copyright_owner = input("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
+    if name_of_copyright_owner == "":
+        name_of_copyright_owner = default_copyright_owner
+    parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    name = input("Please enter the name for this Test (ex: 'smoke'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
+    else:
+        parameters["name"] = name
+        parameters["name_uppercase"] = name.upper()
+    
+    vseq_name = input("Please enter the Virtual Sequence name for this Test (ex: 'basic_access'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: Virtual Sequence name cannot be empty.  Exiting.")
+    else:
+        parameters["vseq_name"] = vseq_name
+    
+    pkg_name = input("Please enter the package name for this Test (ex: 'my_ss'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
+    else:
+        parameters["tb_name"] = pkg_name
+        parameters["tb_name_uppercase"] = pkg_name.upper()
+    
+    base_class = input("Please enter the base class type for this Test (ex: 'uvm_test'):\n").lower().strip()
+    if base_class == "":
+        sys.exit("ERROR: base class type cannot be empty.  Exiting.")
+    else:
+        parameters["base_class"] = base_class
+    
+    process_file(parameters, files['test']['in'], files['test']['out'])
+
+def gen_vseq():
+    global out_path
+    global default_copyright_owner
+    parameters = {}
+    print("Moore.io Template Generator: Virtual Sequence (v1p0)")
+    
+    if out_path == "":
+        out_path = input("Please enter the destination path for this new Virtual Sequence (default: '.'):\n").strip()
+        if out_path == "":
+            out_path = "."
+    
+    parameters = {
+        "year" : date.today().year
+    }
+    
+    name_of_copyright_owner = input("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
+    if name_of_copyright_owner == "":
+        name_of_copyright_owner = default_copyright_owner
+    parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    name = input("Please enter the name for this Virtual Sequence (ex: 'traffic'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
+    else:
+        parameters["name"] = name
+        parameters["name_uppercase"] = name.upper()
+    
+    pkg_name = input("Please enter the package name for this Virtual Sequence (ex: 'uvme_my_ss'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
+    else:
+        parameters["pkg_name"] = pkg_name
+        parameters["pkg_name_uppercase"] = pkg_name.upper()
+    
+    base_class = input("Please enter the base class type for this Virtual Sequence (ex: 'uvme_my_ss_base_vseq_c'):\n").lower().strip()
+    if base_class == "":
+        sys.exit("ERROR: base class type cannot be empty.  Exiting.")
+    else:
+        parameters["base_class"] = base_class
+    
+    process_file(parameters, files['vseq']['in'], files['vseq']['out'])
+
+def gen_vseq_lib():
+    global out_path
+    global default_copyright_owner
+    parameters = {}
+    print("Moore.io Template Generator: Virtual Sequence Library (v1p0)")
+    
+    if out_path == "":
+        out_path = input("Please enter the destination path for this new Virtual Sequence Library (default: '.'):\n").strip()
+        if out_path == "":
+            out_path = "."
+    
+    parameters = {
+        "year" : date.today().year
+    }
+    
+    name_of_copyright_owner = input("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
+    if name_of_copyright_owner == "":
+        name_of_copyright_owner = default_copyright_owner
+    parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    name = input("Please enter the name for this Virtual Sequence Library (ex: 'cpu'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: name cannot be empty.  Exiting.")
+    else:
+        parameters["name"] = name
+        parameters["name_uppercase"] = name.upper()
+    
+    pkg_name = input("Please enter the package name for this Virtual Sequence Library (ex: 'uvme_my_ss'):\n").lower().strip()
+    if name == "":
+        sys.exit("ERROR: package name cannot be empty.  Exiting.")
+    else:
+        parameters["pkg_name"] = pkg_name
+        parameters["pkg_name_uppercase"] = pkg_name.upper()
+    
+    base_class = input("Please enter the base class type for this Virtual Sequence Library (ex: 'uvm_sequence_library #(uvm_sequence_item)'):\n").lower().strip()
+    if base_class == "":
+        parameters["base_class"] = "uvm_sequence_library #(uvm_sequence_item)"
+    else:
+        parameters["base_class"] = base_class
+    
+    process_file(parameters, files['vseq_lib']['in'], files['vseq_lib']['out'])
 
 
 ########################################################################################################################
