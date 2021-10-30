@@ -132,12 +132,12 @@
 						v:horizAlign="1"/><tspan x="83.07" dy="1.14em" class="st6">env</tspan></text>		</g>
 		<g id="shape217-44" v:mID="217" v:groupContext="shape" transform="translate(55.2756,-204.283)">
 			<title>Sheet.217</title>
-			<desc>&#60;uvme_${name}_cfg_c&#62; env_cfg</desc>
+			<desc>&#60;uvmt_${name}_test_cfg_c&#62; test_cfg</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
 			<v:textRect cx="63.7795" cy="370.537" width="127.56" height="35.9176"/>
 			<rect x="0" y="352.578" width="127.559" height="35.9176" class="st4"/>
-			<text x="4" y="363.78" class="st5" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvme_${name}_cfg_c&#62;<v:newlineChar/><v:paragraph
-						v:horizAlign="1"/><tspan x="47.68" dy="1.14em" class="st6">env_cfg</tspan></text>		</g>
+			<text x="4" y="363.78" class="st5" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvmt_${name}_test_cfg_c&#62;<v:newlineChar/><v:paragraph
+						v:horizAlign="1"/><tspan x="47.27" dy="1.14em" class="st6">test_cfg</tspan></text>		</g>
 		<g id="shape218-48" v:mID="218" v:groupContext="shape" transform="translate(55.2756,-163.425)">
 			<title>Sheet.218</title>
 			<desc>&#60;uvme_${name}_cntxt_c&#62; env_cntxt</desc>
@@ -157,12 +157,12 @@
 						dy="1.14em" class="st6">vsequencer</tspan></text>		</g>
 		<g id="shape220-57" v:mID="220" v:groupContext="shape" transform="translate(55.2756,-122.789)">
 			<title>Sheet.220</title>
-			<desc>&#60;uvmt_${name}_test_cfg_c&#62; test_cfg</desc>
+			<desc>&#60;uvme_${name}_cfg_c&#62; env_cfg</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
 			<v:textRect cx="63.7795" cy="370.537" width="127.56" height="35.9176"/>
 			<rect x="0" y="352.578" width="127.559" height="35.9176" class="st4"/>
-			<text x="4" y="363.78" class="st5" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvmt_${name}_test_cfg_c&#62;<v:newlineChar/><v:paragraph
-						v:horizAlign="1"/><tspan x="47.27" dy="1.14em" class="st6">test_cfg</tspan></text>		</g>
+			<text x="4" y="363.78" class="st5" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvme_${name}_cfg_c&#62;<v:newlineChar/><v:paragraph
+						v:horizAlign="1"/><tspan x="47.68" dy="1.14em" class="st6">env_cfg</tspan></text>		</g>
 		<g id="shape221-61" v:mID="221" v:groupContext="shape" transform="translate(192.272,-211.249)">
 			<title>Sheet.221</title>
 			<desc>&#60;virtual uvmt_${name}_probe_if&#62; probe_vif</desc>
@@ -209,9 +209,9 @@
 			<title>Sheet.265</title>
 			<path d="M5.8 388.5 L6.16 388.5 L17.29 388.5" class="st17"/>
 		</g>
-		<g id="shape268-107" v:mID="268" v:groupContext="shape" transform="translate(346.355,-168.194) rotate(24.8918)">
+		<g id="shape268-107" v:mID="268" v:groupContext="shape" transform="translate(10.4672,-118.375) rotate(-26.3388)">
 			<title>Sheet.268</title>
-			<path d="M0 388.5 L11.1 388.5" class="st19"/>
+			<path d="M0 388.5 L11.24 388.5" class="st19"/>
 		</g>
 		<g id="shape269-110" v:mID="269" v:groupContext="shape" transform="translate(182.835,-181.417)">
 			<title>Sheet.269</title>
