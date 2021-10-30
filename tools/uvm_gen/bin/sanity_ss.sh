@@ -20,8 +20,8 @@ cat ./tests/tb_ss.spec  | ./src/new_tb_ss.py  ../../dv/
 cd ../../sim
 ./setup_project.py
 source ./setup_terminal.sh
-../tools/.imports/dvm/src/dvm.py cpel uvmt_ss
-../tools/.imports/dvm/src/dvm.py sim  uvmt_ss -t base -s 1
+../tools/.imports/mio/mio.py cpel uvmt_ss
+../tools/.imports/mio/mio.py sim  uvmt_ss -t base -s 1
 
 # 3. Gather sim results
-../tools/.imports/dvm/src/dvm.py results uvmt_ss tb_ss
+../tools/.imports/mio/mio.py results uvmt_ss tb_ss
