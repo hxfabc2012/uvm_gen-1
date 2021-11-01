@@ -21,8 +21,8 @@ cat ./tests/tb_st.spec  | ./src/new_tb_st.py                   ../../dv/
 cd ../../sim
 ./setup_project.py
 source ./setup_terminal.sh
-../tools/.imports/mio/mio.py cpel uvmt_abc_st
-../tools/.imports/mio/mio.py sim  uvmt_abc_st -t base -s 1
+../tools/.imports/mio/src/mio.py cpel uvmt_abc_st
+../tools/.imports/mio/src/mio.py sim  uvmt_abc_st -t base -s 1
 
 # 3. Gather sim results
-../tools/.imports/mio/mio.py results uvmt_abc_st tb_st
+../tools/.imports/mio/src/mio.py results uvmt_abc_st tb_st

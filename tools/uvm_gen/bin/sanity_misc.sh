@@ -29,8 +29,8 @@ cat ./tests/lib.spec | ./src/new_lib.py ../../dv/
 cd ../../sim
 ./setup_project.py
 source ./setup_terminal.sh
-../tools/.imports/mio/mio.py cpel uvmt_misc_st
-../tools/.imports/mio/mio.py sim uvmt_misc_st -t smoke -s 1
+../tools/.imports/mio/src/mio.py cpel uvmt_misc_st
+../tools/.imports/mio/src/mio.py sim uvmt_misc_st -t smoke -s 1
 
 # 3. Gather sim results
-../tools/.imports/mio/mio.py results uvmt_misc_st misc
+../tools/.imports/mio/src/mio.py results uvmt_misc_st misc
