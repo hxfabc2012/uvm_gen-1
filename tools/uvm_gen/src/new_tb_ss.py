@@ -66,6 +66,7 @@ files = {
     "src/pkg.sv"                         : "uvmt_${name}/src/uvmt_${name}_pkg.sv",
     "src/tdefs.sv"                       : "uvmt_${name}/src/uvmt_${name}_tdefs.sv",
     "../.gitignore"                      : "uvmt_${name}/.gitignore",
+    "ip.yml"                             : "uvmt_${name}/ip.yml",
     "../LICENSE_solderpad_v2p1.md"       : "uvmt_${name}/LICENSE.md",
     "README.md"                          : "uvmt_${name}/README.md"
 }

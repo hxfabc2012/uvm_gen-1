@@ -1,12 +1,12 @@
 ip:
-  name: "uvma_${name}"
-  version: "1.0.0"
-  full-name: "${name_of_copyright_owner} ${name_normal_case} UVM Agent"
+  name: "uvmt_misc_st"
+  version: "1.0.0 Beta 0"
+  full-name: "Moore.io UVM Generator Misc. Templates Self-Test Benh"
   type: "DV"
-  sub-type: "UVM Agent"
-  sub-sub-type: "Simplex; Non-Layered"
+  sub-type: "UVM Test Bench"
+  sub-sub-type: "Self-Testing"
   description: >
-    TODO Describe ${name_normal_case}
+    
   home-page: ""
   repo-uri: ""
   bugs: ""
@@ -17,7 +17,7 @@ ip:
   simulators-supported:
     - { name: "vivado", version: "2021.1" }
   tags: []
-  copyright-holders: ["${name_of_copyright_owner}"]
+  copyright-holders: ["Datum Technology Corporation"]
   licenses: ["SHL-2.1"]
 
 structure:
@@ -30,15 +30,18 @@ dependencies:
   - { type: "DV", name: "uvm"      , repo-uri: "https://github.com/Datum-Technology-Corporation/uvm.git"      , repo-branch: "main", repo-path: "dv/uvm"       }
   - { type: "DV", name: "uvml"     , repo-uri: "https://github.com/Datum-Technology-Corporation/uvml.git"     , repo-branch: "main", repo-path: "dv/uvml"      }
   - { type: "DV", name: "uvml_logs", repo-uri: "https://github.com/Datum-Technology-Corporation/uvml_logs.git", repo-branch: "main", repo-path: "dv/uvml_logs" }
+  - { type: "DV", name: "uvml_sb"  , repo-uri: "https://github.com/Datum-Technology-Corporation/uvml_sb.git"  , repo-branch: "main", repo-path: "dv/uvml_sb"   }
 
 hdl-src:
-  directories: [".", "comps", "obj", "seq"]
-  tests-name-template: ""
+  top-constructs: ["uvmt_misc_st_tb", "uvml_logs_summary"]
+  directories: [".", "tb", "tests"]
+  test-paths: ["tests"]
+  test-name-template: "uvmt_misc_st_{{ name }}_test_c"
   flists:
-    metrics : [ "src/uvma_${name}_pkg.flist"      ]
-    riviera : [ "src/uvma_${name}_pkg.flist"      ]
-    questa  : [ "src/uvma_${name}_pkg.flist"      ]
-    vcs     : [ "src/uvma_${name}_pkg.flist"      ]
-    vivado  : [ "src/uvma_${name}_pkg.flist.xsim" ]
-    xcelium : [ "src/uvma_${name}_pkg.flist"      ]
+    metrics : [ "src/uvmt_misc_st_pkg.flist"      ]
+    riviera : [ "src/uvmt_misc_st_pkg.flist"      ]
+    questa  : [ "src/uvmt_misc_st_pkg.flist"      ]
+    vcs     : [ "src/uvmt_misc_st_pkg.flist"      ]
+    vivado  : [ "src/uvmt_misc_st_pkg.flist.xsim" ]
+    xcelium : [ "src/uvmt_misc_st_pkg.flist"      ]
 

@@ -62,7 +62,8 @@ files = {
     "src/pkg.flist.xsim"                 : "uvmt_${name}_st/src/uvmt_${name}_st_pkg.flist.xsim",
     "src/pkg.sv"                         : "uvmt_${name}_st/src/uvmt_${name}_st_pkg.sv",
     "src/tdefs.sv"                       : "uvmt_${name}_st/src/uvmt_${name}_st_tdefs.sv",
-    "../.gitignore"                      : "uvmt_${name}_st/.gitignore",
+    ".gitignore"                         : "uvmt_${name}_st/.gitignore",
+    "ip.yml"                             : "uvmt_${name}_st/ip.yml",
     "../LICENSE_solderpad_v2p1.md"       : "uvmt_${name}_st/LICENSE.md",
     "README.md"                          : "uvmt_${name}_st/README.md"
 }
