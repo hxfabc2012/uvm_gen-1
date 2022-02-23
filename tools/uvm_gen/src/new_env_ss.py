@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 ########################################################################################################################
-# Copyright 2021 Datum Technology Corporation
+# Copyright 2022 Datum Technology Corporation
 ########################################################################################################################
 # SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 ########################################################################################################################
@@ -80,7 +80,7 @@ files = {
     "src/pkg.flist.xsim"                       : "uvme_${name}/src/uvme_${name}_pkg.flist.xsim",
     "src/pkg.sv"                               : "uvme_${name}/src/uvme_${name}_pkg.sv",
     "src/tdefs.sv"                             : "uvme_${name}/src/uvme_${name}_tdefs.sv",
-    ".gitignore"                               : "uvme_${name}/.gitignore",
+    "gitignore"                                : "uvme_${name}/.gitignore",
     "ip.yml"                                   : "uvme_${name}/ip.yml",
     "../LICENSE_solderpad_v2p1.md"             : "uvme_${name}/LICENSE.md",
     "README.md"                                : "uvme_${name}/README.md"
