@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sv_template>
-                                                                                                                  
+                                                                                                                    
   
   
   
@@ -382,8 +382,10 @@
   
   
   
+  
   <template category="datum_uvm_set" id="datum_uvm_lib" name="Library">
-                                                                                                                                                                        
+                                                                                                                                                                            
+    
     
     
     
@@ -425,7 +427,8 @@
     
     
     <description/>
-                                                                                                                                                                        
+                                                                                                                                                                            
+    
     
     
     
@@ -467,7 +470,7 @@
     
     
     <parameters>
-                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                  
       
       
       
@@ -540,8 +543,10 @@
       
       
       
+      
       <parameter default="" name="name_normal_case" type="id"/>
-                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                  
+      
       
       
       
@@ -583,7 +588,8 @@
       
       
       <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
-                                                            
+                                                                  
+      
       
       
       
@@ -593,7 +599,7 @@
       
       
       <parameter default="" name="name_uppercase" type="id"/>
-                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                
     
     
     
@@ -625,6 +631,7 @@
     
     
     
+      
       
       
       
@@ -635,7 +642,8 @@
       
       
       <parameter default="2021" name="year" type="int"/>
-                                                          
+                                                                
+    
     
     
     
@@ -645,7 +653,8 @@
     
     
     </parameters>
-                                                                                                                                                                        
+                                                                                                                                                                            
+    
     
     
     
@@ -687,7 +696,7 @@
     
     
     <files>
-                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                  
       
       
       
@@ -732,8 +741,9 @@
       
       
       
+      
       <file executable="false" name="uvml_${name}/bin/package.py" template="templates/lib/bin/package.py"/>
-                                                            
+                                                                  
       
       
       
@@ -751,8 +761,9 @@
       
       
       
+      
       <file executable="false" name="uvml_${name}/examples/component.sv" template="templates/lib/examples/component.sv"/>
-                                                            
+                                                                  
       
       
       
@@ -790,9 +801,12 @@
       
       
       
+      
       <file executable="false" name="uvml_${name}/examples/object.sv" template="templates/lib/examples/object.sv"/>
+            
       <file executable="false" name="uvml_${name}/src/uvml_${name}_constants.sv" template="templates/lib/src/constants.sv"/>
-                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                  
+      
       
       
       
@@ -834,7 +848,8 @@
       
       
       <file executable="false" name="uvml_${name}/src/uvml_${name}_macros.sv" template="templates/lib/src/macros.sv"/>
-                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                  
+      
       
       
       
@@ -876,7 +891,8 @@
       
       
       <file executable="false" name="uvml_${name}/src/uvml_${name}_pkg.flist" template="templates/lib/src/pkg.flist"/>
-                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                  
+      
       
       
       
@@ -918,7 +934,8 @@
       
       
       <file executable="false" name="uvml_${name}/src/uvml_${name}_pkg.flist.xsim" template="templates/lib/src/pkg.flist.xsim"/>
-                                                                                    
+                                                                                          
+      
       
       
       
@@ -932,7 +949,8 @@
       
       
       <file executable="false" name="uvml_${name}/src/uvml_${name}_pkg.sv" template="templates/lib/src/pkg.sv"/>
-                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                  
+      
       
       
       
@@ -974,7 +992,7 @@
       
       
       <file executable="false" name="uvml_${name}/src/uvml_${name}_tdefs.sv" template="templates/lib/src/tdefs.sv"/>
-                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                
     
     
     
@@ -1015,8 +1033,10 @@
       
       
       
-      <file executable="false" name="uvml_${name}/.gitignore" template="templates/lib/.gitignore"/>
-                                                            
+      
+      <file executable="false" name="uvml_${name}/.gitignore" template="templates/lib/gitignore"/>
+                                                                  
+      
       
       
       
@@ -1026,10 +1046,11 @@
       
       
       <file executable="false" name="uvml_${name}/ip.yml" template="templates/lib/ip.yml"/>
-                  
+                        
+      
       
       <file executable="false" name="uvml_${name}/LICENSE.md" template="templates/LICENSE_solderpad_v2p1.md"/>
-                                                            
+                                                                  
       
       
       
@@ -1043,8 +1064,10 @@
       
       
       
+      
       <file executable="false" name="uvml_${name}/README.md" template="templates/lib/README.md"/>
-                                                          
+                                                                
+    
     
     
     
@@ -1054,7 +1077,8 @@
     
     
     </files>
-                                                                                                                                                                      
+                                                                                                                                                                          
+  
   
   
   
@@ -1096,7 +1120,7 @@
   
   
   </template>
-                                                                                    
+                                                                                      
   
   
   
@@ -1504,8 +1528,10 @@
   
   
   
+  
   <category category="category.id" id="datum_uvm_set" name="Datum UVM Set">
-                                                                                                                                                                                            
+                                                                                                                                                                                                
+    
     
     
     
@@ -1552,7 +1578,8 @@
     
     
     <description/>
-                                                                                                                                                                                          
+                                                                                                                                                                                              
+  
   
   
   
@@ -1599,7 +1626,7 @@
   
   
   </category>
-                                                                                              
+                                                                                                
   
   
   
@@ -1769,6 +1796,7 @@
   
   
                                                                                                             
+
 
 
 
