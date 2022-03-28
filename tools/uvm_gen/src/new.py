@@ -55,7 +55,7 @@ from docopt import docopt
 ########################################################################################################################
 dbg = False
 args = {}
-relative_path_to_template = os.getcwd() + "/templates/"
+relative_path_to_template = os.getcwd() + "/templates/singleton"
 out_path = ""
 default_copyright_owner = ""
 name_of_copyright_owner = ""

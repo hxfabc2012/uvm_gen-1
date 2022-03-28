@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sv_template>
-                                                                                                                      
+                                                                                                                        
   
   
   
@@ -424,8 +424,10 @@
   
   
   
+  
   <template category="datum_uvm_set" description="" id="datum_uvm_tb_st" name="Test Bench - Self-Testing">
-                                                                                                                                                                                                    
+                                                                                                                                                                                                        
+    
     
     
     
@@ -474,7 +476,8 @@
     
     
     <description/>
-                                                                                                                                                                                                    
+                                                                                                                                                                                                        
+    
     
     
     
@@ -523,7 +526,7 @@
     
     
     <parameters>
-                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                            
       
       
       
@@ -561,6 +564,7 @@
       
       
                                                                                                                                                                                                                               
+      
       
       
       
@@ -609,7 +613,8 @@
       
       
       <parameter default="" name="name_normal_case" type="id"/>
-                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                            
+      
       
       
       
@@ -658,7 +663,8 @@
       
       
       <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
-                                                                        
+                                                                              
+      
       
       
       
@@ -670,7 +676,7 @@
       
       
       <parameter default="" name="name_uppercase" type="id"/>
-                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                          
     
     
     
@@ -693,6 +699,7 @@
     
     
     
+      
       
       
       
@@ -719,7 +726,8 @@
       
       
       <parameter default="" name="name_1" type="id"/>
-                                                                                                                                                            
+                                                                                                                                                                  
+      
       
       
       
@@ -745,7 +753,7 @@
       
       
       <parameter default="" name="name_2" type="id"/>
-                                                                                                                                                          
+                                                                                                                                                                
     
       
       
@@ -774,8 +782,10 @@
       
       
       
+      
       <parameter default="2021" name="year" type="int"/>
-                                                                      
+                                                                            
+    
     
     
     
@@ -787,7 +797,8 @@
     
     
     </parameters>
-                                                                                                                                                                                                    
+                                                                                                                                                                                                        
+    
     
     
     
@@ -836,7 +847,7 @@
     
     
     <files>
-                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                            
       
       
       
@@ -888,8 +899,9 @@
       
       
       
+      
       <file executable="false" name="uvmt_${name}_st/bin/package.py" template="templates/tb_st/bin/package.py"/>
-                                                                        
+                                                                              
       
       
       
@@ -908,6 +920,7 @@
       
       
                                                       
+      
       
       
       
@@ -919,7 +932,8 @@
       
       
       <file executable="false" name="uvmt_${name}_st/docs/tb_block_diagram.svg" template="templates/tb_st/docs/tb_block_diagram.svg"/>
-                                                                        
+                                                                              
+      
       
       
       
@@ -931,7 +945,7 @@
       
       
       <file executable="false" name="uvmt_${name}_st/examples/test.sv" template="templates/tb_st/examples/test.sv"/>
-                                                                        
+                                                                              
       
       
       
@@ -950,6 +964,7 @@
       
       
                                                       
+      
       
       
       
@@ -961,7 +976,8 @@
       
       
       <file executable="false" name="uvmt_${name}_st/src/tb/uvmt_${name}_st_clknrst_gen_if.sv" template="templates/tb_st/src/tb/clknrst_gen_if.sv"/>
-                                                                        
+                                                                              
+      
       
       
       
@@ -973,7 +989,8 @@
       
       
       <file executable="false" name="uvmt_${name}_st/src/tb/uvmt_${name}_st_dut_chkr.sv" template="templates/tb_st/src/tb/dut_chkr.sv"/>
-                                                                        
+                                                                              
+      
       
       
       
@@ -985,7 +1002,8 @@
       
       
       <file executable="false" name="uvmt_${name}_st/src/tb/uvmt_${name}_st_dut_wrap.sv" template="templates/tb_st/src/tb/dut_wrap.sv"/>
-                                                                        
+                                                                              
+      
       
       
       
@@ -997,7 +1015,7 @@
       
       
       <file executable="false" name="uvmt_${name}_st/src/tb/uvmt_${name}_st_tb.sv" template="templates/tb_st/src/tb/tb.sv"/>
-                                                                        
+                                                                              
       
       
       
@@ -1017,8 +1035,10 @@
       
       
       
+      
       <file executable="false" name="uvmt_${name}_st/src/tests/uvmt_${name}_st_base_test_workarounds.sv" template="templates/tb_st/src/tests/base_test_workarounds.sv"/>
-                                                                        
+                                                                              
+      
       
       
       
@@ -1030,7 +1050,7 @@
       
       
       <file executable="false" name="uvmt_${name}_st/src/tests/uvmt_${name}_st_base_test.sv" template="templates/tb_st/src/tests/base_test.sv"/>
-                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                            
       
       
       
@@ -1115,8 +1135,9 @@
       
       
       
+      
       <file executable="false" name="uvmt_${name}_st/src/tests/uvmt_${name}_st_test_cfg.sv" template="templates/tb_st/src/tests/test_cfg.sv"/>
-                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                            
       
       
       
@@ -1282,8 +1303,9 @@
       
       
       
+      
       <file executable="false" name="uvmt_${name}_st/src/uvmt_${name}_st_constants.sv" template="templates/tb_st/src/constants.sv"/>
-                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                            
       
       
       
@@ -1405,8 +1427,10 @@
       
       
       
-      <file executable="false" name="uvmt_${name}_st/src/uvmt_${name}_st_macros.sv" template="templates/tb_st/src/macros.sv"/>
-                                                                                                                                                                                                                                                                                                      
+      
+      <file executable="false" name="uvmt_${name}_st/src/uvmt_${name}_st_macros.svh" template="templates/tb_st/src/macros.svh"/>
+                                                                                                                                                                                                                                                                                                            
+      
       
       
       
@@ -1455,7 +1479,8 @@
       
       
       <file executable="false" name="uvmt_${name}_st/src/uvmt_${name}_st_pkg.flist.xsim" template="templates/tb_st/src/pkg.flist.xsim"/>
-                                                                        
+                                                                              
+      
       
       
       
@@ -1467,7 +1492,8 @@
       
       
       <file executable="false" name="uvmt_${name}_st/src/uvmt_${name}_st_pkg.flist" template="templates/tb_st/src/pkg.flist"/>
-                                                                        
+                                                                              
+      
       
       
       
@@ -1479,7 +1505,7 @@
       
       
       <file executable="false" name="uvmt_${name}_st/src/uvmt_${name}_st_pkg.sv" template="templates/tb_st/src/pkg.sv"/>
-                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                            
       
       
       
@@ -1564,8 +1590,9 @@
       
       
       
+      
       <file executable="false" name="uvmt_${name}_st/src/uvmt_${name}_st_tdefs.sv" template="templates/tb_st/src/tdefs.sv"/>
-                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                          
     
     
     
@@ -1602,6 +1629,7 @@
     
     
     
+      
       
       
       
@@ -1614,7 +1642,8 @@
       
       
       <file executable="false" name="uvmt_${name}_st/.gitignore" template="templates/tb_st/gitignore"/>
-                                                                        
+                                                                              
+      
       
       
       
@@ -1626,17 +1655,19 @@
       
       
       <file executable="false" name="uvmt_${name}_st/ip.yaml" template="templates/tb_st/ip.yaml"/>
-                              
+                                    
+      
       
       
       
       <file executable="false" name="uvmt_${name}_st/LICENSE.md" template="templates/LICENSE_solderpad_v2p1.md"/>
-                                                                        
+                                                                              
       
       
       
       
                               
+      
       
       
       
@@ -1648,7 +1679,8 @@
       
       
       <file executable="false" name="uvmt_${name}_st/README.md" template="templates/tb_st/README.md"/>
-                                                                      
+                                                                            
+    
     
     
     
@@ -1660,7 +1692,8 @@
     
     
     </files>
-                                                                                                                                                                                                  
+                                                                                                                                                                                                      
+  
   
   
   
@@ -1709,7 +1742,8 @@
   
   
   </template>
-                        
+                          
+  
   
   
   
@@ -1721,7 +1755,8 @@
   
   
   <template category="datum_uvm_set" id="datum_uvm_tb_ss" name="Test Bench - Sub-System">
-                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                
+    
     
     
     
@@ -1780,7 +1815,8 @@
     
     
     <description/>
-                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                
+    
     
     
     
@@ -1839,7 +1875,7 @@
     
     
     <parameters>
-                                                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                        
       
       
       
@@ -1940,8 +1976,10 @@
       
       
       
+      
       <parameter default="" name="name_normal_case" type="id"/>
-                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                
+      
       
       
       
@@ -1996,7 +2034,8 @@
       
       
       <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
-                                                                        
+                                                                              
+      
       
       
       
@@ -2008,7 +2047,8 @@
       
       
       <parameter default="" name="name_uppercase" type="id"/>
-                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                      
+      
       
       
       
@@ -2067,7 +2107,8 @@
       
       
       <parameter default="sys_clk" name="clk_agent_name" type="id"/>
-                                                            
+                                                                  
+      
       
       
       
@@ -2077,7 +2118,8 @@
       
       
       <parameter default="clk" name="clk_agent_type" type="id"/>
-                                                                  
+                                                                        
+      
       
       
       
@@ -2088,7 +2130,8 @@
       
       
       <parameter default="CLK" name="clk_agent_type_uppercase" type="id"/>
-                                                                  
+                                                                        
+      
       
       
       
@@ -2099,7 +2142,8 @@
       
       
       <parameter default="apb_master" name="ral_agent_name" type="id"/>
-                                                            
+                                                                  
+      
       
       
       
@@ -2109,7 +2153,8 @@
       
       
       <parameter default="apb" name="ral_agent_type" type="id"/>
-                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                  
+      
       
       
       
@@ -2167,7 +2212,8 @@
       
       
       <parameter default="APB" name="ral_agent_type_uppercase" type="id"/>
-                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                  
+      
       
       
       
@@ -2225,7 +2271,8 @@
       
       
       <parameter default="sys_reset" name="reset_agent_name" type="id"/>
-                                                            
+                                                                  
+      
       
       
       
@@ -2235,7 +2282,8 @@
       
       
       <parameter default="reset" name="reset_agent_type" type="id"/>
-                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                  
+      
       
       
       
@@ -2293,7 +2341,7 @@
       
       
       <parameter default="RESET" name="reset_agent_type_uppercase" type="id"/>
-                                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                
     
     
     
@@ -2339,6 +2387,7 @@
     
     
     
+      
       
       
       
@@ -2351,7 +2400,8 @@
       
       
       <parameter default="2021" name="year" type="int"/>
-                                                                      
+                                                                            
+    
     
     
     
@@ -2363,7 +2413,8 @@
     
     
     </parameters>
-                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                
+    
     
     
     
@@ -2422,7 +2473,8 @@
     
     
     <parameter default="" name="copyright_header" type="id"/>
-                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                
+    
     
     
     
@@ -2477,7 +2529,7 @@
     
     
     <files>
-                                                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                        
       
       
       
@@ -2550,8 +2602,9 @@
       
       
       
+      
       <file executable="false" name="uvmt_${name}/bin/package.py" template="templates/tb_ss/bin/package.py"/>
-                                                                        
+                                                                              
       
       
       
@@ -2572,6 +2625,7 @@
       
       
                                                             
+      
       
       
       
@@ -2583,7 +2637,8 @@
       
       
       <file executable="false" name="uvmt_${name}/docs/tb_block_diagram.svg" template="templates/tb_ss/docs/tb_block_diagram.svg"/>
-                                                                        
+                                                                              
+      
       
       
       
@@ -2595,7 +2650,7 @@
       
       
       <file executable="false" name="uvmt_${name}/examples/test.sv" template="templates/tb_ss/examples/test.sv"/>
-                                                                        
+                                                                              
       
       
       
@@ -2616,6 +2671,7 @@
       
       
                                                             
+      
       
       
       
@@ -2627,7 +2683,8 @@
       
       
       <file executable="false" name="uvmt_${name}/src/tb/uvmt_${name}_probe_if.sv" template="templates/tb_ss/src/tb/probe_if.sv"/>
-                                                                        
+                                                                              
+      
       
       
       
@@ -2639,7 +2696,8 @@
       
       
       <file executable="false" name="uvmt_${name}/src/tb/uvmt_${name}_dut_chkr.sv" template="templates/tb_ss/src/tb/dut_chkr.sv"/>
-                                                                        
+                                                                              
+      
       
       
       
@@ -2651,7 +2709,8 @@
       
       
       <file executable="false" name="uvmt_${name}/src/tb/uvmt_${name}_dut_wrap.sv" template="templates/tb_ss/src/tb/dut_wrap.sv"/>
-                                                                        
+                                                                              
+      
       
       
       
@@ -2663,7 +2722,7 @@
       
       
       <file executable="false" name="uvmt_${name}/src/tb/uvmt_${name}_tb.sv" template="templates/tb_ss/src/tb/tb.sv"/>
-                                                                        
+                                                                              
       
       
       
@@ -2684,8 +2743,10 @@
       
       
       
+      
       <file executable="false" name="uvmt_${name}/src/tests/uvmt_${name}_reg_base_test.sv" template="templates/tb_ss/src/tests/reg_base_test.sv"/>
-                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                      
+      
       
       
       
@@ -2725,7 +2786,8 @@
       
       
       <file executable="false" name="uvmt_${name}/src/tests/uvmt_${name}_reg_bit_bash_test.sv" template="templates/tb_ss/src/tests/reg_bit_bash_test.sv"/>
-                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                      
+      
       
       
       
@@ -2765,7 +2827,8 @@
       
       
       <file executable="false" name="uvmt_${name}/src/tests/uvmt_${name}_reg_hw_reset_test.sv" template="templates/tb_ss/src/tests/reg_hw_reset_test.sv"/>
-                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                      
+      
       
       
       
@@ -2806,7 +2869,8 @@
       
       
       <file executable="false" name="uvmt_${name}/src/tests/uvmt_${name}_base_test.sv" template="templates/tb_ss/src/tests/base_test.sv"/>
-                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                    
+      
       
       
       
@@ -2859,7 +2923,7 @@
       
       
       <file executable="false" name="uvmt_${name}/src/tests/uvmt_${name}_base_test_workarounds.sv" template="templates/tb_ss/src/tests/base_test_workarounds.sv"/>
-                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                
       
             
       
@@ -2951,8 +3015,9 @@
       
       
       
+      
       <file executable="false" name="uvmt_${name}/src/tests/uvmt_${name}_test_cfg.sv" template="templates/tb_ss/src/tests/test_cfg.sv"/>
-                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                            
       
       
       
@@ -3124,8 +3189,9 @@
       
       
       
+      
       <file executable="false" name="uvmt_${name}/src/uvmt_${name}_constants.sv" template="templates/tb_ss/src/constants.sv"/>
-                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                              
       
       
       
@@ -3256,8 +3322,10 @@
       
       
       
-      <file executable="false" name="uvmt_${name}/src/uvmt_${name}_macros.sv" template="templates/tb_ss/src/macros.sv"/>
-                                                                                                                                                                                                                                                                                                                        
+      
+      <file executable="false" name="uvmt_${name}/src/uvmt_${name}_macros.svh" template="templates/tb_ss/src/macros.svh"/>
+                                                                                                                                                                                                                                                                                                                              
+      
       
       
       
@@ -3309,7 +3377,8 @@
       
       
       <file executable="false" name="uvmt_${name}/src/uvmt_${name}_pkg.flist.xsim" template="templates/tb_ss/src/pkg.flist.xsim"/>
-                                                                        
+                                                                              
+      
       
       
       
@@ -3321,7 +3390,8 @@
       
       
       <file executable="false" name="uvmt_${name}/src/uvmt_${name}_pkg.flist" template="templates/tb_ss/src/pkg.flist"/>
-                                                                        
+                                                                              
+      
       
       
       
@@ -3333,7 +3403,7 @@
       
       
       <file executable="false" name="uvmt_${name}/src/uvmt_${name}_pkg.sv" template="templates/tb_ss/src/pkg.sv"/>
-                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                    
                                           
       
       
@@ -3468,8 +3538,9 @@
       
       
       
+      
       <file executable="false" name="uvmt_${name}/src/uvmt_${name}_tdefs.sv" template="templates/tb_ss/src/tdefs.sv"/>
-                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                            
     
     
     
@@ -3509,6 +3580,7 @@
     
     
     
+      
       
       
       
@@ -3521,7 +3593,8 @@
       
       
       <file executable="false" name="uvmt_${name}/.gitignore" template="templates/tb_ss/gitignore"/>
-                                                                        
+                                                                              
+      
       
       
       
@@ -3533,12 +3606,13 @@
       
       
       <file executable="false" name="uvmt_${name}/ip.yml" template="templates/tb_ss/ip.yml"/>
-                              
+                                    
+      
       
       
       
       <file executable="false" name="uvmt_${name}/LICENSE.md" template="templates/LICENSE_solderpad_v2p1.md"/>
-                                                                        
+                                                                              
       
       
       
@@ -3556,8 +3630,10 @@
       
       
       
+      
       <file executable="false" name="uvmt_${name}/README.md" template="templates/tb_ss/README.md"/>
-                                                                      
+                                                                            
+    
     
     
     
@@ -3569,7 +3645,8 @@
     
     
     </files>
-                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                              
+  
   
   
   
@@ -3628,7 +3705,7 @@
   
   
   </template>
-                                                                                                              
+                                                                                                                
   
   
   
@@ -3990,8 +4067,10 @@
   
   
   
+  
   <category category="category.id" id="datum_uvm_set" name="Datum UVM Set">
-                                                                                                                                                                                                    
+                                                                                                                                                                                                        
+    
     
     
     
@@ -4040,7 +4119,8 @@
     
     
     <description/>
-                                                                                                                                                                                                  
+                                                                                                                                                                                                      
+  
   
   
   
@@ -4089,7 +4169,7 @@
   
   
   </category>
-                                                                                                  
+                                                                                                    
   
   
   
@@ -4259,6 +4339,7 @@
   
   
                                                                                                             
+
 
 
 

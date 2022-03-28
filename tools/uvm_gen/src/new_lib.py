@@ -4,13 +4,6 @@
 ########################################################################################################################
 # SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 ########################################################################################################################
-# Licensed under the Solderpad Hardware License v 2.1 (the "License"); you may not use this file except in compliance
-# with the License, or, at your option, the Apache License version 2.0.  You may obtain a copy of the License at
-#                                       https://solderpad.org/licenses/SHL-2.1/
-# Unless required by applicable law or agreed to in writing, any work distributed under the License is distributed on
-# an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations under the License.
-########################################################################################################################
 
 
 ########################################################################################################################
@@ -25,7 +18,7 @@ import sys
 # GLOBALS
 ########################################################################################################################
 dbg = False
-relative_path_to_template = os.getcwd() + "/templates/lib/"
+relative_path_to_template = os.getcwd() + "/templates/"
 out_path = ""
 default_copyright_owner = ""
 name_of_copyright_owner = ""
@@ -51,26 +44,26 @@ parameters = {
 
 files = {
     #              SRC                                 DST
-    "bin/package.py"               : "uvml_${name}/bin/package.py",
-    "examples/component.sv"        : "uvml_${name}/examples/component.sv",
-    "examples/object.sv"           : "uvml_${name}/examples/object.sv",
-    "src/constants.sv"             : "uvml_${name}/src/uvml_${name}_constants.sv",
-    "src/macros.sv"                : "uvml_${name}/src/uvml_${name}_macros.sv",
-    "src/pkg.flist"                : "uvml_${name}/src/uvml_${name}_pkg.flist",
-    "src/pkg.flist.xsim"           : "uvml_${name}/src/uvml_${name}_pkg.flist.xsim",
-    "src/pkg.sv"                   : "uvml_${name}/src/uvml_${name}_pkg.sv",
-    "src/tdefs.sv"                 : "uvml_${name}/src/uvml_${name}_tdefs.sv",
-    "gitignore"                    : "uvml_${name}/.gitignore",
-    "ip.yml"                       : "uvml_${name}/ip.yml",
-    "../LICENSE_solderpad_v2p1.md" : "uvml_${name}/LICENSE.md",
-    "README.md"                    : "uvml_${name}/README.md"
+    "lib/bin/package.py"               : "uvml_${name}/bin/package.py",
+    "lib/examples/component.sv"        : "uvml_${name}/examples/component.sv",
+    "lib/examples/object.sv"           : "uvml_${name}/examples/object.sv",
+    "lib/src/constants.sv"             : "uvml_${name}/src/uvml_${name}_constants.sv",
+    "lib/src/macros.svh"               : "uvml_${name}/src/uvml_${name}_macros.svh",
+    "lib/src/pkg.flist"                : "uvml_${name}/src/uvml_${name}_pkg.flist",
+    "lib/src/pkg.flist.xsim"           : "uvml_${name}/src/uvml_${name}_pkg.flist.xsim",
+    "lib/src/pkg.sv"                   : "uvml_${name}/src/uvml_${name}_pkg.sv",
+    "lib/src/tdefs.sv"                 : "uvml_${name}/src/uvml_${name}_tdefs.sv",
+    "lib/gitignore"                    : "uvml_${name}/.gitignore",
+    "lib/ip.yml"                       : "uvml_${name}/ip.yml",
+    "LICENSE_solderpad_v2p1.md"        : "uvml_${name}/LICENSE.md",
+    "lib/README.md"                    : "uvml_${name}/README.md"
 }
 
 directories = [
     "uvml_${name}",
     "uvml_${name}/bin",
     "uvml_${name}/examples",
-    "uvml_${name}/src",
+    "uvml_${name}/src"
 ]
 
 

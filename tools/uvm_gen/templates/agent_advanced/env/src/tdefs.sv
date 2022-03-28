@@ -1,0 +1,18 @@
+// Copyright ${year} ${name_of_copyright_owner}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// SPDX-License-Identifier: ${license_id}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+`ifndef __UVME_${name_uppercase}_ST_TDEFS_SV__
+`define __UVME_${name_uppercase}_ST_TDEFS_SV__
+
+
+// Scoreboard specialization
+typedef uvml_sb_simplex_c #(
+   .T_ACT_TRN(uvma_${name}_mon_trn_c)
+) uvme_${name}_st_sb_simplex_c;
+
+
+`endif // __UVME_${name_uppercase}_ST_TDEFS_SV__

@@ -1,0 +1,536 @@
+// Copyright ${year} ${name_of_copyright_owner}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// SPDX-License-Identifier: ${license_id}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+`ifndef __UVMA_${name_uppercase}_MON_SV__
+`define __UVMA_${name_uppercase}_MON_SV__
+
+
+/**
+ * Component sampling transactions from an Open Bus Interface (uvma_${name}_if).
+ */
+class uvma_${name}_mon_c extends uvm_monitor;
+   
+   virtual uvma_${name}_if.mon_a_mp  mp_a; ///< Handle to A modport
+   virtual uvma_${name}_if.mon_r_mp  mp_r; ///< Handle to R modport
+   
+   // Objects
+   uvma_${name}_cfg_c    cfg  ; ///< Agent configuration handle
+   uvma_${name}_cntxt_c  cntxt; ///< Agent context handle
+   
+   // TLM
+   uvm_analysis_port#(uvma_${name}_mstr_a_mon_trn_c)  mstr_a_ap; ///< TODO Describe uvma_${name}_mon_c::mstr_a_ap
+   uvm_analysis_port#(uvma_${name}_mstr_r_mon_trn_c)  mstr_r_ap; ///< TODO Describe uvma_${name}_mon_c::mstr_r_ap
+   uvm_analysis_port#(uvma_${name}_slv_a_mon_trn_c )  slv_a_ap ; ///< TODO Describe uvma_${name}_mon_c::slv_a_ap
+   uvm_analysis_port#(uvma_${name}_slv_r_mon_trn_c )  slv_r_ap ; ///< TODO Describe uvma_${name}_mon_c::slv_r_ap
+   
+   
+   `uvm_component_utils_begin(uvma_${name}_mon_c)
+      `uvm_field_object(cfg  , UVM_DEFAULT)
+      `uvm_field_object(cntxt, UVM_DEFAULT)
+   `uvm_component_utils_end
+   
+   
+   /**
+    * Default constructor.
+    */
+   extern function new(string name="uvma_${name}_mon", uvm_component parent=null);
+   
+   /**
+    * 1. Ensures cfg & cntxt handles are not null.
+    * 2. Builds ap.
+    */
+   extern virtual function void build_phase(uvm_phase phase);
+   
+   /**
+    * Oversees monitoring, depending on the reset state, by calling mon_<pre|in|post>_reset() tasks.
+    */
+   extern virtual task run_phase(uvm_phase phase);
+   
+   /**
+    * Updates the context's reset state.
+    */
+   extern virtual task observe_reset();
+   
+   /**
+    * Synchronous reset thread.
+    */
+   extern virtual task observe_reset_sync();
+   
+   /**
+    * Asynchronous reset thread.
+    */
+   extern virtual task observe_reset_async();
+   
+   /**
+    * Called by run_phase() while agent is in pre-reset state.
+    */
+   extern virtual task mon_mstr_a_pre_reset();
+   
+   /**
+    * Called by run_phase() while agent is in pre-reset state.
+    */
+   extern virtual task mon_mstr_r_pre_reset();
+   
+   /**
+    * Called by run_phase() while agent is in pre-reset state.
+    */
+   extern virtual task mon_slv_a_pre_reset();
+   
+   /**
+    * Called by run_phase() while agent is in pre-reset state.
+    */
+   extern virtual task mon_slv_r_pre_reset();
+   
+   /**
+    * Called by run_phase() while agent is in reset state.
+    */
+   extern virtual task mon_mstr_a_in_reset();
+   
+   /**
+    * Called by run_phase() while agent is in reset state.
+    */
+   extern virtual task mon_mstr_r_in_reset();
+   
+   /**
+    * Called by run_phase() while agent is in reset state.
+    */
+   extern virtual task mon_slv_a_in_reset();
+   
+   /**
+    * Called by run_phase() while agent is in reset state.
+    */
+   extern virtual task mon_slv_r_in_reset();
+   
+   /**
+    * Called by run_phase() while agent is in post-reset state.
+    */
+   extern virtual task mon_mstr_a_post_reset();
+   
+   /**
+    * Called by run_phase() while agent is in post-reset state.
+    */
+   extern virtual task mon_mstr_r_post_reset();
+   
+   /**
+    * Called by run_phase() while agent is in post-reset state.
+    */
+   extern virtual task mon_slv_a_post_reset();
+   
+   /**
+    * Called by run_phase() while agent is in post-reset state.
+    */
+   extern virtual task mon_slv_r_post_reset();
+   
+   /**
+    * Creates trn by sampling the virtual interface's (cntxt.vif) signals.
+    */
+   extern virtual task sample_mstr_a_trn(output uvma_${name}_mstr_a_mon_trn_c trn);
+   
+   /**
+    * Creates trn by sampling the virtual interface's (cntxt.vif) signals.
+    */
+   extern virtual task sample_mstr_r_trn(output uvma_${name}_mstr_r_mon_trn_c trn);
+   
+   /**
+    * Creates trn by sampling the virtual interface's (cntxt.vif) signals.
+    */
+   extern virtual task sample_slv_a_trn(output uvma_${name}_slv_a_mon_trn_c trn);
+   
+   /**
+    * Creates trn by sampling the virtual interface's (cntxt.vif) signals.
+    */
+   extern virtual task sample_slv_r_trn(output uvma_${name}_slv_r_mon_trn_c trn);
+   
+   /**
+    * Appends cfg, prints out trn and issues heartbeat.
+    */
+   extern virtual function void process_mstr_a_trn(ref uvma_${name}_mstr_a_mon_trn_c trn);
+   
+   /**
+    * Appends cfg, prints out trn and issues heartbeat.
+    */
+   extern virtual function void process_mstr_r_trn(ref uvma_${name}_mstr_r_mon_trn_c trn);
+   
+   /**
+    * Appends cfg, prints out trn and issues heartbeat.
+    */
+   extern virtual function void process_slv_a_trn(ref uvma_${name}_slv_a_mon_trn_c trn);
+   
+   /**
+    * Appends cfg, prints out trn and issues heartbeat.
+    */
+   extern virtual function void process_slv_r_trn(ref uvma_${name}_slv_r_mon_trn_c trn);
+   
+endclass : uvma_${name}_mon_c
+
+
+function uvma_${name}_mon_c::new(string name="uvma_${name}_mon", uvm_component parent=null);
+   
+   super.new(name, parent);
+   
+endfunction : new
+
+
+function void uvma_${name}_mon_c::build_phase(uvm_phase phase);
+   
+   super.build_phase(phase);
+   
+   void'(uvm_config_db#(uvma_${name}_cfg_c)::get(this, "", "cfg", cfg));
+   if (cfg == null) begin
+      `uvm_fatal("CFG", "Configuration handle is null")
+   end
+   
+   void'(uvm_config_db#(uvma_${name}_cntxt_c)::get(this, "", "cntxt", cntxt));
+   if (cntxt == null) begin
+      `uvm_fatal("CNTXT", "Context handle is null")
+   end
+   
+   mp_a = cntxt.vif.mon_a_mp;
+   mp_r = cntxt.vif.mon_r_mp;
+   mstr_a_ap = new("mstr_a_ap", this);
+   mstr_r_ap = new("mstr_r_ap", this);
+   slv_a_ap  = new("slv_a_ap" , this);
+   slv_r_ap  = new("slv_r_ap" , this);
+  
+endfunction : build_phase
+
+
+task uvma_${name}_mon_c::run_phase(uvm_phase phase);
+   
+   super.run_phase(phase);
+   
+   if (cfg.enabled) begin
+      fork
+         observe_reset();
+         
+         begin : mstr_a
+            forever begin
+               case (cntxt.reset_state)
+                  UVML_RESET_STATE_PRE_RESET : mon_mstr_a_pre_reset ();
+                  UVML_RESET_STATE_IN_RESET  : mon_mstr_a_in_reset  ();
+                  UVML_RESET_STATE_POST_RESET: mon_mstr_a_post_reset();
+               endcase
+            end
+         end
+         
+         begin : mstr_r
+            forever begin
+               case (cntxt.reset_state)
+                  UVML_RESET_STATE_PRE_RESET : mon_mstr_r_pre_reset ();
+                  UVML_RESET_STATE_IN_RESET  : mon_mstr_r_in_reset  ();
+                  UVML_RESET_STATE_POST_RESET: mon_mstr_r_post_reset();
+               endcase
+            end
+         end
+         
+         begin : slv_a
+            forever begin
+               case (cntxt.reset_state)
+                  UVML_RESET_STATE_PRE_RESET : mon_slv_a_pre_reset ();
+                  UVML_RESET_STATE_IN_RESET  : mon_slv_a_in_reset  ();
+                  UVML_RESET_STATE_POST_RESET: mon_slv_a_post_reset();
+               endcase
+            end
+         end
+         
+         begin : slv_r
+            forever begin
+               case (cntxt.reset_state)
+                  UVML_RESET_STATE_PRE_RESET : mon_slv_r_pre_reset ();
+                  UVML_RESET_STATE_IN_RESET  : mon_slv_r_in_reset  ();
+                  UVML_RESET_STATE_POST_RESET: mon_slv_r_post_reset();
+               endcase
+            end
+         end
+      join_none
+   end
+   
+endtask : run_phase
+
+
+task uvma_${name}_mon_c::observe_reset();
+   
+   case (cfg.reset_type)
+      UVML_RESET_TYPE_SYNCHRONOUS : observe_reset_sync ();
+      UVML_RESET_TYPE_ASYNCHRONOUS: observe_reset_async();
+      
+      default: begin
+         `uvm_fatal("${name_uppercase}_MON", $sformatf("Illegal cfg.reset_type: %s", cfg.reset_type.name()))
+      end
+   endcase
+   
+endtask : observe_reset
+
+
+task uvma_${name}_mon_c::observe_reset_sync();
+   
+   forever begin
+      while (cntxt.vif.reset_n !== 1'b0) begin
+         wait (cntxt.vif.clk === 0);
+         wait (cntxt.vif.clk === 1);
+      end
+      cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
+      `uvm_info("${name_uppercase}_MON", "Entered IN_RESET state", UVM_MEDIUM)
+      
+      while (cntxt.vif.reset_n !== 1'b1) begin
+         wait (cntxt.vif.clk === 0);
+         wait (cntxt.vif.clk === 1);
+      end
+      cntxt.reset_state = UVML_RESET_STATE_POST_RESET;
+      `uvm_info("${name_uppercase}_MON", "Entered POST_RESET state", UVM_MEDIUM)
+   end
+   
+endtask : observe_reset_sync
+
+
+task uvma_${name}_mon_c::observe_reset_async();
+   
+   forever begin
+      wait (cntxt.vif.reset_n === 0);
+      cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
+      `uvm_info("${name_uppercase}_MON", "Entered IN_RESET state", UVM_MEDIUM)
+      
+      wait (cntxt.vif.reset_n === 1);
+      cntxt.reset_state = UVML_RESET_STATE_POST_RESET;
+      `uvm_info("${name_uppercase}_MON", "Entered POST_RESET state", UVM_MEDIUM)
+   end
+   
+endtask : observe_reset_async
+
+
+task uvma_${name}_mon_c::mon_mstr_a_pre_reset();
+   
+   @(mp_a.mon_a_cb);
+   
+endtask : mon_mstr_a_pre_reset
+
+
+task uvma_${name}_mon_c::mon_mstr_r_pre_reset();
+   
+   @(mp_r.mon_r_cb);
+   
+endtask : mon_mstr_r_pre_reset
+
+
+task uvma_${name}_mon_c::mon_slv_a_pre_reset();
+   
+   @(mp_a.mon_a_cb);
+   
+endtask : mon_slv_a_pre_reset
+
+
+task uvma_${name}_mon_c::mon_slv_r_pre_reset();
+   
+   @(mp_r.mon_r_cb);
+   
+endtask : mon_slv_r_pre_reset
+
+
+task uvma_${name}_mon_c::mon_mstr_a_in_reset();
+   
+   @(mp_a.mon_a_cb);
+   
+endtask : mon_mstr_a_in_reset
+
+
+task uvma_${name}_mon_c::mon_mstr_r_in_reset();
+   
+   @(mp_r.mon_r_cb);
+   
+endtask : mon_mstr_r_in_reset
+
+
+task uvma_${name}_mon_c::mon_slv_a_in_reset();
+   
+   @(mp_a.mon_a_cb);
+   
+endtask : mon_slv_a_in_reset
+
+
+task uvma_${name}_mon_c::mon_slv_r_in_reset();
+   
+   @(mp_r.mon_r_cb);
+   
+endtask : mon_slv_r_in_reset
+
+
+task uvma_${name}_mon_c::mon_mstr_a_post_reset();
+   
+   uvma_${name}_mstr_a_mon_trn_c  trn;
+   
+   sample_mstr_a_trn (trn);
+   process_mstr_a_trn(trn);
+   mstr_a_ap.write   (trn);
+   
+endtask : mon_mstr_a_post_reset
+
+
+task uvma_${name}_mon_c::mon_mstr_r_post_reset();
+   
+   uvma_${name}_mstr_r_mon_trn_c  trn;
+   
+   sample_mstr_r_trn (trn);
+   process_mstr_r_trn(trn);
+   mstr_r_ap.write   (trn);
+   
+endtask : mon_mstr_r_post_reset
+
+
+task uvma_${name}_mon_c::mon_slv_a_post_reset();
+   
+   uvma_${name}_slv_a_mon_trn_c  trn;
+   
+   sample_slv_a_trn (trn);
+   process_slv_a_trn(trn);
+   slv_a_ap.write   (trn);
+   
+endtask : mon_slv_a_post_reset
+
+
+task uvma_${name}_mon_c::mon_slv_r_post_reset();
+   
+   uvma_${name}_slv_r_mon_trn_c  trn;
+   
+   sample_slv_r_trn (trn);
+   process_slv_r_trn(trn);
+   slv_r_ap.write   (trn);
+   
+endtask : mon_slv_r_post_reset
+
+
+task uvma_${name}_mon_c::sample_mstr_a_trn(output uvma_${name}_mstr_a_mon_trn_c trn);
+   
+   @(mp_a.mon_a_cb);
+   `uvm_info("${name_uppercase}_MON", "Sampling MSTR Channel A transaction", UVM_DEBUG)
+   trn = uvma_${name}_mstr_a_mon_trn_c::type_id::create("trn");
+   trn.req       = mp_a.mon_a_cb.req    ;
+   trn.we        = mp_a.mon_a_cb.we     ;
+   trn.atop      = mp_a.mon_a_cb.atop   ;
+   trn.memtype   = mp_a.mon_a_cb.memtype;
+   trn.prot      = mp_a.mon_a_cb.prot   ;
+   trn.reqpar    = mp_a.mon_a_cb.reqpar ;
+   for (int unsigned ii=0; ii<cfg.addr_width; ii++) begin
+      trn.addr[ii] = mp_a.mon_a_cb.addr[ii];
+   end
+   for (int unsigned ii=0; ii<(cfg.data_width/8); ii++) begin
+      trn.be[ii] = mp_a.mon_a_cb.be[ii];
+   end
+   for (int unsigned ii=0; ii<cfg.data_width; ii++) begin
+      trn.wdata[ii] = mp_a.mon_a_cb.wdata[ii];
+   end
+   for (int unsigned ii=0; ii<cfg.auser_width; ii++) begin
+      trn.auser[ii] = mp_a.mon_a_cb.auser[ii];
+   end
+   for (int unsigned ii=0; ii<cfg.wuser_width; ii++) begin
+      trn.wuser[ii] = mp_a.mon_a_cb.wuser[ii];
+   end
+   for (int unsigned ii=0; ii<cfg.id_width; ii++) begin
+      trn.aid[ii] = mp_a.mon_a_cb.aid[ii];
+   end
+   for (int unsigned ii=0; ii<cfg.achk_width; ii++) begin
+      trn.achk[ii] = mp_a.mon_a_cb.achk[ii];
+   end
+   
+   trn.gnt = mp_a.mon_a_cb.gnt;
+   
+endtask : sample_mstr_a_trn
+
+
+task uvma_${name}_mon_c::sample_mstr_r_trn(output uvma_${name}_mstr_r_mon_trn_c trn);
+   
+   @(mp_r.mon_r_cb);
+   `uvm_info("${name_uppercase}_MON", "Sampling MSTR Channel R transaction", UVM_HIGH)
+   trn = uvma_${name}_mstr_r_mon_trn_c::type_id::create("trn");
+   trn.rready    = mp_r.mon_r_cb.rready   ;
+   trn.rreadypar = mp_r.mon_r_cb.rreadypar;
+   
+   trn.rvalid = mp_r.mon_r_cb.rvalid;
+   
+endtask : sample_mstr_r_trn
+
+
+task uvma_${name}_mon_c::sample_slv_a_trn(output uvma_${name}_slv_a_mon_trn_c trn);
+   
+   @(mp_a.mon_a_cb);
+   `uvm_info("${name_uppercase}_MON", "Sampling SLV Channel A transaction", UVM_DEBUG)
+   trn = uvma_${name}_slv_a_mon_trn_c::type_id::create("trn");
+   trn.gnt    = mp_a.mon_a_cb.gnt;
+   trn.gntpar = mp_a.mon_a_cb.gntpar;
+   
+   trn.req = mp_a.mon_a_cb.req;
+   
+endtask : sample_slv_a_trn
+
+
+task uvma_${name}_mon_c::sample_slv_r_trn(output uvma_${name}_slv_r_mon_trn_c trn);
+   
+   @(mp_r.mon_r_cb);
+   `uvm_info("${name_uppercase}_MON", "Sampling SLV Channel R transaction", UVM_DEBUG)
+   trn = uvma_${name}_slv_r_mon_trn_c::type_id::create("trn");
+   trn.rvalid    = mp_r.mon_r_cb.rvalid   ;
+   trn.rvalidpar = mp_r.mon_r_cb.rvalidpar;
+   trn.err       = mp_r.mon_r_cb.err      ;
+   trn.exokay    = mp_r.mon_r_cb.exokay   ;
+   for (int unsigned ii=0; ii<cfg.data_width; ii++) begin
+      trn.rdata[ii] = mp_r.mon_r_cb.rdata[ii];
+   end
+   for (int unsigned ii=0; ii<cfg.ruser_width; ii++) begin
+      trn.ruser[ii] = mp_r.mon_r_cb.ruser[ii];
+   end
+   for (int unsigned ii=0; ii<cfg.id_width; ii++) begin
+      trn.rid[ii] = mp_r.mon_r_cb.rid[ii];
+   end
+   for (int unsigned ii=0; ii<cfg.rchk_width; ii++) begin
+      trn.rchk[ii] = mp_r.mon_r_cb.rchk[ii];
+   end
+   
+   trn.rready = mp_r.mon_r_cb.rready;
+   
+endtask : sample_slv_r_trn
+
+
+function void uvma_${name}_mon_c::process_mstr_a_trn(ref uvma_${name}_mstr_a_mon_trn_c trn);
+   
+   trn.cfg = cfg;
+   trn.set_initiator(this);
+   trn.set_timestamp_end($realtime());
+   `uvm_info("${name_uppercase}_MON", $sformatf("Sampled MSTR channel A transaction from the virtual interface:\n%s", trn.sprint()), UVM_HIGH)
+   
+endfunction : process_mstr_a_trn
+
+
+function void uvma_${name}_mon_c::process_mstr_r_trn(ref uvma_${name}_mstr_r_mon_trn_c trn);
+   
+   trn.cfg = cfg;
+   trn.set_initiator(this);
+   trn.set_timestamp_end($realtime());
+   `uvm_info("${name_uppercase}_MON", $sformatf("Sampled MSTR channel R transaction from the virtual interface:\n%s", trn.sprint()), UVM_HIGH)
+   
+endfunction : process_mstr_r_trn
+
+
+function void uvma_${name}_mon_c::process_slv_a_trn(ref uvma_${name}_slv_a_mon_trn_c trn);
+   
+   trn.cfg = cfg;
+   trn.set_initiator(this);
+   trn.set_timestamp_end($realtime());
+   `uvm_info("${name_uppercase}_MON", $sformatf("Sampled SLV channel A transaction from the virtual interface:\n%s", trn.sprint()), UVM_HIGH)
+   
+endfunction : process_slv_a_trn
+
+
+function void uvma_${name}_mon_c::process_slv_r_trn(ref uvma_${name}_slv_r_mon_trn_c trn);
+   
+   trn.cfg = cfg;
+   trn.set_initiator(this);
+   trn.set_timestamp_end($realtime());
+   `uvm_info("${name_uppercase}_MON", $sformatf("Sampled SLV channel R transaction from the virtual interface:\n%s", trn.sprint()), UVM_HIGH)
+   
+endfunction : process_slv_r_trn
+
+
+`endif // __UVMA_${name_uppercase}_MON_SV__

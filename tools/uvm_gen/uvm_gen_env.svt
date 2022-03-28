@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sv_template>
-                                                                                                                        
+                                                                                                                          
   
   
   
@@ -359,8 +359,10 @@
   
   
   
+  
   <template category="datum_uvm_set" id="datum_uvm_env_st" name="Environment - Self-Testing (Simplex and Half-Duplex)">
-                                                                                                
+                                                                                                    
+    
     
     
     
@@ -384,7 +386,8 @@
     
     
     <description/>
-                                                                                                
+                                                                                                    
+    
     
     
     
@@ -408,7 +411,7 @@
     
     
     <parameters>
-                                                                                                                                                
+                                                                                                                                                      
       
       
       
@@ -441,8 +444,10 @@
       
       
       
+      
       <parameter default="" name="name_normal_case" type="id"/>
-                                                                                                                                                
+                                                                                                                                                      
+      
       
       
       
@@ -466,7 +471,8 @@
       
       
       <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
-                                                                                    
+                                                                                          
+      
       
       
       
@@ -480,7 +486,8 @@
       
       
       <parameter default="" name="name_uppercase" type="id"/>
-                                                                                                                                                
+                                                                                                                                                      
+      
       
       
       
@@ -504,7 +511,8 @@
       
       
       <parameter default="" name="name_1" type="id"/>
-                                                                                                                                                
+                                                                                                                                                      
+      
       
       
       
@@ -528,7 +536,7 @@
       
       
       <parameter default="" name="name_2" type="id"/>
-                                                                                                                                              
+                                                                                                                                                    
     
     
     
@@ -538,6 +546,7 @@
     
     
     
+      
       
       
       
@@ -552,7 +561,8 @@
       
       
       <parameter default="2021" name="year" type="int"/>
-                                                                                  
+                                                                                        
+    
     
     
     
@@ -566,7 +576,8 @@
     
     
     </parameters>
-                                                                                                
+                                                                                                    
+    
     
     
     
@@ -590,7 +601,7 @@
     
     
     <files>
-                                                                                                                                                
+                                                                                                                                                      
       
       
       
@@ -616,8 +627,10 @@
       
       
       
+      
       <file executable="false" name="uvme_${name}_st/bin/package.py" template="templates/env_st/bin/package.py"/>
-                                                                                    
+                                                                                          
+      
       
       
       
@@ -631,7 +644,8 @@
       
       
       <file executable="false" name="uvme_${name}_st/docs/env_block_diagram.svg" template="templates/env_st/docs/env_block_diagram.svg"/>
-                                                                                    
+                                                                                          
+      
       
       
       
@@ -645,7 +659,7 @@
       
       
       <file executable="false" name="uvme_${name}_st/examples/virtual_sequence.sv" template="templates/env_st/examples/virtual_sequence.sv"/>
-                                                                                    
+                                                                                          
       
       
       
@@ -669,8 +683,9 @@
       
       
       
+      
       <file executable="false" name="uvme_${name}_st/src/comps/uvme_${name}_st_cov_model.sv" template="templates/env_st/src/comps/cov_model.sv"/>
-                                                                                                                                                
+                                                                                                                                                      
       
       
       
@@ -691,6 +706,7 @@
       
       
                                                             
+      
       
       
       
@@ -714,7 +730,8 @@
       
       
       <file executable="false" name="uvme_${name}_st/src/comps/uvme_${name}_st_env.sv" template="templates/env_st/src/comps/env.sv"/>
-                                                                                    
+                                                                                          
+      
       
       
       
@@ -728,7 +745,8 @@
       
       
       <file executable="false" name="uvme_${name}_st/src/comps/uvme_${name}_st_prd.sv" template="templates/env_st/src/comps/prd.sv"/>
-                                                                                    
+                                                                                          
+      
       
       
       
@@ -742,7 +760,7 @@
       
       
       <file executable="false" name="uvme_${name}_st/src/comps/uvme_${name}_st_vsqr.sv" template="templates/env_st/src/comps/vsqr.sv"/>
-                                                                                    
+                                                                                          
       
       
       
@@ -766,8 +784,9 @@
       
       
       
+      
       <file executable="false" name="uvme_${name}_st/src/obj/uvme_${name}_st_cfg.sv" template="templates/env_st/src/obj/cfg.sv"/>
-                                                                                                                                                
+                                                                                                                                                      
       
       
       
@@ -800,8 +819,9 @@
       
       
       
+      
       <file executable="false" name="uvme_${name}_st/src/obj/uvme_${name}_st_cntxt.sv" template="templates/env_st/src/obj/cntxt.sv"/>
-                                                                                    
+                                                                                          
       
       
       
@@ -825,8 +845,9 @@
       
       
       
+      
       <file executable="false" name="uvme_${name}_st/src/seq/uvme_${name}_st_base_vseq.sv" template="templates/env_st/src/seq/base_vseq.sv"/>
-                                                                                    
+                                                                                          
       
       
       
@@ -852,11 +873,14 @@
       
       
       
+      
       <file executable="false" name="uvme_${name}_st/src/seq/uvme_${name}_st_vseq_lib.sv" template="templates/env_st/src/seq/vseq_lib.sv"/>
-                  
+                        
+      
       
       <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_chkr.sv" template="templates/env_st/src/chkr.sv"/>
-                                                                                                                                                
+                                                                                                                                                      
+      
       
       
       
@@ -880,7 +904,7 @@
       
       
       <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_constants.sv" template="templates/env_st/src/constants.sv"/>
-                                                                                                                                                
+                                                                                                                                                      
       
       
       
@@ -913,8 +937,10 @@
       
       
       
-      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_macros.sv" template="templates/env_st/src/macros.sv"/>
-                                                                                                                                                
+      
+      <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_macros.svh" template="templates/env_st/src/macros.svh"/>
+                                                                                                                                                      
+      
       
       
       
@@ -938,7 +964,8 @@
       
       
       <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_pkg.flist" template="templates/env_st/src/pkg.flist"/>
-                                                                                                                                                
+                                                                                                                                                      
+      
       
       
       
@@ -962,7 +989,8 @@
       
       
       <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_pkg.flist.xsim" template="templates/env_st/src/pkg.flist.xsim"/>
-                                                                                                      
+                                                                                                            
+      
       
       
       
@@ -979,7 +1007,7 @@
       
       
       <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_pkg.sv" template="templates/env_st/src/pkg.sv"/>
-                                                                                                                                                
+                                                                                                                                                      
       
       
       
@@ -1012,8 +1040,9 @@
       
       
       
+      
       <file executable="false" name="uvme_${name}_st/src/uvme_${name}_st_tdefs.sv" template="templates/env_st/src/tdefs.sv"/>
-                                                                                                                                                
+                                                                                                                                                      
       
       
       
@@ -1046,8 +1075,10 @@
       
       
       
+      
       <file executable="false" name="uvme_${name}_st/.gitignore" template="templates/env_st/gitignore"/>
-                                                                                    
+                                                                                          
+      
       
       
       
@@ -1061,19 +1092,21 @@
       
       
       <file executable="false" name="uvme_${name}_st/ip.yml" template="templates/env_st/ip.yml"/>
-                                    
+                                          
+      
       
       
       
       
       <file executable="false" name="uvme_${name}_st/LICENSE.md" template="templates/LICENSE_solderpad_v2p1.md"/>
-                                                                                    
+                                                                                          
       
       
       
       
       
                                     
+      
       
       
       
@@ -1087,7 +1120,8 @@
       
       
       <file executable="false" name="uvme_${name}_st/README.md" template="templates/env_st/README.md"/>
-                                                                                  
+                                                                                        
+    
     
     
     
@@ -1101,7 +1135,8 @@
     
     
     </files>
-                                                                                              
+                                                                                                  
+  
   
   
   
@@ -1125,7 +1160,8 @@
   
   
   </template>
-                                                
+                                                  
+  
   
   
   
@@ -1149,7 +1185,8 @@
   
   
   <template category="datum_uvm_set" id="datum_uvm_env_ss" name="Environment - Sub-System">
-                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                    
+    
     
     
     
@@ -1209,7 +1246,8 @@
     
     
     <description/>
-                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                    
+    
     
     
     
@@ -1269,7 +1307,7 @@
     
     
     <parameters>
-                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                              
       
       
       
@@ -1370,8 +1408,10 @@
       
       
       
+      
       <parameter default="" name="name_normal_case" type="id"/>
-                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                      
+      
       
       
       
@@ -1427,7 +1467,8 @@
       
       
       <parameter default="Datum Technology Corporation" name="name_of_copyright_owner" type="id"/>
-                                                                                    
+                                                                                          
+      
       
       
       
@@ -1441,7 +1482,8 @@
       
       
       <parameter default="" name="name_uppercase" type="id"/>
-                                                                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                                            
+      
       
       
       
@@ -1501,7 +1543,8 @@
       
       
       <parameter default="sys_clk" name="clk_agent_name" type="id"/>
-                                                                  
+                                                                        
+      
       
       
       
@@ -1512,7 +1555,8 @@
       
       
       <parameter default="SYS_CLK" name="clk_agent_name_uppercase" type="id"/>
-                                                                  
+                                                                        
+      
       
       
       
@@ -1523,7 +1567,8 @@
       
       
       <parameter default="clk" name="clk_agent_type" type="id"/>
-                                                                  
+                                                                        
+      
       
       
       
@@ -1534,7 +1579,8 @@
       
       
       <parameter default="apb_master" name="ral_agent_name" type="id"/>
-                                                                  
+                                                                        
+      
       
       
       
@@ -1545,7 +1591,8 @@
       
       
       <parameter default="apb" name="ral_agent_type" type="id"/>
-                                                                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                                                                        
+      
       
       
       
@@ -1604,7 +1651,8 @@
       
       
       <parameter default="sys_reset" name="reset_agent_name" type="id"/>
-                                                                  
+                                                                        
+      
       
       
       
@@ -1615,7 +1663,8 @@
       
       
       <parameter default="SYS_RESET" name="reset_agent_name_uppercase" type="id"/>
-                                                                  
+                                                                        
+      
       
       
       
@@ -1626,7 +1675,7 @@
       
       
       <parameter default="reset" name="reset_agent_type" type="id"/>
-                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                      
     
     
     
@@ -1671,6 +1720,7 @@
     
     
     
+      
       
       
       
@@ -1685,7 +1735,8 @@
       
       
       <parameter default="2021" name="year" type="int"/>
-                                                                                  
+                                                                                        
+    
     
     
     
@@ -1699,7 +1750,8 @@
     
     
     </parameters>
-                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                    
+    
     
     
     
@@ -1759,7 +1811,7 @@
     
     
     <files>
-                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                              
       
       
       
@@ -1821,8 +1873,10 @@
       
       
       
+      
       <file executable="false" name="uvme_${name}/bin/package.py" template="templates/env_ss/bin/package.py"/>
-                                                                                    
+                                                                                          
+      
       
       
       
@@ -1836,7 +1890,8 @@
       
       
       <file executable="false" name="uvme_${name}/docs/env_block_diagram.svg" template="templates/env_ss/docs/env_block_diagram.svg"/>
-                                                                                    
+                                                                                          
+      
       
       
       
@@ -1850,7 +1905,7 @@
       
       
       <file executable="false" name="uvme_${name}/examples/instantiation.sv" template="templates/env_ss/examples/instantiation.sv"/>
-                                                                                    
+                                                                                          
       
       
       
@@ -1874,8 +1929,9 @@
       
       
       
+      
       <file executable="false" name="uvme_${name}/src/comps/uvme_${name}_cov_model.sv" template="templates/env_ss/src/comps/cov_model.sv"/>
-                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                              
       
       
       
@@ -1944,8 +2000,10 @@
       
       
       
+      
       <file executable="false" name="uvme_${name}/src/comps/uvme_${name}_env.sv" template="templates/env_ss/src/comps/env.sv"/>
-                                                                                    
+                                                                                          
+      
       
       
       
@@ -1959,7 +2017,8 @@
       
       
       <file executable="false" name="uvme_${name}/src/comps/uvme_${name}_prd.sv" template="templates/env_ss/src/comps/prd.sv"/>
-                                                                                    
+                                                                                          
+      
       
       
       
@@ -1973,7 +2032,8 @@
       
       
       <file executable="false" name="uvme_${name}/src/comps/uvme_${name}_sb.sv" template="templates/env_ss/src/comps/sb.sv"/>
-                                                                                    
+                                                                                          
+      
       
       
       
@@ -1987,7 +2047,7 @@
       
       
       <file executable="false" name="uvme_${name}/src/comps/uvme_${name}_vsqr.sv" template="templates/env_ss/src/comps/vsqr.sv"/>
-                                                                                    
+                                                                                          
       
       
       
@@ -1999,6 +2059,7 @@
       
       
                                                                   
+      
       
       
       
@@ -2012,7 +2073,8 @@
       
       
       <file executable="false" name="uvme_${name}/src/obj/uvme_${name}_cfg.sv" template="templates/env_ss/src/obj/cfg.sv"/>
-                                                                                    
+                                                                                          
+      
       
       
       
@@ -2026,7 +2088,7 @@
       
       
       <file executable="false" name="uvme_${name}/src/obj/uvme_${name}_cntxt.sv" template="templates/env_ss/src/obj/cntxt.sv"/>
-                                                                                    
+                                                                                          
       
       
       
@@ -2038,6 +2100,7 @@
       
       
                                                                   
+      
       
       
       
@@ -2051,7 +2114,7 @@
       
       
       <file executable="false" name="uvme_${name}/src/reg/uvme_${name}_reg_block.sv" template="templates/env_ss/src/reg/reg_block.sv"/>
-                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                              
       
       
       
@@ -2121,8 +2184,10 @@
       
       
       
+      
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_base_vseq.sv" template="templates/env_ss/src/seq/base_vseq.sv"/>
-                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                              
+      
       
       
       
@@ -2182,7 +2247,8 @@
       
       
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_${clk_agent_name}_vseq.sv" template="templates/env_ss/src/seq/clk_vseq.sv"/>
-                                                                  
+                                                                        
+      
       
       
       
@@ -2193,7 +2259,8 @@
       
       
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_reg_base_vseq.sv" template="templates/env_ss/src/seq/reg_base_vseq.sv"/>
-                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                      
+      
       
       
       
@@ -2233,9 +2300,11 @@
       
       
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_reg_base_vseq_ignore_list.sv" template="templates/env_ss/src/seq/reg_base_vseq_ignore_list.sv"/>
-            
+                  
+      
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_reg_bit_bash_vseq.sv" template="templates/env_ss/src/seq/reg_bit_bash_vseq.sv"/>
-                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                      
+      
       
       
       
@@ -2275,9 +2344,10 @@
       
       
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_reg_bit_bash_vseq_ignore_list.sv" template="templates/env_ss/src/seq/reg_bit_bash_vseq_ignore_list.sv"/>
-            
+                  
+      
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_reg_hw_reset_vseq.sv" template="templates/env_ss/src/seq/reg_hw_reset_vseq.sv"/>
-                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                      
       
       
       
@@ -2354,6 +2424,7 @@
       
       
                                                                                                                                                                                                                                     
+      
       
       
       
@@ -2393,7 +2464,8 @@
       
       
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_reg_hw_reset_vseq_ignore_list.sv" template="templates/env_ss/src/seq/reg_hw_reset_vseq_ignore_list.sv"/>
-                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                      
+      
       
       
       
@@ -2433,7 +2505,7 @@
       
       
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_${reset_agent_name}_vseq.sv" template="templates/env_ss/src/seq/reset_vseq.sv"/>
-                                                                                                                                                                                                                        
+                                                                                                                                                                                                                              
       
       
       
@@ -2502,6 +2574,7 @@
       
       
                                                                                                                                                                                                                         
+      
       
       
       
@@ -2551,7 +2624,7 @@
       
       
       <file executable="false" name="uvme_${name}/src/seq/uvme_${name}_vseq_lib.sv" template="templates/env_ss/src/seq/vseq_lib.sv"/>
-                                                      
+                                                            
       
       
             
@@ -2561,8 +2634,9 @@
       
       
       
+      
       <file executable="false" name="uvme_${name}/src/uvme_${name}_chkr.sv" template="templates/env_ss/src/chkr.sv"/>
-                                                                                                                                                                                                                  
+                                                                                                                                                                                                                        
       
       
       
@@ -2632,8 +2706,9 @@
       
       
       
+      
       <file executable="false" name="uvme_${name}/src/uvme_${name}_constants.sv" template="templates/env_ss/src/constants.sv"/>
-                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                  
       
       
       
@@ -2772,8 +2847,10 @@
       
       
       
-      <file executable="false" name="uvme_${name}/src/uvme_${name}_macros.sv" template="templates/env_ss/src/macros.sv"/>
-                                                                                                                                                                                                                                                                                                                                                                        
+      
+      <file executable="false" name="uvme_${name}/src/uvme_${name}_macros.svh" template="templates/env_ss/src/macros.svh"/>
+                                                                                                                                                                                                                                                                                                                                                                              
+      
       
       
       
@@ -2833,7 +2910,8 @@
       
       
       <file executable="false" name="uvme_${name}/src/uvme_${name}_pkg.flist" template="templates/env_ss/src/pkg.flist"/>
-                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                              
+      
       
       
       
@@ -2893,7 +2971,8 @@
       
       
       <file executable="false" name="uvme_${name}/src/uvme_${name}_pkg.flist.xsim" template="templates/env_ss/src/pkg.flist.xsim"/>
-                                                                                                      
+                                                                                                            
+      
       
       
       
@@ -2910,7 +2989,7 @@
       
       
       <file executable="false" name="uvme_${name}/src/uvme_${name}_pkg.sv" template="templates/env_ss/src/pkg.sv"/>
-                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                              
       
       
       
@@ -3053,8 +3132,9 @@
       
       
       
+      
       <file executable="false" name="uvme_${name}/src/uvme_${name}_tdefs.sv" template="templates/env_ss/src/tdefs.sv"/>
-                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                              
       
       
       
@@ -3159,8 +3239,10 @@
       
       
       
+      
       <file executable="false" name="uvme_${name}/.gitignore" template="templates/env_ss/gitignore"/>
-                                                                                    
+                                                                                          
+      
       
       
       
@@ -3174,19 +3256,21 @@
       
       
       <file executable="false" name="uvme_${name}/ip.yml" template="templates/env_ss/ip.yml"/>
-                                    
+                                          
+      
       
       
       
       
       <file executable="false" name="uvme_${name}/LICENSE.md" template="templates/LICENSE_solderpad_v2p1.md"/>
-                                                                                    
+                                                                                          
       
       
       
       
       
                                     
+      
       
       
       
@@ -3200,7 +3284,8 @@
       
       
       <file executable="false" name="uvme_${name}/README.md" template="templates/env_ss/README.md"/>
-                                                                                  
+                                                                                        
+    
     
     
     
@@ -3214,7 +3299,8 @@
     
     
     </files>
-                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                  
+  
   
   
   
@@ -3274,7 +3360,7 @@
   
   
   </template>
-                          
+                            
   
   
   
@@ -3693,8 +3779,10 @@
   
   
   
+  
   <category category="category.id" id="datum_uvm_set" name="Datum UVM Set">
-                                                                                                                                                                                                        
+                                                                                                                                                                                                            
+    
     
     
     
@@ -3744,7 +3832,8 @@
     
     
     <description/>
-                                                                                                                                                                                                      
+                                                                                                                                                                                                          
+  
   
   
   
@@ -3794,7 +3883,7 @@
   
   
   </category>
-                                                                                                    
+                                                                                                      
   
   
   
@@ -3964,6 +4053,7 @@
   
   
                                                                                                             
+
 
 
 
