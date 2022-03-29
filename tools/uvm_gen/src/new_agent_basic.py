@@ -18,7 +18,7 @@ import sys
 # GLOBALS
 ########################################################################################################################
 dbg = False
-relative_path_to_template = os.getcwd() + "/templates/"
+relative_path_to_template = os.getcwd() + "/../templates/"
 out_path = ""
 default_copyright_owner = ""
 name_of_copyright_owner = ""
@@ -46,9 +46,8 @@ files = {
     "agent_basic/agent/src/comps/agent.sv"              : "uvma_${name}/src/comps/uvma_${name}_agent.sv",
     "agent_basic/agent/src/comps/cov_model.sv"          : "uvma_${name}/src/comps/uvma_${name}_cov_model.sv",
     "agent_basic/agent/src/comps/drv.sv"                : "uvma_${name}/src/comps/uvma_${name}_drv.sv",
-    "agent_basic/agent/src/comps/mon_trn_logger.sv"     : "uvma_${name}/src/comps/uvma_${name}_mon_trn_logger.sv",
+    "agent_basic/agent/src/comps/logger.sv"             : "uvma_${name}/src/comps/uvma_${name}_logger.sv",
     "agent_basic/agent/src/comps/mon.sv"                : "uvma_${name}/src/comps/uvma_${name}_mon.sv",
-    "agent_basic/agent/src/comps/seq_item_logger.sv"    : "uvma_${name}/src/comps/uvma_${name}_seq_item_logger.sv",
     "agent_basic/agent/src/comps/sqr.sv"                : "uvma_${name}/src/comps/uvma_${name}_sqr.sv",
     "agent_basic/agent/src/obj/cfg.sv"                  : "uvma_${name}/src/obj/uvma_${name}_cfg.sv",
     "agent_basic/agent/src/obj/cntxt.sv"                : "uvma_${name}/src/obj/uvma_${name}_cntxt.sv",

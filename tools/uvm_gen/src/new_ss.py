@@ -18,7 +18,7 @@ import sys
 # GLOBALS
 ########################################################################################################################
 dbg = False
-relative_path_to_template = os.getcwd() + "/templates/"
+relative_path_to_template = os.getcwd() + "/../templates/"
 out_path = ""
 default_copyright_owner = ""
 name_of_copyright_owner = ""
