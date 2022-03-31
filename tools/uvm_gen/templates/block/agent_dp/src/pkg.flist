@@ -1,0 +1,13 @@
+// Copyright ${year} ${name_of_copyright_owner}
+// ${license}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Directories
++incdir+${DV_UVMA_${name_uppercase}_DP_SRC_PATH}
++incdir+${DV_UVMA_${name_uppercase}_DP_SRC_PATH}/comps
++incdir+${DV_UVMA_${name_uppercase}_DP_SRC_PATH}/obj
++incdir+${DV_UVMA_${name_uppercase}_DP_SRC_PATH}/seq
+
+// Files
+${DV_UVMA_${name_uppercase}_DP_SRC_PATH}/uvma_${name}_dp_pkg.sv
