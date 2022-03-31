@@ -12,15 +12,18 @@
 from datetime import date
 import os
 import sys
+import re
 
 
 ########################################################################################################################
 # GLOBALS
 ########################################################################################################################
 dbg = False
-relative_path_to_template = os.getcwd() + "/../templates/"
+uvm_gen_dir = re.sub("new_agent_basic.py", "", os.path.realpath(__file__)) + ".."
+relative_path_to_template = uvm_gen_dir + "/templates/"
 out_path = ""
-default_copyright_owner = ""
+default_copyright_owner = "Contributors"
+default_license = "SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1"
 name_of_copyright_owner = ""
 name = ""
 name_normal_case = ""
@@ -29,13 +32,7 @@ name_normal_case = ""
 ########################################################################################################################
 # TEMPLATE DATA
 ########################################################################################################################
-parameters = {
-    "name"                    : "",
-    "name_uppercase"          : "",
-    "name_normal_case"        : "",
-    "name_of_copyright_owner" : "",
-    "year"                    : date.today().year
-}
+parameters = { }
 
 files = {
     #              SRC                                 DST
@@ -76,6 +73,7 @@ files = {
     "agent_basic/env/src/obj/cfg.sv"                    : "uvme_${name}_st/src/obj/uvme_${name}_st_cfg.sv",
     "agent_basic/env/src/obj/cntxt.sv"                  : "uvme_${name}_st/src/obj/uvme_${name}_st_cntxt.sv",
     "agent_basic/env/src/seq/base_vseq.sv"              : "uvme_${name}_st/src/seq/uvme_${name}_st_base_vseq.sv",
+    "agent_basic/env/src/seq/rand_stim_vseq.sv"         : "uvme_${name}_st/src/seq/uvme_${name}_st_rand_stim_vseq.sv",
     "agent_basic/env/src/seq/vseq_lib.sv"               : "uvme_${name}_st/src/seq/uvme_${name}_st_vseq_lib.sv",
     "agent_basic/env/src/chkr.sv"                       : "uvme_${name}_st/src/uvme_${name}_st_chkr.sv",
     "agent_basic/env/src/constants.sv"                  : "uvme_${name}_st/src/uvme_${name}_st_constants.sv",
@@ -97,6 +95,7 @@ files = {
     "agent_basic/tb/src/tb/tb.sv"                       : "uvmt_${name}_st/src/tb/uvmt_${name}_st_tb.sv",
     "agent_basic/tb/src/tests/base_test_workarounds.sv" : "uvmt_${name}_st/src/tests/uvmt_${name}_st_base_test_workarounds.sv",
     "agent_basic/tb/src/tests/base_test.sv"             : "uvmt_${name}_st/src/tests/uvmt_${name}_st_base_test.sv",
+    "agent_basic/tb/src/tests/rand_stim_test.sv"        : "uvmt_${name}_st/src/tests/uvmt_${name}_st_rand_stim_test.sv",
     "agent_basic/tb/src/tests/test_cfg.sv"              : "uvmt_${name}_st/src/tests/uvmt_${name}_st_test_cfg.sv",
     "agent_basic/tb/src/constants.sv"                   : "uvmt_${name}_st/src/uvmt_${name}_st_constants.sv",
     "agent_basic/tb/src/macros.svh"                     : "uvmt_${name}_st/src/uvmt_${name}_st_macros.svh",
@@ -214,26 +213,25 @@ def prompt_user_values():
     name_of_copyright_owner = input("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
     if name_of_copyright_owner == "":
         name_of_copyright_owner = default_copyright_owner
-    parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    license = input("Please enter a usage license or hit RETURN for the default (default is '" + default_license + "'):\n").strip()
+    if license == "":
+        license = default_license
     
     name = input("Please enter the package name for this agent (ex: 'apb'); this name will be used for all agent types (ex: 'uvma_apb_agent_c'):\n").lower().strip()
     if name == "":
         sys.exit("ERROR: package name cannot be empty.  Exiting.")
-    else:
-        parameters["name"] = name
-        parameters["name_uppercase"] = name.upper()
     
     name_normal_case = input("Please enter the (descriptive) name for this agent (ex: 'Advanced Peripheral Bus (APB)'):\n").strip()
     if name_normal_case == "":
         sys.exit("ERROR: descriptive name cannot be empty.  Exiting.")
-    else:
-        parameters["name_normal_case"] = name_normal_case
     
     parameters = {
     "name"                    : name,
     "name_uppercase"          : name.upper(),
     "name_normal_case"        : name_normal_case,
     "name_of_copyright_owner" : name_of_copyright_owner,
+    "license"                 : license,
     "year"                    : date.today().year,
     "name_1"                  : "active",
     "name_2"                  : "passive"

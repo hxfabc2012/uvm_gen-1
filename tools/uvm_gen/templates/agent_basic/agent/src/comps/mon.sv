@@ -1,6 +1,5 @@
 // Copyright ${year} ${name_of_copyright_owner}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SPDX-License-Identifier: ${license_id}
+// ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -109,12 +108,12 @@ function void uvma_${name}_mon_c::build_phase(uvm_phase phase);
 
    void'(uvm_config_db#(uvma_${name}_cfg_c)::get(this, "", "cfg", cfg));
    if (!cfg) begin
-      `uvm_fatal("${name_uppecase}_MON", "Configuration handle is null")
+      `uvm_fatal("${name_uppercase}_MON", "Configuration handle is null")
    end
 
    void'(uvm_config_db#(uvma_${name}_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (!cntxt) begin
-      `uvm_fatal("${name_uppecase}_MON", "Context handle is null")
+      `uvm_fatal("${name_uppercase}_MON", "Context handle is null")
    end
 
    ap = new("ap", this);
@@ -161,7 +160,7 @@ endtask : observe_reset
 task uvma_${name}_mon_c::observe_reset_sync();
 
    forever begin
-      `uvm_info("${name_uppecase}_MON", "Waiting for synchronous reset pulse", UVM_MEDIUM)
+      `uvm_info("${name_uppercase}_MON", "Waiting for synchronous reset pulse", UVM_HIGH)
       while (mp.reset_n !== 1'b0) begin
          wait (mp.clk === 1);
          wait (mp.clk === 0);
@@ -169,7 +168,7 @@ task uvma_${name}_mon_c::observe_reset_sync();
 
       cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
       cntxt.sample_cntxt_e.trigger();
-      `uvm_info("${name_uppecase}_MON", "Entered IN_RESET state", UVM_MEDIUM)
+      `uvm_info("${name_uppercase}_MON", "Entered IN_RESET state", UVM_HIGH)
       while (mp.reset_n !== 1'b1) begin
          wait (mp.clk === 1);
          wait (mp.clk === 0);
@@ -177,7 +176,7 @@ task uvma_${name}_mon_c::observe_reset_sync();
 
       cntxt.reset_state = UVML_RESET_STATE_POST_RESET;
       cntxt.sample_cntxt_e.trigger();
-      `uvm_info("${name_uppecase}_MON", "Entered POST_RESET state", UVM_MEDIUM)
+      `uvm_info("${name_uppercase}_MON", "Entered POST_RESET state", UVM_HIGH)
    end
 
 endtask : observe_reset_sync
@@ -186,17 +185,17 @@ endtask : observe_reset_sync
 task uvma_${name}_mon_c::observe_reset_async();
 
    forever begin
-      `uvm_info("${name_uppecase}_MON", "Waiting for asynchronous reset pulse", UVM_MEDIUM)
+      `uvm_info("${name_uppercase}_MON", "Waiting for asynchronous reset pulse", UVM_HIGH)
       wait (mp.reset_n === 0);
 
       cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
       cntxt.sample_cntxt_e.trigger();
-      `uvm_info("${name_uppecase}_MON", "Entered IN_RESET state", UVM_MEDIUM)
+      `uvm_info("${name_uppercase}_MON", "Entered IN_RESET state", UVM_HIGH)
       wait (mp.reset_n === 1);
 
       cntxt.reset_state = UVML_RESET_STATE_POST_RESET;
       cntxt.sample_cntxt_e.trigger();
-      `uvm_info("${name_uppecase}_MON", "Entered POST_RESET state", UVM_MEDIUM)
+      `uvm_info("${name_uppercase}_MON", "Entered POST_RESET state", UVM_HIGH)
    end
 
 endtask : observe_reset_async
@@ -235,7 +234,7 @@ task uvma_${name}_mon_c::sample_trn(output uvma_${name}_mon_trn_c trn);
       @(cntxt.vif.mon_cb);
       // TODO Sample trn from vif
       //      Ex: if (mp.mon_cb.enable === 1'b1) begin
-      //             `uvm_info("${name_uppecase}_MON", "Sampling transaction", UVM_HIGH)
+      //             `uvm_info("${name_uppercase}_MON", "Sampling transaction", UVM_HIGH)
       //             trn = uvma_${name}_mon_trn_c::type_id::create("trn");
       //             sampled_trn = 1;
       //             trn.data = mp.mon_cb.data;
@@ -251,7 +250,7 @@ function void uvma_${name}_mon_c::process_trn(ref uvma_${name}_mon_trn_c trn);
 
    trn.cfg = cfg;
    trn.set_initiator(this);
-   `uvm_info("${name_uppecase}_MON", $sformatf("Sampled transaction from the virtual interface:\n%s", trn.sprint()), UVM_HIGH)
+   `uvm_info("${name_uppercase}_MON", $sformatf("Sampled transaction from the virtual interface:\n%s", trn.sprint()), UVM_DEBUG)
    `uvml_hrtbt()
 
 endfunction : process_trn

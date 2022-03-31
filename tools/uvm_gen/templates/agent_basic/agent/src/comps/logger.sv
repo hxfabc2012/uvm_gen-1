@@ -1,6 +1,5 @@
 // Copyright ${year} ${name_of_copyright_owner}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SPDX-License-Identifier: ${license_id}
+// ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -71,12 +70,12 @@ function void uvma_${name}_logger_c::build_phase(uvm_phase phase);
 
    void'(uvm_config_db#(uvma_${name}_cfg_c)::get(this, "", "cfg", cfg));
    if (cfg == null) begin
-      `uvm_fatal("${name_uppecase}_LOGGER", "Configuration handle is null")
+      `uvm_fatal("${name_uppercase}_LOGGER", "Configuration handle is null")
    end
 
    void'(uvm_config_db#(uvma_${name}_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (cntxt == null) begin
-      `uvm_fatal("${name_uppecase}_LOGGER", "Context handle is null")
+      `uvm_fatal("${name_uppercase}_LOGGER", "Context handle is null")
    end
 
    // Create components

@@ -1,6 +1,5 @@
 // Copyright ${year} ${name_of_copyright_owner}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SPDX-License-Identifier: ${license_id}
+// ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -205,16 +204,16 @@ endfunction : connect_analysis_ports
 
 function void uvma_${name}_agent_c::connect_cov_model();
 
-   drv_ap.connect(cov_model.seq_item_fifo.analysis_export);
-   mon_ap.connect(cov_model.mon_trn_fifo .analysis_export);
+   drv_ap.connect(cov_model.seq_item_export);
+   mon_ap.connect(cov_model.mon_trn_export );
 
 endfunction : connect_cov_model
 
 
 function void uvma_${name}_agent_c::connect_trn_loggers();
 
-   drv_ap.connect(seq_item_logger.analysis_export);
-   mon_ap.connect(mon_trn_logger .analysis_export);
+   drv_ap.connect(logger.seq_item_export);
+   mon_ap.connect(logger.mon_trn_export );
 
 endfunction : connect_trn_loggers
 

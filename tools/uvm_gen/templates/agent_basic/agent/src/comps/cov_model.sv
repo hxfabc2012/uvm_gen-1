@@ -1,6 +1,5 @@
 // Copyright ${year} ${name_of_copyright_owner}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SPDX-License-Identifier: ${license_id}
+// ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -94,18 +93,28 @@ function void uvma_${name}_cov_model_c::build_phase(uvm_phase phase);
 
    void'(uvm_config_db#(uvma_${name}_cfg_c)::get(this, "", "cfg", cfg));
    if (!cfg) begin
-      `uvm_fatal("${name_uppecase}_COV_MODEL", "Configuration handle is null")
+      `uvm_fatal("${name_uppercase}_COV_MODEL", "Configuration handle is null")
    end
 
    void'(uvm_config_db#(uvma_${name}_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (!cntxt) begin
-      `uvm_fatal("${name_uppecase}_COV_MODEL", "Context handle is null")
+      `uvm_fatal("${name_uppercase}_COV_MODEL", "Context handle is null")
    end
 
    mon_trn_fifo  = new("mon_trn_fifo" , this);
    seq_item_fifo = new("seq_item_fifo", this);
 
 endfunction : build_phase
+
+
+function void uvma_${name}_cov_model_c::connect_phase(uvm_phase phase);
+
+   super.connect_phase(phase);
+
+   seq_item_export = mon_trn_fifo .analysis_export;
+   mon_trn_export  = seq_item_fifo.analysis_export;
+
+endfunction : connect_phase
 
 
 task uvma_${name}_cov_model_c::run_phase(uvm_phase phase);

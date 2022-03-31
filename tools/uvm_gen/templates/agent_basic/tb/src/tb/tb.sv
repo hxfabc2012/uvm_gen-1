@@ -1,6 +1,5 @@
 // Copyright ${year} ${name_of_copyright_owner}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SPDX-License-Identifier: ${license_id}
+// ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -9,7 +8,7 @@
 
 
 /**
- * Module instantiating the ${name_normal_case} UVM Agent Self-Test agents and clock generating interfaces and a "DUT".
+ * Module instantiating the ${name_normal_case} UVM Agent interfaces, a clock % reset generating interface and a "DUT".
  */
 module uvmt_${name}_st_tb;
 
@@ -36,7 +35,7 @@ module uvmt_${name}_st_tb;
 
       // Add interfaces to uvm_config_db
       uvm_config_db#(virtual uvmt_${name}_st_clknrst_gen_if)::set(null, "*", "vif", gen_if);
-      uvm_config_db#(virtual uvma_${name}_if)::set(null, "*.env.active_agent", "vif", active_if);
+      uvm_config_db#(virtual uvma_${name}_if)::set(null, "*.env.active_agent" , "vif", active_if );
       uvm_config_db#(virtual uvma_${name}_if)::set(null, "*.env.passive_agent", "vif", passive_if);
 
       // Run test

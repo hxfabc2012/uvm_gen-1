@@ -1,6 +1,5 @@
 // Copyright ${year} ${name_of_copyright_owner}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SPDX-License-Identifier: ${license_id}
+// ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -13,9 +12,9 @@
 `include "uvml_macros.sv"
 `include "uvml_logs_macros.sv"
 `include "uvml_sb_macros.sv"
-`include "uvma_${name}_macros.sv"
-`include "uvme_${name}_st_macros.sv"
-`include "uvmt_${name}_st_macros.sv"
+`include "uvma_${name}_macros.svh"
+`include "uvme_${name}_st_macros.svh"
+`include "uvmt_${name}_st_macros.svh"
 
 // Time units and precision for this test bench
 timeunit       1ns;

@@ -1,6 +1,5 @@
 // Copyright ${year} ${name_of_copyright_owner}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SPDX-License-Identifier: ${license_id}
+// ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -22,6 +21,14 @@ class uvme_${name}_st_rand_stim_vseq_c extends uvme_${name}_st_base_vseq_c;
    `uvm_object_utils_begin(uvme_${name}_st_rand_stim_vseq_c)
       `uvm_field_int(num_items, UVM_DEFAULT + UVM_DEC)
    `uvm_object_utils_end
+
+
+   /**
+    * Sets safe defaults for knobs.
+    */
+   constraint defaults_cons {
+      soft num_items == 100;
+   }
 
 
    /**
@@ -48,7 +55,7 @@ task uvme_${name}_st_rand_stim_vseq_c::body();
 
    uvma_${name}_seq_item_c  seq_item;
    for (int unsigned ii=0; ii<num_items; ii++) begin
-      `uvm_info("${name_uppercase}_ST_VSEQ", $sformatf("Generating item %0d of %0d", (ii+), num_items), UVM_HIGH)
+      `uvm_info("${name_uppercase}_ST_VSEQ", $sformatf("Generating item %0d of %0d", (ii+1), num_items), UVM_HIGH)
       `uvm_do_on(seq_item, p_sequencer.active_sequencer)
    end
 

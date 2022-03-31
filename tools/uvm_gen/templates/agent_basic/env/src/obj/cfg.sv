@@ -1,6 +1,5 @@
 // Copyright ${year} ${name_of_copyright_owner}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SPDX-License-Identifier: ${license_id}
+// ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -64,13 +63,13 @@ class uvme_${name}_st_cfg_c extends uvm_object;
          passive_cfg.enabled == 1;
       }
       else {
-         active_cfg.enabled == 0;
+         active_cfg .enabled == 0;
          passive_cfg.enabled == 0;
       }
 
       if (is_active == UVM_ACTIVE) {
-         active_cfg .is_active == UVM_ACTIVE;
-         passive_cfg.is_active == UVM_ACTIVE;
+         active_cfg .is_active == UVM_ACTIVE ;
+         passive_cfg.is_active == UVM_PASSIVE;
       }
       else {
          active_cfg .is_active == UVM_PASSIVE;

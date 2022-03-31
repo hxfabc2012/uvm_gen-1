@@ -1,6 +1,5 @@
 // Copyright ${year} ${name_of_copyright_owner}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SPDX-License-Identifier: ${license_id}
+// ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -97,13 +96,13 @@ function void uvma_${name}_drv_c::build_phase(uvm_phase phase);
 
    void'(uvm_config_db#(uvma_${name}_cfg_c)::get(this, "", "cfg", cfg));
    if (!cfg) begin
-      `uvm_fatal("${name_uppecase}_DRV", "Configuration handle is null")
+      `uvm_fatal("${name_uppercase}_DRV", "Configuration handle is null")
    end
    uvm_config_db#(uvma_${name}_cfg_c)::set(this, "*", "cfg", cfg);
 
    void'(uvm_config_db#(uvma_${name}_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (!cntxt) begin
-      `uvm_fatal("${name_uppecase}_DRV", "Context handle is null")
+      `uvm_fatal("${name_uppercase}_DRV", "Context handle is null")
    end
    uvm_config_db#(uvma_${name}_cntxt_c)::set(this, "*", "cntxt", cntxt);
 
@@ -158,7 +157,7 @@ endtask : drv_post_reset
 function void uvma_${name}_drv_c::process_req(ref uvma_${name}_seq_item_c req);
 
    req.cfg = cfg;
-   `uvm_info("${name_uppecase}_DRV", $sformatf("Got new req from the sequencer:\n%s", req.sprint()), UVM_HIGH)
+   `uvm_info("${name_uppercase}_DRV", $sformatf("Got new req from the sequencer:\n%s", req.sprint()), UVM_DEBUG)
    `uvml_hrtbt()
 
 endfunction : process_req

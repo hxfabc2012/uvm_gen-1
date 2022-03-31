@@ -1,6 +1,5 @@
 // Copyright ${year} ${name_of_copyright_owner}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SPDX-License-Identifier: ${license_id}
+// ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -23,7 +22,7 @@ class uvmt_${name}_st_rand_stim_test_c extends uvmt_${name}_st_base_test_c;
     * Overrides number of stimulus items to drive with CLI argument (if present).
     */
    constraint vseq_cons {
-      if (test.cli_num_items_override) {
+      if (test_cfg.cli_num_items_override) {
          rand_stim_vseq.num_items == test_cfg.cli_num_items_parsed;
       }
    }
