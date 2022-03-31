@@ -26,7 +26,7 @@ interface uvma_${name}_dp_if (
     * Used by uvma_${name}_dp_drv_c.
     */
    clocking drv_cb @(posedge clk);
-      // TODO Implement uvma_${name}_dp_if::drv_cb()
+      // TODO Add signals to uvma_${name}_dp_if::drv_cb()
       //      Ex: output  enable,
       //                  data  ;
    endclocking : drv_cb
@@ -35,7 +35,7 @@ interface uvma_${name}_dp_if (
     * Used by uvma_${name}_dp_mon_c.
     */
    clocking mon_in_cb @(posedge clk);
-      // TODO Implement uvma_${name}_dp_if::mon_in_cb()
+      // TODO Add signals to uvma_${name}_dp_if::mon_in_cb()
       //      Ex: input  enable,
       //                 data  ;
    endclocking : mon_in_cb
@@ -44,7 +44,7 @@ interface uvma_${name}_dp_if (
     * Used by uvma_${name}_dp_mon_c.
     */
    clocking mon_out_cb @(posedge clk);
-      // TODO Implement uvma_${name}_dp_if::mon_out_cb()
+      // TODO Add signals to uvma_${name}_dp_if::mon_out_cb()
       //      Ex: input  enable,
       //                 data  ;
    endclocking : mon_out_cb

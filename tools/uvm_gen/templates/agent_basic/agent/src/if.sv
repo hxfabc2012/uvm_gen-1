@@ -26,7 +26,7 @@ interface uvma_${name}_if (
     * Used by uvma_${name}_drv_c.
     */
    clocking drv_cb @(posedge clk);
-      // TODO Implement uvma_${name}_if::drv_cb()
+      // TODO Add signals to uvma_${name}_if::drv_cb()
       //      Ex: output  enable,
       //                  data  ;
    endclocking : drv_cb
@@ -35,7 +35,7 @@ interface uvma_${name}_if (
     * Used by uvma_${name}_mon_c.
     */
    clocking mon_cb @(posedge clk);
-      // TODO Implement uvma_${name}_if::mon_cb()
+      // TODO Add signals to uvma_${name}_if::mon_cb()
       //      Ex: input  enable,
       //                 data  ;
    endclocking : mon_cb
