@@ -101,8 +101,8 @@ function void uvma_${name}_cov_model_c::build_phase(uvm_phase phase);
       `uvm_fatal("${name_uppercase}_COV_MODEL", "Context handle is null")
    end
 
-   mon_trn_fifo  = new("mon_trn_fifo" , this);
    seq_item_fifo = new("seq_item_fifo", this);
+   mon_trn_fifo  = new("mon_trn_fifo" , this);
 
 endfunction : build_phase
 

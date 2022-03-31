@@ -19,8 +19,8 @@
 `include "uvml_macros.sv"
 `include "uvml_logs_macros.sv"
 `include "uvml_sb_macros.sv"
-`include "uvml_math_macros.sv"
-`include "uvmt_misc_st_macros.sv"
+`include "uvml_math_macros.svh"
+`include "uvmt_misc_st_macros.svh"
 
 // Time units and precision for this test bench
 timeunit       1ns;
@@ -34,23 +34,23 @@ timeprecision  1ps;
  * Encapsulates all the types and test cases for self-testing Miscellaneous.
  */
 package uvmt_misc_st_pkg;
-   
+
    import uvm_pkg      ::*;
    import uvml_pkg     ::*;
    import uvml_logs_pkg::*;
    import uvml_sb_pkg  ::*;
    import uvml_math_pkg::*;
-   
+
    // Constants / Structs / Enums
    `include "uvmt_misc_st_tdefs.sv"
    `include "uvmt_misc_st_constants.sv"
-   
+
    // Objects
    `include "uvmt_misc_st_seq_item.sv"
-   
+
    // Components
    `include "uvme_misc_st_vsqr.sv"
-   
+
    // Generated code
    `include "uvmt_misc_st_my_obj.sv"
    `include "uvmt_misc_st_my_comp.sv"
@@ -61,14 +61,14 @@ package uvmt_misc_st_pkg;
    `include "uvme_misc_st_basic_access_vseq.sv"
    `include "uvmt_misc_st_mstr_seq_lib.sv"
    `include "uvmt_misc_st_cpu_vseq_lib.sv"
-   
+
    // Base test
    `include "uvmt_misc_st_test_cfg.sv"
    `include "uvmt_misc_st_base_test.sv"
-   
+
    // Generated test
    `include "uvmt_misc_st_smoke_test.sv"
-   
+
 endpackage : uvmt_misc_st_pkg
 
 

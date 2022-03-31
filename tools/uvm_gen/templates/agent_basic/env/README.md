@@ -2,7 +2,7 @@
 
 
 # About
-This package contains the ${name_of_copyright_owner} ${name_normal_case} Agent Self-Test UVM Environment.
+This IP contains the ${name_of_copyright_owner} ${name_normal_case} Agent Self-Test UVM Environment.
 Its main purpose is to test the ${name_normal_case} UVM Agent (`uvma_${name}_pkg`) in isolation.
 
 
@@ -13,14 +13,14 @@ Its main purpose is to test the ${name_normal_case} UVM Agent (`uvma_${name}_pkg
 * `bin` - Scripts, metadata and other miscellaneous files
 * `docs` - Reference documentation
 * `examples` - Code samples for using and extending this environment
-* `src` - Source code for this package
+* `src` - Source code
 
 
 # Dependencies
-It is dependent on the following packages:
+It is dependent on the following IP:
 
-* `uvm_pkg`
-* `uvml_pkg`
-* `uvml_logs_pkg`
-* `uvml_sb_pkg`
-* `uvma_${name}_pkg`
+* `uvm`
+* `uvml`
+* `uvml_logs`
+* `uvml_sb`
+* `uvma_${name}`

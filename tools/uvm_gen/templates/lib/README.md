@@ -2,19 +2,19 @@
 
 
 # About
-This package contains the ${name_of_copyright_owner} ${name_normal_case} UVM Library.
+This IP contains the ${name_of_copyright_owner} ${name_normal_case} UVM Library.
 
 TODO Describe ${name_normal_case}
 
 
 # Directory Structure
 * `bin` - Scripts, metadata and other miscellaneous files
-* `docs` - Documents describing the ${name_of_copyright_owner} ${name_normal_case} UVM Library
-* `examples` - Samples for users
-* `src` - Source code for this package
+* `docs` - Reference documentation
+* `examples` - Code samples for using and extending this library
+* `src` - Source code
 
 
 # Dependencies
-It is dependent on the following packages:
+It is dependent on the following IP:
 
 * `uvm_pkg`

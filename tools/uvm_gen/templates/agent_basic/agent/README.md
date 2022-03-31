@@ -13,7 +13,7 @@ TODO Describe ${name_normal_case}
 * `bin` - Scripts, metadata and other miscellaneous files
 * `docs` - Reference documentation
 * `examples` - Code samples for using and extending this agent
-* `src` - Source code for this package
+* `src` - Source code
 
 
 # Dependencies

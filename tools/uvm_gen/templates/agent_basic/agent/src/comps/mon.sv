@@ -231,10 +231,10 @@ task uvma_${name}_mon_c::sample_trn(output uvma_${name}_mon_trn_c trn);
    bit  sampled_trn = 0;
 
    do begin
-      @(cntxt.vif.mon_cb);
-      // TODO Sample trn from vif
+      @(mp.mon_cb);
+      // TODO Sample trn
       //      Ex: if (mp.mon_cb.enable === 1'b1) begin
-      //             `uvm_info("${name_uppercase}_MON", "Sampling transaction", UVM_HIGH)
+      //             `uvm_info("${name_uppercase}_MON", "Sampling transaction", UVM_DEBUG)
       //             trn = uvma_${name}_mon_trn_c::type_id::create("trn");
       //             sampled_trn = 1;
       //             trn.data = mp.mon_cb.data;

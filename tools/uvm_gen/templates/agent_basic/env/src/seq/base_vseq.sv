@@ -8,9 +8,9 @@
 
 
 /**
- * Abstract object from which ${name_normal_case} UVM Agent Self-Test Environment (uvme_${name}_st_env_c) virtual sequences extend.
- * Subclasses must be run on ${name_normal_case} Virtual Sequencer (uvme_${name}_st_vsqr_c) instance.
- * NOTE: Does not generate any sequence items of its own.
+ * Abstract virtual sequence from which ${name_normal_case} UVM Agent Self-Test environment virtual sequences extend.
+ * Subclasses must be run on uvme_${name}_st_vsqr_c.
+ * @note Does not generate any sequence items of its own.
  */
 class uvme_${name}_st_base_vseq_c extends uvm_sequence #(
    .REQ(uvm_sequence_item),

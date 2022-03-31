@@ -12,7 +12,7 @@
 
 
 /**
- * Object cataloging the ${name_normal_case} self-test environment's virtual sequences.
+ * Object cataloging the ${name_normal_case} UVM Agent self-test environment's virtual sequences.
  */
 class uvme_${name}_st_vseq_lib_c extends uvm_sequence_library #(
    .REQ(uvm_sequence_item),
@@ -35,6 +35,7 @@ function uvme_${name}_st_vseq_lib_c::new(string name="uvme_${name}_st_vseq_lib")
 
    super.new(name);
    init_sequence_library();
+
    add_sequence(uvme_${name}_st_rand_stim_vseq_c::get_type());
 
 endfunction : new

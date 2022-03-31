@@ -8,7 +8,7 @@
 
 
 /**
- * Component on which all ${name_normal_case} UVM Agent Self-Test Environment (uvme_${name}_st_env_c) virtual sequences are run.
+ * Component on which all ${name_normal_case} UVM Agent Self-Test Environment virtual sequences are run.
  */
 class uvme_${name}_st_vsqr_c extends uvm_sequencer #(
    .REQ(uvm_sequence_item),

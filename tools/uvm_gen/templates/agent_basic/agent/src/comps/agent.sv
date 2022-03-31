@@ -8,7 +8,7 @@
 
 
 /**
- * Top-level component that encapsulates, builds and connects all others to implement ${name_normal_case}.
+ * Top-level component that encapsulates, builds and connects all others to implement the ${name_normal_case} UVM Agent.
  * Capable of driving/monitoring ${name_normal_case} virtual interface.
  */
 class uvma_${name}_agent_c extends uvm_agent;

@@ -2,7 +2,7 @@
 
 
 # About
-This package contains the ${name_normal_case} UVM Agent Self-Test Bench and Test Library.
+This IP contains the ${name_normal_case} UVM Agent Self-Test Bench and Test Library.
 
 
 # Block Diagram
@@ -11,16 +11,16 @@ This package contains the ${name_normal_case} UVM Agent Self-Test Bench and Test
 # Directory Structure
 * `bin` - Scripts, metadata and other miscellaneous files
 * `docs` - Reference documentation
-* `examples` - Samples for users
-* `src` - Source code for this package
+* `examples` - Code samples for adding to this test bench
+* `src` - Source code
 
 
 # Dependencies
-It is dependent on the following packages:
+It is dependent on the following IP:
 
-* `uvm_pkg`
-* `uvml_pkg`
-* `uvml_logs_pkg`
-* `uvml_sb_pkg`
-* `uvma_${name}_pkg`
-* `uvme_${name}_st_pkg`
+* `uvm`
+* `uvml`
+* `uvml_logs`
+* `uvml_sb`
+* `uvma_${name}`
+* `uvme_${name}_st`

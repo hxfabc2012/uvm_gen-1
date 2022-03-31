@@ -38,7 +38,7 @@ class uvma_${name}_my_seq_c extends uvma_${name}_base_seq_c;
    extern function new(string name="uvma_${name}_my_seq");
 
    /**
-    * Generates num_items of fully random reqs.
+    * Generates #num_items of fully random reqs.
     */
    extern virtual task body();
 
