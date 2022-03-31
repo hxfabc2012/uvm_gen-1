@@ -23,15 +23,6 @@ interface uvma_${name}_dp_if (
 
 
    /**
-    * Used by target DUT.
-    */
-   clocking dut_cb @(posedge clk);
-      // TODO Implement uvma_${name}_dp_if::dut_cb()
-      //      Ex: input  enable,
-      //                 data  ;
-   endclocking : dut_cb
-
-   /**
     * Used by uvma_${name}_dp_drv_c.
     */
    clocking drv_cb @(posedge clk);
@@ -58,14 +49,6 @@ interface uvma_${name}_dp_if (
       //                 data  ;
    endclocking : mon_out_cb
 
-   /**
-    * Used by target DUT.
-    */
-   modport dut_mp (
-      clocking dut_cb ,
-      input    clk    ,
-      input    reset_n
-   );
 
    /**
     * Used by uvma_${name}_dp_drv_c.
