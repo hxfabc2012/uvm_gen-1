@@ -4,13 +4,6 @@
 ########################################################################################################################
 # SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 ########################################################################################################################
-# Licensed under the Solderpad Hardware License v 2.1 (the "License"); you may not use this file except in compliance
-# with the License, or, at your option, the Apache License version 2.0.  You may obtain a copy of the License at
-#                                       https://solderpad.org/licenses/SHL-2.1/
-# Unless required by applicable law or agreed to in writing, any work distributed under the License is distributed on
-# an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the License for the
-# specific language governing permissions and limitations under the License.
-########################################################################################################################
 
 
 """Moore.io UVM Singleton Generator
@@ -47,6 +40,7 @@ Examples:
 from datetime import date
 import os
 import sys
+import re
 from docopt import docopt
 
 
@@ -55,9 +49,11 @@ from docopt import docopt
 ########################################################################################################################
 dbg = False
 args = {}
-relative_path_to_template = os.getcwd() + "/../templates/singleton"
+uvm_gen_dir = re.sub("new.py", "", os.path.realpath(__file__)) + ".."
+relative_path_to_template = uvm_gen_dir + "/templates/singleton/"
 out_path = ""
 default_copyright_owner = ""
+default_license = "SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1"
 name_of_copyright_owner = ""
 name = ""
 name_normal_case = ""
@@ -166,7 +162,9 @@ def get_next_answer(question):
 def gen_component():
     global out_path
     global default_copyright_owner
-    parameters = {}
+    parameters = {
+        "year" : date.today().year
+    }
     print("Moore.io Template Generator: Component (v1p0)")
     
     if out_path == "":
@@ -174,14 +172,15 @@ def gen_component():
         if out_path == "":
             out_path = "."
     
-    parameters = {
-        "year" : date.today().year
-    }
-    
     name_of_copyright_owner = get_next_answer("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
     if name_of_copyright_owner == "":
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    license = get_next_answer("Please enter a usage license or hit RETURN for the default (default is '" + default_license + "'):\n").strip()
+    if license == "":
+        license = default_license
+    parameters["license"] = license
     
     name = get_next_answer("Please enter the name for this Component (ex: 'my_comp'):\n").lower().strip()
     if name == "":
@@ -208,7 +207,9 @@ def gen_component():
 def gen_object():
     global out_path
     global default_copyright_owner
-    parameters = {}
+    parameters = {
+        "year" : date.today().year
+    }
     print("Moore.io Template Generator: Object (v1p0)")
     
     if out_path == "":
@@ -216,14 +217,15 @@ def gen_object():
         if out_path == "":
             out_path = "."
     
-    parameters = {
-        "year" : date.today().year
-    }
-    
     name_of_copyright_owner = get_next_answer("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
     if name_of_copyright_owner == "":
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    license = get_next_answer("Please enter a usage license or hit RETURN for the default (default is '" + default_license + "'):\n").strip()
+    if license == "":
+        license = default_license
+    parameters["license"] = license
     
     name = get_next_answer("Please enter the name for this Object (ex: 'my_obj'):\n").lower().strip()
     if name == "":
@@ -250,7 +252,9 @@ def gen_object():
 def gen_reg_adapter():
     global out_path
     global default_copyright_owner
-    parameters = {}
+    parameters = {
+        "year" : date.today().year
+    }
     print("Moore.io Template Generator: Register Adapter (v1p0)")
     
     if out_path == "":
@@ -258,14 +262,15 @@ def gen_reg_adapter():
         if out_path == "":
             out_path = "."
     
-    parameters = {
-        "year" : date.today().year
-    }
-    
     name_of_copyright_owner = get_next_answer("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
     if name_of_copyright_owner == "":
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    license = get_next_answer("Please enter a usage license or hit RETURN for the default (default is '" + default_license + "'):\n").strip()
+    if license == "":
+        license = default_license
+    parameters["license"] = license
     
     name = get_next_answer("Please enter the package name for this Register Adapter (ex: 'uvma_apb'):\n").lower().strip()
     if name == "":
@@ -285,7 +290,9 @@ def gen_reg_adapter():
 def gen_reg_block():
     global out_path
     global default_copyright_owner
-    parameters = {}
+    parameters = {
+        "year" : date.today().year
+    }
     print("Moore.io Template Generator: Register Block (v1p0)")
     
     if out_path == "":
@@ -293,14 +300,15 @@ def gen_reg_block():
         if out_path == "":
             out_path = "."
     
-    parameters = {
-        "year" : date.today().year
-    }
-    
     name_of_copyright_owner = get_next_answer("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
     if name_of_copyright_owner == "":
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    license = get_next_answer("Please enter a usage license or hit RETURN for the default (default is '" + default_license + "'):\n").strip()
+    if license == "":
+        license = default_license
+    parameters["license"] = license
     
     name = get_next_answer("Please enter the name for this Register Block (ex: 'top'):\n").lower().strip()
     if name == "":
@@ -327,7 +335,9 @@ def gen_reg_block():
 def gen_reg():
     global out_path
     global default_copyright_owner
-    parameters = {}
+    parameters = {
+        "year" : date.today().year
+    }
     print("Moore.io Template Generator: Register (v1p0)")
     
     if out_path == "":
@@ -335,14 +345,15 @@ def gen_reg():
         if out_path == "":
             out_path = "."
     
-    parameters = {
-        "year" : date.today().year
-    }
-    
     name_of_copyright_owner = get_next_answer("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
     if name_of_copyright_owner == "":
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    license = get_next_answer("Please enter a usage license or hit RETURN for the default (default is '" + default_license + "'):\n").strip()
+    if license == "":
+        license = default_license
+    parameters["license"] = license
     
     name = get_next_answer("Please enter the name for this Register (ex: 'status'):\n").lower().strip()
     if name == "":
@@ -369,7 +380,9 @@ def gen_reg():
 def gen_seq():
     global out_path
     global default_copyright_owner
-    parameters = {}
+    parameters = {
+        "year" : date.today().year
+    }
     print("Moore.io Template Generator: Sequence (v1p0)")
     
     if out_path == "":
@@ -377,14 +390,15 @@ def gen_seq():
         if out_path == "":
             out_path = "."
     
-    parameters = {
-        "year" : date.today().year
-    }
-    
     name_of_copyright_owner = get_next_answer("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
     if name_of_copyright_owner == "":
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    license = get_next_answer("Please enter a usage license or hit RETURN for the default (default is '" + default_license + "'):\n").strip()
+    if license == "":
+        license = default_license
+    parameters["license"] = license
     
     name = get_next_answer("Please enter the name for this Sequence (ex: 'traffic'):\n").lower().strip()
     if name == "":
@@ -411,7 +425,9 @@ def gen_seq():
 def gen_seq_lib():
     global out_path
     global default_copyright_owner
-    parameters = {}
+    parameters = {
+        "year" : date.today().year
+    }
     print("Moore.io Template Generator: Sequence Library (v1p0)")
     
     if out_path == "":
@@ -419,14 +435,15 @@ def gen_seq_lib():
         if out_path == "":
             out_path = "."
     
-    parameters = {
-        "year" : date.today().year
-    }
-    
     name_of_copyright_owner = get_next_answer("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
     if name_of_copyright_owner == "":
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    license = get_next_answer("Please enter a usage license or hit RETURN for the default (default is '" + default_license + "'):\n").strip()
+    if license == "":
+        license = default_license
+    parameters["license"] = license
     
     name = get_next_answer("Please enter the name for this Sequence Library (ex: 'mstr'):\n").lower().strip()
     if name == "":
@@ -453,7 +470,9 @@ def gen_seq_lib():
 def gen_test():
     global out_path
     global default_copyright_owner
-    parameters = {}
+    parameters = {
+        "year" : date.today().year
+    }
     print("Moore.io Template Generator: Test (v1p0)")
     
     if out_path == "":
@@ -461,14 +480,15 @@ def gen_test():
         if out_path == "":
             out_path = "."
     
-    parameters = {
-        "year" : date.today().year
-    }
-    
     name_of_copyright_owner = get_next_answer("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
     if name_of_copyright_owner == "":
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    license = get_next_answer("Please enter a usage license or hit RETURN for the default (default is '" + default_license + "'):\n").strip()
+    if license == "":
+        license = default_license
+    parameters["license"] = license
     
     name = get_next_answer("Please enter the name for this Test (ex: 'smoke'):\n").lower().strip()
     if name == "":
@@ -501,7 +521,9 @@ def gen_test():
 def gen_vseq():
     global out_path
     global default_copyright_owner
-    parameters = {}
+    parameters = {
+        "year" : date.today().year
+    }
     print("Moore.io Template Generator: Virtual Sequence (v1p0)")
     
     if out_path == "":
@@ -509,14 +531,16 @@ def gen_vseq():
         if out_path == "":
             out_path = "."
     
-    parameters = {
-        "year" : date.today().year
-    }
     
     name_of_copyright_owner = get_next_answer("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
     if name_of_copyright_owner == "":
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    license = get_next_answer("Please enter a usage license or hit RETURN for the default (default is '" + default_license + "'):\n").strip()
+    if license == "":
+        license = default_license
+    parameters["license"] = license
     
     name = get_next_answer("Please enter the name for this Virtual Sequence (ex: 'basic_access'):\n").lower().strip()
     if name == "":
@@ -543,7 +567,9 @@ def gen_vseq():
 def gen_vseq_lib():
     global out_path
     global default_copyright_owner
-    parameters = {}
+    parameters = {
+        "year" : date.today().year
+    }
     print("Moore.io Template Generator: Virtual Sequence Library (v1p0)")
     
     if out_path == "":
@@ -551,14 +577,16 @@ def gen_vseq_lib():
         if out_path == "":
             out_path = "."
     
-    parameters = {
-        "year" : date.today().year
-    }
     
     name_of_copyright_owner = get_next_answer("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
     if name_of_copyright_owner == "":
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    license = get_next_answer("Please enter a usage license or hit RETURN for the default (default is '" + default_license + "'):\n").strip()
+    if license == "":
+        license = default_license
+    parameters["license"] = license
     
     name = get_next_answer("Please enter the name for this Virtual Sequence Library (ex: 'cpu'):\n").lower().strip()
     if name == "":

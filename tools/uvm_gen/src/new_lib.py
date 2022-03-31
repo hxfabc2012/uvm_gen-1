@@ -12,35 +12,27 @@
 from datetime import date
 import os
 import sys
+import re
 
 
 ########################################################################################################################
 # GLOBALS
 ########################################################################################################################
 dbg = False
-relative_path_to_template = os.getcwd() + "/../templates/"
+uvm_gen_dir = re.sub("new_lib.py", "", os.path.realpath(__file__)) + ".."
+relative_path_to_template = uvm_gen_dir + "/templates/"
 out_path = ""
-default_copyright_owner = ""
+default_copyright_owner = "Contributors"
+default_license = "SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1"
 name_of_copyright_owner = ""
 name = ""
 name_normal_case = ""
-clk_agent_name = ""
-clk_agent_type = ""
-ral_agent_name = ""
-ral_agent_type = ""
-reset_agent_name = ""
-reset_agent_type = ""
 
 
 ########################################################################################################################
 # TEMPLATE DATA
 ########################################################################################################################
-parameters = {
-    "name"                    : "",
-    "name_uppercase"          : "",
-    "name_normal_case"        : "",
-    "name_of_copyright_owner" : "",
-}
+parameters = { }
 
 files = {
     #              SRC                                 DST
@@ -132,7 +124,7 @@ def prompt_user_values():
     global default_copyright_owner
     global parameters
     
-    print("Moore.io Template Generator: UVM Library (v1p0)")
+    print("Moore.io Template Generator: UVM Library (v1p1)")
     print("***********************************************************************")
     print("The answers to the following questionnaire will be used to generate the code for your new UVM Library")
     print("")
@@ -142,30 +134,31 @@ def prompt_user_values():
         if out_path == "":
             out_path = "."
     
-    parameters = {
-        "name"          : name,
-        "name_uppercase": name.upper(),
-        "year"          : date.today().year
-    }
     
     name_of_copyright_owner = input("Please enter a specific name for the copyright holder or hit RETURN for the default (default is '" + default_copyright_owner + "'):\n").strip()
     if name_of_copyright_owner == "":
         name_of_copyright_owner = default_copyright_owner
-    parameters["name_of_copyright_owner"] = name_of_copyright_owner
+    
+    license = input("Please enter a usage license or hit RETURN for the default (default is '" + default_license + "'):\n").strip()
+    if license == "":
+        license = default_license
     
     name = input("Please enter the name of this new Library (ex: 'math'); this name will be used for all Library types (ex: 'uvml_math_c'):\n").lower().strip()
     if name == "":
         sys.exit("ERROR: package name cannot be empty.  Exiting.")
-    else:
-        parameters["name"] = name
-        parameters["name_uppercase"] = name.upper()
     
     name_normal_case = input("Please enter the (descriptive) name for this new Library (ex: 'Mathematical Objects'):\n").strip()
     if name_normal_case == "":
         sys.exit("ERROR: descriptive name cannot be empty.  Exiting.")
-    else:
-        parameters["name_normal_case"] = name_normal_case
     
+    parameters = {
+        "name_normal_case"        : name_normal_case,
+        "name"                    : name,
+        "name_uppercase"          : name.upper(),
+        "year"                    : date.today().year,
+        "name_of_copyright_owner" : name_of_copyright_owner,
+        "license"                 : license
+    }
 
 
 ########################################################################################################################

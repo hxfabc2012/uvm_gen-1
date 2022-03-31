@@ -7,17 +7,17 @@
 
 
 # 1. Create code from spec files
-cat ./tests/lib.spec | ./src/new_lib.py ../../dv/
-./src/new.py component   -f ./tests/component.spec   -o ../../dv/uvmt_misc_st/src/tests
-./src/new.py object      -f ./tests/object.spec      -o ../../dv/uvmt_misc_st/src/tests
-./src/new.py reg_adapter -f ./tests/reg_adapter.spec -o ../../dv/uvmt_misc_st/src/tests
-./src/new.py reg         -f ./tests/reg.spec         -o ../../dv/uvmt_misc_st/src/tests
-./src/new.py reg_block   -f ./tests/reg_block.spec   -o ../../dv/uvmt_misc_st/src/tests
-./src/new.py seq         -f ./tests/seq.spec         -o ../../dv/uvmt_misc_st/src/seq
-./src/new.py seq_lib     -f ./tests/seq_lib.spec     -o ../../dv/uvmt_misc_st/src/seq
-./src/new.py test        -f ./tests/test.spec        -o ../../dv/uvmt_misc_st/src/tests
-./src/new.py vseq        -f ./tests/vseq.spec        -o ../../dv/uvmt_misc_st/src/seq
-./src/new.py vseq_lib    -f ./tests/vseq_lib.spec    -o ../../dv/uvmt_misc_st/src/seq
+cat ./tests/data/lib.spec | ./src/new_lib.py ../../dv/
+./src/new.py component   -f ./tests/data/component.spec   -o ../../dv/uvmt_misc_st/src/tests
+./src/new.py object      -f ./tests/data/object.spec      -o ../../dv/uvmt_misc_st/src/tests
+./src/new.py reg_adapter -f ./tests/data/reg_adapter.spec -o ../../dv/uvmt_misc_st/src/tests
+./src/new.py reg         -f ./tests/data/reg.spec         -o ../../dv/uvmt_misc_st/src/tests
+./src/new.py reg_block   -f ./tests/data/reg_block.spec   -o ../../dv/uvmt_misc_st/src/tests
+./src/new.py seq         -f ./tests/data/seq.spec         -o ../../dv/uvmt_misc_st/src/seq
+./src/new.py seq_lib     -f ./tests/data/seq_lib.spec     -o ../../dv/uvmt_misc_st/src/seq
+./src/new.py test        -f ./tests/data/test.spec        -o ../../dv/uvmt_misc_st/src/tests
+./src/new.py vseq        -f ./tests/data/vseq.spec        -o ../../dv/uvmt_misc_st/src/seq
+./src/new.py vseq_lib    -f ./tests/data/vseq_lib.spec    -o ../../dv/uvmt_misc_st/src/seq
 
 # 2. Simulate
 cd ../../sim
