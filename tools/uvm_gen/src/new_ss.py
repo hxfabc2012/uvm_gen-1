@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 ########################################################################################################################
 # Copyright 2022 Datum Technology Corporation
-########################################################################################################################
 # SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 ########################################################################################################################
 
@@ -12,15 +11,18 @@
 from datetime import date
 import os
 import sys
+import re
 
 
 ########################################################################################################################
 # GLOBALS
 ########################################################################################################################
 dbg = False
-relative_path_to_template = os.getcwd() + "/../templates/"
+uvm_gen_dir = re.sub("new_ss.py", "", os.path.realpath(__file__)) + ".."
+relative_path_to_template = uvm_gen_dir + "/templates/"
 out_path = ""
-default_copyright_owner = ""
+default_copyright_owner = "Contributors"
+default_license = "SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1"
 name_of_copyright_owner = ""
 name = ""
 name_normal_case = ""

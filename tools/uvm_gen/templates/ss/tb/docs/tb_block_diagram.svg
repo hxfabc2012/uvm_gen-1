@@ -90,7 +90,7 @@
 		</g>
 		<g id="shape159-17" v:mID="159" v:groupContext="shape" transform="translate(439.37,-41.1772)">
 			<title>Sheet.159</title>
-			<desc>&#60;uvma_${clk_agent_type}_if&#62; ${clk_agent_name}_if</desc>
+			<desc>&#60;uvma_clk_if&#62; ${clk_agent_name}_if</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="63.7795" cy="377.624" width="127.56" height="21.7443"/>
 			<rect x="0" y="366.752" width="127.559" height="21.7443" class="st9"/>
@@ -99,7 +99,7 @@
 						class="st6">${</tspan><tspan class="st6" v:langID="1033">clk_agent_name</tspan><tspan class="st6">}_if</tspan></text>		</g>
 		<g id="shape213-24" v:mID="213" v:groupContext="shape" transform="translate(600.945,-41.1772)">
 			<title>Sheet.213</title>
-			<desc>&#60;uvma_${reset_agent_type}_if&#62; ${reset_agent_name}_if</desc>
+			<desc>&#60;uvma_reset_if&#62; ${reset_agent_name}_if</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="63.7795" cy="377.624" width="127.56" height="21.7443"/>
 			<rect x="0" y="366.752" width="127.559" height="21.7443" class="st9"/>

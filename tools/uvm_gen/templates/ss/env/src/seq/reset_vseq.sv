@@ -1,8 +1,6 @@
 // Copyright ${year} ${name_of_copyright_owner}
+// ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SPDX-License-Identifier: ${license_id}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 `ifndef __UVME_${name_uppercase}_${reset_agent_name_uppercase}_VSEQ_SV__
@@ -10,53 +8,61 @@
 
 
 /**
- * Virtual sequence responsible for asserting reset with the ${name_normal_case} DUT.
+ * Virtual sequence responsible for asserting reset for the ${name_normal_case} Sub-System environment.
  */
 class uvme_${name}_${reset_agent_name}_vseq_c extends uvme_${name}_base_vseq_c;
-   
-   // TODO Add reset sequence to uvme_${name}_${reset_agent_name}_vseq_c
-   //      Ex: rand uvma_${reset_agent_type}_simple_seq_c  ${reset_agent_name}_seq;
-   
+
+   /// @defgroup Knobs
+   /// @{
+   rand int unsigned  duration_min; ///< Lower bound for reset pulse duration
+   rand int unsigned  duration_max; ///< Upper bound for reset pulse duration
+   /// @}
+
+
    `uvm_object_utils_begin(uvme_${name}_${reset_agent_name}_vseq_c)
-      // TODO Add sub-sequence(s) utility macros
-      //      Ex: `uvm_field_object(${reset_agent_name}_seq, UVM_DEFAULT)
+      `uvm_field_int(duration_min, UVM_DEFAULT + UVM_DEC)
+      `uvm_field_int(duration_max, UVM_DEFAULT + UVM_DEC)
    `uvm_object_utils_end
-   
-   
-   // TODO Add constraint(s) to uvme_${name}_${reset_agent_name}_vseq_c
-   //      Ex: constraint ${reset_agent_name}_seq_cons {
-   //             ${reset_agent_name}_seq.abc == 123;
-   //          }
-   
-   
+
+
+   /**
+    * Sets safe defaults for knobs.
+    */
+   constraint defaults_cons {
+      soft duration_min ==  10;
+      soft duration_max == 100;
+   }
+
+
    /**
     * Default constructor.
     */
    extern function new(string name="uvme_${name}_${reset_agent_name}_vseq_c");
-   
+
    /**
-    * TODO Describe uvme_${name}_${reset_agent_name}_vseq_c::body()
+    * Sends single reset pulse.
     */
    extern virtual task body();
-   
+
 endclass : uvme_${name}_${reset_agent_name}_vseq_c
 
 
 function uvme_${name}_${reset_agent_name}_vseq_c::new(string name="uvme_${name}_${reset_agent_name}_vseq_c");
-   
+
    super.new(name);
-   
-   // TODO Create sub-sequence(s)
-   //      Ex: ${reset_agent_name}_seq = uvma_${reset_agent_type}_simple_seq_c::type_id::create("${reset_agent_name}_seq");
-   
+
 endfunction : new
 
 
 task uvme_${name}_${reset_agent_name}_vseq_c::body();
-   
-   // TODO Implement uvme_${name}_${reset_agent_name}_vseq_c::body()
-   //      Ex: `uvm_do_with(${reset_agent_name}_seq, p_sequencer.${reset_agent_name}_sequencer)
-   
+
+   uvma_reset_seq_item_c  reset_req;
+
+   `uvm_do_on_with(reset_req, p_sequencer.${reset_agent_name}_sequencer, {
+      duration >= duration_min;
+      duration <= duration_max;
+   })
+
 endtask : body
 
 

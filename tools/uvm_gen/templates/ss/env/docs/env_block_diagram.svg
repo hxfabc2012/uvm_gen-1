@@ -173,7 +173,7 @@
 			<title>Sheet.452</title>
 			<g id="shape426-73" v:mID="426" v:groupContext="shape">
 				<title>Sheet.426</title>
-				<desc>&#60;uvma_${reset_agent_type}_agent_c&#62; ${reset_agent_name}_agent</desc>
+				<desc>&#60;uvma_reset_agent_c&#62; ${reset_agent_name}_agent</desc>
 				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 				<v:textRect cx="72.2407" cy="364.644" width="144.49" height="36.3657"/>
 				<rect x="0" y="346.461" width="144.481" height="36.3657" class="st15"/>
@@ -193,7 +193,7 @@
 			<title>Sheet.453</title>
 			<g id="shape114-83" v:mID="114" v:groupContext="shape">
 				<title>Sheet.114</title>
-				<desc>&#60;uvma_${clk_agent_type}_agent_c&#62; ${clk_agent_name}_agent</desc>
+				<desc>&#60;uvma_clk_agent_c&#62; ${clk_agent_name}_agent</desc>
 				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 				<v:textRect cx="72.2407" cy="364.644" width="144.49" height="36.3657"/>
 				<rect x="0" y="346.461" width="144.481" height="36.3657" class="st15"/>

@@ -2,7 +2,7 @@
 
 
 # About
-This package contains the ${name_of_copyright_owner} ${name_normal_case} Sub-System UVM Test Bench.
+This IP contains the ${name_of_copyright_owner} ${name_normal_case} Sub-System UVM Test Bench.
 
 TODO Describe ${name_normal_case}
 
@@ -12,20 +12,20 @@ TODO Describe ${name_normal_case}
 
 # Directory Structure
 * `bin` - Scripts, metadata and other miscellaneous files
-* `docs` - Documents describing the ${name_of_copyright_owner} ${name_normal_case} Sub-System UVM Test Bench
-* `examples` - Samples for users
-* `src` - Source code for this package
+* `docs` - Reference documentation
+* `examples` - Code samples for adding to this test bench
+* `src` - Source code
 
 
 # Dependencies
-It is dependent on the following packages:
+It is dependent on the following IP:
 
-* `uvm_pkg`
-* `uvml_pkg`
-* `uvml_logs_pkg`
-* `uvml_sb_pkg`
-* `uvma_${clk_agent_type}_pkg`
-* `uvma_${reset_agent_type}_pkg`
-* `uvma_${ral_agent_type}_pkg`
-* `uvme_${name}_pkg`
-* TODO Add ${name_normal_case} dependencies
+* `uvm`
+* `uvml`
+* `uvml_logs`
+* `uvml_sb`
+* `uvml_ral`
+* `uvma_clk`
+* `uvma_reset`
+* `uvma_${ral_agent_type}`
+* `uvme_${name}`

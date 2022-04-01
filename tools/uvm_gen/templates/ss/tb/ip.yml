@@ -27,12 +27,13 @@ structure:
    src-paths     : [ "src"      ]
 
 dependencies:
-  - { type: "DV", name: "uvm"      , repo-uri: "https://github.com/Datum-Technology-Corporation/uvm.git"      , repo-branch: "main", repo-path: "dv/uvm"       }
-  - { type: "DV", name: "uvml"     , repo-uri: "https://github.com/Datum-Technology-Corporation/uvml.git"     , repo-branch: "main", repo-path: "dv/uvml"      }
-  - { type: "DV", name: "uvml_logs", repo-uri: "https://github.com/Datum-Technology-Corporation/uvml_logs.git", repo-branch: "main", repo-path: "dv/uvml_logs" }
-  - { type: "DV", name: "uvml_sb"  , repo-uri: "https://github.com/Datum-Technology-Corporation/uvml_sb.git"  , repo-branch: "main", repo-path: "dv/uvml_sb"   }
-  - { type: "DV", name: "uvma_${clk_agent_type}", repo-uri: "https://github.com/Datum-Technology-Corporation/uvma_${clk_agent_type}.git", repo-branch: "main", repo-path: "dv/uvma_${clk_agent_type}" }
-  - { type: "DV", name: "uvma_${reset_agent_type}", repo-uri: "https://github.com/Datum-Technology-Corporation/uvma_${reset_agent_type}.git", repo-branch: "main", repo-path: "dv/uvma_${reset_agent_type}" }
+  - { type: "DV", name: "uvm"       , repo-uri: "https://github.com/Datum-Technology-Corporation/uvm.git"       , repo-branch: "main", repo-path: "dv/uvm"        }
+  - { type: "DV", name: "uvml"      , repo-uri: "https://github.com/Datum-Technology-Corporation/uvml.git"      , repo-branch: "main", repo-path: "dv/uvml"       }
+  - { type: "DV", name: "uvml_logs" , repo-uri: "https://github.com/Datum-Technology-Corporation/uvml_logs.git" , repo-branch: "main", repo-path: "dv/uvml_logs"  }
+  - { type: "DV", name: "uvml_ral"  , repo-uri: "https://github.com/Datum-Technology-Corporation/uvml_ral.git"  , repo-branch: "main", repo-path: "dv/uvml_ral"   }
+  - { type: "DV", name: "uvml_sb"   , repo-uri: "https://github.com/Datum-Technology-Corporation/uvml_sb.git"   , repo-branch: "main", repo-path: "dv/uvml_sb"    }
+  - { type: "DV", name: "uvma_clk"  , repo-uri: "https://github.com/Datum-Technology-Corporation/uvma_clk.git"  , repo-branch: "main", repo-path: "dv/uvma_clk"   }
+  - { type: "DV", name: "uvma_reset", repo-uri: "https://github.com/Datum-Technology-Corporation/uvma_reset.git", repo-branch: "main", repo-path: "dv/uvma_reset" }
   - { type: "DV", name: "uvma_${ral_agent_type}", repo-uri: "https://github.com/Datum-Technology-Corporation/uvma_${ral_agent_type}.git", repo-branch: "main", repo-path: "dv/uvma_${ral_agent_type}" }
 
 hdl-src:

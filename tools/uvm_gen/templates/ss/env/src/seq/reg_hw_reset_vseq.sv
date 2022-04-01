@@ -1,8 +1,6 @@
 // Copyright ${year} ${name_of_copyright_owner}
+// ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SPDX-License-Identifier: ${license_id}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 `ifndef __UVME_${name_uppercase}_REG_HW_RESET_VSEQ_SV__
@@ -10,90 +8,59 @@
 
 
 /**
- * Virtual sequence that checks that the hardware reset value specified in the register block (uvme_${name}_reg_block_c) matches the DUT's.
+ * Virtual sequence checking that the hardware reset values in a register block match the ${name_normal_case} Sub-System DUT.
  */
 class uvme_${name}_reg_hw_reset_vseq_c extends uvme_${name}_reg_base_vseq_c;
-   
+
    `include "uvme_${name}_reg_hw_reset_vseq_ignore_list.sv"
-   
-   // Sub-sequences
-   rand uvm_reg_hw_reset_seq  single_block_hw_reset_seq;
-   rand uvm_reg_hw_reset_seq  all_blocks_hw_reset_seq[];
-   
-   
+
+   rand uvm_reg_hw_reset_seq  hw_reset_seq; ///< Sequence to be run
+
+
    `uvm_object_utils_begin(uvme_${name}_reg_hw_reset_vseq_c)
-      `uvm_field_object      (single_block_hw_reset_seq, UVM_DEFAULT)
-      `uvm_field_array_object(all_blocks_hw_reset_seq  , UVM_DEFAULT)
+      `uvm_field_object(hw_reset_seq, UVM_DEFAULT)
    `uvm_object_utils_end
-   
-   
-   constraint limits_cons {
-      // TODO Constrain size of all_blocks_hw_reset_seq
-      //      Ex: all_blocks_hw_reset_seq.size() == UVME_${name_uppercase}_MAX_NUM_CHANNELS;
-   }
-   
-   
+
+
    /**
-    * Default constructor.
+    * Creates hw_reset_seq.
     */
    extern function new(string name="uvme_${name}_reg_hw_reset_vseq");
-   
+
    /**
-    * TODO Describe uvme_${name}_reg_hw_reset_vseq_c::run_single_block()
+    * Runs #hw_reset_seq against #single_block.
     */
    extern virtual task run_single_block();
-   
+
    /**
-    * TODO Describe uvme_${name}_reg_hw_reset_vseq_c::run_all_blocks()
+    * Runs #hw_reset_seq against uvme_${name}_reg_block_c.
     */
    extern virtual task run_all_blocks();
-   
+
 endclass : uvme_${name}_reg_hw_reset_vseq_c
 
 
 function uvme_${name}_reg_hw_reset_vseq_c::new(string name="uvme_${name}_reg_hw_reset_vseq");
-   
+
    super.new(name);
-   
-   single_block_hw_reset_seq = uvm_reg_hw_reset_seq::type_id::create("single_block_hw_reset_seq");
-   
-   // TODO Initialize all_blocks_hw_reset_seq array
-   //      Ex: all_blocks_hw_reset_seq = new[UVME_${name_uppercase}_MAX_NUM_CHANNELS];
-   foreach (all_blocks_hw_reset_seq[ii]) begin
-     all_blocks_hw_reset_seq[ii] = uvm_reg_hw_reset_seq::type_id::create($sformatf("all_blocks_hw_reset_seq[%0d]", ii));
-   end
-   
+   hw_reset_seq = uvm_reg_hw_reset_seq::type_id::create("hw_reset_seq");
+
 endfunction : new
 
 
 task uvme_${name}_reg_hw_reset_vseq_c::run_single_block();
-   
-   // TODO Implement uvme_${name}_reg_hw_reset_vseq_c::run_single_block()
-   //      Ex: single_block_hw_reset_seq.model = single_block;
-   //          `uvm_send(single_block_hw_reset_seq)
-   
+
+   hw_reset_seq.model = single_block;
+   `uvm_send(hw_reset_seq)
+
 endtask : run_single_block
 
 
 task uvme_${name}_reg_hw_reset_vseq_c::run_all_blocks();
-   
-   // TODO Implement uvme_${name}_reg_hw_reset_vseq_c::run_all_blocks()
-   //      Ex: fork
-   //             begin
-   //                foreach (cfg.ral.channels[_ii]) begin
-   //                   fork
-   //                      automatic int unsigned ii = _ii;
-   //                      
-   //                      begin
-   //                         all_blocks_hw_reset_seq[ii].model = cfg.${name}_reg_block.channels[ii];
-   //                         `uvm_send(all_blocks_hw_reset_seq[ii])
-   //                      end
-   //                   join_none
-   //                end
-   //                wait fork;
-   //             end
-   //          join
-   
+
+   hw_reset_seq.model = cfg.${name}_reg_block;
+   `uvm_send(hw_reset_seq)
+
 endtask : run_all_blocks
 
 

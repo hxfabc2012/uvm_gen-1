@@ -1,8 +1,6 @@
 // Copyright ${year} ${name_of_copyright_owner}
+// ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SPDX-License-Identifier: ${license_id}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 `ifndef __UVME_${name_uppercase}_VSEQ_LIB_SV__
@@ -18,34 +16,34 @@
 
 
 /**
- * Object cataloging the ${name_normal_case} environment's virtual sequences.
+ * Object cataloging the ${name_normal_case} Sub-System environment's virtual sequences.
  */
-class uvme_${name}_vseq_lib_c extends uvm_sequence_library #(
+class uvme_${name}_vseq_lib_c extends uvml_vseq_lib_c #(
    .REQ(uvm_sequence_item),
    .RSP(uvm_sequence_item)
 );
-   
-   
+
    `uvm_object_utils          (uvme_${name}_vseq_lib_c)
    `uvm_sequence_library_utils(uvme_${name}_vseq_lib_c)
-   
-   
+
+
    /**
-    * Initializes sequence library
+    * 1. Initializes sequence library
+    * 2. Adds sequences to library
     */
    extern function new(string name="uvme_${name}_vseq_lib");
-   
+
 endclass : uvme_${name}_vseq_lib_c
 
 
 function uvme_${name}_vseq_lib_c::new(string name="uvme_${name}_vseq_lib");
-   
+
    super.new(name);
    init_sequence_library();
-   
-   // TODO Add sequences to uvme_${name}_seq_lib_c
-   //      Ex: add_sequence(uvme_${name}_abc_seq_c::get_type());
-   
+
+   add_sequence(uvme_${name}_reg_bit_bash_vseq_c::get_type());
+   add_sequence(uvme_${name}_reg_hw_reset_vseq_c::get_type());
+
 endfunction : new
 
 

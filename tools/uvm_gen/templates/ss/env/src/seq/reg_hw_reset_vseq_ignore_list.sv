@@ -1,8 +1,6 @@
 // Copyright ${year} ${name_of_copyright_owner}
+// ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SPDX-License-Identifier: ${license_id}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 `ifndef __UVME_${name_uppercase}_REG_HW_RESET_VSEQ_IGNORE_LIST_SV__
@@ -10,7 +8,7 @@
 
 
 string  ignore_list[$] = '{
-   // TODO Add register blocks to ${name_normal_case} ignore list for RAL hardware reset value automated testing
+   // TODO Add registers and/or register blocks to ignore list for automated testing of reset values
    //      Ex: "block_name.reg_name", // One register at a time
    //      Ex: "block_name.*", // One block at a time
 };

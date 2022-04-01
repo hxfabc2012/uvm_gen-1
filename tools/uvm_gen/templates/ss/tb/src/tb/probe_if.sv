@@ -1,8 +1,6 @@
 // Copyright ${year} ${name_of_copyright_owner}
+// ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SPDX-License-Identifier: ${license_id}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 `ifndef __UVMT_${name_uppercase}_PROBE_IF_SV__
@@ -10,15 +8,15 @@
 
 
 /**
- * Interface encapsulating all extra signals to/from design hierarchy.
+ * Interface encapsulating all extra signals to/from ${name_normal_case} Sub-System design hierarchy.
  */
 interface uvmt_${name}_probe_if;
-   
+
    import uvme_${name}_pkg::*;
-   
+
    // TODO Add signals to uvmt_${name}_probe_if
-   //      Ex: logic  probed_wire_a;
-   
+   //      Ex: logic  probed_wire_a; ///< Describe me!
+
 endinterface : uvmt_${name}_probe_if
 
 

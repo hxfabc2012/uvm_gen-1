@@ -2,7 +2,7 @@
 
 
 # About
-This package contains the ${name_of_copyright_owner} ${name_normal_case} Sub-System UVM Environment.
+This IP contains the ${name_of_copyright_owner} ${name_normal_case} Sub-System UVM Environment.
 
 TODO Describe ${name_normal_case}
 
@@ -12,14 +12,19 @@ TODO Describe ${name_normal_case}
 
 # Directory Structure
 * `bin` - Scripts, metadata and other miscellaneous files
-* `docs` - Documents describing the ${name_of_copyright_owner} ${name_normal_case} Sub-System UVM Environment
-* `examples` - Samples for users
-* `src` - Source code for this package
+* `docs` - Reference documentation
+* `examples` - Code samples for using and extending this environment
+* `src` - Source code
 
 
 # Dependencies
-It is dependent on the following packages:
+It is dependent on the following IP:
 
-* `uvm_pkg`
-* `uvml_pkg`
-* `uvml_logs_pkg`
+* `uvm`
+* `uvml`
+* `uvml_logs`
+* `uvml_sb`
+* `uvml_ral`
+* `uvma_clk`
+* `uvma_reset`
+* `uvma_${ral_agent_type}`
