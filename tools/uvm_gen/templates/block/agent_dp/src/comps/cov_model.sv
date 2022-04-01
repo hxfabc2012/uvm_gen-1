@@ -25,7 +25,8 @@ class uvma_${name}_dp_cov_model_c extends uvm_component;
    /// @defgroup TLM
    /// @{
    uvm_tlm_analysis_fifo #(uvma_${name}_dp_seq_item_c   )  seq_item_fifo     ; ///< Queue of sequence items waiting to be sampled.
-   uvm_tlm_analysis_fifo #(uvma_${name}_dp_mon_trn_c    )  mon_trn_fifo      ; ///< Queue of monitored transactions waiting to be sampled.
+   uvm_tlm_analysis_fifo #(uvma_${name}_dp_mon_in_trn_c )  mon_in_trn_fifo   ; ///< Queue of monitored input transactions waiting to be sampled.
+   uvm_tlm_analysis_fifo #(uvma_${name}_dp_mon_out_trn_c)  mon_out_trn_fifo  ; ///< Queue of monitored output transactions waiting to be sampled.
    uvm_analysis_export   #(uvma_${name}_dp_seq_item_c   )  seq_item_export   ; ///< Port receiving sequence items.
    uvm_analysis_export   #(uvma_${name}_dp_mon_in_trn_c )  mon_in_trn_export ; ///< Port receiving monitored input transactions.
    uvm_analysis_export   #(uvma_${name}_dp_mon_out_trn_c)  mon_out_trn_export; ///< Port receiving monitored output transactions.

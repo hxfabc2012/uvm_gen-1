@@ -291,7 +291,6 @@ task uvma_${name}_dp_mon_c::sample_in_trn(output uvma_${name}_dp_mon_in_trn_c tr
       //             trn.data = mp_in.mon_in_cb.data;
       //             trn.set_timestamp_end($realtime());
       //          end
-      // WARNING If no time is consumed by this loop, a zero-delay oscillation loop will occur and stall simulation
    end while (!sampled_trn);
 
 endtask : sample_in_trn
@@ -311,7 +310,6 @@ task uvma_${name}_dp_mon_c::sample_out_trn(output uvma_${name}_dp_mon_out_trn_c 
       //             trn.data = mp_out.mon_out_cb.data;
       //             trn.set_timestamp_end($realtime());
       //          end
-      // WARNING If no time is consumed by this loop, a zero-delay oscillation loop will occur and stall simulation
    end while (!sampled_trn);
 
 endtask : sample_out_trn

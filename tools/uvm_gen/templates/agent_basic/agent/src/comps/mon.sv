@@ -240,7 +240,6 @@ task uvma_${name}_mon_c::sample_trn(output uvma_${name}_mon_trn_c trn);
       //             trn.data = mp.mon_cb.data;
       //             trn.set_timestamp_end($realtime());
       //          end
-      // WARNING If no time is consumed by this loop, a zero-delay oscillation loop will occur and stall simulation
    end while (!sampled_trn);
 
 endtask : sample_trn

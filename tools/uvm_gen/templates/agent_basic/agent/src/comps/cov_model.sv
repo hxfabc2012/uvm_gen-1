@@ -43,7 +43,7 @@ class uvma_${name}_cov_model_c extends uvm_component;
 
    /**
     * 1. Ensures #cfg & #cntxt handles are not null.
-    * 2. Builds fifos.
+    * 2. Creates fifos.
     */
    extern virtual function void build_phase(uvm_phase phase);
 
@@ -111,8 +111,8 @@ function void uvma_${name}_cov_model_c::connect_phase(uvm_phase phase);
 
    super.connect_phase(phase);
 
-   seq_item_export = mon_trn_fifo .analysis_export;
-   mon_trn_export  = seq_item_fifo.analysis_export;
+   seq_item_export = seq_item_fifo.analysis_export;
+   mon_trn_export  = mon_trn_fifo .analysis_export;
 
 endfunction : connect_phase
 

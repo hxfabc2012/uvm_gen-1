@@ -170,7 +170,6 @@ task uvma_${name}_dp_drv_c::drv_req(ref uvma_${name}_dp_seq_item_c req);
    //      Ex: mp.drv_cb.enable <= 1'b1;
    //          mp.drv_cb.abc    <= req.abc;
    //          mp.drv_cb.xyz    <= req.xyz;
-   // WARNING If no time is consumed by this task, a zero-delay oscillation loop will occur and stall simulation
 
 endtask : drv_req
 

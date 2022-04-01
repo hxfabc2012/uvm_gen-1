@@ -8,8 +8,8 @@
 
 
 /**
- * Component implementing transaction-based software model of ${name_normal_case} Self-Testing Environment
- * (uvme_${name}_st_env_c) DUT.  Predicts how the passive agent will observe stimulus from the active agent.
+ * Component implementing transaction-based prediction for ${name_normal_case} Self-Testing.
+ * Predicts how the passive agent will observe stimulus from the active agent.
  */
 class uvme_${name}_st_prd_c extends uvm_component;
 
@@ -40,12 +40,12 @@ class uvme_${name}_st_prd_c extends uvm_component;
 
    /**
     * 1. Ensures #cfg & #cntxt handles are not null
-    * 2. Builds TLM objects
+    * 2. Creates TLM objects
     */
    extern virtual function void build_phase(uvm_phase phase);
 
    /**
-    * Connects #in_export to #in_fifo
+    * Connects #in_export to #in_fifo.
     */
    extern virtual function void connect_phase(uvm_phase phase);
 

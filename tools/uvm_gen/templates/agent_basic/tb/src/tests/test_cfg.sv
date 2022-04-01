@@ -14,17 +14,17 @@ class uvmt_${name}_st_test_cfg_c extends uvml_test_cfg_c;
 
    /// @defparam Knobs
    /// @{
-   rand int unsigned  clk_period        ; ///< Specified in picoseconds (ps)
-   rand int unsigned  reset_period      ; ///< Specified in nanoseconds (ns)
-   rand int unsigned  startup_timeout   ; ///< Specified in nanoseconds (ns)
-   rand int unsigned  heartbeat_period  ; ///< Specified in nanoseconds (ns)
-   rand int unsigned  simulation_timeout; ///< Specified in nanoseconds (ns)
+   rand int unsigned  clk_period        ; ///< Test bench clock period (ps)
+   rand int unsigned  reset_period      ; ///< Test bench reset pulse duration (ns)
+   rand int unsigned  startup_timeout   ; ///< Timer ending test if no heartbeat is detected from start of simulation (ns)
+   rand int unsigned  heartbeat_period  ; ///< Timer ending phase if no heartbeat is detected from start of a phase (ns)
+   rand int unsigned  simulation_timeout; ///< Timer ending simulation (ns)
    /// @}
 
    /// @defgroup Command line arguments
    /// @{
-   bit           cli_num_items_override = 0; ///< Argument was found for num_items
-   int unsigned  cli_num_items_parsed      ; ///< Parsed integer value from the CLI
+   bit           cli_num_items_override = 0; ///< Set to '1' if argument was found for num_items
+   int unsigned  cli_num_items_parsed      ; ///< Parsed integer value from the CLI for num_items
    /// @}
 
 

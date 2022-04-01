@@ -24,9 +24,9 @@ class uvme_${name}_st_cfg_c extends uvml_cfg_c;
 
    /// @defgroup Objects
    /// @{
-   rand uvma_${name}_cfg_c  active_cfg ; ///< Active agent configuration handle
-   rand uvma_${name}_cfg_c  passive_cfg; ///< Passive agent configuration handle
-   rand uvml_sb_simplex_cfg_c  sb_cfg; ///< Scoreboard configuration handle
+   rand uvma_${name}_cfg_c  active_cfg ; ///< Active agent configuration
+   rand uvma_${name}_cfg_c  passive_cfg; ///< Passive agent configuration
+   rand uvml_sb_simplex_cfg_c  sb_cfg; ///< Scoreboard configuration
    /// @}
 
 
