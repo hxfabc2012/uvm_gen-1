@@ -8,7 +8,7 @@
 
 
 /**
- * Component encapsulating abstract ${name_normal_case} Data Path functional coverage model.
+ * Component encapsulating abstract ${name_normal_case} Data Plane functional coverage model.
  * Sub-classes must extend this class, add covergroups of their own and override the sample_x() functions.
  */
 class uvma_${name}_dp_cov_model_c extends uvm_component;

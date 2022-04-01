@@ -8,7 +8,7 @@
 
 
 /**
- * Encapsulates all signals and clocking of ${name_normal_case} Data Path interface.
+ * Encapsulates all signals and clocking of ${name_normal_case} Data Plane interface.
  * Used by monitor (uvma_${name}_dp_mon_c) and driver (uvma_${name}_dp_drv_c).
  * Assertions must be captured within uvma_${name}_dp_if_chkr.
  */

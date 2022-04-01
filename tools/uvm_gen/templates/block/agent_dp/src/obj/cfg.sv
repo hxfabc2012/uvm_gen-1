@@ -8,7 +8,7 @@
 
 
 /**
- * Object encapsulating all parameters for creating, connecting and running all ${name_normal_case} Data Path agent (uvma_${name}_dp_agent_c) components.
+ * Object encapsulating all parameters for creating, connecting and running all ${name_normal_case} Data Plane agent (uvma_${name}_dp_agent_c) components.
  */
 class uvma_${name}_dp_cfg_c extends uvml_cfg_c;
 

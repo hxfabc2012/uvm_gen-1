@@ -8,7 +8,7 @@
 
 
 /**
- * Component sampling transactions from ${name_normal_case} Data Path virtual interface (uvma_${name}_dp_if).
+ * Component sampling transactions from ${name_normal_case} Data Plane virtual interface (uvma_${name}_dp_if).
  */
 class uvma_${name}_dp_mon_c extends uvml_mon_c;
 
@@ -285,7 +285,7 @@ task uvma_${name}_dp_mon_c::sample_in_trn(output uvma_${name}_dp_mon_in_trn_c tr
       @(mp_in.mon_in_cb);
       // TODO Sample trn
       //      Ex: if (mp_in.mon_in_cb.enable === 1'b1) begin
-      //             `uvm_info("${name_uppercase}_MON", "Sampling transaction", UVM_DEBUG)
+      //             `uvm_info("${name_uppercase}_MON", "Sampling input transaction", UVM_DEBUG)
       //             trn = uvma_${name}_dp_mon_in_trn_c::type_id::create("trn");
       //             sampled_trn = 1;
       //             trn.data = mp_in.mon_in_cb.data;
@@ -304,7 +304,7 @@ task uvma_${name}_dp_mon_c::sample_out_trn(output uvma_${name}_dp_mon_out_trn_c 
       @(mp_in.mon_out_cb);
       // TODO Sample trn
       //      Ex: if (mp_out.mon_out_cb.enable === 1'b1) begin
-      //             `uvm_info("${name_uppercase}_MON", "Sampling transaction", UVM_DEBUG)
+      //             `uvm_info("${name_uppercase}_MON", "Sampling output transaction", UVM_DEBUG)
       //             trn = uvma_${name}_dp_mon_out_trn_c::type_id::create("trn");
       //             sampled_trn = 1;
       //             trn.data = mp_out.mon_out_cb.data;

@@ -6,12 +6,12 @@
 ip:
   name: "uvma_${name}_dp"
   version: "1.0.0"
-  full-name: "${name_of_copyright_owner} ${name_normal_case} Data Path UVM Agent"
+  full-name: "${name_of_copyright_owner} ${name_normal_case} Data Plane UVM Agent"
   type: "DV"
   sub-type: "UVM Agent"
   sub-sub-type: "Simplex; Non-Layered"
   description: >
-    TODO Describe ${name_normal_case} Data Path
+    TODO Describe ${name_normal_case} Data Plane
   home-page: ""
   repo-uri: ""
   bugs: ""

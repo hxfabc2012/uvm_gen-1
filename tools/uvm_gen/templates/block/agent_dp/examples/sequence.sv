@@ -1,7 +1,7 @@
 // Copyright ${year} ${name_of_copyright_owner}
 // ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// This file contains sample code that demonstrates how to add a new sequence to the ${name_normal_case} Data Path UVM Agent.
+// This file contains sample code that demonstrates how to add a new sequence to the ${name_normal_case} Data Plane UVM Agent.
 
 
 `ifndef __UVMA_${name_uppercase}_DP_MY_SEQ_SV__

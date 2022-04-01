@@ -8,7 +8,7 @@
 
 
 /**
- * Object created by ${name_normal_case} Data Path agent sequences running on uvma_${name}_dp_sqr_c and used by uvma_${name}_dp_drv_c.
+ * Object created by ${name_normal_case} Data Plane agent sequences running on uvma_${name}_dp_sqr_c and used by uvma_${name}_dp_drv_c.
  */
 class uvma_${name}_dp_seq_item_c extends uvml_seq_item_c;
 

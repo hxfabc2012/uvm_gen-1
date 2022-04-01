@@ -8,8 +8,8 @@
 
 
 /**
- * Top-level component that encapsulates, builds and connects all others to implement the ${name_normal_case} Data Path UVM Agent.
- * Capable of driving/monitoring ${name_normal_case} Data Path virtual interface.
+ * Top-level component that encapsulates, builds and connects all others to implement the ${name_normal_case} Data Plane UVM Agent.
+ * Capable of driving/monitoring ${name_normal_case} Data Plane virtual interface.
  */
 class uvma_${name}_dp_agent_c extends uvml_agent_c;
 

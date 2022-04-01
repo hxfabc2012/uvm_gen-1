@@ -20,7 +20,7 @@
 
 
 /**
- * Encapsulates all the types needed for a UVM agent capable of driving and monitoring a ${name_normal_case} Data Path interface.
+ * Encapsulates all the types needed for a UVM agent capable of driving and monitoring a ${name_normal_case} Data Plane interface.
  */
 package uvma_${name}_dp_pkg;
 

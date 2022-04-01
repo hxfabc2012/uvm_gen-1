@@ -1,7 +1,7 @@
 // Copyright ${year} ${name_of_copyright_owner}
 // ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// This file contains sample code that demonstrates how to add an instance of the ${name_normal_case} Data Path UVM Agent to a
+// This file contains sample code that demonstrates how to add an instance of the ${name_normal_case} Data Plane UVM Agent to a
 // a UVM environment.  NOTE: It is recommended to split up class member declaration and definition.  These classes are
 // all inline to keep the example short.
 
@@ -82,7 +82,7 @@ class my_env_c extends uvm_env;
 
    my_env_cfg_c    cfg  ; ///< Configuration handle. Must be provided by component instantiating this environment.
    my_env_cntxt_c  cntxt; ///< Context handle.  Can be provided by component instantiating this environment.
-   uvma_${name}_dp_agent_c  ${name}_agent; ///< ${name_normal_case} Data Path agent instance.
+   uvma_${name}_dp_agent_c  ${name}_agent; ///< ${name_normal_case} Data Plane agent instance.
 
    `uvm_component_utils_begin(my_env_c)
       `uvm_field_object(cfg  , UVM_DEFAULT)

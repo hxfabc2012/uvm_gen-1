@@ -8,7 +8,7 @@
 
 
 /**
- * Component driving a ${name_normal_case} Data Path virtual interface (uvma_${name}_dp_if) with contents from uvma_${name}_dp_seq_item_c requests.
+ * Component driving a ${name_normal_case} Data Plane virtual interface (uvma_${name}_dp_if) with contents from uvma_${name}_dp_seq_item_c requests.
  */
 class uvma_${name}_dp_drv_c extends uvml_drv_c #(
    .REQ(uvma_${name}_dp_seq_item_c),
