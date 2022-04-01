@@ -25,7 +25,7 @@ class uvme_${name}_cfg_c extends uvml_cfg_c;
    /// @defgroup Sub-system parameters
    /// @{
    rand longint unsigned  reg_block_base_address; ///< Base address for #${name}_reg_block
-   rand int unsigned      ${clk_agent_name}_period; ///< Period for clock generation (ps)
+   rand int unsigned      ${clk_agent_name}_frequency; ///< Frequency for clock generation (Hz)
    /// @}
 
    // TODO: Add sub-environments configuration handles
@@ -55,7 +55,7 @@ class uvme_${name}_cfg_c extends uvml_cfg_c;
       `uvm_field_int (                         trn_log_enabled      , UVM_DEFAULT)
 
       `uvm_field_int(reg_block_base_address, UVM_DEFAULT)
-      `uvm_field_int(${clk_agent_name}_period, UVM_DEFAULT + UVM_DEC)
+      `uvm_field_int(${clk_agent_name}_frequency, UVM_DEFAULT + UVM_DEC)
 
       // TODO: Add sub-environments configuration field macros
       //       Ex: `uvm_field_object(sub_env_cfg, UVM_DEFAULT)
@@ -75,13 +75,13 @@ class uvme_${name}_cfg_c extends uvml_cfg_c;
     * Rules for safe default options: enabled, passive with scoreboarding and transaction logging enabled.
     */
    constraint defaults_cons {
-      soft enabled                  == 0;
-      soft is_active                == UVM_PASSIVE;
-      soft scoreboarding_enabled    == 1;
-      soft cov_model_enabled        == 0;
-      soft trn_log_enabled          == 1;
-           reg_block_base_address   == uvme_${name}_default_reg_block_base_address;
-           ${clk_agent_name}_period == uvme_${name}_default_${clk_agent_name}_period;
+      soft enabled                     == 0;
+      soft is_active                   == UVM_PASSIVE;
+      soft scoreboarding_enabled       == 1;
+      soft cov_model_enabled           == 0;
+      soft trn_log_enabled             == 1;
+           reg_block_base_address      == uvme_${name}_default_reg_block_base_address;
+           ${clk_agent_name}_frequency == uvme_${name}_default_${clk_agent_name}_frequency;
    }
 
    /**

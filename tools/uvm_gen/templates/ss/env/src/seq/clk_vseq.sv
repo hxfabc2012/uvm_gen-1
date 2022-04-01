@@ -40,7 +40,7 @@ task uvme_${name}_${clk_agent_name}_vseq_c::body();
 
    `uvm_do_on_with(clk_req, p_sequencer.${clk_agent_name}_sequencer, {
       action        == UVMA_CLK_SEQ_ITEM_ACTION_START;
-      new_frequency == cfg.${clk_agent_name}_period;
+      new_frequency == cfg.${clk_agent_name}_frequency;
    })
 
 endtask : body
