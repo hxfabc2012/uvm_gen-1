@@ -1,13 +1,12 @@
 #! /bin/bash
 ########################################################################################################################
-## Copyright 2022 Datum Technology Corporation
-########################################################################################################################
-## SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+# Copyright 2022 Datum Technology Corporation
+# SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 ########################################################################################################################
 
 
 # 1. Create code from spec files
-cat ./tests/ss.spec | ./src/new_ss.py ../../dv/
+cat ./tests/data/ss.spec | ./src/new_ss.py ../../dv/
 
 # 2. Simulate
 cd ../../sim

@@ -63,12 +63,12 @@ function void uvme_${name}_vsqr_c::build_phase(uvm_phase phase);
 
    void'(uvm_config_db#(uvme_${name}_cfg_c)::get(this, "", "cfg", cfg));
    if (!cfg) begin
-      `uvm_fatal("CFG", "Configuration handle is null")
+      `uvm_fatal("${name_uppercase}_VSQR", "Configuration handle is null")
    end
 
    void'(uvm_config_db#(uvme_${name}_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (!cntxt) begin
-      `uvm_fatal("CNTXT", "Context handle is null")
+      `uvm_fatal("${name_uppercase}_VSQR", "Context handle is null")
    end
 
 endfunction : build_phase

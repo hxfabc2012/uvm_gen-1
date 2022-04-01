@@ -215,6 +215,11 @@ def prompt_user_values():
         name_of_copyright_owner = default_copyright_owner
     parameters["name_of_copyright_owner"] = name_of_copyright_owner
     
+    license = input("Please enter a usage license or hit RETURN for the default (default is '" + default_license + "'):\n").strip()
+    if license == "":
+        license = default_license
+    parameters["license"] = license
+    
     name = input("Please enter the package name for this Environment (ex: 'dp'); this name will be used for all Environment types (ex: 'uvme_dp_env_c'):\n").lower().strip()
     if name == "":
         sys.exit("ERROR: package name cannot be empty.  Exiting.")
@@ -228,12 +233,6 @@ def prompt_user_values():
     else:
         parameters["name_normal_case"] = name_normal_case
     
-    clk_agent_name = input("Please enter the type for the Clock Agent (default: 'clk'):\n").strip()
-    if clk_agent_name == "":
-        parameters["clk_agent_type"] = "clk"
-    else:
-        parameters["clk_agent_type"] = clk_agent_name
-    
     clk_agent_name = input("Please enter the name of the Clock Agent (default: 'sys_clk'):\n").strip()
     if clk_agent_name == "":
         parameters["clk_agent_name"] = "sys_clk"
@@ -241,12 +240,6 @@ def prompt_user_values():
     else:
         parameters["clk_agent_name"] = clk_agent_name
         parameters["clk_agent_name_uppercase"] = clk_agent_name.upper()
-    
-    reset_agent_name = input("Please enter the type for the Reset Agent (default: 'reset'):\n").strip()
-    if reset_agent_name == "":
-        parameters["reset_agent_type"] = "reset"
-    else:
-        parameters["reset_agent_type"] = reset_agent_name
     
     reset_agent_name = input("Please enter the name of the Reset Agent (default: 'sys_reset'):\n").strip()
     if reset_agent_name == "":
@@ -259,8 +252,10 @@ def prompt_user_values():
     ral_agent_type = input("Please enter the type for the RAL Agent (default: 'axil'):\n").strip()
     if ral_agent_type == "":
         parameters["ral_agent_type"] = "axil"
+        parameters["ral_agent_type_uppercase"] = "AXIL"
     else:
-        parameters["ral_agent_type"] = ral_agent_type
+        parameters["ral_agent_type_uppercase"] = ral_agent_type
+        parameters["ral_agent_type_uppercase"] = ral_agent_type.upper()
     
     ral_agent_name = input("Please enter the name of the RAL Agent (default: 'axil'):\n").strip()
     if ral_agent_name == "":

@@ -36,9 +36,9 @@ endfunction : new
 
 task uvme_${name}_${clk_agent_name}_vseq_c::body();
 
-   uvma_reset_seq_item_c  reset_req;
+   uvma_clk_seq_item_c  clk_req;
 
-   `uvm_do_on_with(reset_req, p_sequencer.${reset_agent_name}_sequencer, {
+   `uvm_do_on_with(clk_req, p_sequencer.${clk_agent_name}_sequencer, {
       action        == UVMA_CLK_SEQ_ITEM_ACTION_START;
       new_frequency == cfg.${clk_agent_name}_period;
    })

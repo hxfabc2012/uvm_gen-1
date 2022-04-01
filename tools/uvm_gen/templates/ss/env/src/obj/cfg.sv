@@ -88,8 +88,7 @@ class uvme_${name}_cfg_c extends uvml_cfg_c;
     * Sets agents configuration.
     */
    constraint agent_cfg_cons {
-      ${clk_agent_name}_cfg.period == ${clk_agent_name}_period;
-      ${ral_agent_name}_cfg.reset_type == UVML_RESET_TYPE_SYNCHRONOUS;
+      //${ral_agent_name}_cfg.reset_type == UVML_RESET_TYPE_SYNCHRONOUS;
 
       if (enabled) {
          ${clk_agent_name}_cfg.enabled == 1;

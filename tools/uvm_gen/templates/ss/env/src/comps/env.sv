@@ -154,15 +154,15 @@ function void uvme_${name}_env_c::build_phase(uvm_phase phase);
 
    void'(uvm_config_db#(uvme_${name}_cfg_c)::get(this, "", "cfg", cfg));
    if (!cfg) begin
-      `uvm_fatal("CFG", "Configuration handle is null")
+      `uvm_fatal("${name_uppercase}_ENV", "Configuration handle is null")
    end
    else begin
-      `uvm_info("CFG", $sformatf("Found configuration handle:\n%s", cfg.sprint()), UVM_DEBUG)
+      `uvm_info("${name_uppercase}_ENV", $sformatf("Found configuration handle:\n%s", cfg.sprint()), UVM_DEBUG)
    end
 
    void'(uvm_config_db#(uvme_${name}_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (!cntxt) begin
-      `uvm_info("CNTXT", "Context handle is null; creating.", UVM_DEBUG)
+      `uvm_info("${name_uppercase}_ENV", "Context handle is null; creating.", UVM_DEBUG)
       cntxt = uvme_${name}_cntxt_c::type_id::create("cntxt");
    end
 

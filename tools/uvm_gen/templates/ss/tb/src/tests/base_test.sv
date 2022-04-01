@@ -227,7 +227,7 @@ endtask : configure_phase
 function void uvmt_${name}_base_test_c::retrieve_probe_vif();
 
    if (!uvm_config_db#(virtual uvmt_${name}_probe_if)::get(this, "", "vif", probe_vif)) begin
-      `uvm_fatal("TEST", $sformatf("Could not find probe_vif handle of type %s in uvm_config_db", $typename(vif)))
+      `uvm_fatal("TEST", $sformatf("Could not find probe_vif handle of type %s in uvm_config_db", $typename(probe_vif)))
    end
    else begin
       `uvm_info("TEST", $sformatf("Found probe_vif handle of type %s in uvm_config_db", $typename(probe_vif)), UVM_DEBUG)

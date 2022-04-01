@@ -14,8 +14,8 @@ class uvme_${name}_reg_block_c extends uvml_ral_reg_block_c;
 
    /// @defgroup Objects
    /// @{
-   uvme_${name}_st_cfg_c    cfg  ; ///< Environment configuration handle
-   uvme_${name}_st_cntxt_c  cntxt; ///< Environment context handle
+   uvme_${name}_cfg_c    cfg  ; ///< Environment configuration handle
+   uvme_${name}_cntxt_c  cntxt; ///< Environment context handle
    /// @}
 
    /// @defgroup Sub-Blocks
