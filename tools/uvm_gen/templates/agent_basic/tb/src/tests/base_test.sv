@@ -11,7 +11,7 @@
  * Component from which all other ${name_normal_case} UVM Agent Self-Tests must extend.
  * Subclasses must run sequences on the virtual sequencer by implementing UVM runtime phases.
  */
-class uvmt_${name}_st_base_test_c extends uvm_test;
+class uvmt_${name}_st_base_test_c extends uvml_test_c;
 
    virtual uvmt_${name}_st_clknrst_gen_if  clknrst_gen_vif; ///< Handle to clock and reset generation interface
 

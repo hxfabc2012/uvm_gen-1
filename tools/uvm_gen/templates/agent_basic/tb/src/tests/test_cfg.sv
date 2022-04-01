@@ -10,7 +10,7 @@
 /**
  * Object encapsulating common configuration parameters for ${name_normal_case} UVM Agent Self-Tests.
  */
-class uvmt_${name}_st_test_cfg_c extends uvm_object;
+class uvmt_${name}_st_test_cfg_c extends uvml_test_cfg_c;
 
    /// @defparam Knobs
    /// @{

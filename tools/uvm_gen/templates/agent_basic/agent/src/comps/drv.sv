@@ -10,7 +10,7 @@
 /**
  * Component driving a ${name_normal_case} virtual interface (uvma_${name}_if) with contents from uvma_${name}_seq_item_c requests.
  */
-class uvma_${name}_drv_c extends uvm_driver #(
+class uvma_${name}_drv_c extends uvml_drv_c #(
    .REQ(uvma_${name}_seq_item_c),
    .RSP(uvma_${name}_seq_item_c)
 );

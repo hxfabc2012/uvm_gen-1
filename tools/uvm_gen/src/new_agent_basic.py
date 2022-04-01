@@ -51,6 +51,7 @@ files = {
     "agent_basic/agent/src/obj/mon_trn.sv"              : "uvma_${name}/src/obj/uvma_${name}_mon_trn.sv",
     "agent_basic/agent/src/seq/base_seq.sv"             : "uvma_${name}/src/seq/uvma_${name}_base_seq.sv",
     "agent_basic/agent/src/seq/seq_item.sv"             : "uvma_${name}/src/seq/uvma_${name}_seq_item.sv",
+    "agent_basic/agent/src/seq/seq_lib.sv"              : "uvma_${name}/src/seq/uvma_${name}_seq_lib.sv",
     "agent_basic/agent/src/constants.sv"                : "uvma_${name}/src/uvma_${name}_constants.sv",
     "agent_basic/agent/src/if_chkr.sv"                  : "uvma_${name}/src/uvma_${name}_if_chkr.sv",
     "agent_basic/agent/src/if.sv"                       : "uvma_${name}/src/uvma_${name}_if.sv",

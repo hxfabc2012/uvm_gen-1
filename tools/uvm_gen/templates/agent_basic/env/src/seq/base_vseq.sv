@@ -12,7 +12,7 @@
  * Subclasses must be run on uvme_${name}_st_vsqr_c.
  * @note Does not generate any sequence items of its own.
  */
-class uvme_${name}_st_base_vseq_c extends uvm_sequence #(
+class uvme_${name}_st_base_vseq_c extends uvml_vseq_c #(
    .REQ(uvm_sequence_item),
    .RSP(uvm_sequence_item)
 );

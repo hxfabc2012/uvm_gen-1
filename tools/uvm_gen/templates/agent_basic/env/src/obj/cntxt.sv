@@ -10,7 +10,7 @@
 /**
  * Object encapsulating all state variables for ${name_normal_case} UVM Agent Self-Test Environment (uvme_${name}_st_env_c) components.
  */
-class uvme_${name}_st_cntxt_c extends uvm_object;
+class uvme_${name}_st_cntxt_c extends uvml_cntxt_c;
 
    /// @defgroup Objects
    /// @{

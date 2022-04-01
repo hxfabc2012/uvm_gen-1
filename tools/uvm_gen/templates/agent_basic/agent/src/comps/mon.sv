@@ -10,7 +10,7 @@
 /**
  * Component sampling transactions from ${name_normal_case} virtual interface (uvma_${name}_if).
  */
-class uvma_${name}_mon_c extends uvm_monitor;
+class uvma_${name}_mon_c extends uvml_mon_c;
 
    /// @defgroup Objects
    /// @{

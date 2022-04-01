@@ -11,7 +11,7 @@
  * Object encapsulating all parameters for creating, connecting and running the ${name_normal_case} UVM Agent Self-Testing
  * Environment (uvme_${name}_st_env_c) components.
  */
-class uvme_${name}_st_cfg_c extends uvm_object;
+class uvme_${name}_st_cfg_c extends uvml_cfg_c;
 
    /// @defgroup Integrals
    /// @{

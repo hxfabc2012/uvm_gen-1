@@ -11,7 +11,7 @@
  * Top-level component that encapsulates, builds and connects all other ${name_normal_case} UVM Agent Self-Test Environment
  * (uvme_${name}_st_env_c) components.
  */
-class uvme_${name}_st_env_c extends uvm_env;
+class uvme_${name}_st_env_c extends uvml_env_c;
 
    /// @defgroup Objects
    /// @{

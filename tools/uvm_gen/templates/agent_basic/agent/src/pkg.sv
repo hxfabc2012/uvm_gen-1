@@ -49,8 +49,7 @@ package uvma_${name}_pkg;
    `include "uvma_${name}_agent.sv"
 
    // Sequences
-   `include "uvma_${name}_base_seq.sv"
-   // TODO Add sequences to uvma_${name}_pkg
+   `include "uvma_${name}_seq_lib.sv"
 
 endpackage : uvma_${name}_pkg
 

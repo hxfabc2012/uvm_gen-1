@@ -14,7 +14,7 @@
 /**
  * Object cataloging the ${name_normal_case} UVM Agent self-test environment's virtual sequences.
  */
-class uvme_${name}_st_vseq_lib_c extends uvm_sequence_library #(
+class uvme_${name}_st_vseq_lib_c extends uvml_vseq_lib_c #(
    .REQ(uvm_sequence_item),
    .RSP(uvm_sequence_item)
 );

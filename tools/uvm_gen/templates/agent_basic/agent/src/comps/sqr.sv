@@ -11,7 +11,7 @@
  * Component running ${name_normal_case} sequences of uvma_${name}_seq_item_c requests (and responses).
  * Provides sequence items for uvma_${name}_drv_c.
  */
-class uvma_${name}_sqr_c extends uvm_sequencer #(
+class uvma_${name}_sqr_c extends uvml_sqr_c #(
    .REQ(uvma_${name}_seq_item_c),
    .RSP(uvma_${name}_seq_item_c)
 );

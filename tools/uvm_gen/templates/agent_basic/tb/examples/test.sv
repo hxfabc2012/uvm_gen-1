@@ -55,7 +55,7 @@ task uvmt_${name}_st_my_test_c::main_phase(uvm_phase phase);
 
    phase.raise_objection(this);
    `uvm_info("TEST", $sformatf("Starting my virtual sequence:\n%s", my_vseq.sprint()), UVM_NONE)
-   ${vseq_name}_vseq.start(vsequencer);
+   my_vseq.start(vsequencer);
    `uvm_info("TEST", $sformatf("Finished my virtual sequence:\n%s", my_vseq.sprint()), UVM_NONE)
    phase.drop_objection(this);
 

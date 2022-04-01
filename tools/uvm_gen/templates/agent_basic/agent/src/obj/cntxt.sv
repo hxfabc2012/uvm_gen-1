@@ -10,7 +10,7 @@
 /**
  * Object encapsulating all state variables for all ${name_normal_case} agent (uvma_${name}_agent_c) components.
  */
-class uvma_${name}_cntxt_c extends uvm_object;
+class uvma_${name}_cntxt_c extends uvml_cntxt_c;
 
    virtual uvma_${name}_if  vif; ///< Handle to agent virtual interface.  Used by monitor and driver.
 

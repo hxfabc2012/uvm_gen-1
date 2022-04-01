@@ -10,7 +10,7 @@
 /**
  * Object encapsulating all parameters for creating, connecting and running all ${name_normal_case} agent (uvma_${name}_agent_c) components.
  */
-class uvma_${name}_cfg_c extends uvm_object;
+class uvma_${name}_cfg_c extends uvml_cfg_c;
 
    /// @defgroup Generic options
    /// @{
