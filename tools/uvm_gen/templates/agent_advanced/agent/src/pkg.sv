@@ -1,6 +1,5 @@
 // Copyright ${year} ${name_of_copyright_owner}
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SPDX-License-Identifier: ${license_id}
+// ${license}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -11,10 +10,10 @@
 
 // Pre-processor macros
 `include "uvm_macros.svh"
-`include "uvml_macros.sv"
-`include "uvml_logs_macros.sv"
-`include "uvml_mem_macros.sv"
-`include "uvma_${name}_macros.sv"
+`include "uvml_macros.svh"
+`include "uvml_logs_macros.svh"
+`include "uvml_mem_macros.svh"
+`include "uvma_${name}_macros.svh"
 
 // Interface(s)
 `include "uvma_${name}_if.sv"
