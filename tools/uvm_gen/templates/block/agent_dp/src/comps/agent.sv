@@ -11,7 +11,7 @@
  * Top-level component that encapsulates, builds and connects all others to implement the ${name_normal_case} Data Path UVM Agent.
  * Capable of driving/monitoring ${name_normal_case} Data Path virtual interface.
  */
-class uvma_${name}_dp_agent_c extends uvm_agent;
+class uvma_${name}_dp_agent_c extends uvml_agent_c;
 
    /// @defgroup Objects
    /// @{

@@ -10,7 +10,7 @@
 /**
  * Component sampling transactions from ${name_normal_case} Data Path virtual interface (uvma_${name}_dp_if).
  */
-class uvma_${name}_dp_mon_c extends uvm_monitor;
+class uvma_${name}_dp_mon_c extends uvml_mon_c;
 
    /// @defgroup Objects
    /// @{

@@ -11,7 +11,7 @@
  * Abstract object from which all other ${name_normal_case} Data Path agent sequences must extend.
  * Subclasses must be run on ${name_normal_case} Data Path sequencer (uvma_${name}_dp_sqr_c) instance.
  */
-class uvma_${name}_dp_base_seq_c extends uvm_sequence #(
+class uvma_${name}_dp_base_seq_c extends uvml_seq_c #(
    .REQ(uvma_${name}_dp_seq_item_c),
    .RSP(uvma_${name}_dp_seq_item_c)
 );

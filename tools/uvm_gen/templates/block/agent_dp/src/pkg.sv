@@ -50,8 +50,7 @@ package uvma_${name}_dp_pkg;
    `include "uvma_${name}_dp_agent.sv"
 
    // Sequences
-   `include "uvma_${name}_dp_base_seq.sv"
-   // TODO Add sequences to uvma_${name}_dp_pkg
+   `include "uvma_${name}_dp_seq_lib.sv"
 
 endpackage : uvma_${name}_dp_pkg
 

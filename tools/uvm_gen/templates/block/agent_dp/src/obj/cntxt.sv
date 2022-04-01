@@ -10,7 +10,7 @@
 /**
  * Object encapsulating all state variables for all ${name_normal_case} Data Path agent (uvma_${name}_dp_agent_c) components.
  */
-class uvma_${name}_dp_cntxt_c extends uvm_object;
+class uvma_${name}_dp_cntxt_c extends uvml_cntxt_c;
 
    virtual uvma_${name}_dp_if  vif; ///< Handle to agent virtual interface.  Used by monitor and driver.
 
