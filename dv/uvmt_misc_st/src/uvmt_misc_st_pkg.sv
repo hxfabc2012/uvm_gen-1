@@ -16,9 +16,9 @@
 
 // Pre-processor macros
 `include "uvm_macros.svh"
-`include "uvml_macros.sv"
-`include "uvml_logs_macros.sv"
-`include "uvml_sb_macros.sv"
+`include "uvml_macros.svh"
+`include "uvml_logs_macros.svh"
+`include "uvml_sb_macros.svh"
 `include "uvml_math_macros.svh"
 `include "uvmt_misc_st_macros.svh"
 
