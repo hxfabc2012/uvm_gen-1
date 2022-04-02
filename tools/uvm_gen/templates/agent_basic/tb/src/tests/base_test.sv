@@ -41,8 +41,8 @@ class uvmt_${name}_st_base_test_c extends uvml_test_c;
     * Sets safe default options for #env_cfg.
     */
    constraint env_cfg_cons {
-      soft env_cfg.enabled               == 1;
-      soft env_cfg.is_active             == UVM_ACTIVE;
+           env_cfg.enabled               == 1;
+           env_cfg.is_active             == UVM_ACTIVE;
       soft env_cfg.trn_log_enabled       == 1;
       soft env_cfg.scoreboarding_enabled == 1;
       soft env_cfg.cov_model_enabled     == 1;
