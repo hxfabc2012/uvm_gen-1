@@ -80,10 +80,12 @@ class uvme_${name}_cfg_c extends uvml_cfg_c;
     */
    constraint agent_cfg_cons {
       ${reset_agent_name}_cfg.reset_type == reset_type;
-      ${reset_agent_name}_cfg.polarity   == UVMA_RESET_POLARITY_ACTIVE_LOW;
+      ${reset_agent_name}_cfg.polarity   == UVML_RESET_ACTIVE_LOW;
       cp_cfg    .reset_type == reset_type;
       dp_in_cfg .reset_type == reset_type;
       dp_out_cfg.reset_type == reset_type;
+      ${clk_agent_name}_cfg.cov_model_enabled == 0;
+      ${reset_agent_name}_cfg.cov_model_enabled == 0;
 
       if (enabled) {
          ${clk_agent_name}_cfg.enabled == 1;
@@ -128,6 +130,17 @@ class uvme_${name}_cfg_c extends uvml_cfg_c;
          cp_cfg.trn_log_enabled     == 0;
          dp_in_cfg.trn_log_enabled  == 0;
          dp_out_cfg.trn_log_enabled == 0;
+      }
+
+      if (cov_model_enabled) {
+         cp_cfg.cov_model_enabled     == 1;
+         dp_in_cfg.cov_model_enabled  == 1;
+         dp_out_cfg.cov_model_enabled == 1;
+      }
+      else {
+         cp_cfg.cov_model_enabled     == 0;
+         dp_in_cfg.cov_model_enabled  == 0;
+         dp_out_cfg.cov_model_enabled == 0;
       }
    }
 
