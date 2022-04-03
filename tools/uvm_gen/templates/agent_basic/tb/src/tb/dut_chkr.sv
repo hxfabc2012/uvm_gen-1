@@ -11,8 +11,8 @@
  * Module encapsulating assertions for the ${name_normal_case} UVM Agent Self-Test DUT wrapper (uvmt_${name}_st_dut_wrap).
  */
 module uvmt_${name}_st_dut_chkr (
-   uvma_${name}_if  active_if,
-   uvma_${name}_if  passive_if
+   uvma_${name}_if  active_if , ///< Active agent interface
+   uvma_${name}_if  passive_if ///< Passive agent interface
 );
 
    // TODO Add assertions to uvmt_${name}_st_dut_chkr

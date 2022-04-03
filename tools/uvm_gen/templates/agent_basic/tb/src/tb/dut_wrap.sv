@@ -10,9 +10,9 @@
 /**
  * Module implementing buffer connecting active and passive ${name_normal_case} UVM Agent interfaces.
  */
-module uvmt_${name}_st_dut_wrap(
-   uvma_${name}_if  active_if ,
-   uvma_${name}_if  passive_if
+module uvmt_${name}_st_dut_wrap (
+   uvma_${name}_if  active_if , ///< Active agent interface
+   uvma_${name}_if  passive_if ///< Passive agent interface
 );
 
    // TODO Connect interfaces via buffers to avoid race condition at scoreboard.

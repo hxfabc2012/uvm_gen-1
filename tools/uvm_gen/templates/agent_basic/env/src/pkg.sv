@@ -37,10 +37,10 @@ package uvme_${name}_st_pkg;
    `include "uvme_${name}_st_cfg.sv"
    `include "uvme_${name}_st_cntxt.sv"
 
-   // Environment components
-   `include "uvme_${name}_st_cov_model.sv"
-   `include "uvme_${name}_st_prd.sv"
+   // Components
    `include "uvme_${name}_st_vsqr.sv"
+   `include "uvme_${name}_st_prd.sv"
+   `include "uvme_${name}_st_cov_model.sv"
    `include "uvme_${name}_st_env.sv"
 
    // Sequences
