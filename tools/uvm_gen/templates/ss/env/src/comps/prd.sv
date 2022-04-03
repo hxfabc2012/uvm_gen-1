@@ -20,12 +20,12 @@ class uvme_${name}_prd_c extends uvm_component;
 
    /// @defgroup Input TLM
    /// @{
-   uvm_tlm_analysis_fifo #(uvma_clk_mon_trn_c)  ${clk_agent_name}_fifo  ; ///< Queue of ${clk_agent_name} monitor transactions
-   uvm_analysis_export   #(uvma_clk_mon_trn_c)  ${clk_agent_name}_export; ///< Port taking in ${clk_agent_name} monitor transactions
-   uvm_tlm_analysis_fifo #(uvma_reset_mon_trn_c)  ${reset_agent_name}_fifo  ; ///< Queue of ${reset_agent_name} monitor transactions
-   uvm_analysis_export   #(uvma_reset_mon_trn_c)  ${reset_agent_name}_export; ///< Port taking in ${reset_agent_name} monitor transactions
-   uvm_tlm_analysis_fifo #(uvma_${ral_agent_type}_mon_trn_c)  ${ral_agent_name}_fifo  ; ///< Queue of ${ral_agent_type} monitor transactions
-   uvm_analysis_export   #(uvma_${ral_agent_type}_mon_trn_c)  ${ral_agent_name}_export; ///< Port taking in ${ral_agent_type} monitor transactions
+   uvm_tlm_analysis_fifo #(uvma_clk_mon_trn_c)  ${clk_agent_name}_fifo  ; ///< Queue of ${clk_agent_name} transactions
+   uvm_tlm_analysis_fifo #(uvma_reset_mon_trn_c)  ${reset_agent_name}_fifo  ; ///< Queue of ${reset_agent_name} transactions
+   uvm_tlm_analysis_fifo #(uvma_${ral_agent_type}_mon_trn_c)  ${ral_agent_name}_fifo  ; ///< Queue of ${ral_agent_type} transactions
+   uvm_analysis_export   #(uvma_clk_mon_trn_c)  ${clk_agent_name}_export; ///< Port taking in ${clk_agent_name} transactions
+   uvm_analysis_export   #(uvma_reset_mon_trn_c)  ${reset_agent_name}_export; ///< Port taking in ${reset_agent_name} transactions
+   uvm_analysis_export   #(uvma_${ral_agent_type}_mon_trn_c)  ${ral_agent_name}_export; ///< Port taking in ${ral_agent_type} transactions
    /// @}
 
    /// @defgroup Output TLM
@@ -103,10 +103,10 @@ function void uvme_${name}_prd_c::build_phase(uvm_phase phase);
 
    // Build Input TLM objects
    ${clk_agent_name}_fifo   = new("${clk_agent_name}_fifo"  , this);
+   ${reset_agent_name}_fifo = new("${reset_agent_name}_fifo"  , this);
+   ${ral_agent_name}_fifo = new("${ral_agent_name}_fifo"  , this);
    ${clk_agent_name}_export = new("${clk_agent_name}_export", this);
-   ${reset_agent_name}_fifo   = new("${reset_agent_name}_fifo"  , this);
    ${reset_agent_name}_export = new("${reset_agent_name}_export", this);
-   ${ral_agent_name}_fifo   = new("${ral_agent_name}_fifo"  , this);
    ${ral_agent_name}_export = new("${ral_agent_name}_export", this);
 
    // Build Output TLM objects
@@ -159,7 +159,15 @@ task uvme_${name}_prd_c::process_${reset_agent_name}();
 
    forever begin
       ${reset_agent_name}_fifo.get(${reset_agent_name}_trn);
-      // TODO Implement uvme_${name}_prd_c::process_${reset_agent_name}()
+      case (${reset_agent_name}_trn.transition)
+         UVML_EDGE_ASSERTED: begin
+            cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
+            cntxt.reset();
+         end
+         UVML_EDGE_DEASSERTED: begin
+            cntxt.reset_state = UVML_RESET_STATE_POST_RESET;
+         end
+      endcase
    end
 
 endtask : process_${reset_agent_name}

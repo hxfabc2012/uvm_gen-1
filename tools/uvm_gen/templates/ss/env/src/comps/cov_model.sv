@@ -20,10 +20,12 @@ class uvme_${name}_cov_model_c extends uvm_component;
    //      Ex: uvma_pkt_mon_trn_c  pkt_trn; ///< Describe me!
    /// @}
 
-   // Input TLM
+   /// @defgroup TLM
+   /// @{
    // TODO Add Input TLM to uvme_${name}_cov_model_c
    //      Ex: uvm_tlm_analysis_fifo #(uvma_pkt_mon_trn_c)  pkt_fifo  ; ///< Describe me!
    //          uvm_analysis_port     #(uvma_pkt_mon_trn_c)  pkt_export; ///< Describe me!
+   /// @}
 
 
    `uvm_component_utils_begin(uvme_${name}_cov_model_c)
@@ -36,22 +38,26 @@ class uvme_${name}_cov_model_c extends uvm_component;
     * Coverage for #cfg
     */
    covergroup ${name}_cfg_cg;
+      // TODO Implement ${name}_cfg_cg
+      //      Ex: abc_cp : coverpoint cfg.abc;
    endgroup : ${name}_cfg_cg
 
    /**
     * Coverage for #cntxt
     */
    covergroup ${name}_cntxt_cg;
+      // TODO Implement ${name}_cntxt_cg
+      //      Ex: abc_cp : coverpoint cntxt.abc;
    endgroup : ${name}_cntxt_cg
 
    // TODO Add covergroup(s) to uvme_${name}_cov_model_c
-   //      Ex: covergroup pkt_trn_cg;
-   //             address : coverpoint pkt_trn.payload_size {
+   //      Ex: covergroup ${name}_pkt_trn_cg;
+   //             address_cp : coverpoint pkt_trn.payload_size {
    //                bins small  = {0   ,   64};
    //                bins medium = {65  , 1024};
    //                bins large  = {1024, 2048};
    //             }
-   //          endgroup : pkt_trn_cg
+   //          endgroup : ${name}_pkt_trn_cg
 
 
    /**
@@ -101,7 +107,7 @@ function uvme_${name}_cov_model_c::new(string name="uvme_${name}_cov_model", uvm
    ${name}_cfg_cg   = new();
    ${name}_cntxt_cg = new();
    // TODO Create coverage groups for uvme_${name}_cov_model_c
-   //      Ex: pkt_cg = new();
+   //      Ex: ${name}_pkt_cg = new();
 
 endfunction : new
 
@@ -180,7 +186,7 @@ endfunction : sample_cntxt
 // TODO Implement coverage function(s) to uvme_${name}_cov_model_c
 //      Ex: function void uvme_${name}_cov_model_c::sample_pkt();
 //
-//             pkt_trn_cg.sample();
+//             ${name}_pkt_trn_cg.sample();
 //
 //          endfunction : sample_pkt
 

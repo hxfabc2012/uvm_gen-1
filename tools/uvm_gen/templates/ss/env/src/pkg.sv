@@ -44,13 +44,11 @@ package uvme_${name}_pkg;
    `include "uvme_${name}_cfg.sv"
    `include "uvme_${name}_cntxt.sv"
 
-   // Predictor
-   `include "uvme_${name}_prd.sv"
-
-   // Environment components
-   `include "uvme_${name}_cov_model.sv"
-   `include "uvme_${name}_sb.sv"
+   // Components
    `include "uvme_${name}_vsqr.sv"
+   `include "uvme_${name}_prd.sv"
+   `include "uvme_${name}_sb.sv"
+   `include "uvme_${name}_cov_model.sv"
    `include "uvme_${name}_env.sv"
 
    // Sequences

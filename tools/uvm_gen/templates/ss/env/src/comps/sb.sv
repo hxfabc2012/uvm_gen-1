@@ -94,8 +94,8 @@ endfunction : build_phase
 function void uvme_${name}_sb_c::assign_cfg();
 
    // TODO Implement uvme_${name}_sb_c::assign_cfg()
-   //      Ex: uvm_config_db#(uvml_sb_cfg_c)::set(this, "egress_sb" , "cfg", cfg.sb_egress_cfg );
-   //          uvm_config_db#(uvml_sb_cfg_c)::set(this, "ingress_sb", "cfg", cfg.sb_ingress_cfg);
+   //      Ex: uvm_config_db#(uvml_sb_simplex_cfg_c)::set(this, "egress_sb" , "cfg", cfg.sb_egress_cfg );
+   //          uvm_config_db#(uvml_sb_simplex_cfg_c)::set(this, "ingress_sb", "cfg", cfg.sb_ingress_cfg);
 
 endfunction : assign_cfg
 
@@ -103,8 +103,8 @@ endfunction : assign_cfg
 function void uvme_${name}_sb_c::assign_cntxt();
 
    // TODO Implement uvme_${name}_sb_c::assign_cntxt()
-   //      Ex: uvm_config_db#(uvml_sb_cntxt_c)::set(this, "egress_sb" , "cntxt", cntxt.sb_egress_cntxt );
-   //          uvm_config_db#(uvml_sb_cntxt_c)::set(this, "ingress_sb", "cntxt", cntxt.sb_ingress_cntxt);
+   //      Ex: uvm_config_db#(uvml_sb_simplex_cntxt_c)::set(this, "egress_sb" , "cntxt", cntxt.sb_egress_cntxt );
+   //          uvm_config_db#(uvml_sb_simplex_cntxt_c)::set(this, "ingress_sb", "cntxt", cntxt.sb_ingress_cntxt);
 
 endfunction : assign_cntxt
 

@@ -40,9 +40,9 @@ class uvme_${name}_env_c extends uvml_env_c;
 
    /// @defgroup Agents
    /// @{
-   uvma_clk_agent_c    ${clk_agent_name}_agent  ; ///<
-   uvma_reset_agent_c  ${reset_agent_name}_agent; ///<
-   uvma_${ral_agent_type}_agent_c  ${ral_agent_name}_agent; ///<
+   uvma_clk_agent_c    ${clk_agent_name}_agent  ; ///< Clocking agent
+   uvma_reset_agent_c  ${reset_agent_name}_agent; ///< Reset agent
+   uvma_${ral_agent_type}_agent_c  ${ral_agent_name}_agent; ///< Register access agent
    /// @}
 
 
@@ -253,7 +253,7 @@ endfunction: create_env_components
 function void uvme_${name}_env_c::create_reg_adapter();
 
    reg_adapter = uvma_${ral_agent_type}_reg_adapter_c::type_id::create("reg_adapter");
-   reg_block = cfg.${name}_reg_block;
+   reg_block   = cfg.${name}_reg_block;
 
 endfunction: create_reg_adapter
 

@@ -11,7 +11,7 @@
 /**
  * Sample sequence that runs 5 fully random items by default.
  */
-class uvme_${name}_my_seq_c extends uvme_${name}_base_seq_c;
+class uvme_${name}_my_seq_c extends uvme_${name}_base_vseq_c;
 
    /// @defgroup Knobs
    /// @{

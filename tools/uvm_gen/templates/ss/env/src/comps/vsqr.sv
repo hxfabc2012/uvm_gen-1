@@ -23,11 +23,11 @@ class uvme_${name}_vsqr_c extends uvml_vsqr_c #(
 
    /// @defgroup Sequencer handles
    /// @{
-   uvma_clk_sqr_c    ${clk_agent_name}_sequencer;
-   uvma_reset_sqr_c  ${reset_agent_name}_sequencer;
-   uvma_${ral_agent_type}_sqr_c  ${ral_agent_name}_sequencer;
+   uvma_clk_sqr_c    ${clk_agent_name}_sequencer; ///< Clock agent sequencer
+   uvma_reset_sqr_c  ${reset_agent_name}_sequencer; ///< Reset agent sequener
+   uvma_${ral_agent_type}_sqr_c  ${ral_agent_name}_sequencer; ///< Register access agent sequencer
    // TODO: Add sub-environments (virtual) sequencer handles
-   //       Ex: uvme_sub_env_vsqr_c  sub_env_vsequencer; ///<
+   //       Ex: uvme_sub_env_vsqr_c  sub_env_vsequencer; ///< Describe me!
    /// @}
 
 
@@ -43,7 +43,7 @@ class uvme_${name}_vsqr_c extends uvml_vsqr_c #(
    extern function new(string name="uvme_${name}_sqr", uvm_component parent=null);
 
    /**
-    * Ensures cfg & cntxt handles are not null.
+    * Ensures #cfg & #cntxt handles are not null.
     */
    extern virtual function void build_phase(uvm_phase phase);
 

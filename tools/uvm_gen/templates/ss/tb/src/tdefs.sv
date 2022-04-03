@@ -8,6 +8,7 @@
 
 
 // Add enums and structs here
+// Ex: typedef bit [(`UVMT_${name_uppercase}_ABC_MAX_WIDTH-1):0]  uvmt_${name}_abc_b_t;
 // Ex: typedef enum {
 //        UVMT_${name_uppercase}_MY_ABC
 //     } uvmt_${name}_my_enum;

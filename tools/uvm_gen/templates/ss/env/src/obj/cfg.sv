@@ -24,8 +24,9 @@ class uvme_${name}_cfg_c extends uvml_cfg_c;
 
    /// @defgroup Sub-system parameters
    /// @{
-   rand longint unsigned  reg_block_base_address; ///< Base address for #${name}_reg_block
-   rand int unsigned      ${clk_agent_name}_frequency; ///< Frequency for clock generation (Hz)
+   rand uvml_reset_type_enum  reset_type            ; ///< Specifies if reset pulse is sync/async
+   rand longint unsigned      reg_block_base_address; ///< Base address for #${name}_reg_block
+   rand int unsigned          ${clk_agent_name}_frequency; ///< Frequency for clock generation (Hz)
    /// @}
 
    // TODO: Add sub-environments configuration handles
@@ -75,11 +76,12 @@ class uvme_${name}_cfg_c extends uvml_cfg_c;
     * Rules for safe default options: enabled, passive with scoreboarding and transaction logging enabled.
     */
    constraint defaults_cons {
-      soft enabled                     == 0;
+      soft enabled                     == 1;
       soft is_active                   == UVM_PASSIVE;
       soft scoreboarding_enabled       == 1;
       soft cov_model_enabled           == 0;
       soft trn_log_enabled             == 1;
+           reset_type                  == UVML_RESET_TYPE_SYNCHRONOUS;
            reg_block_base_address      == uvme_${name}_default_reg_block_base_address;
            ${clk_agent_name}_frequency == uvme_${name}_default_${clk_agent_name}_frequency;
    }
@@ -88,7 +90,11 @@ class uvme_${name}_cfg_c extends uvml_cfg_c;
     * Sets agents configuration.
     */
    constraint agent_cfg_cons {
-      //${ral_agent_name}_cfg.reset_type == UVML_RESET_TYPE_SYNCHRONOUS;
+      ${reset_agent_name}_cfg.reset_type == reset_type;
+      ${reset_agent_name}_cfg.polarity   == UVML_RESET_ACTIVE_LOW;
+      ${clk_agent_name}_cfg.cov_model_enabled == 0;
+      ${reset_agent_name}_cfg.cov_model_enabled == 0;
+      ${ral_agent_name}_cfg.cov_model_enabled == 0;
 
       if (enabled) {
          ${clk_agent_name}_cfg.enabled == 1;
@@ -149,8 +155,8 @@ function uvme_${name}_cfg_c::new(string name="uvme_${name}_cfg");
    ${name}_reg_block.build();
 
    // TODO Create scoreboard cfg objects
-   //      Ex: sb_egress_cfg  = uvml_sb_cfg_c::type_id::create("sb_egress_cfg" );
-   //          sb_ingress_cfg = uvml_sb_cfg_c::type_id::create("sb_ingress_cfg");
+   //      Ex: sb_egress_cfg  = uvml_sb_simplex_cfg_c::type_id::create("sb_egress_cfg" );
+   //          sb_ingress_cfg = uvml_sb_simplex_cfg_c::type_id::create("sb_ingress_cfg");
 
 endfunction : new
 

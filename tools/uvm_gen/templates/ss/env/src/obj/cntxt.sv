@@ -12,6 +12,11 @@
  */
 class uvme_${name}_cntxt_c extends uvml_cntxt_c;
 
+   /// @defgroup Integrals
+   /// @{
+   uvml_reset_state_enum  reset_state = UVML_RESET_STATE_PRE_RESET; ///< Predicted Pre/In/Post reset state of the DUT
+   /// @}
+
    /// @defgroup Sub-environments
    /// @{
    // TODO Add sub-environments context handles
@@ -30,12 +35,14 @@ class uvme_${name}_cntxt_c extends uvml_cntxt_c;
    uvm_event  sample_cfg_e  ; ///< Triggers sampling of environment configuration by the functional coverage model.
    uvm_event  sample_cntxt_e; ///< Triggers sampling of environment context by the functional coverage model.
    // TODO Add scoreboard context handles
-   //      Ex: uvml_sb_cntxt_c  sb_egress_cntxt ; ///< Describe me!
-   //          uvml_sb_cntxt_c  sb_ingress_cntxt; ///< Describe me!
+   //      Ex: uvml_sb_simplex_cntxt_c  sb_egress_cntxt ; ///< Describe me!
+   //          uvml_sb_simplex_cntxt_c  sb_ingress_cntxt; ///< Describe me!
    /// @}
 
 
    `uvm_object_utils_begin(uvme_${name}_cntxt_c)
+      `uvm_field_enum(uvml_reset_state_enum, reset_state, UVM_DEFAULT)
+
        // TODO: Add sub-environments context field macros
        //       Ex: `uvm_field_object(sub_env_cntxt, UVM_DEFAULT)
 
@@ -79,15 +86,15 @@ function uvme_${name}_cntxt_c::new(string name="uvme_${name}_cntxt");
    sample_cfg_e   = new("sample_cfg_e"  );
    sample_cntxt_e = new("sample_cntxt_e");
    // TODO Create uvme_${name}_cntxt_c scoreboard context objects
-   //      Ex: sb_egress_cntxt  = uvml_sb_cntxt_c::type_id::create("sb_egress_cntxt" );
-   //          sb_ingress_cntxt = uvml_sb_cntxt_c::type_id::create("sb_ingress_cntxt");
+   //      Ex: sb_egress_cntxt  = uvml_sb_simplex_cntxt_c::type_id::create("sb_egress_cntxt" );
+   //          sb_ingress_cntxt = uvml_sb_simplex_cntxt_c::type_id::create("sb_ingress_cntxt");
 
 endfunction : new
 
 
 function void uvme_${name}_cntxt_c::reset();
 
-   ${ral_agent_name}_cntxt.reset();
+
 
 endfunction : reset
 
