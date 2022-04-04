@@ -39,7 +39,7 @@ class uvme_${name}_cfg_c extends uvml_cfg_c;
 
    /// @defgroup Objects
    /// @{
-   rand uvml_sb_simplex_cfg_c  sb_dp_cfg; ///< Data path scoreboard configuration
+   rand uvml_sb_simplex_cfg_c  sb_cfg; ///< Data path scoreboard configuration
    /// @}
 
 
@@ -58,7 +58,7 @@ class uvme_${name}_cfg_c extends uvml_cfg_c;
       `uvm_field_object(dp_in_cfg , UVM_DEFAULT)
       `uvm_field_object(dp_out_cfg, UVM_DEFAULT)
 
-      `uvm_field_object(sb_dp_cfg, UVM_DEFAULT)
+      `uvm_field_object(sb_cfg, UVM_DEFAULT)
    `uvm_object_utils_end
 
 
@@ -149,8 +149,8 @@ class uvme_${name}_cfg_c extends uvml_cfg_c;
     * Sets scoreboard configuration.
     */
    constraint sb_cons {
-      sb_dp_cfg.enabled == scoreboarding_enabled;
-      sb_dp_cfg.mode    == UVML_SB_MODE_IN_ORDER;
+      sb_cfg.enabled == scoreboarding_enabled;
+      sb_cfg.mode    == UVML_SB_MODE_IN_ORDER;
    }
 
 
@@ -171,7 +171,7 @@ function uvme_${name}_cfg_c::new(string name="uvme_${name}_cfg");
    cp_cfg     = uvma_${name}_cp_cfg_c    ::type_id::create("cp_cfg"    );
    dp_in_cfg  = uvma_${name}_dp_in_cfg_c ::type_id::create("dp_in_cfg" );
    dp_out_cfg = uvma_${name}_dp_out_cfg_c::type_id::create("dp_out_cfg");
-   sb_dp_cfg  = uvml_sb_simplex_cfg_c::type_id::create("sb_dp_cfg");
+   sb_cfg     = uvml_sb_simplex_cfg_c::type_id::create("sb_cfg");
 
 endfunction : new
 
