@@ -59,9 +59,11 @@ task uvme_${name}_my_seq_c::body();
    uvma_${name}_dp_out_seq_item_c  dp_out_req;
 
    fork
-      repeat (num_items) begin
-         `uvm_do_on(cp_req   , p_sequencer.cp_sequencer   )
-         `uvm_do_on(dp_in_req, p_sequencer.dp_in_sequencer)
+      begin
+         repeat (num_items) begin
+            `uvm_do_on(cp_req   , p_sequencer.cp_sequencer   )
+            `uvm_do_on(dp_in_req, p_sequencer.dp_in_sequencer)
+         end
       end
 
       forever begin
@@ -72,4 +74,4 @@ task uvme_${name}_my_seq_c::body();
 endtask : body
 
 
-`endif __UVME_${name_uppercase}_MY_SEQ_SV__
+`endif // __UVME_${name_uppercase}_MY_SEQ_SV__

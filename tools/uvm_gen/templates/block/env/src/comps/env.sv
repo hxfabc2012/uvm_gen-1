@@ -22,14 +22,14 @@ class uvme_${name}_env_c extends uvml_env_c;
    /// @{
    uvme_${name}_vsqr_c        vsequencer; ///< Virtual sequencer on which virtual sequences are run.
    uvme_${name}_prd_c         predictor ; ///< Feeds #sb's expected port(s) with monitor transactions.
-   uvme_${name}_sb_simplex_c  sb        ; ///< Ensures that transactions from #predictor and monitors match.
+   uvme_${name}_sb_simplex_c  sb_dp     ; ///< Ensures that data path transactions from #predictor and output monitor match.
    uvme_${name}_cov_model_c   cov_model ; ///< Functional coverage model.
    /// @}
 
    /// @defgroup Agents
    /// @{
-   uvma_clk_agent_c    ${clk_agent_name}_agent; ///< Clocking agent
-   uvma_reset_agent_c  ${reset_agent_name}_agent; ///< Reset agent
+   uvma_clk_agent_c    clk_agent; ///< Clocking agent
+   uvma_reset_agent_c  reset_agent; ///< Reset agent
    uvma_${name}_cp_agent_c      cp_agent    ; ///< Control plane agent
    uvma_${name}_dp_in_agent_c   dp_in_agent ; ///< Data plane agent for input
    uvma_${name}_dp_out_agent_c  dp_out_agent; ///< Data plane agent for output
@@ -77,11 +77,6 @@ class uvme_${name}_env_c extends uvml_env_c;
     * Creates agent components.
     */
    extern function void create_agents();
-
-   /**
-    * Creates ral_adapter which translates to/from ral to ${ral_agent_type}_agent.
-    */
-   extern function void create_reg_adapter();
 
    /**
     * Creates additional (non-agent) environment components (and objects).
@@ -177,11 +172,12 @@ endfunction: connect_phase
 function void uvme_${name}_env_c::assign_cfg();
 
    uvm_config_db#(uvme_${name}_cfg_c)::set(this, "*", "cfg", cfg);
-   uvm_config_db#(uvma_clk_cfg_c)::set(this, "${clk_agent_name}_agent", "cfg", cfg.${clk_agent_name}_cfg);
-   uvm_config_db#(uvma_reset_cfg_c)::set(this, "${reset_agent_name}_agent", "cfg", cfg.${reset_agent_name}_cfg);
+   uvm_config_db#(uvma_clk_cfg_c  )::set(this, "clk_agent"  , "cfg", cfg.clk_cfg  );
+   uvm_config_db#(uvma_reset_cfg_c)::set(this, "reset_agent", "cfg", cfg.reset_cfg);
    uvm_config_db#(uvma_${name}_cp_cfg_c    )::set(this, "cp_agent"    , "cfg", cfg.cp_cfg    );
    uvm_config_db#(uvma_${name}_dp_in_cfg_c )::set(this, "dp_in_agent" , "cfg", cfg.dp_in_cfg );
    uvm_config_db#(uvma_${name}_dp_out_cfg_c)::set(this, "dp_out_agent", "cfg", cfg.dp_out_cfg);
+   uvm_config_db#(uvml_sb_simplex_cfg_c)::set(this, "sb_dp", "cfg", cfg.sb_dp_cfg);
 
 endfunction: assign_cfg
 
@@ -189,22 +185,23 @@ endfunction: assign_cfg
 function void uvme_${name}_env_c::assign_cntxt();
 
    uvm_config_db#(uvme_${name}_cntxt_c)::set(this, "*", "cntxt", cntxt);
-   uvm_config_db#(uvma_clk_cntxt_c)::set(this, "${clk_agent_name}_agent", "cntxt", cntxt.${clk_agent_name}_cntxt);
-   uvm_config_db#(uvma_reset_cntxt_c)::set(this, "${reset_agent_name}_agent", "cntxt", cntxt.${reset_agent_name}_cntxt);
+   uvm_config_db#(uvma_clk_cntxt_c  )::set(this, "clk_agent"  , "cntxt", cntxt.clk_cntxt  );
+   uvm_config_db#(uvma_reset_cntxt_c)::set(this, "reset_agent", "cntxt", cntxt.reset_cntxt);
    uvm_config_db#(uvma_${name}_cp_cntxt_c    )::set(this, "cp_agent"    , "cntxt", cntxt.cp_cntxt    );
    uvm_config_db#(uvma_${name}_dp_in_cntxt_c )::set(this, "dp_in_agent" , "cntxt", cntxt.dp_in_cntxt );
    uvm_config_db#(uvma_${name}_dp_out_cntxt_c)::set(this, "dp_out_agent", "cntxt", cntxt.dp_out_cntxt);
+   uvm_config_db#(uvml_sb_simplex_cntxt_c)::set(this, "sb_dp", "cntxt", cntxt.sb_dp_cntxt);
 
 endfunction: assign_cntxt
 
 
 function void uvme_${name}_env_c::create_agents();
 
-   ${clk_agent_name}_agent = uvma_clk_agent_c::type_id::create("${clk_agent_name}_agent", this);
-   ${reset_agent_name}_agent = uvma_reset_agent_c::type_id::create("${reset_agent_name}_agent", this);
-   cp_agent     = uvma_cp_agent_c    ::type_id::create("cp_agent"    , this);
-   dp_in_agent  = uvma_dp_in_agent_c ::type_id::create("dp_in_agent" , this);
-   dp_out_agent = uvma_dp_out_agent_c::type_id::create("dp_out_agent", this);
+   clk_agent    = uvma_clk_agent_c  ::type_id::create("clk_agent"  , this);
+   reset_agent  = uvma_reset_agent_c::type_id::create("reset_agent", this);
+   cp_agent     = uvma_${name}_cp_agent_c    ::type_id::create("cp_agent"    , this);
+   dp_in_agent  = uvma_${name}_dp_in_agent_c ::type_id::create("dp_in_agent" , this);
+   dp_out_agent = uvma_${name}_dp_out_agent_c::type_id::create("dp_out_agent", this);
 
 endfunction: create_agents
 
@@ -213,7 +210,7 @@ function void uvme_${name}_env_c::create_env_components();
 
    if (cfg.scoreboarding_enabled) begin
       predictor = uvme_${name}_prd_c        ::type_id::create("predictor", this);
-      sb        = uvme_${name}_sb_simplex_c ::type_id::create("sb"       , this);
+      sb_dp     = uvme_${name}_sb_simplex_c ::type_id::create("sb_dp"    , this);
    end
 
 endfunction: create_env_components
@@ -235,34 +232,35 @@ endfunction: create_cov_model
 
 function void uvme_${name}_env_c::connect_predictor();
 
-   ${clk_agent_name}_agent.mon_ap.connect(predictor.${clk_agent_name}_export);
-   ${reset_agent_name}_agent.mon_ap.connect(predictor.${reset_agent_name}_export);
-   cp_agent   .mon_ap   .connect(predictor.cp_export   );
-   dp_in_agent.mon_in_ap.connect(predictor.dp_in_export);
+   clk_agent  .mon_ap.connect(predictor.clk_export  );
+   reset_agent.mon_ap.connect(predictor.reset_export);
+   cp_agent   .mon_ap.connect(predictor.cp_export   );
+   dp_in_agent.mon_ap.connect(predictor.dp_in_export);
 
 endfunction: connect_predictor
 
 
 function void uvme_${name}_env_c::connect_scoreboard();
 
-   dp_out_agent.mon_out_ap.connect(sb.act_export);
-   predictor.dp_out_ap    .connect(sb.exp_export);
+   dp_out_agent.mon_ap.connect(sb_dp.act_export);
+   predictor.dp_out_ap.connect(sb_dp.exp_export);
 
 endfunction: connect_scoreboard
 
 
 function void uvme_${name}_env_c::connect_coverage_model();
 
-   // TODO Implement uvme_${name}_env_c::connect_coverage_model()
-   //      Ex: ${ral_agent_name}_agent.mon_ap.connect(cov_model.${ral_agent_name}_export);
+   cp_agent    .mon_ap.connect(cov_model.cp_export    );
+   dp_in_agent .mon_ap.connect(cov_model.dp_in_export );
+   dp_out_agent.mon_ap.connect(cov_model.dp_out_export);
 
 endfunction: connect_coverage_model
 
 
 function void uvme_${name}_env_c::assemble_vsequencer();
 
-   vsequencer.${clk_agent_name}_sequencer = ${clk_agent_name}_agent.sequencer;
-   vsequencer.${reset_agent_name}_sequencer = ${reset_agent_name}_agent.sequencer;
+   vsequencer.clk_sequencer    = clk_agent   .sequencer;
+   vsequencer.reset_sequencer  = reset_agent .sequencer;
    vsequencer.cp_sequencer     = cp_agent    .sequencer;
    vsequencer.dp_in_sequencer  = dp_in_agent .sequencer;
    vsequencer.dp_out_sequencer = dp_out_agent.sequencer;

@@ -15,11 +15,11 @@ module uvmt_${name}_tb;
    import uvm_pkg::*;
    import uvmt_${name}_pkg::*;
 
-   uvma_clk_if  ${clk_agent_name}_if(); ///< Clock generating interface
-   uvma_reset_if  ${reset_agent_name}_if(.clk(${clk_agent_name}_if.clk)); ///< Reset assertion interface
-   uvma_${name}_cp_if      cp_if(.clk(${clk_agent_name}_if.clk), .reset_n(${reset_agent_name}_if.reset_n)); ///< Control plane interface
-   uvma_${name}_dp_in_if   dp_in_if(.clk(${clk_agent_name}_if.clk), .reset_n(${reset_agent_name}_if.reset_n)); ///< Data plane input interface
-   uvma_${name}_dp_out_if  dp_out_if(.clk(${clk_agent_name}_if.clk), .reset_n(${reset_agent_name}_if.reset_n)); ///< Data plane output interface
+   uvma_clk_if    clk_if(); ///< Clock generating interface
+   uvma_reset_if  reset_if(.clk(clk_if.clk)); ///< Reset assertion interface
+   uvma_${name}_cp_if      cp_if(.clk(clk_if.clk), .reset_n(reset_if.reset_n)); ///< Control plane interface
+   uvma_${name}_dp_in_if   dp_in_if(.clk(clk_if.clk), .reset_n(reset_if.reset_n)); ///< Data plane input interface
+   uvma_${name}_dp_out_if  dp_out_if(.clk(clk_if.clk), .reset_n(reset_if.reset_n)); ///< Data plane output interface
    uvmt_${name}_probe_if   probe_if(); ///< Misc. signals interface
    uvmt_${name}_dut_wrap   dut_wrap(.*); ///< DUT instance with interface ports
 
@@ -37,8 +37,8 @@ module uvmt_${name}_tb;
       );
 
       // Add interfaces to uvm_config_db
-      uvm_config_db#(virtual uvma_clk_if)::set(null, "*.env.${clk_agent_name}_agent", "vif", ${clk_agent_name}_if);
-      uvm_config_db#(virtual uvma_reset_if)::set(null, "*.env.${reset_agent_name}_agent", "vif", ${reset_agent_name}_if);
+      uvm_config_db#(virtual uvma_clk_if  )::set(null, "*.env.clk_agent"  , "vif", clk_if  );
+      uvm_config_db#(virtual uvma_reset_if)::set(null, "*.env.reset_agent", "vif", reset_if);
       uvm_config_db#(virtual uvma_${name}_cp_if    )::set(null, "*.env.cp_agent"    , "vif", cp_if    );
       uvm_config_db#(virtual uvma_${name}_dp_in_if )::set(null, "*.env.dp_in_agent" , "vif", dp_in_if );
       uvm_config_db#(virtual uvma_${name}_dp_out_if)::set(null, "*.env.dp_out_agent", "vif", dp_out_if);

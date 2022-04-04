@@ -132,11 +132,11 @@ function uvme_${name}_cov_model_c::new(string name="uvme_${name}_cov_model", uvm
 
    super.new(name, parent);
 
-   ${name}_cfg_cg    = new();
-   ${name}_cntxt_cg  = new();
-   ${name}_cp_cg     = new();
-   ${name}_dp_in_cg  = new();
-   ${name}_dp_out_cg = new();
+   ${name}_cfg_cg        = new();
+   ${name}_cntxt_cg      = new();
+   ${name}_cp_trn_cg     = new();
+   ${name}_dp_in_trn_cg  = new();
+   ${name}_dp_out_trn_cg = new();
 
 endfunction : new
 

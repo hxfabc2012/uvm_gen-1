@@ -15,6 +15,8 @@ import sys
 import re
 
 
+
+
 ########################################################################################################################
 # GLOBALS
 ########################################################################################################################
@@ -29,100 +31,48 @@ name = ""
 name_normal_case = ""
 
 
+
+
 ########################################################################################################################
 # TEMPLATE DATA
 ########################################################################################################################
-parameters = { }
+agent_cp_parameters = { }
+agent_dp_in_parameters = { }
+agent_dp_out_parameters = { }
+env_tb_parameters = { }
 
-files = {
-    #              SRC                                 DST
-    "agent_basic/agent/bin/package.py"                  : "uvma_${name}_cp/bin/package.py",
-    "agent_basic/agent/docs/agent_block_diagram.svg"    : "uvma_${name}_cp/docs/agent_block_diagram.svg",
-    "agent_basic/agent/examples/instantiation.sv"       : "uvma_${name}_cp/examples/instantiation.sv",
-    "agent_basic/agent/examples/sequence.sv"            : "uvma_${name}_cp/examples/sequence.sv",
-    "agent_basic/agent/src/comps/agent.sv"              : "uvma_${name}_cp/src/comps/uvma_${name}_cp_agent.sv",
-    "agent_basic/agent/src/comps/cov_model.sv"          : "uvma_${name}_cp/src/comps/uvma_${name}_cp_cov_model.sv",
-    "agent_basic/agent/src/comps/drv.sv"                : "uvma_${name}_cp/src/comps/uvma_${name}_cp_drv.sv",
-    "agent_basic/agent/src/comps/logger.sv"             : "uvma_${name}_cp/src/comps/uvma_${name}_cp_logger.sv",
-    "agent_basic/agent/src/comps/mon.sv"                : "uvma_${name}_cp/src/comps/uvma_${name}_cp_mon.sv",
-    "agent_basic/agent/src/comps/sqr.sv"                : "uvma_${name}_cp/src/comps/uvma_${name}_cp_sqr.sv",
-    "agent_basic/agent/src/obj/cfg.sv"                  : "uvma_${name}_cp/src/obj/uvma_${name}_cp_cfg.sv",
-    "agent_basic/agent/src/obj/cntxt.sv"                : "uvma_${name}_cp/src/obj/uvma_${name}_cp_cntxt.sv",
-    "agent_basic/agent/src/obj/mon_trn.sv"              : "uvma_${name}_cp/src/obj/uvma_${name}_cp_mon_trn.sv",
-    "agent_basic/agent/src/seq/base_seq.sv"             : "uvma_${name}_cp/src/seq/uvma_${name}_cp_base_seq.sv",
-    "agent_basic/agent/src/seq/seq_item.sv"             : "uvma_${name}_cp/src/seq/uvma_${name}_cp_seq_item.sv",
-    "agent_basic/agent/src/seq/seq_lib.sv"              : "uvma_${name}_cp/src/seq/uvma_${name}_cp_seq_lib.sv",
-    "agent_basic/agent/src/constants.sv"                : "uvma_${name}_cp/src/uvma_${name}_cp_constants.sv",
-    "agent_basic/agent/src/if_chkr.sv"                  : "uvma_${name}_cp/src/uvma_${name}_cp_if_chkr.sv",
-    "agent_basic/agent/src/if.sv"                       : "uvma_${name}_cp/src/uvma_${name}_cp_if.sv",
-    "agent_basic/agent/src/macros.svh"                  : "uvma_${name}_cp/src/uvma_${name}_cp_macros.svh",
-    "agent_basic/agent/src/pkg.flist"                   : "uvma_${name}_cp/src/uvma_${name}_cp_pkg.flist",
-    "agent_basic/agent/src/pkg.flist.xsim"              : "uvma_${name}_cp/src/uvma_${name}_cp_pkg.flist.xsim",
-    "agent_basic/agent/src/pkg.sv"                      : "uvma_${name}_cp/src/uvma_${name}_cp_pkg.sv",
-    "agent_basic/agent/src/tdefs.sv"                    : "uvma_${name}_cp/src/uvma_${name}_cp_tdefs.sv",
-    "agent_basic/agent/gitignore"                       : "uvma_${name}_cp/.gitignore",
-    "agent_basic/agent/ip.yml"                          : "uvma_${name}_cp/ip.yml",
-    "LICENSE_solderpad_v2p1.md"                         : "uvma_${name}_cp/LICENSE.md",
-    "agent_basic/agent/README.md"                       : "uvma_${name}_cp/README.md",
-    
-    "agent_basic/agent/bin/package.py"                  : "uvma_${name}dp_in/bin/package.py",
-    "agent_basic/agent/docs/agent_block_diagram.svg"    : "uvma_${name}dp_in/docs/agent_block_diagram.svg",
-    "agent_basic/agent/examples/instantiation.sv"       : "uvma_${name}dp_in/examples/instantiation.sv",
-    "agent_basic/agent/examples/sequence.sv"            : "uvma_${name}dp_in/examples/sequence.sv",
-    "agent_basic/agent/src/comps/agent.sv"              : "uvma_${name}dp_in/src/comps/uvma_${name}_dp_in_agent.sv",
-    "agent_basic/agent/src/comps/cov_model.sv"          : "uvma_${name}dp_in/src/comps/uvma_${name}_dp_in_cov_model.sv",
-    "agent_basic/agent/src/comps/drv.sv"                : "uvma_${name}dp_in/src/comps/uvma_${name}_dp_in_drv.sv",
-    "agent_basic/agent/src/comps/logger.sv"             : "uvma_${name}dp_in/src/comps/uvma_${name}_dp_in_logger.sv",
-    "agent_basic/agent/src/comps/mon.sv"                : "uvma_${name}dp_in/src/comps/uvma_${name}_dp_in_mon.sv",
-    "agent_basic/agent/src/comps/sqr.sv"                : "uvma_${name}dp_in/src/comps/uvma_${name}_dp_in_sqr.sv",
-    "agent_basic/agent/src/obj/cfg.sv"                  : "uvma_${name}dp_in/src/obj/uvma_${name}_dp_in_cfg.sv",
-    "agent_basic/agent/src/obj/cntxt.sv"                : "uvma_${name}dp_in/src/obj/uvma_${name}_dp_in_cntxt.sv",
-    "agent_basic/agent/src/obj/mon_trn.sv"              : "uvma_${name}dp_in/src/obj/uvma_${name}_dp_in_mon_trn.sv",
-    "agent_basic/agent/src/seq/base_seq.sv"             : "uvma_${name}dp_in/src/seq/uvma_${name}_dp_in_base_seq.sv",
-    "agent_basic/agent/src/seq/seq_item.sv"             : "uvma_${name}dp_in/src/seq/uvma_${name}_dp_in_seq_item.sv",
-    "agent_basic/agent/src/seq/seq_lib.sv"              : "uvma_${name}dp_in/src/seq/uvma_${name}_dp_in_seq_lib.sv",
-    "agent_basic/agent/src/constants.sv"                : "uvma_${name}dp_in/src/uvma_${name}_dp_in_constants.sv",
-    "agent_basic/agent/src/if_chkr.sv"                  : "uvma_${name}dp_in/src/uvma_${name}_dp_in_if_chkr.sv",
-    "agent_basic/agent/src/if.sv"                       : "uvma_${name}dp_in/src/uvma_${name}_dp_in_if.sv",
-    "agent_basic/agent/src/macros.svh"                  : "uvma_${name}dp_in/src/uvma_${name}_dp_in_macros.svh",
-    "agent_basic/agent/src/pkg.flist"                   : "uvma_${name}dp_in/src/uvma_${name}_dp_in_pkg.flist",
-    "agent_basic/agent/src/pkg.flist.xsim"              : "uvma_${name}dp_in/src/uvma_${name}_dp_in_pkg.flist.xsim",
-    "agent_basic/agent/src/pkg.sv"                      : "uvma_${name}dp_in/src/uvma_${name}_dp_in_pkg.sv",
-    "agent_basic/agent/src/tdefs.sv"                    : "uvma_${name}dp_in/src/uvma_${name}_dp_in_tdefs.sv",
-    "agent_basic/agent/gitignore"                       : "uvma_${name}dp_in/.gitignore",
-    "agent_basic/agent/ip.yml"                          : "uvma_${name}dp_in/ip.yml",
-    "LICENSE_solderpad_v2p1.md"                         : "uvma_${name}dp_in/LICENSE.md",
-    "agent_basic/agent/README.md"                       : "uvma_${name}dp_in/README.md",
-    
-    "agent_basic/agent/bin/package.py"                  : "uvma_${name}dp_out/bin/package.py",
-    "agent_basic/agent/docs/agent_block_diagram.svg"    : "uvma_${name}dp_out/docs/agent_block_diagram.svg",
-    "agent_basic/agent/examples/instantiation.sv"       : "uvma_${name}dp_out/examples/instantiation.sv",
-    "agent_basic/agent/examples/sequence.sv"            : "uvma_${name}dp_out/examples/sequence.sv",
-    "agent_basic/agent/src/comps/agent.sv"              : "uvma_${name}dp_out/src/comps/uvma_${name}_dp_out_agent.sv",
-    "agent_basic/agent/src/comps/cov_model.sv"          : "uvma_${name}dp_out/src/comps/uvma_${name}_dp_out_cov_model.sv",
-    "agent_basic/agent/src/comps/drv.sv"                : "uvma_${name}dp_out/src/comps/uvma_${name}_dp_out_drv.sv",
-    "agent_basic/agent/src/comps/logger.sv"             : "uvma_${name}dp_out/src/comps/uvma_${name}_dp_out_logger.sv",
-    "agent_basic/agent/src/comps/mon.sv"                : "uvma_${name}dp_out/src/comps/uvma_${name}_dp_out_mon.sv",
-    "agent_basic/agent/src/comps/sqr.sv"                : "uvma_${name}dp_out/src/comps/uvma_${name}_dp_out_sqr.sv",
-    "agent_basic/agent/src/obj/cfg.sv"                  : "uvma_${name}dp_out/src/obj/uvma_${name}_dp_out_cfg.sv",
-    "agent_basic/agent/src/obj/cntxt.sv"                : "uvma_${name}dp_out/src/obj/uvma_${name}_dp_out_cntxt.sv",
-    "agent_basic/agent/src/obj/mon_trn.sv"              : "uvma_${name}dp_out/src/obj/uvma_${name}_dp_out_mon_trn.sv",
-    "agent_basic/agent/src/seq/base_seq.sv"             : "uvma_${name}dp_out/src/seq/uvma_${name}_dp_out_base_seq.sv",
-    "agent_basic/agent/src/seq/seq_item.sv"             : "uvma_${name}dp_out/src/seq/uvma_${name}_dp_out_seq_item.sv",
-    "agent_basic/agent/src/seq/seq_lib.sv"              : "uvma_${name}dp_out/src/seq/uvma_${name}_dp_out_seq_lib.sv",
-    "agent_basic/agent/src/constants.sv"                : "uvma_${name}dp_out/src/uvma_${name}_dp_out_constants.sv",
-    "agent_basic/agent/src/if_chkr.sv"                  : "uvma_${name}dp_out/src/uvma_${name}_dp_out_if_chkr.sv",
-    "agent_basic/agent/src/if.sv"                       : "uvma_${name}dp_out/src/uvma_${name}_dp_out_if.sv",
-    "agent_basic/agent/src/macros.svh"                  : "uvma_${name}dp_out/src/uvma_${name}_dp_out_macros.svh",
-    "agent_basic/agent/src/pkg.flist"                   : "uvma_${name}dp_out/src/uvma_${name}_dp_out_pkg.flist",
-    "agent_basic/agent/src/pkg.flist.xsim"              : "uvma_${name}dp_out/src/uvma_${name}_dp_out_pkg.flist.xsim",
-    "agent_basic/agent/src/pkg.sv"                      : "uvma_${name}dp_out/src/uvma_${name}_dp_out_pkg.sv",
-    "agent_basic/agent/src/tdefs.sv"                    : "uvma_${name}dp_out/src/uvma_${name}_dp_out_tdefs.sv",
-    "agent_basic/agent/gitignore"                       : "uvma_${name}dp_out/.gitignore",
-    "agent_basic/agent/ip.yml"                          : "uvma_${name}dp_out/ip.yml",
-    "LICENSE_solderpad_v2p1.md"                         : "uvma_${name}dp_out/LICENSE.md",
-    "agent_basic/agent/README.md"                       : "uvma_${name}dp_out/README.md",
-    
+agent_files = {
+    "agent_basic/agent/bin/package.py"                  : "uvma_${name}/bin/package.py",
+    "agent_basic/agent/docs/agent_block_diagram.svg"    : "uvma_${name}/docs/agent_block_diagram.svg",
+    "agent_basic/agent/examples/instantiation.sv"       : "uvma_${name}/examples/instantiation.sv",
+    "agent_basic/agent/examples/sequence.sv"            : "uvma_${name}/examples/sequence.sv",
+    "agent_basic/agent/src/comps/agent.sv"              : "uvma_${name}/src/comps/uvma_${name}_agent.sv",
+    "agent_basic/agent/src/comps/cov_model.sv"          : "uvma_${name}/src/comps/uvma_${name}_cov_model.sv",
+    "agent_basic/agent/src/comps/drv.sv"                : "uvma_${name}/src/comps/uvma_${name}_drv.sv",
+    "agent_basic/agent/src/comps/logger.sv"             : "uvma_${name}/src/comps/uvma_${name}_logger.sv",
+    "agent_basic/agent/src/comps/mon.sv"                : "uvma_${name}/src/comps/uvma_${name}_mon.sv",
+    "agent_basic/agent/src/comps/sqr.sv"                : "uvma_${name}/src/comps/uvma_${name}_sqr.sv",
+    "agent_basic/agent/src/obj/cfg.sv"                  : "uvma_${name}/src/obj/uvma_${name}_cfg.sv",
+    "agent_basic/agent/src/obj/cntxt.sv"                : "uvma_${name}/src/obj/uvma_${name}_cntxt.sv",
+    "agent_basic/agent/src/obj/mon_trn.sv"              : "uvma_${name}/src/obj/uvma_${name}_mon_trn.sv",
+    "agent_basic/agent/src/seq/base_seq.sv"             : "uvma_${name}/src/seq/uvma_${name}_base_seq.sv",
+    "agent_basic/agent/src/seq/seq_item.sv"             : "uvma_${name}/src/seq/uvma_${name}_seq_item.sv",
+    "agent_basic/agent/src/seq/seq_lib.sv"              : "uvma_${name}/src/seq/uvma_${name}_seq_lib.sv",
+    "agent_basic/agent/src/constants.sv"                : "uvma_${name}/src/uvma_${name}_constants.sv",
+    "agent_basic/agent/src/if_chkr.sv"                  : "uvma_${name}/src/uvma_${name}_if_chkr.sv",
+    "agent_basic/agent/src/if.sv"                       : "uvma_${name}/src/uvma_${name}_if.sv",
+    "agent_basic/agent/src/macros.svh"                  : "uvma_${name}/src/uvma_${name}_macros.svh",
+    "agent_basic/agent/src/pkg.flist"                   : "uvma_${name}/src/uvma_${name}_pkg.flist",
+    "agent_basic/agent/src/pkg.flist.xsim"              : "uvma_${name}/src/uvma_${name}_pkg.flist.xsim",
+    "agent_basic/agent/src/pkg.sv"                      : "uvma_${name}/src/uvma_${name}_pkg.sv",
+    "agent_basic/agent/src/tdefs.sv"                    : "uvma_${name}/src/uvma_${name}_tdefs.sv",
+    "agent_basic/agent/gitignore"                       : "uvma_${name}/.gitignore",
+    "agent_basic/agent/ip.yml"                          : "uvma_${name}/ip.yml",
+    "LICENSE_solderpad_v2p1.md"                         : "uvma_${name}/LICENSE.md",
+    "agent_basic/agent/README.md"                       : "uvma_${name}/README.md"
+}
+
+env_tb_files = {
     "block/env/bin/package.py"                          : "uvme_${name}/bin/package.py",
     "block/env/docs/env_block_diagram.svg"              : "uvme_${name}/docs/env_block_diagram.svg",
     "block/env/examples/virtual_sequence.sv"            : "uvme_${name}/examples/virtual_sequence.sv",
@@ -133,6 +83,8 @@ files = {
     "block/env/src/obj/cfg.sv"                          : "uvme_${name}/src/obj/uvme_${name}_cfg.sv",
     "block/env/src/obj/cntxt.sv"                        : "uvme_${name}/src/obj/uvme_${name}_cntxt.sv",
     "block/env/src/seq/base_vseq.sv"                    : "uvme_${name}/src/seq/uvme_${name}_base_vseq.sv",
+    "block/env/src/seq/clk_vseq.sv"                     : "uvme_${name}/src/seq/uvme_${name}_clk_vseq.sv",
+    "block/env/src/seq/reset_vseq.sv"                   : "uvme_${name}/src/seq/uvme_${name}_reset_vseq.sv",
     "block/env/src/seq/rand_stim_vseq.sv"               : "uvme_${name}/src/seq/uvme_${name}_rand_stim_vseq.sv",
     "block/env/src/seq/vseq_lib.sv"                     : "uvme_${name}/src/seq/uvme_${name}_vseq_lib.sv",
     "block/env/src/chkr.sv"                             : "uvme_${name}/src/uvme_${name}_chkr.sv",
@@ -152,6 +104,7 @@ files = {
     "block/tb/examples/test.sv"                         : "uvmt_${name}/examples/test.sv",
     "block/tb/src/tb/dut_chkr.sv"                       : "uvmt_${name}/src/tb/uvmt_${name}_dut_chkr.sv",
     "block/tb/src/tb/dut_wrap.sv"                       : "uvmt_${name}/src/tb/uvmt_${name}_dut_wrap.sv",
+    "block/tb/src/tb/probe_if.sv"                       : "uvmt_${name}/src/tb/uvmt_${name}_probe_if.sv",
     "block/tb/src/tb/tb.sv"                             : "uvmt_${name}/src/tb/uvmt_${name}_tb.sv",
     "block/tb/src/tests/base_test_workarounds.sv"       : "uvmt_${name}/src/tests/uvmt_${name}_base_test_workarounds.sv",
     "block/tb/src/tests/base_test.sv"                   : "uvmt_${name}/src/tests/uvmt_${name}_base_test.sv",
@@ -169,31 +122,18 @@ files = {
     "block/tb/README.md"                                : "uvmt_${name}/README.md"
 }
 
-directories = [
-    "uvma_${name}_cp",
-    "uvma_${name}_cp/bin",
-    "uvma_${name}_cp/docs",
-    "uvma_${name}_cp/examples",
-    "uvma_${name}_cp/src",
-    "uvma_${name}_cp/src/comps",
-    "uvma_${name}_cp/src/obj",
-    "uvma_${name}_cp/src/seq",
-    "uvma_${name}_dp_in",
-    "uvma_${name}_dp_in/bin",
-    "uvma_${name}_dp_in/docs",
-    "uvma_${name}_dp_in/examples",
-    "uvma_${name}_dp_in/src",
-    "uvma_${name}_dp_in/src/comps",
-    "uvma_${name}_dp_in/src/obj",
-    "uvma_${name}_dp_in/src/seq"
-    "uvma_${name}_dp_out",
-    "uvma_${name}_dp_out/bin",
-    "uvma_${name}_dp_out/docs",
-    "uvma_${name}_dp_out/examples",
-    "uvma_${name}_dp_out/src",
-    "uvma_${name}_dp_out/src/comps",
-    "uvma_${name}_dp_out/src/obj",
-    "uvma_${name}_dp_out/src/seq"
+agent_directories = [
+    "uvma_${name}",
+    "uvma_${name}/bin",
+    "uvma_${name}/docs",
+    "uvma_${name}/examples",
+    "uvma_${name}/src",
+    "uvma_${name}/src/comps",
+    "uvma_${name}/src/obj",
+    "uvma_${name}/src/seq"
+]
+
+env_tb_directories = [
     "uvme_${name}",
     "uvme_${name}/bin",
     "uvme_${name}/docs",
@@ -212,10 +152,12 @@ directories = [
 ]
 
 
+
+
 ########################################################################################################################
 # MAIN
 ########################################################################################################################
-def process_file(path, file_path_template):
+def process_file(path, file_path_template, parameters):
     if dbg:
         print("Processing file " + path + " with path template " + file_path_template)
     
@@ -243,12 +185,26 @@ def process_file(path, file_path_template):
         print("Writing " + fout_path)
         fout.write(data)
         fout.close()
-    
-def process_all_files():
-    for file in files:
-        process_file(file, files[file])
 
-def create_directories():
+
+
+def process_all_files():
+    for file in agent_files:
+        process_file(file, agent_files[file], agent_cp_parameters)
+        
+    for file in agent_files:
+        process_file(file, agent_files[file], agent_dp_in_parameters)
+        
+    for file in agent_files:
+        process_file(file, agent_files[file], agent_dp_out_parameters)
+        
+    for file in env_tb_files:
+        process_file(file, env_tb_files[file], env_tb_parameters)
+
+
+
+
+def create_directories(directories, parameters):
     for dir in directories:
         dir_name = out_path + "/" + dir
         for param in parameters:
@@ -257,6 +213,9 @@ def create_directories():
             print("Creating directory '" + dir_name + "'")
         else:
             os.mkdir(dir_name)
+
+
+
 
 def pick_out_path():
     global out_path
@@ -268,13 +227,19 @@ def pick_out_path():
         default_copyright_owner = sys.argv[2].replace('"', "")
         print("Default copyright owner is " + default_copyright_owner)
 
+
+
+
 def prompt_user_values():
     global out_path
     global name
     global name_normal_case
     global name_of_copyright_owner
     global default_copyright_owner
-    global parameters
+    global agent_cp_parameters
+    global agent_dp_in_parameters
+    global agent_dp_out_parameters
+    global env_tb_parameters
     
     print("Moore.io Template Generator: RTL Block UVM DV Combo (v1p0)")
     print("******************************************************************")
@@ -302,18 +267,47 @@ def prompt_user_values():
     if name_normal_case == "":
         sys.exit("ERROR: descriptive name cannot be empty.  Exiting.")
     
-    parameters = {
-    "name"                    : name,
-    "name_uppercase"          : name.upper(),
-    "name_normal_case"        : name_normal_case + " Block",
-    "name_of_copyright_owner" : name_of_copyright_owner,
-    "license"                 : license,
-    "year"                    : date.today().year
-}
+    agent_cp_parameters = {
+        "name"                    : name + "_cp",
+        "name_uppercase"          : name.upper() + "_CP",
+        "name_normal_case"        : name_normal_case + " Block Control Plane",
+        "name_of_copyright_owner" : name_of_copyright_owner,
+        "license"                 : license,
+        "year"                    : date.today().year
+    }
+    
+    agent_dp_in_parameters = {
+        "name"                    : name + "_dp_in",
+        "name_uppercase"          : name.upper() + "_DP_IN",
+        "name_normal_case"        : name_normal_case + " Block Data Plane Input",
+        "name_of_copyright_owner" : name_of_copyright_owner,
+        "license"                 : license,
+        "year"                    : date.today().year
+    }
+    
+    agent_dp_out_parameters = {
+        "name"                    : name + "_dp_out",
+        "name_uppercase"          : name.upper() + "_DP_OUT",
+        "name_normal_case"        : name_normal_case + " Block Data Plane Output",
+        "name_of_copyright_owner" : name_of_copyright_owner,
+        "license"                 : license,
+        "year"                    : date.today().year
+    }
+    
+    env_tb_parameters = {
+        "name"                    : name,
+        "name_uppercase"          : name.upper(),
+        "name_normal_case"        : name_normal_case,
+        "name_of_copyright_owner" : name_of_copyright_owner,
+        "license"                 : license,
+        "year"                    : date.today().year
+    }
 
 
 def print_end_message():
     print("Code successfully generated")
+
+
 
 
 ########################################################################################################################
@@ -321,6 +315,9 @@ def print_end_message():
 ########################################################################################################################
 pick_out_path()
 prompt_user_values()
-create_directories()
+create_directories(agent_directories, agent_cp_parameters)
+create_directories(agent_directories, agent_dp_in_parameters)
+create_directories(agent_directories, agent_dp_out_parameters)
+create_directories(env_tb_directories, env_tb_parameters)
 process_all_files()
 print_end_message()

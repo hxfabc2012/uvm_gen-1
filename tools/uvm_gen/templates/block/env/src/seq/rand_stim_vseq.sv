@@ -58,10 +58,12 @@ task uvme_${name}_rand_stim_vseq_c::body();
    uvma_${name}_dp_out_seq_item_c  dp_out_req;
 
    fork
-      for (int unsigned ii=0; ii<num_items; ii++) begin
-         `uvm_info("${name_uppercase}_VSEQ", $sformatf("Driving item #%0d of %0d", (ii+1), num_items), UVM_HIGH)
-         `uvm_do_on(cp_req   , p_sequencer.cp_sequencer   )
-         `uvm_do_on(dp_in_req, p_sequencer.dp_in_sequencer)
+      begin
+         for (int unsigned ii=0; ii<num_items; ii++) begin
+            `uvm_info("${name_uppercase}_VSEQ", $sformatf("Driving item #%0d of %0d", (ii+1), num_items), UVM_HIGH)
+            `uvm_do_on(cp_req   , p_sequencer.cp_sequencer   )
+            `uvm_do_on(dp_in_req, p_sequencer.dp_in_sequencer)
+         end
       end
 
       forever begin
@@ -72,4 +74,4 @@ task uvme_${name}_rand_stim_vseq_c::body();
 endtask : body
 
 
-`endif __UVME_${name_uppercase}_RAND_STIM_VSEQ_SV__
+`endif // __UVME_${name_uppercase}_RAND_STIM_VSEQ_SV__

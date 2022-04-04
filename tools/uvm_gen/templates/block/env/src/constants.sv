@@ -7,7 +7,7 @@
 `define __UVME_${name_uppercase}_CONSTANTS_SV__
 
 
-const int unsigned  uvme_${name}_default_${clk_agent_name}_frequency = 100_000_000; ///< Clock agent frequency (Hz)
+const int unsigned  uvme_${name}_default_clk_frequency = 100_000_000; ///< Clock agent frequency (Hz)
 
 
 `endif // __UVME_${name_uppercase}_CONSTANTS_SV__

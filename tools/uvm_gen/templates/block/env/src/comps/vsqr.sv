@@ -23,8 +23,8 @@ class uvme_${name}_vsqr_c extends uvml_vsqr_c #(
 
    /// @defgroup Sequencer handles
    /// @{
-   uvma_clk_sqr_c    ${clk_agent_name}_sequencer; ///< Clock agent sequencer
-   uvma_reset_sqr_c  ${reset_agent_name}_sequencer; ///< Reset agent sequencer
+   uvma_clk_sqr_c    clk_sequencer  ; ///< Clock agent sequencer
+   uvma_reset_sqr_c  reset_sequencer; ///< Reset agent sequencer
    uvma_${name}_cp_sqr_c      cp_sequencer    ; ///< Control plane agent sequencer
    uvma_${name}_dp_in_sqr_c   dp_in_sequencer ; ///< Data plane input agent sequencer
    uvma_${name}_dp_out_sqr_c  dp_out_sequencer; ///< Data plane output agent sequencer

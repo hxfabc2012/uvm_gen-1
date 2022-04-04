@@ -8,8 +8,8 @@
 
 
 `include "uvme_${name}_base_vseq.sv"
-`include "uvme_${name}_${clk_agent_name}_vseq.sv"
-`include "uvme_${name}_${reset_agent_name}_vseq.sv"
+`include "uvme_${name}_clk_vseq.sv"
+`include "uvme_${name}_reset_vseq.sv"
 `include "uvme_${name}_rand_stim_vseq.sv"
 
 

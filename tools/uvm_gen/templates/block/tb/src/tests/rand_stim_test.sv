@@ -12,7 +12,7 @@
  */
 class uvmt_${name}_rand_stim_test_c extends uvmt_${name}_base_test_c;
 
-   rand uvme_${name}_rand_stim_c  rand_stim_vseq; ///< Virtual sequence to be run
+   rand uvme_${name}_rand_stim_vseq_c  rand_stim_vseq; ///< Virtual sequence to be run
 
 
    `uvm_component_utils(uvmt_${name}_rand_stim_test_c)
@@ -42,7 +42,7 @@ endclass : uvmt_${name}_rand_stim_test_c
 function uvmt_${name}_rand_stim_test_c::new(string name="uvmt_${name}_rand_stim_test", uvm_component parent=null);
 
    super.new(name, parent);
-   rand_stim_vseq = uvme_${name}_rand_stim_c::type_id::create("rand_stim_vseq");
+   rand_stim_vseq = uvme_${name}_rand_stim_vseq_c::type_id::create("rand_stim_vseq");
 
 endfunction : new
 

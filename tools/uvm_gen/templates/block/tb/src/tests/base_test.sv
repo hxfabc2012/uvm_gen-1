@@ -31,8 +31,8 @@ class uvmt_${name}_base_test_c extends uvml_test_c;
 
    /// @defgroup Default sequences
    /// @{
-   rand uvme_${name}_${clk_agent_name}_vseq_c  ${clk_agent_name}_vseq; ///< Starts clock generation during pre_reset_phase()
-   rand uvme_${name}_${reset_agent_name}_vseq_c  ${reset_agent_name}_vseq; ///< Asserts reset during reset_phase()
+   rand uvme_${name}_clk_vseq_c    clk_vseq  ; ///< Starts clock generation during pre_reset_phase()
+   rand uvme_${name}_reset_vseq_c  reset_vseq; ///< Asserts reset during reset_phase()
    /// @}
 
 
@@ -81,12 +81,12 @@ class uvmt_${name}_base_test_c extends uvml_test_c;
    extern virtual function void connect_phase(uvm_phase phase);
 
    /**
-    * Runs ${clk_agent_name}_vseq.
+    * Runs clk_vseq.
     */
    extern virtual task pre_reset_phase(uvm_phase phase);
 
    /**
-    * Runs ${reset_agent_name}_vseq.
+    * Runs reset_vseq.
     */
    extern virtual task reset_phase(uvm_phase phase);
 
@@ -147,8 +147,8 @@ function uvmt_${name}_base_test_c::new(string name="uvmt_${name}_base_test", uvm
 
    rs = new("rs");
    uvm_report_server::set_server(rs);
-   ${clk_agent_name}_vseq = uvme_${name}_${clk_agent_name}_vseq_c::type_id::create("${clk_agent_name}_vseq");
-   ${reset_agent_name}_vseq = uvme_${name}_${reset_agent_name}_vseq_c::type_id::create("${reset_agent_name}_vseq");
+   clk_vseq = uvme_${name}_clk_vseq_c::type_id::create("clk_vseq");
+   reset_vseq = uvme_${name}_reset_vseq_c::type_id::create("reset_vseq");
 
 endfunction : new
 
@@ -183,9 +183,9 @@ task uvmt_${name}_base_test_c::pre_reset_phase(uvm_phase phase);
 
    super.pre_reset_phase(phase);
 
-   `uvm_info("TEST", $sformatf("Starting ${clk_agent_name} virtual sequence:\n%s", ${clk_agent_name}_vseq.sprint()), UVM_NONE)
-   ${clk_agent_name}_vseq.start(vsequencer);
-   `uvm_info("TEST", "Finished ${clk_agent_name} virtual sequence", UVM_NONE)
+   `uvm_info("TEST", $sformatf("Starting clk virtual sequence:\n%s", clk_vseq.sprint()), UVM_NONE)
+   clk_vseq.start(vsequencer);
+   `uvm_info("TEST", "Finished clk virtual sequence", UVM_NONE)
 
 endtask : pre_reset_phase
 
@@ -194,9 +194,9 @@ task uvmt_${name}_base_test_c::reset_phase(uvm_phase phase);
 
    super.reset_phase(phase);
 
-   `uvm_info("TEST", $sformatf("Starting ${reset_agent_name} virtual sequence:\n%s", ${reset_agent_name}_vseq.sprint()), UVM_NONE)
-   ${reset_agent_name}_vseq.start(vsequencer);
-   `uvm_info("TEST", "Finished ${reset_agent_name} virtual sequence", UVM_NONE)
+   `uvm_info("TEST", $sformatf("Starting reset virtual sequence:\n%s", reset_vseq.sprint()), UVM_NONE)
+   reset_vseq.start(vsequencer);
+   `uvm_info("TEST", "Finished reset virtual sequence", UVM_NONE)
 
 endtask : reset_phase
 

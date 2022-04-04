@@ -8,7 +8,7 @@
 
 
 // Scoreboard specialization
-typedef uvme_sb_simplex_c #(
+typedef uvml_sb_simplex_c #(
    .T_ACT_TRN(uvma_${name}_dp_out_mon_trn_c)
 ) uvme_${name}_sb_simplex_c;
 

@@ -20,10 +20,10 @@ class uvme_${name}_prd_c extends uvm_component;
 
    /// @defgroup TLM
    /// @{
-   uvm_tlm_analysis_fifo #(uvma_clk_mon_trn_c)  ${clk_agent_name}_fifo  ; ///< Queue of ${clk_agent_name} monitor transactions
-   uvm_analysis_export   #(uvma_clk_mon_trn_c)  ${clk_agent_name}_export; ///< Port taking in ${clk_agent_name} monitor transactions
-   uvm_tlm_analysis_fifo #(uvma_reset_mon_trn_c)  ${reset_agent_name}_fifo  ; ///< Queue of ${reset_agent_name} monitor transactions
-   uvm_analysis_export   #(uvma_reset_mon_trn_c)  ${reset_agent_name}_export; ///< Port taking in ${reset_agent_name} monitor transactions
+   uvm_tlm_analysis_fifo #(uvma_clk_mon_trn_c  )  clk_fifo    ; ///< Queue of clk monitor transactions
+   uvm_analysis_export   #(uvma_clk_mon_trn_c  )  clk_export  ; ///< Port taking in clk monitor transactions
+   uvm_tlm_analysis_fifo #(uvma_reset_mon_trn_c)  reset_fifo  ; ///< Queue of reset monitor transactions
+   uvm_analysis_export   #(uvma_reset_mon_trn_c)  reset_export; ///< Port taking in reset monitor transactions
    uvm_tlm_analysis_fifo #(uvma_${name}_cp_mon_trn_c    )  cp_fifo     ; ///< Queue of control plane monitor transactions
    uvm_analysis_export   #(uvma_${name}_cp_mon_trn_c    )  cp_export   ; ///< Port taking in control plane monitor transactions
    uvm_tlm_analysis_fifo #(uvma_${name}_dp_in_mon_trn_c )  dp_in_fifo  ; ///< Queue of data plane input monitor transactions
@@ -60,14 +60,14 @@ class uvme_${name}_prd_c extends uvm_component;
    extern virtual task run_phase(uvm_phase phase);
 
    /**
-    * Processes input ${clk_agent_name} monitor transactions.
+    * Processes input clk monitor transactions.
     */
-   extern task process_${clk_agent_name}();
+   extern task process_clk();
 
    /**
-    * Processes input ${reset_agent_name} monitor transactions.
+    * Processes input reset monitor transactions.
     */
-   extern task process_${reset_agent_name}();
+   extern task process_reset();
 
    /**
     * Processes input control plane monitor transactions.
@@ -104,10 +104,10 @@ function void uvme_${name}_prd_c::build_phase(uvm_phase phase);
    end
 
    // Create TLM objects
-   ${clk_agent_name}_fifo   = new("${clk_agent_name}_fifo"  , this);
-   ${clk_agent_name}_export = new("${clk_agent_name}_export", this);
-   ${reset_agent_name}_fifo   = new("${reset_agent_name}_fifo"  , this);
-   ${reset_agent_name}_export = new("${reset_agent_name}_export", this);
+   clk_fifo     = new("clk_fifo"    , this);
+   clk_export   = new("clk_export"  , this);
+   reset_fifo   = new("reset_fifo"  , this);
+   reset_export = new("reset_export", this);
    cp_fifo      = new("cp_fifo"     , this);
    cp_export    = new("cp_export"   , this);
    dp_in_fifo   = new("dp_in_fifo"  , this);
@@ -122,8 +122,8 @@ function void uvme_${name}_prd_c::connect_phase(uvm_phase phase);
    super.connect_phase(phase);
 
    // Connect TLM objects
-   ${clk_agent_name}_export.connect(${clk_agent_name}_fifo.analysis_export);
-   ${reset_agent_name}_export.connect(${reset_agent_name}_fifo.analysis_export);
+   clk_export  .connect(clk_fifo  .analysis_export);
+   reset_export.connect(reset_fifo.analysis_export);
    cp_export   .connect(cp_fifo   .analysis_export);
    dp_in_export.connect(dp_in_fifo.analysis_export);
 
@@ -135,8 +135,8 @@ task uvme_${name}_prd_c::run_phase(uvm_phase phase);
    super.run_phase(phase);
 
    fork
-      process_${clk_agent_name}();
-      process_${reset_agent_name}();
+      process_clk  ();
+      process_reset();
       process_cp   ();
       process_dp_in();
    join_none
@@ -144,25 +144,25 @@ task uvme_${name}_prd_c::run_phase(uvm_phase phase);
 endtask: run_phase
 
 
-task uvme_${name}_prd_c::process_${clk_agent_name}();
+task uvme_${name}_prd_c::process_clk();
 
-   uvma_clk_mon_trn_c  ${clk_agent_name}_trn;
+   uvma_clk_mon_trn_c  clk_trn;
 
    forever begin
-      ${clk_agent_name}_fifo.get(${clk_agent_name}_trn);
-      // TODO Implement uvme_${name}_prd_c::process_${clk_agent_name}()
+      clk_fifo.get(clk_trn);
+      // TODO Implement uvme_${name}_prd_c::process_clk()
    end
 
-endtask : process_${clk_agent_name}
+endtask : process_clk
 
 
-task uvme_${name}_prd_c::process_${reset_agent_name}();
+task uvme_${name}_prd_c::process_reset();
 
-   uvma_reset_mon_trn_c  ${reset_agent_name}_trn;
+   uvma_reset_mon_trn_c  reset_trn;
 
    forever begin
-      ${reset_agent_name}_fifo.get(${reset_agent_name}_trn);
-      case (${reset_agent_name}_trn.transition) begin
+      reset_fifo.get(reset_trn);
+      case (reset_trn.transition)
          UVML_EDGE_ASSERTED: begin
             cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
             cntxt.reset();
@@ -173,7 +173,7 @@ task uvme_${name}_prd_c::process_${reset_agent_name}();
       endcase
    end
 
-endtask : process_${reset_agent_name}
+endtask : process_reset
 
 
 task uvme_${name}_prd_c::process_cp();
