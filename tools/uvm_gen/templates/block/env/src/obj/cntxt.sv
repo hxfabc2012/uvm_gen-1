@@ -71,7 +71,7 @@ function uvme_${name}_cntxt_c::new(string name="uvme_${name}_cntxt");
    dp_in_cntxt  = uvma_${name}_dp_in_cntxt_c ::type_id::create("dp_in_cntxt" );
    dp_out_cntxt = uvma_${name}_dp_out_cntxt_c::type_id::create("dp_out_cntxt");
 
-   sb_dp_cntxt = uvml_sb_simplex_cntxt_c::type_id::create("sb_dp_cntxt");
+   sb_dp_cntxt    = uvml_sb_simplex_cntxt_c::type_id::create("sb_dp_cntxt");
    sample_cfg_e   = new("sample_cfg_e"  );
    sample_cntxt_e = new("sample_cntxt_e");
 

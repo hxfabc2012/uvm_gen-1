@@ -39,8 +39,9 @@ task uvme_${name}_clk_vseq_c::body();
    uvma_clk_seq_item_c  clk_req;
 
    `uvm_do_on_with(clk_req, p_sequencer.clk_sequencer, {
-      action        == UVMA_CLK_SEQ_ITEM_ACTION_START;
-      new_frequency == cfg.clk_frequency;
+      action         == UVMA_CLK_SEQ_ITEM_ACTION_START;
+      new_frequency  == cfg.clk_frequency;
+      new_duty_cycle == 50;
    })
 
 endtask : body

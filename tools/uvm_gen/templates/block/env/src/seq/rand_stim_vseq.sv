@@ -70,6 +70,7 @@ task uvme_${name}_rand_stim_vseq_c::body();
          `uvm_do_on(dp_out_req, p_sequencer.dp_out_sequencer)
       end
    join_any
+   disable fork;
 
 endtask : body
 

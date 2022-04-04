@@ -84,6 +84,7 @@ class uvme_${name}_cfg_c extends uvml_cfg_c;
       cp_cfg    .reset_type == reset_type;
       dp_in_cfg .reset_type == reset_type;
       dp_out_cfg.reset_type == reset_type;
+      clk_cfg   .mon_enabled       == 0;
       clk_cfg   .cov_model_enabled == 0;
       reset_cfg .cov_model_enabled == 0;
 

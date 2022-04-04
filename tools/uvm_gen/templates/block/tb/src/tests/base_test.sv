@@ -44,14 +44,20 @@ class uvmt_${name}_base_test_c extends uvml_test_c;
 
 
    /**
-    * Sets safe default options for #env_cfg.
+    * Sets env to enabled and active.
     */
    constraint env_cfg_cons {
-      env_cfg.enabled               == 1;
-      env_cfg.is_active             == UVM_ACTIVE;
-      env_cfg.scoreboarding_enabled == 1;
-      env_cfg.trn_log_enabled       == 1;
-      env_cfg.cov_model_enabled     == 1;
+      env_cfg.enabled   == 1;
+      env_cfg.is_active == UVM_ACTIVE;
+   }
+
+   /**
+    * Sets safe default options for #env_cfg.
+    */
+   constraint defaults_cons {
+      soft env_cfg.scoreboarding_enabled == 1;
+      soft env_cfg.trn_log_enabled       == 1;
+      soft env_cfg.cov_model_enabled     == 1;
    }
 
    // Additional, temporary constraints to get around known design bugs/constraints
