@@ -79,7 +79,7 @@ function uvme_${name}_cntxt_c::new(string name="uvme_${name}_cntxt");
    // TODO Create environment cntxt objects
    //      Ex: sub_env_cntxt  = uvme_sub_env_cntxt_c::type_id::create("sub_env_cntxt");
 
-   ${clk_agent_name}_cntxt = uvma_reset_cntxt_c::type_id::create("${clk_agent_name}_cntxt");
+   ${clk_agent_name}_cntxt = uvma_clk_cntxt_c::type_id::create("${clk_agent_name}_cntxt");
    ${reset_agent_name}_cntxt = uvma_reset_cntxt_c::type_id::create("${reset_agent_name}_cntxt");
    ${ral_agent_name}_cntxt = uvma_${ral_agent_type}_cntxt_c::type_id::create("${ral_agent_name}_cntxt");
 
