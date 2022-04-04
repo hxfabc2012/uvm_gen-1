@@ -28,7 +28,7 @@ class uvme_${name}_cntxt_c extends uvml_cntxt_c;
 
    /// @defgroup Objects
    /// @{
-   uvml_sb_simplex_cntxt_c  sb_dp_cntxt   ; ///< Data path scoreboard context
+   uvml_sb_simplex_cntxt_c  sb_cntxt      ; ///< Data path scoreboard context
    uvm_event                sample_cfg_e  ; ///< Triggers sampling of environment configuration by the functional coverage model.
    uvm_event                sample_cntxt_e; ///< Triggers sampling of environment context by the functional coverage model.
    /// @}
@@ -41,7 +41,7 @@ class uvme_${name}_cntxt_c extends uvml_cntxt_c;
       `uvm_field_object(dp_in_cntxt , UVM_DEFAULT)
       `uvm_field_object(dp_out_cntxt, UVM_DEFAULT)
 
-      `uvm_field_object(sb_dp_cntxt   , UVM_DEFAULT)
+      `uvm_field_object(sb_cntxt      , UVM_DEFAULT)
       `uvm_field_event (sample_cfg_e  , UVM_DEFAULT)
       `uvm_field_event (sample_cntxt_e, UVM_DEFAULT)
    `uvm_object_utils_end
@@ -71,7 +71,7 @@ function uvme_${name}_cntxt_c::new(string name="uvme_${name}_cntxt");
    dp_in_cntxt  = uvma_${name}_dp_in_cntxt_c ::type_id::create("dp_in_cntxt" );
    dp_out_cntxt = uvma_${name}_dp_out_cntxt_c::type_id::create("dp_out_cntxt");
 
-   sb_dp_cntxt    = uvml_sb_simplex_cntxt_c::type_id::create("sb_dp_cntxt");
+   sb_cntxt       = uvml_sb_simplex_cntxt_c::type_id::create("sb_cntxt");
    sample_cfg_e   = new("sample_cfg_e"  );
    sample_cntxt_e = new("sample_cntxt_e");
 

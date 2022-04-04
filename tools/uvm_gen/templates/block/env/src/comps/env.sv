@@ -22,7 +22,7 @@ class uvme_${name}_env_c extends uvml_env_c;
    /// @{
    uvme_${name}_vsqr_c        vsequencer; ///< Virtual sequencer on which virtual sequences are run.
    uvme_${name}_prd_c         predictor ; ///< Feeds #sb's expected port(s) with monitor transactions.
-   uvme_${name}_sb_simplex_c  sb_dp     ; ///< Ensures that data path transactions from #predictor and output monitor match.
+   uvme_${name}_sb_simplex_c  scoreboard; ///< Ensures that data path transactions from #predictor and output monitor match.
    uvme_${name}_cov_model_c   cov_model ; ///< Functional coverage model.
    /// @}
 
@@ -177,7 +177,7 @@ function void uvme_${name}_env_c::assign_cfg();
    uvm_config_db#(uvma_${name}_cp_cfg_c    )::set(this, "cp_agent"    , "cfg", cfg.cp_cfg    );
    uvm_config_db#(uvma_${name}_dp_in_cfg_c )::set(this, "dp_in_agent" , "cfg", cfg.dp_in_cfg );
    uvm_config_db#(uvma_${name}_dp_out_cfg_c)::set(this, "dp_out_agent", "cfg", cfg.dp_out_cfg);
-   uvm_config_db#(uvml_sb_simplex_cfg_c)::set(this, "sb_dp", "cfg", cfg.sb_dp_cfg);
+   uvm_config_db#(uvml_sb_simplex_cfg_c)::set(this, "scoreboard", "cfg", cfg.sb_cfg);
 
 endfunction: assign_cfg
 
@@ -190,7 +190,7 @@ function void uvme_${name}_env_c::assign_cntxt();
    uvm_config_db#(uvma_${name}_cp_cntxt_c    )::set(this, "cp_agent"    , "cntxt", cntxt.cp_cntxt    );
    uvm_config_db#(uvma_${name}_dp_in_cntxt_c )::set(this, "dp_in_agent" , "cntxt", cntxt.dp_in_cntxt );
    uvm_config_db#(uvma_${name}_dp_out_cntxt_c)::set(this, "dp_out_agent", "cntxt", cntxt.dp_out_cntxt);
-   uvm_config_db#(uvml_sb_simplex_cntxt_c)::set(this, "sb_dp", "cntxt", cntxt.sb_dp_cntxt);
+   uvm_config_db#(uvml_sb_simplex_cntxt_c)::set(this, "scoreboard", "cntxt", cntxt.sb_cntxt);
 
 endfunction: assign_cntxt
 
@@ -209,8 +209,8 @@ endfunction: create_agents
 function void uvme_${name}_env_c::create_env_components();
 
    if (cfg.scoreboarding_enabled) begin
-      predictor = uvme_${name}_prd_c        ::type_id::create("predictor", this);
-      sb_dp     = uvme_${name}_sb_simplex_c ::type_id::create("sb_dp"    , this);
+      predictor  = uvme_${name}_prd_c       ::type_id::create("predictor" , this);
+      scoreboard = uvme_${name}_sb_simplex_c::type_id::create("scoreboard", this);
    end
 
 endfunction: create_env_components
@@ -242,8 +242,8 @@ endfunction: connect_predictor
 
 function void uvme_${name}_env_c::connect_scoreboard();
 
-   dp_out_agent.mon_ap.connect(sb_dp.act_export);
-   predictor.dp_out_ap.connect(sb_dp.exp_export);
+   dp_out_agent.mon_ap.connect(scoreboard.act_export);
+   predictor.dp_out_ap.connect(scoreboard.exp_export);
 
 endfunction: connect_scoreboard
 
