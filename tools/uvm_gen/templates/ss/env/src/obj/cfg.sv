@@ -92,6 +92,7 @@ class uvme_${name}_cfg_c extends uvml_cfg_c;
    constraint agent_cfg_cons {
       ${reset_agent_name}_cfg.reset_type == reset_type;
       ${reset_agent_name}_cfg.polarity   == UVML_RESET_ACTIVE_LOW;
+      ${clk_agent_name}_cfg.mon_enabled       == 0;
       ${clk_agent_name}_cfg.cov_model_enabled == 0;
       ${reset_agent_name}_cfg.cov_model_enabled == 0;
       ${ral_agent_name}_cfg.cov_model_enabled == 0;
