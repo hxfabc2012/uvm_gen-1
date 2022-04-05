@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 ########################################################################################################################
 # Copyright 2022 Datum Technology Corporation
-########################################################################################################################
-# SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+# All rights reserved
 ########################################################################################################################
 
 
@@ -68,7 +67,7 @@ agent_files = {
     "agent_basic/agent/src/tdefs.sv"                    : "uvma_${name}/src/uvma_${name}_tdefs.sv",
     "agent_basic/agent/gitignore"                       : "uvma_${name}/.gitignore",
     "agent_basic/agent/ip.yml"                          : "uvma_${name}/ip.yml",
-    "LICENSE_solderpad_v2p1.md"                         : "uvma_${name}/LICENSE.md",
+    #"LICENSE_solderpad_v2p1.md"                         : "uvma_${name}/LICENSE.md",
     "agent_basic/agent/README.md"                       : "uvma_${name}/README.md"
 }
 
@@ -96,7 +95,7 @@ env_tb_files = {
     "block/env/src/tdefs.sv"                            : "uvme_${name}/src/uvme_${name}_tdefs.sv",
     "block/env/gitignore"                               : "uvme_${name}/.gitignore",
     "block/env/ip.yml"                                  : "uvme_${name}/ip.yml",
-    "LICENSE_solderpad_v2p1.md"                         : "uvme_${name}/LICENSE.md",
+    #"LICENSE_solderpad_v2p1.md"                         : "uvme_${name}/LICENSE.md",
     "block/env/README.md"                               : "uvme_${name}/README.md",
     
     "block/tb/bin/package.py"                           : "uvmt_${name}/bin/package.py",
@@ -118,7 +117,7 @@ env_tb_files = {
     "block/tb/src/tdefs.sv"                             : "uvmt_${name}/src/uvmt_${name}_tdefs.sv",
     "block/tb/gitignore"                                : "uvmt_${name}/.gitignore",
     "block/tb/ip.yml"                                   : "uvmt_${name}/ip.yml",
-    "LICENSE_solderpad_v2p1.md"                         : "uvmt_${name}/LICENSE.md",
+    #"LICENSE_solderpad_v2p1.md"                         : "uvmt_${name}/LICENSE.md",
     "block/tb/README.md"                                : "uvmt_${name}/README.md"
 }
 
