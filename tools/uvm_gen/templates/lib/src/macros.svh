@@ -4,11 +4,11 @@
 
 
 
-`ifndef __UVML_${name_uppercase}_MACROS_SV__
-`define __UVML_${name_uppercase}_MACROS_SV__
+`ifndef __UVML_${name_uppercase}_MACROS_SVH__
+`define __UVML_${name_uppercase}_MACROS_SVH__
 
 
 
 
 
-`endif // __UVML_${name_uppercase}_MACROS_SV__
+`endif // __UVML_${name_uppercase}_MACROS_SVH__
