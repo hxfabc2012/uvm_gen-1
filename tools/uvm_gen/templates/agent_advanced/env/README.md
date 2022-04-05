@@ -1,31 +1,26 @@
-# ${name_of_copyright_owner} ${name_normal_case} Self-Test UVM Environment
-This package contains the ${name_of_copyright_owner} ${name_normal_case} Self-Test UVM Environment.
-
-
-
-# ${name_of_copyright_owner} ${name_normal_case} Self-Test UVM Environment
+# {{ name_of_copyright_owner }} {{ name_normal_case }} Agent Self-Test UVM Environment
 
 
 # About
-This package contains the ${name_of_copyright_owner} ${name_normal_case} Self-Test UVM Environment.
-
-TODO Describe ${name_normal_case}
+This IP contains the {{ name_of_copyright_owner }} {{ name_normal_case }} Agent Self-Test UVM Environment.
+Its main purpose is to test the {{ name_normal_case }} UVM Agent (`uvma_{{ name }}_pkg`) in isolation.
 
 
 # Block Diagram
-![alt text](./docs/env_block_diagram.svg "${name_normal_case} Self-Test UVM Environment")
+![alt text](./docs/env_block_diagram.svg "{{ name_normal_case }} Self-Test UVM Environment")
 
 # Directory Structure
 * `bin` - Scripts, metadata and other miscellaneous files
-* `docs` - Documents describing the ${name_of_copyright_owner} ${name_normal_case} Self-Test UVM Environment
-* `examples` - Samples for users
-* `src` - Source code for this package
+* `docs` - Reference documentation
+* `examples` - Code samples for using and extending this environment
+* `src` - Source code
 
 
 # Dependencies
-It is dependent on the following packages:
+It is dependent on the following IP:
 
-* `uvm_pkg`
-* `uvml_pkg`
-* `uvml_logs_pkg`
-* TODO Add ${name_normal_case} dependencies
+* `uvm`
+* `uvml`
+* `uvml_logs`
+* `uvml_sb`
+* `uvma_{{ name }}`

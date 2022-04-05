@@ -1,14 +1,13 @@
-// Copyright ${year} ${name_of_copyright_owner}
-// ${license}
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
 // Directories
--i ${DV_UVME_${name_uppercase}_ST_SRC_PATH}
--i ${DV_UVME_${name_uppercase}_ST_SRC_PATH}/comps
--i ${DV_UVME_${name_uppercase}_ST_SRC_PATH}/obj
--i ${DV_UVME_${name_uppercase}_ST_SRC_PATH}/seq
+-i ${DV_UVME_{{ name_uppercase }}_ST_SRC_PATH}
+-i ${DV_UVME_{{ name_uppercase }}_ST_SRC_PATH}/comps
+-i ${DV_UVME_{{ name_uppercase }}_ST_SRC_PATH}/obj
+-i ${DV_UVME_{{ name_uppercase }}_ST_SRC_PATH}/seq
 
 // Files
-${DV_UVME_${name_uppercase}_ST_SRC_PATH}/uvme_${name}_st_pkg.sv
+${DV_UVME_{{ name_uppercase }}_ST_SRC_PATH}/uvme_{{ name }}_st_pkg.sv

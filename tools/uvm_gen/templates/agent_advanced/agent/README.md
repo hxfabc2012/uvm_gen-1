@@ -1,4 +1,4 @@
-# Open Bus Interface (${name_uppercase}) UVM Agent
+# Open Bus Interface ({{ name_uppercase }}) UVM Agent
 
 
 # About

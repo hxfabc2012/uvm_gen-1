@@ -1,25 +1,25 @@
-// Copyright ${year} ${name_of_copyright_owner}
-// ${license}
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-`ifndef __UVMA_${name_uppercase}_SV__
-`define __UVMA_${name_uppercase}_SV__
+`ifndef __UVMA_{{ name_uppercase }}_SV__
+`define __UVMA_{{ name_uppercase }}_SV__
 
 
 /**
  * Encapsulates all signals and clocking of the Open Bus Interface.
  */
-interface uvma_${name}_if #(
-   parameter AUSER_WIDTH = `UVMA_${name_uppercase}_AUSER_MAX_WIDTH, ///< Width of the auser signal. RI5CY, Ibex, CV32E40* do not have the auser signal.
-   parameter WUSER_WIDTH = `UVMA_${name_uppercase}_WUSER_MAX_WIDTH, ///< Width of the wuser signal. RI5CY, Ibex, CV32E40* do not have the wuser signal.
-   parameter RUSER_WIDTH = `UVMA_${name_uppercase}_RUSER_MAX_WIDTH, ///< Width of the ruser signal. RI5CY, Ibex, CV32E40* do not have the ruser signal.
-   parameter ADDR_WIDTH  = `UVMA_${name_uppercase}_ADDR_MAX_WIDTH , ///< Width of the addr signal.
-   parameter DATA_WIDTH  = `UVMA_${name_uppercase}_DATA_MAX_WIDTH , ///< Width of the rdata and wdata signals. be width is DATA_WIDTH / 8. Valid DATA_WIDTH settings are 32 and 64.
-   parameter ID_WIDTH    = `UVMA_${name_uppercase}_ID_MAX_WIDTH   , ///< Width of the aid and rid signals.
-   parameter ACHK_WIDTH  = `UVMA_${name_uppercase}_ACHK_MAX_WIDTH , ///< Width of the achk signal.
-   parameter RCHK_WIDTH  = `UVMA_${name_uppercase}_RCHK_MAX_WIDTH   ///< Width of the rchk signal.
+interface uvma_{{ name }}_if #(
+   parameter AUSER_WIDTH = `UVMA_{{ name_uppercase }}_AUSER_MAX_WIDTH, ///< Width of the auser signal. RI5CY, Ibex, CV32E40* do not have the auser signal.
+   parameter WUSER_WIDTH = `UVMA_{{ name_uppercase }}_WUSER_MAX_WIDTH, ///< Width of the wuser signal. RI5CY, Ibex, CV32E40* do not have the wuser signal.
+   parameter RUSER_WIDTH = `UVMA_{{ name_uppercase }}_RUSER_MAX_WIDTH, ///< Width of the ruser signal. RI5CY, Ibex, CV32E40* do not have the ruser signal.
+   parameter ADDR_WIDTH  = `UVMA_{{ name_uppercase }}_ADDR_MAX_WIDTH , ///< Width of the addr signal.
+   parameter DATA_WIDTH  = `UVMA_{{ name_uppercase }}_DATA_MAX_WIDTH , ///< Width of the rdata and wdata signals. be width is DATA_WIDTH / 8. Valid DATA_WIDTH settings are 32 and 64.
+   parameter ID_WIDTH    = `UVMA_{{ name_uppercase }}_ID_MAX_WIDTH   , ///< Width of the aid and rid signals.
+   parameter ACHK_WIDTH  = `UVMA_{{ name_uppercase }}_ACHK_MAX_WIDTH , ///< Width of the achk signal.
+   parameter RCHK_WIDTH  = `UVMA_{{ name_uppercase }}_RCHK_MAX_WIDTH   ///< Width of the rchk signal.
 )
 (
    input  clk    , ///< The bus clock times all bus transfers. All signal timings are related to the rising edge of clk.
@@ -119,7 +119,7 @@ interface uvma_${name}_if #(
    endclocking : dut_slv_cb
    
    /**
-    * Used by uvma_${name}_drv_mstr_a_c.
+    * Used by uvma_{{ name }}_drv_mstr_a_c.
     */
    clocking drv_mstr_a_cb @(posedge clk);
       output  req,
@@ -140,7 +140,7 @@ interface uvma_${name}_if #(
    endclocking : drv_mstr_a_cb
    
    /**
-    * Used by uvma_${name}_drv_mstr_r_c.
+    * Used by uvma_{{ name }}_drv_mstr_r_c.
     */
    clocking drv_mstr_r_cb @(posedge clk);
       output  rready,
@@ -156,7 +156,7 @@ interface uvma_${name}_if #(
    endclocking : drv_mstr_r_cb
    
    /**
-    * Used by uvma_${name}_drv_slv_a_c.
+    * Used by uvma_{{ name }}_drv_slv_a_c.
     */
    clocking drv_slv_a_cb @(posedge clk);
       output  gnt,
@@ -177,7 +177,7 @@ interface uvma_${name}_if #(
    endclocking : drv_slv_a_cb
    
    /**
-    * Used by uvma_${name}_drv_slv_r_c.
+    * Used by uvma_{{ name }}_drv_slv_r_c.
     */
    clocking drv_slv_r_cb @(posedge clk);
       output  rvalid,
@@ -193,7 +193,7 @@ interface uvma_${name}_if #(
    endclocking : drv_slv_r_cb
    
    /**
-    * Used by uvma_${name}_mon_c.
+    * Used by uvma_{{ name }}_mon_c.
     */
    clocking mon_a_cb @(posedge clk);
       input  gnt,
@@ -214,7 +214,7 @@ interface uvma_${name}_if #(
    endclocking : mon_a_cb
    
    /**
-    * Used by uvma_${name}_mon_c.
+    * Used by uvma_{{ name }}_mon_c.
     */
    clocking mon_r_cb @(posedge clk);
       input  rvalid,
@@ -249,7 +249,7 @@ interface uvma_${name}_if #(
    );
    
    /**
-    * Used by uvma_${name}_drv_mstr_a_c.
+    * Used by uvma_{{ name }}_drv_mstr_a_c.
     */
    modport drv_mstr_a_mp (
       clocking drv_mstr_a_cb,
@@ -258,7 +258,7 @@ interface uvma_${name}_if #(
    );
    
    /**
-    * Used by uvma_${name}_drv_mstr_r_c.
+    * Used by uvma_{{ name }}_drv_mstr_r_c.
     */
    modport drv_mstr_r_mp (
       clocking drv_mstr_r_cb,
@@ -267,7 +267,7 @@ interface uvma_${name}_if #(
    );
    
    /**
-    * Used by uvma_${name}_drv_slv_a_c.
+    * Used by uvma_{{ name }}_drv_slv_a_c.
     */
    modport drv_slv_a_mp (
       clocking drv_slv_a_cb,
@@ -276,7 +276,7 @@ interface uvma_${name}_if #(
    );
    
    /**
-    * Used by uvma_${name}_drv_slv_r_c.
+    * Used by uvma_{{ name }}_drv_slv_r_c.
     */
    modport drv_slv_r_mp (
       clocking drv_slv_r_cb,
@@ -285,7 +285,7 @@ interface uvma_${name}_if #(
    );
    
    /**
-    * Used by uvma_${name}_mon_c.
+    * Used by uvma_{{ name }}_mon_c.
     */
    modport mon_a_mp(
       clocking mon_a_cb,
@@ -294,7 +294,7 @@ interface uvma_${name}_if #(
    );
    
    /**
-    * Used by uvma_${name}_mon_c.
+    * Used by uvma_{{ name }}_mon_c.
     */
    modport mon_r_mp(
       clocking mon_r_cb,
@@ -302,7 +302,7 @@ interface uvma_${name}_if #(
       input    reset_n 
    );
    
-endinterface : uvma_${name}_if
+endinterface : uvma_{{ name }}_if
 
 
-`endif // __UVMA_${name_uppercase}_SV__
+`endif // __UVMA_{{ name_uppercase }}_SV__

@@ -1,26 +1,25 @@
-// Copyright ${year} ${name_of_copyright_owner}
-// ${license}
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
 // Libraries
-//-f ${DV_UVM_SRC_PATH}/uvm_pkg.flist.xsim
--f ${DV_UVML_SRC_PATH}/uvml_pkg.flist.xsim
--f ${DV_UVML_LOGS_SRC_PATH}/uvml_logs_pkg.flist.xsim
--f ${DV_UVML_SB_SRC_PATH}/uvml_sb_pkg.flist.xsim
+//-f {{ DV_UVM_SRC_PATH }}/uvm_pkg.flist.xsim
+-f {{ DV_UVML_SRC_PATH }}/uvml_pkg.flist.xsim
+-f {{ DV_UVML_LOGS_SRC_PATH }}/uvml_logs_pkg.flist.xsim
+-f {{ DV_UVML_SB_SRC_PATH }}/uvml_sb_pkg.flist.xsim
 
 // Agents
--f ${DV_UVMA_${name_uppercase}_SRC_PATH}/uvma_${name}_pkg.flist.xsim
+-f ${DV_UVMA_{{ name_uppercase }}_SRC_PATH}/uvma_{{ name }}_pkg.flist.xsim
 
 // Environments
--f ${DV_UVME_${name_uppercase}_ST_SRC_PATH}/uvme_${name}_st_pkg.flist.xsim
+-f ${DV_UVME_{{ name_uppercase }}_ST_SRC_PATH}/uvme_{{ name }}_st_pkg.flist.xsim
 
-// ${name_normal_case} test bench Directories
--i ${DV_UVMT_${name_uppercase}_ST_SRC_PATH}
--i ${DV_UVMT_${name_uppercase}_ST_SRC_PATH}/seq
--i ${DV_UVMT_${name_uppercase}_ST_SRC_PATH}/tb
--i ${DV_UVMT_${name_uppercase}_ST_SRC_PATH}/tests
+// Test bench directories
+-i ${DV_UVMT_{{ name_uppercase }}_ST_SRC_PATH}
+-i ${DV_UVMT_{{ name_uppercase }}_ST_SRC_PATH}/seq
+-i ${DV_UVMT_{{ name_uppercase }}_ST_SRC_PATH}/tb
+-i ${DV_UVMT_{{ name_uppercase }}_ST_SRC_PATH}/tests
 
-// ${name_normal_case} tests (includes constants/macros/types meant for test bench)
-${DV_UVMT_${name_uppercase}_ST_SRC_PATH}/uvmt_${name}_st_pkg.sv
+// Test bench package and modules/interfaces
+${DV_UVMT_{{ name_uppercase }}_ST_SRC_PATH}/uvmt_{{ name }}_st_pkg.sv

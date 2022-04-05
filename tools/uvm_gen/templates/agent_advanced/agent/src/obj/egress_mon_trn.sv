@@ -1,40 +1,40 @@
-// Copyright ${year} ${name_of_copyright_owner}
-// ${license}
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-`ifndef __UVMA_${name_uppercase}_MSTR_A_MON_TRN_SV__
-`define __UVMA_${name_uppercase}_MSTR_A_MON_TRN_SV__
+`ifndef __UVMA_{{ name_uppercase }}_MSTR_A_MON_TRN_SV__
+`define __UVMA_{{ name_uppercase }}_MSTR_A_MON_TRN_SV__
 
 
 /**
- * Object rebuilt by the Open Bus Interface monitor's A Channel Master.  Analog of uvma_${name}_mstr_a_seq_item_c.
+ * Object rebuilt by the Open Bus Interface monitor's A Channel Master.  Analog of uvma_{{ name }}_mstr_a_seq_item_c.
  */
-class uvma_${name}_mstr_a_mon_trn_c extends uvml_mon_trn_c;
+class uvma_{{ name }}_mstr_a_mon_trn_c extends uvml_mon_trn_c;
    
-   uvma_${name}_cfg_c  cfg; ///< Agent configuration handle
+   uvma_{{ name }}_cfg_c  cfg; ///< Agent configuration handle
    
    // Data
-   uvma_${name}_req_l_t      req    ; ///< TODO Describe uvma_${name}_mstr_a_mon_trn_c::req
-   uvma_${name}_addr_l_t     addr   ; ///< TODO Describe uvma_${name}_mstr_a_mon_trn_c::addr
-   uvma_${name}_we_l_t       we     ; ///< TODO Describe uvma_${name}_mstr_a_mon_trn_c::we
-   uvma_${name}_be_l_t       be     ; ///< TODO Describe uvma_${name}_mstr_a_mon_trn_c::be
-   uvma_${name}_data_l_t     wdata  ; ///< TODO Describe uvma_${name}_mstr_a_mon_trn_c::wdata
-   uvma_${name}_auser_l_t    auser  ; ///< TODO Describe uvma_${name}_mstr_a_mon_trn_c::auser
-   uvma_${name}_wuser_l_t    wuser  ; ///< TODO Describe uvma_${name}_mstr_a_mon_trn_c::wuser
-   uvma_${name}_id_l_t       aid    ; ///< TODO Describe uvma_${name}_mstr_a_mon_trn_c::aid
-   uvma_${name}_atop_l_t     atop   ; ///< TODO Describe uvma_${name}_mstr_a_mon_trn_c::atop
-   uvma_${name}_memtype_l_t  memtype; ///< TODO Describe uvma_${name}_mstr_a_mon_trn_c::memtype
-   uvma_${name}_prot_l_t     prot   ; ///< TODO Describe uvma_${name}_mstr_a_mon_trn_c::prot
-   uvma_${name}_reqpar_l_t   reqpar ; ///< TODO Describe uvma_${name}_mstr_a_mon_trn_c::reqpar
-   uvma_${name}_achk_l_t     achk   ; ///< TODO Describe uvma_${name}_mstr_a_mon_trn_c::achk
+   uvma_{{ name }}_req_l_t      req    ; ///< TODO Describe uvma_{{ name }}_mstr_a_mon_trn_c::req
+   uvma_{{ name }}_addr_l_t     addr   ; ///< TODO Describe uvma_{{ name }}_mstr_a_mon_trn_c::addr
+   uvma_{{ name }}_we_l_t       we     ; ///< TODO Describe uvma_{{ name }}_mstr_a_mon_trn_c::we
+   uvma_{{ name }}_be_l_t       be     ; ///< TODO Describe uvma_{{ name }}_mstr_a_mon_trn_c::be
+   uvma_{{ name }}_data_l_t     wdata  ; ///< TODO Describe uvma_{{ name }}_mstr_a_mon_trn_c::wdata
+   uvma_{{ name }}_auser_l_t    auser  ; ///< TODO Describe uvma_{{ name }}_mstr_a_mon_trn_c::auser
+   uvma_{{ name }}_wuser_l_t    wuser  ; ///< TODO Describe uvma_{{ name }}_mstr_a_mon_trn_c::wuser
+   uvma_{{ name }}_id_l_t       aid    ; ///< TODO Describe uvma_{{ name }}_mstr_a_mon_trn_c::aid
+   uvma_{{ name }}_atop_l_t     atop   ; ///< TODO Describe uvma_{{ name }}_mstr_a_mon_trn_c::atop
+   uvma_{{ name }}_memtype_l_t  memtype; ///< TODO Describe uvma_{{ name }}_mstr_a_mon_trn_c::memtype
+   uvma_{{ name }}_prot_l_t     prot   ; ///< TODO Describe uvma_{{ name }}_mstr_a_mon_trn_c::prot
+   uvma_{{ name }}_reqpar_l_t   reqpar ; ///< TODO Describe uvma_{{ name }}_mstr_a_mon_trn_c::reqpar
+   uvma_{{ name }}_achk_l_t     achk   ; ///< TODO Describe uvma_{{ name }}_mstr_a_mon_trn_c::achk
    
    // Metadata
-   uvma_${name}_gnt_l_t  gnt;
+   uvma_{{ name }}_gnt_l_t  gnt;
    
    
-   `uvm_object_utils_begin(uvma_${name}_mstr_a_mon_trn_c)
+   `uvm_object_utils_begin(uvma_{{ name }}_mstr_a_mon_trn_c)
       `uvm_field_int(req    , UVM_DEFAULT              )
       `uvm_field_int(addr   , UVM_DEFAULT + UVM_NOPRINT)
       `uvm_field_int(we     , UVM_DEFAULT + UVM_NOPRINT)
@@ -54,22 +54,22 @@ class uvma_${name}_mstr_a_mon_trn_c extends uvml_mon_trn_c;
    /**
     * Default constructor.
     */
-   extern function new(string name="uvma_${name}_mstr_a_mon_trn");
+   extern function new(string name="uvma_{{ name }}_mstr_a_mon_trn");
    
    /**
-    * TODO Describe uvma_${name}_mstr_a_mon_trn_c::do_print()
+    * TODO Describe uvma_{{ name }}_mstr_a_mon_trn_c::do_print()
     */
    extern function void do_print(uvm_printer printer);
    
    /**
-    * TODO Describe uvma_${name}_mstr_a_mon_trn_c::get_metadata()
+    * TODO Describe uvma_{{ name }}_mstr_a_mon_trn_c::get_metadata()
     */
    extern function uvml_metadata_t get_metadata();
    
-endclass : uvma_${name}_mstr_a_mon_trn_c
+endclass : uvma_{{ name }}_mstr_a_mon_trn_c
 
 
-function uvma_${name}_mstr_a_mon_trn_c::new(string name="uvma_${name}_mstr_a_mon_trn");
+function uvma_{{ name }}_mstr_a_mon_trn_c::new(string name="uvma_{{ name }}_mstr_a_mon_trn");
    
    super.new(name);
    req     = 0;
@@ -89,7 +89,7 @@ function uvma_${name}_mstr_a_mon_trn_c::new(string name="uvma_${name}_mstr_a_mon
 endfunction : new
 
 
-function void uvma_${name}_mstr_a_mon_trn_c::do_print(uvm_printer printer);
+function void uvma_{{ name }}_mstr_a_mon_trn_c::do_print(uvm_printer printer);
    
    super.do_print(printer);
    
@@ -121,7 +121,7 @@ function void uvma_${name}_mstr_a_mon_trn_c::do_print(uvm_printer printer);
 endfunction : do_print
 
 
-function uvml_metadata_t uvma_${name}_mstr_a_mon_trn_c::get_metadata();
+function uvml_metadata_t uvma_{{ name }}_mstr_a_mon_trn_c::get_metadata();
    
    int unsigned  field_count = 0;
    string  addr_str    = $sformatf("%h", addr);
@@ -277,4 +277,4 @@ function uvml_metadata_t uvma_${name}_mstr_a_mon_trn_c::get_metadata();
 endfunction : get_metadata
 
 
-`endif // __UVMA_${name_uppercase}_MSTR_A_MON_TRN_SV__
+`endif // __UVMA_{{ name_uppercase }}_MSTR_A_MON_TRN_SV__

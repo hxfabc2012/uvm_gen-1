@@ -1,4 +1,4 @@
-# Copyright ${year} ${name_of_copyright_owner}
+# Copyright {{ year }} {{ name_of_copyright_owner }}
 # SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 ########################################################################################################################
 # Licensed under the Solderpad Hardware License v 2.1 (the "License"); you may not use this file except in compliance
@@ -17,4 +17,4 @@ def make_tarfile(output_filename, source_dir):
     with tarfile.open(output_filename, "w:gz") as tar:
         tar.add(source_dir, arcname=os.path.basename(source_dir))
 
-make_tarfile("uvma_${name}_pkg.tgz", "../"")
+make_tarfile("uvma_{{ name }}_pkg.tgz", "../"")

@@ -4,7 +4,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
 		width="8.05222in" height="4.72649in" viewBox="0 0 579.76 340.307" xml:space="preserve" color-interpolation-filters="sRGB"
 		class="st12">
-	<title>uvme_${name}_st_env_c</title>
+	<title>{{ name_normal_case }} UVM Agent Self-Testing Environment</title>
 
 	<style type="text/css">
 	<![CDATA[
@@ -35,24 +35,24 @@
 		<title>Page-1</title>
 		<g id="shape2-1" transform="translate(18.5,-18.5)">
 			<title>Sheet.2</title>
-			<desc>&#60;uvme_${name}_st_env_c&#62;</desc>
+			<desc>&#60;uvme_{{ name }}_st_env_c&#62;</desc>
 			<rect x="0" y="37" width="542.76" height="303.307" class="st1"/>
-			<text x="4" y="50" class="st2">&#60;uvme_${name}_st_env_c&#62;</text>		</g>
+			<text x="4" y="50" class="st2">&#60;uvme_{{ name }}_st_env_c&#62;</text>		</g>
 		<g id="shape118-4" transform="translate(223.247,-245.272)">
 			<title>Sheet.118</title>
-			<desc>&#60;uvme_${name}_st_vsqr_c&#62; vsequencer</desc>
+			<desc>&#60;uvme_{{ name }}_st_vsqr_c&#62; vsequencer</desc>
 			<rect x="0" y="303.941" width="109.097" height="36.3657" class="st3"/>
-			<text x="8.29" y="318.52" class="st4">&#60;uvme_${name}_st_vsqr_c&#62; <tspan x="30.72" dy="1.14em" class="st5">vsequencer</tspan></text>		</g>
+			<text x="8.29" y="318.52" class="st4">&#60;uvme_{{ name }}_st_vsqr_c&#62; <tspan x="30.72" dy="1.14em" class="st5">vsequencer</tspan></text>		</g>
 		<g id="shape174-8" transform="translate(441.371,-273.807)">
 			<title>Sheet.174</title>
-			<desc>&#60;uvme_${name}_st_cfg_c&#62; cfg</desc>
+			<desc>&#60;uvme_{{ name }}_st_cfg_c&#62; cfg</desc>
 			<rect x="0" y="306.48" width="104.722" height="33.8267" class="st6"/>
-			<text x="8.18" y="319.79" class="st4">&#60;uvme_${name}_st_cfg_c&#62; <tspan x="46.32" dy="1.14em" class="st5">cfg</tspan></text>		</g>
+			<text x="8.18" y="319.79" class="st4">&#60;uvme_{{ name }}_st_cfg_c&#62; <tspan x="46.32" dy="1.14em" class="st5">cfg</tspan></text>		</g>
 		<g id="shape175-12" transform="translate(440.364,-227.633)">
 			<title>Sheet.175</title>
-			<desc>&#60;uvme_${name}_st_cntxt_c&#62; cntxt</desc>
+			<desc>&#60;uvme_{{ name }}_st_cntxt_c&#62; cntxt</desc>
 			<rect x="0" y="306.48" width="104.722" height="33.8267" class="st6"/>
-			<text x="4.77" y="319.79" class="st4">&#60;uvme_${name}_st_cntxt_c&#62; <tspan x="41.82" dy="1.14em" class="st5">cntxt</tspan></text>		</g>
+			<text x="4.77" y="319.79" class="st4">&#60;uvme_{{ name }}_st_cntxt_c&#62; <tspan x="41.82" dy="1.14em" class="st5">cntxt</tspan></text>		</g>
 		<g id="group270-16" transform="translate(52.5157,-120.588)">
 			<title>Sheet.270</title>
 		</g>
@@ -64,9 +64,9 @@
 			<title>Sheet.424</title>
 			<g id="shape114-24">
 				<title>Sheet.114</title>
-				<desc>&#60;uvma_${name}_agent_c&#62; ${name_1}_agent</desc>
+				<desc>&#60;uvma_{{ name }}_agent_c&#62; active_agent</desc>
 				<rect x="0" y="303.941" width="123.222" height="36.3657" class="st9"/>
-				<text x="17.96" y="318.52" class="st4">&#60;uvma_${name}_agent_c&#62; <tspan x="24.62" dy="1.14em" class="st5">${name_1}_agent</tspan></text>			</g>
+				<text x="17.96" y="318.52" class="st4">&#60;uvma_{{ name }}_agent_c&#62; <tspan x="34.94" dy="1.14em" class="st5">active_agent</tspan></text>			</g>
 			<g id="shape115-28" transform="translate(456.189,314.762) rotate(90)">
 				<title>Diamond.115</title>
 				<path d="M7.36 340.31 L14.72 332.95 L7.36 325.58 L0 332.95 L7.36 340.31 Z" class="st10"/>
@@ -76,9 +76,9 @@
 			<title>Sheet.425</title>
 			<g id="shape426-31">
 				<title>Sheet.426</title>
-				<desc>&#60;uvma_${name}_agent_c&#62; ${name_2}_agent</desc>
+				<desc>&#60;uvma_{{ name }}_agent_c&#62; passive_agent</desc>
 				<rect x="0" y="303.941" width="123.222" height="36.3657" class="st9"/>
-				<text x="17.96" y="318.52" class="st4">&#60;uvma_${name}_agent_c&#62; <tspan x="24.62" dy="1.14em" class="st5">${name_2}_agent</tspan></text>			</g>
+				<text x="17.96" y="318.52" class="st4">&#60;uvma_{{ name }}_agent_c&#62; <tspan x="32.1" dy="1.14em" class="st5">passive_agent</tspan></text>			</g>
 			<g id="shape427-35" transform="translate(456.189,314.762) rotate(90)">
 				<title>Diamond.115</title>
 				<path d="M7.36 340.31 L14.72 332.95 L7.36 325.58 L0 332.95 L7.36 340.31 Z" class="st10"/>
@@ -88,9 +88,9 @@
 			<title>Sheet.428</title>
 			<g id="shape263-38" transform="translate(5.61752,5.68434E-14)">
 				<title>Sheet.263</title>
-				<desc>&#60;uvme_${name}_st_prd_c&#62; predictor</desc>
+				<desc>&#60;uvme_{{ name }}_st_prd_c&#62; predictor</desc>
 				<rect x="0" y="280.955" width="165.818" height="59.3521" class="st3"/>
-				<text x="37.92" y="307.03" class="st4">&#60;uvme_${name}_st_prd_c&#62; <tspan x="63.73" dy="1.14em" class="st5">predictor</tspan></text>			</g>
+				<text x="37.92" y="307.03" class="st4">&#60;uvme_{{ name }}_st_prd_c&#62; <tspan x="63.73" dy="1.14em" class="st5">predictor</tspan></text>			</g>
 			<g id="shape281-42" transform="translate(1.4988E-14,645.239) scale(1,-1)">
 				<title>Circle.121</title>
 				<path d="M0 334.7 A5.61129 5.61129 0 0 1 11.22 334.7 A5.61129 5.61129 0 0 1 0 334.7 Z" class="st10"/>
