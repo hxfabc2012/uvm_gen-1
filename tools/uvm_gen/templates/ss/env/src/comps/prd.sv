@@ -77,6 +77,11 @@ class uvme_${name}_prd_c extends uvm_component;
     */
    extern task process_${ral_agent_name}();
 
+   /**
+    * Prediction handler for register access.
+    */
+   extern virtual task predict_reg(ref uvma_${ral_agent_type}_mon_trn_c trn);
+
 endclass : uvme_${name}_prd_c
 
 
@@ -155,11 +160,11 @@ endtask : process_${clk_agent_name}
 
 task uvme_${name}_prd_c::process_${reset_agent_name}();
 
-   uvma_reset_mon_trn_c  ${reset_agent_name}_trn;
+   uvma_reset_mon_trn_c  trn;
 
    forever begin
-      ${reset_agent_name}_fifo.get(${reset_agent_name}_trn);
-      case (${reset_agent_name}_trn.transition)
+      ${reset_agent_name}_fifo.get(trn);
+      case (trn.transition)
          UVML_EDGE_ASSERTED: begin
             cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
             cntxt.reset();
@@ -175,14 +180,22 @@ endtask : process_${reset_agent_name}
 
 task uvme_${name}_prd_c::process_${ral_agent_name}();
 
-   uvma_${ral_agent_type}_mon_trn_c  ${ral_agent_type}_trn;
+   uvma_${ral_agent_type}_mon_trn_c  trn;
 
    forever begin
-      ${ral_agent_name}_fifo.get(${ral_agent_type}_trn);
-      // TODO Implement uvme_${name}_prd_c::process_${ral_agent_type}()
+      ${ral_agent_name}_fifo.get(trn);
+      predict_reg(trn);
    end
 
 endtask : process_${ral_agent_name}
+
+
+task uvme_${name}_prd_c::predict_reg(ref uvma_${ral_agent_type}_mon_trn_c trn);
+
+   // TODO Implement uvme_${name}_prd_c::process_${ral_agent_type}()
+   //      Ex: uvm_reg  accessed_reg = cfg.${name}_reg_block.get_reg_by_offset(trn.address-cfg.reg_block_base_address);
+
+endtask : predict_reg
 
 
 `endif // __UVME_${name_uppercase}_PRD_SV__

@@ -79,6 +79,11 @@ class uvme_${name}_prd_c extends uvm_component;
     */
    extern task process_dp_in();
 
+   /**
+    * Data output prediction handler.
+    */
+   extern virtual task predict_dp_out(ref uvma_${name}_dp_in_mon_trn_c in_trn, ref uvma_${name}_dp_out_mon_trn_c out_trn);
+
 endclass : uvme_${name}_prd_c
 
 
@@ -146,10 +151,10 @@ endtask: run_phase
 
 task uvme_${name}_prd_c::process_clk();
 
-   uvma_clk_mon_trn_c  clk_trn;
+   uvma_clk_mon_trn_c  trn;
 
    forever begin
-      clk_fifo.get(clk_trn);
+      clk_fifo.get(trn);
       // TODO Implement uvme_${name}_prd_c::process_clk()
    end
 
@@ -158,11 +163,11 @@ endtask : process_clk
 
 task uvme_${name}_prd_c::process_reset();
 
-   uvma_reset_mon_trn_c  reset_trn;
+   uvma_reset_mon_trn_c  trn;
 
    forever begin
-      reset_fifo.get(reset_trn);
-      case (reset_trn.transition)
+      reset_fifo.get(trn);
+      case (trn.transition)
          UVML_EDGE_ASSERTED: begin
             cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
             cntxt.reset();
@@ -178,10 +183,10 @@ endtask : process_reset
 
 task uvme_${name}_prd_c::process_cp();
 
-   uvma_${name}_cp_mon_trn_c  cp_trn;
+   uvma_${name}_cp_mon_trn_c  trn;
 
    forever begin
-      cp_fifo.get(cp_trn);
+      cp_fifo.get(trn);
       // TODO Implement uvme_${name}_prd_c::process_cp()
    end
 
@@ -190,20 +195,30 @@ endtask : process_cp
 
 task uvme_${name}_prd_c::process_dp_in();
 
-   uvma_${name}_dp_in_mon_trn_c   dp_in_trn ;
-   uvma_${name}_dp_out_mon_trn_c  dp_out_trn;
+   uvma_${name}_dp_in_mon_trn_c  in_trn ;
+   uvma_${name}_dp_out_mon_trn_c out_trn;
 
    forever begin
-      dp_in_fifo.get(dp_in_trn);
-      if (cntxt.reset_state == UVML_RESET_STATE_POST_RESET) begin
-         dp_out_trn = uvma_${name}_dp_out_mon_trn_c::type_id::create("dp_out_trn");
-         // TODO Implement uvme_${name}_prd_c::process_cp()
-         //      Ex: dp_out_trn.abc = dp_in_trn.xyz;
-         dp_out_ap.write(dp_out_trn);
-      end
+      dp_in_fifo.get(in_trn);
+      out_trn = uvma_${name}_dp_out_mon_trn_c::type_id::create("out_trn");
+      predict_dp_out(in_trn, out_trn);
    end
 
 endtask : process_dp_in
+
+
+task uvme_${name}_prd_c::predict_dp_out(ref uvma_${name}_dp_in_mon_trn_c in_trn, ref uvma_${name}_dp_out_mon_trn_c out_trn);
+
+   if (cntxt.reset_state == UVML_RESET_STATE_POST_RESET) begin
+      // TODO Implement uvme_${name}_prd_c::process_dp()
+      //      Ex: out_trn.abc = in_trn.xyz;
+   end
+   else begin
+      out_trn.set_may_drop(1);
+   end
+   dp_out_ap.write(out_trn);
+
+endtask : predict_dp_out
 
 
 `endif // __UVME_${name_uppercase}_PRD_SV__

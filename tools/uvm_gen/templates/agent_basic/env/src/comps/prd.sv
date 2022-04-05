@@ -54,6 +54,11 @@ class uvme_${name}_st_prd_c extends uvm_component;
     */
    extern virtual task run_phase(uvm_phase phase);
 
+   /**
+    * Prediction handler.
+    */
+   extern virtual task predict(ref uvma_${name}_mon_trn_c trn);
+
 endclass : uvme_${name}_st_prd_c
 
 
@@ -112,12 +117,20 @@ task uvme_${name}_st_prd_c::run_phase(uvm_phase phase);
             out_trn.set_may_drop(1);
          end
 
-         // Send transaction to analysis port
-         out_ap.write(out_trn);
+         // Invoke prediction handler
+         predict(out_trn);
       end
    end
 
 endtask: run_phase
+
+
+task uvme_${name}_st_prd_c::predict(ref uvma_${name}_mon_trn_c trn);
+
+   // Send transaction to analysis port
+   out_ap.write(trn);
+
+endtask: predict
 
 
 `endif // __UVME_${name_uppercase}_ST_PRD_SV__
