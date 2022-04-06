@@ -98,9 +98,9 @@
 			<text x="4" y="258.06" class="st2">&#60;uvmt_${name}_base_test_c&#62;</text>		</g>
 		<g id="shape216-37" transform="translate(192.905,-205.027)">
 			<title>Sheet.216</title>
-			<desc>&#60;uvme_${name}_env_c&#62; env</desc>
+			<desc>&#60;uvme_${name}_vsequencer_c&#62; vsequencer</desc>
 			<rect x="0" y="352.578" width="181.268" height="35.9176" class="st12"/>
-			<text x="50.24" y="363.78" class="st4">&#60;uvme_${name}_env_c&#62; <tspan x="83.07" dy="1.14em" class="st5">env</tspan></text>		</g>
+			<text x="37.41" y="363.78" class="st4">&#60;uvme_${name}_vsequencer_c&#62; <tspan x="66.8" dy="1.14em" class="st5">vsequencer</tspan></text>		</g>
 		<g id="shape217-41" transform="translate(55.2756,-121.358)">
 			<title>Sheet.217</title>
 			<desc>&#60;uvmt_${name}_test_cfg_c&#62; test_cfg</desc>
@@ -113,9 +113,9 @@
 			<text x="21.08" y="363.78" class="st4">&#60;uvme_${name}_cntxt_c&#62; <tspan x="43.18" dy="1.14em" class="st5">env_cntxt</tspan></text>		</g>
 		<g id="shape219-49" transform="translate(192.905,-164.169)">
 			<title>Sheet.219</title>
-			<desc>&#60;uvme_${name}_vsequencer_c&#62; vsequencer</desc>
+			<desc>&#60;uvme_${name}_env_c&#62; env</desc>
 			<rect x="0" y="352.578" width="181.268" height="35.9176" class="st12"/>
-			<text x="37.41" y="363.78" class="st4">&#60;uvme_${name}_vsequencer_c&#62; <tspan x="66.8" dy="1.14em" class="st5">vsequencer</tspan></text>		</g>
+			<text x="50.24" y="363.78" class="st4">&#60;uvme_${name}_env_c&#62; <tspan x="83.07" dy="1.14em" class="st5">env</tspan></text>		</g>
 		<g id="shape220-53" transform="translate(55.2756,-164.124)">
 			<title>Sheet.220</title>
 			<desc>&#60;uvme_${name}_cfg_c&#62; env_cfg</desc>
@@ -160,11 +160,11 @@
 			<title>Sheet.265</title>
 			<path d="M5.8 388.5 L6.16 388.5 L17.29 388.5" class="st16"/>
 		</g>
-		<g id="shape268-99" transform="translate(10.4672,-159.71) rotate(-26.3388)">
+		<g id="shape268-99" transform="translate(346.355,-168.67) rotate(24.8918)">
 			<title>Sheet.268</title>
-			<path d="M0 388.5 L11.24 388.5" class="st18"/>
+			<path d="M0 388.5 L11.1 388.5" class="st18"/>
 		</g>
-		<g id="shape269-102" transform="translate(182.835,-222.752)">
+		<g id="shape269-102" transform="translate(182.835,-181.89)">
 			<title>Sheet.269</title>
 			<path d="M0 388.5 L10.07 388.5" class="st18"/>
 		</g>
