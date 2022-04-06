@@ -1,24 +1,29 @@
+# Copyright {{ year }} {{ name_of_copyright_owner }}
+# {{ license }}
+########################################################################################################################
+
+
 ip:
-  name: "uvme_${name}_st"
+  name: "uvme_{{ name }}_st"
   version: "1.0.0"
-  full-name: "${name_of_copyright_owner} ${name_normal_case} UVM Agent Self-Test Environment"
+  full-name: "{{ name_of_copyright_owner }} {{ name_normal_case }} UVM Agent Self-Test Environment"
   type: "DV"
   sub-type: "UVM Environment"
   sub-sub-type: "Agent Self-Testing"
   description: >
-    TODO Describe ${name_normal_case}
+    TODO Describe {{ name_normal_case }}
   home-page: ""
   repo-uri: ""
   bugs: ""
   aliases: []
   logo: ""
-  block-diagram: ""
+  block-diagram: "/docs/env_block_diagram.svg"
   languages: ["sv"]
   simulators-supported:
     - { name: "vivado", version: "2021.1" }
   tags: []
-  copyright-holders: ["${name_of_copyright_owner}"]
-  licenses: ["SHL-2.1"]
+  copyright-holders: ["{{ name_of_copyright_owner }}"]
+  licenses: ["{{ license_id }}"]
 
 structure:
    scripts-paths : [ "bin"      ]
@@ -31,14 +36,14 @@ dependencies:
   - { type: "DV", name: "uvml"     , repo-uri: "https://github.com/Datum-Technology-Corporation/uvml.git"     , repo-branch: "main", repo-path: "dv/uvml"      }
   - { type: "DV", name: "uvml_logs", repo-uri: "https://github.com/Datum-Technology-Corporation/uvml_logs.git", repo-branch: "main", repo-path: "dv/uvml_logs" }
   - { type: "DV", name: "uvml_sb"  , repo-uri: "https://github.com/Datum-Technology-Corporation/uvml_sb.git"  , repo-branch: "main", repo-path: "dv/uvml_sb"   }
+  - { type: "DV", name: "uvma_{{ name }}", repo-uri: "https://github.com/{{ name_of_copyright_owner }}/uvma_{{ name }}.git"  , repo-branch: "main", repo-path: "dv/uvma_{{ name }}" }
 
 hdl-src:
-  directories: [".", "comps", "obj", "seq"]
+  directories: ["comps", "obj", "seq"]
   flists:
-    metrics : [ "src/uvme_${name}_st_pkg.flist"      ]
-    riviera : [ "src/uvme_${name}_st_pkg.flist"      ]
-    questa  : [ "src/uvme_${name}_st_pkg.flist"      ]
-    vcs     : [ "src/uvme_${name}_st_pkg.flist"      ]
-    vivado  : [ "src/uvme_${name}_st_pkg.flist.xsim" ]
-    xcelium : [ "src/uvme_${name}_st_pkg.flist"      ]
-
+    metrics : [ "src/uvme_{{ name }}_st_pkg.flist"      ]
+    riviera : [ "src/uvme_{{ name }}_st_pkg.flist"      ]
+    questa  : [ "src/uvme_{{ name }}_st_pkg.flist"      ]
+    vcs     : [ "src/uvme_{{ name }}_st_pkg.flist"      ]
+    vivado  : [ "src/uvme_{{ name }}_st_pkg.flist.xsim" ]
+    xcelium : [ "src/uvme_{{ name }}_st_pkg.flist"      ]

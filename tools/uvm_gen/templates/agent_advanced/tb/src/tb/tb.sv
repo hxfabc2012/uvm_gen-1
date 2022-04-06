@@ -1,32 +1,26 @@
-// Copyright ${year} ${name_of_copyright_owner}
-// ${license}
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-`ifndef __UVMT_${name_uppercase}_ST_TB_SV__
-`define __UVMT_${name_uppercase}_ST_TB_SV__
+`ifndef __UVMT_{{ name_uppercase }}_ST_TB_SV__
+`define __UVMT_{{ name_uppercase }}_ST_TB_SV__
 
 
 /**
- * Module encapsulating the ${name_normal_case} Self-Test DUT wrapper, agents and clock generating interfaces.
+ * Module instantiating the {{ name_normal_case }} UVM Agent interfaces, a clock % reset generating interface and a "DUT".
  */
-module uvmt_${name}_st_tb;
-   
+module uvmt_{{ name }}_st_tb;
+
    import uvm_pkg::*;
-   import uvmt_${name}_st_pkg::*;
-   
-   // Clocking & Reset
-   uvmt_${name}_st_clknrst_gen_if  clknrst_gen_if();
-   
-   // Agent interfaces
-   uvma_${name}_if  ${name_1}_if(.clk(clknrst_gen_if.clk), .reset_n(clknrst_gen_if.reset_n));
-   uvma_${name}_if  ${name_2}_if(.clk(clknrst_gen_if.clk), .reset_n(clknrst_gen_if.reset_n));
-   
-   // DUT instance
-   uvmt_${name}_st_dut_wrap  dut_wrap(.*);
-   
-   
+   import uvmt_{{ name }}_st_pkg::*;
+
+   uvmt_{{ name }}_st_clknrst_gen_if  gen_if(); ///< Provides clocking & reset
+   uvma_{{ name }}_if  active_if (.clk(gen_if.clk), .reset_n(gen_if.reset_n)); ///< Active agent interface
+   uvma_{{ name }}_if  passive_if(.clk(gen_if.clk), .reset_n(gen_if.reset_n)); ///< Passive agent interface
+   uvmt_{{ name }}_st_dut_wrap  dut_wrap(.*); ///< Connects the agent interfaces
+
+
    /**
     * Test bench entry point.
     */
@@ -36,21 +30,21 @@ module uvmt_${name}_st_tb;
          .units_number       (   -9),
          .precision_number   (    3),
          .suffix_string      (" ns"),
-         .minimum_field_width(   18) 
+         .minimum_field_width(   18)
       );
-      
+
       // Add interfaces to uvm_config_db
-      uvm_config_db#(virtual uvmt_${name}_st_clknrst_gen_if)::set(null, "*", "clknrst_gen_vif", clknrst_gen_if);
-      uvm_config_db#(virtual uvma_${name}_if)::set(null, "*.env.${name_1}_agent", "vif", ${name_1}_if);
-      uvm_config_db#(virtual uvma_${name}_if)::set(null, "*.env.${name_2}_agent", "vif", ${name_2}_if);
-      
+      uvm_config_db#(virtual uvmt_{{ name }}_st_clknrst_gen_if)::set(null, "*", "vif", gen_if);
+      uvm_config_db#(virtual uvma_{{ name }}_if)::set(null, "*.env.active_agent" , "vif", active_if );
+      uvm_config_db#(virtual uvma_{{ name }}_if)::set(null, "*.env.passive_agent", "vif", passive_if);
+
       // Run test
       uvm_top.enable_print_topology = 0;
       uvm_top.finish_on_completion  = 1;
       uvm_top.run_test();
    end
-   
-   
+
+
    /**
     * End-of-test summary printout.
     */
@@ -60,19 +54,19 @@ module uvmt_${name}_st_tb;
       int                err_count;
       int                fatal_count;
       static bit         sim_finished = 0;
-      
+
       static string  red   = "\033[31m\033[1m";
       static string  green = "\033[32m\033[1m";
       static string  reset = "\033[0m";
-      
+
       rs          = uvm_top.get_report_server();
       err_count   = rs.get_severity_count(UVM_ERROR);
       fatal_count = rs.get_severity_count(UVM_FATAL);
-      
+
       void'(uvm_config_db#(bit)::get(null, "", "sim_finished", sim_finished));
-      
+
       $display("\n*** Test Summary ***\n");
-      
+
       if (sim_finished && (err_count == 0) && (fatal_count == 0)) begin
          $display("    PPPPPPP    AAAAAA    SSSSSS    SSSSSS   EEEEEEEE  DDDDDDD     ");
          $display("    PP    PP  AA    AA  SS    SS  SS    SS  EE        DD    DD    ");
@@ -93,7 +87,7 @@ module uvmt_${name}_st_tb;
          $display("    FF        AA    AA    II    LL        EE        DD    DD      ");
          $display("    FF        AA    AA    II    LL        EE        DD    DD      ");
          $display("    FF        AA    AA  IIIIII  LLLLLLLL  EEEEEEEE  DDDDDDD       ");
-         
+
          if (sim_finished == 0) begin
             $display("    --------------------------------------------------------");
             $display("                   SIMULATION FAILED - ABORTED              ");
@@ -106,8 +100,8 @@ module uvmt_${name}_st_tb;
          end
       end
    end
-   
-endmodule : uvmt_${name}_st_tb
+
+endmodule : uvmt_{{ name }}_st_tb
 
 
-`endif // __UVMT_${name_uppercase}_ST_TB_SV__
+`endif // __UVMT_{{ name_uppercase }}_ST_TB_SV__

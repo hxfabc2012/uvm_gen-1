@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 ########################################################################################################################
 # Copyright 2022 Datum Technology Corporation
-########################################################################################################################
 # SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 ########################################################################################################################
 
@@ -47,7 +46,7 @@ files = {
     "lib/src/tdefs.sv"                 : "uvml_${name}/src/uvml_${name}_tdefs.sv",
     "lib/gitignore"                    : "uvml_${name}/.gitignore",
     "lib/ip.yml"                       : "uvml_${name}/ip.yml",
-    "LICENSE_solderpad_v2p1.md"        : "uvml_${name}/LICENSE.md",
+    #"LICENSE_solderpad_v2p1.md"        : "uvml_${name}/LICENSE.md",
     "lib/README.md"                    : "uvml_${name}/README.md"
 }
 

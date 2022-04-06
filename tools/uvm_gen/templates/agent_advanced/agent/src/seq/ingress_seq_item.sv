@@ -1,29 +1,29 @@
-// Copyright ${year} ${name_of_copyright_owner}
-// ${license}
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
-`ifndef __UVMA_${name_uppercase}_SLV_A_SEQ_ITEM_SV__
-`define __UVMA_${name_uppercase}_SLV_A_SEQ_ITEM_SV__
+`ifndef __UVMA_{{ name_uppercase }}_SLV_A_SEQ_ITEM_SV__
+`define __UVMA_{{ name_uppercase }}_SLV_A_SEQ_ITEM_SV__
 
 
 /**
- * Object created by sequences running on uvma_${name}_slv_a_sqr_c.
+ * Object created by sequences running on uvma_{{ name }}_slv_a_sqr_c.
  */
-class uvma_${name}_slv_a_seq_item_c extends uvml_seq_item_c;
+class uvma_{{ name }}_slv_a_seq_item_c extends uvml_seq_item_c;
    
-   uvma_${name}_cfg_c  cfg; ///< Agent configuration handle
+   uvma_{{ name }}_cfg_c  cfg; ///< Agent configuration handle
    
    // Data
-   rand bit  gnt   ; ///< TODO Describe uvma_${name}_slv_a_seq_item_c::gnt
-   rand bit  gntpar; ///< TODO Describe uvma_${name}_slv_a_seq_item_c::gntpar
+   rand bit  gnt   ; ///< TODO Describe uvma_{{ name }}_slv_a_seq_item_c::gnt
+   rand bit  gntpar; ///< TODO Describe uvma_{{ name }}_slv_a_seq_item_c::gntpar
    
    // Metadata
-   uvma_${name}_req_l_t  req;
+   uvma_{{ name }}_req_l_t  req;
    
    
-   `uvm_object_utils_begin(uvma_${name}_slv_a_seq_item_c)
+   `uvm_object_utils_begin(uvma_{{ name }}_slv_a_seq_item_c)
       `uvm_field_int(gnt   , UVM_DEFAULT)
       `uvm_field_int(gntpar, UVM_DEFAULT)
    `uvm_object_utils_end
@@ -37,24 +37,24 @@ class uvma_${name}_slv_a_seq_item_c extends uvml_seq_item_c;
    /**
     * Default constructor.
     */
-   extern function new(string name="uvma_${name}_slv_a_seq_item");
+   extern function new(string name="uvma_{{ name }}_slv_a_seq_item");
    
    /**
-    * TODO Describe uvma_${name}_slv_a_seq_item_c::get_metadata()
+    * TODO Describe uvma_{{ name }}_slv_a_seq_item_c::get_metadata()
     */
    extern function uvml_metadata_t get_metadata();
    
-endclass : uvma_${name}_slv_a_seq_item_c
+endclass : uvma_{{ name }}_slv_a_seq_item_c
 
 
-function uvma_${name}_slv_a_seq_item_c::new(string name="uvma_${name}_slv_a_seq_item");
+function uvma_{{ name }}_slv_a_seq_item_c::new(string name="uvma_{{ name }}_slv_a_seq_item");
    
    super.new(name);
    
 endfunction : new
 
 
-function uvml_metadata_t uvma_${name}_slv_a_seq_item_c::get_metadata();
+function uvml_metadata_t uvma_{{ name }}_slv_a_seq_item_c::get_metadata();
    
    string gnt_str    = $sformatf("%b", gnt   );
    string gntpar_str = $sformatf("%b", gntpar);
@@ -82,4 +82,4 @@ function uvml_metadata_t uvma_${name}_slv_a_seq_item_c::get_metadata();
 endfunction : get_metadata
 
 
-`endif // __UVMA_${name_uppercase}_SLV_A_SEQ_ITEM_SV__
+`endif // __UVMA_{{ name_uppercase }}_SLV_A_SEQ_ITEM_SV__

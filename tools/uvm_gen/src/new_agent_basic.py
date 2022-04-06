@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 ########################################################################################################################
 # Copyright 2022 Datum Technology Corporation
-########################################################################################################################
 # SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 ########################################################################################################################
 
@@ -62,7 +61,7 @@ files = {
     "agent_basic/agent/src/tdefs.sv"                    : "uvma_${name}/src/uvma_${name}_tdefs.sv",
     "agent_basic/agent/gitignore"                       : "uvma_${name}/.gitignore",
     "agent_basic/agent/ip.yml"                          : "uvma_${name}/ip.yml",
-    "LICENSE_solderpad_v2p1.md"                         : "uvma_${name}/LICENSE.md",
+    #"LICENSE_solderpad_v2p1.md"                         : "uvma_${name}/LICENSE.md",
     "agent_basic/agent/README.md"                       : "uvma_${name}/README.md",
     "agent_basic/env/bin/package.py"                    : "uvme_${name}_st/bin/package.py",
     "agent_basic/env/docs/env_block_diagram.svg"        : "uvme_${name}_st/docs/env_block_diagram.svg",
@@ -85,7 +84,7 @@ files = {
     "agent_basic/env/src/tdefs.sv"                      : "uvme_${name}_st/src/uvme_${name}_st_tdefs.sv",
     "agent_basic/env/gitignore"                         : "uvme_${name}_st/.gitignore",
     "agent_basic/env/ip.yml"                            : "uvme_${name}_st/ip.yml",
-    "LICENSE_solderpad_v2p1.md"                         : "uvme_${name}_st/LICENSE.md",
+    #"LICENSE_solderpad_v2p1.md"                         : "uvme_${name}_st/LICENSE.md",
     "agent_basic/env/README.md"                         : "uvme_${name}_st/README.md",
     "agent_basic/tb/bin/package.py"                     : "uvmt_${name}_st/bin/package.py",
     "agent_basic/tb/docs/tb_block_diagram.svg"          : "uvmt_${name}_st/docs/tb_block_diagram.svg",
@@ -106,7 +105,7 @@ files = {
     "agent_basic/tb/src/tdefs.sv"                       : "uvmt_${name}_st/src/uvmt_${name}_st_tdefs.sv",
     "agent_basic/tb/gitignore"                          : "uvmt_${name}_st/.gitignore",
     "agent_basic/tb/ip.yml"                             : "uvmt_${name}_st/ip.yml",
-    "LICENSE_solderpad_v2p1.md"                         : "uvmt_${name}_st/LICENSE.md",
+    #"LICENSE_solderpad_v2p1.md"                         : "uvmt_${name}_st/LICENSE.md",
     "agent_basic/tb/README.md"                          : "uvmt_${name}_st/README.md"
 }
 

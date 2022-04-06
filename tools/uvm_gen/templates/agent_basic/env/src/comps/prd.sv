@@ -54,6 +54,11 @@ class uvme_${name}_st_prd_c extends uvm_component;
     */
    extern virtual task run_phase(uvm_phase phase);
 
+   /**
+    * Prediction handler.
+    */
+   extern virtual task predict(ref uvma_${name}_mon_trn_c trn);
+
 endclass : uvme_${name}_st_prd_c
 
 
@@ -70,12 +75,12 @@ function void uvme_${name}_st_prd_c::build_phase(uvm_phase phase);
 
    void'(uvm_config_db#(uvme_${name}_st_cfg_c)::get(this, "", "cfg", cfg));
    if (!cfg) begin
-      `uvm_fatal("CFG", "Configuration handle is null")
+      `uvm_fatal("${name_uppercase}_ST_PRD", "Configuration handle is null")
    end
 
    void'(uvm_config_db#(uvme_${name}_st_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (!cntxt) begin
-      `uvm_fatal("CNTXT", "Context handle is null")
+      `uvm_fatal("${name_uppercase}_ST_PRD", "Context handle is null")
    end
 
    in_export = new("in_export", this);
@@ -112,12 +117,20 @@ task uvme_${name}_st_prd_c::run_phase(uvm_phase phase);
             out_trn.set_may_drop(1);
          end
 
-         // Send transaction to analysis port
-         out_ap.write(out_trn);
+         // Invoke prediction handler
+         predict(out_trn);
       end
    end
 
 endtask: run_phase
+
+
+task uvme_${name}_st_prd_c::predict(ref uvma_${name}_mon_trn_c trn);
+
+   // Send transaction to analysis port
+   out_ap.write(trn);
+
+endtask: predict
 
 
 `endif // __UVME_${name_uppercase}_ST_PRD_SV__

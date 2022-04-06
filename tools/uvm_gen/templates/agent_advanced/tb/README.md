@@ -1,28 +1,26 @@
-# ${name_of_copyright_owner} ${name_normal_case} Self-Test Bench and UVM Test Library
+# {{ name_of_copyright_owner }} {{ name_normal_case }} Self-Test Bench and UVM Test Library
 
 
 # About
-This package contains the ${name_of_copyright_owner} ${name_normal_case} Self-Test Bench and UVM Test Library.
-
-TODO Describe ${name_normal_case}
+This IP contains the {{ name_normal_case }} UVM Agent Self-Test Bench and Test Library.
 
 
 # Block Diagram
-![alt text](./docs/tb_block_diagram.svg "${name_normal_case} Self-Test Bench Block Diagram")
+![alt text](./docs/tb_block_diagram.svg "{{ name_normal_case }} Self-Test Bench Block Diagram")
 
 # Directory Structure
 * `bin` - Scripts, metadata and other miscellaneous files
-* `docs` - Documents describing the ${name_of_copyright_owner} ${name_normal_case} Self-Test Bench and UVM Test Library
-* `examples` - Samples for users
-* `src` - Source code for this package
+* `docs` - Reference documentation
+* `examples` - Code samples for adding to this test bench
+* `src` - Source code
 
 
 # Dependencies
-It is dependent on the following packages:
+It is dependent on the following IP:
 
-* `uvm_pkg`
-* `uvml_pkg`
-* `uvml_logs_pkg`
-* `uvml_sb_pkg`
-* TODO Add ${name_normal_case} dependencies
-* `uvme_${name}_st_pkg`
+* `uvm`
+* `uvml`
+* `uvml_logs`
+* `uvml_sb`
+* `uvma_{{ name }}`
+* `uvme_{{ name }}_st`

@@ -4,7 +4,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
 		xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="11.5955in" height="3.15666in"
 		viewBox="0 0 834.878 227.28" xml:space="preserve" color-interpolation-filters="sRGB" class="st21">
-	<title>uvmt_${name}</title>
+	<title>uvmt_{{ name }}</title>
 	<v:documentProperties v:langID="4105" v:metric="true" v:viewMarkup="false">
 		<v:userDefs>
 			<v:ud v:nameU="msvNoAutoConnect" v:val="VT0(1):26"/>
@@ -68,46 +68,46 @@
 			<text x="80.43" y="229.68" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>assign</text>		</g>
 		<g id="shape1-6" v:mID="1" v:groupContext="shape" transform="translate(18.5,-18.5)">
 			<title>Sheet.1</title>
-			<desc>&#60;uvmt_${name}_st_tb&#62;</desc>
+			<desc>&#60;uvmt_{{ name }}_st_tb&#62;</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
 			<v:textRect cx="220.356" cy="132.14" width="440.72" height="190.28"/>
 			<rect x="0" y="37" width="440.713" height="190.28" class="st4"/>
-			<text x="4" y="50" class="st5" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvmt_${name}_<tspan class="st6"
+			<text x="4" y="50" class="st5" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvmt_{{ name }}_<tspan class="st6"
 						v:langID="1033">st_</tspan>tb&#62;</text>		</g>
 		<g id="shape98-10" v:mID="98" v:groupContext="shape" transform="translate(147.551,-72.7165)">
 			<title>Sheet.98</title>
-			<desc>&#60;uvmt_${name}_st_dut_wrap&#62; dut_wrap</desc>
+			<desc>&#60;uvmt_{{ name }}_st_dut_wrap&#62; dut_wrap</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
 			<v:textRect cx="90.6339" cy="173.421" width="181.27" height="107.717"/>
 			<rect x="0" y="119.563" width="181.268" height="107.717" class="st7"/>
-			<text x="4" y="130.76" class="st8" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvmt_${name}_<tspan class="st6"
+			<text x="4" y="130.76" class="st8" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvmt_{{ name }}_<tspan class="st6"
 						v:langID="1033">st_</tspan>dut_wrap&#62;<v:newlineChar/><v:paragraph v:horizAlign="1"/><v:newlineChar/><v:newlineChar/><v:newlineChar/><v:newlineChar/><v:newlineChar/><v:newlineChar/><tspan
 						x="70.39" dy="6.9em" class="st9">dut_wrap</tspan></text>		</g>
 		<g id="shape159-15" v:mID="159" v:groupContext="shape" transform="translate(35.2835,-119.791)">
 			<title>Sheet.159</title>
-			<desc>&#60;uvma_${name}_if&#62; ${name_1}_if</desc>
+			<desc>&#60;uvma_{{ name }}_if&#62; active_if</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="48.189" cy="216.407" width="96.38" height="21.7443"/>
 			<rect x="0" y="205.535" width="96.378" height="21.7443" class="st10"/>
-			<text x="15.32" y="212.81" class="st8" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_${name}_if&#62;<v:newlineChar/><tspan
-						x="20.16" dy="1.14em" class="st9">${name_1}_if</tspan></text>		</g>
+			<text x="15.32" y="212.81" class="st8" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_{{ name }}_if&#62;<v:newlineChar/><tspan
+						x="20.16" dy="1.14em" class="st9">active_if</tspan></text>		</g>
 		<g id="shape213-19" v:mID="213" v:groupContext="shape" transform="translate(342.992,-119.791)">
 			<title>Sheet.213</title>
-			<desc>&#60;uvma_${name}_if&#62; ${name_2}_if</desc>
+			<desc>&#60;uvma_{{ name }}_if&#62; passive_if</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="48.189" cy="216.407" width="96.38" height="21.7443"/>
 			<rect x="0" y="205.535" width="96.378" height="21.7443" class="st10"/>
-			<text x="15.32" y="212.81" class="st8" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_${name}_if&#62;<v:newlineChar/><tspan
-						x="20.16" dy="1.14em" class="st9">${name_2}_if</tspan></text>		</g>
+			<text x="15.32" y="212.81" class="st8" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_{{ name }}_if&#62;<v:newlineChar/><tspan
+						x="20.16" dy="1.14em" class="st9">passive_if</tspan></text>		</g>
 		<g id="group214-23" transform="translate(156.614,-18.878)" v:mID="214" v:groupContext="group">
 			<title>Sheet.214</title>
 			<g id="shape100-24" v:mID="100" v:groupContext="shape" transform="translate(0,-19.5905)">
 				<title>Sheet.100</title>
-				<desc>&#60;uvmt_${name}_st_clknrst_gen_if&#62; clknrst_gen_if</desc>
+				<desc>&#60;uvmt_{{ name }}_st_clknrst_gen_if&#62; clknrst_gen_if</desc>
 				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 				<v:textRect cx="81.4961" cy="216.407" width="163" height="21.7443"/>
 				<rect x="0" y="205.535" width="162.992" height="21.7443" class="st11"/>
-				<text x="23.52" y="212.81" class="st8" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvmt_${name}_st_clknrst_gen_if&#62;<v:newlineChar/><tspan
+				<text x="23.52" y="212.81" class="st8" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvmt_{{ name }}_st_clknrst_gen_if&#62;<v:newlineChar/><tspan
 							x="52.23" dy="1.14em" class="st9">clknrst_gen_if</tspan></text>			</g>
 			<g id="shape157-28" v:mID="157" v:groupContext="shape" transform="translate(5.95276,2.84217E-14)">
 				<title>Sheet.157</title>
@@ -119,59 +119,59 @@
 		</g>
 		<g id="shape215-31" v:mID="215" v:groupContext="shape" transform="translate(476.22,-41.6693)">
 			<title>Sheet.215</title>
-			<desc>&#60;uvmt_${name}_st_base_test_c&#62;</desc>
+			<desc>&#60;uvmt_{{ name }}_st_base_test_c&#62;</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
 			<v:textRect cx="170.079" cy="155.563" width="340.16" height="143.433"/>
 			<rect x="0" y="83.8465" width="340.157" height="143.433" class="st4"/>
-			<text x="4" y="96.85" class="st5" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvmt_${name}_<tspan class="st6"
+			<text x="4" y="96.85" class="st5" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvmt_{{ name }}_<tspan class="st6"
 						v:langID="1033">st_</tspan>base_test_c&#62;</text>		</g>
 		<g id="shape216-35" v:mID="216" v:groupContext="shape" transform="translate(492.595,-129.582)">
 			<title>Sheet.216</title>
-			<desc>&#60;uvme_${name}_st_env_c&#62; env</desc>
+			<desc>&#60;uvme_{{ name }}_st_env_c&#62; env</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
 			<v:textRect cx="90.6339" cy="209.321" width="181.27" height="35.9176"/>
 			<rect x="0" y="191.362" width="181.268" height="35.9176" class="st13"/>
-			<text x="4" y="202.56" class="st8" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvme_${name}_st_env_c&#62;<v:newlineChar/><v:paragraph
+			<text x="4" y="202.56" class="st8" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvme_{{ name }}_st_env_c&#62;<v:newlineChar/><v:paragraph
 						v:horizAlign="1"/><tspan x="83.07" dy="1.14em" class="st9">env</tspan></text>		</g>
 		<g id="shape217-39" v:mID="217" v:groupContext="shape" transform="translate(682.366,-129.582)">
 			<title>Sheet.217</title>
-			<desc>&#60;uvme_${name}_st_cfg_c&#62; env_cfg</desc>
+			<desc>&#60;uvme_{{ name }}_st_cfg_c&#62; env_cfg</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
 			<v:textRect cx="63.7795" cy="209.321" width="127.56" height="35.9176"/>
 			<rect x="0" y="191.362" width="127.559" height="35.9176" class="st7"/>
-			<text x="4" y="202.56" class="st8" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvme_${name}_st_cfg_c&#62;<v:newlineChar/><v:paragraph
+			<text x="4" y="202.56" class="st8" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvme_{{ name }}_st_cfg_c&#62;<v:newlineChar/><v:paragraph
 						v:horizAlign="1"/><tspan x="47.68" dy="1.14em" class="st9">env_cfg</tspan></text>		</g>
 		<g id="shape218-43" v:mID="218" v:groupContext="shape" transform="translate(682.366,-88.7244)">
 			<title>Sheet.218</title>
-			<desc>&#60;uvme_${name}_st_cntxt_c&#62; env_cntxt</desc>
+			<desc>&#60;uvme_{{ name }}_st_cntxt_c&#62; env_cntxt</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
 			<v:textRect cx="63.7795" cy="209.321" width="127.56" height="35.9176"/>
 			<rect x="0" y="191.362" width="127.559" height="35.9176" class="st7"/>
-			<text x="4" y="202.56" class="st8" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvme_${name}_st_cntxt_c&#62;<v:newlineChar/><v:paragraph
+			<text x="4" y="202.56" class="st8" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvme_{{ name }}_st_cntxt_c&#62;<v:newlineChar/><v:paragraph
 						v:horizAlign="1"/><tspan x="43.18" dy="1.14em" class="st9">env_cntxt</tspan></text>		</g>
 		<g id="shape219-47" v:mID="219" v:groupContext="shape" transform="translate(492.595,-88.7244)">
 			<title>Sheet.219</title>
-			<desc>&#60;uvme_${name}_st_vsequencer_c&#62; vsequencer</desc>
+			<desc>&#60;uvme_{{ name }}_st_vsequencer_c&#62; vsequencer</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
 			<v:textRect cx="90.6339" cy="209.321" width="181.27" height="35.9176"/>
 			<rect x="0" y="191.362" width="181.268" height="35.9176" class="st13"/>
-			<text x="4" y="202.56" class="st8" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvme_${name}_st_vsequencer_c&#62;<v:newlineChar/><v:paragraph
+			<text x="4" y="202.56" class="st8" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvme_{{ name }}_st_vsequencer_c&#62;<v:newlineChar/><v:paragraph
 						v:horizAlign="1"/><tspan x="66.8" dy="1.14em" class="st9">vsequencer</tspan></text>		</g>
 		<g id="shape220-51" v:mID="220" v:groupContext="shape" transform="translate(682.366,-48.0885)">
 			<title>Sheet.220</title>
-			<desc>&#60;uvmt_${name}_st_test_cfg_c&#62; test_cfg</desc>
+			<desc>&#60;uvmt_{{ name }}_st_test_cfg_c&#62; test_cfg</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
 			<v:textRect cx="63.7795" cy="209.321" width="127.56" height="35.9176"/>
 			<rect x="0" y="191.362" width="127.559" height="35.9176" class="st7"/>
-			<text x="4" y="202.56" class="st8" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvmt_${name}_st_test_cfg_c&#62;<v:newlineChar/><v:paragraph
+			<text x="4" y="202.56" class="st8" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvmt_{{ name }}_st_test_cfg_c&#62;<v:newlineChar/><v:paragraph
 						v:horizAlign="1"/><tspan x="47.27" dy="1.14em" class="st9">test_cfg</tspan></text>		</g>
 		<g id="shape221-55" v:mID="221" v:groupContext="shape" transform="translate(491.961,-55.1751)">
 			<title>Sheet.221</title>
-			<desc>&#60;virtual uvmt_${name}_st_clknrst_gen_if&#62; clknrst_gen_vif</desc>
+			<desc>&#60;virtual uvmt_{{ name }}_st_clknrst_gen_if&#62; clknrst_gen_vif</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="90.6339" cy="216.407" width="181.27" height="21.7443"/>
 			<rect x="0" y="205.535" width="181.268" height="21.7443" class="st11"/>
-			<text x="21.35" y="212.81" class="st8" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;virtual uvmt_${name}_st_clknrst_gen_if&#62;<v:newlineChar/><tspan
+			<text x="21.35" y="212.81" class="st8" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;virtual uvmt_{{ name }}_st_clknrst_gen_if&#62;<v:newlineChar/><tspan
 						x="59" dy="1.14em" class="st9">clknrst_gen_vif</tspan></text>		</g>
 		<g id="shape222-59" v:mID="222" v:groupContext="shape" transform="translate(124.401,-141.42) rotate(-1.83051)">
 			<title>Sheet.222</title>

@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVME_${name_uppercase}_ST_MACROS_SV__
-`define __UVME_${name_uppercase}_ST_MACROS_SV__
+`ifndef __UVME_${name_uppercase}_ST_MACROS_SVH__
+`define __UVME_${name_uppercase}_ST_MACROS_SVH__
 
 
 // Add preprocessor macros here
@@ -13,4 +13,4 @@
 //     `endif
 
 
-`endif // __UVME_${name_uppercase}_ST_MACROS_SV__
+`endif // __UVME_${name_uppercase}_ST_MACROS_SVH__

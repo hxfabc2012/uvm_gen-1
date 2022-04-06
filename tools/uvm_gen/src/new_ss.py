@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 ########################################################################################################################
 # Copyright 2022 Datum Technology Corporation
-# SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+# All rights reserved.
 ########################################################################################################################
 
 
@@ -77,7 +77,7 @@ files = {
     "ss/env/src/tdefs.sv"                             : "uvme_${name}/src/uvme_${name}_tdefs.sv",
     "gitignore"                                       : "uvme_${name}/.gitignore",
     "ss/env/ip.yml"                                   : "uvme_${name}/ip.yml",
-    "LICENSE_solderpad_v2p1.md"                       : "uvme_${name}/LICENSE.md",
+    #"LICENSE_solderpad_v2p1.md"                       : "uvme_${name}/LICENSE.md",
     "ss/env/README.md"                                : "uvme_${name}/README.md",
     "ss/tb/bin/package.py"                            : "uvmt_${name}/bin/package.py",
     "ss/tb/docs/tb_block_diagram.svg"                 : "uvmt_${name}/docs/tb_block_diagram.svg",
@@ -100,7 +100,7 @@ files = {
     "ss/tb/src/tdefs.sv"                              : "uvmt_${name}/src/uvmt_${name}_tdefs.sv",
     "gitignore"                                       : "uvmt_${name}/.gitignore",
     "ss/tb/ip.yml"                                    : "uvmt_${name}/ip.yml",
-    "LICENSE_solderpad_v2p1.md"                       : "uvmt_${name}/LICENSE.md",
+    #"LICENSE_solderpad_v2p1.md"                       : "uvmt_${name}/LICENSE.md",
     "ss/tb/README.md"                                 : "uvmt_${name}/README.md"
 }
 
