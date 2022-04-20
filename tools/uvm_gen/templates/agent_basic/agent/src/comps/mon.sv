@@ -250,7 +250,6 @@ function void uvma_${name}_mon_c::process_trn(ref uvma_${name}_mon_trn_c trn);
    trn.cfg = cfg;
    trn.set_initiator(this);
    `uvm_info("${name_uppercase}_MON", $sformatf("Sampled transaction from the virtual interface:\n%s", trn.sprint()), UVM_DEBUG)
-   `uvml_hrtbt()
 
 endfunction : process_trn
 
