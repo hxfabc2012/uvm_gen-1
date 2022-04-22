@@ -28,4 +28,5 @@ It is dependent on the following IP:
 * `uvma_clk`
 * `uvma_reset`
 * `uvma_${name}_cp`
-* `uvma_${name}_dp`
+* `uvma_${name}_dp_in`
+* `uvma_${name}_dp_out`
