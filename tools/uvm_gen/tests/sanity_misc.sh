@@ -1,7 +1,6 @@
 #! /bin/bash
 ########################################################################################################################
 ## Copyright 2022 Datum Technology Corporation
-########################################################################################################################
 ## SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 ########################################################################################################################
 
@@ -23,8 +22,8 @@ cat ./tests/data/lib.spec | ./src/new_lib.py ../../dv/
 cd ../../sim
 ./setup_project.py
 source ./setup_terminal.sh
-../tools/.imports/mio/src/mio.py cpel uvmt_misc_st
-../tools/.imports/mio/src/mio.py sim uvmt_misc_st -t smoke -s 1
+../tools/.imports/mio/src/__main__.py cpel uvmt_misc_st
+../tools/.imports/mio/src/__main__.py sim uvmt_misc_st -t smoke -s 1
 
 # 3. Gather sim results
-../tools/.imports/mio/src/mio.py results uvmt_misc_st misc
+../tools/.imports/mio/src/__main__.py results uvmt_misc_st misc

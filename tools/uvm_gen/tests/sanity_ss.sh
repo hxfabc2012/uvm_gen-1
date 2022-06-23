@@ -1,7 +1,7 @@
 #! /bin/bash
 ########################################################################################################################
-# Copyright 2022 Datum Technology Corporation
-# SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+## Copyright 2022 Datum Technology Corporation
+## SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
 ########################################################################################################################
 
 
@@ -12,8 +12,8 @@ cat ./tests/data/ss.spec | ./src/new_ss.py ../../dv/
 cd ../../sim
 ./setup_project.py
 source ./setup_terminal.sh
-../tools/.imports/mio/src/mio.py cpel uvmt_ss
-../tools/.imports/mio/src/mio.py sim  uvmt_ss -t base -s 1
+../tools/.imports/mio/src/__main__.py cpel uvmt_ss
+../tools/.imports/mio/src/__main__.py sim  uvmt_ss -t base -s 1
 
 # 3. Gather sim results
-../tools/.imports/mio/src/mio.py results uvmt_ss tb_ss
+../tools/.imports/mio/src/__main__.py results uvmt_ss tb_ss
