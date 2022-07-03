@@ -1,0 +1,44 @@
+ip:
+  name: "uvme_obi_st"
+  version: "1.0.0 Beta 0"
+  full-name: "Moore.io OBI Aget Self-Test UVM Environment"
+  type: "DV"
+  sub-type: "UVM Environment"
+  sub-sub-type: "Agent Self-Testing"
+  description: >
+    
+  home-page: "https://datum-technology-corporation.github.io/uvma_obi/"
+  repo-uri: "https://github.com/Datum-Technology-Corporation/uvma_obi.git"
+  bugs: "https://github.com/Datum-Technology-Corporation/uvma_obi/issues"
+  aliases: []
+  logo: ""
+  block-diagram: "docs/env_block_diagram.svg"
+  languages: ["sv"]
+  simulators-supported:
+    - { name: "vivado", version: "2021.1" }
+  tags: []
+  copyright-holders: ["Datum Technology Corporation"]
+  licenses: ["SHL-2.1"]
+
+structure:
+   scripts-path : "bin"
+   docs-path    : "docs"
+   examples-path: "examples"
+   src-path     : "src"
+
+dependencies:
+  - { name: "uvm"      , version:  "1.2" }
+  - { name: "uvml"     , version: "~1.0" }
+  - { name: "uvml_logs", version: "~1.0" }
+  - { name: "uvml_sb"  , version: "~1.0" }
+
+hdl-src:
+  directories: [".", "comps", "obj", "seq"]
+  flists:
+    metrics : [ "src/uvme_obi_st_pkg.flist"      ]
+    riviera : [ "src/uvme_obi_st_pkg.flist"      ]
+    questa  : [ "src/uvme_obi_st_pkg.flist"      ]
+    vcs     : [ "src/uvme_obi_st_pkg.flist"      ]
+    vivado  : [ "src/uvme_obi_st_pkg.flist.xsim" ]
+    xcelium : [ "src/uvme_obi_st_pkg.flist"      ]
+

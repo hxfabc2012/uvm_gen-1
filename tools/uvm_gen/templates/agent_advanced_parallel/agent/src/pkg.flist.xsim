@@ -1,0 +1,14 @@
+// Copyright 2021 Datum Technology Corporation
+// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Directories
+-i ${DV_UVMA_OBI_SRC_PATH}
+-i ${DV_UVMA_OBI_SRC_PATH}/comps
+-i ${DV_UVMA_OBI_SRC_PATH}/obj
+-i ${DV_UVMA_OBI_SRC_PATH}/reg
+-i ${DV_UVMA_OBI_SRC_PATH}/seq
+
+// Files
+${DV_UVMA_OBI_SRC_PATH}/uvma_obi_pkg.sv
