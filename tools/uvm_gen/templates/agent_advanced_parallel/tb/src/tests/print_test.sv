@@ -1,21 +1,21 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMT_OBI_ST_PRINT_TEST_SV__
-`define __UVMT_OBI_ST_PRINT_TEST_SV__
+`ifndef __UVMT_{{ upper(name) }}_ST_PRINT_TEST_SV__
+`define __UVMT_{{ upper(name) }}_ST_PRINT_TEST_SV__
 
 
 /**
- * TODO Describe uvmt_obi_st_print_test_c
+ * TODO Describe uvmt_{{ name }}_st_print_test_c
  */
-class uvmt_obi_st_print_test_c extends uvmt_obi_st_base_test_c;
+class uvmt_{{ name }}_st_print_test_c extends uvmt_{{ name }}_st_base_test_c;
    
-   rand uvme_obi_st_print_vseq_c  print_vseq; ///< 
+   rand uvme_{{ name }}_st_print_vseq_c  print_vseq; ///< 
    
    
-   `uvm_component_utils(uvmt_obi_st_print_test_c)
+   `uvm_component_utils(uvmt_{{ name }}_st_print_test_c)
    
    
    constraint env_cfg_cons {
@@ -26,26 +26,26 @@ class uvmt_obi_st_print_test_c extends uvmt_obi_st_base_test_c;
    /**
     * Creates print_vseq.
     */
-   extern function new(string name="uvmt_obi_st_print_test", uvm_component parent=null);
+   extern function new(string name="uvmt_{{ name }}_st_print_test", uvm_component parent=null);
    
    /**
     * Runs print_vseq on vsequencer.
     */
    extern virtual task main_phase(uvm_phase phase);
    
-endclass : uvmt_obi_st_print_test_c
+endclass : uvmt_{{ name }}_st_print_test_c
 
 
-function uvmt_obi_st_print_test_c::new(string name="uvmt_obi_st_print_test", uvm_component parent=null);
+function uvmt_{{ name }}_st_print_test_c::new(string name="uvmt_{{ name }}_st_print_test", uvm_component parent=null);
    
    super.new(name, parent);
    
-   print_vseq = uvme_obi_st_print_vseq_c::type_id::create("print_vseq");
+   print_vseq = uvme_{{ name }}_st_print_vseq_c::type_id::create("print_vseq");
    
 endfunction : new
 
 
-task uvmt_obi_st_print_test_c::main_phase(uvm_phase phase);
+task uvmt_{{ name }}_st_print_test_c::main_phase(uvm_phase phase);
    
    super.main_phase(phase);
    
@@ -58,4 +58,4 @@ task uvmt_obi_st_print_test_c::main_phase(uvm_phase phase);
 endtask : main_phase
 
 
-`endif // __UVMT_OBI_ST_PRINT_TEST_SV__
+`endif // __UVMT_{{ upper(name) }}_ST_PRINT_TEST_SV__

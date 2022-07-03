@@ -1,18 +1,18 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMT_OBI_ST_DUT_WRAP_SV__
-`define __UVMT_OBI_ST_DUT_WRAP_SV__
+`ifndef __UVMT_{{ upper(name) }}_ST_DUT_WRAP_SV__
+`define __UVMT_{{ upper(name) }}_ST_DUT_WRAP_SV__
 
 
 /**
- * Module wrapper for Open Bus Interface RTL DUT. All ports are SV interfaces.
+ * Module wrapper for {{ full_name }} RTL DUT. All ports are SV interfaces.
  */
-module uvmt_obi_st_dut_wrap(
-   uvma_obi_if  mstr_if,
-   uvma_obi_if  slv_if
+module uvmt_{{ name }}_st_dut_wrap(
+   uvma_{{ name }}_if  mstr_if,
+   uvma_{{ name }}_if  slv_if
 );
    // 'A Channel' signals
    assign slv_if .req     = mstr_if.req    ;
@@ -43,7 +43,7 @@ module uvmt_obi_st_dut_wrap(
    assign slv_if .rreadypar = mstr_if.rreadypar;
    assign mstr_if.rchk      = slv_if .rchk     ;
    
-endmodule : uvmt_obi_st_dut_wrap
+endmodule : uvmt_{{ name }}_st_dut_wrap
 
 
-`endif // __UVMT_OBI_ST_DUT_WRAP_SV__
+`endif // __UVMT_{{ upper(name) }}_ST_DUT_WRAP_SV__

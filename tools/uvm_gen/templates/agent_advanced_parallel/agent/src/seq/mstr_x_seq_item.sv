@@ -1,39 +1,39 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_OBI_MSTR_A_SEQ_ITEM_SV__
-`define __UVMA_OBI_MSTR_A_SEQ_ITEM_SV__
+`ifndef __UVMA_{{ upper(name) }}_MSTR_A_SEQ_ITEM_SV__
+`define __UVMA_{{ upper(name) }}_MSTR_A_SEQ_ITEM_SV__
 
 
 /**
- * Object created by Open Bus Interface agent sequences extending uvma_obi_seq_base_c.
+ * Object created by {{ full_name }} agent sequences extending uvma_{{ name }}_seq_base_c.
  */
-class uvma_obi_mstr_a_seq_item_c extends uvml_seq_item_c;
+class uvma_{{ name }}_mstr_a_seq_item_c extends uvml_seq_item_c;
    
-   uvma_obi_cfg_c  cfg; ///< Agent configuration handle
+   uvma_{{ name }}_cfg_c  cfg; ///< Agent configuration handle
    
    // Data
-   rand uvma_obi_req_b_t      req    ; ///< TODO Describe uvma_obi_mstr_a_seq_item_c::req
-   rand uvma_obi_addr_b_t     addr   ; ///< TODO Describe uvma_obi_mstr_a_seq_item_c::addr
-   rand uvma_obi_we_b_t       we     ; ///< TODO Describe uvma_obi_mstr_a_seq_item_c::we
-   rand uvma_obi_be_b_t       be     ; ///< TODO Describe uvma_obi_mstr_a_seq_item_c::be
-   rand uvma_obi_data_b_t     wdata  ; ///< TODO Describe uvma_obi_mstr_a_seq_item_c::wdata
-   rand uvma_obi_auser_b_t    auser  ; ///< TODO Describe uvma_obi_mstr_a_seq_item_c::auser
-   rand uvma_obi_wuser_b_t    wuser  ; ///< TODO Describe uvma_obi_mstr_a_seq_item_c::wuser
-   rand uvma_obi_id_b_t       aid    ; ///< TODO Describe uvma_obi_mstr_a_seq_item_c::aid
-   rand uvma_obi_atop_b_t     atop   ; ///< TODO Describe uvma_obi_mstr_a_seq_item_c::atop
-   rand uvma_obi_memtype_b_t  memtype; ///< TODO Describe uvma_obi_mstr_a_seq_item_c::memtype
-   rand uvma_obi_prot_b_t     prot   ; ///< TODO Describe uvma_obi_mstr_a_seq_item_c::prot
-   rand uvma_obi_reqpar_b_t   reqpar ; ///< TODO Describe uvma_obi_mstr_a_seq_item_c::reqpar
-   rand uvma_obi_achk_b_t     achk   ; ///< TODO Describe uvma_obi_mstr_a_seq_item_c::achk
+   rand uvma_{{ name }}_req_b_t      req    ; ///< TODO Describe uvma_{{ name }}_mstr_a_seq_item_c::req
+   rand uvma_{{ name }}_addr_b_t     addr   ; ///< TODO Describe uvma_{{ name }}_mstr_a_seq_item_c::addr
+   rand uvma_{{ name }}_we_b_t       we     ; ///< TODO Describe uvma_{{ name }}_mstr_a_seq_item_c::we
+   rand uvma_{{ name }}_be_b_t       be     ; ///< TODO Describe uvma_{{ name }}_mstr_a_seq_item_c::be
+   rand uvma_{{ name }}_data_b_t     wdata  ; ///< TODO Describe uvma_{{ name }}_mstr_a_seq_item_c::wdata
+   rand uvma_{{ name }}_auser_b_t    auser  ; ///< TODO Describe uvma_{{ name }}_mstr_a_seq_item_c::auser
+   rand uvma_{{ name }}_wuser_b_t    wuser  ; ///< TODO Describe uvma_{{ name }}_mstr_a_seq_item_c::wuser
+   rand uvma_{{ name }}_id_b_t       aid    ; ///< TODO Describe uvma_{{ name }}_mstr_a_seq_item_c::aid
+   rand uvma_{{ name }}_atop_b_t     atop   ; ///< TODO Describe uvma_{{ name }}_mstr_a_seq_item_c::atop
+   rand uvma_{{ name }}_memtype_b_t  memtype; ///< TODO Describe uvma_{{ name }}_mstr_a_seq_item_c::memtype
+   rand uvma_{{ name }}_prot_b_t     prot   ; ///< TODO Describe uvma_{{ name }}_mstr_a_seq_item_c::prot
+   rand uvma_{{ name }}_reqpar_b_t   reqpar ; ///< TODO Describe uvma_{{ name }}_mstr_a_seq_item_c::reqpar
+   rand uvma_{{ name }}_achk_b_t     achk   ; ///< TODO Describe uvma_{{ name }}_mstr_a_seq_item_c::achk
    
    // Metadata
-   uvma_obi_gnt_l_t  gnt;
+   uvma_{{ name }}_gnt_l_t  gnt;
    
    
-   `uvm_object_utils_begin(uvma_obi_mstr_a_seq_item_c)
+   `uvm_object_utils_begin(uvma_{{ name }}_mstr_a_seq_item_c)
       `uvm_field_int(req    , UVM_DEFAULT              )
       `uvm_field_int(addr   , UVM_DEFAULT + UVM_NOPRINT)
       `uvm_field_int(we     , UVM_DEFAULT + UVM_NOPRINT)
@@ -58,29 +58,29 @@ class uvma_obi_mstr_a_seq_item_c extends uvml_seq_item_c;
    /**
     * Default constructor.
     */
-   extern function new(string name="uvma_obi_mstr_a_seq_item");
+   extern function new(string name="uvma_{{ name }}_mstr_a_seq_item");
    
    /**
-    * TODO Describe uvma_obi_mstr_a_seq_item_c::do_print()
+    * TODO Describe uvma_{{ name }}_mstr_a_seq_item_c::do_print()
     */
    extern function void do_print(uvm_printer printer);
    
    /**
-    * TODO Describe uvma_obi_mstr_a_seq_item_c::get_metadata()
+    * TODO Describe uvma_{{ name }}_mstr_a_seq_item_c::get_metadata()
     */
    extern function uvml_metadata_t get_metadata();
    
-endclass : uvma_obi_mstr_a_seq_item_c
+endclass : uvma_{{ name }}_mstr_a_seq_item_c
 
 
-function uvma_obi_mstr_a_seq_item_c::new(string name="uvma_obi_mstr_a_seq_item");
+function uvma_{{ name }}_mstr_a_seq_item_c::new(string name="uvma_{{ name }}_mstr_a_seq_item");
    
    super.new(name);
    
 endfunction : new
 
 
-function void uvma_obi_mstr_a_seq_item_c::do_print(uvm_printer printer);
+function void uvma_{{ name }}_mstr_a_seq_item_c::do_print(uvm_printer printer);
    
    super.do_print(printer);
    
@@ -112,7 +112,7 @@ function void uvma_obi_mstr_a_seq_item_c::do_print(uvm_printer printer);
 endfunction : do_print
 
 
-function uvml_metadata_t uvma_obi_mstr_a_seq_item_c::get_metadata();
+function uvml_metadata_t uvma_{{ name }}_mstr_a_seq_item_c::get_metadata();
    
    int unsigned  field_count = 0;
    string  addr_str    = $sformatf("%h", addr);
@@ -268,4 +268,4 @@ function uvml_metadata_t uvma_obi_mstr_a_seq_item_c::get_metadata();
 endfunction : get_metadata
 
 
-`endif // __UVMA_OBI_MSTR_A_SEQ_ITEM_SV__
+`endif // __UVMA_{{ upper(name) }}_MSTR_A_SEQ_ITEM_SV__

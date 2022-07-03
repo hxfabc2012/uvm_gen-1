@@ -1,6 +1,6 @@
-// Copyright 2021 Datum Technology Corporation
+// Copyright {{ year }} {{ name_of_copyright_owner }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// {{ license }}
 // Licensed under the Solderpad Hardware License v 2.1 (the "License"); you may not use this file except in compliance
 // with the License, or, at your option, the Apache License version 2.0.  You may obtain a copy of the License at
 //                                        https://solderpad.org/licenses/SHL-2.1/
@@ -10,43 +10,43 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVME_OBI_ST_E2E_MON_TRN_SV__
-`define __UVME_OBI_ST_E2E_MON_TRN_SV__
+`ifndef __UVME_{{ upper(name) }}_ST_E2E_MON_TRN_SV__
+`define __UVME_{{ upper(name) }}_ST_E2E_MON_TRN_SV__
 
 
 /**
- * TODO Describe uvme_obi_st_e2e_mon_trn_c
+ * TODO Describe uvme_{{ name }}_st_e2e_mon_trn_c
  */
-class uvme_obi_st_e2e_mon_trn_c extends uvma_obi_mon_trn_c;
+class uvme_{{ name }}_st_e2e_mon_trn_c extends uvma_{{ name }}_mon_trn_c;
    
-   `uvm_object_utils(uvme_obi_st_e2e_mon_trn_c)
+   `uvm_object_utils(uvme_{{ name }}_st_e2e_mon_trn_c)
    
    /**
     * Default constructor.
     */
-   extern function new(string name="uvme_obi_st_e2e_mon_trn");
+   extern function new(string name="uvme_{{ name }}_st_e2e_mon_trn");
    
    /**
-    * TODO Describe uvme_obi_st_e2e_mon_trn_c::do_compare()
+    * TODO Describe uvme_{{ name }}_st_e2e_mon_trn_c::do_compare()
     */
    extern function bit do_compare(uvm_object rhs, uvm_comparer comparer);
    
-endclass : uvme_obi_st_e2e_mon_trn_c
+endclass : uvme_{{ name }}_st_e2e_mon_trn_c
 
 
-function uvme_obi_st_e2e_mon_trn_c::new(string name="uvme_obi_st_e2e_mon_trn");
+function uvme_{{ name }}_st_e2e_mon_trn_c::new(string name="uvme_{{ name }}_st_e2e_mon_trn");
    
    super.new(name);
    
 endfunction : new
 
 
-function bit uvme_obi_st_e2e_mon_trn_c::do_compare(uvm_object rhs, uvm_comparer comparer);
+function bit uvme_{{ name }}_st_e2e_mon_trn_c::do_compare(uvm_object rhs, uvm_comparer comparer);
    
-   uvma_obi_mon_trn_c  rhs_;
+   uvma_{{ name }}_mon_trn_c  rhs_;
    
    if (!$cast(rhs_, rhs)) begin
-      `uvm_fatal("UVME_OBI_ST_E2E_MON_TRN", $sformatf("Could not cast 'rhs' (%s) to 'rhs_' (%s)", $typename(rhs), $typename(rhs_)))
+      `uvm_fatal("UVME_{{ upper(name) }}_ST_E2E_MON_TRN", $sformatf("Could not cast 'rhs' (%s) to 'rhs_' (%s)", $typename(rhs), $typename(rhs_)))
    end
    
    do_compare = 1;
@@ -70,4 +70,4 @@ function bit uvme_obi_st_e2e_mon_trn_c::do_compare(uvm_object rhs, uvm_comparer 
 endfunction : do_compare
 
 
-`endif // __UVME_OBI_ST_E2E_MON_TRN_SV__
+`endif // __UVME_{{ upper(name) }}_ST_E2E_MON_TRN_SV__

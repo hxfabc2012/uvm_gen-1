@@ -1,52 +1,52 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_OBI_MON_VSEQ_SV__
-`define __UVMA_OBI_MON_VSEQ_SV__
+`ifndef __UVMA_{{ upper(name) }}_MON_VSEQ_SV__
+`define __UVMA_{{ upper(name) }}_MON_VSEQ_SV__
 
 
 /**
- * TODO Describe uvma_obi_mon_vseq_c
+ * TODO Describe uvma_{{ name }}_mon_vseq_c
  */
-class uvma_obi_mon_vseq_c extends uvma_obi_base_vseq_c;
+class uvma_{{ name }}_mon_vseq_c extends uvma_{{ name }}_base_vseq_c;
    
-   `uvm_object_utils(uvma_obi_mon_vseq_c)
+   `uvm_object_utils(uvma_{{ name }}_mon_vseq_c)
    
    /**
     * Default constructor.
     */
-   extern function new(string name="uvma_obi_mon_vseq");
+   extern function new(string name="uvma_{{ name }}_mon_vseq");
    
    /**
-    * TODO Describe uvma_obi_mon_vseq_c::body()
+    * TODO Describe uvma_{{ name }}_mon_vseq_c::body()
     */
    extern virtual task body();
    
    /**
-    * TODO Describe uvma_obi_mon_vseq_c::monitor_a()
+    * TODO Describe uvma_{{ name }}_mon_vseq_c::monitor_a()
     */
    extern virtual task monitor_a();
    
    /**
-    * TODO Describe uvma_obi_mon_vseq_c::monitor_r()
+    * TODO Describe uvma_{{ name }}_mon_vseq_c::monitor_r()
     */
    extern virtual task monitor_r();
    
-endclass : uvma_obi_mon_vseq_c
+endclass : uvma_{{ name }}_mon_vseq_c
 
 
-function uvma_obi_mon_vseq_c::new(string name="uvma_obi_mon_vseq");
+function uvma_{{ name }}_mon_vseq_c::new(string name="uvma_{{ name }}_mon_vseq");
    
    super.new(name);
    
 endfunction : new
 
 
-task uvma_obi_mon_vseq_c::body();
+task uvma_{{ name }}_mon_vseq_c::body();
    
-   `uvm_info("OBI_MON_VSEQ", "Monitor virtual sequence has started", UVM_HIGH)
+   `uvm_info("{{ upper(name) }}_MON_VSEQ", "Monitor virtual sequence has started", UVM_HIGH)
    forever begin
       fork
          begin
@@ -70,10 +70,10 @@ task uvma_obi_mon_vseq_c::body();
 endtask : body
 
 
-task uvma_obi_mon_vseq_c::monitor_a();
+task uvma_{{ name }}_mon_vseq_c::monitor_a();
    
-   uvma_obi_mstr_a_mon_trn_c  mstr_a_mon_trn, mstr_a_mon_trn_copy;
-   uvma_obi_slv_a_mon_trn_c   slv_a_mon_trn ;
+   uvma_{{ name }}_mstr_a_mon_trn_c  mstr_a_mon_trn, mstr_a_mon_trn_copy;
+   uvma_{{ name }}_slv_a_mon_trn_c   slv_a_mon_trn ;
    
    forever begin
       do begin
@@ -82,8 +82,8 @@ task uvma_obi_mon_vseq_c::monitor_a();
       end while ((mstr_a_mon_trn.req !== 1'b1) || (slv_a_mon_trn.gnt !== 1'b1));
       
       cntxt.mon_outstanding_q.push_back(mstr_a_mon_trn);
-      if (cfg.is_active && (cfg.drv_mode == UVMA_OBI_DRV_MODE_SLV)) begin
-         mstr_a_mon_trn_copy = uvma_obi_mstr_a_mon_trn_c::type_id::create("mstr_a_mon_trn_copy");
+      if (cfg.is_active && (cfg.drv_mode == UVMA_{{ upper(name) }}_DRV_MODE_SLV)) begin
+         mstr_a_mon_trn_copy = uvma_{{ name }}_mstr_a_mon_trn_c::type_id::create("mstr_a_mon_trn_copy");
          mstr_a_mon_trn_copy.copy(mstr_a_mon_trn);
          cntxt.drv_slv_outstanding_q.push_back(mstr_a_mon_trn);
       end
@@ -93,7 +93,7 @@ task uvma_obi_mon_vseq_c::monitor_a();
          get_slv_a_mon_trn (slv_a_mon_trn );
       end while ((mstr_a_mon_trn.req === 1'b1) && (slv_a_mon_trn.gnt === 1'b1));
       
-      if (cfg.is_active && (cfg.drv_mode == UVMA_OBI_DRV_MODE_SLV)) begin
+      if (cfg.is_active && (cfg.drv_mode == UVMA_{{ upper(name) }}_DRV_MODE_SLV)) begin
          cntxt.mstr_a_req_e.trigger();
       end
       `uvml_hrtbt_owner(p_sequencer)
@@ -102,12 +102,12 @@ task uvma_obi_mon_vseq_c::monitor_a();
 endtask : monitor_a
 
 
-task uvma_obi_mon_vseq_c::monitor_r();
+task uvma_{{ name }}_mon_vseq_c::monitor_r();
    
-   uvma_obi_mon_trn_c         mon_trn       ;
-   uvma_obi_mstr_a_mon_trn_c  mstr_a_mon_trn;
-   uvma_obi_mstr_r_mon_trn_c  mstr_r_mon_trn;
-   uvma_obi_slv_r_mon_trn_c   slv_r_mon_trn ;
+   uvma_{{ name }}_mon_trn_c         mon_trn       ;
+   uvma_{{ name }}_mstr_a_mon_trn_c  mstr_a_mon_trn;
+   uvma_{{ name }}_mstr_r_mon_trn_c  mstr_r_mon_trn;
+   uvma_{{ name }}_slv_r_mon_trn_c   slv_r_mon_trn ;
    
    forever begin
       do begin
@@ -117,7 +117,7 @@ task uvma_obi_mon_vseq_c::monitor_r();
       
       mstr_a_mon_trn = cntxt.mon_outstanding_q.pop_front();
       if (mstr_a_mon_trn != null) begin
-         mon_trn = uvma_obi_mon_trn_c::type_id::create("mon_trn");
+         mon_trn = uvma_{{ name }}_mon_trn_c::type_id::create("mon_trn");
          mon_trn.set_initiator(mstr_a_mon_trn.get_initiator());
          mon_trn.cfg         = cfg;
          mon_trn.set_timestamp_start(mstr_a_mon_trn.get_timestamp_start());
@@ -140,16 +140,16 @@ task uvma_obi_mon_vseq_c::monitor_r();
          
          if (mstr_a_mon_trn.we) begin
             mon_trn.data = mstr_a_mon_trn.wdata;
-            mon_trn.access_type = UVMA_OBI_ACCESS_WRITE;
+            mon_trn.access_type = UVMA_{{ upper(name) }}_ACCESS_WRITE;
          end
          else begin
             mon_trn.data = slv_r_mon_trn.rdata;
-            mon_trn.access_type = UVMA_OBI_ACCESS_READ;
+            mon_trn.access_type = UVMA_{{ upper(name) }}_ACCESS_READ;
          end
          // TODO Implement latency stats collection
       end
       else begin
-         `uvm_error("OBI_MON_VSEQ", $sformatf("No outstanding mstr_a transaction to account for this slv_r transaction:\n%s", slv_r_mon_trn.sprint()))
+         `uvm_error("{{ upper(name) }}_MON_VSEQ", $sformatf("No outstanding mstr_a transaction to account for this slv_r transaction:\n%s", slv_r_mon_trn.sprint()))
          // TODO Handle errors
       end
       
@@ -160,4 +160,4 @@ task uvma_obi_mon_vseq_c::monitor_r();
 endtask : monitor_r
 
 
-`endif // __UVMA_OBI_BASE_SEQ_SV__
+`endif // __UVMA_{{ upper(name) }}_BASE_SEQ_SV__

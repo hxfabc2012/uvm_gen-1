@@ -1,14 +1,14 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 // Directories
-+incdir+${DV_UVMA_OBI_SRC_PATH}
-+incdir+${DV_UVMA_OBI_SRC_PATH}/comps
-+incdir+${DV_UVMA_OBI_SRC_PATH}/obj
-+incdir+${DV_UVMA_OBI_SRC_PATH}/reg
-+incdir+${DV_UVMA_OBI_SRC_PATH}/seq
++incdir+${DV_UVMA_{{ upper(name) }}_SRC_PATH}
++incdir+${DV_UVMA_{{ upper(name) }}_SRC_PATH}/comps
++incdir+${DV_UVMA_{{ upper(name) }}_SRC_PATH}/obj
++incdir+${DV_UVMA_{{ upper(name) }}_SRC_PATH}/reg
++incdir+${DV_UVMA_{{ upper(name) }}_SRC_PATH}/seq
 
 // Files
-${DV_UVMA_OBI_SRC_PATH}/uvma_obi_pkg.sv
+${DV_UVMA_{{ upper(name) }}_SRC_PATH}/uvma_{{ name }}_pkg.sv

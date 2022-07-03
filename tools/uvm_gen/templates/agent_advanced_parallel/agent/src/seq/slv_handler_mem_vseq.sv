@@ -1,45 +1,45 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_OBI_SLV_HANDLER_MEM_VSEQ_SV__
-`define __UVMA_OBI_SLV_HANDLER_MEM_VSEQ_SV__
+`ifndef __UVMA_{{ upper(name) }}_SLV_HANDLER_MEM_VSEQ_SV__
+`define __UVMA_{{ upper(name) }}_SLV_HANDLER_MEM_VSEQ_SV__
 
 
 /**
- * TODO Describe uvma_obi_slv_handler_mem_vseq_c
+ * TODO Describe uvma_{{ name }}_slv_handler_mem_vseq_c
  */
-class uvma_obi_slv_handler_mem_vseq_c extends uvma_obi_slv_handler_base_vseq_c;
+class uvma_{{ name }}_slv_handler_mem_vseq_c extends uvma_{{ name }}_slv_handler_base_vseq_c;
    
-   `uvm_object_utils(uvma_obi_slv_handler_mem_vseq_c)
+   `uvm_object_utils(uvma_{{ name }}_slv_handler_mem_vseq_c)
    
    /**
     * Default constructor.
     */
-   extern function new(string name="uvma_obi_slv_handler_mem_vseq");
+   extern function new(string name="uvma_{{ name }}_slv_handler_mem_vseq");
    
    /**
-    * TODO Describe uvma_obi_slv_handler_mem_vseq_c::body()
+    * TODO Describe uvma_{{ name }}_slv_handler_mem_vseq_c::body()
     */
    extern virtual task body();
    
    /**
-    * TODO Describe uvma_obi_slv_handler_mem_vseq_c::body()
+    * TODO Describe uvma_{{ name }}_slv_handler_mem_vseq_c::body()
     */
-   extern virtual task handle_mstr_req(ref uvma_obi_mstr_a_mon_trn_c trn, bit handled);
+   extern virtual task handle_mstr_req(ref uvma_{{ name }}_mstr_a_mon_trn_c trn, bit handled);
    
-endclass : uvma_obi_slv_handler_mem_vseq_c
+endclass : uvma_{{ name }}_slv_handler_mem_vseq_c
 
 
-function uvma_obi_slv_handler_mem_vseq_c::new(string name="uvma_obi_slv_handler_mem_vseq");
+function uvma_{{ name }}_slv_handler_mem_vseq_c::new(string name="uvma_{{ name }}_slv_handler_mem_vseq");
    
    super.new(name);
    
 endfunction : new
 
 
-task uvma_obi_slv_handler_mem_vseq_c::body();
+task uvma_{{ name }}_slv_handler_mem_vseq_c::body();
    
    p_sequencer.cntxt.slv_handlers.push_back(this);
    forever begin
@@ -49,14 +49,14 @@ task uvma_obi_slv_handler_mem_vseq_c::body();
 endtask : body
 
 
-task uvma_obi_slv_handler_mem_vseq_c::handle_mstr_req(ref uvma_obi_mstr_a_mon_trn_c trn, bit handled);
+task uvma_{{ name }}_slv_handler_mem_vseq_c::handle_mstr_req(ref uvma_{{ name }}_mstr_a_mon_trn_c trn, bit handled);
    
-   uvma_obi_data_b_t          readback_data ;
-   uvma_obi_slv_r_seq_item_c  slv_r_seq_item;
+   uvma_{{ name }}_data_b_t          readback_data ;
+   uvma_{{ name }}_slv_r_seq_item_c  slv_r_seq_item;
    
    // TODO Add response latency cycles
    
-   `uvm_info("OBI_SLV_MEM_VSEQ", $sformatf("Responding to \n%s", trn.sprint()), UVM_DEBUG)
+   `uvm_info("{{ upper(name) }}_SLV_MEM_VSEQ", $sformatf("Responding to \n%s", trn.sprint()), UVM_DEBUG)
    do begin
       `uvm_create_on(slv_r_seq_item, p_sequencer.slv_r_sequencer)
       
@@ -80,13 +80,13 @@ task uvma_obi_slv_handler_mem_vseq_c::handle_mstr_req(ref uvma_obi_mstr_a_mon_tr
          // TODO Implement rchk
       end
       
-      `uvm_send_pri(slv_r_seq_item, `UVMA_OBI_SLV_DRV_SEQ_ITEM_PRI)
+      `uvm_send_pri(slv_r_seq_item, `UVMA_{{ upper(name) }}_SLV_DRV_SEQ_ITEM_PRI)
    end while (slv_r_seq_item.rready !== 1'b1);
-   `uvm_info("OBI_SLV_MEM_VSEQ", $sformatf("Responded to \n%s\nwith\n%s", trn.sprint(), slv_r_seq_item.sprint()), UVM_DEBUG)
+   `uvm_info("{{ upper(name) }}_SLV_MEM_VSEQ", $sformatf("Responded to \n%s\nwith\n%s", trn.sprint(), slv_r_seq_item.sprint()), UVM_DEBUG)
    
    handled = 1;
    
 endtask : handle_mstr_req
 
 
-`endif // __UVMA_OBI_SLV_HANDLER_MEM_VSEQ_SV__
+`endif // __UVMA_{{ upper(name) }}_SLV_HANDLER_MEM_VSEQ_SV__

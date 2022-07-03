@@ -1,81 +1,81 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_OBI_IDLE_VSEQ_SV__
-`define __UVMA_OBI_IDLE_VSEQ_SV__
+`ifndef __UVMA_{{ upper(name) }}_IDLE_VSEQ_SV__
+`define __UVMA_{{ upper(name) }}_IDLE_VSEQ_SV__
 
 
 /**
- * TODO Describe uvma_obi_idle_vseq_c
+ * TODO Describe uvma_{{ name }}_idle_vseq_c
  */
-class uvma_obi_idle_vseq_c extends uvma_obi_base_vseq_c;
+class uvma_{{ name }}_idle_vseq_c extends uvma_{{ name }}_base_vseq_c;
    
-   `uvm_object_utils(uvma_obi_idle_vseq_c)
+   `uvm_object_utils(uvma_{{ name }}_idle_vseq_c)
    
    /**
     * Default constructor.
     */
-   extern function new(string name="uvma_obi_idle_vseq");
+   extern function new(string name="uvma_{{ name }}_idle_vseq");
    
    /**
-    * TODO Describe uvma_obi_idle_vseq_c::body()
+    * TODO Describe uvma_{{ name }}_idle_vseq_c::body()
     */
    extern virtual task body();
    
    /**
-    * TODO Describe uvma_obi_idle_vseq_c::do_idle_mstr()
+    * TODO Describe uvma_{{ name }}_idle_vseq_c::do_idle_mstr()
     */
    extern task do_idle_mstr();
    
    /**
-    * TODO Describe uvma_obi_idle_vseq_c::do_idle_slv()
+    * TODO Describe uvma_{{ name }}_idle_vseq_c::do_idle_slv()
     */
    extern task do_idle_slv();
    
    /**
-    * TODO Describe uvma_obi_idle_vseq_c::do_idle_mstr_a()
+    * TODO Describe uvma_{{ name }}_idle_vseq_c::do_idle_mstr_a()
     */
    extern task do_idle_mstr_a();
    
    /**
-    * TODO Describe uvma_obi_idle_vseq_c::do_idle_mstr_r()
+    * TODO Describe uvma_{{ name }}_idle_vseq_c::do_idle_mstr_r()
     */
    extern task do_idle_mstr_r();
    
    /**
-    * TODO Describe uvma_obi_idle_vseq_c::do_idle_slv_a()
+    * TODO Describe uvma_{{ name }}_idle_vseq_c::do_idle_slv_a()
     */
    extern task do_idle_slv_a();
    
    /**
-    * TODO Describe uvma_obi_idle_vseq_c::do_idle_slv_r()
+    * TODO Describe uvma_{{ name }}_idle_vseq_c::do_idle_slv_r()
     */
    extern task do_idle_slv_r();
    
-endclass : uvma_obi_idle_vseq_c
+endclass : uvma_{{ name }}_idle_vseq_c
 
 
-function uvma_obi_idle_vseq_c::new(string name="uvma_obi_idle_vseq");
+function uvma_{{ name }}_idle_vseq_c::new(string name="uvma_{{ name }}_idle_vseq");
    
    super.new(name);
    
 endfunction : new
 
 
-task uvma_obi_idle_vseq_c::body();
+task uvma_{{ name }}_idle_vseq_c::body();
    
-   `uvm_info("OBI_IDLE_VSEQ", "Idle virtual sequence has started", UVM_HIGH)
+   `uvm_info("{{ upper(name) }}_IDLE_VSEQ", "Idle virtual sequence has started", UVM_HIGH)
    case (cfg.drv_mode)
-      UVMA_OBI_DRV_MODE_MSTR: do_idle_mstr();
-      UVMA_OBI_DRV_MODE_SLV : do_idle_slv ();
+      UVMA_{{ upper(name) }}_DRV_MODE_MSTR: do_idle_mstr();
+      UVMA_{{ upper(name) }}_DRV_MODE_SLV : do_idle_slv ();
    endcase
    
 endtask : body
 
 
-task uvma_obi_idle_vseq_c::do_idle_mstr();
+task uvma_{{ name }}_idle_vseq_c::do_idle_mstr();
    
    fork
       begin : chan_a
@@ -94,7 +94,7 @@ task uvma_obi_idle_vseq_c::do_idle_mstr();
 endtask : do_idle_mstr
 
 
-task uvma_obi_idle_vseq_c::do_idle_slv();
+task uvma_{{ name }}_idle_vseq_c::do_idle_slv();
    
    fork
       begin : chan_a
@@ -113,14 +113,14 @@ task uvma_obi_idle_vseq_c::do_idle_slv();
 endtask : do_idle_slv
 
 
-task uvma_obi_idle_vseq_c::do_idle_mstr_a();
+task uvma_{{ name }}_idle_vseq_c::do_idle_mstr_a();
    
-   uvma_obi_mstr_a_seq_item_c  mstr_a_seq_item;
+   uvma_{{ name }}_mstr_a_seq_item_c  mstr_a_seq_item;
    
    `uvm_create_on(mstr_a_seq_item, p_sequencer.mstr_a_sequencer)
    case (cfg.drv_idle)
-      UVMA_OBI_DRV_IDLE_ZEROS: begin
-         `uvm_rand_send_pri_with(mstr_a_seq_item, `UVMA_OBI_MSTR_A_IDLE_SEQ_ITEM_PRI, {
+      UVMA_{{ upper(name) }}_DRV_IDLE_ZEROS: begin
+         `uvm_rand_send_pri_with(mstr_a_seq_item, `UVMA_{{ upper(name) }}_MSTR_A_IDLE_SEQ_ITEM_PRI, {
             req     == 0;
             addr    == 0;
             we      == 0;
@@ -136,8 +136,8 @@ task uvma_obi_idle_vseq_c::do_idle_mstr_a();
          })
       end
       
-      UVMA_OBI_DRV_IDLE_RANDOM: begin
-         `uvm_rand_send_pri_with(mstr_a_seq_item, `UVMA_OBI_MSTR_A_IDLE_SEQ_ITEM_PRI, {
+      UVMA_{{ upper(name) }}_DRV_IDLE_RANDOM: begin
+         `uvm_rand_send_pri_with(mstr_a_seq_item, `UVMA_{{ upper(name) }}_MSTR_A_IDLE_SEQ_ITEM_PRI, {
             req == 0;
          })
       end
@@ -146,38 +146,38 @@ task uvma_obi_idle_vseq_c::do_idle_mstr_a();
 endtask : do_idle_mstr_a
 
 
-task uvma_obi_idle_vseq_c::do_idle_mstr_r();
+task uvma_{{ name }}_idle_vseq_c::do_idle_mstr_r();
    
-   uvma_obi_mstr_r_seq_item_c  mstr_r_seq_item;
+   uvma_{{ name }}_mstr_r_seq_item_c  mstr_r_seq_item;
    
    `uvm_create_on(mstr_r_seq_item, p_sequencer.mstr_r_sequencer)
-   `uvm_rand_send_pri_with(mstr_r_seq_item, `UVMA_OBI_MSTR_R_IDLE_SEQ_ITEM_PRI, {
+   `uvm_rand_send_pri_with(mstr_r_seq_item, `UVMA_{{ upper(name) }}_MSTR_R_IDLE_SEQ_ITEM_PRI, {
       rready == 0;
    })
    
 endtask : do_idle_mstr_r
 
 
-task uvma_obi_idle_vseq_c::do_idle_slv_a();
+task uvma_{{ name }}_idle_vseq_c::do_idle_slv_a();
    
-   uvma_obi_slv_a_seq_item_c  slv_a_seq_item;
+   uvma_{{ name }}_slv_a_seq_item_c  slv_a_seq_item;
    
    `uvm_create_on(slv_a_seq_item, p_sequencer.slv_a_sequencer)
-   `uvm_rand_send_pri_with(slv_a_seq_item, `UVMA_OBI_SLV_A_IDLE_SEQ_ITEM_PRI, {
+   `uvm_rand_send_pri_with(slv_a_seq_item, `UVMA_{{ upper(name) }}_SLV_A_IDLE_SEQ_ITEM_PRI, {
       gnt == 0;
    })
    
 endtask : do_idle_slv_a
 
 
-task uvma_obi_idle_vseq_c::do_idle_slv_r();
+task uvma_{{ name }}_idle_vseq_c::do_idle_slv_r();
    
-   uvma_obi_slv_r_seq_item_c  slv_r_seq_item;
+   uvma_{{ name }}_slv_r_seq_item_c  slv_r_seq_item;
    
    `uvm_create_on(slv_r_seq_item, p_sequencer.slv_r_sequencer)
    case (cfg.drv_idle)
-      UVMA_OBI_DRV_IDLE_ZEROS: begin
-         `uvm_rand_send_pri_with(slv_r_seq_item, `UVMA_OBI_SLV_R_IDLE_SEQ_ITEM_PRI, {
+      UVMA_{{ upper(name) }}_DRV_IDLE_ZEROS: begin
+         `uvm_rand_send_pri_with(slv_r_seq_item, `UVMA_{{ upper(name) }}_SLV_R_IDLE_SEQ_ITEM_PRI, {
             rvalid    == 0;
             rdata     == 0;
             err       == 0;
@@ -188,8 +188,8 @@ task uvma_obi_idle_vseq_c::do_idle_slv_r();
          })
       end
       
-      UVMA_OBI_DRV_IDLE_RANDOM: begin
-         `uvm_rand_send_pri_with(slv_r_seq_item, `UVMA_OBI_SLV_R_IDLE_SEQ_ITEM_PRI, {
+      UVMA_{{ upper(name) }}_DRV_IDLE_RANDOM: begin
+         `uvm_rand_send_pri_with(slv_r_seq_item, `UVMA_{{ upper(name) }}_SLV_R_IDLE_SEQ_ITEM_PRI, {
             rvalid == 0;
          })
       end
@@ -198,4 +198,4 @@ task uvma_obi_idle_vseq_c::do_idle_slv_r();
 endtask : do_idle_slv_r
 
 
-`endif // __UVMA_OBI_BASE_SEQ_SV__
+`endif // __UVMA_{{ upper(name) }}_BASE_SEQ_SV__

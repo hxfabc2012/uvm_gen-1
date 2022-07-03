@@ -1,21 +1,21 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVME_OBI_ST_CNTXT_SV__
-`define __UVME_OBI_ST_CNTXT_SV__
+`ifndef __UVME_{{ upper(name) }}_ST_CNTXT_SV__
+`define __UVME_{{ upper(name) }}_ST_CNTXT_SV__
 
 
 /**
- * Object encapsulating all state variables for Open Bus Interface VIP Self-Testing environment (uvme_obi_st_env_c)
+ * Object encapsulating all state variables for {{ full_name }} VIP Self-Testing environment (uvme_{{ name }}_st_env_c)
  * components.
  */
-class uvme_obi_st_cntxt_c extends uvm_object;
+class uvme_{{ name }}_st_cntxt_c extends uvm_object;
    
    // Agent context handles
-   uvma_obi_cntxt_c  mstr_cntxt; ///< 
-   uvma_obi_cntxt_c  slv_cntxt ; ///< 
+   uvma_{{ name }}_cntxt_c  mstr_cntxt; ///< 
+   uvma_{{ name }}_cntxt_c  slv_cntxt ; ///< 
    
    // Scoreboard context handle
    uvml_sb_simplex_cntxt_c  sb_e2e_cntxt ; ///< 
@@ -27,7 +27,7 @@ class uvme_obi_st_cntxt_c extends uvm_object;
    uvm_event  sample_cntxt_e; ///< 
    
    
-   `uvm_object_utils_begin(uvme_obi_st_cntxt_c)
+   `uvm_object_utils_begin(uvme_{{ name }}_st_cntxt_c)
       `uvm_field_object(mstr_cntxt, UVM_DEFAULT)
       `uvm_field_object(slv_cntxt , UVM_DEFAULT)
       
@@ -43,17 +43,17 @@ class uvme_obi_st_cntxt_c extends uvm_object;
    /**
     * Builds events and sub-context objects.
     */
-   extern function new(string name="uvme_obi_st_cntxt");
+   extern function new(string name="uvme_{{ name }}_st_cntxt");
    
-endclass : uvme_obi_st_cntxt_c
+endclass : uvme_{{ name }}_st_cntxt_c
 
 
-function uvme_obi_st_cntxt_c::new(string name="uvme_obi_st_cntxt");
+function uvme_{{ name }}_st_cntxt_c::new(string name="uvme_{{ name }}_st_cntxt");
    
    super.new(name);
    
-   mstr_cntxt = uvma_obi_cntxt_c::type_id::create("mstr_cntxt");
-   slv_cntxt  = uvma_obi_cntxt_c::type_id::create("slv_cntxt" );
+   mstr_cntxt = uvma_{{ name }}_cntxt_c::type_id::create("mstr_cntxt");
+   slv_cntxt  = uvma_{{ name }}_cntxt_c::type_id::create("slv_cntxt" );
    slv_cntxt.memory.mem_default = UVML_MEM_DEFAULT_VAL_INCR;
    
    sb_e2e_cntxt  = uvml_sb_simplex_cntxt_c::type_id::create("sb_e2e_cntxt" );
@@ -66,4 +66,4 @@ function uvme_obi_st_cntxt_c::new(string name="uvme_obi_st_cntxt");
 endfunction : new
 
 
-`endif // __UVME_OBI_ST_CNTXT_SV__
+`endif // __UVME_{{ upper(name) }}_ST_CNTXT_SV__

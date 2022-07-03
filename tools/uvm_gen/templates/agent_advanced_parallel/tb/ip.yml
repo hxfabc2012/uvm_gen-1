@@ -1,15 +1,15 @@
 ip:
-  name: "uvmt_obi_st"
+  name: "uvmt_{{ name }}_st"
   version: "1.0.0 Beta 0"
-  full-name: "Moore.io OBI Agent Self-Test Bench"
+  full-name: "Moore.io {{ upper(name) }} Agent Self-Test Bench"
   type: "DV"
   sub-type: "UVM Test Bench"
   sub-sub-type: "Agent Self-Testing"
   description: >
     
-  home-page: "https://datum-technology-corporation.github.io/uvma_obi/"
-  repo-uri: "https://github.com/Datum-Technology-Corporation/uvma_obi.git"
-  bugs: "https://github.com/Datum-Technology-Corporation/uvma_obi/issues"
+  home-page: "https://datum-technology-corporation.github.io/uvma_{{ name }}/"
+  repo-uri: "https://github.com/Datum-Technology-Corporation/uvma_{{ name }}.git"
+  bugs: "https://github.com/Datum-Technology-Corporation/uvma_{{ name }}/issues"
   aliases: []
   logo: ""
   block-diagram: "docs/tb_block_diagram.svg"
@@ -33,15 +33,15 @@ dependencies:
   - { name: "uvml_sb"  , version: "~1.0" }
 
 hdl-src:
-  top-constructs: ["uvmt_obi_st_tb", "uvml_logs_sim_summary"]
+  top-constructs: ["uvmt_{{ name }}_st_tb", "uvml_logs_sim_summary"]
   directories: [".", "tb", "tests"]
   test-paths: ["tests"]
-  test-name-template: "uvmt_obi_st_{{ name }}_test_c"
+  test-name-template: "uvmt_{{ name }}_st_{{ name }}_test_c"
   flists:
-    metrics : [ "src/uvmt_obi_st_pkg.flist"      ]
-    riviera : [ "src/uvmt_obi_st_pkg.flist"      ]
-    questa  : [ "src/uvmt_obi_st_pkg.flist"      ]
-    vcs     : [ "src/uvmt_obi_st_pkg.flist"      ]
-    vivado  : [ "src/uvmt_obi_st_pkg.flist.xsim" ]
-    xcelium : [ "src/uvmt_obi_st_pkg.flist"      ]
+    metrics : [ "src/uvmt_{{ name }}_st_pkg.flist"      ]
+    riviera : [ "src/uvmt_{{ name }}_st_pkg.flist"      ]
+    questa  : [ "src/uvmt_{{ name }}_st_pkg.flist"      ]
+    vcs     : [ "src/uvmt_{{ name }}_st_pkg.flist"      ]
+    vivado  : [ "src/uvmt_{{ name }}_st_pkg.flist.xsim" ]
+    xcelium : [ "src/uvmt_{{ name }}_st_pkg.flist"      ]
 

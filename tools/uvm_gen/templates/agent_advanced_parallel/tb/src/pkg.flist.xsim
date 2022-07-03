@@ -1,5 +1,5 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -11,16 +11,16 @@
 -f ${DV_UVML_SB_SRC_PATH}/uvml_sb_pkg.flist.xsim
 
 // Agents
--f ${DV_UVMA_OBI_SRC_PATH}/uvma_obi_pkg.flist.xsim
+-f ${DV_UVMA_{{ upper(name) }}_SRC_PATH}/uvma_{{ name }}_pkg.flist.xsim
 
 // Environments
--f ${DV_UVME_OBI_ST_SRC_PATH}/uvme_obi_st_pkg.flist.xsim
+-f ${DV_UVME_{{ upper(name) }}_ST_SRC_PATH}/uvme_{{ name }}_st_pkg.flist.xsim
 
-// Open Bus Interface test bench directories
--i ${DV_UVMT_OBI_ST_SRC_PATH}
--i ${DV_UVMT_OBI_ST_SRC_PATH}/seq
--i ${DV_UVMT_OBI_ST_SRC_PATH}/tb
--i ${DV_UVMT_OBI_ST_SRC_PATH}/tests
+// {{ full_name }} test bench directories
+-i ${DV_UVMT_{{ upper(name) }}_ST_SRC_PATH}
+-i ${DV_UVMT_{{ upper(name) }}_ST_SRC_PATH}/seq
+-i ${DV_UVMT_{{ upper(name) }}_ST_SRC_PATH}/tb
+-i ${DV_UVMT_{{ upper(name) }}_ST_SRC_PATH}/tests
 
-// Open Bus Interface test bench files
-${DV_UVMT_OBI_ST_SRC_PATH}/uvmt_obi_st_pkg.sv
+// {{ full_name }} test bench files
+${DV_UVMT_{{ upper(name) }}_ST_SRC_PATH}/uvmt_{{ name }}_st_pkg.sv

@@ -1,17 +1,17 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMT_OBI_ST_CLKNRST_GEN_IF_SV__
-`define __UVMT_OBI_ST_CLKNRST_GEN_IF_SV__
+`ifndef __UVMT_{{ upper(name) }}_ST_CLKNRST_GEN_IF_SV__
+`define __UVMT_{{ upper(name) }}_ST_CLKNRST_GEN_IF_SV__
 
 
 /**
- * Interface providing clock and reset signals to all other interfaces used by Open Bus Interface Agent Self-Testing
- * Test Bench (uvmt_obi_st_tb).  Managed by test cases.
+ * Interface providing clock and reset signals to all other interfaces used by {{ full_name }} Agent Self-Testing
+ * Test Bench (uvmt_{{ name }}_st_tb).  Managed by test cases.
  */
-interface uvmt_obi_st_clknrst_gen_if;
+interface uvmt_{{ name }}_st_clknrst_gen_if;
    
    // Signals
    logic  clk     = 0;
@@ -65,7 +65,7 @@ interface uvmt_obi_st_clknrst_gen_if;
       reset_n = 1;
    endfunction : deassert_reset
    
-endinterface : uvmt_obi_st_clknrst_gen_if
+endinterface : uvmt_{{ name }}_st_clknrst_gen_if
 
 
-`endif // __UVMT_OBI_ST_CLKNRST_GEN_IF_SV__
+`endif // __UVMT_{{ upper(name) }}_ST_CLKNRST_GEN_IF_SV__

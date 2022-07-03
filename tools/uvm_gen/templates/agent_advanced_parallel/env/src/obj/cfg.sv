@@ -1,17 +1,17 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVME_OBI_ST_CFG_SV__
-`define __UVME_OBI_ST_CFG_SV__
+`ifndef __UVME_{{ upper(name) }}_ST_CFG_SV__
+`define __UVME_{{ upper(name) }}_ST_CFG_SV__
 
 
 /**
- * Object encapsulating all parameters for creating, connecting and running Open Bus Interface VIP Self-Testing
- * Environment (uvme_obi_st_env_c) components.
+ * Object encapsulating all parameters for creating, connecting and running {{ full_name }} VIP Self-Testing
+ * Environment (uvme_{{ name }}_st_env_c) components.
  */
-class uvme_obi_st_cfg_c extends uvm_object;
+class uvme_{{ name }}_st_cfg_c extends uvm_object;
    
    // Integrals
    rand bit                      enabled              ; ///< 
@@ -21,14 +21,14 @@ class uvme_obi_st_cfg_c extends uvm_object;
    rand bit                      trn_log_enabled      ; ///< 
    
    // Objects
-   rand uvma_obi_cfg_c         mstr_cfg   ; ///< 
-   rand uvma_obi_cfg_c         slv_cfg    ; ///< 
+   rand uvma_{{ name }}_cfg_c         mstr_cfg   ; ///< 
+   rand uvma_{{ name }}_cfg_c         slv_cfg    ; ///< 
    rand uvml_sb_simplex_cfg_c  sb_e2e_cfg ; ///< 
    rand uvml_sb_simplex_cfg_c  sb_mstr_cfg; ///< 
    rand uvml_sb_simplex_cfg_c  sb_slv_cfg ; ///< 
    
    
-   `uvm_object_utils_begin(uvme_obi_st_cfg_c)
+   `uvm_object_utils_begin(uvme_{{ name }}_st_cfg_c)
       `uvm_field_int (                         enabled              , UVM_DEFAULT)
       `uvm_field_enum(uvm_active_passive_enum, is_active            , UVM_DEFAULT)
       `uvm_field_int (                         scoreboarding_enabled, UVM_DEFAULT)
@@ -105,10 +105,10 @@ class uvme_obi_st_cfg_c extends uvm_object;
       mstr_cfg.rchk_width  == slv_cfg.rchk_width ;
       mstr_cfg.id_width    == slv_cfg.id_width   ;
       
-      mstr_cfg.drv_mode == UVMA_OBI_DRV_MODE_MSTR;
-      mstr_cfg.drv_idle == UVMA_OBI_DRV_IDLE_ZEROS;
-      slv_cfg .drv_mode == UVMA_OBI_DRV_MODE_SLV ;
-      slv_cfg .drv_idle == UVMA_OBI_DRV_IDLE_ZEROS;
+      mstr_cfg.drv_mode == UVMA_{{ upper(name) }}_DRV_MODE_MSTR;
+      mstr_cfg.drv_idle == UVMA_{{ upper(name) }}_DRV_IDLE_ZEROS;
+      slv_cfg .drv_mode == UVMA_{{ upper(name) }}_DRV_MODE_SLV ;
+      slv_cfg .drv_idle == UVMA_{{ upper(name) }}_DRV_IDLE_ZEROS;
    }
    
    constraint sb_e2e_cfg_cons {
@@ -131,16 +131,16 @@ class uvme_obi_st_cfg_c extends uvm_object;
    /**
     * Creates sub-configuration objects.
     */
-   extern function new(string name="uvme_obi_st_cfg");
+   extern function new(string name="uvme_{{ name }}_st_cfg");
    
-endclass : uvme_obi_st_cfg_c
+endclass : uvme_{{ name }}_st_cfg_c
 
 
-function uvme_obi_st_cfg_c::new(string name="uvme_obi_st_cfg");
+function uvme_{{ name }}_st_cfg_c::new(string name="uvme_{{ name }}_st_cfg");
    
    super.new(name);
-   mstr_cfg    = uvma_obi_cfg_c       ::type_id::create("mstr_cfg"   );
-   slv_cfg     = uvma_obi_cfg_c       ::type_id::create("slv_cfg"    );
+   mstr_cfg    = uvma_{{ name }}_cfg_c       ::type_id::create("mstr_cfg"   );
+   slv_cfg     = uvma_{{ name }}_cfg_c       ::type_id::create("slv_cfg"    );
    sb_e2e_cfg  = uvml_sb_simplex_cfg_c::type_id::create("sb_e2e_cfg" );
    sb_mstr_cfg = uvml_sb_simplex_cfg_c::type_id::create("sb_mstr_cfg");
    sb_slv_cfg  = uvml_sb_simplex_cfg_c::type_id::create("sb_slv_cfg" );
@@ -148,4 +148,4 @@ function uvme_obi_st_cfg_c::new(string name="uvme_obi_st_cfg");
 endfunction : new
 
 
-`endif // __UVME_OBI_ST_CFG_SV__
+`endif // __UVME_{{ upper(name) }}_ST_CFG_SV__

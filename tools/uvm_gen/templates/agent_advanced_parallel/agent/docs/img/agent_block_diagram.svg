@@ -4,7 +4,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events"
 		xmlns:v="http://schemas.microsoft.com/visio/2003/SVGExtensions/" width="8.50601in" height="8.47236in"
 		viewBox="0 0 612.433 610.01" xml:space="preserve" color-interpolation-filters="sRGB" class="st32">
-	<title>uvma_obi_agent_c</title>
+	<title>uvma_{{ name }}_agent_c</title>
 	<v:documentProperties v:langID="4105" v:metric="true" v:viewMarkup="false">
 		<v:userDefs>
 			<v:ud v:nameU="msvNoAutoConnect" v:val="VT0(1):26"/>
@@ -88,42 +88,42 @@
 		<v:layer v:name="Connector" v:index="0"/>
 		<g id="shape4-1" v:mID="4" v:groupContext="shape" transform="translate(18.5,-75.7293)">
 			<title>Sheet.4</title>
-			<desc>&#60;uvma_obi_agent_c&#62;</desc>
+			<desc>&#60;uvma_{{ name }}_agent_c&#62;</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
 			<v:textRect cx="287.717" cy="386.073" width="575.44" height="447.874"/>
 			<rect x="0" y="162.136" width="575.433" height="447.874" class="st1"/>
-			<text x="4" y="175.14" class="st2" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvma_obi_agent_c&#62;</text>		</g>
+			<text x="4" y="175.14" class="st2" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvma_{{ name }}_agent_c&#62;</text>		</g>
 		<g id="shape10-4" v:mID="10" v:groupContext="shape" transform="translate(330.47,-92.8317)">
 			<title>Sheet.10</title>
-			<desc>&#60;uvma_obi_cfg_c&#62; cfg</desc>
+			<desc>&#60;uvma_{{ name }}_cfg_c&#62; cfg</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="41.5098" cy="593.096" width="83.02" height="33.8267"/>
 			<rect x="0" y="576.183" width="83.0197" height="33.8267" class="st1"/>
-			<text x="18.56" y="588.9" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_obi_cfg_c&#62;<v:newlineChar/><tspan
+			<text x="18.56" y="588.9" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_{{ name }}_cfg_c&#62;<v:newlineChar/><tspan
 						x="35.46" dy="1.08em" class="st4">cfg</tspan></text>		</g>
 		<g id="shape77-8" v:mID="77" v:groupContext="shape" transform="translate(473.053,-92.9262)">
 			<title>Sheet.77</title>
-			<desc>&#60;uvma_obi_cntxt_c&#62; cntxt</desc>
+			<desc>&#60;uvma_{{ name }}_cntxt_c&#62; cntxt</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="41.5098" cy="593.096" width="83.02" height="33.8267"/>
 			<rect x="0" y="576.183" width="83.0197" height="33.8267" class="st1"/>
-			<text x="16.01" y="588.9" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_obi_cntxt_c&#62;<v:newlineChar/><tspan
+			<text x="16.01" y="588.9" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_{{ name }}_cntxt_c&#62;<v:newlineChar/><tspan
 						x="30.97" dy="1.08em" class="st4">cntxt</tspan></text>		</g>
 		<g id="shape87-12" v:mID="87" v:groupContext="shape" transform="translate(38.3425,-302.501)">
 			<title>Sheet.87</title>
-			<desc>&#60;uvma_obi_vsqr_c&#62; vsequencer</desc>
+			<desc>&#60;uvma_{{ name }}_vsqr_c&#62; vsequencer</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
 			<v:textRect cx="119.055" cy="510.797" width="238.12" height="198.425"/>
 			<rect x="0" y="411.585" width="238.11" height="198.425" class="st5"/>
-			<text x="4" y="420.98" class="st3" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvma_obi_vsqr_c&#62;<v:newlineChar/><v:paragraph
+			<text x="4" y="420.98" class="st3" v:langID="4105"><v:paragraph/><v:tabList/>&#60;uvma_{{ name }}_vsqr_c&#62;<v:newlineChar/><v:paragraph
 						v:horizAlign="1"/><tspan x="95.22" dy="1.08em" class="st4">vsequencer</tspan><v:newlineChar/></text>		</g>
 		<g id="shape8-16" v:mID="8" v:groupContext="shape" transform="translate(316.138,-302.501)">
 			<title>Sheet.8</title>
-			<desc>&#60;uvma_obi_mon_c&#62; monitor</desc>
+			<desc>&#60;uvma_{{ name }}_mon_c&#62; monitor</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 			<v:textRect cx="127.559" cy="523.553" width="255.12" height="172.913"/>
 			<rect x="0" y="437.096" width="255.118" height="172.913" class="st5"/>
-			<text x="102.65" y="513.35" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_obi_mon_c&#62;<v:newlineChar/><tspan
+			<text x="102.65" y="513.35" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_{{ name }}_mon_c&#62;<v:newlineChar/><tspan
 						x="110.69" dy="1.08em" class="st4">monitor</tspan><v:newlineChar/></text>		</g>
 		<g id="shape12-20" v:mID="12" v:groupContext="shape" transform="translate(343.431,-344.47)">
 			<title>Sheet.12</title>
@@ -178,11 +178,11 @@
 			<title>Sheet.102</title>
 			<g id="shape99-39" v:mID="99" v:groupContext="shape" transform="translate(5.66929,1.13687E-13)">
 				<title>Sheet.99</title>
-				<desc>&#60;uvma_obi_mstr_a_sqr_c&#62; mstr_a_sequencer</desc>
+				<desc>&#60;uvma_{{ name }}_mstr_a_sqr_c&#62; mstr_a_sequencer</desc>
 				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 				<v:textRect cx="63.9921" cy="599.38" width="127.99" height="21.2598"/>
 				<rect x="0" y="588.75" width="127.984" height="21.2598" class="st13"/>
-				<text x="30.8" y="595.18" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_obi_mstr_a_sqr_c&#62;<v:newlineChar/><tspan
+				<text x="30.8" y="595.18" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_{{ name }}_mstr_a_sqr_c&#62;<v:newlineChar/><tspan
 							x="25.51" dy="1.08em" class="st4">mstr_a_sequencer</tspan></text>			</g>
 			<g id="shape100-43" v:mID="100" v:groupContext="shape" transform="translate(6.39488E-14,-4.96063)">
 				<title>Sheet.100</title>
@@ -193,11 +193,11 @@
 			<title>Sheet.103</title>
 			<g id="shape104-46" v:mID="104" v:groupContext="shape" transform="translate(5.66929,1.13687E-13)">
 				<title>Sheet.104</title>
-				<desc>&#60;uvma_obi_mstr_r_sqr_c&#62; mstr_r_sequencer</desc>
+				<desc>&#60;uvma_{{ name }}_mstr_r_sqr_c&#62; mstr_r_sequencer</desc>
 				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 				<v:textRect cx="63.9921" cy="599.38" width="127.99" height="21.2598"/>
 				<rect x="0" y="588.75" width="127.984" height="21.2598" class="st13"/>
-				<text x="31.19" y="595.18" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_obi_mstr_r_sqr_c&#62;<v:newlineChar/><tspan
+				<text x="31.19" y="595.18" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_{{ name }}_mstr_r_sqr_c&#62;<v:newlineChar/><tspan
 							x="26.2" dy="1.08em" class="st4">mstr_r_sequencer</tspan></text>			</g>
 			<g id="shape105-50" v:mID="105" v:groupContext="shape" transform="translate(6.39488E-14,-4.96063)">
 				<title>Sheet.105</title>
@@ -208,11 +208,11 @@
 			<title>Sheet.109</title>
 			<g id="shape110-53" v:mID="110" v:groupContext="shape" transform="translate(5.66929,1.13687E-13)">
 				<title>Sheet.110</title>
-				<desc>&#60;uvma_obi_slv_a_sqr_c&#62; slv_a_sequencer</desc>
+				<desc>&#60;uvma_{{ name }}_slv_a_sqr_c&#62; slv_a_sequencer</desc>
 				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 				<v:textRect cx="63.9921" cy="599.38" width="127.99" height="21.2598"/>
 				<rect x="0" y="588.75" width="127.984" height="21.2598" class="st13"/>
-				<text x="33.2" y="595.18" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_obi_slv_a_sqr_c&#62;<v:newlineChar/><tspan
+				<text x="33.2" y="595.18" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_{{ name }}_slv_a_sqr_c&#62;<v:newlineChar/><tspan
 							x="29.49" dy="1.08em" class="st4">slv_a_sequencer</tspan></text>			</g>
 			<g id="shape111-57" v:mID="111" v:groupContext="shape" transform="translate(6.39488E-14,-4.96063)">
 				<title>Sheet.111</title>
@@ -223,11 +223,11 @@
 			<title>Sheet.112</title>
 			<g id="shape113-60" v:mID="113" v:groupContext="shape" transform="translate(5.66929,1.13687E-13)">
 				<title>Sheet.113</title>
-				<desc>&#60;uvma_obi_slv_r_sqr_c&#62; slv_r_sequencer</desc>
+				<desc>&#60;uvma_{{ name }}_slv_r_sqr_c&#62; slv_r_sequencer</desc>
 				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 				<v:textRect cx="63.9921" cy="599.38" width="127.99" height="21.2598"/>
 				<rect x="0" y="588.75" width="127.984" height="21.2598" class="st13"/>
-				<text x="33.6" y="595.18" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_obi_slv_r_sqr_c&#62;<v:newlineChar/><tspan
+				<text x="33.6" y="595.18" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_{{ name }}_slv_r_sqr_c&#62;<v:newlineChar/><tspan
 							x="30.18" dy="1.08em" class="st4">slv_r_sequencer</tspan></text>			</g>
 			<g id="shape114-64" v:mID="114" v:groupContext="shape" transform="translate(6.39488E-14,-4.96063)">
 				<title>Sheet.114</title>
@@ -257,11 +257,11 @@
 		</g>
 		<g id="shape118-72" v:mID="118" v:groupContext="shape" transform="translate(87.0984,-103.525)">
 			<title>Sheet.118</title>
-			<desc>&#60;uvma_obi_drv_c&#62; driver</desc>
+			<desc>&#60;uvma_{{ name }}_drv_c&#62; driver</desc>
 			<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197" v:verticalAlign="0"/>
 			<v:textRect cx="89.0079" cy="519.026" width="178.02" height="181.968"/>
 			<rect x="0" y="428.042" width="178.016" height="181.968" class="st5"/>
-			<text x="65.68" y="437.44" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_obi_drv_c&#62;<v:newlineChar/><tspan
+			<text x="65.68" y="437.44" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_{{ name }}_drv_c&#62;<v:newlineChar/><tspan
 						x="76.66" dy="1.08em" class="st4">driver</tspan></text>		</g>
 		<g id="shape26-76" v:mID="26" v:groupContext="shape" v:layerMember="0" transform="translate(98.4701,-321.918)">
 			<title>Dynamic connector.346</title>
@@ -271,11 +271,11 @@
 			<title>Sheet.149</title>
 			<g id="shape120-83" v:mID="120" v:groupContext="shape" transform="translate(-585.53,595.837) rotate(-90)">
 				<title>Sheet.120</title>
-				<desc>&#60;uvma_obi_mstr_a_drv_c&#62; mstr_a_driver</desc>
+				<desc>&#60;uvma_{{ name }}_mstr_a_drv_c&#62; mstr_a_driver</desc>
 				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 				<v:textRect cx="70.8661" cy="599.38" width="141.74" height="21.2598"/>
 				<rect x="0" y="588.75" width="141.732" height="21.2598" class="st13"/>
-				<text x="37.49" y="595.18" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_obi_mstr_a_drv_c&#62;<v:newlineChar/><tspan
+				<text x="37.49" y="595.18" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_{{ name }}_mstr_a_drv_c&#62;<v:newlineChar/><tspan
 							x="41.5" dy="1.08em" class="st4">mstr_a_driver</tspan></text>			</g>
 			<g id="shape131-87" v:mID="131" v:groupContext="shape" transform="translate(7.84967,1058.44) scale(1,-1)">
 				<title>Circle.131</title>
@@ -304,11 +304,11 @@
 			<title>Sheet.162</title>
 			<g id="shape163-96" v:mID="163" v:groupContext="shape" transform="translate(-585.53,595.837) rotate(-90)">
 				<title>Sheet.163</title>
-				<desc>&#60;uvma_obi_mstr_r_drv_c&#62; mstr_r_driver</desc>
+				<desc>&#60;uvma_{{ name }}_mstr_r_drv_c&#62; mstr_r_driver</desc>
 				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 				<v:textRect cx="70.8661" cy="599.38" width="141.74" height="21.2598"/>
 				<rect x="0" y="588.75" width="141.732" height="21.2598" class="st13"/>
-				<text x="37.88" y="595.18" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_obi_mstr_r_drv_c&#62;<v:newlineChar/><tspan
+				<text x="37.88" y="595.18" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_{{ name }}_mstr_r_drv_c&#62;<v:newlineChar/><tspan
 							x="42.19" dy="1.08em" class="st4">mstr_r_driver</tspan></text>			</g>
 			<g id="shape164-100" v:mID="164" v:groupContext="shape" transform="translate(7.84967,1058.44) scale(1,-1)">
 				<title>Circle.131</title>
@@ -341,11 +341,11 @@
 			<title>Sheet.169</title>
 			<g id="shape170-114" v:mID="170" v:groupContext="shape" transform="translate(-585.53,595.837) rotate(-90)">
 				<title>Sheet.170</title>
-				<desc>&#60;uvma_obi_slv_a_drv_c&#62; slv_a_driver</desc>
+				<desc>&#60;uvma_{{ name }}_slv_a_drv_c&#62; slv_a_driver</desc>
 				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 				<v:textRect cx="70.8661" cy="599.38" width="141.74" height="21.2598"/>
 				<rect x="0" y="588.75" width="141.732" height="21.2598" class="st13"/>
-				<text x="39.9" y="595.18" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_obi_slv_a_drv_c&#62;<v:newlineChar/><tspan
+				<text x="39.9" y="595.18" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_{{ name }}_slv_a_drv_c&#62;<v:newlineChar/><tspan
 							x="45.48" dy="1.08em" class="st4">slv_a_driver</tspan></text>			</g>
 			<g id="shape171-118" v:mID="171" v:groupContext="shape" transform="translate(7.84967,1058.44) scale(1,-1)">
 				<title>Circle.131</title>
@@ -374,11 +374,11 @@
 			<title>Sheet.175</title>
 			<g id="shape176-127" v:mID="176" v:groupContext="shape" transform="translate(-585.53,595.837) rotate(-90)">
 				<title>Sheet.176</title>
-				<desc>&#60;uvma_obi_slv_r_drv_c&#62; slv_r_driver</desc>
+				<desc>&#60;uvma_{{ name }}_slv_r_drv_c&#62; slv_r_driver</desc>
 				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 				<v:textRect cx="70.8661" cy="599.38" width="141.74" height="21.2598"/>
 				<rect x="0" y="588.75" width="141.732" height="21.2598" class="st13"/>
-				<text x="40.29" y="595.18" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_obi_slv_r_drv_c&#62;<v:newlineChar/><tspan
+				<text x="40.29" y="595.18" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_{{ name }}_slv_r_drv_c&#62;<v:newlineChar/><tspan
 							x="46.17" dy="1.08em" class="st4">slv_r_driver</tspan></text>			</g>
 			<g id="shape177-131" v:mID="177" v:groupContext="shape" transform="translate(7.84967,1058.44) scale(1,-1)">
 				<title>Circle.131</title>
@@ -628,11 +628,11 @@
 			<title>Sheet.227</title>
 			<g id="shape80-280" v:mID="80" v:groupContext="shape">
 				<title>Sheet.80</title>
-				<desc>&#60;uvma_obi_logger_c&#62; logger</desc>
+				<desc>&#60;uvma_{{ name }}_logger_c&#62; logger</desc>
 				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 				<v:textRect cx="61.2283" cy="553.317" width="122.46" height="113.386"/>
 				<rect x="0" y="496.624" width="122.457" height="113.386" class="st5"/>
-				<text x="34.24" y="549.12" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_obi_logger_c&#62;<v:newlineChar/><tspan
+				<text x="34.24" y="549.12" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_{{ name }}_logger_c&#62;<v:newlineChar/><tspan
 							x="48.28" dy="1.08em" class="st4">logger</tspan></text>			</g>
 			<g id="shape81-284" v:mID="81" v:groupContext="shape" transform="translate(55.2971,1101.16) scale(1,-1)">
 				<title>Circle.81</title>
@@ -661,11 +661,11 @@
 			<title>Sheet.228</title>
 			<g id="shape70-297" v:mID="70" v:groupContext="shape">
 				<title>Sheet.70</title>
-				<desc>&#60;uvma_obi_cov_model_c&#62; cov_model</desc>
+				<desc>&#60;uvma_{{ name }}_cov_model_c&#62; cov_model</desc>
 				<v:textBlock v:margins="rect(4,4,4,4)" v:tabSpace="42.5197"/>
 				<v:textRect cx="61.2283" cy="553.317" width="122.46" height="113.386"/>
 				<rect x="0" y="496.624" width="122.457" height="113.386" class="st5"/>
-				<text x="28.44" y="549.12" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_obi_cov_model_c&#62;<v:newlineChar/><tspan
+				<text x="28.44" y="549.12" class="st3" v:langID="4105"><v:paragraph v:horizAlign="1"/><v:tabList/>&#60;uvma_{{ name }}_cov_model_c&#62;<v:newlineChar/><tspan
 							x="38.41" dy="1.08em" class="st4">cov_model</tspan></text>			</g>
 			<g id="shape71-301" v:mID="71" v:groupContext="shape" transform="translate(55.2971,1101.56) scale(1,-1)">
 				<title>Circle.67</title>

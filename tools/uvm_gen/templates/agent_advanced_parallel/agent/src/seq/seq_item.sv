@@ -1,31 +1,31 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_OBI_SEQ_ITEM_SV__
-`define __UVMA_OBI_SEQ_ITEM_SV__
+`ifndef __UVMA_{{ upper(name) }}_SEQ_ITEM_SV__
+`define __UVMA_{{ upper(name) }}_SEQ_ITEM_SV__
 
 
 /**
- * Object created by Open Bus Interface agent sequences extending uvma_obi_seq_base_c.
+ * Object created by {{ full_name }} agent sequences extending uvma_{{ name }}_seq_base_c.
  */
-class uvma_obi_seq_item_c extends uvml_seq_item_c;
+class uvma_{{ name }}_seq_item_c extends uvml_seq_item_c;
    
-   uvma_obi_cfg_c  cfg;
+   uvma_{{ name }}_cfg_c  cfg;
    
    // Data
-   rand uvma_obi_access_type_enum  access_type; ///< Read or write
-   rand uvma_obi_addr_b_t          address    ; ///< Read/Write Address
-   rand uvma_obi_data_b_t          data       ; ///< Write Data
-   rand uvma_obi_be_b_t            be         ; ///< Byte Enable. Is set for the bytes to write/read.
-   rand uvma_obi_auser_b_t         auser      ; ///< Address Phase User signals. Valid for both read and write transactions.
-   rand uvma_obi_wuser_b_t         wuser      ; ///< Additional Address Phase User signals. Only valid for write transactions.
-   rand uvma_obi_ruser_b_t         ruser      ; ///< Response phase User signals. Only valid for read transactions. Undefined for write transactions.
-   rand uvma_obi_id_b_t            id         ; ///< Address/Response Phase transaction identifier.
-   rand uvma_obi_atop_b_t          atop       ; ///< TODO Describe uvma_obi_seq_item_c::atop
-   rand uvma_obi_memtype_b_t       memtype    ; ///< TODO Describe uvma_obi_seq_item_c::memtype
-   rand uvma_obi_prot_b_t          prot       ; ///< TODO Describe uvma_obi_seq_item_c::prot
+   rand uvma_{{ name }}_access_type_enum  access_type; ///< Read or write
+   rand uvma_{{ name }}_addr_b_t          address    ; ///< Read/Write Address
+   rand uvma_{{ name }}_data_b_t          data       ; ///< Write Data
+   rand uvma_{{ name }}_be_b_t            be         ; ///< Byte Enable. Is set for the bytes to write/read.
+   rand uvma_{{ name }}_auser_b_t         auser      ; ///< Address Phase User signals. Valid for both read and write transactions.
+   rand uvma_{{ name }}_wuser_b_t         wuser      ; ///< Additional Address Phase User signals. Only valid for write transactions.
+   rand uvma_{{ name }}_ruser_b_t         ruser      ; ///< Response phase User signals. Only valid for read transactions. Undefined for write transactions.
+   rand uvma_{{ name }}_id_b_t            id         ; ///< Address/Response Phase transaction identifier.
+   rand uvma_{{ name }}_atop_b_t          atop       ; ///< TODO Describe uvma_{{ name }}_seq_item_c::atop
+   rand uvma_{{ name }}_memtype_b_t       memtype    ; ///< TODO Describe uvma_{{ name }}_seq_item_c::memtype
+   rand uvma_{{ name }}_prot_b_t          prot       ; ///< TODO Describe uvma_{{ name }}_seq_item_c::prot
    
    // Metadata
    rand int unsigned  req_latency   ; ///< Number of cycles before req is asserted
@@ -34,8 +34,8 @@ class uvma_obi_seq_item_c extends uvml_seq_item_c;
    rand int unsigned  tail_length   ; ///< Number of idle cycles after rready has been de-asserted
    
    
-   `uvm_object_utils_begin(uvma_obi_seq_item_c)
-      `uvm_field_enum(uvma_obi_access_type_enum, access_type, UVM_DEFAULT               )
+   `uvm_object_utils_begin(uvma_{{ name }}_seq_item_c)
+      `uvm_field_enum(uvma_{{ name }}_access_type_enum, access_type, UVM_DEFAULT               )
       `uvm_field_int (                           address    , UVM_DEFAULT + UVM_NOPRINT)
       `uvm_field_int (                           data       , UVM_DEFAULT + UVM_NOPRINT)
       `uvm_field_int (                           be         , UVM_DEFAULT + UVM_NOPRINT)
@@ -65,29 +65,29 @@ class uvma_obi_seq_item_c extends uvml_seq_item_c;
    /**
     * Default constructor.
     */
-   extern function new(string name="uvma_obi_seq_item");
+   extern function new(string name="uvma_{{ name }}_seq_item");
    
    /**
-    * TODO Describe uvma_obi_seq_item_c::do_print()
+    * TODO Describe uvma_{{ name }}_seq_item_c::do_print()
     */
    extern virtual function void do_print(uvm_printer printer);
    
    /**
-    * TODO Describe uvma_obi_seq_item_c::get_metadata()
+    * TODO Describe uvma_{{ name }}_seq_item_c::get_metadata()
     */
    extern function uvml_metadata_t get_metadata();
    
-endclass : uvma_obi_seq_item_c
+endclass : uvma_{{ name }}_seq_item_c
 
 
-function uvma_obi_seq_item_c::new(string name="uvma_obi_seq_item");
+function uvma_{{ name }}_seq_item_c::new(string name="uvma_{{ name }}_seq_item");
    
    super.new(name);
    
 endfunction : new
 
 
-function void uvma_obi_seq_item_c::do_print(uvm_printer printer);
+function void uvma_{{ name }}_seq_item_c::do_print(uvm_printer printer);
    
    super.do_print(printer);
    
@@ -116,10 +116,10 @@ function void uvma_obi_seq_item_c::do_print(uvm_printer printer);
 endfunction : do_print
 
 
-function uvml_metadata_t uvma_obi_seq_item_c::get_metadata();
+function uvml_metadata_t uvma_{{ name }}_seq_item_c::get_metadata();
    
    int unsigned  field_count = 0;
-   string  access_str  = (access_type == UVMA_OBI_ACCESS_READ) ? "READ" : "WRITE";
+   string  access_str  = (access_type == UVMA_{{ upper(name) }}_ACCESS_READ) ? "READ" : "WRITE";
    string  address_str = $sformatf("%h", address);
    string  data_str    = $sformatf("%h", data   );
    string  be_str      = $sformatf("%b", be     );
@@ -261,4 +261,4 @@ function uvml_metadata_t uvma_obi_seq_item_c::get_metadata();
 endfunction : get_metadata
 
 
-`endif // __UVMA_OBI_SEQ_ITEM_SV__
+`endif // __UVMA_{{ upper(name) }}_SEQ_ITEM_SV__

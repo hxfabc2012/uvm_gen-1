@@ -1,23 +1,23 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMT_OBI_ST_DUT_CHKR_SV__
-`define __UVMT_OBI_ST_DUT_CHKR_SV__
+`ifndef __UVMT_{{ upper(name) }}_ST_DUT_CHKR_SV__
+`define __UVMT_{{ upper(name) }}_ST_DUT_CHKR_SV__
 
 
 /**
- * Module encapsulating assertions for Open Bus Interface Agent Self-Testing DUT wrapper (uvmt_obi_st_dut_wrap).
+ * Module encapsulating assertions for {{ full_name }} Agent Self-Testing DUT wrapper (uvmt_{{ name }}_st_dut_wrap).
  */
-module uvmt_obi_st_dut_chkr(
-   uvma_obi_if  mstr_if,
-   uvma_obi_if  slv_if
+module uvmt_{{ name }}_st_dut_chkr(
+   uvma_{{ name }}_if  mstr_if,
+   uvma_{{ name }}_if  slv_if
 );
    
-   // TODO Add assertions to uvmt_obi_st_dut_chkr
+   // TODO Add assertions to uvmt_{{ name }}_st_dut_chkr
    
-endmodule : uvmt_obi_st_dut_chkr
+endmodule : uvmt_{{ name }}_st_dut_chkr
 
 
-`endif // __UVMT_OBI_ST_DUT_CHKR_SV__
+`endif // __UVMT_{{ upper(name) }}_ST_DUT_CHKR_SV__

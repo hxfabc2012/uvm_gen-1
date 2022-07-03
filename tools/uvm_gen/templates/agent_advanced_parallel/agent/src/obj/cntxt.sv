@@ -1,26 +1,26 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_OBI_CNTXT_SV__
-`define __UVMA_OBI_CNTXT_SV__
+`ifndef __UVMA_{{ upper(name) }}_CNTXT_SV__
+`define __UVMA_{{ upper(name) }}_CNTXT_SV__
 
 
-typedef class uvma_obi_mstr_a_mon_trn_c;
+typedef class uvma_{{ name }}_mstr_a_mon_trn_c;
 
 
 /**
- * Object encapsulating all state variables for all Open Bus Interface agent (uvma_obi_agent_c) components.
+ * Object encapsulating all state variables for all {{ full_name }} agent (uvma_{{ name }}_agent_c) components.
  */
-class uvma_obi_cntxt_c extends uvm_object;
+class uvma_{{ name }}_cntxt_c extends uvm_object;
    
-   virtual uvma_obi_if               vif                     ; ///< Handle to agent interface
-   uvml_reset_state_enum             reset_state             ; ///< TODO Describe uvma_obi_cntxt_c::reset_state
-   uvma_obi_mstr_a_mon_trn_c         mon_outstanding_q[$]    ; ///< TODO Describe uvma_obi_cntxt_c::mon_outstanding_q
-   uvma_obi_mstr_a_mon_trn_c         drv_slv_outstanding_q[$]; ///< TODO Describe uvma_obi_cntxt_c::mon_outstanding_q
+   virtual uvma_{{ name }}_if               vif                     ; ///< Handle to agent interface
+   uvml_reset_state_enum             reset_state             ; ///< TODO Describe uvma_{{ name }}_cntxt_c::reset_state
+   uvma_{{ name }}_mstr_a_mon_trn_c         mon_outstanding_q[$]    ; ///< TODO Describe uvma_{{ name }}_cntxt_c::mon_outstanding_q
+   uvma_{{ name }}_mstr_a_mon_trn_c         drv_slv_outstanding_q[$]; ///< TODO Describe uvma_{{ name }}_cntxt_c::mon_outstanding_q
    uvml_mem_model_c                  memory                  ; ///< Handle to memory model for active slaves
-   uvma_obi_slv_handler_base_vseq_c  slv_handlers[$]         ; ///< Queue of sequences that can respond to read/write from mstr
+   uvma_{{ name }}_slv_handler_base_vseq_c  slv_handlers[$]         ; ///< Queue of sequences that can respond to read/write from mstr
    
    uvm_sequence_base  mon_vseq     ; ///< 
    uvm_sequence_base  idle_vseq    ; ///< 
@@ -33,7 +33,7 @@ class uvma_obi_cntxt_c extends uvm_object;
    uvm_event  sample_cntxt_e; ///< 
    
    
-   `uvm_object_utils_begin(uvma_obi_cntxt_c)
+   `uvm_object_utils_begin(uvma_{{ name }}_cntxt_c)
       `uvm_field_enum        (uvml_reset_state_enum, reset_state               , UVM_DEFAULT)
       //`uvm_field_queue_object(                       mon_outstanding_q, UVM_DEFAULT)
       `uvm_field_object      (                       memory                    , UVM_DEFAULT)
@@ -48,17 +48,17 @@ class uvma_obi_cntxt_c extends uvm_object;
    /**
     * Builds events.
     */
-   extern function new(string name="uvma_obi_cntxt");
+   extern function new(string name="uvma_{{ name }}_cntxt");
    
    /**
-    * TODO Describe uvma_obi_cntxt_c::reset()
+    * TODO Describe uvma_{{ name }}_cntxt_c::reset()
     */
    extern function void reset();
    
-endclass : uvma_obi_cntxt_c
+endclass : uvma_{{ name }}_cntxt_c
 
 
-function uvma_obi_cntxt_c::new(string name="uvma_obi_cntxt");
+function uvma_{{ name }}_cntxt_c::new(string name="uvma_{{ name }}_cntxt");
    
    super.new(name);
    reset_state    = UVML_RESET_STATE_PRE_RESET;
@@ -70,7 +70,7 @@ function uvma_obi_cntxt_c::new(string name="uvma_obi_cntxt");
 endfunction : new
 
 
-function void uvma_obi_cntxt_c::reset();
+function void uvma_{{ name }}_cntxt_c::reset();
    
    mon_outstanding_q    .delete();
    drv_slv_outstanding_q.delete();
@@ -78,4 +78,4 @@ function void uvma_obi_cntxt_c::reset();
 endfunction : reset
 
 
-`endif // __UVMA_OBI_CNTXT_SV__
+`endif // __UVMA_{{ upper(name) }}_CNTXT_SV__

@@ -10,9 +10,9 @@
 
 
 @section license_agreement License Agreement
-© Copyright 2021 Datum Technology Corporation
+© Copyright {{ year }} {{ name_of_copyright_owner }}
 
-SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+{{ license }}
 
 
 

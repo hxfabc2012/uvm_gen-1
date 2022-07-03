@@ -1,36 +1,36 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_OBI_MON_TRN_SV__
-`define __UVMA_OBI_MON_TRN_SV__
+`ifndef __UVMA_{{ upper(name) }}_MON_TRN_SV__
+`define __UVMA_{{ upper(name) }}_MON_TRN_SV__
 
 
 /**
- * Object rebuilt from the Open Bus Interface monitor.  Analog of uvma_obi_seq_item_c.
+ * Object rebuilt from the {{ full_name }} monitor.  Analog of uvma_{{ name }}_seq_item_c.
  */
-class uvma_obi_mon_trn_c extends uvml_mon_trn_c;
+class uvma_{{ name }}_mon_trn_c extends uvml_mon_trn_c;
    
-   uvma_obi_cfg_c  cfg;
+   uvma_{{ name }}_cfg_c  cfg;
    
    // Data
-   uvma_obi_access_type_enum  access_type; ///< Read or write
-   uvma_obi_addr_l_t          address    ; ///< Read/Write Address
-   uvma_obi_data_l_t          data       ; ///< Read/Write Data
-   uvma_obi_be_l_t            be         ; ///< Byte Enable. Is set for the bytes to write/read.
-   uvma_obi_auser_l_t         auser      ; ///< Address Phase User signals. Valid for both read and write transactions. (1p2 only)
-   uvma_obi_wuser_l_t         wuser      ; ///< Additional Address Phase User signals. Only valid for write transactions. (1p2 only)
-   uvma_obi_ruser_l_t         ruser      ; ///< Response phase User signals. Only valid for read transactions. Undefined for write transactions. (1p2 only)
-   uvma_obi_id_l_t            aid        ; ///< Address Phase transaction identifier. (1p2 only)
-   uvma_obi_id_l_t            rid        ; ///< Address Phase transaction identifier. (1p2 only)
-   uvma_obi_err_l_t           err        ; ///< Error (1p2 only)
-   uvma_obi_exokay_l_t        exokay     ; ///< Exclusive access response (1p2 only)
-   uvma_obi_atop_l_t          atop       ; ///< Atomic attributes of transaction (1p2 only)
-   uvma_obi_memtype_l_t       memtype    ; ///< Bufferable and cacheable attributes of transactions (1p2 only)
-   uvma_obi_prot_l_t          prot       ; ///< Memory access type and privilege level of transaction
-   uvma_obi_achk_l_t          achk       ; ///< Address signal checksum
-   uvma_obi_rchk_l_t          rchk       ; ///< Response signal checksum
+   uvma_{{ name }}_access_type_enum  access_type; ///< Read or write
+   uvma_{{ name }}_addr_l_t          address    ; ///< Read/Write Address
+   uvma_{{ name }}_data_l_t          data       ; ///< Read/Write Data
+   uvma_{{ name }}_be_l_t            be         ; ///< Byte Enable. Is set for the bytes to write/read.
+   uvma_{{ name }}_auser_l_t         auser      ; ///< Address Phase User signals. Valid for both read and write transactions. (1p2 only)
+   uvma_{{ name }}_wuser_l_t         wuser      ; ///< Additional Address Phase User signals. Only valid for write transactions. (1p2 only)
+   uvma_{{ name }}_ruser_l_t         ruser      ; ///< Response phase User signals. Only valid for read transactions. Undefined for write transactions. (1p2 only)
+   uvma_{{ name }}_id_l_t            aid        ; ///< Address Phase transaction identifier. (1p2 only)
+   uvma_{{ name }}_id_l_t            rid        ; ///< Address Phase transaction identifier. (1p2 only)
+   uvma_{{ name }}_err_l_t           err        ; ///< Error (1p2 only)
+   uvma_{{ name }}_exokay_l_t        exokay     ; ///< Exclusive access response (1p2 only)
+   uvma_{{ name }}_atop_l_t          atop       ; ///< Atomic attributes of transaction (1p2 only)
+   uvma_{{ name }}_memtype_l_t       memtype    ; ///< Bufferable and cacheable attributes of transactions (1p2 only)
+   uvma_{{ name }}_prot_l_t          prot       ; ///< Memory access type and privilege level of transaction
+   uvma_{{ name }}_achk_l_t          achk       ; ///< Address signal checksum
+   uvma_{{ name }}_rchk_l_t          rchk       ; ///< Response signal checksum
    
    // Metadata
    int unsigned  req_latency   ; ///< Number of cycles before req is asserted
@@ -39,8 +39,8 @@ class uvma_obi_mon_trn_c extends uvml_mon_trn_c;
    int unsigned  tail_length   ; ///< Number of idle cycles after rready has been de-asserted
    
    
-   `uvm_object_utils_begin(uvma_obi_mon_trn_c)
-      `uvm_field_enum(uvma_obi_access_type_enum, access_type, UVM_DEFAULT + UVM_NOCOMPARE              )
+   `uvm_object_utils_begin(uvma_{{ name }}_mon_trn_c)
+      `uvm_field_enum(uvma_{{ name }}_access_type_enum, access_type, UVM_DEFAULT + UVM_NOCOMPARE              )
       `uvm_field_int (                           address    , UVM_DEFAULT + UVM_NOCOMPARE + UVM_NOPRINT)
       `uvm_field_int (                           data       , UVM_DEFAULT + UVM_NOCOMPARE + UVM_NOPRINT)
       `uvm_field_int (                           be         , UVM_DEFAULT + UVM_NOCOMPARE + UVM_NOPRINT)
@@ -62,39 +62,39 @@ class uvma_obi_mon_trn_c extends uvml_mon_trn_c;
    /**
     * Default constructor.
     */
-   extern function new(string name="uvma_obi_mon_trn");
+   extern function new(string name="uvma_{{ name }}_mon_trn");
    
    /**
-    * TODO Describe uvma_obi_mon_trn_c::do_compare()
+    * TODO Describe uvma_{{ name }}_mon_trn_c::do_compare()
     */
    extern function bit do_compare(uvm_object rhs, uvm_comparer comparer);
    
    /**
-    * TODO Describe uvma_obi_mon_trn_c::do_print()
+    * TODO Describe uvma_{{ name }}_mon_trn_c::do_print()
     */
    extern virtual function void do_print(uvm_printer printer);
    
    /**
-    * TODO Describe uvma_obi_mon_trn_c::get_metadata()
+    * TODO Describe uvma_{{ name }}_mon_trn_c::get_metadata()
     */
    extern function uvml_metadata_t get_metadata();
    
-endclass : uvma_obi_mon_trn_c
+endclass : uvma_{{ name }}_mon_trn_c
 
 
-function uvma_obi_mon_trn_c::new(string name="uvma_obi_mon_trn");
+function uvma_{{ name }}_mon_trn_c::new(string name="uvma_{{ name }}_mon_trn");
    
    super.new(name);
    
 endfunction : new
 
 
-function bit uvma_obi_mon_trn_c::do_compare(uvm_object rhs, uvm_comparer comparer);
+function bit uvma_{{ name }}_mon_trn_c::do_compare(uvm_object rhs, uvm_comparer comparer);
    
-   uvma_obi_mon_trn_c  rhs_;
+   uvma_{{ name }}_mon_trn_c  rhs_;
    
    if (!$cast(rhs_, rhs)) begin
-      `uvm_fatal("UVMA_OBI_MON_TRN", $sformatf("Could not cast 'rhs' (%s) to 'rhs_' (%s)", $typename(rhs), $typename(rhs_)))
+      `uvm_fatal("UVMA_{{ upper(name) }}_MON_TRN", $sformatf("Could not cast 'rhs' (%s) to 'rhs_' (%s)", $typename(rhs), $typename(rhs_)))
    end
    
    do_compare = 1;
@@ -118,7 +118,7 @@ function bit uvma_obi_mon_trn_c::do_compare(uvm_object rhs, uvm_comparer compare
 endfunction : do_compare
 
 
-function void uvma_obi_mon_trn_c::do_print(uvm_printer printer);
+function void uvma_{{ name }}_mon_trn_c::do_print(uvm_printer printer);
    
    super.do_print(printer);
    
@@ -157,10 +157,10 @@ function void uvma_obi_mon_trn_c::do_print(uvm_printer printer);
 endfunction : do_print
 
 
-function uvml_metadata_t uvma_obi_mon_trn_c::get_metadata();
+function uvml_metadata_t uvma_{{ name }}_mon_trn_c::get_metadata();
    
    int unsigned  field_count = 0;
-   string  access_str  = (access_type == UVMA_OBI_ACCESS_READ) ? "READ" : "WRITE";
+   string  access_str  = (access_type == UVMA_{{ upper(name) }}_ACCESS_READ) ? "READ" : "WRITE";
    string  address_str = $sformatf("%h", address);
    string  data_str    = $sformatf("%h", data   );
    string  be_str      = $sformatf("%b", be     );
@@ -364,4 +364,4 @@ function uvml_metadata_t uvma_obi_mon_trn_c::get_metadata();
 endfunction : get_metadata
 
 
-`endif // __UVMA_OBI_MON_TRN_SV__
+`endif // __UVMA_{{ upper(name) }}_MON_TRN_SV__

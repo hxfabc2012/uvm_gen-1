@@ -1,26 +1,26 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMT_OBI_ST_ALL_ACCESS_TEST_SV__
-`define __UVMT_OBI_ST_ALL_ACCESS_TEST_SV__
+`ifndef __UVMT_{{ upper(name) }}_ST_ALL_ACCESS_TEST_SV__
+`define __UVMT_{{ upper(name) }}_ST_ALL_ACCESS_TEST_SV__
 
 
 /**
- * TODO Describe uvmt_obi_st_all_access_test_c
+ * TODO Describe uvmt_{{ name }}_st_all_access_test_c
  */
-class uvmt_obi_st_all_access_test_c extends uvmt_obi_st_base_test_c;
+class uvmt_{{ name }}_st_all_access_test_c extends uvmt_{{ name }}_st_base_test_c;
    
-   rand uvma_obi_rand_access_vseq_c  rand_access_vseq;
+   rand uvma_{{ name }}_rand_access_vseq_c  rand_access_vseq;
    
    
-   `uvm_component_utils(uvmt_obi_st_all_access_test_c)
+   `uvm_component_utils(uvmt_{{ name }}_st_all_access_test_c)
    
    /**
     * Creates all_access_vseq.
     */
-   extern function new(string name="uvmt_obi_st_all_access_test", uvm_component parent=null);
+   extern function new(string name="uvmt_{{ name }}_st_all_access_test", uvm_component parent=null);
    
    /**
     * Runs all_access_vseq on vsequencer.
@@ -32,19 +32,19 @@ class uvmt_obi_st_all_access_test_c extends uvmt_obi_st_base_test_c;
     */
    extern virtual function void check_phase(uvm_phase phase);
    
-endclass : uvmt_obi_st_all_access_test_c
+endclass : uvmt_{{ name }}_st_all_access_test_c
 
 
-function uvmt_obi_st_all_access_test_c::new(string name="uvmt_obi_st_all_access_test", uvm_component parent=null);
+function uvmt_{{ name }}_st_all_access_test_c::new(string name="uvmt_{{ name }}_st_all_access_test", uvm_component parent=null);
    
    super.new(name, parent);
    
-   rand_access_vseq = uvma_obi_rand_access_vseq_c::type_id::create("rand_access_vseq");
+   rand_access_vseq = uvma_{{ name }}_rand_access_vseq_c::type_id::create("rand_access_vseq");
    
 endfunction : new
 
 
-task uvmt_obi_st_all_access_test_c::main_phase(uvm_phase phase);
+task uvmt_{{ name }}_st_all_access_test_c::main_phase(uvm_phase phase);
    
    super.main_phase(phase);
    
@@ -57,7 +57,7 @@ task uvmt_obi_st_all_access_test_c::main_phase(uvm_phase phase);
 endtask : main_phase
 
 
-function void uvmt_obi_st_all_access_test_c::check_phase(uvm_phase phase);
+function void uvmt_{{ name }}_st_all_access_test_c::check_phase(uvm_phase phase);
    
    super.check_phase(phase);
    
@@ -68,4 +68,4 @@ function void uvmt_obi_st_all_access_test_c::check_phase(uvm_phase phase);
 endfunction : check_phase
 
 
-`endif // __UVMT_OBI_ST_ALL_ACCESS_TEST_SV__
+`endif // __UVMT_{{ upper(name) }}_ST_ALL_ACCESS_TEST_SV__

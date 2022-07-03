@@ -1,32 +1,32 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMT_OBI_ST_BASE_TEST_SV__
-`define __UVMT_OBI_ST_BASE_TEST_SV__
+`ifndef __UVMT_{{ upper(name) }}_ST_BASE_TEST_SV__
+`define __UVMT_{{ upper(name) }}_ST_BASE_TEST_SV__
 
 
 /**
- * Abstract component from which all other Open Bus Interface test cases must ultimately extend.
+ * Abstract component from which all other {{ full_name }} test cases must ultimately extend.
  * Subclasses must provide stimulus via the virtual sequencer by implementing UVM runtime phases.
  */
-class uvmt_obi_st_base_test_c extends uvml_test_c;
+class uvmt_{{ name }}_st_base_test_c extends uvml_test_c;
 
    // Objects
-   rand uvmt_obi_st_test_cfg_c  test_cfg ; ///<
-   rand uvme_obi_st_cfg_c       env_cfg  ; ///<
-   uvme_obi_st_cntxt_c          env_cntxt; ///<
+   rand uvmt_{{ name }}_st_test_cfg_c  test_cfg ; ///<
+   rand uvme_{{ name }}_st_cfg_c       env_cfg  ; ///<
+   uvme_{{ name }}_st_cntxt_c          env_cntxt; ///<
    uvml_logs_rs_text_c          rs       ; ///<
 
    // Components
-   uvme_obi_st_env_c   env       ; ///<
-   uvme_obi_st_vsqr_c  vsequencer; ///<
+   uvme_{{ name }}_st_env_c   env       ; ///<
+   uvme_{{ name }}_st_vsqr_c  vsequencer; ///<
 
-   virtual uvmt_obi_st_clknrst_gen_if  clknrst_gen_vif; ///< Handle to clock generation interface
+   virtual uvmt_{{ name }}_st_clknrst_gen_if  clknrst_gen_vif; ///< Handle to clock generation interface
 
 
-   `uvm_component_utils_begin(uvmt_obi_st_base_test_c)
+   `uvm_component_utils_begin(uvmt_{{ name }}_st_base_test_c)
       `uvm_field_object(test_cfg , UVM_DEFAULT)
       `uvm_field_object(env_cfg  , UVM_DEFAULT)
       `uvm_field_object(env_cntxt, UVM_DEFAULT)
@@ -43,13 +43,13 @@ class uvmt_obi_st_base_test_c extends uvml_test_c;
 
 
    // Additional, temporary constraints to get around known design bugs/constraints
-   `include "uvmt_obi_st_base_test_workarounds.sv"
+   `include "uvmt_{{ name }}_st_base_test_workarounds.sv"
 
 
    /**
     * Replaces default report server with rs.
     */
-   extern function new(string name="uvmt_obi_st_base_test", uvm_component parent=null);
+   extern function new(string name="uvmt_{{ name }}_st_base_test", uvm_component parent=null);
 
    /**
     * 1. Builds test_cfg & env_cfg via create_cfg()
@@ -130,10 +130,10 @@ class uvmt_obi_st_base_test_c extends uvml_test_c;
     */
    extern task start_clk();
 
-endclass : uvmt_obi_st_base_test_c
+endclass : uvmt_{{ name }}_st_base_test_c
 
 
-function uvmt_obi_st_base_test_c::new(string name="uvmt_obi_st_base_test", uvm_component parent=null);
+function uvmt_{{ name }}_st_base_test_c::new(string name="uvmt_{{ name }}_st_base_test", uvm_component parent=null);
 
    super.new(name, parent);
 
@@ -143,7 +143,7 @@ function uvmt_obi_st_base_test_c::new(string name="uvmt_obi_st_base_test", uvm_c
 endfunction : new
 
 
-function void uvmt_obi_st_base_test_c::build_phase(uvm_phase phase);
+function void uvmt_{{ name }}_st_base_test_c::build_phase(uvm_phase phase);
 
    super.build_phase(phase);
 
@@ -160,7 +160,7 @@ function void uvmt_obi_st_base_test_c::build_phase(uvm_phase phase);
 endfunction : build_phase
 
 
-function void uvmt_obi_st_base_test_c::connect_phase(uvm_phase phase);
+function void uvmt_{{ name }}_st_base_test_c::connect_phase(uvm_phase phase);
 
    super.connect_phase(phase);
    vsequencer = env.vsequencer;
@@ -168,7 +168,7 @@ function void uvmt_obi_st_base_test_c::connect_phase(uvm_phase phase);
 endfunction : connect_phase
 
 
-task uvmt_obi_st_base_test_c::run_phase(uvm_phase phase);
+task uvmt_{{ name }}_st_base_test_c::run_phase(uvm_phase phase);
 
    super.run_phase(phase);
    start_clk();
@@ -176,7 +176,7 @@ task uvmt_obi_st_base_test_c::run_phase(uvm_phase phase);
 endtask : run_phase
 
 
-task uvmt_obi_st_base_test_c::reset_phase(uvm_phase phase);
+task uvmt_{{ name }}_st_base_test_c::reset_phase(uvm_phase phase);
 
    super.reset_phase(phase);
 
@@ -189,9 +189,9 @@ task uvmt_obi_st_base_test_c::reset_phase(uvm_phase phase);
 endtask : reset_phase
 
 
-function void uvmt_obi_st_base_test_c::retrieve_clknrst_gen_vif();
+function void uvmt_{{ name }}_st_base_test_c::retrieve_clknrst_gen_vif();
 
-   if (!uvm_config_db#(virtual uvmt_obi_st_clknrst_gen_if)::get(this, "", "clknrst_gen_vif", clknrst_gen_vif)) begin
+   if (!uvm_config_db#(virtual uvmt_{{ name }}_st_clknrst_gen_if)::get(this, "", "clknrst_gen_vif", clknrst_gen_vif)) begin
       `uvm_fatal("VIF", $sformatf("Could not find clknrst_gen_vif handle of type %s in uvm_config_db", $typename(clknrst_gen_vif)))
    end
    else begin
@@ -201,15 +201,15 @@ function void uvmt_obi_st_base_test_c::retrieve_clknrst_gen_vif();
 endfunction : retrieve_clknrst_gen_vif
 
 
-function void uvmt_obi_st_base_test_c::create_cfg();
+function void uvmt_{{ name }}_st_base_test_c::create_cfg();
 
-   test_cfg = uvmt_obi_st_test_cfg_c::type_id::create("test_cfg");
-   env_cfg  = uvme_obi_st_cfg_c     ::type_id::create("env_cfg" );
+   test_cfg = uvmt_{{ name }}_st_test_cfg_c::type_id::create("test_cfg");
+   env_cfg  = uvme_{{ name }}_st_cfg_c     ::type_id::create("env_cfg" );
 
 endfunction : create_cfg
 
 
-function void uvmt_obi_st_base_test_c::randomize_test();
+function void uvmt_{{ name }}_st_base_test_c::randomize_test();
 
    test_cfg.process_cli_args();
    if (!this.randomize()) begin
@@ -220,7 +220,7 @@ function void uvmt_obi_st_base_test_c::randomize_test();
 endfunction : randomize_test
 
 
-function void uvmt_obi_st_base_test_c::cfg_hrtbt_monitor();
+function void uvmt_{{ name }}_st_base_test_c::cfg_hrtbt_monitor();
 
    `uvml_hrtbt_set_cfg(startup_timeout , test_cfg.startup_timeout )
    `uvml_hrtbt_set_cfg(heartbeat_period, test_cfg.heartbeat_period)
@@ -229,42 +229,42 @@ function void uvmt_obi_st_base_test_c::cfg_hrtbt_monitor();
 endfunction : cfg_hrtbt_monitor
 
 
-function void uvmt_obi_st_base_test_c::assign_cfg();
+function void uvmt_{{ name }}_st_base_test_c::assign_cfg();
 
-   uvm_config_db#(uvme_obi_st_cfg_c)::set(this, "env", "cfg", env_cfg);
+   uvm_config_db#(uvme_{{ name }}_st_cfg_c)::set(this, "env", "cfg", env_cfg);
 
 endfunction : assign_cfg
 
 
-function void uvmt_obi_st_base_test_c::create_cntxt();
+function void uvmt_{{ name }}_st_base_test_c::create_cntxt();
 
-   env_cntxt = uvme_obi_st_cntxt_c::type_id::create("env_cntxt");
+   env_cntxt = uvme_{{ name }}_st_cntxt_c::type_id::create("env_cntxt");
 
 endfunction : create_cntxt
 
 
-function void uvmt_obi_st_base_test_c::assign_cntxt();
+function void uvmt_{{ name }}_st_base_test_c::assign_cntxt();
 
-   uvm_config_db#(uvme_obi_st_cntxt_c)::set(this, "env", "cntxt", env_cntxt);
+   uvm_config_db#(uvme_{{ name }}_st_cntxt_c)::set(this, "env", "cntxt", env_cntxt);
 
 endfunction : assign_cntxt
 
 
-function void uvmt_obi_st_base_test_c::create_env();
+function void uvmt_{{ name }}_st_base_test_c::create_env();
 
-   env = uvme_obi_st_env_c::type_id::create("env", this);
+   env = uvme_{{ name }}_st_env_c::type_id::create("env", this);
 
 endfunction : create_env
 
 
-function void uvmt_obi_st_base_test_c::create_components();
+function void uvmt_{{ name }}_st_base_test_c::create_components();
 
-   // TODO Implement uvmt_obi_st_base_test_c::create_components()
+   // TODO Implement uvmt_{{ name }}_st_base_test_c::create_components()
 
 endfunction : create_components
 
 
-task uvmt_obi_st_base_test_c::start_clk();
+task uvmt_{{ name }}_st_base_test_c::start_clk();
 
    clknrst_gen_vif.set_clk_period(test_cfg.clk_period);
    clknrst_gen_vif.start_clk();
@@ -272,4 +272,4 @@ task uvmt_obi_st_base_test_c::start_clk();
 endtask : start_clk
 
 
-`endif // __UVMT_OBI_ST_BASE_TEST_SV__
+`endif // __UVMT_{{ upper(name) }}_ST_BASE_TEST_SV__

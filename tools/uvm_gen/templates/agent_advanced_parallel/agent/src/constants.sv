@@ -1,20 +1,20 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_OBI_CONSTANTS_SV__
-`define __UVMA_OBI_CONSTANTS_SV__
+`ifndef __UVMA_{{ upper(name) }}_CONSTANTS_SV__
+`define __UVMA_{{ upper(name) }}_CONSTANTS_SV__
 
 
-const int unsigned  uvma_obi_default_auser_width = `UVMA_OBI_AUSER_DEFAULT_WIDTH; // Measured in bits (b)
-const int unsigned  uvma_obi_default_wuser_width = `UVMA_OBI_WUSER_DEFAULT_WIDTH; // Measured in bits (b)
-const int unsigned  uvma_obi_default_ruser_width = `UVMA_OBI_RUSER_DEFAULT_WIDTH; // Measured in bits (b)
-const int unsigned  uvma_obi_default_addr_width  = `UVMA_OBI_ADDR_DEFAULT_WIDTH ; // Measured in bits (b)
-const int unsigned  uvma_obi_default_data_width  = `UVMA_OBI_DATA_DEFAULT_WIDTH ; // Measured in bits (b)
-const int unsigned  uvma_obi_default_id_width    = `UVMA_OBI_ID_DEFAULT_WIDTH   ; // Measured in bits (b)
-const int unsigned  uvma_obi_default_achk_width  = `UVMA_OBI_ACHK_DEFAULT_WIDTH ; // Measured in bits (b)
-const int unsigned  uvma_obi_default_rchk_width  = `UVMA_OBI_RCHK_DEFAULT_WIDTH ; // Measured in bits (b)
+const int unsigned  uvma_{{ name }}_default_auser_width = `UVMA_{{ upper(name) }}_AUSER_DEFAULT_WIDTH; // Measured in bits (b)
+const int unsigned  uvma_{{ name }}_default_wuser_width = `UVMA_{{ upper(name) }}_WUSER_DEFAULT_WIDTH; // Measured in bits (b)
+const int unsigned  uvma_{{ name }}_default_ruser_width = `UVMA_{{ upper(name) }}_RUSER_DEFAULT_WIDTH; // Measured in bits (b)
+const int unsigned  uvma_{{ name }}_default_addr_width  = `UVMA_{{ upper(name) }}_ADDR_DEFAULT_WIDTH ; // Measured in bits (b)
+const int unsigned  uvma_{{ name }}_default_data_width  = `UVMA_{{ upper(name) }}_DATA_DEFAULT_WIDTH ; // Measured in bits (b)
+const int unsigned  uvma_{{ name }}_default_id_width    = `UVMA_{{ upper(name) }}_ID_DEFAULT_WIDTH   ; // Measured in bits (b)
+const int unsigned  uvma_{{ name }}_default_achk_width  = `UVMA_{{ upper(name) }}_ACHK_DEFAULT_WIDTH ; // Measured in bits (b)
+const int unsigned  uvma_{{ name }}_default_rchk_width  = `UVMA_{{ upper(name) }}_RCHK_DEFAULT_WIDTH ; // Measured in bits (b)
 
 
-`endif // __UVMA_OBI_CONSTANTS_SV__
+`endif // __UVMA_{{ upper(name) }}_CONSTANTS_SV__

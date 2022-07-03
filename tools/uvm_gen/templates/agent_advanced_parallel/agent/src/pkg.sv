@@ -1,10 +1,10 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_OBI_PKG_SV__
-`define __UVMA_OBI_PKG_SV__
+`ifndef __UVMA_{{ upper(name) }}_PKG_SV__
+`define __UVMA_{{ upper(name) }}_PKG_SV__
 
 
 // Pre-processor macros
@@ -12,16 +12,16 @@
 `include "uvml_macros.svh"
 `include "uvml_logs_macros.svh"
 `include "uvml_mem_macros.svh"
-`include "uvma_obi_macros.svh"
+`include "uvma_{{ name }}_macros.svh"
 
 // Interface(s)
-`include "uvma_obi_if.sv"
+`include "uvma_{{ name }}_if.sv"
 
 
 /**
- * Encapsulates all the types needed for an UVM agent capable of driving and/or monitoring Open Bus Interface.
+ * Encapsulates all the types needed for an UVM agent capable of driving and/or monitoring {{ full_name }}.
  */
-package uvma_obi_pkg;
+package uvma_{{ name }}_pkg;
 
    import uvm_pkg      ::*;
    import uvml_pkg     ::*;
@@ -29,64 +29,64 @@ package uvma_obi_pkg;
    import uvml_mem_pkg ::*;
 
    // Constants / Structs / Enums
-   `include "uvma_obi_tdefs.sv"
-   `include "uvma_obi_constants.sv"
+   `include "uvma_{{ name }}_tdefs.sv"
+   `include "uvma_{{ name }}_constants.sv"
 
    // Objects
-   `include "uvma_obi_cfg.sv"
-   `include "uvma_obi_cntxt.sv"
+   `include "uvma_{{ name }}_cfg.sv"
+   `include "uvma_{{ name }}_cntxt.sv"
 
    // Transactions
-   `include "uvma_obi_mon_trn.sv"
-   `include "uvma_obi_mstr_a_mon_trn.sv"
-   `include "uvma_obi_mstr_r_mon_trn.sv"
-   `include "uvma_obi_slv_a_mon_trn.sv"
-   `include "uvma_obi_slv_r_mon_trn.sv"
-   `include "uvma_obi_seq_item.sv"
-   `include "uvma_obi_mstr_a_seq_item.sv"
-   `include "uvma_obi_mstr_r_seq_item.sv"
-   `include "uvma_obi_slv_a_seq_item.sv"
-   `include "uvma_obi_slv_r_seq_item.sv"
+   `include "uvma_{{ name }}_mon_trn.sv"
+   `include "uvma_{{ name }}_mstr_a_mon_trn.sv"
+   `include "uvma_{{ name }}_mstr_r_mon_trn.sv"
+   `include "uvma_{{ name }}_slv_a_mon_trn.sv"
+   `include "uvma_{{ name }}_slv_r_mon_trn.sv"
+   `include "uvma_{{ name }}_seq_item.sv"
+   `include "uvma_{{ name }}_mstr_a_seq_item.sv"
+   `include "uvma_{{ name }}_mstr_r_seq_item.sv"
+   `include "uvma_{{ name }}_slv_a_seq_item.sv"
+   `include "uvma_{{ name }}_slv_r_seq_item.sv"
 
    // Driver
-   `include "uvma_obi_mstr_a_drv.sv"
-   `include "uvma_obi_mstr_r_drv.sv"
-   `include "uvma_obi_slv_a_drv.sv"
-   `include "uvma_obi_slv_r_drv.sv"
+   `include "uvma_{{ name }}_mstr_a_drv.sv"
+   `include "uvma_{{ name }}_mstr_r_drv.sv"
+   `include "uvma_{{ name }}_slv_a_drv.sv"
+   `include "uvma_{{ name }}_slv_r_drv.sv"
 
    // Virtual Sequencer
-   `include "uvma_obi_mstr_a_sqr.sv"
-   `include "uvma_obi_mstr_r_sqr.sv"
-   `include "uvma_obi_slv_a_sqr.sv"
-   `include "uvma_obi_slv_r_sqr.sv"
+   `include "uvma_{{ name }}_mstr_a_sqr.sv"
+   `include "uvma_{{ name }}_mstr_r_sqr.sv"
+   `include "uvma_{{ name }}_slv_a_sqr.sv"
+   `include "uvma_{{ name }}_slv_r_sqr.sv"
 
    // Agent-Level Components
-   `include "uvma_obi_mon.sv"
-   `include "uvma_obi_drv.sv"
-   `include "uvma_obi_vsqr.sv"
-   `include "uvma_obi_logger.sv"
-   `include "uvma_obi_cov_model.sv"
-   `include "uvma_obi_agent.sv"
+   `include "uvma_{{ name }}_mon.sv"
+   `include "uvma_{{ name }}_drv.sv"
+   `include "uvma_{{ name }}_vsqr.sv"
+   `include "uvma_{{ name }}_logger.sv"
+   `include "uvma_{{ name }}_cov_model.sv"
+   `include "uvma_{{ name }}_agent.sv"
 
    // Sequences
-   `include "uvma_obi_base_vseq.sv"
-   `include "uvma_obi_mon_vseq.sv"
-   `include "uvma_obi_mstr_drv_vseq.sv"
-   `include "uvma_obi_slv_drv_vseq.sv"
-   `include "uvma_obi_idle_vseq.sv"
-   `include "uvma_obi_vseq_lib.sv"
-   `include "uvma_obi_slv_handler_vseq_lib.sv"
+   `include "uvma_{{ name }}_base_vseq.sv"
+   `include "uvma_{{ name }}_mon_vseq.sv"
+   `include "uvma_{{ name }}_mstr_drv_vseq.sv"
+   `include "uvma_{{ name }}_slv_drv_vseq.sv"
+   `include "uvma_{{ name }}_idle_vseq.sv"
+   `include "uvma_{{ name }}_vseq_lib.sv"
+   `include "uvma_{{ name }}_slv_handler_vseq_lib.sv"
 
    // Register-related
-   `include "uvma_obi_reg_adapter.sv"
+   `include "uvma_{{ name }}_reg_adapter.sv"
 
-endpackage : uvma_obi_pkg
+endpackage : uvma_{{ name }}_pkg
 
 
 // Module(s) / Checker(s)
-`ifdef UVMA_OBI_INC_CHKR
-`include "uvma_obi_chkr.sv"
+`ifdef UVMA_{{ upper(name) }}_INC_CHKR
+`include "uvma_{{ name }}_chkr.sv"
 `endif
 
 
-`endif // __UVMA_OBI_PKG_SV__
+`endif // __UVMA_{{ upper(name) }}_PKG_SV__

@@ -1,39 +1,39 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_OBI_REG_ADAPTER_SV__
-`define __UVMA_OBI_REG_ADAPTER_SV__
+`ifndef __UVMA_{{ upper(name) }}_REG_ADAPTER_SV__
+`define __UVMA_{{ upper(name) }}_REG_ADAPTER_SV__
 
 
 /**
- * Object that converts between abstract register operations (UVM) and Open Bus Interface (OBI) Agent operations.
+ * Object that converts between abstract register operations (UVM) and {{ full_name }} ({{ upper(name) }}) Agent operations.
  */
-class uvma_obi_reg_adapter_c extends uvm_reg_adapter;
+class uvma_{{ name }}_reg_adapter_c extends uvm_reg_adapter;
    
-   `uvm_object_utils(uvma_obi_reg_adapter_c)
+   `uvm_object_utils(uvma_{{ name }}_reg_adapter_c)
    
    
    /**
     * Default constructor
     */
-   extern function new(string name="uvma_obi_reg_adapter");
+   extern function new(string name="uvma_{{ name }}_reg_adapter");
    
    /**
-    * Converts from UVM register operation to Open Bus Interface (OBI) Agent.
+    * Converts from UVM register operation to {{ full_name }} ({{ upper(name) }}) Agent.
     */
    extern virtual function uvm_sequence_item reg2bus(const ref uvm_reg_bus_op rw);
    
    /**
-    * Converts from Open Bus Interface (OBI) Agent to UVM register operation.
+    * Converts from {{ full_name }} ({{ upper(name) }}) Agent to UVM register operation.
     */
    extern virtual function void bus2reg(uvm_sequence_item bus_item, ref uvm_reg_bus_op rw);
    
-endclass : uvma_obi_reg_adapter_c
+endclass : uvma_{{ name }}_reg_adapter_c
 
 
-function uvma_obi_reg_adapter_c::new(string name="uvma_obi_reg_adapter");
+function uvma_{{ name }}_reg_adapter_c::new(string name="uvma_{{ name }}_reg_adapter");
    
    super.new(name);
    supports_byte_enable = 1;
@@ -41,38 +41,38 @@ function uvma_obi_reg_adapter_c::new(string name="uvma_obi_reg_adapter");
 endfunction : new
 
 
-function uvm_sequence_item uvma_obi_reg_adapter_c::reg2bus(const ref uvm_reg_bus_op rw);
+function uvm_sequence_item uvma_{{ name }}_reg_adapter_c::reg2bus(const ref uvm_reg_bus_op rw);
    
-   uvma_obi_seq_item_c  obi_seq_item = uvma_obi_seq_item_c::type_id::create("obi_seq_item");
+   uvma_{{ name }}_seq_item_c  {{ name }}_seq_item = uvma_{{ name }}_seq_item_c::type_id::create("{{ name }}_seq_item");
    
-   obi_seq_item.access_type  = (rw.kind == UVM_READ) ? UVMA_OBI_ACCESS_READ : UVMA_OBI_ACCESS_WRITE;
-   obi_seq_item.address      = rw.addr;
-   obi_seq_item.data         = rw.data;
-   obi_seq_item.be           = rw.byte_en;
+   {{ name }}_seq_item.access_type  = (rw.kind == UVM_READ) ? UVMA_{{ upper(name) }}_ACCESS_READ : UVMA_{{ upper(name) }}_ACCESS_WRITE;
+   {{ name }}_seq_item.address      = rw.addr;
+   {{ name }}_seq_item.data         = rw.data;
+   {{ name }}_seq_item.be           = rw.byte_en;
    
    if (rw.status == UVM_NOT_OK) begin
-      obi_seq_item.set_error(1);
+      {{ name }}_seq_item.set_error(1);
    end
    
-   return obi_seq_item;
+   return {{ name }}_seq_item;
    
 endfunction : reg2bus
 
 
-function void uvma_obi_reg_adapter_c::bus2reg(uvm_sequence_item bus_item, ref uvm_reg_bus_op rw);
+function void uvma_{{ name }}_reg_adapter_c::bus2reg(uvm_sequence_item bus_item, ref uvm_reg_bus_op rw);
    
-   uvma_obi_seq_item_c  obi_seq_item;
+   uvma_{{ name }}_seq_item_c  {{ name }}_seq_item;
    
-   if (!$cast(obi_seq_item, bus_item)) begin
-      `uvm_fatal("APB", $sformatf("Could not cast bus_item (%s) into obi_seq_item (%s)", $typename(bus_item), $typename(obi_seq_item)))
+   if (!$cast({{ name }}_seq_item, bus_item)) begin
+      `uvm_fatal("APB", $sformatf("Could not cast bus_item (%s) into {{ name }}_seq_item (%s)", $typename(bus_item), $typename({{ name }}_seq_item)))
    end
    
-   rw.kind    = (obi_seq_item.access_type == UVMA_OBI_ACCESS_READ) ? UVM_READ : UVM_WRITE;
-   rw.addr    = obi_seq_item.address;
-   rw.data    = obi_seq_item.data;
-   rw.byte_en = obi_seq_item.be;
+   rw.kind    = ({{ name }}_seq_item.access_type == UVMA_{{ upper(name) }}_ACCESS_READ) ? UVM_READ : UVM_WRITE;
+   rw.addr    = {{ name }}_seq_item.address;
+   rw.data    = {{ name }}_seq_item.data;
+   rw.byte_en = {{ name }}_seq_item.be;
    
-   if (obi_seq_item.has_error()) begin
+   if ({{ name }}_seq_item.has_error()) begin
       rw.status = UVM_NOT_OK;
    end
    else begin
@@ -82,4 +82,4 @@ function void uvma_obi_reg_adapter_c::bus2reg(uvm_sequence_item bus_item, ref uv
 endfunction : bus2reg
 
 
-`endif // __UVMA_OBI_REG_ADAPTER_SV__
+`endif // __UVMA_{{ upper(name) }}_REG_ADAPTER_SV__

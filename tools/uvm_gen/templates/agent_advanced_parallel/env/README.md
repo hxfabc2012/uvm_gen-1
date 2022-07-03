@@ -1,14 +1,14 @@
-# Open Bus Interface (OBI) UVM Agent Self-Test Environment
+# {{ full_name }} ({{ upper(name) }}) UVM Agent Self-Test Environment
 
 # About
-This IP contains the Open Bus Interface (OBI) UVM Agent Self-Test Environment.
+This IP contains the {{ full_name }} ({{ upper(name) }}) UVM Agent Self-Test Environment.
 
 # Block Diagram
-![alt text](./docs/env_block_diagram.png "Open Bus Interface (OBI) UVM Agent Self-Test Environment Block Diagram")
+![alt text](./docs/env_block_diagram.png "{{ full_name }} ({{ upper(name) }}) UVM Agent Self-Test Environment Block Diagram")
 
 # Directory Structure
 * `bin` - Scripts, metadata and other miscellaneous files
-* `docs` - Documents describing the Open Bus Interface UVM Agent Self-Test Environment
+* `docs` - Documents describing the {{ full_name }} UVM Agent Self-Test Environment
 * `examples` - Samples for users
 * `src` - Source code for this IP
 
@@ -20,4 +20,4 @@ It is dependent on the following packages:
 * [`uvml_pkg`](https://datum-technology-corporation.github.io/uvml/)
 * [`uvml_logs_pkg`](https://datum-technology-corporation.github.io/uvml_logs/)
 * `uvml_mem_pkg`
-* `uvma_obi`
+* `uvma_{{ name }}`

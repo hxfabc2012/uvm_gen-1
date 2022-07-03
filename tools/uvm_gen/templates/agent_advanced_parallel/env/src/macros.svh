@@ -1,13 +1,13 @@
-// Copyright 2021 Datum Technology Corporation
-// SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVME_OBI_ST_MACROS_SV__
-`define __UVME_OBI_ST_MACROS_SV__
+`ifndef __UVME_{{ upper(name) }}_ST_MACROS_SV__
+`define __UVME_{{ upper(name) }}_ST_MACROS_SV__
 
 
 
 
 
-`endif // __UVME_OBI_ST_MACROS_SV__
+`endif // __UVME_{{ upper(name) }}_ST_MACROS_SV__
