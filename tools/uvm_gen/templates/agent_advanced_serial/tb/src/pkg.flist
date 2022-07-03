@@ -1,0 +1,25 @@
+// Copyright {{ year }} {{ name_of_copyright_owner }}
+// {{ license }}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Libraries
+-f ${DV_UVM_SRC_PATH}/uvm_pkg.flist
+-f ${DV_UVML_SRC_PATH}/uvml_pkg.flist
+-f ${DV_UVML_LOGS_SRC_PATH}/uvml_logs_pkg.flist
+-f ${DV_UVML_SB_SRC_PATH}/uvml_sb_pkg.flist
+
+// Agents
+-f ${DV_UVMA_{{ upper(name) }}_SRC_PATH}/uvma_{{ name }}_pkg.flist
+
+// Environments
+-f ${DV_UVME_{{ upper(name) }}_ST_SRC_PATH}/uvme_{{ name }}_st_pkg.flist
+
+// {{ full_name }} test bench Directories
++incdir+${DV_UVMT_{{ upper(name) }}_ST_SRC_PATH}
++incdir+${DV_UVMT_{{ upper(name) }}_ST_SRC_PATH}/seq
++incdir+${DV_UVMT_{{ upper(name) }}_ST_SRC_PATH}/tb
++incdir+${DV_UVMT_{{ upper(name) }}_ST_SRC_PATH}/tests
+
+// {{ full_name }} tests (includes constants/macros/types meant for test bench)
+${DV_UVMT_{{ upper(name) }}_ST_SRC_PATH}/uvmt_{{ name }}_st_pkg.sv

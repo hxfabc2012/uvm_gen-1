@@ -1,0 +1,47 @@
+ip:
+  name: "uvmt_{{ name }}_st"
+  version: "1.0.0"
+  full-name: "{{ upper(name) }} Agent Self-Test Bench"
+  type: "DV"
+  sub-type: "UVM Test Bench"
+  sub-sub-type: "Self-Test"
+  description: >
+    TODO Describe {{ full_(name }} Agent Self-Test Bench
+  home-page: ""
+  repo-uri: ""
+  bugs: ""
+  aliases: []
+  logo: ""
+  block-diagram: ""
+  languages: ["sv"]
+  simulators-supported:
+    - { name: "vivado", version: "{{ year }}.1" }
+  tags: []
+  copyright-holders: ["Low Power Futures"]
+
+structure:
+   scripts-path :  "bin"
+   docs-path    :  "docs"
+   examples-path:  "examples"
+   src-path     :  "src"
+
+dependencies:
+  - { name: "uvm"      , version:  "1.2" }
+  - { name: "uvml"     , version: "~1.0" }
+  - { name: "uvml_logs", version: "~1.0" }
+  - { name: "uvml_sb"  , version: "~1.0" }
+  - { name: "uvml_ral" , version: "~1.0" }
+
+hdl-src:
+  top-constructs: ["uvmt_{{ name }}_st_tb", "uvml_logs_sim_summary"]
+  directories: [".", "tb", "tests"]
+  test-paths: ["tests"]
+  test-name-template: "uvmt_{{ name }}_st_{{ name }}_test_c"
+  flist:
+    metrics : "uvmt_{{ name }}_st_pkg.flist"
+    riviera : "uvmt_{{ name }}_st_pkg.flist"
+    questa  : "uvmt_{{ name }}_st_pkg.flist"
+    vcs     : "uvmt_{{ name }}_st_pkg.flist"
+    vivado  : "uvmt_{{ name }}_st_pkg.flist.xsim"
+    xcelium : "uvmt_{{ name }}_st_pkg.flist"
+

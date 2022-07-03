@@ -1,0 +1,45 @@
+ip:
+  name: "uvma_{{ name }}"
+  version: "1.0.0"
+  full-name: "{{ full_name }} UVM Agent"
+  type: "DV"
+  sub-type: "UVM Agent"
+  sub-sub-type: ""
+  description: >
+    
+  home-page: ""
+  repo-uri: ""
+  bugs: ""
+  aliases: []
+  logo: ""
+  block-diagram: "docs/agent_block_diagram.svg"
+  languages: ["sv"]
+  simulators-supported:
+    - { name: "vivado", version: "2022.1" }
+  tags: []
+  copyright-holders: ["{{ name_of_copyright_owner }}"]
+  licenses: ["{{ license }}"]
+
+structure:
+   scripts-path :  "bin"
+   docs-path    :  "docs"
+   examples-path:  "examples"
+   src-path     :  "src"
+
+dependencies:
+  - { name: "uvm"      , version:  "1.2" }
+  - { name: "uvml"     , version: "~1.0" }
+  - { name: "uvml_logs", version: "~1.0" }
+  - { name: "uvml_ral" , version: "~1.0" }
+
+hdl-src:
+  directories: [".", "comps", "obj", "seq"]
+  tests-name-template: ""
+  flist:
+    metrics : "uvma_{{ name }}_pkg.flist"
+    riviera : "uvma_{{ name }}_pkg.flist"
+    questa  : "uvma_{{ name }}_pkg.flist"
+    vcs     : "uvma_{{ name }}_pkg.flist"
+    vivado  : "uvma_{{ name }}_pkg.flist.xsim"
+    xcelium : "uvma_{{ name }}_pkg.flist"
+
