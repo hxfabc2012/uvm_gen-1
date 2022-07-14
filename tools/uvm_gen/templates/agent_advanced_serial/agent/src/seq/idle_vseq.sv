@@ -25,14 +25,9 @@ class uvma_{{ name }}_idle_vseq_c extends uvma_{{ name }}_base_vseq_c;
    extern virtual task body();
 
    /**
-    * TODO Describe uvma_{{ name }}_idle_vseq_c::do_idle_tx()
+    * TODO Describe uvma_{{ name }}_idle_vseq_c::idle_loop()
     */
-   extern task do_idle_tx();
-
-   /**
-    * TODO Describe uvma_{{ name }}_idle_vseq_c::do_idle_rx()
-    */
-   extern task do_idle_rx();
+   extern task idle_loop();
 
 endclass : uvma_{{ name }}_idle_vseq_c
 
@@ -47,52 +42,22 @@ endfunction : new
 task uvma_{{ name }}_idle_vseq_c::body();
 
    `uvm_info("{{ upper(name) }}_IDLE_VSEQ", "Idle virtual sequence has started", UVM_HIGH)
-   case (cfg.drv_mode)
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }}: do_idle_tx();
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }}: do_idle_rx();
-   endcase
+   idle_loop();
 
 endtask : body
 
 
-task uvma_{{ name }}_idle_vseq_c::do_idle_tx();
+task uvma_{{ name }}_idle_vseq_c::idle_loop();
 
-   uvma_{{ name }}_seq_item_c  tx_idle;
+   uvma_{{ name }}_seq_item_c  idle_seq_item;
 
-   forever begin
-      `uvm_create_on(tx_idle, p_sequencer.frame_sequencer)
-      tx_idle.direction = UVMA_{{ upper(name) }}_DIRECTION_{{ upper(tx) }};
-      tx_idle.q_sync    = 2'b01;
-      tx_idle.i_sync    = 2'b10;
-      tx_idle.q0        = 0;
-      tx_idle.q_data    = 0;
-      tx_idle.tx_ctrl   = 0;
-      tx_idle.i_data    = 0;
-      tx_idle.is_idle   = 1;
-      `uvm_send_pri(tx_idle, `UVMA_{{ upper(name) }}_FRAME_IDLE_PRI)
+   forever begi
+      `uvm_create_on(idle_seq_item, p_sequencer)
+      idle_seq_item.sync = UVMA_{{ upper(name) }}_SYNC_IDLE;
+      `uvm_send_pri(idle_seq_item, `UVMA_{{ upper(name) }}_IDLE_SEQ_ITEM_PRI)
    end
 
-endtask : do_idle_tx
+endtask : idle_loop
 
 
-task uvma_{{ name }}_idle_vseq_c::do_idle_rx();
-
-   uvma_{{ name }}_seq_item_c  rx_idle;
-
-   forever begin
-      `uvm_create_on(rx_idle, p_sequencer.frame_sequencer)
-      rx_idle.direction = UVMA_{{ upper(name) }}_DIRECTION_{{ upper(rx) }};
-      rx_idle.q_sync    = 2'b01;
-      rx_idle.i_sync    = 2'b10;
-      rx_idle.q0        = 0;
-      rx_idle.q_data    = 0;
-      rx_idle.tx_ctrl   = 0;
-      rx_idle.i_data    = 0;
-      rx_idle.is_idle   = 1;
-      `uvm_send_pri(rx_idle, `UVMA_{{ upper(name) }}_FRAME_IDLE_PRI)
-   end
-
-endtask : do_idle_rx
-
-
-`endif // __UVMA_{{ upper(name) }}_BASE_SEQ_SV__
+`endif // __UVMA_{{ upper(name) }}_IDLE_VSEQ_SV__

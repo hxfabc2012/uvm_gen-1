@@ -48,27 +48,29 @@ class uvma_{{ name }}_base_vseq_c extends uvm_sequence #(
    extern task upstream_item_done(ref uvm_sequence_item req);
 
    /**
-    * TODO Describe uvma_{{ name }}_base_vseq_c::write_mon_trn_tx()
+    * TODO Describe uvma_{{ name }}_base_vseq_c::write_{{ tx }}_mon_trn()
     */
-   extern task write_mon_trn_tx(ref uvma_{{ name }}_mon_trn_c trn);
+   extern task write_{{ tx }}_mon_trn(ref uvma_{{ name }}_mon_trn_c trn);
 
    /**
-    * TODO Describe uvma_{{ name }}_base_vseq_c::write_mon_trn_rx()
+    * TODO Describe uvma_{{ name }}_base_vseq_c::write_{{ rx }}_mon_trn()
     */
-   extern task write_mon_trn_rx(ref uvma_{{ name }}_mon_trn_c trn);
+   extern task write_{{ rx }}_mon_trn(ref uvma_{{ name }}_mon_trn_c trn);
 
    /**
-    * TODO Describe uvma_{{ name }}_base_vseq_c::get_tx_mon_trn()
+    * TODO Describe uvma_{{ name }}_base_vseq_c::get_{{ tx }}_phy_mon_trn()
     */
-   extern task get_tx_mon_trn(output uvma_{{ name }}_tx_mon_trn_c trn);
-
+{% if symmetric %}   extern task get_{{ tx }}_phy_mon_trn(output uvma_{{ name }}_phy_mon_trn_c trn);
+{% else %}   extern task get_{{ tx }}_phy_mon_trn(output uvma_{{ name }}_{{ tx }}_mon_trn_c trn);
+{% endif %}
    /**
-    * TODO Describe uvma_{{ name }}_base_vseq_c::get_rx_mon_trn()
+    * TODO Describe uvma_{{ name }}_base_vseq_c::get_{{ rx }}_phy_mon_trn()
     */
-   extern task get_rx_mon_trn(output uvma_{{ name }}_rx_mon_trn_c trn);
-
+{% if symmetric %}   extern task get_{{ rx }}_phy_mon_trn(output uvma_{{ name }}_phy_mon_trn_c trn);
+{% else %}   extern task get_{{ rx }}_phy_mon_trn(output uvma_{{ name }}_{{ rx }}_mon_trn_c trn);
+{% endif %}
    /**
-    * TODO Describe uvma_{{ name }}_rx_drv_vseq_c::wait_clk()
+    * TODO Describe uvma_{{ name }}_{{ rx }}_drv_vseq_c::wait_clk()
     */
    extern task wait_clk();
 
@@ -104,39 +106,41 @@ task uvma_{{ name }}_base_vseq_c::upstream_item_done(ref uvm_sequence_item req);
 endtask : upstream_item_done
 
 
-task uvma_{{ name }}_base_vseq_c::write_mon_trn_tx(ref uvma_{{ name }}_mon_trn_c trn);
+task uvma_{{ name }}_base_vseq_c::write_{{ tx }}_mon_trn(ref uvma_{{ name }}_mon_trn_c trn);
 
-   p_sequencer.mon_trn_tx_ap.write(trn);
+   p_sequencer.{{ tx }}_mon_trn_ap.write(trn);
 
-endtask : write_mon_trn_tx
-
-
-task uvma_{{ name }}_base_vseq_c::write_mon_trn_rx(ref uvma_{{ name }}_mon_trn_c trn);
-
-   p_sequencer.mon_trn_rx_ap.write(trn);
-
-endtask : write_mon_trn_rx
+endtask : write_{{ tx }}_mon_trn
 
 
-task uvma_{{ name }}_base_vseq_c::get_tx_mon_trn(output uvma_{{ name }}_tx_mon_trn_c trn);
+task uvma_{{ name }}_base_vseq_c::write_{{ rx }}_mon_trn(ref uvma_{{ name }}_mon_trn_c trn);
 
-   p_sequencer.tx_mon_trn_fifo.get(trn);
+   p_sequencer.{{ rx }}_mon_trn_ap.write(trn);
 
-endtask : get_tx_mon_trn
+endtask : write_{{ rx }}_mon_trn
 
 
-task uvma_{{ name }}_base_vseq_c::get_rx_mon_trn(output uvma_{{ name }}_rx_mon_trn_c trn);
+{% if symmetric %}task uvma_{{ name }}_base_vseq_c::get_{{ tx }}_phy_mon_trn(output uvma_{{ name }}_phy_mon_trn_c trn);
+{% else %}task uvma_{{ name }}_base_vseq_c::get_{{ tx }}_phy_mon_trn(output uvma_{{ name }}_{{ tx }}_mon_trn_c trn);
+{% endif %}
+   p_sequencer.{{ tx }}_phy_mon_trn_fifo.get(trn);
 
-   p_sequencer.rx_mon_trn_fifo.get(trn);
+endtask : get_{{ tx }}_phy_mon_trn
 
-endtask : get_rx_mon_trn
+
+{% if symmetric %}task uvma_{{ name }}_base_vseq_c::get_{{ rx }}_phy_mon_trn(output uvma_{{ name }}_phy_mon_trn_c trn);
+{% else %}task uvma_{{ name }}_base_vseq_c::get_{{ rx }}_phy_mon_trn(output uvma_{{ name }}_{{ rx }}_mon_trn_c trn);
+{% endif %}
+   p_sequencer.{{ rx }}_phy_mon_trn_fifo.get(trn);
+
+endtask : get_{{ rx }}_phy_mon_trn
 
 
 task uvma_{{ name }}_base_vseq_c::wait_clk();
 
 {% if symmetric %}   case (cfg.drv_mode)
-      UVMA_{{ upper(name) }}_DIRECTION_TX : @(cntxt.vif.drv_tx_cb);
-      UVMA_{{ upper(name) }}_DIRECTION_RX : @(cntxt.vif.drv_rx_cb);
+      UVMA_{{ upper(name) }}_DIRECTION_{{ upper(tx) }} : @(cntxt.vif.drv_{{ tx }}_cb);
+      UVMA_{{ upper(name) }}_DIRECTION_{{ upper(rx) }} : @(cntxt.vif.drv_{{ rx }}_cb);
    endcase{% endif %}
 
 endtask : wait_clk

@@ -19,23 +19,25 @@ class uvma_{{ name }}_seq_item_c extends uvml_seq_item_c;
 
    /// @defgroup Data
    /// @{
-   rand uvma_{{ name }}_sync_b_t  start; ///<
-   rand uvma_{{ name }}_data_b_t  data ; ///<
-   rand uvma_{{ name }}_sync_b_t  stop ; ///<
+   rand uvma_{{ name }}_header_enum  header; ///<
+   rand uvma_{{ name }}_data_b_t     data  ; ///<
+   rand uvma_{{ name }}_tail_b_t     tail  ; ///<
    /// @}
 
 
 
    `uvm_object_utils_begin(uvma_{{ name }}_seq_item_c)
-      `uvm_field_int(start, UVM_DEFAULT + UVM_BIN)
+      `uvm_field_enum(uvma_{{ name }}_header_enum, header, UVM_DEFAULT)
       `uvm_field_int(data , UVM_DEFAULT          )
-      `uvm_field_int(stop , UVM_DEFAULT + UVM_BIN)
+      `uvm_field_int(tail , UVM_DEFAULT + UVM_BIN)
    `uvm_object_utils_end
 
 
    constraint limits_cons {
-      soft start == uvma_{{ name }}_start_symbol;
-      soft stop  == uvma_{{ name }}_stop_symbol ;
+      soft tail == uvma_{{ name }}_tail_symbol;
+      if (header == UVMA_{{ upper(name) }}_HEADER_IDLE) {
+         data == uvma_{{ name }}_idle_data;
+      }
    }
 
 
@@ -61,36 +63,43 @@ endfunction : new
 
 function uvml_metadata_t uvma_{{ name }}_seq_item_c::get_metadata();
 
-   string start_str = $sformatf("%b", start);
-   string stop_str  = $sformatf("%b", stop );
-   string data_str  = $sformatf("%h", data );
+   string header_str = header.name();
+   string tail_str = $sformatf("%b", tail);
+   string data_str = $sformatf("%h", data);
 
-   if (!is_idle) begin
-      get_metadata.push_back('{
-         index     : 0,
-         value     : start_str,
-         col_name  : "start",
-         col_width : start_str.len(),
-         col_align : UVML_TEXT_ALIGN_RIGHT,
-         data_type : UVML_FIELD_INT
-      });
-      get_metadata.push_back('{
-         index     : 0,
-         value     : stop_str,
-         col_name  : "stop",
-         col_width : stop_str.len(),
-         col_align : UVML_TEXT_ALIGN_RIGHT,
-         data_type : UVML_FIELD_INT
-      });
-      get_metadata.push_back('{
-         index     : 0,
-         value     : data_str,
-         col_name  : "data",
-         col_width : data_str.len(),
-         col_align : UVML_TEXT_ALIGN_RIGHT,
-         data_type : UVML_FIELD_INT
-      });
+   if (header == UVMA_{{ upper(name) }}_HEADER_DATA) begin
+      header_str = "DATA";
    end
+   else if (header == UVMA_{{ upper(name) }}_HEADER_IDLE) begin
+      header_str = "IDLE";
+   end
+   else begin
+      header_str = $sformatf("??(%b)", header);
+   end
+   get_metadata.push_back('{
+      index     : 0,
+      value     : header_str,
+      col_name  : "header",
+      col_width : header_str.len(),
+      col_align : UVML_TEXT_ALIGN_RIGHT,
+      data_type : UVML_FIELD_INT
+   });
+   get_metadata.push_back('{
+      index     : 0,
+      value     : tail_str,
+      col_name  : "tail",
+      col_width : tail_str.len(),
+      col_align : UVML_TEXT_ALIGN_RIGHT,
+      data_type : UVML_FIELD_INT
+   });
+   get_metadata.push_back('{
+      index     : 0,
+      value     : data_str,
+      col_name  : "data",
+      col_width : data_str.len(),
+      col_align : UVML_TEXT_ALIGN_RIGHT,
+      data_type : UVML_FIELD_INT
+   });
 
 endfunction : get_metadata
 

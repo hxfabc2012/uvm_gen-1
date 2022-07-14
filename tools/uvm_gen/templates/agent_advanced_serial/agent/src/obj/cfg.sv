@@ -11,8 +11,8 @@
 typedef class uvma_{{ name }}_mon_vseq_c   ;
 typedef class uvma_{{ name }}_idle_vseq_c  ;
 {% if symmetric %}typedef class uvma_{{ name }}_phy_drv_vseq_c;
-{% else %}typedef class uvma_{{ name }}_tx_drv_vseq_c;
-typedef class uvma_{{ name }}_rx_drv_vseq_c;
+{% else %}typedef class uvma_{{ name }}_{{ tx }}_drv_vseq_c;
+typedef class uvma_{{ name }}_{{ rx }}_drv_vseq_c;
 {% endif %}
 
 /**
@@ -42,8 +42,8 @@ class uvma_{{ name }}_cfg_c extends uvm_object;
    /// @{
    uvm_object_wrapper  mon_vseq_type   ; ///< TODO Describe uvma_{{ name }}_cfg_c::mon_vseq_type
    uvm_object_wrapper  idle_vseq_type  ; ///< TODO Describe uvma_{{ name }}_cfg_c::idle_vseq_type
-   uvm_object_wrapper  tx_drv_vseq_type; ///< TODO Describe uvma_{{ name }}_cfg_c::mstr_drv_vseq_type
-   uvm_object_wrapper  rx_drv_vseq_type; ///< TODO Describe uvma_{{ name }}_cfg_c::slv_drv_vseq_type
+   uvm_object_wrapper  {{ tx }}_drv_vseq_type; ///< TODO Describe uvma_{{ name }}_cfg_c::mstr_drv_vseq_type
+   uvm_object_wrapper  {{ rx }}_drv_vseq_type; ///< TODO Describe uvma_{{ name }}_cfg_c::slv_drv_vseq_type
    /// @}
 
 
@@ -85,10 +85,10 @@ function uvma_{{ name }}_cfg_c::new(string name="uvma_{{ name }}_cfg");
    super.new(name);
    mon_vseq_type    = uvma_{{ name }}_mon_vseq_c   ::get_type();
    idle_vseq_type   = uvma_{{ name }}_idle_vseq_c  ::get_type();
-{% if symmetric %}   tx_drv_vseq_type = uvma_{{ name }}_phy_drv_vseq_c::get_type();
-   rx_drv_vseq_type = uvma_{{ name }}_phy_drv_vseq_c::get_type();
-{% else %}   tx_drv_vseq_type = uvma_{{ name }}_tx_drv_vseq_c::get_type();
-   rx_drv_vseq_type = uvma_{{ name }}_rx_drv_vseq_c::get_type();
+{% if symmetric %}   {{ tx }}_drv_vseq_type = uvma_{{ name }}_phy_drv_vseq_c::get_type();
+   {{ rx }}_drv_vseq_type = uvma_{{ name }}_phy_drv_vseq_c::get_type();
+{% else %}   {{ tx }}_drv_vseq_type = uvma_{{ name }}_{{ tx }}_drv_vseq_c::get_type();
+   {{ rx }}_drv_vseq_type = uvma_{{ name }}_{{ rx }}_drv_vseq_c::get_type();
 {% endif %}
 endfunction : new
 

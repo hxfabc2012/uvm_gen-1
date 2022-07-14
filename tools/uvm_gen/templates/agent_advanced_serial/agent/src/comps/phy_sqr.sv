@@ -67,7 +67,7 @@ function void uvma_{{ name }}_phy_sqr_c::build_phase(uvm_phase phase);
 endfunction : build_phase
 
 
-function void uvma_{{ name }}_tx_sqr_c::get_cfg();
+function void uvma_{{ name }}_{{ tx }}_sqr_c::get_cfg();
 
    void'(uvm_config_db#(uvma_{{ name }}_cfg_c)::get(this, "", "cfg", cfg));
    if (cfg == null) begin
@@ -77,7 +77,7 @@ function void uvma_{{ name }}_tx_sqr_c::get_cfg();
 endfunction : get_cfg
 
 
-function void uvma_{{ name }}_tx_sqr_c::get_cntxt();
+function void uvma_{{ name }}_{{ tx }}_sqr_c::get_cntxt();
 
    void'(uvm_config_db#(uvma_{{ name }}_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (cntxt == null) begin

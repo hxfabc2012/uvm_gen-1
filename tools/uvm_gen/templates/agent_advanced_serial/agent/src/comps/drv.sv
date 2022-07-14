@@ -20,18 +20,18 @@ class uvma_{{ name }}_drv_c extends uvm_component;
 
    /// @defgroup Components
    /// @{
-{% if symmetric %}   uvma_{{ name }}_phy_drv_c  tx_driver; ///< TODO Describe uvma_{{ name }}_drv_c::tx_driver
-   uvma_{{ name }}_phy_drv_c  rx_driver; ///< TODO Describe uvma_{{ name }}_drv_c::rx_driver
-{% else %}   uvma_{{ name }}_tx_drv_c  tx_driver; ///< TODO Describe uvma_{{ name }}_drv_c::tx_driver
-   uvma_{{ name }}_rx_drv_c  rx_driver; ///< TODO Describe uvma_{{ name }}_drv_c::rx_driver
+{% if symmetric %}   uvma_{{ name }}_phy_drv_c  {{ tx }}_driver; ///< TODO Describe uvma_{{ name }}_drv_c::{{ tx }}_driver
+   uvma_{{ name }}_phy_drv_c  {{ rx }}_driver; ///< TODO Describe uvma_{{ name }}_drv_c::{{ rx }}_driver
+{% else %}   uvma_{{ name }}_{{ tx }}_drv_c  {{ tx }}_driver; ///< TODO Describe uvma_{{ name }}_drv_c::{{ tx }}_driver
+   uvma_{{ name }}_{{ rx }}_drv_c  {{ rx }}_driver; ///< TODO Describe uvma_{{ name }}_drv_c::{{ rx }}_driver
 {% endif %}   /// @}
 
    /// @defgroup TLM
    /// @{
-{% if symmetric %}   uvm_analysis_port#(uvma_{{ name }}_phy_seq_item_c)  tx_ap; ///< TODO Describe uvma_{{ name }}_drv_c:: tx_ap
-   uvm_analysis_port#(uvma_{{ name }}_phy_seq_item_c)  rx_ap; ///< TODO Describe uvma_{{ name }}_drv_c:: rx_ap
-{% else %}   uvm_analysis_port#(uvma_{{ name }}_tx_seq_item_c)  tx_ap; ///< TODO Describe uvma_{{ name }}_drv_c:: tx_ap
-   uvm_analysis_port#(uvma_{{ name }}_rx_seq_item_c)  rx_ap; ///< TODO Describe uvma_{{ name }}_drv_c:: rx_ap
+{% if symmetric %}   uvm_analysis_port#(uvma_{{ name }}_phy_seq_item_c)  {{ tx }}_ap; ///< TODO Describe uvma_{{ name }}_drv_c:: {{ tx }}_ap
+   uvm_analysis_port#(uvma_{{ name }}_phy_seq_item_c)  {{ rx }}_ap; ///< TODO Describe uvma_{{ name }}_drv_c:: {{ rx }}_ap
+{% else %}   uvm_analysis_port#(uvma_{{ name }}_{{ tx }}_seq_item_c)  {{ tx }}_ap; ///< TODO Describe uvma_{{ name }}_drv_c:: {{ tx }}_ap
+   uvm_analysis_port#(uvma_{{ name }}_{{ rx }}_seq_item_c)  {{ rx }}_ap; ///< TODO Describe uvma_{{ name }}_drv_c:: {{ rx }}_ap
 {% endif %}   /// @}
 
    `uvm_component_utils_begin(uvma_{{ name }}_drv_c)
@@ -133,26 +133,26 @@ endfunction : get_cntxt
 
 function void uvma_{{ name }}_drv_c::create_components();
 
-{% if symmetric %}   tx_driver = uvma_{{ name }}_phy_drv_c::type_id::create("tx_driver", this);
-   rx_driver = uvma_{{ name }}_phy_drv_c::type_id::create("rx_driver", this);
-{% else %}   tx_driver = uvma_{{ name }}_tx_drv_c::type_id::create("tx_driver", this);
-   rx_driver = uvma_{{ name }}_rx_drv_c::type_id::create("rx_driver", this);
+{% if symmetric %}   {{ tx }}_driver = uvma_{{ name }}_phy_drv_c::type_id::create("{{ tx }}_driver", this);
+   {{ rx }}_driver = uvma_{{ name }}_phy_drv_c::type_id::create("{{ rx }}_driver", this);
+{% else %}   {{ tx }}_driver = uvma_{{ name }}_{{ tx }}_drv_c::type_id::create("{{ tx }}_driver", this);
+   {{ rx }}_driver = uvma_{{ name }}_{{ rx }}_drv_c::type_id::create("{{ rx }}_driver", this);
 {% endif %}
 endfunction : create_components
 
 
 function void uvma_{{ name }}_drv_c::create_ports();
 
-   tx_ap = new("tx_ap", this);
-   rx_ap = new("rx_ap", this);
+   {{ tx }}_ap = new("{{ tx }}_ap", this);
+   {{ rx }}_ap = new("{{ rx }}_ap", this);
 
 endfunction : create_ports
 
 
 function void uvma_{{ name }}_drv_c::connect_ports();
 
-   tx_ap = tx_driver.ap;
-   rx_ap = rx_driver.ap;
+   {{ tx }}_ap = {{ tx }}_driver.ap;
+   {{ rx }}_ap = {{ rx }}_driver.ap;
 
 endfunction : connect_ports
 

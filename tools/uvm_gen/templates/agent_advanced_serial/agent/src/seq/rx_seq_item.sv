@@ -10,7 +10,7 @@
 /**
  * Object created by {{ full_name }} agent sequences extending uvma_{{ name }}_seq_base_c.
  */
-class uvma_{{ name }}_rx_seq_item_c extends uvml_seq_item_c;
+class uvma_{{ name }}_{{ rx }}_seq_item_c extends uvml_seq_item_c;
 
    uvma_{{ name }}_cfg_c  cfg; ///< Agent configuration handle
 
@@ -23,7 +23,7 @@ class uvma_{{ name }}_rx_seq_item_c extends uvml_seq_item_c;
    /// @}
 
 
-   `uvm_object_utils_begin(uvma_{{ name }}_rx_seq_item_c)
+   `uvm_object_utils_begin(uvma_{{ name }}_{{ rx }}_seq_item_c)
       `uvm_field_int(rx0p, UVM_DEFAULT)
       `uvm_field_int(rx0n, UVM_DEFAULT)
       `uvm_field_int(rx1p, UVM_DEFAULT)
@@ -40,24 +40,24 @@ class uvma_{{ name }}_rx_seq_item_c extends uvml_seq_item_c;
    /**
     * Default constructor.
     */
-   extern function new(string name="uvma_{{ name }}_rx_seq_item");
+   extern function new(string name="uvma_{{ name }}_{{ rx }}_seq_item");
 
    /**
-    * TODO Describe uvma_{{ name }}_rx_seq_item_c::get_metadata()
+    * TODO Describe uvma_{{ name }}_{{ rx }}_seq_item_c::get_metadata()
     */
    extern function uvml_metadata_t get_metadata();
 
-endclass : uvma_{{ name }}_rx_seq_item_c
+endclass : uvma_{{ name }}_{{ rx }}_seq_item_c
 
 
-function uvma_{{ name }}_rx_seq_item_c::new(string name="uvma_{{ name }}_rx_seq_item");
+function uvma_{{ name }}_{{ rx }}_seq_item_c::new(string name="uvma_{{ name }}_{{ rx }}_seq_item");
 
    super.new(name);
 
 endfunction : new
 
 
-function uvml_metadata_t uvma_{{ name }}_rx_seq_item_c::get_metadata();
+function uvml_metadata_t uvma_{{ name }}_{{ rx }}_seq_item_c::get_metadata();
 
    string rx0p_str = $sformatf("%b", rx0p);
    string rx0n_str = $sformatf("%b", rx0n);

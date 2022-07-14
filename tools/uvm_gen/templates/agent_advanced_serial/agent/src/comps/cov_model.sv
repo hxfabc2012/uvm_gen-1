@@ -21,31 +21,31 @@ class uvma_{{ name }}_cov_model_c extends uvm_component;
    /// @defgroup Covergroup variables
    /// @{
    uvma_{{ name }}_seq_item_c     seq_item    ; ///<
-   uvma_{{ name }}_mon_trn_c      tx_mon_trn  ; ///<
-   uvma_{{ name }}_mon_trn_c      rx_mon_trn  ; ///<
-{% if symmetric %}   uvma_{{ name }}_phy_seq_item_c  tx_phy_seq_item ; ///<
-   uvma_{{ name }}_phy_seq_item_c  rx_phy_seq_item ; ///<
-   uvma_{{ name }}_phy_mon_trn_c   tx_phy_mon_trn  ; ///<
-   uvma_{{ name }}_phy_mon_trn_c   rx_phy_mon_trn  ; ///<
-{% else %}   uvma_{{ name }}_tx_seq_item_c  tx_phy_seq_item ; ///<
-   uvma_{{ name }}_rx_seq_item_c  rx_phy_seq_item ; ///<
-   uvma_{{ name }}_tx_mon_trn_c   tx_phy_mon_trn  ; ///<
-   uvma_{{ name }}_rx_mon_trn_c   rx_phy_mon_trn  ; ///<
+   uvma_{{ name }}_mon_trn_c      {{ tx }}_mon_trn  ; ///<
+   uvma_{{ name }}_mon_trn_c      {{ rx }}_mon_trn  ; ///<
+{% if symmetric %}   uvma_{{ name }}_phy_seq_item_c  {{ tx }}_phy_seq_item ; ///<
+   uvma_{{ name }}_phy_seq_item_c  {{ rx }}_phy_seq_item ; ///<
+   uvma_{{ name }}_phy_mon_trn_c   {{ tx }}_phy_mon_trn  ; ///<
+   uvma_{{ name }}_phy_mon_trn_c   {{ rx }}_phy_mon_trn  ; ///<
+{% else %}   uvma_{{ name }}_{{ tx }}_seq_item_c  {{ tx }}_phy_seq_item ; ///<
+   uvma_{{ name }}_{{ rx }}_seq_item_c  {{ rx }}_phy_seq_item ; ///<
+   uvma_{{ name }}_{{ tx }}_mon_trn_c   {{ tx }}_phy_mon_trn  ; ///<
+   uvma_{{ name }}_{{ rx }}_mon_trn_c   {{ rx }}_phy_mon_trn  ; ///<
 {% endif %}   /// @}
 
    /// @defgroup TLM
    /// @{
    uvm_tlm_analysis_fifo #(uvma_{{ name }}_seq_item_c   )  seq_item_fifo    ; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_mon_trn_c    )  tx_mon_trn_fifo  ; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_mon_trn_c    )  rx_mon_trn_fifo  ; ///<
-{% if symmetric %}   uvm_tlm_analysis_fifo #(uvma_{{ name }}_phy_seq_item_c)  tx_phy_seq_item_fifo ; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_phy_seq_item_c)  rx_phy_seq_item_fifo ; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_phy_mon_trn_c )  tx_phy_mon_trn_fifo  ; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_phy_mon_trn_c )  rx_phy_mon_trn_fifo  ; ///<
-{% else %}   uvm_tlm_analysis_fifo #(uvma_{{ name }}_tx_seq_item_c)  tx_phy_seq_item_fifo ; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_rx_seq_item_c)  rx_phy_seq_item_fifo ; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_tx_mon_trn_c )  tx_phy_mon_trn_fifo  ; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_rx_mon_trn_c )  rx_phy_mon_trn_fifo  ; ///<
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_mon_trn_c    )  {{ tx }}_mon_trn_fifo  ; ///<
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_mon_trn_c    )  {{ rx }}_mon_trn_fifo  ; ///<
+{% if symmetric %}   uvm_tlm_analysis_fifo #(uvma_{{ name }}_phy_seq_item_c)  {{ tx }}_phy_seq_item_fifo ; ///<
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_phy_seq_item_c)  {{ rx }}_phy_seq_item_fifo ; ///<
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_phy_mon_trn_c )  {{ tx }}_phy_mon_trn_fifo  ; ///<
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_phy_mon_trn_c )  {{ rx }}_phy_mon_trn_fifo  ; ///<
+{% else %}   uvm_tlm_analysis_fifo #(uvma_{{ name }}_{{ tx }}_seq_item_c)  {{ tx }}_phy_seq_item_fifo ; ///<
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_{{ rx }}_seq_item_c)  {{ rx }}_phy_seq_item_fifo ; ///<
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_{{ tx }}_mon_trn_c )  {{ tx }}_phy_mon_trn_fifo  ; ///<
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_{{ rx }}_mon_trn_c )  {{ rx }}_phy_mon_trn_fifo  ; ///<
 {% endif %}   /// @}
 
 
@@ -87,34 +87,34 @@ class uvma_{{ name }}_cov_model_c extends uvm_component;
    extern virtual function void sample_seq_item();
 
    /**
-    * TODO Describe uvma_{{ name }}_cov_model_c::sample_tx_mon_trn()
+    * TODO Describe uvma_{{ name }}_cov_model_c::sample_{{ tx }}_mon_trn()
     */
-   extern virtual function void sample_tx_mon_trn();
+   extern virtual function void sample_{{ tx }}_mon_trn();
 
    /**
-    * TODO Describe uvma_{{ name }}_cov_model_c::sample_rx_mon_trn()
+    * TODO Describe uvma_{{ name }}_cov_model_c::sample_{{ rx }}_mon_trn()
     */
-   extern virtual function void sample_rx_mon_trn();
+   extern virtual function void sample_{{ rx }}_mon_trn();
 
    /**
-    * TODO Describe uvma_{{ name }}_cov_model_c::sample_tx_phy_seq_item()
+    * TODO Describe uvma_{{ name }}_cov_model_c::sample_{{ tx }}_phy_seq_item()
     */
-   extern virtual function void sample_tx_phy_seq_item();
+   extern virtual function void sample_{{ tx }}_phy_seq_item();
 
    /**
-    * TODO Describe uvma_{{ name }}_cov_model_c::sample_rx_phy_seq_item()
+    * TODO Describe uvma_{{ name }}_cov_model_c::sample_{{ rx }}_phy_seq_item()
     */
-   extern virtual function void sample_rx_phy_seq_item();
+   extern virtual function void sample_{{ rx }}_phy_seq_item();
 
    /**
-    * TODO Describe uvma_{{ name }}_cov_model_c::sample_tx_phy_mon_trn()
+    * TODO Describe uvma_{{ name }}_cov_model_c::sample_{{ tx }}_phy_mon_trn()
     */
-   extern virtual function void sample_tx_phy_mon_trn();
+   extern virtual function void sample_{{ tx }}_phy_mon_trn();
 
    /**
-    * TODO Describe uvma_{{ name }}_cov_model_c::sample_rx_phy_mon_trn()
+    * TODO Describe uvma_{{ name }}_cov_model_c::sample_{{ rx }}_phy_mon_trn()
     */
-   extern virtual function void sample_rx_phy_mon_trn();
+   extern virtual function void sample_{{ rx }}_phy_mon_trn();
 
 endclass : uvma_{{ name }}_cov_model_c
 
@@ -141,12 +141,12 @@ function void uvma_{{ name }}_cov_model_c::build_phase(uvm_phase phase);
    end
 
    seq_item_fifo = new("seq_item_fifo", this);
-   tx_mon_trn_fifo       = new("tx_mon_trn_fifo"     , this);
-   rx_mon_trn_fifo       = new("rx_mon_trn_fifo"     , this);
-   tx_phy_seq_item_fifo  = new("tx_phy_seq_item_fifo", this);
-   rx_phy_seq_item_fifo  = new("rx_phy_seq_item_fifo", this);
-   tx_phy_mon_trn_fifo   = new("tx_phy_mon_trn_fifo" , this);
-   rx_phy_mon_trn_fifo   = new("rx_phy_mon_trn_fifo" , this);
+   {{ tx }}_mon_trn_fifo       = new("{{ tx }}_mon_trn_fifo"     , this);
+   {{ rx }}_mon_trn_fifo       = new("{{ rx }}_mon_trn_fifo"     , this);
+   {{ tx }}_phy_seq_item_fifo  = new("{{ tx }}_phy_seq_item_fifo", this);
+   {{ rx }}_phy_seq_item_fifo  = new("{{ rx }}_phy_seq_item_fifo", this);
+   {{ tx }}_phy_mon_trn_fifo   = new("{{ tx }}_phy_mon_trn_fifo" , this);
+   {{ rx }}_phy_mon_trn_fifo   = new("{{ rx }}_phy_mon_trn_fifo" , this);
 
 endfunction : build_phase
 
@@ -177,38 +177,38 @@ task uvma_{{ name }}_cov_model_c::run_phase(uvm_phase phase);
 
          // Monitor tx transactions
          forever begin
-            tx_mon_trn_fifo.get(tx_mon_trn);
-            sample_tx_mon_trn();
+            {{ tx }}_mon_trn_fifo.get({{ tx }}_mon_trn);
+            sample_{{ tx }}_mon_trn();
          end
 
          // Monitor rx transactions
          forever begin
-            rx_mon_trn_fifo.get(rx_mon_trn);
-            sample_rx_mon_trn();
+            {{ rx }}_mon_trn_fifo.get({{ rx }}_mon_trn);
+            sample_{{ rx }}_mon_trn();
          end
 
          // Sequence tx phy items
          forever begin
-            tx_phy_seq_item_fifo.get(tx_phy_seq_item);
-            sample_tx_phy_seq_item();
+            {{ tx }}_phy_seq_item_fifo.get({{ tx }}_phy_seq_item);
+            sample_{{ tx }}_phy_seq_item();
          end
 
          // Sequence rx phy items
          forever begin
-            rx_phy_seq_item_fifo.get(rx_phy_seq_item);
-            sample_rx_phy_seq_item();
+            {{ rx }}_phy_seq_item_fifo.get({{ rx }}_phy_seq_item);
+            sample_{{ rx }}_phy_seq_item();
          end
 
          // Monitor tx phy transactions
          forever begin
-            tx_phy_mon_trn_fifo.get(tx_phy_mon_trn);
-            sample_tx_phy_mon_trn();
+            {{ tx }}_phy_mon_trn_fifo.get({{ tx }}_phy_mon_trn);
+            sample_{{ tx }}_phy_mon_trn();
          end
 
          // Monitor rx phy transactions
          forever begin
-            rx_phy_mon_trn_fifo.get(rx_phy_mon_trn);
-            sample_rx_phy_mon_trn();
+            {{ rx }}_phy_mon_trn_fifo.get({{ rx }}_phy_mon_trn);
+            sample_{{ rx }}_phy_mon_trn();
          end
       join_none
    end
@@ -237,46 +237,46 @@ function void uvma_{{ name }}_cov_model_c::sample_seq_item();
 endfunction : sample_seq_item
 
 
-function void uvma_{{ name }}_cov_model_c::sample_tx_mon_trn();
+function void uvma_{{ name }}_cov_model_c::sample_{{ tx }}_mon_trn();
 
-   // TODO Implement uvma_{{ name }}_cov_model_c::sample_tx_mon_trn();
+   // TODO Implement uvma_{{ name }}_cov_model_c::sample_{{ tx }}_mon_trn();
 
-endfunction : sample_tx_mon_trn
-
-
-function void uvma_{{ name }}_cov_model_c::sample_rx_mon_trn();
-
-   // TODO Implement uvma_{{ name }}_cov_model_c::sample_rx_mon_trn();
-
-endfunction : sample_rx_mon_trn
+endfunction : sample_{{ tx }}_mon_trn
 
 
-function void uvma_{{ name }}_cov_model_c::sample_tx_phy_seq_item();
+function void uvma_{{ name }}_cov_model_c::sample_{{ rx }}_mon_trn();
 
-   // TODO Implement uvma_{{ name }}_cov_model_c::sample_tx_phy_seq_item();
+   // TODO Implement uvma_{{ name }}_cov_model_c::sample_{{ rx }}_mon_trn();
 
-endfunction : sample_tx_phy_seq_item
-
-
-function void uvma_{{ name }}_cov_model_c::sample_rx_phy_seq_item();
-
-   // TODO Implement uvma_{{ name }}_cov_model_c::sample_rx_phy_seq_item();
-
-endfunction : sample_rx_phy_seq_item
+endfunction : sample_{{ rx }}_mon_trn
 
 
-function void uvma_{{ name }}_cov_model_c::sample_tx_phy_mon_trn();
+function void uvma_{{ name }}_cov_model_c::sample_{{ tx }}_phy_seq_item();
 
-   // TODO Implement uvma_{{ name }}_cov_model_c::sample_tx_phy_mon_trn();
+   // TODO Implement uvma_{{ name }}_cov_model_c::sample_{{ tx }}_phy_seq_item();
 
-endfunction : sample_tx_phy_mon_trn
+endfunction : sample_{{ tx }}_phy_seq_item
 
 
-function void uvma_{{ name }}_cov_model_c::sample_rx_phy_mon_trn();
+function void uvma_{{ name }}_cov_model_c::sample_{{ rx }}_phy_seq_item();
 
-   // TODO Implement uvma_{{ name }}_cov_model_c::sample_rx_phy_mon_trn();
+   // TODO Implement uvma_{{ name }}_cov_model_c::sample_{{ rx }}_phy_seq_item();
 
-endfunction : sample_rx_phy_mon_trn
+endfunction : sample_{{ rx }}_phy_seq_item
+
+
+function void uvma_{{ name }}_cov_model_c::sample_{{ tx }}_phy_mon_trn();
+
+   // TODO Implement uvma_{{ name }}_cov_model_c::sample_{{ tx }}_phy_mon_trn();
+
+endfunction : sample_{{ tx }}_phy_mon_trn
+
+
+function void uvma_{{ name }}_cov_model_c::sample_{{ rx }}_phy_mon_trn();
+
+   // TODO Implement uvma_{{ name }}_cov_model_c::sample_{{ rx }}_phy_mon_trn();
+
+endfunction : sample_{{ rx }}_phy_mon_trn
 
 
 `endif // __UVMA_{{ upper(name) }}_COV_MODEL_SV__

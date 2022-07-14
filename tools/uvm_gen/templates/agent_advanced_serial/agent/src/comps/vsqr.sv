@@ -23,26 +23,26 @@ class uvma_{{ name }}_vsqr_c extends uvml_vsqr_c #(
 
    /// @defgroup Components
    /// @{
-{% if symmetric %}   uvma_{{ name }}_phy_sqr_c  tx_sequencer; ///< TODO Describe uvma_{{ name }}_vsqr_c::tx_sequencer
-   uvma_{{ name }}_phy_sqr_c  rx_sequencer; ///< TODO Describe uvma_{{ name }}_vsqr_c::rx_sequencer
-{% else %}   uvma_{{ name }}_tx_sqr_c  tx_sequencer; ///< TODO Describe uvma_{{ name }}_vsqr_c::tx_sequencer
-   uvma_{{ name }}_rx_sqr_c  rx_sequencer; ///< TODO Describe uvma_{{ name }}_vsqr_c::rx_sequencer
+{% if symmetric %}   uvma_{{ name }}_phy_sqr_c  {{ tx }}_sequencer; ///< TODO Describe uvma_{{ name }}_vsqr_c::{{ tx }}_sequencer
+   uvma_{{ name }}_phy_sqr_c  {{ rx }}_sequencer; ///< TODO Describe uvma_{{ name }}_vsqr_c::{{ rx }}_sequencer
+{% else %}   uvma_{{ name }}_{{ tx }}_sqr_c  {{ tx }}_sequencer; ///< TODO Describe uvma_{{ name }}_vsqr_c::{{ tx }}_sequencer
+   uvma_{{ name }}_{{ rx }}_sqr_c  {{ rx }}_sequencer; ///< TODO Describe uvma_{{ name }}_vsqr_c::{{ rx }}_sequencer
 {% endif %}   /// @}
 
    /// @defgroup TLM
    /// @{
    uvm_seq_item_pull_port #(uvm_sequence_item)  upstream_sqr_port; ///< TODO Describe uvma_{{ name }}_vsqr_c::upstream_sqr_port
    uvm_analysis_port      #(uvma_{{ name }}_seq_item_c)  seq_item_ap ; ///< TODO Describe uvma_{{ name }}_vswr_c::seq_item_ap
-   uvm_analysis_port      #(uvma_{{ name }}_mon_trn_c )  tx_mon_trn_ap; ///< TODO Rename this
-   uvm_analysis_port      #(uvma_{{ name }}_mon_trn_c )  rx_mon_trn_ap; ///< TODO Rename this
-{% if symmetric %}   uvm_tlm_analysis_fifo  #(uvma_{{ name }}_phy_mon_trn_c)  tx_phy_mon_trn_fifo  ; ///< TODO Describe uvma_{{ name }}_vswr_c::tx_phy_mon_trn_fifo
-   uvm_tlm_analysis_fifo  #(uvma_{{ name }}_phy_mon_trn_c)  rx_phy_mon_trn_fifo  ; ///< TODO Describe uvma_{{ name }}_vswr_c::rx_phy_mon_trn_fifo
-   uvm_analysis_export    #(uvma_{{ name }}_phy_mon_trn_c)  tx_phy_mon_trn_export; ///< TODO Describe uvma_{{ name }}_vswr_c::tx_phy_mon_trn_export
-   uvm_analysis_export    #(uvma_{{ name }}_phy_mon_trn_c)  rx_phy_mon_trn_export; ///< TODO Describe uvma_{{ name }}_vswr_c::rx_phy_mon_trn_export
-{% else %}   uvm_tlm_analysis_fifo  #(uvma_{{ name }}_tx_mon_trn_c)  tx_phy_mon_trn_fifo  ; ///< TODO Describe uvma_{{ name }}_vswr_c::tx_phy_mon_trn_fifo
-   uvm_tlm_analysis_fifo  #(uvma_{{ name }}_rx_mon_trn_c)  rx_phy_mon_trn_fifo  ; ///< TODO Describe uvma_{{ name }}_vswr_c::rx_phy_mon_trn_fifo
-   uvm_analysis_export    #(uvma_{{ name }}_tx_mon_trn_c)  tx_phy_mon_trn_export; ///< TODO Describe uvma_{{ name }}_vswr_c::tx_phy_mon_trn_export
-   uvm_analysis_export    #(uvma_{{ name }}_rx_mon_trn_c)  rx_phy_mon_trn_export; ///< TODO Describe uvma_{{ name }}_vswr_c::rx_phy_mon_trn_export
+   uvm_analysis_port      #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_mon_trn_ap; ///< TODO Rename this
+   uvm_analysis_port      #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_mon_trn_ap; ///< TODO Rename this
+{% if symmetric %}   uvm_tlm_analysis_fifo  #(uvma_{{ name }}_phy_mon_trn_c)  {{ tx }}_phy_mon_trn_fifo  ; ///< TODO Describe uvma_{{ name }}_vswr_c::{{ tx }}_phy_mon_trn_fifo
+   uvm_tlm_analysis_fifo  #(uvma_{{ name }}_phy_mon_trn_c)  {{ rx }}_phy_mon_trn_fifo  ; ///< TODO Describe uvma_{{ name }}_vswr_c::{{ rx }}_phy_mon_trn_fifo
+   uvm_analysis_export    #(uvma_{{ name }}_phy_mon_trn_c)  {{ tx }}_phy_mon_trn_export; ///< TODO Describe uvma_{{ name }}_vswr_c::{{ tx }}_phy_mon_trn_export
+   uvm_analysis_export    #(uvma_{{ name }}_phy_mon_trn_c)  {{ rx }}_phy_mon_trn_export; ///< TODO Describe uvma_{{ name }}_vswr_c::{{ rx }}_phy_mon_trn_export
+{% else %}   uvm_tlm_analysis_fifo  #(uvma_{{ name }}_{{ tx }}_mon_trn_c)  {{ tx }}_phy_mon_trn_fifo  ; ///< TODO Describe uvma_{{ name }}_vswr_c::{{ tx }}_phy_mon_trn_fifo
+   uvm_tlm_analysis_fifo  #(uvma_{{ name }}_{{ rx }}_mon_trn_c)  {{ rx }}_phy_mon_trn_fifo  ; ///< TODO Describe uvma_{{ name }}_vswr_c::{{ rx }}_phy_mon_trn_fifo
+   uvm_analysis_export    #(uvma_{{ name }}_{{ tx }}_mon_trn_c)  {{ tx }}_phy_mon_trn_export; ///< TODO Describe uvma_{{ name }}_vswr_c::{{ tx }}_phy_mon_trn_export
+   uvm_analysis_export    #(uvma_{{ name }}_{{ rx }}_mon_trn_c)  {{ rx }}_phy_mon_trn_export; ///< TODO Describe uvma_{{ name }}_vswr_c::{{ rx }}_phy_mon_trn_export
 {% endif %}   /// @}
 
 
@@ -120,10 +120,10 @@ endfunction : get_cntxt
 
 function void uvma_{{ name }}_vsqr_c::create_components();
 
-{% if %}   tx_sequencer = uvma_{{ name }}_phy_sqr_c::type_id::create("tx_sequencer", this);
-   rx_sequencer = uvma_{{ name }}_phy_sqr_c::type_id::create("rx_sequencer", this);
-{% else %}   tx_sequencer = uvma_{{ name }}_tx_sqr_c::type_id::create("tx_sequencer", this);
-   rx_sequencer = uvma_{{ name }}_rx_sqr_c::type_id::create("rx_sequencer", this);
+{% if %}   {{ tx }}_sequencer = uvma_{{ name }}_phy_sqr_c::type_id::create("{{ tx }}_sequencer", this);
+   {{ rx }}_sequencer = uvma_{{ name }}_phy_sqr_c::type_id::create("{{ rx }}_sequencer", this);
+{% else %}   {{ tx }}_sequencer = uvma_{{ name }}_{{ tx }}_sqr_c::type_id::create("{{ tx }}_sequencer", this);
+   {{ rx }}_sequencer = uvma_{{ name }}_{{ rx }}_sqr_c::type_id::create("{{ rx }}_sequencer", this);
 {% endif %}
 
 endfunction : create_components
@@ -133,20 +133,20 @@ function void uvma_{{ name }}_vsqr_c::create_ports();
 
    upstream_sqr_port = new("upstream_sqr_port", this);
    seq_item_ap       = new("seq_item_ap", this);
-   tx_mon_trn_ap         = new("tx_mon_trn_ap"        , this);
-   rx_mon_trn_ap         = new("rx_mon_trn_ap"        , this);
-   tx_phy_mon_trn_fifo   = new("tx_phy_mon_trn_fifo"  , this);
-   rx_phy_mon_trn_fifo   = new("rx_phy_mon_trn_fifo"  , this);
-   tx_phy_mon_trn_export = new("tx_phy_mon_trn_export", this);
-   rx_phy_mon_trn_export = new("rx_phy_mon_trn_export", this);
+   {{ tx }}_mon_trn_ap         = new("{{ tx }}_mon_trn_ap"        , this);
+   {{ rx }}_mon_trn_ap         = new("{{ rx }}_mon_trn_ap"        , this);
+   {{ tx }}_phy_mon_trn_fifo   = new("{{ tx }}_phy_mon_trn_fifo"  , this);
+   {{ rx }}_phy_mon_trn_fifo   = new("{{ rx }}_phy_mon_trn_fifo"  , this);
+   {{ tx }}_phy_mon_trn_export = new("{{ tx }}_phy_mon_trn_export", this);
+   {{ rx }}_phy_mon_trn_export = new("{{ rx }}_phy_mon_trn_export", this);
 
 endfunction : create_ports
 
 
 function void uvma_{{ name }}_vsqr_c::connect_fifos();
 
-   tx_phy_mon_trn_export.connect(tx_phy_mon_trn_fifo.analysis_export);
-   rx_phy_mon_trn_export.connect(rx_phy_mon_trn_fifo.analysis_export);
+   {{ tx }}_phy_mon_trn_export.connect({{ tx }}_phy_mon_trn_fifo.analysis_export);
+   {{ rx }}_phy_mon_trn_export.connect({{ rx }}_phy_mon_trn_fifo.analysis_export);
 
 endfunction : connect_fifos
 

@@ -21,31 +21,31 @@ class uvma_{{ name }}_logger_c extends uvm_component;
    /// @defgroup Components
    /// @{
    uvml_logs_metadata_logger_c #(uvma_{{ name }}_seq_item_c)  seq_item_logger; ///<
-   uvml_logs_metadata_logger_c #(uvma_{{ name }}_mon_trn_c )  tx_mon_trn_logger; ///<
-   uvml_logs_metadata_logger_c #(uvma_{{ name }}_mon_trn_c )  rx_mon_trn_logger; ///<
-{% if symmetric %}   uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_seq_item_c)  tx_phy_seq_item_logger ; ///<
-   uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_seq_item_c)  rx_phy_seq_item_logger ; ///<
-   uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_mon_trn_c )  tx_phy_mon_trn_logger  ; ///<
-   uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_mon_trn_c )  rx_phy_mon_trn_logger  ; ///<
-{% else %}   uvml_logs_metadata_logger_c #(uvma_{{ name }}_tx_seq_item_c)  tx_phy_seq_item_logger ; ///<
-   uvml_logs_metadata_logger_c #(uvma_{{ name }}_rx_seq_item_c)  rx_phy_seq_item_logger ; ///<
-   uvml_logs_metadata_logger_c #(uvma_{{ name }}_tx_mon_trn_c )  tx_phy_mon_trn_logger  ; ///<
-   uvml_logs_metadata_logger_c #(uvma_{{ name }}_rx_mon_trn_c )  rx_phy_mon_trn_logger  ; ///<
+   uvml_logs_metadata_logger_c #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_mon_trn_logger; ///<
+   uvml_logs_metadata_logger_c #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_mon_trn_logger; ///<
+{% if symmetric %}   uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_seq_item_c)  {{ tx }}_phy_seq_item_logger ; ///<
+   uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_seq_item_c)  {{ rx }}_phy_seq_item_logger ; ///<
+   uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_mon_trn_c )  {{ tx }}_phy_mon_trn_logger  ; ///<
+   uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_mon_trn_c )  {{ rx }}_phy_mon_trn_logger  ; ///<
+{% else %}   uvml_logs_metadata_logger_c #(uvma_{{ name }}_{{ tx }}_seq_item_c)  {{ tx }}_phy_seq_item_logger ; ///<
+   uvml_logs_metadata_logger_c #(uvma_{{ name }}_{{ rx }}_seq_item_c)  {{ rx }}_phy_seq_item_logger ; ///<
+   uvml_logs_metadata_logger_c #(uvma_{{ name }}_{{ tx }}_mon_trn_c )  {{ tx }}_phy_mon_trn_logger  ; ///<
+   uvml_logs_metadata_logger_c #(uvma_{{ name }}_{{ rx }}_mon_trn_c )  {{ rx }}_phy_mon_trn_logger  ; ///<
 {% endif %}   /// @}
 
    /// @defgroup TLM
    /// @{
    uvm_analysis_export #(uvma_{{ name }}_seq_item_c)  seq_item_export   ; ///<
-   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c )  tx_mon_trn_export ; ///< TODO Rename this
-   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c )  rx_mon_trn_export ; ///< TODO Rename this
-{% if symmetric %}   uvm_analysis_export #(uvma_{{ name }}_phy_seq_item_c)  tx_phy_seq_item_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_phy_seq_item_c)  rx_phy_seq_item_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_phy_mon_trn_c )  tx_phy_mon_trn_export ; ///<
-   uvm_analysis_export #(uvma_{{ name }}_phy_mon_trn_c )  rx_phy_mon_trn_export ; ///<
-{% else %}   uvm_analysis_export #(uvma_{{ name }}_tx_seq_item_c)  tx_phy_seq_item_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_rx_seq_item_c)  rx_phy_seq_item_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_tx_mon_trn_c )  tx_phy_mon_trn_export ; ///<
-   uvm_analysis_export #(uvma_{{ name }}_rx_mon_trn_c )  rx_phy_mon_trn_export ; ///<
+   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_mon_trn_export ; ///< TODO Rename this
+   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_mon_trn_export ; ///< TODO Rename this
+{% if symmetric %}   uvm_analysis_export #(uvma_{{ name }}_phy_seq_item_c)  {{ tx }}_phy_seq_item_export; ///<
+   uvm_analysis_export #(uvma_{{ name }}_phy_seq_item_c)  {{ rx }}_phy_seq_item_export; ///<
+   uvm_analysis_export #(uvma_{{ name }}_phy_mon_trn_c )  {{ tx }}_phy_mon_trn_export ; ///<
+   uvm_analysis_export #(uvma_{{ name }}_phy_mon_trn_c )  {{ rx }}_phy_mon_trn_export ; ///<
+{% else %}   uvm_analysis_export #(uvma_{{ name }}_{{ tx }}_seq_item_c)  {{ tx }}_phy_seq_item_export; ///<
+   uvm_analysis_export #(uvma_{{ name }}_{{ rx }}_seq_item_c)  {{ rx }}_phy_seq_item_export; ///<
+   uvm_analysis_export #(uvma_{{ name }}_{{ tx }}_mon_trn_c )  {{ tx }}_phy_mon_trn_export ; ///<
+   uvm_analysis_export #(uvma_{{ name }}_{{ rx }}_mon_trn_c )  {{ rx }}_phy_mon_trn_export ; ///<
 {% endif %}   /// @}
 
 
@@ -147,16 +147,16 @@ endfunction : get_cntxt
 function void uvma_{{ name }}_logger_c::create_components();
 
    seq_item_logger = uvml_logs_metadata_logger_c #(uvma_{{ name }}_seq_item_c)::type_id::create("seq_item_logger", this);
-   tx_mon_trn_logger = uvml_logs_metadata_logger_c #(uvma_{{ name }}_mon_trn_c)::type_id::create("tx_mon_trn_logger", this);
-   rx_mon_trn_logger = uvml_logs_metadata_logger_c #(uvma_{{ name }}_mon_trn_c)::type_id::create("rx_mon_trn_logger", this);
-{% if symmetric %}   tx_phy_seq_item_logger = uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_seq_item_c)::type_id::create("tx_phy_seq_item_logger", this);
-   rx_phy_seq_item_logger = uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_seq_item_c)::type_id::create("rx_phy_seq_item_logger", this);
-   tx_phy_mon_trn_logger  = uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_mon_trn_c )::type_id::create("tx_phy_mon_trn_logger" , this);
-   rx_phy_mon_trn_logger  = uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_mon_trn_c )::type_id::create("rx_phy_mon_trn_logger" , this);
-{% else %}   tx_phy_seq_item_logger = uvml_logs_metadata_logger_c #(uvma_{{ name }}_tx_seq_item_c)::type_id::create("tx_phy_seq_item_logger", this);
-   rx_phy_seq_item_logger = uvml_logs_metadata_logger_c #(uvma_{{ name }}_rx_seq_item_c)::type_id::create("rx_phy_seq_item_logger", this);
-   tx_phy_mon_trn_logger  = uvml_logs_metadata_logger_c #(uvma_{{ name }}_tx_mon_trn_c )::type_id::create("tx_phy_mon_trn_logger" , this);
-   rx_phy_mon_trn_logger  = uvml_logs_metadata_logger_c #(uvma_{{ name }}_rx_mon_trn_c )::type_id::create("rx_phy_mon_trn_logger" , this);
+   {{ tx }}_mon_trn_logger = uvml_logs_metadata_logger_c #(uvma_{{ name }}_mon_trn_c)::type_id::create("{{ tx }}_mon_trn_logger", this);
+   {{ rx }}_mon_trn_logger = uvml_logs_metadata_logger_c #(uvma_{{ name }}_mon_trn_c)::type_id::create("{{ rx }}_mon_trn_logger", this);
+{% if symmetric %}   {{ tx }}_phy_seq_item_logger = uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_seq_item_c)::type_id::create("{{ tx }}_phy_seq_item_logger", this);
+   {{ rx }}_phy_seq_item_logger = uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_seq_item_c)::type_id::create("{{ rx }}_phy_seq_item_logger", this);
+   {{ tx }}_phy_mon_trn_logger  = uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_mon_trn_c )::type_id::create("{{ tx }}_phy_mon_trn_logger" , this);
+   {{ rx }}_phy_mon_trn_logger  = uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_mon_trn_c )::type_id::create("{{ rx }}_phy_mon_trn_logger" , this);
+{% else %}   {{ tx }}_phy_seq_item_logger = uvml_logs_metadata_logger_c #(uvma_{{ name }}_{{ tx }}_seq_item_c)::type_id::create("{{ tx }}_phy_seq_item_logger", this);
+   {{ rx }}_phy_seq_item_logger = uvml_logs_metadata_logger_c #(uvma_{{ name }}_{{ rx }}_seq_item_c)::type_id::create("{{ rx }}_phy_seq_item_logger", this);
+   {{ tx }}_phy_mon_trn_logger  = uvml_logs_metadata_logger_c #(uvma_{{ name }}_{{ tx }}_mon_trn_c )::type_id::create("{{ tx }}_phy_mon_trn_logger" , this);
+   {{ rx }}_phy_mon_trn_logger  = uvml_logs_metadata_logger_c #(uvma_{{ name }}_{{ rx }}_mon_trn_c )::type_id::create("{{ rx }}_phy_mon_trn_logger" , this);
 {% endif %}
 endfunction : create_components
 
@@ -164,12 +164,12 @@ endfunction : create_components
 function void uvma_{{ name }}_logger_c::configure_loggers();
 
    seq_item_logger.set_file_name({get_parent().get_full_name(), ".seq_item"});
-   tx_mon_trn_logger     .set_file_name({get_parent().get_full_name(), ".tx_mon_trn"     });
-   rx_mon_trn_logger     .set_file_name({get_parent().get_full_name(), ".rx_mon_trn"     });
-   tx_phy_seq_item_logger.set_file_name({get_parent().get_full_name(), ".tx_phy_seq_item"});
-   rx_phy_seq_item_logger.set_file_name({get_parent().get_full_name(), ".rx_phy_seq_item"});
-   tx_phy_mon_trn_logger .set_file_name({get_parent().get_full_name(), ".tx_phy_mon_trn" });
-   rx_phy_mon_trn_logger .set_file_name({get_parent().get_full_name(), ".rx_phy_mon_trn" });
+   {{ tx }}_mon_trn_logger     .set_file_name({get_parent().get_full_name(), ".{{ tx }}_mon_trn"     });
+   {{ rx }}_mon_trn_logger     .set_file_name({get_parent().get_full_name(), ".{{ rx }}_mon_trn"     });
+   {{ tx }}_phy_seq_item_logger.set_file_name({get_parent().get_full_name(), ".{{ tx }}_phy_seq_item"});
+   {{ rx }}_phy_seq_item_logger.set_file_name({get_parent().get_full_name(), ".{{ rx }}_phy_seq_item"});
+   {{ tx }}_phy_mon_trn_logger .set_file_name({get_parent().get_full_name(), ".{{ tx }}_phy_mon_trn" });
+   {{ rx }}_phy_mon_trn_logger .set_file_name({get_parent().get_full_name(), ".{{ rx }}_phy_mon_trn" });
 
 endfunction : configure_loggers
 
@@ -177,12 +177,12 @@ endfunction : configure_loggers
 function void uvma_{{ name }}_logger_c::connect_loggers();
 
    seq_item_export = seq_item_logger.analysis_export;
-   tx_mon_trn_export      = tx_mon_trn_logger     .analysis_export;
-   rx_mon_trn_export      = rx_mon_trn_logger     .analysis_export;
-   tx_phy_seq_item_export = tx_phy_seq_item_logger.analysis_export;
-   rx_phy_seq_item_export = rx_phy_seq_item_logger.analysis_export;
-   tx_phy_mon_trn_export  = tx_phy_mon_trn_logger .analysis_export;
-   rx_phy_mon_trn_export  = rx_phy_mon_trn_logger .analysis_export;
+   {{ tx }}_mon_trn_export      = {{ tx }}_mon_trn_logger     .analysis_export;
+   {{ rx }}_mon_trn_export      = {{ rx }}_mon_trn_logger     .analysis_export;
+   {{ tx }}_phy_seq_item_export = {{ tx }}_phy_seq_item_logger.analysis_export;
+   {{ rx }}_phy_seq_item_export = {{ rx }}_phy_seq_item_logger.analysis_export;
+   {{ tx }}_phy_mon_trn_export  = {{ tx }}_phy_mon_trn_logger .analysis_export;
+   {{ rx }}_phy_mon_trn_export  = {{ rx }}_phy_mon_trn_logger .analysis_export;
 
 endfunction : connect_loggers
 

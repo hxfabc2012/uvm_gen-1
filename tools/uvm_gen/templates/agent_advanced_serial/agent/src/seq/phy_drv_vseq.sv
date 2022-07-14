@@ -61,6 +61,7 @@ endfunction : new
 
 task uvma_{{ name }}_phy_drv_vseq_c::body();
 
+   `uvm_info("{{ upper(name) }}_PHY_DRV_VSEQ", "Phy Driver Virtual Sequence has started", UVM_HIGH)
    forever begin
       fork
          begin : main
@@ -147,15 +148,15 @@ task uvma_{{ name }}_phy_drv_vseq_c::drive(ref uvma_{{ name }}_seq_item_c seq_it
    `uvm_info("{{ upper(name) }}_PHY_DRV_VSEQ", $sformatf("Driving %0d bits of serial data", num_seq_item_bits), UVM_DEBUG)
    for (int ii=num_seq_item_bits-1; ii>=0; ii--) begin
       case (cfg.drv_mode)
-         UVMA_{{ upper(name) }}_DIRECTION_TX : begin
-            `uvm_create_on(req, p_sequencer.tx_serial_sequencer)
-            `uvm_rand_send_pri_with(req, `UVMA_{{ upper(name) }}_TX_DRV_SEQ_ITEM_PRI, {
+         UVMA_{{ upper(name) }}_DIRECTION_{{ upper(tx) }} : begin
+            `uvm_create_on(req, p_sequencer.{{ tx }}_serial_sequencer)
+            `uvm_rand_send_pri_with(req, `UVMA_{{ upper(name) }}_{{ upper(tx) }}_DRV_SEQ_ITEM_PRI, {
                dp == frame_bits[ii];
             })
          end
-         UVMA_{{ upper(name) }}_DIRECTION_RX : begin
-            `uvm_create_on(req, p_sequencer.rx_serial_sequencer)
-            `uvm_rand_send_pri_with(req, `UVMA_{{ upper(name) }}_RX_DRV_SEQ_ITEM_PRI, {
+         UVMA_{{ upper(name) }}_DIRECTION_{{ upper(rx) }} : begin
+            `uvm_create_on(req, p_sequencer.{{ rx }}_serial_sequencer)
+            `uvm_rand_send_pri_with(req, `UVMA_{{ upper(name) }}_{{ upper(rx) }}_DRV_SEQ_ITEM_PRI, {
                dp == frame_bits[ii];
             })
          end

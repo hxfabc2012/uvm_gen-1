@@ -3,23 +3,23 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_TX_MON_TRN_SV__
-`define __UVMA_{{ upper(name) }}_TX_MON_TRN_SV__
+`ifndef __UVMA_{{ upper(name) }}_{{ upper(tx) }}_MON_TRN_SV__
+`define __UVMA_{{ upper(name) }}_{{ upper(tx) }}_MON_TRN_SV__
 
 
 /**
  * Object rebuilt by the {{ full_name }} monitor's A Channel Master.  Analog of uvma_{{ name }}_{{ mode_1 }}_seq_item_c.
  */
-class uvma_{{ name }}_tx_mon_trn_c extends uvml_mon_trn_c;
+class uvma_{{ name }}_{{ tx }}_mon_trn_c extends uvml_mon_trn_c;
 
    uvma_{{ name }}_cfg_c  cfg; ///< Agent configuration handle
 
    // Data
-   logic  txp; ///< TODO Describe uvma_{{ name }}_tx_mon_trn_c::txd
-   logic  txn; ///< TODO Describe uvma_{{ name }}_tx_mon_trn_c::txd
+   logic  txp; ///< TODO Describe uvma_{{ name }}_{{ tx }}_mon_trn_c::txd
+   logic  txn; ///< TODO Describe uvma_{{ name }}_{{ tx }}_mon_trn_c::txd
 
 
-   `uvm_object_utils_begin(uvma_{{ name }}_tx_mon_trn_c)
+   `uvm_object_utils_begin(uvma_{{ name }}_{{ tx }}_mon_trn_c)
       `uvm_field_int(txp, UVM_DEFAULT)
       `uvm_field_int(txn, UVM_DEFAULT)
    `uvm_object_utils_end
@@ -28,24 +28,24 @@ class uvma_{{ name }}_tx_mon_trn_c extends uvml_mon_trn_c;
    /**
     * Default constructor.
     */
-   extern function new(string name="uvma_{{ name }}_tx_mon_trn");
+   extern function new(string name="uvma_{{ name }}_{{ tx }}_mon_trn");
 
    /**
-    * TODO Describe uvma_{{ name }}_tx_mon_trn_c::get_metadata()
+    * TODO Describe uvma_{{ name }}_{{ tx }}_mon_trn_c::get_metadata()
     */
    extern function uvml_metadata_t get_metadata();
 
-endclass : uvma_{{ name }}_tx_mon_trn_c
+endclass : uvma_{{ name }}_{{ tx }}_mon_trn_c
 
 
-function uvma_{{ name }}_tx_mon_trn_c::new(string name="uvma_{{ name }}_tx_mon_trn");
+function uvma_{{ name }}_{{ tx }}_mon_trn_c::new(string name="uvma_{{ name }}_{{ tx }}_mon_trn");
 
    super.new(name);
 
 endfunction : new
 
 
-function uvml_metadata_t uvma_{{ name }}_tx_mon_trn_c::get_metadata();
+function uvml_metadata_t uvma_{{ name }}_{{ tx }}_mon_trn_c::get_metadata();
 
    string txp_str = $sformatf("%h", txp);
    string txn_str = $sformatf("%h", txn);
@@ -71,4 +71,4 @@ function uvml_metadata_t uvma_{{ name }}_tx_mon_trn_c::get_metadata();
 endfunction : get_metadata
 
 
-`endif // __UVMA_{{ upper(name) }}_TX_MON_TRN_SV__
+`endif // __UVMA_{{ upper(name) }}_{{ upper(tx) }}_MON_TRN_SV__

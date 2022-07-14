@@ -10,12 +10,12 @@
 /**
  * Component driving a {{ full_name }} virtual interface (uvma_{{ name }}_if).
  */
-class uvma_{{ name }}_rx_drv_c extends uvml_drv_c #(
-   .REQ(uvma_{{ name }}_rx_seq_item_c),
-   .RSP(uvma_{{ name }}_rx_seq_item_c)
+class uvma_{{ name }}_{{ rx }}_drv_c extends uvml_drv_c #(
+   .REQ(uvma_{{ name }}_{{ rx }}_seq_item_c),
+   .RSP(uvma_{{ name }}_{{ rx }}_seq_item_c)
 );
 
-   virtual uvma_{{ name }}_if.drv_rx_mp  mp; ///< Handle to virtual interface modport
+   virtual uvma_{{ name }}_if.drv_{{ rx }}_mp  mp; ///< Handle to virtual interface modport
 
    /// @defgroup Objects
    /// @{
@@ -25,11 +25,11 @@ class uvma_{{ name }}_rx_drv_c extends uvml_drv_c #(
 
    /// @defgroup TLM
    /// @{
-   uvm_analysis_port#(uvma_{{ name }}_rx_seq_item_c)  ap; ///<
+   uvm_analysis_port#(uvma_{{ name }}_{{ rx }}_seq_item_c)  ap; ///<
    /// @}
 
 
-   `uvm_component_utils_begin(uvma_{{ name }}_rx_drv_c)
+   `uvm_component_utils_begin(uvma_{{ name }}_{{ rx }}_drv_c)
       `uvm_field_object(cfg  , UVM_DEFAULT)
       `uvm_field_object(cntxt, UVM_DEFAULT)
    `uvm_component_utils_end
@@ -38,7 +38,7 @@ class uvma_{{ name }}_rx_drv_c extends uvml_drv_c #(
    /**
     * Default constructor.
     */
-   extern function new(string name="uvma_{{ name }}_rx_drv", uvm_component parent=null);
+   extern function new(string name="uvma_{{ name }}_{{ rx }}_drv", uvm_component parent=null);
 
    /**
     * 1. Ensures cfg & cntxt handles are not null.
@@ -64,41 +64,41 @@ class uvma_{{ name }}_rx_drv_c extends uvml_drv_c #(
    /**
     * Appends cfg, prints out trn and issues heartbeat.
     */
-   extern virtual function void process_req(ref uvma_{{ name }}_rx_seq_item_c req);
+   extern virtual function void process_req(ref uvma_{{ name }}_{{ rx }}_seq_item_c req);
 
    /**
     * Drives the virtual interface's (cntxt.vif) signals using req's contents.
     */
-   extern virtual task drv_req(ref uvma_{{ name }}_rx_seq_item_c req);
+   extern virtual task drv_req(ref uvma_{{ name }}_{{ rx }}_seq_item_c req);
 
    /**
-    * TODO Describe uvma_{{ name }}_rx_drv_c::sample_post_clk()
+    * TODO Describe uvma_{{ name }}_{{ rx }}_drv_c::sample_post_clk()
     */
-   extern virtual task sample_post_clk(ref uvma_{{ name }}_rx_seq_item_c req);
+   extern virtual task sample_post_clk(ref uvma_{{ name }}_{{ rx }}_seq_item_c req);
 
-endclass : uvma_{{ name }}_rx_drv_c
+endclass : uvma_{{ name }}_{{ rx }}_drv_c
 
 
-function uvma_{{ name }}_rx_drv_c::new(string name="uvma_{{ name }}_rx_drv", uvm_component parent=null);
+function uvma_{{ name }}_{{ rx }}_drv_c::new(string name="uvma_{{ name }}_{{ rx }}_drv", uvm_component parent=null);
 
    super.new(name, parent);
 
 endfunction : new
 
 
-function void uvma_{{ name }}_rx_drv_c::build_phase(uvm_phase phase);
+function void uvma_{{ name }}_{{ rx }}_drv_c::build_phase(uvm_phase phase);
 
    super.build_phase(phase);
    get_cfg  ();
    get_cntxt();
 
    ap = new("ap", this);
-   mp = cntxt.vif.drv_rx_mp;
+   mp = cntxt.vif.drv_{{ rx }}_mp;
 
 endfunction : build_phase
 
 
-task uvma_{{ name }}_rx_drv_c::run_phase(uvm_phase phase);
+task uvma_{{ name }}_{{ rx }}_drv_c::run_phase(uvm_phase phase);
 
    super.run_phase(phase);
    if (cfg.enabled && cfg.is_active && (cfg.drv_mode == UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }})) begin
@@ -114,27 +114,27 @@ task uvma_{{ name }}_rx_drv_c::run_phase(uvm_phase phase);
 endtask : run_phase
 
 
-function void uvma_{{ name }}_rx_drv_c::get_cfg();
+function void uvma_{{ name }}_{{ rx }}_drv_c::get_cfg();
 
    void'(uvm_config_db#(uvma_{{ name }}_cfg_c)::get(this, "", "cfg", cfg));
    if (cfg == null) begin
-      `uvm_fatal("{{ upper(name) }}_RX_DRV", "Configuration handle is null")
+      `uvm_fatal("{{ upper(name) }}_{{ upper(rx) }}_DRV", "Configuration handle is null")
    end
 
 endfunction : get_cfg
 
 
-function void uvma_{{ name }}_rx_drv_c::get_cntxt();
+function void uvma_{{ name }}_{{ rx }}_drv_c::get_cntxt();
 
    void'(uvm_config_db#(uvma_{{ name }}_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (cntxt == null) begin
-      `uvm_fatal("{{ upper(name) }}_RX_DRV", "Context handle is null")
+      `uvm_fatal("{{ upper(name) }}_{{ upper(rx) }}_DRV", "Context handle is null")
    end
 
 endfunction : get_cntxt
 
 
-function void uvma_{{ name }}_rx_drv_c::process_req(ref uvma_{{ name }}_rx_seq_item_c req);
+function void uvma_{{ name }}_{{ rx }}_drv_c::process_req(ref uvma_{{ name }}_{{ rx }}_seq_item_c req);
 
    req.cfg = cfg;
    `uvm_info("{{ upper(name) }}_{{ upper(rx) }}_DRV", $sformatf("Got new req from the sequencer:\n%s", req.sprint()), UVM_DEBUG)
@@ -142,29 +142,29 @@ function void uvma_{{ name }}_rx_drv_c::process_req(ref uvma_{{ name }}_rx_seq_i
 endfunction : process_req
 
 
-task uvma_{{ name }}_rx_drv_c::drv_req(ref uvma_{{ name }}_rx_seq_item_c req);
+task uvma_{{ name }}_{{ rx }}_drv_c::drv_req(ref uvma_{{ name }}_{{ rx }}_seq_item_c req);
 
 {% if ddr %}   bit valid_edge = 0;
    do begin
-      @(mp.drv_rx_cb);
-      if (mp.rx_clk inside {0,1}) begin
+      @(mp.drv_{{ rx }}_cb);
+      if (mp.{{ rx }}_clk inside {0,1}) begin
          valid_edge = 1;
-         mp.drv_rx_cb.rx0p <= req.rx0p;
-         mp.drv_rx_cb.rx0n <= req.rx0n;
-         mp.drv_rx_cb.rx1p <= req.rx1p;
-         mp.drv_rx_cb.rx1n <= req.rx1n;
+         mp.drv_{{ rx }}_cb.rx0p <= req.rx0p;
+         mp.drv_{{ rx }}_cb.rx0n <= req.rx0n;
+         mp.drv_{{ rx }}_cb.rx1p <= req.rx1p;
+         mp.drv_{{ rx }}_cb.rx1n <= req.rx1n;
       end
    end while (!valid_edge);
-{% else %}   @(mp.drv_rx_cb);
-   mp.drv_rx_cb.rx0p <= req.rx0p;
-   mp.drv_rx_cb.rx0n <= req.rx0n;
-   mp.drv_rx_cb.rx1p <= req.rx1p;
-   mp.drv_rx_cb.rx1n <= req.rx1n;
+{% else %}   @(mp.drv_{{ rx }}_cb);
+   mp.drv_{{ rx }}_cb.rx0p <= req.rx0p;
+   mp.drv_{{ rx }}_cb.rx0n <= req.rx0n;
+   mp.drv_{{ rx }}_cb.rx1p <= req.rx1p;
+   mp.drv_{{ rx }}_cb.rx1n <= req.rx1n;
 {% endif %}
 endtask : drv_req
 
 
-task uvma_{{ name }}_rx_drv_c::sample_post_clk(ref uvma_{{ name }}_rx_seq_item_c req);
+task uvma_{{ name }}_{{ rx }}_drv_c::sample_post_clk(ref uvma_{{ name }}_{{ rx }}_seq_item_c req);
 
 
 

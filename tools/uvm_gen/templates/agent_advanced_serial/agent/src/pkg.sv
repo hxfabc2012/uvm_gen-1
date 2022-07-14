@@ -38,22 +38,22 @@ package uvma_{{ name }}_pkg;
    // Transactions
    `include "uvma_{{ name }}_mon_trn.sv"
 {% if symmetric %}   `include "uvma_{{ name }}_phy_mon_trn.sv"
-{% else %}   `include "uvma_{{ name }}_tx_mon_trn.sv"
-   `include "uvma_{{ name }}_rx_mon_trn.sv"
+{% else %}   `include "uvma_{{ name }}_{{ tx }}_mon_trn.sv"
+   `include "uvma_{{ name }}_{{ rx }}_mon_trn.sv"
 {% endif %}   `include "uvma_{{ name }}_seq_item.sv"
 {% if symmetric %}   `include "uvma_{{ name }}_phy_seq_item.sv"
-{% else %}   `include "uvma_{{ name }}_tx_seq_item.sv"
-   `include "uvma_{{ name }}_rx_seq_item.sv"
+{% else %}   `include "uvma_{{ name }}_{{ tx }}_seq_item.sv"
+   `include "uvma_{{ name }}_{{ rx }}_seq_item.sv"
 {% endif %}
    // Drivers
 {% if symmetric %}   `include "uvma_{{ name }}_phy_drv.sv"
-{% else %}   `include "uvma_{{ name }}_tx_drv.sv"
-   `include "uvma_{{ name }}_rx_drv.sv"
+{% else %}   `include "uvma_{{ name }}_{{ tx }}_drv.sv"
+   `include "uvma_{{ name }}_{{ rx }}_drv.sv"
 {% endif %}
    // Sequencers
 {% if symmetric %}   `include "uvma_{{ name }}_phy_sqr.sv"
-{% else %}   `include "uvma_{{ name }}_tx_sqr.sv"
-   `include "uvma_{{ name }}_rx_sqr.sv"
+{% else %}   `include "uvma_{{ name }}_{{ tx }}_sqr.sv"
+   `include "uvma_{{ name }}_{{ rx }}_sqr.sv"
 {% endif %}
    // Agent-Level Components
    `include "uvma_{{ name }}_mon.sv"
@@ -68,8 +68,8 @@ package uvma_{{ name }}_pkg;
    `include "uvma_{{ name }}_mon_vseq.sv"
    `include "uvma_{{ name }}_training_vseq.sv"
 {% if symmetric %}   `include "uvma_{{ name }}_phy_drv_vseq.sv"
-{% else %}   `include "uvma_{{ name }}_tx_drv_vseq.sv"
-   `include "uvma_{{ name }}_rx_drv_vseq.sv"
+{% else %}   `include "uvma_{{ name }}_{{ tx }}_drv_vseq.sv"
+   `include "uvma_{{ name }}_{{ rx }}_drv_vseq.sv"
 {% endif %}   `include "uvma_{{ name }}_idle_vseq.sv"
 
 endpackage : uvma_{{ name }}_pkg

@@ -11,8 +11,8 @@
  * Encapsulates all signals and clocking of the {{ full_name }}.
  */
 interface uvma_{{ name }}_if (
-   input  tx_clk , ///< The bus clock times all bus transfers. All signal timings are related to the rising edge of clk.
-   input  rx_clk , ///< The bus clock times all bus transfers. All signal timings are related to the rising edge of clk.
+   input  {{ tx }}_clk , ///< The bus clock times all bus transfers. All signal timings are related to the rising edge of clk.
+   input  {{ rx }}_clk , ///< The bus clock times all bus transfers. All signal timings are related to the rising edge of clk.
    input  reset_n  ///< The bus reset signal is active LOW and resets the system and the bus. This is the only active LOW signal.
 );
 
@@ -34,17 +34,17 @@ interface uvma_{{ name }}_if (
    /**
     * Used by {{ mode_1 }} DUT Tx.
     */
-   {% if ddr %}clocking dut_{{ mode_1 }}_tx_cb @(tx_clk);
-   {% else %}clocking dut_{{ mode_1 }}_tx_cb @(posedge tx_clk);{% endif %}
+   {% if ddr %}clocking dut_{{ mode_1 }}_{{ tx }}_cb @({{ tx }}_clk);
+   {% else %}clocking dut_{{ mode_1 }}_{{ tx }}_cb @(posedge {{ tx }}_clk);{% endif %}
       output  txp,
               txn;
-   endclocking : dut_{{ mode_1 }}_tx_cb
+   endclocking : dut_{{ mode_1 }}_{{ tx }}_cb
 
    /**
     * Used by {{ mode_1 }} DUT Rx.
     */
-   {% if ddr %}clocking dut_{{ mode_1 }}_rx_cb @(rx_clk);
-   {% else %}clocking dut_{{ mode_1 }}_rx_cb @(posedge rx_clk);{% endif %}
+   {% if ddr %}clocking dut_{{ mode_1 }}_{{ rx }}_cb @({{ rx }}_clk);
+   {% else %}clocking dut_{{ mode_1 }}_{{ rx }}_cb @(posedge {{ rx }}_clk);{% endif %}
 {% if symmetric %}      input  rxp,
              rxn;
 {% else %}      input  rx0p,
@@ -52,22 +52,22 @@ interface uvma_{{ name }}_if (
                 input  rx1p,
              rx1n;
 {% endif %}
-   endclocking : dut_{{ mode_1 }}_rx_cb
+   endclocking : dut_{{ mode_1 }}_{{ rx }}_cb
 
    /**
     * Used by {{ mode_2 }} DUT Tx.
     */
-   {% if ddr %}clocking dut_{{ mode_2 }}_tx_cb @(tx_clk);
-   {% else %}clocking dut_{{ mode_2 }}_tx_cb @(posedge tx_clk);{% endif %}
+   {% if ddr %}clocking dut_{{ mode_2 }}_{{ tx }}_cb @({{ tx }}_clk);
+   {% else %}clocking dut_{{ mode_2 }}_{{ tx }}_cb @(posedge {{ tx }}_clk);{% endif %}
       output  txp,
               txn;
-   endclocking : dut_{{ mode_2 }}_tx_cb
+   endclocking : dut_{{ mode_2 }}_{{ tx }}_cb
 
    /**
     * Used by {{ mode_2 }} DUT Rx.
     */
-   {% if ddr %}clocking dut_{{ mode_2 }}_rx_cb @(rx_clk);
-   {% else %}clocking dut_{{ mode_2 }}_rx_cb @(posedge rx_clk);{% endif %}
+   {% if ddr %}clocking dut_{{ mode_2 }}_{{ rx }}_cb @({{ rx }}_clk);
+   {% else %}clocking dut_{{ mode_2 }}_{{ rx }}_cb @(posedge {{ rx }}_clk);{% endif %}
 {% if symmetric %}      input  rxp,
              rxn;
 {% else %}      input  rx0p,
@@ -75,40 +75,40 @@ interface uvma_{{ name }}_if (
                 input  rx1p,
              rx1n;
 {% endif %}
-   endclocking : dut_{{ mode_2 }}_rx_cb
+   endclocking : dut_{{ mode_2 }}_{{ rx }}_cb
 
    /**
-    * Used by uvma_{{ name }}_drv_tx_c.
+    * Used by uvma_{{ name }}_drv_{{ tx }}_c.
     */
-   {% if ddr %}clocking drv_tx_cb @(tx_clk);
-   {% else %}clocking drv_tx_cb @(posedge tx_clk);{% endif %}
+   {% if ddr %}clocking drv_{{ tx }}_cb @({{ tx }}_clk);
+   {% else %}clocking drv_{{ tx }}_cb @(posedge {{ tx }}_clk);{% endif %}
       output  txp,
               txn;
-   endclocking : drv_tx_cb
+   endclocking : drv_{{ tx }}_cb
 
    /**
-    * Used by uvma_{{ name }}_drv_rx_c.
+    * Used by uvma_{{ name }}_drv_{{ rx }}_c.
     */
-   {% if ddr %}clocking drv_rx_cb @(rx_clk);
-   {% else %}clocking drv_rx_cb @(posedge rx_clk);{% endif %}
+   {% if ddr %}clocking drv_{{ rx }}_cb @({{ rx }}_clk);
+   {% else %}clocking drv_{{ rx }}_cb @(posedge {{ rx }}_clk);{% endif %}
       output  txp,
               txn;
-   endclocking : drv_rx_cb
+   endclocking : drv_{{ rx }}_cb
 
    /**
     * Used by uvma_{{ name }}_mon_c.
     */
-   {% if ddr %}clocking mon_{{ mode_1 }}_tx_cb @(tx_clk);
-   {% else %}clocking mon_{{ mode_1 }}_tx_cb @(posedge tx_clk);{% endif %}
+   {% if ddr %}clocking mon_{{ mode_1 }}_{{ tx }}_cb @({{ tx }}_clk);
+   {% else %}clocking mon_{{ mode_1 }}_{{ tx }}_cb @(posedge {{ tx }}_clk);{% endif %}
       input  txp,
              txn;
-   endclocking : mon_{{ mode_1 }}_tx_cb
+   endclocking : mon_{{ mode_1 }}_{{ tx }}_cb
 
    /**
     * Used by uvma_{{ name }}_mon_c.
     */
-   {% if ddr %}clocking mon_{{ mode_1 }}_rx_cb @(rx_clk);
-   {% else %}clocking mon_{{ mode_1 }}_rx_cb @(posedge rx_clk);{% endif %}
+   {% if ddr %}clocking mon_{{ mode_1 }}_{{ rx }}_cb @({{ rx }}_clk);
+   {% else %}clocking mon_{{ mode_1 }}_{{ rx }}_cb @(posedge {{ rx }}_clk);{% endif %}
 {% if symmetric %}      input  rxp,
              rxn;
 {% else %}      input  rx0p,
@@ -116,22 +116,22 @@ interface uvma_{{ name }}_if (
                 input  rx1p,
              rx1n;
 {% endif %}
-   endclocking : mon_{{ mode_1 }}_rx_cb
+   endclocking : mon_{{ mode_1 }}_{{ rx }}_cb
 
    /**
     * Used by uvma_{{ name }}_mon_c.
     */
-   {% if ddr %}clocking mon_{{ mode_2 }}_tx_cb @(tx_clk);
-   {% else %}clocking mon_{{ mode_2 }}_tx_cb @(posedge tx_clk);{% endif %}
+   {% if ddr %}clocking mon_{{ mode_2 }}_{{ tx }}_cb @({{ tx }}_clk);
+   {% else %}clocking mon_{{ mode_2 }}_{{ tx }}_cb @(posedge {{ tx }}_clk);{% endif %}
       input  txp,
              txn;
-   endclocking : mon_{{ mode_2 }}_tx_cb
+   endclocking : mon_{{ mode_2 }}_{{ tx }}_cb
 
    /**
     * Used by uvma_{{ name }}_mon_c.
     */
-   {% if ddr %}clocking mon_{{ mode_2 }}_rx_cb @(rx_clk);
-   {% else %}clocking mon_{{ mode_2 }}_rx_cb @(posedge rx_clk);{% endif %}
+   {% if ddr %}clocking mon_{{ mode_2 }}_{{ rx }}_cb @({{ rx }}_clk);
+   {% else %}clocking mon_{{ mode_2 }}_{{ rx }}_cb @(posedge {{ rx }}_clk);{% endif %}
 {% if symmetric %}      input  rxp,
              rxn;
 {% else %}      input  rx0p,
@@ -139,15 +139,15 @@ interface uvma_{{ name }}_if (
                 input  rx1p,
              rx1n;
 {% endif %}
-   endclocking : mon_{{ mode_2 }}_rx_cb
+   endclocking : mon_{{ mode_2 }}_{{ rx }}_cb
 
 
    /**
     * Used by {{ mode_1 }} DUT Tx.
     */
    modport dut_{{ mode_1 }}_mp (
-      clocking dut_{{ mode_1 }}_tx_cb,{% if ddr %}
-      input    tx_clk ,{% endif %}
+      clocking dut_{{ mode_1 }}_{{ tx }}_cb,{% if ddr %}
+      input    {{ tx }}_clk ,{% endif %}
       input    reset_n
    );
 
@@ -155,8 +155,8 @@ interface uvma_{{ name }}_if (
     * Used by {{ mode_1 }} DUT Rx.
     */
    modport dut_{{ mode_1 }}_mp (
-      clocking dut_{{ mode_1 }}_rx_cb,{% if ddr %}
-      input    rx_clk ,{% endif %}
+      clocking dut_{{ mode_1 }}_{{ rx }}_cb,{% if ddr %}
+      input    {{ rx }}_clk ,{% endif %}
       input    reset_n
    );
 
@@ -164,8 +164,8 @@ interface uvma_{{ name }}_if (
     * Used by {{ mode_2 }} DUT Tx.
     */
    modport dut_{{ mode_2 }}_mp (
-      clocking dut_{{ mode_2 }}_tx_cb,{% if ddr %}
-      input    tx_clk ,{% endif %}
+      clocking dut_{{ mode_2 }}_{{ tx }}_cb,{% if ddr %}
+      input    {{ tx }}_clk ,{% endif %}
       input    reset_n
    );
 
@@ -173,62 +173,62 @@ interface uvma_{{ name }}_if (
     * Used by {{ mode_2 }} DUT Rx.
     */
    modport dut_{{ mode_2 }}_mp (
-      clocking dut_{{ mode_2 }}_rx_cb,{% if ddr %}
-      input    rx_clk ,{% endif %}
+      clocking dut_{{ mode_2 }}_{{ rx }}_cb,{% if ddr %}
+      input    {{ rx }}_clk ,{% endif %}
       input    reset_n
    );
 
    /**
-    * Used by uvma_{{ name }}_drv_tx_c.
+    * Used by uvma_{{ name }}_drv_{{ tx }}_c.
     */
-   modport drv_tx_mp (
-      clocking drv_tx_cb,{% if ddr %}
-      input    tx_clk ,{% endif %}
+   modport drv_{{ tx }}_mp (
+      clocking drv_{{ tx }}_cb,{% if ddr %}
+      input    {{ tx }}_clk ,{% endif %}
       input    reset_n
    );
 
    /**
-    * Used by uvma_{{ name }}_drv_rx_c.
+    * Used by uvma_{{ name }}_drv_{{ rx }}_c.
     */
-   modport drv_rx_mp (
-      clocking drv_rx_cb,{% if ddr %}
-      input    rx_clk ,{% endif %}
-      input    reset_n
-   );
-
-   /**
-    * Used by uvma_{{ name }}_mon_c.
-    */
-   modport mon_{{ mode_1 }}_tx_mp (
-      clocking mon_{{ mode_1 }}_tx_cb,{% if ddr %}
-      input    tx_clk ,{% endif %}
+   modport drv_{{ rx }}_mp (
+      clocking drv_{{ rx }}_cb,{% if ddr %}
+      input    {{ rx }}_clk ,{% endif %}
       input    reset_n
    );
 
    /**
     * Used by uvma_{{ name }}_mon_c.
     */
-   modport mon_{{ mode_1 }}_rx_mp (
-      clocking mon_{{ mode_1 }}_rx_cb,{% if ddr %}
-      input    rx_clk ,{% endif %}
+   modport mon_{{ mode_1 }}_{{ tx }}_mp (
+      clocking mon_{{ mode_1 }}_{{ tx }}_cb,{% if ddr %}
+      input    {{ tx }}_clk ,{% endif %}
       input    reset_n
    );
 
    /**
     * Used by uvma_{{ name }}_mon_c.
     */
-   modport mon_{{ mode_2 }}_tx_mp (
-      clocking mon_{{ mode_2 }}_tx_cb,{% if ddr %}
-      input    tx_clk ,{% endif %}
+   modport mon_{{ mode_1 }}_{{ rx }}_mp (
+      clocking mon_{{ mode_1 }}_{{ rx }}_cb,{% if ddr %}
+      input    {{ rx }}_clk ,{% endif %}
       input    reset_n
    );
 
    /**
     * Used by uvma_{{ name }}_mon_c.
     */
-   modport mon_{{ mode_2 }}_rx_mp (
-      clocking mon_{{ mode_2 }}_rx_cb,{% if ddr %}
-      input    rx_clk ,{% endif %}
+   modport mon_{{ mode_2 }}_{{ tx }}_mp (
+      clocking mon_{{ mode_2 }}_{{ tx }}_cb,{% if ddr %}
+      input    {{ tx }}_clk ,{% endif %}
+      input    reset_n
+   );
+
+   /**
+    * Used by uvma_{{ name }}_mon_c.
+    */
+   modport mon_{{ mode_2 }}_{{ rx }}_mp (
+      clocking mon_{{ mode_2 }}_{{ rx }}_cb,{% if ddr %}
+      input    {{ rx }}_clk ,{% endif %}
       input    reset_n
    );
 

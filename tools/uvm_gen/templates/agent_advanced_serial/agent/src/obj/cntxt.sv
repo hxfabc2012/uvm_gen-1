@@ -22,14 +22,14 @@ class uvma_{{ name }}_cntxt_c extends uvm_object;
    /// @{
    uvm_sequence_base  mon_vseq   ; ///<
    uvm_sequence_base  idle_vseq  ; ///<
-   uvm_sequence_base  tx_drv_vseq; ///<
-   uvm_sequence_base  rx_drv_vseq; ///<
+   uvm_sequence_base  {{ tx }}_drv_vseq; ///<
+   uvm_sequence_base  {{ rx }}_drv_vseq; ///<
    /// @}
 
    /// @defgroup FSM
    /// @{
-   uvma_{{ name }}_mon_fsm_cntxt_c  tx_mon_fsm_cntxt;
-   uvma_{{ name }}_mon_fsm_cntxt_c  rx_mon_fsm_cntxt;
+   uvma_{{ name }}_mon_fsm_cntxt_c  {{ tx }}_mon_fsm_cntxt;
+   uvma_{{ name }}_mon_fsm_cntxt_c  {{ rx }}_mon_fsm_cntxt;
    /// @}
 
    /// @defgroup Events
@@ -42,8 +42,8 @@ class uvma_{{ name }}_cntxt_c extends uvm_object;
    `uvm_object_utils_begin(uvma_{{ name }}_cntxt_c)
       `uvm_field_enum(uvml_reset_state_enum, reset_state, UVM_DEFAULT)
 
-      `uvm_field_object(mon_fsm_tx_cntxt, UVM_DEFAULT)
-      `uvm_field_object(mon_fsm_rx_cntxt, UVM_DEFAULT)
+      `uvm_field_object(mon_fsm_{{ tx }}_cntxt, UVM_DEFAULT)
+      `uvm_field_object(mon_fsm_{{ rx }}_cntxt, UVM_DEFAULT)
 
       `uvm_field_event(sample_cfg_e  , UVM_DEFAULT)
       `uvm_field_event(sample_cntxt_e, UVM_DEFAULT)
@@ -67,8 +67,8 @@ function uvma_{{ name }}_cntxt_c::new(string name="uvma_{{ name }}_cntxt");
 
    super.new(name);
    reset_state = UVML_RESET_STATE_PRE_RESET;
-   tx_mon_fsm_cntxt = uvma_{{ name }}_mon_fsm_cntxt_c::type_id::create("tx_mon_fsm_cntxt");
-   rx_mon_fsm_cntxt = uvma_{{ name }}_mon_fsm_cntxt_c::type_id::create("rx_mon_fsm_cntxt");
+   {{ tx }}_mon_fsm_cntxt = uvma_{{ name }}_mon_fsm_cntxt_c::type_id::create("{{ tx }}_mon_fsm_cntxt");
+   {{ rx }}_mon_fsm_cntxt = uvma_{{ name }}_mon_fsm_cntxt_c::type_id::create("{{ rx }}_mon_fsm_cntxt");
    sample_cfg_e   = new("sample_cfg_e"  );
    sample_cntxt_e = new("sample_cntxt_e");
 
@@ -77,8 +77,8 @@ endfunction : new
 
 function void uvma_{{ name }}_cntxt_c::reset();
 
-   mon_fsm_tx_cntxt.reset();
-   mon_fsm_rx_cntxt.reset();
+   mon_fsm_{{ tx }}_cntxt.reset();
+   mon_fsm_{{ rx }}_cntxt.reset();
 
 endfunction : reset
 

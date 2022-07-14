@@ -10,9 +10,9 @@
 /**
  * Component running {{ full_name }} sequences extending uvma_{{ name }}_vseq_base_c.
  */
-class uvma_{{ name }}_rx_sqr_c extends uvml_sqr_c #(
-   .REQ(uvma_{{ name }}_rx_seq_item_c),
-   .RSP(uvma_{{ name }}_rx_seq_item_c)
+class uvma_{{ name }}_{{ rx }}_sqr_c extends uvml_sqr_c #(
+   .REQ(uvma_{{ name }}_{{ rx }}_seq_item_c),
+   .RSP(uvma_{{ name }}_{{ rx }}_seq_item_c)
 );
 
    /// @defgroup Objects
@@ -22,7 +22,7 @@ class uvma_{{ name }}_rx_sqr_c extends uvml_sqr_c #(
    /// @}
 
 
-   `uvm_component_utils_begin(uvma_{{ name }}_rx_sqr_c)
+   `uvm_component_utils_begin(uvma_{{ name }}_{{ rx }}_sqr_c)
       `uvm_field_object(cfg  , UVM_DEFAULT)
       `uvm_field_object(cntxt, UVM_DEFAULT)
    `uvm_component_utils_end
@@ -31,7 +31,7 @@ class uvma_{{ name }}_rx_sqr_c extends uvml_sqr_c #(
    /**
     * Default constructor.
     */
-   extern function new(string name="uvma_{{ name }}_rx_sqr", uvm_component parent=null);
+   extern function new(string name="uvma_{{ name }}_{{ rx }}_sqr", uvm_component parent=null);
 
    /**
     * Ensures cfg & cntxt handles are not null
@@ -48,17 +48,17 @@ class uvma_{{ name }}_rx_sqr_c extends uvml_sqr_c #(
     */
    extern function void get_cntxt();
 
-endclass : uvma_{{ name }}_rx_sqr_c
+endclass : uvma_{{ name }}_{{ rx }}_sqr_c
 
 
-function uvma_{{ name }}_rx_sqr_c::new(string name="uvma_{{ name }}_rx_sqr", uvm_component parent=null);
+function uvma_{{ name }}_{{ rx }}_sqr_c::new(string name="uvma_{{ name }}_{{ rx }}_sqr", uvm_component parent=null);
 
    super.new(name, parent);
 
 endfunction : new
 
 
-function void uvma_{{ name }}_rx_sqr_c::build_phase(uvm_phase phase);
+function void uvma_{{ name }}_{{ rx }}_sqr_c::build_phase(uvm_phase phase);
 
    super.build_phase(phase);
    get_cfg  ();
@@ -67,21 +67,21 @@ function void uvma_{{ name }}_rx_sqr_c::build_phase(uvm_phase phase);
 endfunction : build_phase
 
 
-function void uvma_{{ name }}_rx_sqr_c::get_cfg();
+function void uvma_{{ name }}_{{ rx }}_sqr_c::get_cfg();
 
    void'(uvm_config_db#(uvma_{{ name }}_cfg_c)::get(this, "", "cfg", cfg));
    if (cfg == null) begin
-      `uvm_fatal("{{ upper(name) }}_RX_SQR", "Configuration handle is null")
+      `uvm_fatal("{{ upper(name) }}_{{ upper(rx) }}_SQR", "Configuration handle is null")
    end
 
 endfunction : get_cfg
 
 
-function void uvma_{{ name }}_rx_sqr_c::get_cntxt();
+function void uvma_{{ name }}_{{ rx }}_sqr_c::get_cntxt();
 
    void'(uvm_config_db#(uvma_{{ name }}_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (cntxt == null) begin
-      `uvm_fatal("{{ upper(name) }}_RX_SQR", "Context handle is null")
+      `uvm_fatal("{{ upper(name) }}_{{ upper(rx) }}_SQR", "Context handle is null")
    end
 
 endfunction : get_cntxt

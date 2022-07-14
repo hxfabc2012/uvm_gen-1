@@ -15,8 +15,8 @@ class uvma_{{ name }}_phy_drv_c extends uvml_drv_c #(
    .RSP(uvma_{{ name }}_phy_seq_item_c)
 );
 
-   virtual uvma_{{ name }}_if.drv_tx_mp  tx_mp; ///< Handle to virtual interface modport
-   virtual uvma_{{ name }}_if.drv_rx_mp  rx_mp; ///< Handle to virtual interface modport
+   virtual uvma_{{ name }}_if.drv_{{ tx }}_mp  {{ tx }}_mp; ///< Handle to virtual interface modport
+   virtual uvma_{{ name }}_if.drv_{{ rx }}_mp  {{ rx }}_mp; ///< Handle to virtual interface modport
 
    /// @defgroup Objects
    /// @{
@@ -39,7 +39,7 @@ class uvma_{{ name }}_phy_drv_c extends uvml_drv_c #(
    /**
     * Default constructor.
     */
-   extern function new(string name="uvma_{{ name }}_rx_drv", uvm_component parent=null);
+   extern function new(string name="uvma_{{ name }}_{{ rx }}_drv", uvm_component parent=null);
 
    /**
     * 1. Ensures cfg & cntxt handles are not null.
@@ -80,7 +80,7 @@ class uvma_{{ name }}_phy_drv_c extends uvml_drv_c #(
 endclass : uvma_{{ name }}_phy_drv_c
 
 
-function uvma_{{ name }}_phy_drv_c::new(string name="uvma_{{ name }}_rx_drv", uvm_component parent=null);
+function uvma_{{ name }}_phy_drv_c::new(string name="uvma_{{ name }}_{{ rx }}_drv", uvm_component parent=null);
 
    super.new(name, parent);
 
@@ -94,7 +94,7 @@ function void uvma_{{ name }}_phy_drv_c::build_phase(uvm_phase phase);
    get_cntxt();
 
    ap = new("ap", this);
-   mp = cntxt.vif.drv_rx_mp;
+   mp = cntxt.vif.drv_{{ rx }}_mp;
 
 endfunction : build_phase
 
@@ -149,33 +149,33 @@ task uvma_{{ name }}_phy_drv_c::drv_req(ref uvma_{{ name }}_phy_seq_item_c req);
    do begin
       case (cfg.mode)
          UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }}: begin
-            @(tx_mp.drv_tx_cb);
-            if (tx_mp.tx_clk inside {0,1}) begin
+            @({{ tx }}_mp.drv_{{ tx }}_cb);
+            if ({{ tx }}_mp.{{ tx }}_clk inside {0,1}) begin
                valid_edge = 1;
-               tx_mp.drv_tx_cb.txp <= req.dp;
-               tx_mp.drv_tx_cb.txn <= req.dn;
+               {{ tx }}_mp.drv_{{ tx }}_cb.txp <= req.dp;
+               {{ tx }}_mp.drv_{{ tx }}_cb.txn <= req.dn;
             end
          end
          UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }}: begin
-            @(rx_mp.drv_rx_cb);
-            if (rx_mp.rx_clk inside {0,1}) begin
+            @({{ rx }}_mp.drv_{{ rx }}_cb);
+            if ({{ rx }}_mp.{{ rx }}_clk inside {0,1}) begin
                valid_edge = 1;
-               rx_mp.drv_rx_cb.rxp <= req.dp;
-               rx_mp.drv_rx_cb.rxn <= req.dn;
+               {{ rx }}_mp.drv_{{ rx }}_cb.rxp <= req.dp;
+               {{ rx }}_mp.drv_{{ rx }}_cb.rxn <= req.dn;
             end
          end
       endcase
    end while (!valid_edge);
 {% else %}   case (cfg.mode)
       UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }}: begin
-         @(tx_mp.drv_tx_cb);
-         tx_mp.drv_tx_cb.txp <= req.dp;
-         tx_mp.drv_tx_cb.txn <= req.dn;
+         @({{ tx }}_mp.drv_{{ tx }}_cb);
+         {{ tx }}_mp.drv_{{ tx }}_cb.txp <= req.dp;
+         {{ tx }}_mp.drv_{{ tx }}_cb.txn <= req.dn;
       end
       UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }}: begin
-         @(rx_mp.drv_rx_cb);
-         rx_mp.drv_rx_cb.rxp <= req.dp;
-         rx_mp.drv_rx_cb.rxn <= req.dn;
+         @({{ rx }}_mp.drv_{{ rx }}_cb);
+         {{ rx }}_mp.drv_{{ rx }}_cb.rxp <= req.dp;
+         {{ rx }}_mp.drv_{{ rx }}_cb.rxn <= req.dn;
       end
    endcase
 {% endif %}
