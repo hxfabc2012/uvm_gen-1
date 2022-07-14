@@ -12,26 +12,36 @@
  */
 class uvma_{{ name }}_agent_c extends uvml_agent_c;
 
-   // Objects
+   /// @defgroup Objects
+   /// @{
    uvma_{{ name }}_cfg_c    cfg  ; ///< Agent configuration handle
    uvma_{{ name }}_cntxt_c  cntxt; ///< Agent context handle
+   /// @}
 
-   // Components
+   /// @defgroup Components
+   /// @{
+   uvma_{{ name }}_vsqr_c       vsequencer; ///< TODO Describe uvma_{{ name }}_agent_c::vsequencer
    uvma_{{ name }}_drv_c        driver    ; ///< TODO Describe uvma_{{ name }}_agent_c::driver
    uvma_{{ name }}_mon_c        monitor   ; ///< TODO Describe uvma_{{ name }}_agent_c::monitor
-   uvma_{{ name }}_vsqr_c       vsequencer; ///< TODO Describe uvma_{{ name }}_agent_c::vsequencer
-   uvma_{{ name }}_logger_c     logger    ; ///< TODO Describe uvma_{{ name }}_agent_c::logger
    uvma_{{ name }}_cov_model_c  cov_model ; ///< TODO Describe uvma_{{ name }}_agent_c::cov_model
+   uvma_{{ name }}_logger_c     logger    ; ///< TODO Describe uvma_{{ name }}_agent_c::logger
+   /// @}
 
-   // TLM
+   /// @defgroup TLM
+   /// @{
    uvm_seq_item_pull_port #(uvm_sequence_item)  upstream_sqr_port; ///< TODO Describe uvma_{{ name }}_vsqr_c::upstream_sqr_port
-   uvm_analysis_port      #(uvma_{{ name }}_seq_item_c   )  seq_item_ap      ; ///< TODO Describe uvma_{{ name }}_agent_c::seq_item_ap
-   uvm_analysis_port      #(uvma_{{ name }}_mon_trn_c    )  mon_trn_{{ tx }}_ap    ; ///< TODO Describe uvma_{{ name }}_agent_c::mon_trn_{{ tx }}_ap
-   uvm_analysis_port      #(uvma_{{ name }}_mon_trn_c    )  mon_trn_{{ rx }}_ap    ; ///< TODO Describe uvma_{{ name }}_agent_c::mon_trn_{{ rx }}_ap
-   uvm_analysis_port      #(uvma_{{ name }}_{{ tx }}_seq_item_c)  drv_{{ tx }}_ap        ; ///< TODO Describe uvma_{{ name }}_agent_c::drv_{{ tx }}_a_ap
-   uvm_analysis_port      #(uvma_{{ name }}_{{ rx }}_seq_item_c)  drv_{{ rx }}_ap        ; ///< TODO Describe uvma_{{ name }}_agent_c::drv_{{ rx }}_a_ap
-   uvm_analysis_port      #(uvma_{{ name }}_{{ tx }}_mon_trn_c )  mon_{{ tx }}_ap        ; ///< TODO Describe uvma_{{ name }}_agent_c::mon_{{ tx }}_a_ap
-   uvm_analysis_port      #(uvma_{{ name }}_{{ rx }}_mon_trn_c )  mon_{{ rx }}_ap        ; ///< TODO Describe uvma_{{ name }}_agent_c::mon_{{ rx }}_a_ap
+   uvm_analysis_port  #(uvma_{{ name }}_seq_item_c)  seq_item_ap  ; ///< TODO Describe uvma_{{ name }}_agent_c::seq_item_ap
+   uvm_analysis_port  #(uvma_{{ name }}_mon_trn_c )  tx_mon_trn_ap; ///< TODO Describe uvma_{{ name }}_agent_c::tx_mon_trn_ap
+   uvm_analysis_port  #(uvma_{{ name }}_mon_trn_c )  rx_mon_trn_ap; ///< TODO Describe uvma_{{ name }}_agent_c::rx_mon_trn_ap
+{% if symmetric %}   uvm_analysis_port  #(uvma_{{ name }}_phy_seq_item_c)  tx_phy_seq_item_ap; ///< TODO Describe uvma_{{ name }}_agent_c::drv_tx_a_ap
+   uvm_analysis_port  #(uvma_{{ name }}_phy_seq_item_c)  rx_phy_seq_item_ap; ///< TODO Describe uvma_{{ name }}_agent_c::drv_rx_a_ap
+   uvm_analysis_port  #(uvma_{{ name }}_phy_mon_trn_c )  tx_phy_mon_trn_ap; ///< TODO Describe uvma_{{ name }}_agent_c::mon_tx_a_ap
+   uvm_analysis_port  #(uvma_{{ name }}_phy_mon_trn_c )  rx_phy_mon_trn_ap; ///< TODO Describe uvma_{{ name }}_agent_c::mon_rx_a_ap
+{% else %}   uvm_analysis_port  #(uvma_{{ name }}_tx_seq_item_c)  tx_phy_seq_item_ap; ///< TODO Describe uvma_{{ name }}_agent_c::drv_tx_a_ap
+   uvm_analysis_port  #(uvma_{{ name }}_rx_seq_item_c)  rx_phy_seq_item_ap; ///< TODO Describe uvma_{{ name }}_agent_c::drv_rx_a_ap
+   uvm_analysis_port  #(uvma_{{ name }}_tx_mon_trn_c )  tx_phy_mon_trn_ap; ///< TODO Describe uvma_{{ name }}_agent_c::mon_tx_a_ap
+   uvm_analysis_port  #(uvma_{{ name }}_rx_mon_trn_c )  rx_phy_mon_trn_ap; ///< TODO Describe uvma_{{ name }}_agent_c::mon_rx_a_ap
+{% endif %}   /// @}
 
 
    `uvm_component_utils_begin(uvma_{{ name }}_agent_c)
@@ -118,14 +128,14 @@ class uvma_{{ name }}_agent_c extends uvml_agent_c;
    extern task start_idle_vseq();
 
    /**
-    * TODO Describe uvma_{{ name }}_agent_c::start_{{ tx }}_drv_vseq()
+    * TODO Describe uvma_{{ name }}_agent_c::start_drv_vseq_{{ mode_1 }}()
     */
-   extern task start_{{ tx }}_drv_vseq();
+   extern task start_drv_vseq_{{ mode_1 }}();
 
    /**
-    * TODO Describe uvma_{{ name }}_agent_c::start_{{ rx }}_drv_vseq()
+    * TODO Describe uvma_{{ name }}_agent_c::start_drv_vseq_{{ mode_2 }}()
     */
-   extern task start_{{ rx }}_drv_vseq();
+   extern task start_drv_vseq_{{ mode_2 }}();
 
 endclass : uvma_{{ name }}_agent_c
 
@@ -178,8 +188,8 @@ task uvma_{{ name }}_agent_c::run_phase(uvm_phase phase);
          start_idle_vseq();
 
          case (cfg.drv_mode)
-            UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }}: start_{{ tx }}_drv_vseq();
-            UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }}: start_{{ rx }}_drv_vseq();
+            UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }}: start_drv_vseq_{{ mode_1 }}();
+            UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }}: start_drv_vseq_{{ mode_2 }}();
 
             default: begin
                `uvm_fatal("{{ upper(name) }}_AGENT", $sformatf("Invalid cfg.drv_mode: %s", cfg.drv_mode.name()))
@@ -231,9 +241,9 @@ endfunction : retrieve_vif
 
 function void uvma_{{ name }}_agent_c::create_components();
 
-   monitor    = uvma_{{ name }}_mon_c      ::type_id::create("monitor"   , this);
    vsequencer = uvma_{{ name }}_vsqr_c     ::type_id::create("vsequencer", this);
    driver     = uvma_{{ name }}_drv_c      ::type_id::create("driver"    , this);
+   monitor    = uvma_{{ name }}_mon_c      ::type_id::create("monitor"   , this);
    cov_model  = uvma_{{ name }}_cov_model_c::type_id::create("cov_model" , this);
    logger     = uvma_{{ name }}_logger_c   ::type_id::create("logger"    , this);
 
@@ -244,27 +254,27 @@ function void uvma_{{ name }}_agent_c::create_analysis_ports();
 
    upstream_sqr_port = new("upstream_sqr_port", this);
    seq_item_ap       = new("seq_item_ap"      , this);
-   mon_trn_{{ tx }}_ap = new("mon_trn_{{ tx }}_ap", this);
-   mon_trn_{{ rx }}_ap = new("mon_trn_{{ rx }}_ap", this);
-   mon_{{ tx }}_ap     = new("mon_{{ tx }}_ap"    , this);
-   mon_{{ rx }}_ap     = new("mon_{{ rx }}_ap"    , this);
-   drv_{{ tx }}_ap     = new("drv_{{ tx }}_ap"    , this);
-   drv_{{ rx }}_ap     = new("drv_{{ rx }}_ap"    , this);
+   tx_mon_trn_ap      = new("tx_mon_trn_ap"     , this);
+   rx_mon_trn_ap      = new("rx_mon_trn_ap"     , this);
+   tx_phy_mon_trn_ap  = new("tx_phy_mon_trn_ap" , this);
+   rx_phy_mon_trn_ap  = new("rx_phy_mon_trn_ap" , this);
+   tx_phy_seq_item_ap = new("tx_phy_seq_item_ap", this);
+   rx_phy_seq_item_ap = new("rx_phy_seq_item_ap", this);
 
 endfunction : create_analysis_ports
 
 
 function void uvma_{{ name }}_agent_c::connect_sequencer();
 
-   vsequencer.frame_sequencer.set_arbitration(cfg.sqr_arb_mode);
-   vsequencer.{{ tx }}_serial_sequencer.set_arbitration(UVM_SEQ_ARB_STRICT_FIFO);
-   vsequencer.{{ rx }}_serial_sequencer.set_arbitration(UVM_SEQ_ARB_STRICT_FIFO);
+   vsequencer.set_arbitration(cfg.sqr_arb_mode);
+   vsequencer.tx_phy_sequencer.set_arbitration(UVM_SEQ_ARB_STRICT_FIFO);
+   vsequencer.rx_phy_sequencer.set_arbitration(UVM_SEQ_ARB_STRICT_FIFO);
 
    if (!cfg.bypass_mode) begin
-      driver .{{ tx }}_driver.seq_item_port.connect(vsequencer.{{ tx }}_serial_sequencer.seq_item_export);
-      driver .{{ rx }}_driver.seq_item_port.connect(vsequencer.{{ rx }}_serial_sequencer.seq_item_export);
-      monitor.{{ tx }}_ap.connect(vsequencer.{{ tx }}_mon_trn_export);
-      monitor.{{ rx }}_ap.connect(vsequencer.{{ rx }}_mon_trn_export);
+      driver .tx_driver.seq_item_port.connect(vsequencer.tx_phy_sequencer.seq_item_export);
+      driver .rx_driver.seq_item_port.connect(vsequencer.rx_phy_sequencer.seq_item_export);
+      monitor.tx_ap.connect(vsequencer.tx_phy_mon_trn_export);
+      monitor.rx_ap.connect(vsequencer.rx_phy_mon_trn_export);
    end
 
 endfunction : connect_sequencer
@@ -273,26 +283,26 @@ endfunction : connect_sequencer
 function void uvma_{{ name }}_agent_c::connect_analysis_ports();
 
    upstream_sqr_port = vsequencer.upstream_sqr_port;
-   mon_trn_{{ tx }}_ap = vsequencer.mon_trn_{{ tx }}_ap;
-   mon_trn_{{ rx }}_ap = vsequencer.mon_trn_{{ rx }}_ap;
-   seq_item_ap = vsequencer.seq_item_ap;
-   drv_{{ tx }}_ap = driver.{{ tx }}_driver.ap;
-   drv_{{ rx }}_ap = driver.{{ rx }}_driver.ap;
-   mon_{{ tx }}_ap = monitor.{{ tx }}_ap      ;
-   mon_{{ rx }}_ap = monitor.{{ rx }}_ap      ;
+   seq_item_ap       = vsequencer.seq_item_ap;
+   tx_mon_trn_ap      = vsequencer.tx_mon_trn_ap;
+   rx_mon_trn_ap      = vsequencer.rx_mon_trn_ap;
+   tx_phy_seq_item_ap = driver .tx_ap;
+   rx_phy_seq_item_ap = driver .rx_ap;
+   tx_phy_mon_trn_ap  = monitor.tx_ap;
+   rx_phy_mon_trn_ap  = monitor.rx_ap;
 
 endfunction : connect_analysis_ports
 
 
 function void uvma_{{ name }}_agent_c::connect_cov_model();
 
-   seq_item_ap.connect(cov_model.seq_item_fifo.analysis_export);
-   mon_trn_{{ tx }}_ap.connect(cov_model.mon_trn_{{ tx }}_fifo .analysis_export);
-   mon_trn_{{ rx }}_ap.connect(cov_model.mon_trn_{{ rx }}_fifo .analysis_export);
-   drv_{{ tx }}_ap    .connect(cov_model.{{ tx }}_seq_item_fifo.analysis_export);
-   drv_{{ rx }}_ap    .connect(cov_model.{{ rx }}_seq_item_fifo.analysis_export);
-   mon_{{ tx }}_ap    .connect(cov_model.{{ tx }}_mon_trn_fifo .analysis_export);
-   mon_{{ rx }}_ap    .connect(cov_model.{{ rx }}_mon_trn_fifo .analysis_export);
+   seq_item_ap.connect(cov_model.seq_item_export);
+   tx_mon_trn_ap     .connect(cov_model.tx_mon_trn_export     );
+   rx_mon_trn_ap     .connect(cov_model.rx_mon_trn_export     );
+   tx_phy_seq_item_ap.connect(cov_model.tx_phy_seq_item_export);
+   rx_phy_seq_item_ap.connect(cov_model.rx_phy_seq_item_export);
+   tx_phy_mon_trn_ap .connect(cov_model.tx_phy_mon_trn_export );
+   rx_phy_mon_trn_ap .connect(cov_model.rx_phy_mon_trn_export );
 
 endfunction : connect_cov_model
 
@@ -300,12 +310,12 @@ endfunction : connect_cov_model
 function void uvma_{{ name }}_agent_c::connect_logger();
 
    seq_item_ap.connect(logger.seq_item_export);
-   mon_trn_{{ tx }}_ap.connect(logger.mon_trn_{{ tx }}_export );
-   mon_trn_{{ rx }}_ap.connect(logger.mon_trn_{{ rx }}_export );
-   drv_{{ tx }}_ap    .connect(logger.{{ tx }}_seq_item_export);
-   drv_{{ rx }}_ap    .connect(logger.{{ rx }}_seq_item_export);
-   mon_{{ tx }}_ap    .connect(logger.{{ tx }}_mon_trn_export );
-   mon_{{ rx }}_ap    .connect(logger.{{ rx }}_mon_trn_export );
+   tx_mon_trn_ap     .connect(cov_model.tx_mon_trn_export     );
+   rx_mon_trn_ap     .connect(cov_model.rx_mon_trn_export     );
+   tx_phy_seq_item_ap.connect(cov_model.tx_phy_seq_item_export);
+   rx_phy_seq_item_ap.connect(cov_model.rx_phy_seq_item_export);
+   tx_phy_mon_trn_ap .connect(cov_model.tx_phy_mon_trn_export );
+   rx_phy_mon_trn_ap .connect(cov_model.rx_phy_mon_trn_export );
 
 endfunction : connect_logger
 
@@ -354,48 +364,48 @@ task uvma_{{ name }}_agent_c::start_idle_vseq();
 endtask : start_idle_vseq
 
 
-task uvma_{{ name }}_agent_c::start_{{ tx }}_drv_vseq();
+task uvma_{{ name }}_agent_c::start_drv_vseq_{{ mode_1 }}();
 
    uvm_coreservice_t cs = uvm_coreservice_t::get();
    uvm_factory       f  = cs.get_factory();
    uvm_object        temp_obj;
 
-   temp_obj = f.create_object_by_type(cfg.{{ tx }}_drv_vseq_type, get_full_name(), cfg.{{ tx }}_drv_vseq_type.get_type_name());
-   if (!$cast(cntxt.{{ tx }}_drv_vseq, temp_obj)) begin
-      `uvm_fatal("{{ upper(name) }}_AGENT", $sformatf("Could not cast 'temp_obj' (%s) to 'cntxt.{{ tx }}_drv_vseq' (%s)", $typename(temp_obj), $typename(cntxt.{{ tx }}_drv_vseq)))
+   temp_obj = f.create_object_by_type(cfg.tx_drv_vseq_type, get_full_name(), cfg.tx_drv_vseq_type.get_type_name());
+   if (!$cast(cntxt.tx_drv_vseq, temp_obj)) begin
+      `uvm_fatal("{{ upper(name) }}_AGENT", $sformatf("Could not cast 'temp_obj' (%s) to 'cntxt.tx_drv_vseq' (%s)", $typename(temp_obj), $typename(cntxt.tx_drv_vseq)))
    end
 
-   if (!cntxt.{{ tx }}_drv_vseq.randomize()) begin
-      `uvm_fatal("{{ upper(name) }}_AGENT", "Failed to randomize cntxt.{{ tx }}_drv_vseq")
+   if (!cntxt.tx_drv_vseq.randomize()) begin
+      `uvm_fatal("{{ upper(name) }}_AGENT", "Failed to randomize cntxt.tx_drv_vseq")
    end
 
    fork
-      cntxt.{{ tx }}_drv_vseq.start(vsequencer);
+      cntxt.tx_drv_vseq.start(vsequencer);
    join_none
 
-endtask : start_{{ tx }}_drv_vseq
+endtask : start_drv_vseq_{{ mode_1 }}
 
 
-task uvma_{{ name }}_agent_c::start_{{ rx }}_drv_vseq();
+task uvma_{{ name }}_agent_c::start_drv_vseq_{{ mode_2 }}();
 
    uvm_coreservice_t cs = uvm_coreservice_t::get();
    uvm_factory       f  = cs.get_factory();
    uvm_object        temp_obj;
 
-   temp_obj = f.create_object_by_type(cfg.{{ rx }}_drv_vseq_type, get_full_name(), cfg.{{ rx }}_drv_vseq_type.get_type_name());
-   if (!$cast(cntxt.{{ rx }}_drv_vseq, temp_obj)) begin
-      `uvm_fatal("{{ upper(name) }}_AGENT", $sformatf("Could not cast 'temp_obj' (%s) to 'cntxt.{{ rx }}_drv_vseq' (%s)", $typename(temp_obj), $typename(cntxt.{{ rx }}_drv_vseq)))
+   temp_obj = f.create_object_by_type(cfg.rx_drv_vseq_type, get_full_name(), cfg.rx_drv_vseq_type.get_type_name());
+   if (!$cast(cntxt.rx_drv_vseq, temp_obj)) begin
+      `uvm_fatal("{{ upper(name) }}_AGENT", $sformatf("Could not cast 'temp_obj' (%s) to 'cntxt.rx_drv_vseq' (%s)", $typename(temp_obj), $typename(cntxt.rx_drv_vseq)))
    end
 
-   if (!cntxt.{{ rx }}_drv_vseq.randomize()) begin
-      `uvm_fatal("{{ upper(name) }}_AGENT", "Failed to randomize cntxt.{{ rx }}_drv_vseq")
+   if (!cntxt.rx_drv_vseq.randomize()) begin
+      `uvm_fatal("{{ upper(name) }}_AGENT", "Failed to randomize cntxt.rx_drv_vseq")
    end
 
    fork
-      cntxt.{{ rx }}_drv_vseq.start(vsequencer);
+      cntxt.rx_drv_vseq.start(vsequencer);
    join_none
 
-endtask : start_{{ rx }}_drv_vseq
+endtask : start_drv_vseq_{{ mode_2 }}
 
 
 `endif // __UVMA_{{ upper(name) }}_AGENT_SV__

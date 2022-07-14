@@ -23,8 +23,8 @@ class uvme_{{ name }}_st_cfg_c extends uvml_cfg_c;
    // Objects
    rand uvma_{{ name }}_cfg_c      {{ mode_1 }}_cfg  ; ///<
    rand uvma_{{ name }}_cfg_c      {{ mode_2 }}_cfg  ; ///<
-   rand uvml_sb_simplex_cfg_c  sb_{{ tx }}_cfg; ///<
-   rand uvml_sb_simplex_cfg_c  sb_{{ rx }}_cfg; ///<
+   rand uvml_sb_simplex_cfg_c  sb_tx_cfg; ///<
+   rand uvml_sb_simplex_cfg_c  sb_rx_cfg; ///<
 
 
    `uvm_object_utils_begin(uvme_{{ name }}_st_cfg_c)
@@ -37,8 +37,8 @@ class uvme_{{ name }}_st_cfg_c extends uvml_cfg_c;
 
       `uvm_field_object({{ mode_1 }}_cfg  , UVM_DEFAULT)
       `uvm_field_object({{ mode_2 }}_cfg  , UVM_DEFAULT)
-      `uvm_field_object(sb_{{ tx }}_cfg, UVM_DEFAULT)
-      `uvm_field_object(sb_{{ rx }}_cfg, UVM_DEFAULT)
+      `uvm_field_object(sb_tx_cfg, UVM_DEFAULT)
+      `uvm_field_object(sb_rx_cfg, UVM_DEFAULT)
    `uvm_object_utils_end
 
 
@@ -98,15 +98,15 @@ class uvme_{{ name }}_st_cfg_c extends uvml_cfg_c;
    }
 
    constraint sb_cfg_cons {
-      sb_{{ tx }}_cfg.mode == UVML_SB_MODE_IN_ORDER;
-      sb_{{ rx }}_cfg.mode == UVML_SB_MODE_IN_ORDER;
+      sb_tx_cfg.mode == UVML_SB_MODE_IN_ORDER;
+      sb_rx_cfg.mode == UVML_SB_MODE_IN_ORDER;
       if (scoreboarding_enabled) {
-         sb_{{ tx }}_cfg.enabled == 1;
-         sb_{{ rx }}_cfg.enabled == 1;
+         sb_tx_cfg.enabled == 1;
+         sb_rx_cfg.enabled == 1;
       }
       else {
-         sb_{{ tx }}_cfg.enabled == 0;
-         sb_{{ rx }}_cfg.enabled == 0;
+         sb_tx_cfg.enabled == 0;
+         sb_rx_cfg.enabled == 0;
       }
    }
 
@@ -125,8 +125,8 @@ function uvme_{{ name }}_st_cfg_c::new(string name="uvme_{{ name }}_st_cfg");
 
    {{ mode_1 }}_cfg   = uvma_{{ name }}_cfg_c    ::type_id::create("{{ mode_1 }}_cfg"  );
    {{ mode_2 }}_cfg   = uvma_{{ name }}_cfg_c    ::type_id::create("{{ mode_2 }}_cfg"  );
-   sb_{{ tx }}_cfg = uvml_sb_simplex_cfg_c::type_id::create("sb_{{ tx }}_cfg");
-   sb_{{ rx }}_cfg = uvml_sb_simplex_cfg_c::type_id::create("sb_{{ rx }}_cfg");
+   sb_tx_cfg = uvml_sb_simplex_cfg_c::type_id::create("sb_tx_cfg");
+   sb_rx_cfg = uvml_sb_simplex_cfg_c::type_id::create("sb_rx_cfg");
 
 endfunction : new
 

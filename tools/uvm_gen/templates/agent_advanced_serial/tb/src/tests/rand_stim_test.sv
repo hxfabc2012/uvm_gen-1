@@ -62,11 +62,11 @@ function void uvmt_{{ name }}_st_rand_stim_test_c::check_phase(uvm_phase phase);
 
    super.check_phase(phase);
 
-   if (env_cntxt.sb_{{ tx }}_cntxt.match_count < 10) begin
-      `uvm_error("TEST", $sformatf("Tx scoreboard saw less than 10 matches: %0d", env_cntxt.sb_{{ tx }}_cntxt.match_count))
+   if (env_cntxt.sb_tx_cntxt.match_count < 10) begin
+      `uvm_error("TEST", $sformatf("Tx scoreboard saw less than 10 matches: %0d", env_cntxt.sb_tx_cntxt.match_count))
    end
-   if (env_cntxt.sb_{{ rx }}_cntxt.match_count < 10) begin
-      `uvm_error("TEST", $sformatf("Rx scoreboard saw less than 10 matches: %0d", env_cntxt.sb_{{ rx }}_cntxt.match_count))
+   if (env_cntxt.sb_rx_cntxt.match_count < 10) begin
+      `uvm_error("TEST", $sformatf("Rx scoreboard saw less than 10 matches: %0d", env_cntxt.sb_rx_cntxt.match_count))
    end
 
 endfunction : check_phase

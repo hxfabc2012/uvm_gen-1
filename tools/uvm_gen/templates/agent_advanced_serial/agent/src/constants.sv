@@ -7,7 +7,8 @@
 `define __UVMA_{{ upper(name) }}_CONSTANTS_SV__
 
 
-//const int unsigned  uvma_{{ name }}_default_auser_width = `UVMA_{{ upper(name) }}_AUSER_DEFAULT_WIDTH; // Measured in bits (b)
+const uvma_{{ name }}_sync_b_t  uvma_{{ name }}_start_symbol  = 2'b10; ///<
+const uvma_{{ name }}_sync_b_t  uvma_{{ name }}_stop_symbol   = 2'b01; ///<
 
 
 `endif // __UVMA_{{ upper(name) }}_CONSTANTS_SV__

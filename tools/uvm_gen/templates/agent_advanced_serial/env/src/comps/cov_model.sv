@@ -28,17 +28,17 @@ class uvme_{{ name }}_st_cov_model_c extends uvma_{{ name }}_cov_model_c;
       //          xyz_cpt : coverpoint cntxt.xyz;
    endgroup : {{ name }}_st_cntxt_cg
    
-   covergroup {{ name }}_st_mon_trn_{{ tx }}_cg;
-      // TODO Implement {{ name }}_st_mon_trn_{{ tx }}_cg
+   covergroup {{ name }}_st_mon_trn_tx_cg;
+      // TODO Implement {{ name }}_st_mon_trn_tx_cg
       //      Ex: abc_cpt : coverpoint mon_trn_tx.abc;
       //          xyz_cpt : coverpoint mon_trn_tx.xyz;
-   endgroup : {{ name }}_st_mon_trn_{{ tx }}_cg
+   endgroup : {{ name }}_st_mon_trn_tx_cg
    
-   covergroup {{ name }}_st_mon_trn_{{ rx }}_cg;
-      // TODO Implement {{ name }}_st_mon_trn_{{ tx }}_cg
+   covergroup {{ name }}_st_mon_trn_rx_cg;
+      // TODO Implement {{ name }}_st_mon_trn_tx_cg
       //      Ex: abc_cpt : coverpoint mon_trn_rx.abc;
       //          xyz_cpt : coverpoint mon_trn_rx.xyz;
-   endgroup : {{ name }}_st_mon_trn_{{ rx }}_cg
+   endgroup : {{ name }}_st_mon_trn_rx_cg
    
    covergroup {{ name }}_st_seq_item_cg;
       // TODO Implement {{ name }}_st_seq_item_cg
@@ -85,8 +85,8 @@ function uvme_{{ name }}_st_cov_model_c::new(string name="uvme_{{ name }}_st_cov
    super.new(name, parent);
    {{ name }}_st_cfg_cg        = new();
    {{ name }}_st_cntxt_cg      = new();
-   {{ name }}_st_mon_trn_{{ tx }}_cg = new();
-   {{ name }}_st_mon_trn_{{ rx }}_cg = new();
+   {{ name }}_st_mon_trn_tx_cg = new();
+   {{ name }}_st_mon_trn_rx_cg = new();
    {{ name }}_st_seq_item_cg   = new();
    
 endfunction : new
@@ -108,14 +108,14 @@ endfunction : sample_cntxt
 
 function void uvme_{{ name }}_st_cov_model_c::sample_mon_trn_tx();
    
-   {{ name }}_st_mon_trn_{{ tx }}_cg.sample();
+   {{ name }}_st_mon_trn_tx_cg.sample();
    
 endfunction : sample_mon_trn_tx
 
 
 function void uvme_{{ name }}_st_cov_model_c::sample_mon_trn_rx();
    
-   {{ name }}_st_mon_trn_{{ rx }}_cg.sample();
+   {{ name }}_st_mon_trn_rx_cg.sample();
    
 endfunction : sample_mon_trn_rx
 

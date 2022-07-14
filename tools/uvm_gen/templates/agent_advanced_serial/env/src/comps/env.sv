@@ -164,8 +164,8 @@ function void uvme_{{ name }}_st_env_c::assign_cfg();
    uvm_config_db#(uvme_{{ name }}_st_cfg_c )::set(this, "*"        , "cfg", cfg          );
    uvm_config_db#(uvma_{{ name }}_cfg_c    )::set(this, "{{ mode_1 }}_agent", "cfg", cfg.{{ mode_1 }}_cfg  );
    uvm_config_db#(uvma_{{ name }}_cfg_c    )::set(this, "{{ mode_2 }}_agent", "cfg", cfg.{{ mode_2 }}_cfg  );
-   uvm_config_db#(uvml_sb_simplex_cfg_c)::set(this, "sb_tx"    , "cfg", cfg.sb_{{ tx }}_cfg);
-   uvm_config_db#(uvml_sb_simplex_cfg_c)::set(this, "sb_rx"    , "cfg", cfg.sb_{{ rx }}_cfg);
+   uvm_config_db#(uvml_sb_simplex_cfg_c)::set(this, "sb_tx"    , "cfg", cfg.sb_tx_cfg);
+   uvm_config_db#(uvml_sb_simplex_cfg_c)::set(this, "sb_rx"    , "cfg", cfg.sb_rx_cfg);
 
 endfunction: assign_cfg
 
@@ -175,8 +175,8 @@ function void uvme_{{ name }}_st_env_c::assign_cntxt();
    uvm_config_db#(uvme_{{ name }}_st_cntxt_c )::set(this, "*"        , "cntxt", cntxt            );
    uvm_config_db#(uvma_{{ name }}_cntxt_c    )::set(this, "{{ mode_1 }}_agent", "cntxt", cntxt.{{ mode_1 }}_cntxt  );
    uvm_config_db#(uvma_{{ name }}_cntxt_c    )::set(this, "{{ mode_2 }}_agent", "cntxt", cntxt.{{ mode_2 }}_cntxt  );
-   uvm_config_db#(uvml_sb_simplex_cntxt_c)::set(this, "sb_tx"    , "cntxt", cntxt.sb_{{ tx }}_cntxt);
-   uvm_config_db#(uvml_sb_simplex_cntxt_c)::set(this, "sb_rx"    , "cntxt", cntxt.sb_{{ rx }}_cntxt);
+   uvm_config_db#(uvml_sb_simplex_cntxt_c)::set(this, "sb_tx"    , "cntxt", cntxt.sb_tx_cntxt);
+   uvm_config_db#(uvml_sb_simplex_cntxt_c)::set(this, "sb_rx"    , "cntxt", cntxt.sb_rx_cntxt);
 
 endfunction: assign_cntxt
 
@@ -210,8 +210,8 @@ endfunction: create_vsequencer
 function void uvme_{{ name }}_st_env_c::connect_predictor();
 
    // Connect agent -> predictor
-   {{ mode_1 }}_agent.mon_trn_{{ tx }}_ap.connect(predictor.{{ tx }}_in_export);
-   {{ mode_2 }}_agent.mon_trn_{{ rx }}_ap.connect(predictor.{{ rx }}_in_export);
+   {{ mode_1 }}_agent.mon_trn_tx_ap.connect(predictor.tx_in_export);
+   {{ mode_2 }}_agent.mon_trn_rx_ap.connect(predictor.rx_in_export);
 
 endfunction: connect_predictor
 
@@ -219,12 +219,12 @@ endfunction: connect_predictor
 function void uvme_{{ name }}_st_env_c::connect_scoreboard();
 
    // Connect agent -> scoreboard
-   {{ mode_2 }}_agent.mon_trn_{{ tx }}_ap.connect(sb_tx.act_export);
-   {{ mode_1 }}_agent.mon_trn_{{ rx }}_ap.connect(sb_rx.act_export);
+   {{ mode_2 }}_agent.mon_trn_tx_ap.connect(sb_tx.act_export);
+   {{ mode_1 }}_agent.mon_trn_rx_ap.connect(sb_rx.act_export);
 
    // Connect predictor -> scoreboard
-   predictor.{{ tx }}_out_ap.connect(sb_tx.exp_export);
-   predictor.{{ rx }}_out_ap.connect(sb_rx.exp_export);
+   predictor.tx_out_ap.connect(sb_tx.exp_export);
+   predictor.rx_out_ap.connect(sb_rx.exp_export);
 
 endfunction: connect_scoreboard
 

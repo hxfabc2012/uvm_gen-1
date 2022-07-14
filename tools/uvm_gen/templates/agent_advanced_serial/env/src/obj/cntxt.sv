@@ -17,8 +17,8 @@ class uvme_{{ name }}_st_cntxt_c extends uvml_cntxt_c;
    uvma_{{ name }}_cntxt_c  {{ mode_2 }}_cntxt; ///<
 
    // Scoreboard context handle
-   uvml_sb_simplex_cntxt_c  sb_{{ tx }}_cntxt; ///<
-   uvml_sb_simplex_cntxt_c  sb_{{ rx }}_cntxt; ///<
+   uvml_sb_simplex_cntxt_c  sb_tx_cntxt; ///<
+   uvml_sb_simplex_cntxt_c  sb_rx_cntxt; ///<
 
    // Events
    uvm_event  sample_cfg_e  ; ///<
@@ -29,8 +29,8 @@ class uvme_{{ name }}_st_cntxt_c extends uvml_cntxt_c;
       `uvm_field_object({{ mode_1 }}_cntxt, UVM_DEFAULT)
       `uvm_field_object({{ mode_2 }}_cntxt, UVM_DEFAULT)
 
-      `uvm_field_object(sb_{{ tx }}_cntxt, UVM_DEFAULT)
-      `uvm_field_object(sb_{{ rx }}_cntxt, UVM_DEFAULT)
+      `uvm_field_object(sb_tx_cntxt, UVM_DEFAULT)
+      `uvm_field_object(sb_rx_cntxt, UVM_DEFAULT)
 
       `uvm_field_event(sample_cfg_e  , UVM_DEFAULT)
       `uvm_field_event(sample_cntxt_e, UVM_DEFAULT)
@@ -56,8 +56,8 @@ function uvme_{{ name }}_st_cntxt_c::new(string name="uvme_{{ name }}_st_cntxt")
 
    {{ mode_1 }}_cntxt   = uvma_{{ name }}_cntxt_c    ::type_id::create("{{ mode_1 }}_cntxt"  );
    {{ mode_2 }}_cntxt   = uvma_{{ name }}_cntxt_c    ::type_id::create("{{ mode_2 }}_cntxt"  );
-   sb_{{ tx }}_cntxt = uvml_sb_simplex_cntxt_c::type_id::create("sb_{{ tx }}_cntxt");
-   sb_{{ rx }}_cntxt = uvml_sb_simplex_cntxt_c::type_id::create("sb_{{ rx }}_cntxt");
+   sb_tx_cntxt = uvml_sb_simplex_cntxt_c::type_id::create("sb_tx_cntxt");
+   sb_rx_cntxt = uvml_sb_simplex_cntxt_c::type_id::create("sb_rx_cntxt");
 
    sample_cfg_e   = new("sample_cfg_e"  );
    sample_cntxt_e = new("sample_cntxt_e");

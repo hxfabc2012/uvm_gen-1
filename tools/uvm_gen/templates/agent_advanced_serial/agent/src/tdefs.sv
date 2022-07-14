@@ -7,10 +7,8 @@
 `define __UVMA_{{ upper(name) }}_TDEFS_SV__
 
 
-typedef logic [31:0]  uvma_{{ name }}_frame_l_t;
-typedef bit   [31:0]  uvma_{{ name }}_frame_b_t;
-typedef bit   [12:0]  uvma_{{ name }}_data_b_t;
-typedef logic [12:0]  uvma_{{ name }}_data_l_t;
+typedef bit   [31:0]  uvma_{{ name }}_data_b_t;
+typedef logic [31:0]  uvma_{{ name }}_data_l_t;
 typedef bit   [ 1:0]  uvma_{{ name }}_sync_b_t;
 typedef logic [ 1:0]  uvma_{{ name }}_sync_l_t;
 
@@ -20,8 +18,8 @@ typedef enum {
 } uvma_{{ name }}_mode_enum;
 
 typedef enum {
-   UVMA_{{ upper(name) }}_DIRECTION_{{ upper(tx) }},
-   UVMA_{{ upper(name) }}_DIRECTION_{{ upper(rx) }}
+   UVMA_{{ upper(name) }}_DIRECTION_TX,
+   UVMA_{{ upper(name) }}_DIRECTION_RX
 } uvma_{{ name }}_direction_enum;
 
 typedef enum {

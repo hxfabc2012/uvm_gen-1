@@ -12,19 +12,19 @@
  */
 class uvme_{{ name }}_st_rand_traffic_vseq_c extends uvme_{{ name }}_st_base_vseq_c;
    
-   rand int unsigned  num_{{ tx }}_frames;
-   rand int unsigned  num_{{ rx }}_frames;
+   rand int unsigned  num_tx_frames;
+   rand int unsigned  num_rx_frames;
    
    
    `uvm_object_utils_begin(uvme_{{ name }}_st_rand_traffic_vseq_c)
-       `uvm_field_int(num_{{ tx }}_frames, UVM_DEFAULT + UVM_DEC)
-       `uvm_field_int(num_{{ rx }}_frames, UVM_DEFAULT + UVM_DEC)
+       `uvm_field_int(num_tx_frames, UVM_DEFAULT + UVM_DEC)
+       `uvm_field_int(num_rx_frames, UVM_DEFAULT + UVM_DEC)
    `uvm_object_utils_end
    
    
    constraint defaults_cons {
-      num_{{ tx }}_frames == 10;
-      num_{{ rx }}_frames == 10;
+      num_tx_frames == 10;
+      num_rx_frames == 10;
    }
    
    
@@ -50,21 +50,21 @@ endfunction : new
 
 task uvme_{{ name }}_st_rand_traffic_vseq_c::body();
    
-   uvma_{{ name }}_seq_item_c  {{ tx }}_frame;
-   uvma_{{ name }}_seq_item_c  {{ rx }}_frame;
+   uvma_{{ name }}_seq_item_c  tx_frame;
+   uvma_{{ name }}_seq_item_c  rx_frame;
    
    fork
       begin : tx
          `uvm_info("VSEQ", "Starting traffic on Tx", UVM_LOW)
-         repeat (num_{{ tx }}_frames) begin
-            `uvm_do_on_pri({{ tx }}_frame, p_sequencer.{{ mode_1 }}_sequencer, 1_000)
+         repeat (num_tx_frames) begin
+            `uvm_do_on_pri(tx_frame, p_sequencer.{{ mode_1 }}_sequencer, 1_000)
          end
       end
       
       begin : rx
          `uvm_info("VSEQ", "Starting traffic on Rx", UVM_LOW)
-         repeat (num_{{ rx }}_frames) begin
-            `uvm_do_on_pri({{ rx }}_frame, p_sequencer.{{ mode_2 }}_sequencer, 1_000)
+         repeat (num_rx_frames) begin
+            `uvm_do_on_pri(rx_frame, p_sequencer.{{ mode_2 }}_sequencer, 1_000)
          end
       end
    join
