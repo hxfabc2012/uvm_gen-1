@@ -20,10 +20,10 @@ class uvma_{{ name }}_mon_c extends uvml_mon_c;
 
    /// @defgroup Virtual Interface handles
    /// @{
-   virtual uvma_{{ name }}_if.mon_{{ mode_1 }}_{{ tx }}_mp  {{ mode_1 }}_{{ tx }}_mp; ///< Handle to {{ mode_1 }} Tx modport
-   virtual uvma_{{ name }}_if.mon_{{ mode_1 }}_{{ rx }}_mp  {{ mode_1 }}_{{ rx }}_mp; ///< Handle to {{ mode_1 }} Rx modport
+   virtual uvma_{{ name }}_if.mon_{{ mode_1 }}_{{ tx }}_mp  {{ mode_1 }}_{{ tx }}_mp; ///< Handle to {{ mode_1 }} TX modport
+   virtual uvma_{{ name }}_if.mon_{{ mode_1 }}_{{ rx }}_mp  {{ mode_1 }}_{{ rx }}_mp; ///< Handle to {{ mode_1 }} RX modport
    virtual uvma_{{ name }}_if.mon_{{ mode_2 }}_{{ tx }}_mp  {{ mode_2 }}_{{ tx }}_mp; ///< Handle to {{ mode_2 }} Tx modport
-   virtual uvma_{{ name }}_if.mon_{{ mode_2 }}_{{ rx }}_mp  {{ mode_2 }}_{{ rx }}_mp; ///< Handle to {{ mode_2 }} Rx modport
+   virtual uvma_{{ name }}_if.mon_{{ mode_2 }}_{{ rx }}_mp  {{ mode_2 }}_{{ rx }}_mp; ///< Handle to {{ mode_2 }} RX modport
    /// @}
 
    /// @defgroup TLM
@@ -213,8 +213,8 @@ task uvma_{{ name }}_mon_c::run_phase(uvm_phase phase);
    if (cfg.enabled) begin
       fork
          mon_reset();
-         mon_tx   ();
-         mon_{{ rx }}   ();
+         mon_{{ tx }}();
+         mon_{{ rx }}();
       join_none
    end
 
@@ -226,7 +226,6 @@ task uvma_{{ name }}_mon_c::mon_reset();
    case (cfg.reset_type)
       UVML_RESET_TYPE_SYNCHRONOUS : mon_reset_sync ();
       UVML_RESET_TYPE_ASYNCHRONOUS: mon_reset_async();
-
       default: begin
          `uvm_fatal("{{ name.upper() }}_MON", $sformatf("Illegal cfg.reset_type: %s", cfg.reset_type.name()))
       end
@@ -245,7 +244,6 @@ task uvma_{{ name }}_mon_c::mon_reset_sync();
       cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
       `uvm_info("{{ name.upper() }}_MON", "Entered IN_RESET state", UVM_MEDIUM)
       cntxt.reset();
-
       while (cntxt.vif.reset_n !== 1'b1) begin
          wait (cntxt.vif.clk === 0);
          wait (cntxt.vif.clk === 1);
@@ -264,7 +262,6 @@ task uvma_{{ name }}_mon_c::mon_reset_async();
       cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
       `uvm_info("{{ name.upper() }}_MON", "Entered IN_RESET state", UVM_MEDIUM)
       cntxt.reset();
-
       wait (cntxt.vif.reset_n === 1);
       cntxt.reset_state = UVML_RESET_STATE_POST_RESET;
       `uvm_info("{{ name.upper() }}_MON", "Entered POST_RESET state", UVM_MEDIUM)
@@ -371,22 +368,22 @@ endtask : mon_{{ rx }}_post_reset
          @({{ mode_1 }}_{{ tx }}_mp.mon_{{ mode_1 }}_{{ tx }}_cb);
          `uvm_info("{{ name.upper() }}_MON", "Sampling Tx transaction", UVM_DEBUG)
 {% if symmetric %}         trn = uvma_{{ name }}_phy_mon_trn_c::type_id::create("trn");
-         trn.dxp = {{ mode_1 }}_{{ tx }}_mp.mon_{{ mode_1 }}_{{ tx }}_cb.txp;
-         trn.dxn = {{ mode_1 }}_{{ tx }}_mp.mon_{{ mode_1 }}_{{ tx }}_cb.txn;
+         trn.dxp = {{ mode_1 }}_{{ tx }}_mp.mon_{{ mode_1 }}_{{ tx }}_cb.{{ tx }}p;
+         trn.dxn = {{ mode_1 }}_{{ tx }}_mp.mon_{{ mode_1 }}_{{ tx }}_cb.{{ tx }}n;
 {% else %}         trn = uvma_{{ name }}_{{ tx }}_mon_trn_c::type_id::create("trn");
-         trn.txp = {{ mode_1 }}_{{ tx }}_mp.mon_{{ mode_1 }}_{{ tx }}_cb.txp;
-         trn.txn = {{ mode_1 }}_{{ tx }}_mp.mon_{{ mode_1 }}_{{ tx }}_cb.txn;
+         trn.{{ tx }}p = {{ mode_1 }}_{{ tx }}_mp.mon_{{ mode_1 }}_{{ tx }}_cb.{{ tx }}p;
+         trn.{{ tx }}n = {{ mode_1 }}_{{ tx }}_mp.mon_{{ mode_1 }}_{{ tx }}_cb.{{ tx }}n;
 {% endif %}      end
 
       UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }}: begin
          @({{ mode_2 }}_{{ tx }}_mp.mon_{{ mode_2 }}_{{ tx }}_cb);
          `uvm_info("{{ name.upper() }}_MON", "Sampling Tx transaction", UVM_DEBUG)
 {% if symmetric %}         trn = uvma_{{ name }}_phy_mon_trn_c::type_id::create("trn");
-         trn.dxp = {{ mode_2 }}_{{ tx }}_mp.mon_{{ mode_2 }}_{{ tx }}_cb.txp;
-         trn.dxn = {{ mode_2 }}_{{ tx }}_mp.mon_{{ mode_2 }}_{{ tx }}_cb.txn;
+         trn.dxp = {{ mode_2 }}_{{ tx }}_mp.mon_{{ mode_2 }}_{{ tx }}_cb.{{ tx }}p;
+         trn.dxn = {{ mode_2 }}_{{ tx }}_mp.mon_{{ mode_2 }}_{{ tx }}_cb.{{ tx }}n;
 {% else %}         trn = uvma_{{ name }}_{{ tx }}_mon_trn_c::type_id::create("trn");
-         trn.txp = {{ mode_2 }}_{{ tx }}_mp.mon_{{ mode_2 }}_{{ tx }}_cb.txp;
-         trn.txn = {{ mode_2 }}_{{ tx }}_mp.mon_{{ mode_2 }}_{{ tx }}_cb.txn;
+         trn.{{ tx }}p = {{ mode_2 }}_{{ tx }}_mp.mon_{{ mode_2 }}_{{ tx }}_cb.{{ tx }}p;
+         trn.{{ tx }}n = {{ mode_2 }}_{{ tx }}_mp.mon_{{ mode_2 }}_{{ tx }}_cb.{{ tx }}n;
 {% endif %}      end
    endcase
 
@@ -401,26 +398,26 @@ endtask : sample_{{ tx }}_trn
          @({{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb);
          `uvm_info("{{ name.upper() }}_MON", "Sampling Tx transaction", UVM_DEBUG)
 {% if symmetric %}         trn = uvma_{{ name }}_phy_mon_trn_c::type_id::create("trn");
-         trn.dp = {{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb.rxp;
-         trn.dn = {{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb.rxn;
+         trn.dp = {{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb.{{ rx }}p;
+         trn.dn = {{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb.{{ rx }}n;
 {% else %}         trn = uvma_{{ name }}_{{ rx }}_mon_trn_c::type_id::create("trn");
-         trn.rx0p = {{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb.rx0p;
-         trn.rx0n = {{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb.rx0n;
-         trn.rx1p = {{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb.rx1p;
-         trn.rx1n = {{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb.rx1n;
+         trn.{{ rx }}0p = {{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb.{{ rx }}0p;
+         trn.{{ rx }}0n = {{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb.{{ rx }}0n;
+         trn.{{ rx }}1p = {{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb.{{ rx }}1p;
+         trn.{{ rx }}1n = {{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb.{{ rx }}1n;
 {% endif %}      end
 
       UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }}: begin
          @({{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb);
          `uvm_info("{{ name.upper() }}_MON", "Sampling Tx transaction", UVM_DEBUG)
 {% if symmetric %}         trn = uvma_{{ name }}_phy_mon_trn_c::type_id::create("trn");
-         trn.dp = {{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb.rxp;
-         trn.dn = {{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb.rxn;
+         trn.dp = {{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb.{{ rx }}p;
+         trn.dn = {{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb.{{ rx }}n;
 {% else %}         trn = uvma_{{ name }}_{{ rx }}_mon_trn_c::type_id::create("trn");
-         trn.rx0p = {{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb.rx0p;
-         trn.rx0n = {{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb.rx0n;
-         trn.rx1p = {{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb.rx1p;
-         trn.rx1n = {{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb.rx1n;
+         trn.{{ rx }}0p = {{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb.{{ rx }}0p;
+         trn.{{ rx }}0n = {{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb.{{ rx }}0n;
+         trn.{{ rx }}1p = {{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb.{{ rx }}1p;
+         trn.{{ rx }}1n = {{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb.{{ rx }}1n;
 {% endif %}      end
    endcase
 

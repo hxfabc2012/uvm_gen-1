@@ -48,8 +48,8 @@ interface uvma_{{ name }}_if (
 {% if symmetric %}      input  rxp,
              rxn;
 {% else %}      input  rx0p,
-             rx0n;
-                input  rx1p,
+             rx0n,
+             rx1p,
              rx1n;
 {% endif %}
    endclocking : dut_{{ mode_1 }}_{{ rx }}_cb
@@ -71,8 +71,8 @@ interface uvma_{{ name }}_if (
 {% if symmetric %}      input  rxp,
              rxn;
 {% else %}      input  rx0p,
-             rx0n;
-                input  rx1p,
+             rx0n,
+             rx1p,
              rx1n;
 {% endif %}
    endclocking : dut_{{ mode_2 }}_{{ rx }}_cb
@@ -112,8 +112,8 @@ interface uvma_{{ name }}_if (
 {% if symmetric %}      input  rxp,
              rxn;
 {% else %}      input  rx0p,
-             rx0n;
-                input  rx1p,
+             rx0n,
+             rx1p,
              rx1n;
 {% endif %}
    endclocking : mon_{{ mode_1 }}_{{ rx }}_cb
@@ -135,8 +135,8 @@ interface uvma_{{ name }}_if (
 {% if symmetric %}      input  rxp,
              rxn;
 {% else %}      input  rx0p,
-             rx0n;
-                input  rx1p,
+             rx0n,
+             rx1p,
              rx1n;
 {% endif %}
    endclocking : mon_{{ mode_2 }}_{{ rx }}_cb

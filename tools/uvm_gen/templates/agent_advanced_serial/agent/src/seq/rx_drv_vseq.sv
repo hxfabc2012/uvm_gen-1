@@ -71,7 +71,7 @@ endfunction : new
 
 task uvma_{{ name }}_{{ rx }}_drv_vseq_c::body();
 
-   `uvm_info("{{ name.upper() }}_{{ rx.upper() }}_DRV_VSEQ", "RX Driver Virtual Sequence has started", UVM_HIGH)
+   `uvm_info("{{ name.upper() }}_{{ rx.upper() }}_DRV_VSEQ", "{{ name.upper() }} Driver Virtual Sequence has started", UVM_HIGH)
    forever begin
       fork
          begin : main
@@ -79,7 +79,6 @@ task uvma_{{ name }}_{{ rx }}_drv_vseq_c::body();
             post_reset_init();
             drv_loop       ();
          end
-
          begin : reset
             reset_trigger();
          end
@@ -115,7 +114,7 @@ task uvma_{{ name }}_{{ rx }}_drv_vseq_c::drv_loop();
 
    forever begin
       `uvm_info("{{ name.upper() }}_{{ rx.upper() }}_DRV_VSEQ", "Waiting for next seq_item", UVM_DEBUG)
-      p_sequencer.get_next_item    (seq_item);
+      p_sequencer.get_next_item(seq_item);
       `uvm_info("{{ name.upper() }}_{{ rx.upper() }}_DRV_VSEQ", $sformatf("Received seq_item:\n%s", seq_item.sprint()), UVM_DEBUG)
       process_seq_item             (seq_item);
       drive                        (seq_item);
@@ -160,8 +159,8 @@ task uvma_{{ name }}_{{ rx }}_drv_vseq_c::drive(ref uvma_{{ name }}_seq_item_c s
    for (int ii=num_seq_item_bits-1; ii>=1; ii-=2) begin
       `uvm_create_on(req, p_sequencer.{{ rx }}_serial_sequencer)
       `uvm_rand_send_pri_with(req, `UVMA_{{ name.upper() }}_{{ rx.upper() }}_DRV_SEQ_ITEM_PRI, {
-         rx0p == frame_bits[ii-0];
-         rx1p == frame_bits[ii-1];
+         {{ rx }}0p == seq_item_bits[ii-0];
+         {{ rx }}1p == seq_item_bits[ii-1];
       })
    end
    `uvm_info("{{ name.upper() }}_{{ rx.upper() }}_DRV_VSEQ", $sformatf("Finished driving %0d bits of serial data", num_seq_item_bits), UVM_DEBUG)
