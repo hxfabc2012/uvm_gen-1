@@ -4,10 +4,10 @@
 
 
 // Directories
--i ${DV_UVME_{{ upper(name) }}_ST_SRC_PATH}
--i ${DV_UVME_{{ upper(name) }}_ST_SRC_PATH}/comps
--i ${DV_UVME_{{ upper(name) }}_ST_SRC_PATH}/obj
--i ${DV_UVME_{{ upper(name) }}_ST_SRC_PATH}/seq
+-i ${UVME_{{ upper(name) }}_ST_SRC_PATH}
+-i ${UVME_{{ upper(name) }}_ST_SRC_PATH}/comps
+-i ${UVME_{{ upper(name) }}_ST_SRC_PATH}/obj
+-i ${UVME_{{ upper(name) }}_ST_SRC_PATH}/seq
 
 // Files
-${DV_UVME_{{ upper(name) }}_ST_SRC_PATH}/uvme_{{ name }}_st_pkg.sv
+${UVME_{{ upper(name) }}_ST_SRC_PATH}/uvme_{{ name }}_st_pkg.sv

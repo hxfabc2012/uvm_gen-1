@@ -12,17 +12,27 @@
  */
 class uvme_{{ name }}_st_prd_c extends uvm_component;
 
-   // Objects
+   /// @defgroup Objects
+   /// @{
    uvme_{{ name }}_st_cfg_c    cfg  ; ///<
    uvme_{{ name }}_st_cntxt_c  cntxt; ///<
+   /// @}
 
-   // TLM
-   uvm_analysis_export  #(uvma_{{ name }}_mon_trn_c)  tx_in_export; ///<
-   uvm_analysis_export  #(uvma_{{ name }}_mon_trn_c)  rx_in_export; ///<
-   uvm_tlm_analysis_fifo#(uvma_{{ name }}_mon_trn_c)  tx_in_fifo  ; ///<
-   uvm_tlm_analysis_fifo#(uvma_{{ name }}_mon_trn_c)  rx_in_fifo  ; ///<
-   uvm_analysis_port    #(uvma_{{ name }}_mon_trn_c)  tx_out_ap   ; ///<
-   uvm_analysis_port    #(uvma_{{ name }}_mon_trn_c)  rx_out_ap   ; ///<
+   /// @defgroup TLM
+   /// @{
+   uvm_analysis_export   #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_in_export; ///<
+   uvm_analysis_export   #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_in_export; ///<
+   uvm_analysis_export   #(uvma_{{ name }}_seq_item_c)  {{ mode_1 }}_in_export; ///<
+   uvm_analysis_export   #(uvma_{{ name }}_seq_item_c)  {{ mode_2 }}_in_export; ///<
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_in_fifo; ///<
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_in_fifo; ///<
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_seq_item_c)  {{ mode_1 }}_in_fifo; ///<
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_seq_item_c)  {{ mode_2 }}_in_fifo; ///<
+   uvm_analysis_port     #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_out_ap; ///<
+   uvm_analysis_port     #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_out_ap; ///<
+   uvm_analysis_port     #(uvma_{{ name }}_mon_trn_c )  {{ mode_1 }}_out_ap; ///<
+   uvm_analysis_port     #(uvma_{{ name }}_mon_trn_c )  {{ mode_2 }}_out_ap; ///<
+   /// @}
 
 
    `uvm_component_utils_begin(uvme_{{ name }}_st_prd_c)
@@ -52,14 +62,44 @@ class uvme_{{ name }}_st_prd_c extends uvm_component;
    extern virtual task run_phase(uvm_phase phase);
 
    /**
-    * TODO Describe uvme_{{ name }}_st_prd_c::process_tx()
+    * Uses uvm_config_db to retrieve cfg.
     */
-   extern virtual task process_tx();
+   extern function void get_cfg();
 
    /**
-    * TODO Describe uvme_{{ name }}_st_prd_c::process_rx()
+    * Uses uvm_config_db to retrieve cntxt.
     */
-   extern virtual task process_rx();
+   extern function void get_cntxt();
+
+   /**
+    *
+    */
+   extern function void create_tlm_objects();
+
+   /**
+    *
+    */
+   extern function void connect_ports();
+
+   /**
+    * TODO Describe uvme_{{ name }}_st_prd_c::process_{{ tx }}()
+    */
+   extern virtual task process_{{ tx }}();
+
+   /**
+    * TODO Describe uvme_{{ name }}_st_prd_c::process_{{ rx }}()
+    */
+   extern virtual task process_{{ rx }}();
+
+   /**
+    * TODO Describe uvme_{{ name }}_st_prd_c::process_{{ mode_1 }}()
+    */
+   extern virtual task process_{{ mode_1 }}();
+
+   /**
+    * TODO Describe uvme_{{ name }}_st_prd_c::process_{{ mode_2 }}()
+    */
+   extern virtual task process_{{ mode_2 }}();
 
 endclass : uvme_{{ name }}_st_prd_c
 
@@ -74,24 +114,9 @@ endfunction : new
 function void uvme_{{ name }}_st_prd_c::build_phase(uvm_phase phase);
 
    super.build_phase(phase);
-
-   void'(uvm_config_db#(uvme_{{ name }}_st_cfg_c)::get(this, "", "cfg", cfg));
-   if (!cfg) begin
-      `uvm_fatal("CFG", "Configuration handle is null")
-   end
-
-   void'(uvm_config_db#(uvme_{{ name }}_st_cntxt_c)::get(this, "", "cntxt", cntxt));
-   if (!cntxt) begin
-      `uvm_fatal("CNTXT", "Context handle is null")
-   end
-
-   // Build TLM objects
-   tx_in_export  = new("tx_in_export", this);
-   rx_in_export  = new("rx_in_export", this);
-   tx_in_fifo    = new("tx_in_fifo"  , this);
-   rx_in_fifo    = new("rx_in_fifo"  , this);
-   tx_out_ap     = new("tx_out_ap"   , this);
-   rx_out_ap     = new("rx_out_ap"   , this);
+   get_cfg           ();
+   get_cntxt         ();
+   create_tlm_objects();
 
 endfunction : build_phase
 
@@ -99,10 +124,7 @@ endfunction : build_phase
 function void uvme_{{ name }}_st_prd_c::connect_phase(uvm_phase phase);
 
    super.connect_phase(phase);
-
-   // Connect TLM objects
-   tx_in_export.connect(tx_in_fifo.analysis_export);
-   rx_in_export.connect(rx_in_fifo.analysis_export);
+   connect_ports();
 
 endfunction: connect_phase
 
@@ -110,62 +132,152 @@ endfunction: connect_phase
 task uvme_{{ name }}_st_prd_c::run_phase(uvm_phase phase);
 
    super.run_phase(phase);
-
    fork
-      process_tx();
-      process_rx();
+      process_{{ tx }}();
+      process_{{ rx }}();
+      process_{{ mode_1 }}();
+      process_{{ mode_2 }}();
    join_none
 
 endtask: run_phase
 
 
-task uvme_{{ name }}_st_prd_c::process_tx();
+function void uvme_{{ name }}_st_prd_c::get_cfg();
 
-   uvma_{{ name }}_mon_trn_c  tx_in_trn, tx_out_trn;
+   void'(uvm_config_db#(uvme_{{ name }}_st_cfg_c)::get(this, "", "cfg", cfg));
+   if (cfg == null) begin
+      `uvm_fatal("{{ upper(name) }}_ST_PRD", "Configuration handle is null")
+   end
+
+endfunction : get_cfg
+
+
+function void uvme_{{ name }}_st_prd_c::get_cntxt();
+
+   void'(uvm_config_db#(uvme_{{ name }}_st_cntxt_c)::get(this, "", "cntxt", cntxt));
+   if (cntxt == null) begin
+      `uvm_fatal("{{ upper(name) }}_ST_PRD", "Context handle is null")
+   end
+
+endfunction : get_cntxt
+
+
+function void uvme_{{ name }}_st_prd_c::create_tlm_objects();
+
+   {{ tx }}_in_export = new("{{ tx }}_in_export", this);
+   {{ rx }}_in_export = new("{{ rx }}_in_export", this);
+   {{ mode_1 }}_in_export = new("{{ mode_1 }}_in_export", this);
+   {{ mode_2 }}_in_export = new("{{ mode_2 }}_in_export", this);
+   {{ tx }}_in_fifo = new("{{ tx }}_in_fifo", this);
+   {{ rx }}_in_fifo = new("{{ rx }}_in_fifo", this);
+   {{ mode_1 }}_in_fifo = new("{{ mode_1 }}_in_fifo", this);
+   {{ mode_2 }}_in_fifo = new("{{ mode_2 }}_in_fifo", this);
+   {{ tx }}_out_ap = new("{{ tx }}_out_ap", this);
+   {{ rx }}_out_ap = new("{{ rx }}_out_ap", this);
+   {{ mode_1 }}_out_ap = new("{{ mode_1 }}_out_ap", this);
+   {{ mode_2 }}_out_ap = new("{{ mode_2 }}_out_ap", this);
+
+endfunction: create_tlm_objects
+
+
+function void uvme_{{ name }}_st_prd_c::connect_ports();
+
+   {{ tx }}_in_export.connect({{ tx }}_in_fifo.analysis_export);
+   {{ rx }}_in_export.connect({{ rx }}_in_fifo.analysis_export);
+   {{ mode_1 }}_in_export.connect({{ mode_1 }}_in_fifo.analysis_export);
+   {{ mode_2 }}_in_export.connect({{ mode_2 }}_in_fifo.analysis_export);
+
+endfunction: connect_ports
+
+
+task uvme_{{ name }}_st_prd_c::process_{{ tx }}();
+
+   uvma_{{ name }}_mon_trn_c  {{ tx }}_in_trn, {{ tx }}_out_trn;
 
    forever begin
-      // Get next transaction and copy it
-      tx_in_fifo.get(tx_in_trn);
-      tx_out_trn = uvma_{{ name }}_mon_trn_c::type_id::create("tx_out_trn");
-      tx_out_trn.copy(tx_in_trn);
-      tx_out_trn.set_initiator(this);
-
+      {{ tx }}_in_fifo.get({{ tx }}_in_trn);
+      {{ tx }}_out_trn = uvma_{{ name }}_mon_trn_c::type_id::create("{{ tx }}_out_trn");
+      {{ tx }}_out_trn.copy({{ tx }}_in_trn);
+      {{ tx }}_out_trn.set_initiator(this);
       if (cntxt.{{ mode_1 }}_cntxt.reset_state != UVML_RESET_STATE_POST_RESET) begin
-         tx_out_trn.set_may_drop(1);
+         {{ tx }}_out_trn.set_may_drop(1);
       end
-      if (tx_out_trn.is_idle()) begin
-         tx_out_trn.set_may_drop(1);
+      if ({{ tx }}_out_trn.is_idle()) begin
+         {{ tx }}_out_trn.set_may_drop(1);
       end
-
-      // Send transaction to analysis port
-      tx_out_ap.write(tx_out_trn);
+      {{ tx }}_out_ap.write({{ tx }}_out_trn);
    end
 
-endfunction: process_tx
+endfunction: process_{{ tx }}
 
 
-task uvme_{{ name }}_st_prd_c::process_rx();
+task uvme_{{ name }}_st_prd_c::process_{{ rx }}();
 
-   uvma_{{ name }}_mon_trn_c  rx_in_trn, rx_out_trn;
+   uvma_{{ name }}_mon_trn_c  {{ rx }}_in_trn, {{ rx }}_out_trn;
 
    forever begin
-      // Get next transaction and copy it
-      rx_in_fifo.get(rx_in_trn);
-      rx_out_trn = uvma_{{ name }}_mon_trn_c::type_id::create("rx_out_trn");
-      rx_out_trn.copy(rx_in_trn);
-      rx_out_trn.set_initiator(this);
-
+      {{ rx }}_in_fifo.get({{ rx }}_in_trn);
+      {{ rx }}_out_trn = uvma_{{ name }}_mon_trn_c::type_id::create("{{ rx }}_out_trn");
+      {{ rx }}_out_trn.copy({{ rx }}_in_trn);
+      {{ rx }}_out_trn.set_initiator(this);
       if (cntxt.{{ mode_2 }}_cntxt.reset_state != UVML_RESET_STATE_POST_RESET) begin
-         rx_out_trn.set_may_drop(1);
+         {{ rx }}_out_trn.set_may_drop(1);
       end
-      if (rx_out_trn.is_idle()) begin
-         rx_out_trn.set_may_drop(1);
+      if ({{ rx }}_out_trn.is_idle()) begin
+         {{ rx }}_out_trn.set_may_drop(1);
       end
-
-      rx_out_ap.write(rx_out_trn);
+      {{ rx }}_out_ap.write({{ rx }}_out_trn);
    end
 
-endfunction: process_rx
+endfunction: process_{{ rx }}
+
+
+task uvme_{{ name }}_st_prd_c::process_{{ mode_1 }}();
+
+   uvma_{{ name }}_seq_item_c  {{ tx }}_in_trn ;
+   uvma_{{ name }}_mon_trn_c   {{ tx }}_out_trn;
+
+   forever begin
+      {{ tx }}_in_fifo.get({{ tx }}_in_trn);
+      {{ tx }}_out_trn = uvma_{{ name }}_mon_trn_c::type_id::create("{{ tx }}_out_trn");
+      {{ tx }}_out_trn.header = {{ tx }}_in_trn.header;
+      {{ tx }}_out_trn.data   = {{ tx }}_in_trn.data  ;
+      {{ tx }}_out_trn.tail   = {{ tx }}_in_trn.tail  ;
+      {{ tx }}_out_trn.set_initiator(this);
+      if (cntxt.passive_cntxt.reset_state != UVML_RESET_STATE_POST_RESET) begin
+         {{ tx }}_out_trn.set_may_drop(1);
+      end
+      if ({{ tx }}_out_trn.is_idle()) begin
+         {{ tx }}_out_trn.set_may_drop(1);
+      end
+      {{ tx }}_out_ap.write({{ tx }}_out_trn);
+   end
+
+endfunction: process_{{ mode_1 }}
+
+
+task uvme_{{ name }}_st_prd_c::process_{{ mode_2 }}();
+
+   uvma_{{ name }}_seq_item_c  {{ rx }}_in_trn ;
+   uvma_{{ name }}_mon_trn_c   {{ rx }}_out_trn;
+
+   forever begin
+      {{ rx }}_in_fifo.get({{ rx }}_in_trn);
+      {{ rx }}_out_trn = uvma_{{ name }}_mon_trn_c::type_id::create("{{ rx }}_out_trn");
+      {{ rx }}_out_trn.header = {{ rx }}_in_trn.header;
+      {{ rx }}_out_trn.data   = {{ rx }}_in_trn.data  ;
+      {{ rx }}_out_trn.tail   = {{ rx }}_in_trn.tail  ;
+      {{ rx }}_out_trn.set_initiator(this);
+      if (cntxt.passive_cntxt.reset_state != UVML_RESET_STATE_POST_RESET) begin
+         {{ rx }}_out_trn.set_may_drop(1);
+      end
+      if ({{ rx }}_out_trn.is_idle()) begin
+         {{ rx }}_out_trn.set_may_drop(1);
+      end
+      {{ rx }}_out_ap.write({{ rx }}_out_trn);
+   end
+
+endfunction: process_{{ mode_2 }}
 
 
 `endif // __UVME_{{ upper(name) }}_ST_PRD_SV__

@@ -17,9 +17,11 @@ class uvme_{{ name }}_st_base_vseq_c extends uvml_seq_c #(
    .RSP(uvm_sequence_item)
 );
 
-   // Environment handles
-   uvme_{{ name }}_st_cfg_c    cfg  ;
-   uvme_{{ name }}_st_cntxt_c  cntxt;
+   /// @defgroup Environment handles
+   /// @{
+   uvme_{{ name }}_st_cfg_c    cfg  ; ///<
+   uvme_{{ name }}_st_cntxt_c  cntxt; ///<
+   /// @}
 
 
    `uvm_object_utils(uvme_{{ name }}_st_base_vseq_c)

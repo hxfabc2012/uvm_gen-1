@@ -193,9 +193,10 @@ endfunction : diff_decode
 
 function bit uvma_{{ name }}_mon_vseq_c::monitor_fsm(uvma_{{ name }}_mon_fsm_cntxt_c fsm_cntxt, uvma_{{ name }}_direction_enum direction);
 
-   string  direction_str = "";
-   bit     sample_trn = 0;
-   logic   new_bit;
+   string       direction_str = "";
+   bit          sample_trn = 0;
+   logic        new_bit;
+   logic [1:0]  header_bits;
    uvma_{{ name }}_mon_fsm_enum  next_state;
 
    case (direction)
@@ -220,15 +221,29 @@ function bit uvma_{{ name }}_mon_vseq_c::monitor_fsm(uvma_{{ name }}_mon_fsm_cnt
          if (fsm_cntxt.training_count >= uvma_{{ name }}_training_length) begin
             `uvm_info({"{{ upper(name) }}_MON_VSEQ_", direction_str}, $sformatf("%s - Training complete after %0d consecutive 0s", fsm_cntxt.state.name(), fsm_cntxt.training_count), UVM_DEBUG)
             next_state = UVMA_{{ upper(name) }}_MON_FSM_SYNCED;
-            `uvm_info({"{{ upper(name) }}_MON_VSEQ_", direction_str}, "Synced to bitstream", UVM_LOW)
+         end
+      end
+
+      UVMA_{{ upper(name) }}_MON_FSM_SYNCING: begin
+         next_state = UVMA_{{ upper(name) }}_MON_FSM_SYNCING;
+         if (fsm_cntxt.data_q.size() >= 2) begin
+            header_bits = {fsm_cntxt.data_q[0],fsm_cntxt.data_q[1]};
+            `uvm_info({"{{ upper(name) }}_MON_VSEQ_", direction_str}, $sformatf("%s - New potential header bits: %b", fsm_cntxt.state.name(), header_bits), UVM_DEBUG)
+            if (header_bits inside {UVMA_{{ upper(name) }}_HEADER_DATA,UVMA_{{ upper(name) }}_HEADER_IDLE}) begin
+               next_state = UVMA_{{ upper(name) }}_MON_FSM_SYNCED;
+               `uvm_info({"{{ upper(name) }}_MON_VSEQ_", direction_str}, "Synced to bitstream", UVM_LOW)
+            end
+            else begin
+               void'(fsm_cntxt.data_q.pop_front());
+            end
          end
       end
 
       UVMA_{{ upper(name) }}_MON_FSM_SYNCED: begin
+         next_state = UVMA_{{ upper(name) }}_MON_FSM_SYNCED;
          if (fsm_cntxt.data_q.size() >= uvma_{{ name }}_trn_length) begin
             `uvm_info({"{{ upper(name) }}_MON_VSEQ_", direction_str}, $sformatf("%s - Have enough bits (%0d) to unpack trn", fsm_cntxt.state.name(), fsm_cntxt.data_q.size()), UVM_DEBUG)
             sample_trn = 1;
-            next_state = UVMA_{{ upper(name) }}_MON_FSM_SYNCED;
             for (int unsigned ii = 0; ii<uvma_{{ name }}_trn_length; ii++) begin
                fsm_cntxt.trn_data[ii] = fsm_cntxt.data_q.pop_front();
             end

@@ -15,7 +15,7 @@ ip:
   block-diagram: ""
   languages: ["sv"]
   simulators-supported:
-    - { name: "vivado", version: "{{ year }}.1" }
+    - { name: "vivado", version: "2022.1" }
   tags: []
   copyright-holders: ["{{ name_of_copyright_owner }}"]
   licenses: ["{{ license }}"]
@@ -43,4 +43,3 @@ hdl-src:
     vcs     : "uvme_{{ name }}_st_pkg.flist"
     vivado  : "uvme_{{ name }}_st_pkg.flist.xsim"
     xcelium : "uvme_{{ name }}_st_pkg.flist"
-

@@ -22,30 +22,31 @@
  * Encapsulates all the types needed for an UVM environment capable of self-testing the {{ full_name }}.
  */
 package uvme_{{ name }}_st_pkg;
-   
+
    import uvm_pkg         ::*;
    import uvml_pkg        ::*;
    import uvml_logs_pkg   ::*;
    import uvml_sb_pkg     ::*;
    import uvma_{{ name }}_pkg::*;
-   
+
    // Constants / Structs / Enums
    `include "uvme_{{ name }}_st_tdefs.sv"
    `include "uvme_{{ name }}_st_constants.sv"
-   
+
    // Objects
    `include "uvme_{{ name }}_st_cfg.sv"
    `include "uvme_{{ name }}_st_cntxt.sv"
-   
+
    // Environment components
    `include "uvme_{{ name }}_st_cov_model.sv"
    `include "uvme_{{ name }}_st_prd.sv"
+   `include "uvme_{{ name }}_st_sb.sv"
    `include "uvme_{{ name }}_st_vsqr.sv"
    `include "uvme_{{ name }}_st_env.sv"
-   
+
    // Sequences
    `include "uvme_{{ name }}_st_vseq_lib.sv"
-   
+
 endpackage : uvme_{{ name }}_st_pkg
 
 

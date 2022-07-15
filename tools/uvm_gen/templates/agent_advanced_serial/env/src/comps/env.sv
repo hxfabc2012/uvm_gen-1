@@ -12,19 +12,25 @@
  */
 class uvme_{{ name }}_st_env_c extends uvml_env_c;
 
-   // Objects
+   /// @defgroup Objects
+   /// @{
    uvme_{{ name }}_st_cfg_c    cfg  ; ///<
    uvme_{{ name }}_st_cntxt_c  cntxt; ///<
-                                      ///<
-   // Agents
+   /// @}
+
+   /// @defgroup Agents
+   /// @{
    uvma_{{ name }}_agent_c  {{ mode_1 }}_agent; ///<
    uvma_{{ name }}_agent_c  {{ mode_2 }}_agent; ///<
+   uvma_{{ name }}_agent_c  passive_agent; ///<
+   /// @}
 
-   // Components
-   uvme_{{ name }}_st_prd_c         predictor ; ///<
-   uvme_{{ name }}_st_sb_simplex_c  sb_tx     ; ///<
-   uvme_{{ name }}_st_sb_simplex_c  sb_rx     ; ///<
-   uvme_{{ name }}_st_vsqr_c        vsequencer; ///<
+   /// @defgroup Components
+   /// @{
+   uvme_{{ name }}_st_prd_c   predictor; ///<
+   uvme_{{ name }}_st_sb_c    sb; ///<
+   uvme_{{ name }}_st_vsqr_c  vsequencer; ///<
+   /// @}
 
 
    `uvm_component_utils_begin(uvme_{{ name }}_st_env_c)
@@ -101,41 +107,20 @@ function uvme_{{ name }}_st_env_c::new(string name="uvme_{{ name }}_st_env", uvm
 
    super.new(name, parent);
 
-   set_type_override_by_type(
-      uvma_{{ name }}_cov_model_c   ::get_type(),
-      uvme_{{ name }}_st_cov_model_c::get_type(),
-   );
-
 endfunction : new
 
 
 function void uvme_{{ name }}_st_env_c::build_phase(uvm_phase phase);
 
    super.build_phase(phase);
-
-   void'(uvm_config_db#(uvme_{{ name }}_st_cfg_c)::get(this, "", "cfg", cfg));
-   if (!cfg) begin
-      `uvm_fatal("CFG", "Configuration handle is null")
-   end
-   else begin
-      `uvm_info("CFG", $sformatf("Found configuration handle:\n%s", cfg.sprint()), UVM_DEBUG)
-   end
-
+   get_cfg();
    if (cfg.enabled) begin
-      void'(uvm_config_db#(uvme_{{ name }}_st_cntxt_c)::get(this, "", "cntxt", cntxt));
-      if (!cntxt) begin
-         `uvm_info("CNTXT", "Context handle is null; creating.", UVM_DEBUG)
-         cntxt = uvme_{{ name }}_st_cntxt_c::type_id::create("cntxt");
-      end
-
+      get_cntxt            ();
       assign_cfg           ();
       assign_cntxt         ();
       create_agents        ();
       create_env_components();
-
-      if (cfg.is_active) begin
-         create_vsequencer();
-      end
+      create_vsequencer    ();
    end
 
 endfunction : build_phase
@@ -144,47 +129,63 @@ endfunction : build_phase
 function void uvme_{{ name }}_st_env_c::connect_phase(uvm_phase phase);
 
    super.connect_phase(phase);
-
    if (cfg.enabled) begin
+      assemble_vsequencer();
       if (cfg.scoreboarding_enabled) begin
          connect_predictor ();
          connect_scoreboard();
-      end
-
-      if (cfg.is_active) begin
-         assemble_vsequencer();
       end
    end
 
 endfunction: connect_phase
 
 
+function void uvme_{{ name }}_st_env_c::get_cfg();
+
+   void'(uvm_config_db#(uvme_{{ name }}_st_cfg_c)::get(this, "", "cfg", cfg));
+   if (cfg == null) begin
+      `uvm_fatal("{{ upper(name) }}_ST_ENV", "Configuration handle is null")
+   end
+
+endfunction : get_cfg
+
+
+function void uvme_{{ name }}_st_env_c::get_cntxt();
+
+   void'(uvm_config_db#(uvme_{{ name }}_st_cntxt_c)::get(this, "", "cntxt", cntxt));
+   if (cntxt == null) begin
+      `uvm_fatal("{{ upper(name) }}_ST_ENV", "Context handle is null")
+   end
+
+endfunction : get_cntxt
+
+
 function void uvme_{{ name }}_st_env_c::assign_cfg();
 
-   uvm_config_db#(uvme_{{ name }}_st_cfg_c )::set(this, "*"        , "cfg", cfg          );
-   uvm_config_db#(uvma_{{ name }}_cfg_c    )::set(this, "{{ mode_1 }}_agent", "cfg", cfg.{{ mode_1 }}_cfg  );
-   uvm_config_db#(uvma_{{ name }}_cfg_c    )::set(this, "{{ mode_2 }}_agent", "cfg", cfg.{{ mode_2 }}_cfg  );
-   uvm_config_db#(uvml_sb_simplex_cfg_c)::set(this, "sb_tx"    , "cfg", cfg.sb_tx_cfg);
-   uvm_config_db#(uvml_sb_simplex_cfg_c)::set(this, "sb_rx"    , "cfg", cfg.sb_rx_cfg);
+   uvm_config_db#(uvme_{{ name }}_st_cfg_c )::set(this, "*", "cfg", cfg);
+   uvm_config_db#(uvma_{{ name }}_cfg_c    )::set(this, "{{ mode_1 }}_agent", "cfg", cfg.{{ mode_1 }}_cfg);
+   uvm_config_db#(uvma_{{ name }}_cfg_c    )::set(this, "{{ mode_2 }}_agent", "cfg", cfg.{{ mode_2 }}_cfg);
+   uvm_config_db#(uvma_{{ name }}_cfg_c    )::set(this, "passive_agent", "cfg", cfg.passive_cfg);
 
 endfunction: assign_cfg
 
 
 function void uvme_{{ name }}_st_env_c::assign_cntxt();
 
-   uvm_config_db#(uvme_{{ name }}_st_cntxt_c )::set(this, "*"        , "cntxt", cntxt            );
-   uvm_config_db#(uvma_{{ name }}_cntxt_c    )::set(this, "{{ mode_1 }}_agent", "cntxt", cntxt.{{ mode_1 }}_cntxt  );
-   uvm_config_db#(uvma_{{ name }}_cntxt_c    )::set(this, "{{ mode_2 }}_agent", "cntxt", cntxt.{{ mode_2 }}_cntxt  );
-   uvm_config_db#(uvml_sb_simplex_cntxt_c)::set(this, "sb_tx"    , "cntxt", cntxt.sb_tx_cntxt);
-   uvm_config_db#(uvml_sb_simplex_cntxt_c)::set(this, "sb_rx"    , "cntxt", cntxt.sb_rx_cntxt);
+   uvm_config_db#(uvme_{{ name }}_st_cntxt_c )::set(this, "*" "cntxt", cntxt);
+   uvm_config_db#(uvma_{{ name }}_cntxt_c    )::set(this, "{{ mode_1 }}_agent", "cntxt", cntxt.{{ mode_1 }}_cntxt);
+   uvm_config_db#(uvma_{{ name }}_cntxt_c    )::set(this, "{{ mode_2 }}_agent", "cntxt", cntxt.{{ mode_2 }}_cntxt);
+   uvm_config_db#(uvma_{{ name }}_cntxt_c    )::set(this, "passive_agent", "cntxt", cntxt.passive_cntxt);
 
 endfunction: assign_cntxt
 
 
 function void uvme_{{ name }}_st_env_c::create_agents();
 
+   set_type_override_by_type(uvma_{{ name }}_cov_model_c::get_type(), uvme_{{ name }}_st_cov_model_c::get_type());
    {{ mode_1 }}_agent = uvma_{{ name }}_agent_c::type_id::create("{{ mode_1 }}_agent", this);
    {{ mode_2 }}_agent = uvma_{{ name }}_agent_c::type_id::create("{{ mode_2 }}_agent", this);
+   passive_agent = uvma_{{ name }}_agent_c::type_id::create("passive_agent", this);
 
 endfunction: create_agents
 
@@ -192,9 +193,8 @@ endfunction: create_agents
 function void uvme_{{ name }}_st_env_c::create_env_components();
 
    if (cfg.scoreboarding_enabled) begin
-      predictor = uvme_{{ name }}_st_prd_c       ::type_id::create("predictor", this);
-      sb_tx     = uvme_{{ name }}_st_sb_simplex_c::type_id::create("sb_tx"    , this);
-      sb_rx     = uvme_{{ name }}_st_sb_simplex_c::type_id::create("sb_rx"    , this);
+      predictor = uvme_{{ name }}_st_prd_c::type_id::create("predictor", this);
+      sb        = uvme_{{ name }}_st_sb_c ::type_id::create("sb"       , this);
    end
 
 endfunction: create_env_components
@@ -210,8 +210,10 @@ endfunction: create_vsequencer
 function void uvme_{{ name }}_st_env_c::connect_predictor();
 
    // Connect agent -> predictor
-   {{ mode_1 }}_agent.mon_trn_tx_ap.connect(predictor.tx_in_export);
-   {{ mode_2 }}_agent.mon_trn_rx_ap.connect(predictor.rx_in_export);
+   {{ mode_1 }}_agent.{{ tx }}_mon_trn_ap.connect(predictor.{{ tx }}_in_export);
+   {{ mode_2 }}_agent.{{ rx }}_mon_trn_ap.connect(predictor.{{ rx }}_in_export);
+   {{ mode_1 }}_agent.seq_item_ap.connect(predictor.{{ mode_1 }}_in_export);
+   {{ mode_2 }}_agent.seq_item_ap.connect(predictor.{{ mode_2 }}_in_export);
 
 endfunction: connect_predictor
 
@@ -219,20 +221,24 @@ endfunction: connect_predictor
 function void uvme_{{ name }}_st_env_c::connect_scoreboard();
 
    // Connect agent -> scoreboard
-   {{ mode_2 }}_agent.mon_trn_tx_ap.connect(sb_tx.act_export);
-   {{ mode_1 }}_agent.mon_trn_rx_ap.connect(sb_rx.act_export);
-
+   {{ mode_2 }}_agent.{{ tx }}_mon_trn_ap.connect(sb.{{ tx }}_act_export);
+   {{ mode_1 }}_agent.{{ rx }}_mon_trn_ap.connect(sb.{{ rx }}_act_export);
+   passive_agent.{{ tx }}_mon_trn_ap.connect(sb.{{ mode_1 }}_act_export);
+   passive_agent.{{ rx }}_mon_trn_ap.connect(sb.{{ mode_2 }}_act_export);
    // Connect predictor -> scoreboard
-   predictor.tx_out_ap.connect(sb_tx.exp_export);
-   predictor.rx_out_ap.connect(sb_rx.exp_export);
+   predictor.{{ tx }}_out_ap.connect(sb.{{ tx }}_exp_export);
+   predictor.{{ rx }}_out_ap.connect(sb.{{ rx }}_exp_export);
+   predictor.{{ mode_1 }}_out_ap.connect(sb.{{ mode_1 }}_exp_export);
+   predictor.{{ mode_2 }}_out_ap.connect(sb.{{ mode_2 }}_exp_export);
 
 endfunction: connect_scoreboard
 
 
 function void uvme_{{ name }}_st_env_c::assemble_vsequencer();
 
-   vsequencer.{{ mode_1 }}_sequencer = {{ mode_1 }}_agent.vsequencer.frame_sequencer;
-   vsequencer.{{ mode_2 }}_sequencer = {{ mode_2 }}_agent.vsequencer.frame_sequencer;
+   vsequencer.{{ mode_1 }}_vsequencer = {{ mode_1 }}_agent.vsequencer;
+   vsequencer.{{ mode_2 }}_vsequencer = {{ mode_2 }}_agent.vsequencer;
+   vsequencer.passive_vsequencer = passive_agent.vsequencer;
 
 endfunction: assemble_vsequencer
 

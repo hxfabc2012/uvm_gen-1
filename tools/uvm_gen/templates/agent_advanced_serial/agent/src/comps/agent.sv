@@ -150,7 +150,6 @@ endfunction : new
 function void uvma_{{ name }}_agent_c::build_phase(uvm_phase phase);
 
    super.build_phase(phase);
-
    get_and_set_cfg      ();
    get_and_set_cntxt    ();
    retrieve_vif         ();
@@ -163,10 +162,8 @@ endfunction : build_phase
 function void uvma_{{ name }}_agent_c::connect_phase(uvm_phase phase);
 
    super.connect_phase(phase);
-
-   connect_sequencer     ();
+   connect_sequencer();
    connect_analysis_ports();
-
    if (cfg.cov_model_enabled) begin
       connect_cov_model();
    end
@@ -180,17 +177,13 @@ endfunction: connect_phase
 task uvma_{{ name }}_agent_c::run_phase(uvm_phase phase);
 
    super.run_phase(phase);
-
    if (cfg.enabled) begin
       start_mon_vseq();
-
       if (cfg.is_active) begin
          start_idle_vseq();
-
          case (cfg.drv_mode)
             UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }}: start_drv_vseq_{{ mode_1 }}();
             UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }}: start_drv_vseq_{{ mode_2 }}();
-
             default: begin
                `uvm_fatal("{{ upper(name) }}_AGENT", $sformatf("Invalid cfg.drv_mode: %s", cfg.drv_mode.name()))
             end
@@ -269,7 +262,6 @@ function void uvma_{{ name }}_agent_c::connect_sequencer();
    vsequencer.set_arbitration(cfg.sqr_arb_mode);
    vsequencer.{{ tx }}_phy_sequencer.set_arbitration(UVM_SEQ_ARB_STRICT_FIFO);
    vsequencer.{{ rx }}_phy_sequencer.set_arbitration(UVM_SEQ_ARB_STRICT_FIFO);
-
    if (!cfg.bypass_mode) begin
       driver .{{ tx }}_driver.seq_item_port.connect(vsequencer.{{ tx }}_phy_sequencer.seq_item_export);
       driver .{{ rx }}_driver.seq_item_port.connect(vsequencer.{{ rx }}_phy_sequencer.seq_item_export);
@@ -330,11 +322,9 @@ task uvma_{{ name }}_agent_c::start_mon_vseq();
    if (!$cast(cntxt.mon_vseq, temp_obj)) begin
       `uvm_fatal("{{ upper(name) }}_AGENT", $sformatf("Could not cast 'temp_obj' (%s) to 'cntxt.mon_vseq' (%s)", $typename(temp_obj), $typename(cntxt.mon_vseq)))
    end
-
    if (!cntxt.mon_vseq.randomize()) begin
       `uvm_fatal("{{ upper(name) }}_AGENT", "Failed to randomize cntxt.mon_vseq")
    end
-
    fork
       cntxt.mon_vseq.start(vsequencer);
    join_none
@@ -352,11 +342,9 @@ task uvma_{{ name }}_agent_c::start_idle_vseq();
    if (!$cast(cntxt.idle_vseq, temp_obj)) begin
       `uvm_fatal("{{ upper(name) }}_AGENT", $sformatf("Could not cast 'temp_obj' (%s) to 'cntxt.idle_vseq' (%s)", $typename(temp_obj), $typename(cntxt.idle_vseq)))
    end
-
    if (!cntxt.idle_vseq.randomize()) begin
       `uvm_fatal("{{ upper(name) }}_AGENT", "Failed to randomize cntxt.idle_vseq")
    end
-
    fork
       cntxt.idle_vseq.start(vsequencer);
    join_none
@@ -374,11 +362,9 @@ task uvma_{{ name }}_agent_c::start_drv_vseq_{{ mode_1 }}();
    if (!$cast(cntxt.{{ tx }}_drv_vseq, temp_obj)) begin
       `uvm_fatal("{{ upper(name) }}_AGENT", $sformatf("Could not cast 'temp_obj' (%s) to 'cntxt.{{ tx }}_drv_vseq' (%s)", $typename(temp_obj), $typename(cntxt.{{ tx }}_drv_vseq)))
    end
-
    if (!cntxt.{{ tx }}_drv_vseq.randomize()) begin
       `uvm_fatal("{{ upper(name) }}_AGENT", "Failed to randomize cntxt.{{ tx }}_drv_vseq")
    end
-
    fork
       cntxt.{{ tx }}_drv_vseq.start(vsequencer);
    join_none
@@ -396,11 +382,9 @@ task uvma_{{ name }}_agent_c::start_drv_vseq_{{ mode_2 }}();
    if (!$cast(cntxt.{{ rx }}_drv_vseq, temp_obj)) begin
       `uvm_fatal("{{ upper(name) }}_AGENT", $sformatf("Could not cast 'temp_obj' (%s) to 'cntxt.{{ rx }}_drv_vseq' (%s)", $typename(temp_obj), $typename(cntxt.{{ rx }}_drv_vseq)))
    end
-
    if (!cntxt.{{ rx }}_drv_vseq.randomize()) begin
       `uvm_fatal("{{ upper(name) }}_AGENT", "Failed to randomize cntxt.{{ rx }}_drv_vseq")
    end
-
    fork
       cntxt.{{ rx }}_drv_vseq.start(vsequencer);
    join_none

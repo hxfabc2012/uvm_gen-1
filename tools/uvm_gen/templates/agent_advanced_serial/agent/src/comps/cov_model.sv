@@ -72,6 +72,21 @@ class uvma_{{ name }}_cov_model_c extends uvm_component;
    extern virtual task run_phase(uvm_phase phase);
 
    /**
+    * Uses uvm_config_db to retrieve cfg.
+    */
+   extern function void get_cfg();
+
+   /**
+    * Uses uvm_config_db to retrieve cntxt.
+    */
+   extern function void get_cntxt();
+
+   /**
+    *
+    */
+   extern function void create_tlm_objects();
+
+   /**
     * TODO Describe uvma_{{ name }}_cov_model_c::sample_cfg()
     */
    extern virtual function void sample_cfg();
@@ -129,24 +144,9 @@ endfunction : new
 function void uvma_{{ name }}_cov_model_c::build_phase(uvm_phase phase);
 
    super.build_phase(phase);
-
-   void'(uvm_config_db#(uvma_{{ name }}_cfg_c)::get(this, "", "cfg", cfg));
-   if (cfg == null) begin
-      `uvm_fatal("CFG", "Configuration handle is null")
-   end
-
-   void'(uvm_config_db#(uvma_{{ name }}_cntxt_c)::get(this, "", "cntxt", cntxt));
-   if (cntxt == null) begin
-      `uvm_fatal("CNTXT", "Context handle is null")
-   end
-
-   seq_item_fifo = new("seq_item_fifo", this);
-   {{ tx }}_mon_trn_fifo       = new("{{ tx }}_mon_trn_fifo"     , this);
-   {{ rx }}_mon_trn_fifo       = new("{{ rx }}_mon_trn_fifo"     , this);
-   {{ tx }}_phy_seq_item_fifo  = new("{{ tx }}_phy_seq_item_fifo", this);
-   {{ rx }}_phy_seq_item_fifo  = new("{{ rx }}_phy_seq_item_fifo", this);
-   {{ tx }}_phy_mon_trn_fifo   = new("{{ tx }}_phy_mon_trn_fifo" , this);
-   {{ rx }}_phy_mon_trn_fifo   = new("{{ rx }}_phy_mon_trn_fifo" , this);
+   get_cfg           ();
+   get_cntxt         ();
+   create_tlm_objects();
 
 endfunction : build_phase
 
@@ -154,58 +154,40 @@ endfunction : build_phase
 task uvma_{{ name }}_cov_model_c::run_phase(uvm_phase phase);
 
    super.run_phase(phase);
-
    if (cfg.enabled && cfg.cov_model_enabled) begin
       fork
-         // Configuration
          forever begin
             cntxt.sample_cfg_e.wait_trigger();
             sample_cfg();
          end
-
-         // Context
          forever begin
             cntxt.sample_cntxt_e.wait_trigger();
             sample_cntxt();
          end
-
-         // Sequence items
          forever begin
             seq_item_fifo.get(seq_item);
             sample_seq_item();
          end
-
-         // Monitor tx transactions
          forever begin
             {{ tx }}_mon_trn_fifo.get({{ tx }}_mon_trn);
             sample_{{ tx }}_mon_trn();
          end
-
-         // Monitor rx transactions
          forever begin
             {{ rx }}_mon_trn_fifo.get({{ rx }}_mon_trn);
             sample_{{ rx }}_mon_trn();
          end
-
-         // Sequence tx phy items
          forever begin
             {{ tx }}_phy_seq_item_fifo.get({{ tx }}_phy_seq_item);
             sample_{{ tx }}_phy_seq_item();
          end
-
-         // Sequence rx phy items
          forever begin
             {{ rx }}_phy_seq_item_fifo.get({{ rx }}_phy_seq_item);
             sample_{{ rx }}_phy_seq_item();
          end
-
-         // Monitor tx phy transactions
          forever begin
             {{ tx }}_phy_mon_trn_fifo.get({{ tx }}_phy_mon_trn);
             sample_{{ tx }}_phy_mon_trn();
          end
-
-         // Monitor rx phy transactions
          forever begin
             {{ rx }}_phy_mon_trn_fifo.get({{ rx }}_phy_mon_trn);
             sample_{{ rx }}_phy_mon_trn();
@@ -216,66 +198,72 @@ task uvma_{{ name }}_cov_model_c::run_phase(uvm_phase phase);
 endtask : run_phase
 
 
+function void uvme_{{ name }}_cov_model_c::get_cfg();
+
+   void'(uvm_config_db#(uvme_{{ name }}_st_cfg_c)::get(this, "", "cfg", cfg));
+   if (cfg == null) begin
+      `uvm_fatal("{{ upper(name) }}_ST_ENV", "Configuration handle is null")
+   end
+
+endfunction : get_cfg
+
+
+function void uvme_{{ name }}_cov_model_c::get_cntxt();
+
+   void'(uvm_config_db#(uvme_{{ name }}_st_cntxt_c)::get(this, "", "cntxt", cntxt));
+   if (cntxt == null) begin
+      `uvm_fatal("{{ upper(name) }}_ST_ENV", "Context handle is null")
+   end
+
+endfunction : get_cntxt
+
+
+function void uvme_{{ name }}_cov_model_c::create_tlm_objects();
+
+   seq_item_fifo = new("seq_item_fifo", this);
+   {{ tx }}_mon_trn_fifo      = new("{{ tx }}_mon_trn_fifo"     , this);
+   {{ rx }}_mon_trn_fifo      = new("{{ rx }}_mon_trn_fifo"     , this);
+   {{ tx }}_phy_seq_item_fifo = new("{{ tx }}_phy_seq_item_fifo", this);
+   {{ rx }}_phy_seq_item_fifo = new("{{ rx }}_phy_seq_item_fifo", this);
+   {{ tx }}_phy_mon_trn_fifo  = new("{{ tx }}_phy_mon_trn_fifo" , this);
+   {{ rx }}_phy_mon_trn_fifo  = new("{{ rx }}_phy_mon_trn_fifo" , this);
+
+endfunction : create_tlm_objects
+
+
 function void uvma_{{ name }}_cov_model_c::sample_cfg();
-
-   // TODO Implement uvma_{{ name }}_cov_model_c::sample_cfg();
-
 endfunction : sample_cfg
 
 
 function void uvma_{{ name }}_cov_model_c::sample_cntxt();
-
-   // TODO Implement uvma_{{ name }}_cov_model_c::sample_cntxt();
-
 endfunction : sample_cntxt
 
 
 function void uvma_{{ name }}_cov_model_c::sample_seq_item();
-
-   // TODO Implement uvma_{{ name }}_cov_model_c::sample_seq_item();
-
 endfunction : sample_seq_item
 
 
 function void uvma_{{ name }}_cov_model_c::sample_{{ tx }}_mon_trn();
-
-   // TODO Implement uvma_{{ name }}_cov_model_c::sample_{{ tx }}_mon_trn();
-
 endfunction : sample_{{ tx }}_mon_trn
 
 
 function void uvma_{{ name }}_cov_model_c::sample_{{ rx }}_mon_trn();
-
-   // TODO Implement uvma_{{ name }}_cov_model_c::sample_{{ rx }}_mon_trn();
-
 endfunction : sample_{{ rx }}_mon_trn
 
 
 function void uvma_{{ name }}_cov_model_c::sample_{{ tx }}_phy_seq_item();
-
-   // TODO Implement uvma_{{ name }}_cov_model_c::sample_{{ tx }}_phy_seq_item();
-
 endfunction : sample_{{ tx }}_phy_seq_item
 
 
 function void uvma_{{ name }}_cov_model_c::sample_{{ rx }}_phy_seq_item();
-
-   // TODO Implement uvma_{{ name }}_cov_model_c::sample_{{ rx }}_phy_seq_item();
-
 endfunction : sample_{{ rx }}_phy_seq_item
 
 
 function void uvma_{{ name }}_cov_model_c::sample_{{ tx }}_phy_mon_trn();
-
-   // TODO Implement uvma_{{ name }}_cov_model_c::sample_{{ tx }}_phy_mon_trn();
-
 endfunction : sample_{{ tx }}_phy_mon_trn
 
 
 function void uvma_{{ name }}_cov_model_c::sample_{{ rx }}_phy_mon_trn();
-
-   // TODO Implement uvma_{{ name }}_cov_model_c::sample_{{ rx }}_phy_mon_trn();
-
 endfunction : sample_{{ rx }}_phy_mon_trn
 
 

@@ -7,7 +7,8 @@
 `define __UVME_{{ upper(name) }}_ST_CONSTANTS_SV__
 
 
-
+const int unsigned uvme_{{ name }}_st_rand_traffic_default_num_seq_items =   100; ///<
+const int unsigned uvme_{{ name }}_st_rand_traffic_default_sqr_priority  = 1_000; ///<
 
 
 `endif // __UVME_{{ upper(name) }}_ST_CONSTANTS_SV__

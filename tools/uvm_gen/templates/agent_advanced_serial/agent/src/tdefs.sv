@@ -25,6 +25,7 @@ typedef enum {
 typedef enum {
    UVMA_{{ upper(name) }}_MON_FSM_INIT    ,
    UVMA_{{ upper(name) }}_MON_FSM_TRAINING,
+   UVMA_{{ upper(name) }}_MON_FSM_SYNCING ,
    UVMA_{{ upper(name) }}_MON_FSM_SYNCED
 } uvma_{{ name }}_mon_fsm_enum;
 
