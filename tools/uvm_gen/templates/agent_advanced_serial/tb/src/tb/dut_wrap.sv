@@ -15,50 +15,50 @@ module uvmt_{{ name }}_st_dut_wrap(
    uvma_{{ name }}_if  {{ mode_1 }}_if,
    uvma_{{ name }}_if  {{ mode_2 }}_if,
    uvma_{{ name }}_if  passive_if
-   );
+);
 
-{% if symmetric %}   reg rxp;
-   reg rxn;
-{% else %}   reg rx0p;
-   reg rx0n;
-   reg rx1p;
-   reg rx1n;
-{% endif %}   reg txp;
-   reg txn;
+{% if symmetric %}   reg {{ rx }}p;
+   reg {{ rx }}n;
+{% else %}   reg {{ rx }}0p;
+   reg {{ rx }}0n;
+   reg {{ rx }}1p;
+   reg {{ rx }}1n;
+{% endif %}   reg {{ tx }}p;
+   reg {{ tx }}n;
 
-{% if symmetric %}   assign {{ mode_1 }}_if.rxp = rxp;
-   assign {{ mode_1 }}_if.rxn = rxn;
-   assign passive_if.rxp = rxp;
-   assign passive_if.rxn = rxn;
-{% else %}   assign {{ mode_1 }}_if.rx0p = rx0p;
-   assign {{ mode_1 }}_if.rx0n = rx0n;
-   assign {{ mode_1 }}_if.rx1p = rx1p;
-   assign {{ mode_1 }}_if.rx1n = rx1n;
-   assign passive_if.rx0p = rx0p;
-   assign passive_if.rx0n = rx0n;
-   assign passive_if.rx1p = rx1p;
-   assign passive_if.rx1n = rx1n;
+{% if symmetric %}   assign {{ mode_1 }}_if.{{ rx }}p = {{ rx }}p;
+   assign {{ mode_1 }}_if.{{ rx }}n = {{ rx }}n;
+   assign passive_if.{{ rx }}p = {{ rx }}p;
+   assign passive_if.{{ rx }}n = {{ rx }}n;
+{% else %}   assign {{ mode_1 }}_if.{{ rx }}0p = {{ rx }}0p;
+   assign {{ mode_1 }}_if.{{ rx }}0n = {{ rx }}0n;
+   assign {{ mode_1 }}_if.{{ rx }}1p = {{ rx }}1p;
+   assign {{ mode_1 }}_if.{{ rx }}1n = {{ rx }}1n;
+   assign passive_if.{{ rx }}0p = {{ rx }}0p;
+   assign passive_if.{{ rx }}0n = {{ rx }}0n;
+   assign passive_if.{{ rx }}1p = {{ rx }}1p;
+   assign passive_if.{{ rx }}1n = {{ rx }}1n;
 {% endif %}
-   assign {{ mode_2 }}_if.txp = txp;
-   assign {{ mode_2 }}_if.txn = txn;
-   assign passive_if.txp = txp;
-   assign passive_if.txn = txn;
+   assign {{ mode_2 }}_if.{{ tx }}p = {{ tx }}p;
+   assign {{ mode_2 }}_if.{{ tx }}n = {{ tx }}n;
+   assign passive_if.{{ tx }}p = {{ tx }}p;
+   assign passive_if.{{ tx }}n = {{ tx }}n;
 
-{% if ddr %}   always @({{ mode_1 }}_if.tx_clk) begin
-{% else %}   always @(posedge {{ mode_1 }}_if.tx_clk) begin
-{% endif %}      txp = {{ mode_1 }}_if.txp;
-      txn = {{ mode_1 }}_if.txn;
+{% if ddr %}   always @({{ mode_1 }}_if.{{ tx }}_clk) begin
+{% else %}   always @(posedge {{ mode_1 }}_if.{{ tx }}_clk) begin
+{% endif %}      {{ tx }}p = {{ mode_1 }}_if.{{ tx }}p;
+      {{ tx }}n = {{ mode_1 }}_if.{{ tx }}n;
    end
 
-{% if ddr %}   always @({{ mode_2 }}_if.rx_clk) begin
-{% else %}   always @(posedge {{ mode_1 }}_if.rx_clk) begin
-{% endif %}{% if symmetric %}   rx0p = {{ mode_2 }}_if.rxp;
-      rxp = {{ mode_2 }}_if.rxp;
-{% else %}      rx0p = {{ mode_2 }}_if.rx0p;
-      rx0p = {{ mode_2 }}_if.rx0p;
-      rx0n = {{ mode_2 }}_if.rx0n;
-      rx1p = {{ mode_2 }}_if.rx1p;
-      rx1n = {{ mode_2 }}_if.rx1n;
+{% if ddr %}   always @({{ mode_2 }}_if.{{ rx }}_clk) begin
+{% else %}   always @(posedge {{ mode_1 }}_if.{{ rx }}_clk) begin
+{% endif %}{% if symmetric %}   {{ rx }}0p = {{ mode_2 }}_if.{{ rx }}p;
+      {{ rx }}p = {{ mode_2 }}_if.{{ rx }}p;
+{% else %}      {{ rx }}0p = {{ mode_2 }}_if.{{ rx }}0p;
+      {{ rx }}0p = {{ mode_2 }}_if.{{ rx }}0p;
+      {{ rx }}0n = {{ mode_2 }}_if.{{ rx }}0n;
+      {{ rx }}1p = {{ mode_2 }}_if.{{ rx }}1p;
+      {{ rx }}1n = {{ mode_2 }}_if.{{ rx }}1n;
 {% endif %}
    end
 
