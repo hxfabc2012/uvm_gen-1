@@ -74,7 +74,7 @@ function uvml_metadata_t uvma_{{ name }}_seq_item_c::get_metadata();
       header_str = "IDLE";
    end
    else begin
-      header_str = $sformatf("??(%b)", header);
+      header_str = $sformatf("? %b", header);
    end
    get_metadata.push_back('{
       index     : 0,

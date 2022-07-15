@@ -114,14 +114,21 @@ task uvma_{{ name }}_mon_vseq_c::monitor_tx();
       `uvm_info("{{ upper(name) }}_MON_VSEQ_{{ upper(tx) }}", $sformatf("Got Phy Monitor Transaction:\n%s", phy_trn.sprint()), UVM_DEBUG)
 {% if symmetric %}      cntxt.{{ tx }}_mon_fsm_cntxt.data_q.push_back(diff_decode(phy_trn.dp, phy_trn.dn));
 {% else %}      cntxt.{{ tx }}_mon_fsm_cntxt.data_q.push_back(diff_decode(phy_trn.txp, phy_trn.txn));
-{% endif %}      `uvm_info("{{ upper(name) }}_MON_VSEQ_{{ upper(tx) }}", $sformatf("Monitor has accumulated %0d bits", cnrxt.{{ tx }}_mon_fsm_cnrxt.trn_data.size()), UVM_DEBUG)
+{% endif %}     cntxt.{{ tx }}_mon_fsm_cntxt.timestamps_q.push_back(phy_trn.get_timestamp_start());
+      `uvm_info("{{ upper(name) }}_MON_VSEQ_{{ upper(tx) }}", $sformatf("Monitor has accumulated %0d bits", cnrxt.{{ tx }}_mon_fsm_cnrxt.trn_data.size()), UVM_DEBUG)
       sample_trn = monitor_fsm(cntxt.mon_fsm_{{ tx }}_cntxt, UVMA_{{ upper(name) }}_DIRECTION_{{ upper(tx) }});
       if (sample_trn) begin
          `uvm_info("{{ upper(name) }}_MON_VSEQ_{{ upper(tx) }}", $sformatf("Unpacking Monitor Transaction from %0d bits", cntxt.{{ tx }}_mon_fsm_cntxt.trn_data.size()), UVM_DEBUG)
          mon_trn = uvma_{{ name }}_mon_trn_c::type_id::create("mon_trn");
          void'(mon_trn.unpack(cntxt.{{ tx }}_mon_fsm_cntxt.trn_data));
-         `uvm_info("{{ upper(name) }}_MON_VSEQ_{{ upper(tx) }}", $sformatf("Unpacked Monitor Transaction:\n%s", mon_trn.sprint()), UVM_DEBUG)
+         mon_trn.set_initiator(p_sequencer);
+         mon_trn.direction = UVMA_{{ upper(name) }}_DIRECTION_{{ upper(tx) }};
+         mon_trn.cfg = cfg;
+         mon_trn.set_error(!mon_trn.self_check());
+         mon_trn.set_timestamp_start(cntxt.{{ tx }}_mon_fsm_cntxt.trn_start);
+         mon_trn.set_timestamp_end  (cntxt.{{ tx }}_mon_fsm_cntxt.trn_end  );
          if (mon_trn.header != UVMA_{{ upper(name) }}_HEADER_IDLE) begin
+            `uvm_info("{{ upper(name) }}_MON_VSEQ_{{ upper(tx) }}", $sformatf("Unpacked Data Monitor Transaction:\n%s", mon_trn.sprint()), UVM_DEBUG)
             `uvml_hrtbt_owner(p_sequencer)
             write_{{ tx }}_mon_trn(mon_trn);
          end
@@ -154,14 +161,21 @@ task uvma_{{ name }}_mon_vseq_c::monitor_{{ rx }}();
 {% if symmetric %}      cnrxt.{{ rx }}_mon_fsm_cntxt.data_q.push_back(diff_decode(phy_trn.dp, phy_trn.dn));
 {% else %}      cnrxt.{{ rx }}_mon_fsm_cntxt.data_q.push_back(diff_decode(phy_trn.rx0p, phy_trn.rx0n));
       cnrxt.{{ rx }}_mon_fsm_cntxt.data_q.push_back(diff_decode(phy_trn.rx1p, phy_trn.rx1n));
-{% endif %}      `uvm_info("{{ upper(name) }}_MON_VSEQ_{{ upper(rx) }}", $sformatf("Monitor has accumulated %0d bits", cnrxt.{{ rx }}_mon_fsm_cntxt.trn_data.size()), UVM_DEBUG)
+{% endif %}      cntxt.{{ rx }}_mon_fsm_cntxt.timestamps_q.push_back(phy_trn.get_timestamp_start());
+      `uvm_info("{{ upper(name) }}_MON_VSEQ_{{ upper(rx) }}", $sformatf("Monitor has accumulated %0d bits", cnrxt.{{ rx }}_mon_fsm_cntxt.trn_data.size()), UVM_DEBUG)
       sample_trn = monitor_fsm(cnrxt.mon_fsm_{{ rx }}_cntxt, UVMA_{{ upper(name) }}_DIRECTION_{{ upper(rx) }});
       if (sample_trn) begin
          `uvm_info("{{ upper(name) }}_MON_VSEQ_{{ upper(rx) }}", $sformatf("Unpacking Monitor Transaction from %0d bits", cnrxt.{{ rx }}_mon_fsm_cntxt.trn_data.size()), UVM_DEBUG)
          mon_trn = uvma_{{ name }}_mon_trn_c::type_id::create("mon_trn");
          void'(mon_trn.unpack(cnrxt.{{ rx }}_mon_fsm_cntxt.trn_data));
-         `uvm_info("{{ upper(name) }}_MON_VSEQ_{{ upper(rx) }}", $sformatf("Unpacked Monitor Transaction:\n%s", mon_trn.sprint()), UVM_DEBUG)
+         mon_trn.set_initiator(p_sequencer);
+         mon_trn.direction = UVMA_{{ upper(name) }}_DIRECTION_{{ upper(rx) }};
+         mon_trn.cfg = cfg;
+         mon_trn.set_error(!mon_trn.self_check());
+         mon_trn.set_timestamp_start(cntxt.{{ rx }}_mon_fsm_cntxt.trn_start);
+         mon_trn.set_timestamp_end  (cntxt.{{ rx }}_mon_fsm_cntxt.trn_end  );
          if (mon_trn.header != UVMA_{{ upper(name) }}_HEADER_IDLE) begin
+            `uvm_info("{{ upper(name) }}_MON_VSEQ_{{ upper(rx) }}", $sformatf("Unpacked Data Monitor Transaction:\n%s", mon_trn.sprint()), UVM_DEBUG)
             `uvml_hrtbt_owner(p_sequencer)
             write_{{ rx }}_mon_trn(mon_trn);
          end
@@ -214,6 +228,7 @@ function bit uvma_{{ name }}_mon_vseq_c::monitor_fsm(uvma_{{ name }}_mon_fsm_cnt
       UVMA_{{ upper(name) }}_MON_FSM_TRAINING: begin
          next_state = UVMA_{{ upper(name) }}_MON_FSM_TRAINING;
          new_bit = fsm_cntxt.data_q.pop_front();
+         void'(fsm_cntxt.timestamps_q.pop_front());
          if (new_bit === 0) begin
             fsm_cntxt.training_count++;
             `uvm_info({"{{ upper(name) }}_MON_VSEQ_", direction_str}, $sformatf("%s - Seen %0d consecutive 1'b0", fsm_cntxt.state.name(), fsm_cntxt.training_count), UVM_DEBUG)
@@ -235,6 +250,7 @@ function bit uvma_{{ name }}_mon_vseq_c::monitor_fsm(uvma_{{ name }}_mon_fsm_cnt
             end
             else begin
                void'(fsm_cntxt.data_q.pop_front());
+               void'(fsm_cntxt.timestamps_q.pop_front());
             end
          end
       end
@@ -244,14 +260,16 @@ function bit uvma_{{ name }}_mon_vseq_c::monitor_fsm(uvma_{{ name }}_mon_fsm_cnt
          if (fsm_cntxt.data_q.size() >= uvma_{{ name }}_trn_length) begin
             `uvm_info({"{{ upper(name) }}_MON_VSEQ_", direction_str}, $sformatf("%s - Have enough bits (%0d) to unpack trn", fsm_cntxt.state.name(), fsm_cntxt.data_q.size()), UVM_DEBUG)
             sample_trn = 1;
-            for (int unsigned ii = 0; ii<uvma_{{ name }}_trn_length; ii++) begin
-               fsm_cntxt.trn_data[ii] = fsm_cntxt.data_q.pop_front();
+            fsm_cntxt.trn_start = fsm_cntxt.data_q[0];
+            for (int unsigned ii=0; ii<uvma_{{ name }}_trn_length; ii++) begin
+               fsm_cntxt.trn_data[ii] = fsm_cntxt.data_q      .pop_front();
+               fsm_cntxt.trn_end      = fsm_cntxt.timestamps_q.pop_front();
             end
          end
       end
 
       default: begin
-         `uvm_warning({"{{ upper(name) }}_MON_VSEQ_", direction_str}, $sformatf("%s - Invalid state, changing to INIT", fsm_cntxt.state.name()))
+         `uvm_error({"{{ upper(name) }}_MON_VSEQ_", direction_str}, $sformatf("%s - Invalid state, changing to INIT", fsm_cntxt.state.name()))
          next_state = UVMA_{{ upper(name) }}_MON_FSM_INIT;
       end
    endcase

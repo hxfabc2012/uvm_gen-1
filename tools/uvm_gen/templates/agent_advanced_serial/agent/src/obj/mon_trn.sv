@@ -44,6 +44,11 @@ class uvma_{{ name }}_mon_trn_c extends uvml_mon_trn_c;
     */
    extern function uvml_metadata_t get_metadata();
 
+   /**
+    * TODO Describe uvma_{{ name }}_mon_trn_c::self_check()
+    */
+   extern function bit self_check();
+
 endclass : uvma_{{ name }}_mon_trn_c
 
 
@@ -57,8 +62,8 @@ endfunction : new
 function uvml_metadata_t uvma_{{ name }}_mon_trn_c::get_metadata();
 
    string header_str = header.name();
-   string tail_str = $sformatf("%b", tail );
-   string data_str = $sformatf("%h", data );
+   string tail_str = $sformatf("%b", tail);
+   string data_str = $sformatf("%h", data);
 
    if (header == UVMA_{{ upper(name) }}_HEADER_DATA) begin
       header_str = "DATA";
@@ -67,7 +72,7 @@ function uvml_metadata_t uvma_{{ name }}_mon_trn_c::get_metadata();
       header_str = "IDLE";
    end
    else begin
-      header_str = $sformatf("??(%b)", header);
+      header_str = $sformatf("? %b", header);
    end
    get_metadata.push_back('{
       index     : 0,
@@ -95,6 +100,31 @@ function uvml_metadata_t uvma_{{ name }}_mon_trn_c::get_metadata();
    });
 
 endfunction : get_metadata
+
+
+function bit uvma_{{ name }}_mon_trn_c::self_check();
+
+   self_check = 1;
+   case (header)
+      UVMA_{{ upper(name) }}_HEADER_DATA: ;
+      UVMA_{{ upper(name) }}_HEADER_IDLE: ;
+      default: begin
+         `uvm_error("{{ upper(name) }}_MON_TRN", $sformatf("Invalid header: %b", header))
+         self_check = 0;
+      end
+   endcase
+   if (header == UVMA_{{ upper(name) }}_HEADER_IDLE) begin
+      if (data !== uvma_{{ name }}_idle_data) begin
+         `uvm_error("{{ upper(name) }}_MON_TRN", $sformatf("Invalid IDLE data: %b", data))
+         sself_check = 0;
+      end
+   end
+   if (tail !== uvma_{{ name }}_tail_symbol) begin
+      `uvm_error("{{ upper(name) }}_MON_TRN", $sformatf("Invalid tail symbol: %b", data))
+      self_check = 0;
+   end
+
+endfunction : self_check
 
 
 `endif // __UVMA_{{ upper(name) }}_MON_TRN_SV__

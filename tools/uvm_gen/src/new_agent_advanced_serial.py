@@ -12,6 +12,8 @@ from datetime import date
 import os
 import sys
 import re
+import jinja2
+from jinja2 import Template
 
 
 ########################################################################################################################
@@ -25,7 +27,7 @@ default_copyright_owner = "Contributors"
 default_license = "SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1"
 name_of_copyright_owner = ""
 name = ""
-name_normal_case = ""
+full_name = ""
 
 
 ########################################################################################################################
@@ -122,7 +124,7 @@ asymmetric_phy_agent_files = {
     "agent_advanced/agent/README.md"                       : "uvma_{{ name }}/README.md"
 }
 
-env_files {
+env_files = {
     #"agent_advanced_serial/env/bin/package.py"                    : "uvme_{{ name }}_st/bin/package.py",
     #"agent_advanced_serial/env/docs/env_block_diagram.svg"        : "uvme_{{ name }}_st/docs/env_block_diagram.svg",
     #"agent_advanced_serial/env/examples/virtual_sequence.sv"      : "uvme_{{ name }}_st/examples/virtual_sequence.sv",
@@ -203,47 +205,53 @@ directories = [
 # MAIN
 ########################################################################################################################
 def process_file(path, file_path_template):
+    global parameters
     if dbg:
         print("Processing file " + path + " with path template " + file_path_template)
     
     if not dbg:
         fin = open(relative_path_to_template + path, "rt")
     
-    fout_path = file_path_template
-    for param in parameters:
-        fout_path = fout_path.replace("${" + param + "}", str(parameters[param]))
+    fout_path_template = Template(file_path_template)
+    fout_path = file_path_template.render(parameters)
     fout_path = out_path + "/" + fout_path
     if dbg:
         print("Templated path: " + fout_path)
     else:
         fout = open(fout_path, "w+")
         data = fin.read()
-    
-    for param in parameters:
-        if dbg:
-            print("Replacing string '${" + param + "}' with '" + str(parameters[param]) + "'")
-        else:
-            data = data.replace("${" + param + "}", str(parameters[param]))
+        template = Template(data)
+        data = template.render(parameters)
     
     if not dbg:
         fin.close()
         print("Writing " + fout_path)
         fout.write(data)
         fout.close()
-    
+
+
 def process_all_files():
-    for file in files:
-        process_file(file, files[file])
+    global parameters
+    final_fileset = env_files + tb_files
+    if parameters['symmetric']:
+        final_fileset = final_fileset + symmetric_phy_agent_files
+    else:
+        final_fileset = final_fileset + asymmetric_phy_agent_files
+    for file in final_fileset:
+        process_file(file, final_fileset[file])
+
 
 def create_directories():
+    global parameters
     for dir in directories:
         dir_name = out_path + "/" + dir
-        for param in parameters:
-            dir_name = dir_name.replace("${" + param + "}", str(parameters[param]))
+        dir_name_template = Template(dir_name)
+        dir_name = dir_template.render(parameters)
         if dbg:
             print("Creating directory '" + dir_name + "'")
         else:
             os.mkdir(dir_name)
+
 
 def pick_out_path():
     global out_path
@@ -255,15 +263,16 @@ def pick_out_path():
         default_copyright_owner = sys.argv[2].replace('"', "")
         print("Default copyright owner is " + default_copyright_owner)
 
+
 def prompt_user_values():
     global out_path
     global name
-    global name_normal_case
+    global full_name
     global name_of_copyright_owner
     global default_copyright_owner
     global parameters
     
-    print("Moore.io Template Generator: UVM Agent - Basic (v1p1)")
+    print("Moore.io Template Generator: UVM Advanced Serial Agent - (v1p0)")
     print("******************************************************************")
     print("The answers to the following questionnaire will be used to generate the code for your new UVM Agent")
     print("")
@@ -281,24 +290,65 @@ def prompt_user_values():
     if license == "":
         license = default_license
     
-    name = input("Please enter the package name for this agent (ex: 'apb'); this name will be used for all agent types (ex: 'uvma_apb_agent_c'):\n").lower().strip()
+    name = input("Please enter the package name for this agent (ex: 'spi'); this name will be used for all agent types (ex: 'uvma_spi_agent_c'):\n").lower().strip()
     if name == "":
         sys.exit("ERROR: package name cannot be empty.  Exiting.")
     
-    name_normal_case = input("Please enter the (descriptive) name for this agent (ex: 'Advanced Peripheral Bus (APB)'):\n").strip()
-    if name_normal_case == "":
-        sys.exit("ERROR: descriptive name cannot be empty.  Exiting.")
+    full_name = input("Please enter the full name for this agent (ex: 'Serial Peripheral Interface'):\n").strip()
+    if full_name == "":
+        sys.exit("ERROR: full name cannot be empty.  Exiting.")
+    
+    is_symmetric_str = input("Is the physical interface symmetric?  [N/y]").strip().lower()
+        if is_symmetric_str == "":
+            is_symmetric = False
+        else:
+            if is_symmetric_str == "n" or is_symmetric_str == "no":
+                is_symmetric = False
+            else if is_symmetric_str == "y" or is_symmetric_str == "yes":
+                is_symmetric = True
+            else:
+                sys.exit("ERROR: please enter 'y' or 'n'")
+    
+    is_ddr_str = input("Is the physical interface using DDR clocking?  [N/y]").strip().lower()
+        if is_ddr_str == "":
+            is_ddr = False
+        else:
+            if is_ddr_str == "n" or is_ddr_str == "no":
+                is_ddr = False
+            else if is_ddr_str == "y" or is_ddr_str == "yes":
+                is_ddr = True
+            else:
+                sys.exit("ERROR: please enter 'y' or 'n'")
+    
+    mode_1 = input("Please enter the first mode for this new agent (default: 'mstr'):\n").strip()
+        if mode_1 == "":
+            mode_1 = "mstr"
+    
+    mode_2 = input("Please enter the second mode for this new agent (default: 'slv'):\n").strip()
+        if mode_2 == "":
+            mode_2 = "slv"
+    
+    tx_str = input("Please enter the first direction for this new agent (default: 'm2s'):\n").strip()
+        if tx_str == "":
+            tx_str = "m2s"
+    
+    rx_str = input("Please enter the second direction for this new agent (default: 's2m'):\n").strip()
+        if rx_str == "":
+            rx_str = "s2m"
     
     parameters = {
-    "name"                    : name,
-    "name_uppercase"          : name.upper(),
-    "name_normal_case"        : name_normal_case,
-    "name_of_copyright_owner" : name_of_copyright_owner,
-    "license"                 : license,
-    "year"                    : date.today().year,
-    "name_1"                  : "active",
-    "name_2"                  : "passive"
-}
+        "name"                    : name,
+        "full_name"               : full_name,
+        "name_of_copyright_owner" : name_of_copyright_owner,
+        "license"                 : license,
+        "year"                    : date.today().year,
+        "symmetric"               : is_symmetric,
+        "ddr"                     : is_ddr,
+        "mode_1"                  : mode_1,
+        "mode_2"                  : mode_2,
+        "tx"                      : tx_str,
+        "rx"                      : rx_str
+    }
 
 
 def print_end_message():

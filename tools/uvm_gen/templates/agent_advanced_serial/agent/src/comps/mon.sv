@@ -431,9 +431,10 @@ endtask : sample_{{ rx }}_trn
 {% else %}task uvma_{{ name }}_mon_c::process_{{ tx }}_trn(ref uvma_{{ name }}_{{ tx }}_mon_trn_c trn);
 {% endif %}
    trn.cfg = cfg;
+   trn.direction = UVMA_{{ upper(name) }}_DIRECTION_{{ upper(tx) }};
    trn.set_initiator(this);
    trn.set_timestamp_end($realtime());
-   `uvm_info("{{ upper(name) }}_MON", $sformatf("Sampled Tx transaction from the virtual interface:\n%s", trn.sprint()), UVM_DEBUG)
+   `uvm_info("{{ upper(name) }}_MON", $sformatf("Sampled {{ upper(tx) }} transaction from the virtual interface:\n%s", trn.sprint()), UVM_DEBUG)
 
 endfunction : process_{{ tx }}_trn
 
@@ -442,9 +443,10 @@ endfunction : process_{{ tx }}_trn
 {% else %}task uvma_{{ name }}_mon_c::process_{{ rx }}_trn(ref uvma_{{ name }}_{{ rx }}_mon_trn_c trn);
 {% endif %}
    trn.cfg = cfg;
+   trn.direction = UVMA_{{ upper(name) }}_DIRECTION_{{ upper(rx) }};
    trn.set_initiator(this);
    trn.set_timestamp_end($realtime());
-   `uvm_info("{{ upper(name) }}_MON", $sformatf("Sampled Rx transaction from the virtual interface:\n%s", trn.sprint()), UVM_DEBUG)
+   `uvm_info("{{ upper(name) }}_MON", $sformatf("Sampled {{ upper(rx) }} transaction from the virtual interface:\n%s", trn.sprint()), UVM_DEBUG)
 
 endfunction : process_{{ rx }}_trn
 

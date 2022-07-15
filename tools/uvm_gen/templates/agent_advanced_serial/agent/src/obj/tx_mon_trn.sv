@@ -14,9 +14,11 @@ class uvma_{{ name }}_{{ tx }}_mon_trn_c extends uvml_mon_trn_c;
 
    uvma_{{ name }}_cfg_c  cfg; ///< Agent configuration handle
 
-   // Data
+   /// @defgroup Data
+   /// @{
    logic  txp; ///< TODO Describe uvma_{{ name }}_{{ tx }}_mon_trn_c::txd
    logic  txn; ///< TODO Describe uvma_{{ name }}_{{ tx }}_mon_trn_c::txd
+   /// @}
 
 
    `uvm_object_utils_begin(uvma_{{ name }}_{{ tx }}_mon_trn_c)

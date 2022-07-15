@@ -12,7 +12,11 @@
  */
 class uvma_{{ name }}_phy_mon_trn_c extends uvml_mon_trn_c;
 
-   uvma_{{ name }}_cfg_c  cfg; ///< Agent configuration handle
+   /// @defgroup Metadata
+   /// @{
+   uvma_{{ name }}_cfg_c           cfg      ; ///< Agent configuration handle
+   uvma_{{ name }}_direction_enum  direction; ///<
+   /// @}
 
    /// @defgroup Data
    /// @{
@@ -22,6 +26,7 @@ class uvma_{{ name }}_phy_mon_trn_c extends uvml_mon_trn_c;
 
 
    `uvm_object_utils_begin(uvma_{{ name }}_phy_mon_trn_c)
+      `uvm_field_enum(uvma_{{ name }}_direction_enum, direction, UVM_DEFAULT)
       `uvm_field_int(dp, UVM_DEFAULT)
       `uvm_field_int(dn, UVM_DEFAULT)
    `uvm_object_utils_end
