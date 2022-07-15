@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_TRAINING_VSEQ_SV__
-`define __UVMA_{{ upper(name) }}_TRAINING_VSEQ_SV__
+`ifndef __UVMA_{{ name.upper() }}_TRAINING_VSEQ_SV__
+`define __UVMA_{{ name.upper() }}_TRAINING_VSEQ_SV__
 
 
 /**
@@ -46,10 +46,10 @@ endfunction : new
 
 task uvma_{{ name }}_training_vseq_c::body();
 
-   `uvm_info("{{ upper(name) }}_TRAINING_VSEQ", "Training virtual sequence has started", UVM_HIGH)
+   `uvm_info("{{ name.upper() }}_TRAINING_VSEQ", "Training virtual sequence has started", UVM_HIGH)
    case (cfg.drv_mode)
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }}: do_training_tx();
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }}: do_training_{{ rx }}();
+      UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }}: do_training_tx();
+      UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }}: do_training_{{ rx }}();
    endcase
 
 endtask : body
@@ -61,18 +61,18 @@ task uvma_{{ name }}_training_vseq_c::do_training_tx();
 
    do begin
       `uvm_create_on({{ tx }}_seq_item, p_sequencer.{{ tx }}_sequencer)
-      `uvm_rand_send_pri_with({{ tx }}_seq_item, `UVMA_{{ upper(name) }}_{{ upper(tx) }}_DRV_SEQ_ITEM_PRI, {
+      `uvm_rand_send_pri_with({{ tx }}_seq_item, `UVMA_{{ name.upper() }}_{{ tx.upper() }}_DRV_SEQ_ITEM_PRI, {
          dp == 0;
       })
-   end while (cntxt.{{ tx }}_mon_fsm_cntxt.state != UVMA_{{ upper(name) }}_MON_FSM_SYNCED);
+   end while (cntxt.{{ tx }}_mon_fsm_cntxt.state != UVMA_{{ name.upper() }}_MON_FSM_SYNCED);
 {% else %}   uvma_{{ name }}_{{ tx }}_seq_item_c  {{ tx }}_seq_item;
 
    do begin
       `uvm_create_on({{ tx }}_seq_item, p_sequencer.{{ tx }}_sequencer)
-      `uvm_rand_send_pri_with({{ tx }}_seq_item, `UVMA_{{ upper(name) }}_{{ upper(tx) }}_DRV_SEQ_ITEM_PRI, {
+      `uvm_rand_send_pri_with({{ tx }}_seq_item, `UVMA_{{ name.upper() }}_{{ tx.upper() }}_DRV_SEQ_ITEM_PRI, {
          txp == 0;
       })
-   end while (cntxt.{{ tx }}_mon_fsm_cntxt.state != UVMA_{{ upper(name) }}_MON_FSM_SYNCED);
+   end while (cntxt.{{ tx }}_mon_fsm_cntxt.state != UVMA_{{ name.upper() }}_MON_FSM_SYNCED);
 {% endif %}
 endtask : do_training_tx
 
@@ -83,21 +83,21 @@ task uvma_{{ name }}_training_vseq_c::do_training_{{ rx }}();
 
    do begin
       `uvm_create_on({{ rx }}_seq_item, p_sequencer.{{ rx }}_sequencer)
-      `uvm_rand_send_pri_with({{ rx }}_seq_item, `UVMA_{{ upper(name) }}_{{ upper(rx) }}_DRV_SEQ_ITEM_PRI, {
+      `uvm_rand_send_pri_with({{ rx }}_seq_item, `UVMA_{{ name.upper() }}_{{ rx.upper() }}_DRV_SEQ_ITEM_PRI, {
          dp == 0;
       })
-   end while (cntxt.{{ rx }}_mon_fsm_cntxt.state != UVMA_{{ upper(name) }}_MON_FSM_SYNCED);
+   end while (cntxt.{{ rx }}_mon_fsm_cntxt.state != UVMA_{{ name.upper() }}_MON_FSM_SYNCED);
 {% else %}   uvma_{{ name }}_{{ rx }}_seq_item_c  {{ rx }}_seq_item;
 
    do begin
       `uvm_create_on({{ rx }}_seq_item, p_sequencer.{{ rx }}_sequencer)
-      `uvm_rand_send_pri_with({{ rx }}_seq_item, `UVMA_{{ upper(name) }}_{{ upper(rx) }}_DRV_SEQ_ITEM_PRI, {
+      `uvm_rand_send_pri_with({{ rx }}_seq_item, `UVMA_{{ name.upper() }}_{{ rx.upper() }}_DRV_SEQ_ITEM_PRI, {
          rx0p == 0;
          rx1p == 0;
       })
-   end while (cntxt.{{ rx }}_mon_fsm_cntxt.state != UVMA_{{ upper(name) }}_MON_FSM_SYNCED);
+   end while (cntxt.{{ rx }}_mon_fsm_cntxt.state != UVMA_{{ name.upper() }}_MON_FSM_SYNCED);
 {% endif %}
 endtask : do_training_{{ rx }}
 
 
-`endif // __UVMA_{{ upper(name) }}_TRAINING_VSEQ_SV__
+`endif // __UVMA_{{ name.upper() }}_TRAINING_VSEQ_SV__

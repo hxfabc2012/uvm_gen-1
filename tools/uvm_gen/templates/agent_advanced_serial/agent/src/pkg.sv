@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_PKG_SV__
-`define __UVMA_{{ upper(name) }}_PKG_SV__
+`ifndef __UVMA_{{ name.upper() }}_PKG_SV__
+`define __UVMA_{{ name.upper() }}_PKG_SV__
 
 
 // Pre-processor macros
@@ -76,9 +76,9 @@ endpackage : uvma_{{ name }}_pkg
 
 
 // Module(s) / Checker(s)
-`ifdef UVMA_{{ upper(name) }}_INC_CHKR
+`ifdef UVMA_{{ name.upper() }}_INC_CHKR
 `include "uvma_{{ name }}_if_chkr.sv"
 `endif
 
 
-`endif // __UVMA_{{ upper(name) }}_PKG_SV__
+`endif // __UVMA_{{ name.upper() }}_PKG_SV__

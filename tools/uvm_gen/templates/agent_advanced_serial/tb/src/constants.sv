@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMT_{{ upper(name) }}_ST_CONSTANTS_SV__
-`define __UVMT_{{ upper(name) }}_ST_CONSTANTS_SV__
+`ifndef __UVMT_{{ name.upper() }}_ST_CONSTANTS_SV__
+`define __UVMT_{{ name.upper() }}_ST_CONSTANTS_SV__
 
 
 const int unsigned uvmt_{{ name }}_st_default_clk_period          =     10_000; //   10 ns (100 Mhz) // TODO Set default clock period
@@ -14,4 +14,4 @@ const int unsigned uvmt_{{ name }}_st_default_heartbeat_period    =     20_000; 
 const int unsigned uvmt_{{ name }}_st_default_simulation_timeout  = 20_000_000; //   20 ms           // TODO Set default simulation timeout
 
 
-`endif // __UVMT_{{ upper(name) }}_ST_CONSTANTS_SV__
+`endif // __UVMT_{{ name.upper() }}_ST_CONSTANTS_SV__

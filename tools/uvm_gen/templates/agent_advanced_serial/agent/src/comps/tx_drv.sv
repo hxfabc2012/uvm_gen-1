@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_{{ upper(tx) }}_DRV_SV__
-`define __UVMA_{{ upper(name) }}_{{ upper(tx) }}_DRV_SV__
+`ifndef __UVMA_{{ name.upper() }}_{{ tx.upper() }}_DRV_SV__
+`define __UVMA_{{ name.upper() }}_{{ tx.upper() }}_DRV_SV__
 
 
 /**
@@ -98,7 +98,7 @@ task uvma_{{ name }}_{{ tx }}_drv_c::run_phase(uvm_phase phase);
 
    super.run_phase(phase);
 
-   if (cfg.enabled && cfg.is_active && (cfg.drv_mode == UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }})) begin
+   if (cfg.enabled && cfg.is_active && (cfg.drv_mode == UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }})) begin
       forever begin
          seq_item_port.get_next_item(req);
          process_req                (req);
@@ -115,7 +115,7 @@ function void uvma_{{ name }}_{{ tx }}_drv_c::get_cfg();
 
    void'(uvm_config_db#(uvma_{{ name }}_cfg_c)::get(this, "", "cfg", cfg));
    if (cfg == null) begin
-      `uvm_fatal("{{ upper(name) }}_{{ upper(tx) }}_DRV", "Configuration handle is null")
+      `uvm_fatal("{{ name.upper() }}_{{ tx.upper() }}_DRV", "Configuration handle is null")
    end
 
 endfunction : get_cfg
@@ -125,7 +125,7 @@ function void uvma_{{ name }}_{{ tx }}_drv_c::get_cntxt();
 
    void'(uvm_config_db#(uvma_{{ name }}_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (cntxt == null) begin
-      `uvm_fatal("{{ upper(name) }}_{{ upper(tx) }}_DRV", "Context handle is null")
+      `uvm_fatal("{{ name.upper() }}_{{ tx.upper() }}_DRV", "Context handle is null")
    end
 
 endfunction : get_cntxt
@@ -134,7 +134,7 @@ endfunction : get_cntxt
 function void uvma_{{ name }}_{{ tx }}_drv_c::process_req(ref uvma_{{ name }}_{{ tx }}_seq_item_c req);
 
    req.cfg = cfg;
-   `uvm_info("{{ upper(name) }}_{{ upper(tx) }}_DRV", $sformatf("Got new req from the sequencer:\n%s", req.sprint()), UVM_DEBUG)
+   `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV", $sformatf("Got new req from the sequencer:\n%s", req.sprint()), UVM_DEBUG)
 
 endfunction : process_req
 
@@ -164,4 +164,4 @@ task uvma_{{ name }}_{{ tx }}_drv_c::sample_post_clk(ref uvma_{{ name }}_{{ tx }
 endtask : sample_post_clk
 
 
-`endif // __UVMA_{{ upper(name) }}_{{ upper(tx) }}_DRV_SV__
+`endif // __UVMA_{{ name.upper() }}_{{ tx.upper() }}_DRV_SV__

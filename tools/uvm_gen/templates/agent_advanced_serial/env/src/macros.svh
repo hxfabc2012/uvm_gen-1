@@ -3,11 +3,11 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVME_{{ upper(name) }}_ST_MACROS_SV__
-`define __UVME_{{ upper(name) }}_ST_MACROS_SV__
+`ifndef __UVME_{{ name.upper() }}_ST_MACROS_SV__
+`define __UVME_{{ name.upper() }}_ST_MACROS_SV__
 
 
 
 
 
-`endif // __UVME_{{ upper(name) }}_ST_MACROS_SV__
+`endif // __UVME_{{ name.upper() }}_ST_MACROS_SV__

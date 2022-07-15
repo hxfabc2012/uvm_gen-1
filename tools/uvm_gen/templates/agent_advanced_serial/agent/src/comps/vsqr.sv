@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_VSQR_SV__
-`define __UVMA_{{ upper(name) }}_VSQR_SV__
+`ifndef __UVMA_{{ name.upper() }}_VSQR_SV__
+`define __UVMA_{{ name.upper() }}_VSQR_SV__
 
 
 /**
@@ -102,7 +102,7 @@ function void uvma_{{ name }}_vsqr_c::get_cfg();
 
    void'(uvm_config_db#(uvma_{{ name }}_cfg_c)::get(this, "", "cfg", cfg));
    if (cfg == null) begin
-      `uvm_fatal("{{ upper(name) }}_VSQR", "Configuration handle is null")
+      `uvm_fatal("{{ name.upper() }}_VSQR", "Configuration handle is null")
    end
 
 endfunction : get_cfg
@@ -112,7 +112,7 @@ function void uvma_{{ name }}_vsqr_c::get_cntxt();
 
    void'(uvm_config_db#(uvma_{{ name }}_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (cntxt == null) begin
-      `uvm_fatal("{{ upper(name) }}_VSQR", "Context handle is null")
+      `uvm_fatal("{{ name.upper() }}_VSQR", "Context handle is null")
    end
 
 endfunction : get_cntxt
@@ -120,12 +120,11 @@ endfunction : get_cntxt
 
 function void uvma_{{ name }}_vsqr_c::create_components();
 
-{% if %}   {{ tx }}_sequencer = uvma_{{ name }}_phy_sqr_c::type_id::create("{{ tx }}_sequencer", this);
+{% if symmetric %}   {{ tx }}_sequencer = uvma_{{ name }}_phy_sqr_c::type_id::create("{{ tx }}_sequencer", this);
    {{ rx }}_sequencer = uvma_{{ name }}_phy_sqr_c::type_id::create("{{ rx }}_sequencer", this);
 {% else %}   {{ tx }}_sequencer = uvma_{{ name }}_{{ tx }}_sqr_c::type_id::create("{{ tx }}_sequencer", this);
    {{ rx }}_sequencer = uvma_{{ name }}_{{ rx }}_sqr_c::type_id::create("{{ rx }}_sequencer", this);
 {% endif %}
-
 endfunction : create_components
 
 
@@ -151,4 +150,4 @@ function void uvma_{{ name }}_vsqr_c::connect_fifos();
 endfunction : connect_fifos
 
 
-`endif // __UVMA_{{ upper(name) }}_VSQR_SV__
+`endif // __UVMA_{{ name.upper() }}_VSQR_SV__

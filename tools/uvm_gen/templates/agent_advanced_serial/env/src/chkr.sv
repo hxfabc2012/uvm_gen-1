@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVME_{{ upper(name) }}_ST_CHKR_SV__
-`define __UVME_{{ upper(name) }}_ST_CHKR_SV__
+`ifndef __UVME_{{ name.upper() }}_ST_CHKR_SV__
+`define __UVME_{{ name.upper() }}_ST_CHKR_SV__
 
 
 /**
@@ -20,4 +20,4 @@ module uvme_{{ name }}_st_chkr (
 endmodule : uvme_{{ name }}_st_chkr
 
 
-`endif // __UVME_{{ upper(name) }}_ST_CHKR_SV__
+`endif // __UVME_{{ name.upper() }}_ST_CHKR_SV__

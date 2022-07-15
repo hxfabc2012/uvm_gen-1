@@ -1,12 +1,12 @@
 ip:
   name: "uvmt_{{ name }}_st"
   version: "1.0.0"
-  full-name: "{{ upper(name) }} Agent Self-Test Bench"
+  full-name: "{{ name.upper() }} Agent Self-Test Bench"
   type: "DV"
   sub-type: "UVM Test Bench"
   sub-sub-type: "Self-Test"
   description: >
-    TODO Describe {{ full_(name }} Agent Self-Test Bench
+    TODO Describe {{ full_name }} Agent Self-Test Bench
   home-page: ""
   repo-uri: ""
   bugs: ""

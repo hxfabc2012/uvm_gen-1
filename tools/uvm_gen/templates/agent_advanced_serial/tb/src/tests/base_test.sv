@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMT_{{ upper(name) }}_ST_BASE_TEST_SV__
-`define __UVMT_{{ upper(name) }}_ST_BASE_TEST_SV__
+`ifndef __UVMT_{{ name.upper() }}_ST_BASE_TEST_SV__
+`define __UVMT_{{ name.upper() }}_ST_BASE_TEST_SV__
 
 
 /**
@@ -278,4 +278,4 @@ task uvmt_{{ name }}_st_base_test_c::start_clk();
 endtask : start_clk
 
 
-`endif // __UVMT_{{ upper(name) }}_ST_BASE_TEST_SV__
+`endif // __UVMT_{{ name.upper() }}_ST_BASE_TEST_SV__

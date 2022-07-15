@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_{{ upper(tx) }}_SEQ_ITEM_SV__
-`define __UVMA_{{ upper(name) }}_{{ upper(tx) }}_SEQ_ITEM_SV__
+`ifndef __UVMA_{{ name.upper() }}_{{ tx.upper() }}_SEQ_ITEM_SV__
+`define __UVMA_{{ name.upper() }}_{{ tx.upper() }}_SEQ_ITEM_SV__
 
 
 /**
@@ -77,4 +77,4 @@ function uvml_metadata_t uvma_{{ name }}_{{ tx }}_seq_item_c::get_metadata();
 endfunction : get_metadata
 
 
-`endif // __UVMA_{{ upper(name) }}_{{ upper(tx) }}_SEQ_ITEM_SV__
+`endif // __UVMA_{{ name.upper() }}_{{ tx.upper() }}_SEQ_ITEM_SV__

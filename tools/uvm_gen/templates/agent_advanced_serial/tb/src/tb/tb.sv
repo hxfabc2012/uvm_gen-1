@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMT_{{ upper(name) }}_ST_TB_SV__
-`define __UVMT_{{ upper(name) }}_ST_TB_SV__
+`ifndef __UVMT_{{ name.upper() }}_ST_TB_SV__
+`define __UVMT_{{ name.upper() }}_ST_TB_SV__
 
 
 /**
@@ -21,7 +21,7 @@ module uvmt_{{ name }}_st_tb;
    uvmt_{{ name }}_st_clknrst_gen_if  clknrst_gen_if();
 
    /**
-    * {{ upper(mode_1) }} Agent interface
+    * {{ mode_1.upper() }} Agent interface
     */
    uvma_{{ name }}_if {{ mode_1 }}_if(
       .{{ tx }}_clk(clknrst_gen_if.clk),
@@ -30,7 +30,7 @@ module uvmt_{{ name }}_st_tb;
    );
 
    /**
-    * {{ upper(mode_2) }} Agent interface
+    * {{ mode_2.upper() }} Agent interface
     */
    uvma_{{ name }}_if {{ mode_2 }}_if(
       .{{ tx }}_clk(clknrst_gen_if.clk),
@@ -80,4 +80,4 @@ module uvmt_{{ name }}_st_tb;
 endmodule : uvmt_{{ name }}_st_tb
 
 
-`endif // __UVMT_{{ upper(name) }}_ST_TB_SV__
+`endif // __UVMT_{{ name.upper() }}_ST_TB_SV__

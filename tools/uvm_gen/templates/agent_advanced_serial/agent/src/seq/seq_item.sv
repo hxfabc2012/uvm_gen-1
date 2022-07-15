@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_SEQ_ITEM_SV__
-`define __UVMA_{{ upper(name) }}_SEQ_ITEM_SV__
+`ifndef __UVMA_{{ name.upper() }}_SEQ_ITEM_SV__
+`define __UVMA_{{ name.upper() }}_SEQ_ITEM_SV__
 
 
 /**
@@ -35,7 +35,7 @@ class uvma_{{ name }}_seq_item_c extends uvml_seq_item_c;
 
    constraint limits_cons {
       soft tail == uvma_{{ name }}_tail_symbol;
-      if (header == UVMA_{{ upper(name) }}_HEADER_IDLE) {
+      if (header == UVMA_{{ name.upper() }}_HEADER_IDLE) {
          data == uvma_{{ name }}_idle_data;
       }
    }
@@ -67,10 +67,10 @@ function uvml_metadata_t uvma_{{ name }}_seq_item_c::get_metadata();
    string tail_str = $sformatf("%b", tail);
    string data_str = $sformatf("%h", data);
 
-   if (header == UVMA_{{ upper(name) }}_HEADER_DATA) begin
+   if (header == UVMA_{{ name.upper() }}_HEADER_DATA) begin
       header_str = "DATA";
    end
-   else if (header == UVMA_{{ upper(name) }}_HEADER_IDLE) begin
+   else if (header == UVMA_{{ name.upper() }}_HEADER_IDLE) begin
       header_str = "IDLE";
    end
    else begin
@@ -104,4 +104,4 @@ function uvml_metadata_t uvma_{{ name }}_seq_item_c::get_metadata();
 endfunction : get_metadata
 
 
-`endif // __UVMA_{{ upper(name) }}_SEQ_ITEM_SV__
+`endif // __UVMA_{{ name.upper() }}_SEQ_ITEM_SV__

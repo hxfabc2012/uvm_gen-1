@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVME_{{ upper(name) }}_ST_SB_SV__
-`define __UVME_{{ upper(name) }}_ST_SB_SV__
+`ifndef __UVME_{{ name.upper() }}_ST_SB_SV__
+`define __UVME_{{ name.upper() }}_ST_SB_SV__
 
 
 /**
@@ -124,7 +124,7 @@ function void uvme_{{ name }}_st_sb_c::get_cfg();
 
    void'(uvm_config_db#(uvme_{{ name }}_st_cfg_c)::get(this, "", "cfg", cfg));
    if (cfg == null) begin
-      `uvm_fatal("{{ upper(name) }}_ST_SB", "Configuration handle is null")
+      `uvm_fatal("{{ name.upper() }}_ST_SB", "Configuration handle is null")
    end
 
 endfunction : get_cfg
@@ -134,7 +134,7 @@ function void uvme_{{ name }}_st_sb_c::get_cntxt();
 
    void'(uvm_config_db#(uvme_{{ name }}_st_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (cntxt == null) begin
-      `uvm_fatal("{{ upper(name) }}_ST_SB", "Context handle is null")
+      `uvm_fatal("{{ name.upper() }}_ST_SB", "Context handle is null")
    end
 
 endfunction : get_cntxt
@@ -184,4 +184,4 @@ function void uvme_{{ name }}_st_sb_c::connect_ports();
 endfunction: connect_ports
 
 
-`endif // __UVME_{{ upper(name) }}_ST_SB_SV__
+`endif // __UVME_{{ name.upper() }}_ST_SB_SV__

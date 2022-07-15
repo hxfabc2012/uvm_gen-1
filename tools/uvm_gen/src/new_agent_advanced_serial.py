@@ -19,7 +19,7 @@ from jinja2 import Template
 ########################################################################################################################
 # GLOBALS
 ########################################################################################################################
-dbg = False
+dbg = True
 uvm_gen_dir = re.sub("new_agent_advanced_serial.py", "", os.path.realpath(__file__)) + ".."
 relative_path_to_template = uvm_gen_dir + "/templates/"
 out_path = ""
@@ -74,7 +74,7 @@ symmetric_phy_agent_files = {
     "agent_advanced_serial/agent/gitignore"                       : "uvma_{{ name }}/.gitignore",
     "agent_advanced_serial/agent/ip.yml"                          : "uvma_{{ name }}/ip.yml",
     #"LICENSE_solderpad_v2p1.md"                         : "uvma_{{ name }}/LICENSE.md",
-    "agent_advanced/agent/README.md"                       : "uvma_{{ name }}/README.md"
+    "agent_advanced_serial/agent/README.md"                       : "uvma_{{ name }}/README.md"
 }
 
 asymmetric_phy_agent_files = {
@@ -121,7 +121,7 @@ asymmetric_phy_agent_files = {
     "agent_advanced_serial/agent/gitignore"                       : "uvma_{{ name }}/.gitignore",
     "agent_advanced_serial/agent/ip.yml"                          : "uvma_{{ name }}/ip.yml",
     #"LICENSE_solderpad_v2p1.md"                         : "uvma_{{ name }}/LICENSE.md",
-    "agent_advanced/agent/README.md"                       : "uvma_{{ name }}/README.md"
+    "agent_advanced_serial/agent/README.md"                       : "uvma_{{ name }}/README.md"
 }
 
 env_files = {
@@ -171,7 +171,7 @@ tb_files = {
     "agent_advanced_serial/tb/gitignore"                          : "uvmt_{{ name }}_st/.gitignore",
     "agent_advanced_serial/tb/ip.yml"                             : "uvmt_{{ name }}_st/ip.yml",
     #"LICENSE_solderpad_v2p1.md"                         : "uvmt_{{ name }}_st/LICENSE.md",
-    "agent_advanced_serial/tb/README.md"                          : "uvmt_{{ name }}_st/README.md"
+    #"agent_advanced_serial/tb/README.md"                          : "uvmt_{{ name }}_st/README.md"
 }
 
 directories = [
@@ -204,39 +204,43 @@ directories = [
 ########################################################################################################################
 # MAIN
 ########################################################################################################################
+def combine_dict(d1, d2):
+    d3 = {}
+    for d in d1:
+        d3[d] = d1[d]
+    for d in d2:
+        d3[d] = d2[d]
+    return d3
+
+
 def process_file(path, file_path_template):
     global parameters
     if dbg:
         print("Processing file " + path + " with path template " + file_path_template)
     
-    if not dbg:
-        fin = open(relative_path_to_template + path, "rt")
-    
+    fin = open(relative_path_to_template + path, "rt")
     fout_path_template = Template(file_path_template)
-    fout_path = file_path_template.render(parameters)
+    fout_path = fout_path_template.render(parameters)
     fout_path = out_path + "/" + fout_path
     if dbg:
         print("Templated path: " + fout_path)
-    else:
-        fout = open(fout_path, "w+")
-        data = fin.read()
-        template = Template(data)
-        data = template.render(parameters)
-    
-    if not dbg:
-        fin.close()
-        print("Writing " + fout_path)
-        fout.write(data)
-        fout.close()
+    fout = open(fout_path, "w+")
+    data = fin.read()
+    template = Template(data)
+    data = template.render(parameters)
+    fin.close()
+    print("Writing " + fout_path)
+    fout.write(data)
+    fout.close()
 
 
 def process_all_files():
     global parameters
-    final_fileset = env_files + tb_files
+    final_fileset = combine_dict(env_files, tb_files)
     if parameters['symmetric']:
-        final_fileset = final_fileset + symmetric_phy_agent_files
+        final_fileset = combine_dict(final_fileset, symmetric_phy_agent_files)
     else:
-        final_fileset = final_fileset + asymmetric_phy_agent_files
+        final_fileset = combine_dict(final_fileset, asymmetric_phy_agent_files)
     for file in final_fileset:
         process_file(file, final_fileset[file])
 
@@ -246,11 +250,10 @@ def create_directories():
     for dir in directories:
         dir_name = out_path + "/" + dir
         dir_name_template = Template(dir_name)
-        dir_name = dir_template.render(parameters)
+        dir_name = dir_name_template.render(parameters)
         if dbg:
             print("Creating directory '" + dir_name + "'")
-        else:
-            os.mkdir(dir_name)
+        os.mkdir(dir_name)
 
 
 def pick_out_path():
@@ -299,42 +302,42 @@ def prompt_user_values():
         sys.exit("ERROR: full name cannot be empty.  Exiting.")
     
     is_symmetric_str = input("Is the physical interface symmetric?  [N/y]").strip().lower()
-        if is_symmetric_str == "":
+    if is_symmetric_str == "":
+        is_symmetric = False
+    else:
+        if is_symmetric_str == "n" or is_symmetric_str == "no":
             is_symmetric = False
+        elif is_symmetric_str == "y" or is_symmetric_str == "yes":
+            is_symmetric = True
         else:
-            if is_symmetric_str == "n" or is_symmetric_str == "no":
-                is_symmetric = False
-            else if is_symmetric_str == "y" or is_symmetric_str == "yes":
-                is_symmetric = True
-            else:
-                sys.exit("ERROR: please enter 'y' or 'n'")
+            sys.exit("ERROR: please enter 'y' or 'n'")
     
     is_ddr_str = input("Is the physical interface using DDR clocking?  [N/y]").strip().lower()
-        if is_ddr_str == "":
+    if is_ddr_str == "":
+        is_ddr = False
+    else:
+        if is_ddr_str == "n" or is_ddr_str == "no":
             is_ddr = False
+        elif is_ddr_str == "y" or is_ddr_str == "yes":
+            is_ddr = True
         else:
-            if is_ddr_str == "n" or is_ddr_str == "no":
-                is_ddr = False
-            else if is_ddr_str == "y" or is_ddr_str == "yes":
-                is_ddr = True
-            else:
-                sys.exit("ERROR: please enter 'y' or 'n'")
+            sys.exit("ERROR: please enter 'y' or 'n'")
     
     mode_1 = input("Please enter the first mode for this new agent (default: 'mstr'):\n").strip()
-        if mode_1 == "":
-            mode_1 = "mstr"
+    if mode_1 == "":
+        mode_1 = "mstr"
     
     mode_2 = input("Please enter the second mode for this new agent (default: 'slv'):\n").strip()
-        if mode_2 == "":
-            mode_2 = "slv"
+    if mode_2 == "":
+        mode_2 = "slv"
     
     tx_str = input("Please enter the first direction for this new agent (default: 'm2s'):\n").strip()
-        if tx_str == "":
-            tx_str = "m2s"
+    if tx_str == "":
+        tx_str = "m2s"
     
     rx_str = input("Please enter the second direction for this new agent (default: 's2m'):\n").strip()
-        if rx_str == "":
-            rx_str = "s2m"
+    if rx_str == "":
+        rx_str = "s2m"
     
     parameters = {
         "name"                    : name,

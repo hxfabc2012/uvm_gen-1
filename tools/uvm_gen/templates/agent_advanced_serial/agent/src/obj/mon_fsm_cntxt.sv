@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_MON_FSM_CNTXT_SV__
-`define __UVMA_{{ upper(name) }}_MON_FSM_CNTXT_SV__
+`ifndef __UVMA_{{ name.upper() }}_MON_FSM_CNTXT_SV__
+`define __UVMA_{{ name.upper() }}_MON_FSM_CNTXT_SV__
 
 
 /**
@@ -61,7 +61,7 @@ endfunction : new
 
 function void uvma_{{ name }}_mon_fsm_cntxt_c::reset();
 
-   state          = UVMA_{{ upper(name) }}_MON_FSM_INIT;
+   state          = UVMA_{{ name.upper() }}_MON_FSM_INIT;
    training_count = 0;
    trn_start      = 0;
    trn_end        = 0;
@@ -72,4 +72,4 @@ function void uvma_{{ name }}_mon_fsm_cntxt_c::reset();
 endfunction : reset
 
 
-`endif // __UVMA_{{ upper(name) }}_MON_FSM_CNTXT_SV__
+`endif // __UVMA_{{ name.upper() }}_MON_FSM_CNTXT_SV__

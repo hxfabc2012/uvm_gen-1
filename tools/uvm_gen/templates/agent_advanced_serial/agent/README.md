@@ -1,4 +1,4 @@
-# {{ full_name }} ({{ upper(name) }}) UVM Agent
+# {{ full_name }} ({{ name.upper() }}) UVM Agent
 
 
 # About

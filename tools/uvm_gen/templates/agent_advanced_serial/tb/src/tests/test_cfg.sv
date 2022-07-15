@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMT_{{ upper(name) }}_ST_TEST_CFG_SV__
-`define __UVMT_{{ upper(name) }}_ST_TEST_CFG_SV__
+`ifndef __UVMT_{{ name.upper() }}_ST_TEST_CFG_SV__
+`define __UVMT_{{ name.upper() }}_ST_TEST_CFG_SV__
 
 
 /**
@@ -92,4 +92,4 @@ function void uvmt_{{ name }}_st_test_cfg_c::process_cli_args();
 endfunction : process_cli_args
 
 
-`endif // __UVMT_{{ upper(name) }}_ST_TEST_CFG_SV__
+`endif // __UVMT_{{ name.upper() }}_ST_TEST_CFG_SV__

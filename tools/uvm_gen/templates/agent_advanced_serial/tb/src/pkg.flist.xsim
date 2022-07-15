@@ -10,16 +10,16 @@
 -f ${UVML_SB_SRC_PATH}/uvml_sb_pkg.flist.xsim
 
 // Agents
--f ${UVMA_{{ upper(name) }}_SRC_PATH}/uvma_{{ name }}_pkg.flist.xsim
+-f ${UVMA_{{ name.upper() }}_SRC_PATH}/uvma_{{ name }}_pkg.flist.xsim
 
 // Environments
--f ${UVME_{{ upper(name) }}_ST_SRC_PATH}/uvme_{{ name }}_st_pkg.flist.xsim
+-f ${UVME_{{ name.upper() }}_ST_SRC_PATH}/uvme_{{ name }}_st_pkg.flist.xsim
 
 // {{ full_name }} test bench Directories
--i ${UVMT_{{ upper(name) }}_ST_SRC_PATH}
--i ${UVMT_{{ upper(name) }}_ST_SRC_PATH}/seq
--i ${UVMT_{{ upper(name) }}_ST_SRC_PATH}/tb
--i ${UVMT_{{ upper(name) }}_ST_SRC_PATH}/tests
+-i ${UVMT_{{ name.upper() }}_ST_SRC_PATH}
+-i ${UVMT_{{ name.upper() }}_ST_SRC_PATH}/seq
+-i ${UVMT_{{ name.upper() }}_ST_SRC_PATH}/tb
+-i ${UVMT_{{ name.upper() }}_ST_SRC_PATH}/tests
 
 // {{ full_name }} tests (includes constants/macros/types meant for test bench)
-${UVMT_{{ upper(name) }}_ST_SRC_PATH}/uvmt_{{ name }}_st_pkg.sv
+${UVMT_{{ name.upper() }}_ST_SRC_PATH}/uvmt_{{ name }}_st_pkg.sv

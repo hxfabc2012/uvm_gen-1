@@ -8,8 +8,8 @@
  */
 
 
-`ifndef __UVMT_{{ upper(name) }}_ST_MY_TEST_SV__
-`define __UVMT_{{ upper(name) }}_ST_MY_TEST_SV__
+`ifndef __UVMT_{{ name.upper() }}_ST_MY_TEST_SV__
+`define __UVMT_{{ name.upper() }}_ST_MY_TEST_SV__
 
 
 /**
@@ -57,4 +57,4 @@ task uvmt_{{ name }}_st_my_test_c::main_phase(uvm_phase phase);
 endtask : main_phase
 
 
-`endif // __UVMT_{{ upper(name) }}_ST_MY_TEST_SV__
+`endif // __UVMT_{{ name.upper() }}_ST_MY_TEST_SV__

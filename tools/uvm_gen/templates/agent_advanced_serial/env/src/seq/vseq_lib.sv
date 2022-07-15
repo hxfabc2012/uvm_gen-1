@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVME_{{ upper(name) }}_ST_VSEQ_LIB_SV__
-`define __UVME_{{ upper(name) }}_ST_VSEQ_LIB_SV__
+`ifndef __UVME_{{ name.upper() }}_ST_VSEQ_LIB_SV__
+`define __UVME_{{ name.upper() }}_ST_VSEQ_LIB_SV__
 
 
 `include "uvme_{{ name }}_st_base_vseq.sv"
@@ -39,4 +39,4 @@ function uvme_{{ name }}_st_vseq_lib_c::new(string name="uvme_{{ name }}_st_vseq
 endfunction : new
 
 
-`endif // __UVME_{{ upper(name) }}_ST_VSEQ_LIB_SV__
+`endif // __UVME_{{ name.upper() }}_ST_VSEQ_LIB_SV__

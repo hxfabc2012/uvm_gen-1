@@ -3,15 +3,15 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_VSEQ_LIB_SV__
-`define __UVMA_{{ upper(name) }}_VSEQ_LIB_SV__
+`ifndef __UVMA_{{ name.upper() }}_VSEQ_LIB_SV__
+`define __UVMA_{{ name.upper() }}_VSEQ_LIB_SV__
 
 
 `include "uvma_{{ name }}_transport_base_vseq.sv"
 
 
 /**
- * Object holding sequence library for {{ upper(name) }} agent.
+ * Object holding sequence library for {{ name.upper() }} agent.
  */
 class uvma_{{ name }}_vseq_lib_c extends uvml_vseq_lib_c #(
    .REQ(uvma_{{ name }}_seq_item_c),
@@ -41,4 +41,4 @@ function uvma_{{ name }}_vseq_lib_c::new(string name="uvma_{{ name }}_vseq_lib")
 endfunction : new
 
 
-`endif // __UVMA_{{ upper(name) }}_VSEQ_LIB_SV__
+`endif // __UVMA_{{ name.upper() }}_VSEQ_LIB_SV__

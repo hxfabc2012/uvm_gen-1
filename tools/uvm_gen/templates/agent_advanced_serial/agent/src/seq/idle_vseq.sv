@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_IDLE_VSEQ_SV__
-`define __UVMA_{{ upper(name) }}_IDLE_VSEQ_SV__
+`ifndef __UVMA_{{ name.upper() }}_IDLE_VSEQ_SV__
+`define __UVMA_{{ name.upper() }}_IDLE_VSEQ_SV__
 
 
 /**
@@ -41,7 +41,7 @@ endfunction : new
 
 task uvma_{{ name }}_idle_vseq_c::body();
 
-   `uvm_info("{{ upper(name) }}_IDLE_VSEQ", "Idle virtual sequence has started", UVM_HIGH)
+   `uvm_info("{{ name.upper() }}_IDLE_VSEQ", "Idle virtual sequence has started", UVM_HIGH)
    idle_loop();
 
 endtask : body
@@ -53,11 +53,11 @@ task uvma_{{ name }}_idle_vseq_c::idle_loop();
 
    forever begi
       `uvm_create_on(idle_seq_item, p_sequencer)
-      idle_seq_item.sync = UVMA_{{ upper(name) }}_SYNC_IDLE;
-      `uvm_send_pri(idle_seq_item, `UVMA_{{ upper(name) }}_IDLE_SEQ_ITEM_PRI)
+      idle_seq_item.sync = UVMA_{{ name.upper() }}_SYNC_IDLE;
+      `uvm_send_pri(idle_seq_item, `UVMA_{{ name.upper() }}_IDLE_SEQ_ITEM_PRI)
    end
 
 endtask : idle_loop
 
 
-`endif // __UVMA_{{ upper(name) }}_IDLE_VSEQ_SV__
+`endif // __UVMA_{{ name.upper() }}_IDLE_VSEQ_SV__

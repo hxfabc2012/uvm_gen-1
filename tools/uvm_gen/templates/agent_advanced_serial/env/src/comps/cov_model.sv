@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVME_{{ upper(name) }}_ST_COV_MODEL_SV__
-`define __UVME_{{ upper(name) }}_ST_COV_MODEL_SV__
+`ifndef __UVME_{{ name.upper() }}_ST_COV_MODEL_SV__
+`define __UVME_{{ name.upper() }}_ST_COV_MODEL_SV__
 
 
 /**
@@ -178,7 +178,7 @@ endfunction : end_of_elaboration_phase
 
 function void uvme_{{ name }}_st_cov_model_c::sample_cfg();
 
-   `uvm_info("UVME_{{ upper(name) }}_ST_COV_MODEL", $sformatf("Sampling Configuration:\n%s", cfg.sprint()), UVM_HIGH)
+   `uvm_info("UVME_{{ name.upper() }}_ST_COV_MODEL", $sformatf("Sampling Configuration:\n%s", cfg.sprint()), UVM_HIGH)
   {{ name }}_st_cfg_cg.sample();
 
 endfunction : sample_cfg
@@ -186,7 +186,7 @@ endfunction : sample_cfg
 
 function void uvme_{{ name }}_st_cov_model_c::sample_cntxt();
 
-   `uvm_info("UVME_{{ upper(name) }}_ST_COV_MODEL", $sformatf("Sampling Context:\n%s", cntxt.sprint()), UVM_HIGH)
+   `uvm_info("UVME_{{ name.upper() }}_ST_COV_MODEL", $sformatf("Sampling Context:\n%s", cntxt.sprint()), UVM_HIGH)
    {{ name }}_st_cntxt_cg.sample();
 
 endfunction : sample_cntxt
@@ -194,7 +194,7 @@ endfunction : sample_cntxt
 
 function void uvme_{{ name }}_st_cov_model_c::sample_seq_item();
 
-   `uvm_info("UVME_{{ upper(name) }}_ST_COV_MODEL", $sformatf("Sampling Sequence Item:\n%s", seq_item.sprint()), UVM_HIGH)
+   `uvm_info("UVME_{{ name.upper() }}_ST_COV_MODEL", $sformatf("Sampling Sequence Item:\n%s", seq_item.sprint()), UVM_HIGH)
    {{ name }}_st_seq_item_cg.sample();
 
 endfunction : sample_seq_item
@@ -202,7 +202,7 @@ endfunction : sample_seq_item
 
 function void uvme_{{ name }}_st_cov_model_c::sample_{{ tx }}_mon_trn();
 
-   `uvm_info("UVME_{{ upper(name) }}_ST_COV_MODEL", $sformatf("Sampling {{ upper(tx) }} Monitor Transaction:\n%s", tx_mon_trn.sprint()), UVM_HIGH)
+   `uvm_info("UVME_{{ name.upper() }}_ST_COV_MODEL", $sformatf("Sampling {{ tx.upper() }} Monitor Transaction:\n%s", tx_mon_trn.sprint()), UVM_HIGH)
    {{ name }}_st_tx_mon_trn_cg.sample();
 
 endfunction : sample_{{ tx }}_mon_trn
@@ -210,7 +210,7 @@ endfunction : sample_{{ tx }}_mon_trn
 
 function void uvme_{{ name }}_st_cov_model_c::sample_{{ rx }}_mon_trn();
 
-   `uvm_info("UVME_{{ upper(name) }}_ST_COV_MODEL", $sformatf("Sampling {{ upper(rx) }} Monitor Transaction:\n%s", {{ rx }}_mon_trn.sprint()), UVM_HIGH)
+   `uvm_info("UVME_{{ name.upper() }}_ST_COV_MODEL", $sformatf("Sampling {{ rx.upper() }} Monitor Transaction:\n%s", {{ rx }}_mon_trn.sprint()), UVM_HIGH)
    {{ name }}_st_{{ rx }}_mon_trn_cg.sample();
 
 endfunction : sample_{{ rx }}_mon_trn
@@ -218,7 +218,7 @@ endfunction : sample_{{ rx }}_mon_trn
 
 function void uvme_{{ name }}_st_cov_model_c::sample_{{ tx }}_phy_seq_item();
 
-   `uvm_info("UVME_{{ upper(name) }}_ST_COV_MODEL", $sformatf("Sampling {{ upper(tx) }} Phy Sequence Item:\n%s", {{ tx }}_phy_seq_item.sprint()), UVM_HIGH)
+   `uvm_info("UVME_{{ name.upper() }}_ST_COV_MODEL", $sformatf("Sampling {{ tx.upper() }} Phy Sequence Item:\n%s", {{ tx }}_phy_seq_item.sprint()), UVM_HIGH)
    {{ name }}_st_{{ tx }}_phy_seq_item_cg.sample();
 
 endfunction : sample_{{ tx }}_phy_seq_item
@@ -226,7 +226,7 @@ endfunction : sample_{{ tx }}_phy_seq_item
 
 function void uvme_{{ name }}_st_cov_model_c::sample_{{ rx }}_phy_seq_item();
 
-   `uvm_info("UVME_{{ upper(name) }}_ST_COV_MODEL", $sformatf("Sampling {{ upper(rx) }} Phy Sequence Item:\n%s", {{ rx }}_phy_seq_item.sprint()), UVM_HIGH)
+   `uvm_info("UVME_{{ name.upper() }}_ST_COV_MODEL", $sformatf("Sampling {{ rx.upper() }} Phy Sequence Item:\n%s", {{ rx }}_phy_seq_item.sprint()), UVM_HIGH)
    {{ name }}_st_{{ rx }}_phy_seq_item_cg.sample();
 
 endfunction : sample_{{ rx }}_phy_seq_item
@@ -234,7 +234,7 @@ endfunction : sample_{{ rx }}_phy_seq_item
 
 function void uvme_{{ name }}_st_cov_model_c::sample_{{ tx }}_phy_mon_trn();
 
-   `uvm_info("UVME_{{ upper(name) }}_ST_COV_MODEL", $sformatf("Sampling {{ upper(tx) }} Phy Monitor Transaction:\n%s", {{ tx }}_phy_mon_trn.sprint()), UVM_HIGH)
+   `uvm_info("UVME_{{ name.upper() }}_ST_COV_MODEL", $sformatf("Sampling {{ tx.upper() }} Phy Monitor Transaction:\n%s", {{ tx }}_phy_mon_trn.sprint()), UVM_HIGH)
    {{ name }}_st_{{ tx }}_phy_mon_trn_cg.sample();
 
 endfunction : sample_{{ tx }}_phy_mon_trn
@@ -242,10 +242,10 @@ endfunction : sample_{{ tx }}_phy_mon_trn
 
 function void uvme_{{ name }}_st_cov_model_c::sample_{{ rx }}_phy_mon_trn();
 
-   `uvm_info("UVME_{{ upper(name) }}_ST_COV_MODEL", $sformatf("Sampling {{ upper(rx) }} Phy Monitor Transaction:\n%s", {{ rx }}_phy_mon_trn.sprint()), UVM_HIGH)
+   `uvm_info("UVME_{{ name.upper() }}_ST_COV_MODEL", $sformatf("Sampling {{ rx.upper() }} Phy Monitor Transaction:\n%s", {{ rx }}_phy_mon_trn.sprint()), UVM_HIGH)
    {{ name }}_st_{{ rx }}_phy_mon_trn_cg.sample();
 
 endfunction : sample_{{ rx }}_phy_mon_trn
 
 
-`endif // __UVME_{{ upper(name) }}_ST_COV_MODEL_SV__
+`endif // __UVME_{{ name.upper() }}_ST_COV_MODEL_SV__

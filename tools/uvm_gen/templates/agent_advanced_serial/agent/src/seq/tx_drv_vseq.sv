@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_{{ upper(tx) }}_DRV_VSEQ_SV__
-`define __UVMA_{{ upper(name) }}_{{ upper(tx) }}_DRV_VSEQ_SV__
+`ifndef __UVMA_{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ_SV__
+`define __UVMA_{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ_SV__
 
 
 /**
@@ -71,7 +71,7 @@ endfunction : new
 
 task uvma_{{ name }}_{{ tx }}_drv_vseq_c::body();
 
-   `uvm_info("{{ upper(name) }}_{{ upper(tx) }}_DRV_VSEQ", "TX Driver Virtual Sequence has started", UVM_HIGH)
+   `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", "TX Driver Virtual Sequence has started", UVM_HIGH)
    forever begin
       fork
          begin : main
@@ -92,9 +92,9 @@ endtask : body
 
 task uvma_{{ name }}_{{ tx }}_drv_vseq_c::wait_for_reset();
 
-   `uvm_info("{{ upper(name) }}_{{ upper(tx) }}_DRV_VSEQ", "Waiting for post_reset", UVM_HIGH)
+   `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", "Waiting for post_reset", UVM_HIGH)
    wait (cntxt.reset_state == UVML_RESET_STATE_POST_RESET);
-   `uvm_info("{{ upper(name) }}_{{ upper(tx) }}_DRV_VSEQ", "Done waiting for post_reset", UVM_HIGH)
+   `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", "Done waiting for post_reset", UVM_HIGH)
 
 endtask : wait_for_reset
 
@@ -102,9 +102,9 @@ endtask : wait_for_reset
 task uvma_{{ name }}_{{ tx }}_drv_vseq_c::post_reset_init();
 
    rand uvma_{{ name }}_training_vseq_c  training_vseq;
-   `uvm_info("{{ upper(name) }}_{{ upper(tx) }}_DRV_VSEQ", {"Starting training sequence:\n", training_vseq.sprint()}, UVM_HIGH)
+   `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", {"Starting training sequence:\n", training_vseq.sprint()}, UVM_HIGH)
    `uvm_do_on(training_vseq, p_sequencer)
-   `uvm_info("{{ upper(name) }}_{{ upper(tx) }}_DRV_VSEQ", {"Finished training sequence:\n", training_vseq.sprint()}, UVM_HIGH)
+   `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", {"Finished training sequence:\n", training_vseq.sprint()}, UVM_HIGH)
 
 endtask : post_reset_init
 
@@ -114,13 +114,13 @@ task uvma_{{ name }}_{{ tx }}_drv_vseq_c::drv_loop();
    uvma_{{ name }}_seq_item_c  seq_item;
 
    forever begin
-      `uvm_info("{{ upper(name) }}_{{ upper(tx) }}_DRV_VSEQ", "Waiting for next seq_item", UVM_DEBUG)
+      `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", "Waiting for next seq_item", UVM_DEBUG)
       p_sequencer.get_next_item    (seq_item);
-      `uvm_info("{{ upper(name) }}_{{ upper(tx) }}_DRV_VSEQ", $sformatf("Received seq_item:\n%s", seq_item.sprint()), UVM_DEBUG)
+      `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", $sformatf("Received seq_item:\n%s", seq_item.sprint()), UVM_DEBUG)
       process_seq_item             (seq_item);
       drive                        (seq_item);
       p_sequencer.seq_item_ap.write(seq_item);
-      `uvm_info("{{ upper(name) }}_{{ upper(tx) }}_DRV_VSEQ", {"Done with seq_item:\n", seq_item.sprint()}, UVM_DEBUG)
+      `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", {"Done with seq_item:\n", seq_item.sprint()}, UVM_DEBUG)
       p_sequencer.item_done();
    end
 
@@ -131,7 +131,7 @@ task uvma_{{ name }}_{{ tx }}_drv_vseq_c::reset_trigger();
 
    wait (cntxt.reset_state == UVML_RESET_STATE_POST_RESET);
    wait (cntxt.reset_state != UVML_RESET_STATE_POST_RESET);
-   `uvm_info("{{ upper(name) }}_{{ upper(tx) }}_DRV_VSEQ", "Mid-sim reset detected. Resetting main loop, this may kill some sequences.", UVM_NONE)
+   `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", "Mid-sim reset detected. Resetting main loop, this may kill some sequences.", UVM_NONE)
 
 endtask : reset_trigger
 
@@ -139,8 +139,8 @@ endtask : reset_trigger
 function void uvma_{{ name }}_{{ tx }}_drv_vseq_c::process_seq_item(ref uvma_{{ name }}_seq_item_c seq_item);
 
    seq_item.cfg       = cfg;
-   seq_item.direction = UVMA_{{ upper(name) }}_DIRECTION_{{ upper(tx) }};
-   `uvm_info("{{ upper(name) }}_{{ upper(tx) }}_DRV_VSEQ", $sformatf("Processed seq_item:\n%s", seq_item.sprint()), UVM_DEBUG)
+   seq_item.direction = UVMA_{{ name.upper() }}_DIRECTION_{{ tx.upper() }};
+   `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", $sformatf("Processed seq_item:\n%s", seq_item.sprint()), UVM_DEBUG)
    if (!seq_item.is_idle) begin
       `uvml_hrtbt_owner(p_sequencer)
    end
@@ -156,14 +156,14 @@ task uvma_{{ name }}_{{ tx }}_drv_vseq_c::drive(ref uvma_{{ name }}_seq_item_c s
 
    uvm_default_packer.big_endian = cfg.big_endian;
    num_seq_item_bits = seq_item.pack(seq_item_bits);
-   `uvm_info("{{ upper(name) }}_{{ upper(tx) }}_DRV_VSEQ", $sformatf("Driving %0d bits of serial data", num_seq_item_bits), UVM_DEBUG)
+   `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", $sformatf("Driving %0d bits of serial data", num_seq_item_bits), UVM_DEBUG)
    for (int ii=num_seq_item_bits-1; ii>=0; ii--) begin
       `uvm_create_on(req, p_sequencer.{{ tx }}_serial_sequencer)
-      `uvm_rand_send_pri_with(req, `UVMA_{{ upper(name) }}_{{ upper(tx) }}_DRV_SEQ_ITEM_PRI, {
+      `uvm_rand_send_pri_with(req, `UVMA_{{ name.upper() }}_{{ tx.upper() }}_DRV_SEQ_ITEM_PRI, {
          txp == frame_bits[ii];
       })
    end
-   `uvm_info("{{ upper(name) }}_{{ upper(tx) }}_DRV_VSEQ", $sformatf("Finished driving %0d bits of serial data", num_seq_item_bits), UVM_DEBUG)
+   `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", $sformatf("Finished driving %0d bits of serial data", num_seq_item_bits), UVM_DEBUG)
 
 endtask : drive
 
@@ -175,4 +175,4 @@ task uvma_{{ name }}_{{ tx }}_drv_vseq_c::wait_clk();
 endtask : wait_clk
 
 
-`endif // __UVMA_{{ upper(name) }}_{{ upper(tx) }}_DRV_VSEQ_SV__
+`endif // __UVMA_{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ_SV__

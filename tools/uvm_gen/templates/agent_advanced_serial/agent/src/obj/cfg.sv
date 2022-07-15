@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_CFG_SV__
-`define __UVMA_{{ upper(name) }}_CFG_SV__
+`ifndef __UVMA_{{ name.upper() }}_CFG_SV__
+`define __UVMA_{{ name.upper() }}_CFG_SV__
 
 
 // Default sequences
@@ -93,4 +93,4 @@ function uvma_{{ name }}_cfg_c::new(string name="uvma_{{ name }}_cfg");
 endfunction : new
 
 
-`endif // __UVMA_{{ upper(name) }}_CFG_SV__
+`endif // __UVMA_{{ name.upper() }}_CFG_SV__

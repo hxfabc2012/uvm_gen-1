@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_PHY_SQR_SV__
-`define __UVMA_{{ upper(name) }}_PHY_SQR_SV__
+`ifndef __UVMA_{{ name.upper() }}_PHY_SQR_SV__
+`define __UVMA_{{ name.upper() }}_PHY_SQR_SV__
 
 
 /**
@@ -71,7 +71,7 @@ function void uvma_{{ name }}_{{ tx }}_sqr_c::get_cfg();
 
    void'(uvm_config_db#(uvma_{{ name }}_cfg_c)::get(this, "", "cfg", cfg));
    if (cfg == null) begin
-      `uvm_fatal("{{ upper(name) }}_PHY_SQR", "Configuration handle is null")
+      `uvm_fatal("{{ name.upper() }}_PHY_SQR", "Configuration handle is null")
    end
 
 endfunction : get_cfg
@@ -81,10 +81,10 @@ function void uvma_{{ name }}_{{ tx }}_sqr_c::get_cntxt();
 
    void'(uvm_config_db#(uvma_{{ name }}_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (cntxt == null) begin
-      `uvm_fatal("{{ upper(name) }}_PHY_SQR", "Context handle is null")
+      `uvm_fatal("{{ name.upper() }}_PHY_SQR", "Context handle is null")
    end
 
 endfunction : get_cntxt
 
 
-`endif // __UVMA_{{ upper(name) }}_PHY_SQR_SV__
+`endif // __UVMA_{{ name.upper() }}_PHY_SQR_SV__

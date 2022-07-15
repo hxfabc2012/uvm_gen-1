@@ -8,8 +8,8 @@
  */
 
 
-`ifndef __UVME_{{ upper(name) }}_MY_VSEQ_SV__
-`define __UVME_{{ upper(name) }}_MY_VSEQ_SV__
+`ifndef __UVME_{{ name.upper() }}_MY_VSEQ_SV__
+`define __UVME_{{ name.upper() }}_MY_VSEQ_SV__
 
 
 /**
@@ -63,4 +63,4 @@ task uvme_{{ name }}_my_vseq_c::body();
 endtask : body
 
 
-`endif __UVME_{{ upper(name) }}_MY_VSEQ_SV__
+`endif __UVME_{{ name.upper() }}_MY_VSEQ_SV__

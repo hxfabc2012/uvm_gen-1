@@ -4,10 +4,10 @@
 
 
 // Directories
--i ${UVMA_{{ upper(name) }}_SRC_PATH}
--i ${UVMA_{{ upper(name) }}_SRC_PATH}/comps
--i ${UVMA_{{ upper(name) }}_SRC_PATH}/obj
--i ${UVMA_{{ upper(name) }}_SRC_PATH}/seq
+-i ${UVMA_{{ name.upper() }}_SRC_PATH}
+-i ${UVMA_{{ name.upper() }}_SRC_PATH}/comps
+-i ${UVMA_{{ name.upper() }}_SRC_PATH}/obj
+-i ${UVMA_{{ name.upper() }}_SRC_PATH}/seq
 
 // Files
-${UVMA_{{ upper(name) }}_SRC_PATH}/uvma_{{ name }}_pkg.sv
+${UVMA_{{ name.upper() }}_SRC_PATH}/uvma_{{ name }}_pkg.sv

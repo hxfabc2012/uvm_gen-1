@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_CHKR_SV__
-`define __UVMA_{{ upper(name) }}_CHKR_SV__
+`ifndef __UVMA_{{ name.upper() }}_CHKR_SV__
+`define __UVMA_{{ name.upper() }}_CHKR_SV__
 
 
 /**
@@ -19,4 +19,4 @@ module uvma_{{ name }}_chkr(
 endmodule : uvma_{{ name }}_chkr
 
 
-`endif // __UVMA_{{ upper(name) }}_CHKR_SV__
+`endif // __UVMA_{{ name.upper() }}_CHKR_SV__

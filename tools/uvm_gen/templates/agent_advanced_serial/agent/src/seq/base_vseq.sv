@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_BASE_VSEQ_SV__
-`define __UVMA_{{ upper(name) }}_BASE_VSEQ_SV__
+`ifndef __UVMA_{{ name.upper() }}_BASE_VSEQ_SV__
+`define __UVMA_{{ name.upper() }}_BASE_VSEQ_SV__
 
 
 /**
@@ -139,11 +139,11 @@ endtask : get_{{ rx }}_phy_mon_trn
 task uvma_{{ name }}_base_vseq_c::wait_clk();
 
 {% if symmetric %}   case (cfg.drv_mode)
-      UVMA_{{ upper(name) }}_DIRECTION_{{ upper(tx) }} : @(cntxt.vif.drv_{{ tx }}_cb);
-      UVMA_{{ upper(name) }}_DIRECTION_{{ upper(rx) }} : @(cntxt.vif.drv_{{ rx }}_cb);
+      UVMA_{{ name.upper() }}_DIRECTION_{{ tx.upper() }} : @(cntxt.vif.drv_{{ tx }}_cb);
+      UVMA_{{ name.upper() }}_DIRECTION_{{ rx.upper() }} : @(cntxt.vif.drv_{{ rx }}_cb);
    endcase{% endif %}
 
 endtask : wait_clk
 
 
-`endif // __UVMA_{{ upper(name) }}_BASE_SEQ_SV__
+`endif // __UVMA_{{ name.upper() }}_BASE_SEQ_SV__

@@ -3,13 +3,13 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_MACROS_SV__
-`define __UVMA_{{ upper(name) }}_MACROS_SV__
+`ifndef __UVMA_{{ name.upper() }}_MACROS_SV__
+`define __UVMA_{{ name.upper() }}_MACROS_SV__
 
 
-`define UVMA_{{ upper(name) }}_{{ upper(tx) }}_DRV_SEQ_ITEM_PRI   100
-`define UVMA_{{ upper(name) }}_{{ upper(rx) }}_DRV_SEQ_ITEM_PRI   100
-`define UVMA_{{ upper(name) }}_IDLE_SEQ_ITEM_PRI       1
+`define UVMA_{{ name.upper() }}_{{ tx.upper() }}_DRV_SEQ_ITEM_PRI   100
+`define UVMA_{{ name.upper() }}_{{ rx.upper() }}_DRV_SEQ_ITEM_PRI   100
+`define UVMA_{{ name.upper() }}_IDLE_SEQ_ITEM_PRI       1
 
 
-`endif // __UVMA_{{ upper(name) }}_MACROS_SV__
+`endif // __UVMA_{{ name.upper() }}_MACROS_SV__

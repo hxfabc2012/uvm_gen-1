@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVME_{{ upper(name) }}_ST_CFG_SV__
-`define __UVME_{{ upper(name) }}_ST_CFG_SV__
+`ifndef __UVME_{{ name.upper() }}_ST_CFG_SV__
+`define __UVME_{{ name.upper() }}_ST_CFG_SV__
 
 
 /**
@@ -67,7 +67,7 @@ class uvme_{{ name }}_st_cfg_c extends uvml_cfg_c;
     *
     */
    constraint agent_{{ mode_1 }}_cfg_cons {
-      {{ mode_1 }}_cfg.drv_mode == UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }};
+      {{ mode_1 }}_cfg.drv_mode == UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }};
       {{ mode_1 }}_cfg.bypass_mode == 0;
       {{ mode_1 }}_cfg.reset_type == reset_type;
       if (enabled) {
@@ -100,7 +100,7 @@ class uvme_{{ name }}_st_cfg_c extends uvml_cfg_c;
     *
     */
    constraint agent_{{ mode_2 }}_cfg_cons {
-      {{ mode_2 }}_cfg.drv_mode == UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }};
+      {{ mode_2 }}_cfg.drv_mode == UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }};
       {{ mode_2 }}_cfg.bypass_mode == 0;
       {{ mode_2 }}_cfg.reset_type == reset_type;
       if (enabled) {
@@ -201,4 +201,4 @@ function uvme_{{ name }}_st_cfg_c::new(string name="uvme_{{ name }}_st_cfg");
 endfunction : new
 
 
-`endif // __UVME_{{ upper(name) }}_ST_CFG_SV__
+`endif // __UVME_{{ name.upper() }}_ST_CFG_SV__

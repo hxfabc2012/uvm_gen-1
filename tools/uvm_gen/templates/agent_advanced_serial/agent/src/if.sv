@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_SV__
-`define __UVMA_{{ upper(name) }}_SV__
+`ifndef __UVMA_{{ name.upper() }}_SV__
+`define __UVMA_{{ name.upper() }}_SV__
 
 
 /**
@@ -235,4 +235,4 @@ interface uvma_{{ name }}_if (
 endinterface : uvma_{{ name }}_if
 
 
-`endif // __UVMA_{{ upper(name) }}_SV__
+`endif // __UVMA_{{ name.upper() }}_SV__

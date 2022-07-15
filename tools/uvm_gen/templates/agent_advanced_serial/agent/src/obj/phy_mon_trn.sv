@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_PHY_MON_TRN_SV__
-`define __UVMA_{{ upper(name) }}_PHY_MON_TRN_SV__
+`ifndef __UVMA_{{ name.upper() }}_PHY_MON_TRN_SV__
+`define __UVMA_{{ name.upper() }}_PHY_MON_TRN_SV__
 
 
 /**
@@ -77,4 +77,4 @@ function uvml_metadata_t uvma_{{ name }}_phy_mon_trn_c::get_metadata();
 endfunction : get_metadata
 
 
-`endif // __UVMA_{{ upper(name) }}_PHY_MON_TRN_SV__
+`endif // __UVMA_{{ name.upper() }}_PHY_MON_TRN_SV__

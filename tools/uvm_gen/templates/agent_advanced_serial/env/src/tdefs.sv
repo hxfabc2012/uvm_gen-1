@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVME_{{ upper(name) }}_ST_TDEFS_SV__
-`define __UVME_{{ upper(name) }}_ST_TDEFS_SV__
+`ifndef __UVME_{{ name.upper() }}_ST_TDEFS_SV__
+`define __UVME_{{ name.upper() }}_ST_TDEFS_SV__
 
 
 // Scoreboard specialization
@@ -13,4 +13,4 @@ typedef uvml_sb_simplex_c #(
 ) uvme_{{ name }}_st_sb_simplex_c;
 
 
-`endif // __UVME_{{ upper(name) }}_ST_TDEFS_SV__
+`endif // __UVME_{{ name.upper() }}_ST_TDEFS_SV__

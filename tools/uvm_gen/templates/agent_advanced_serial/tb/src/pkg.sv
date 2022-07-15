@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMT_{{ upper(name) }}_ST_PKG_SV__
-`define __UVMT_{{ upper(name) }}_ST_PKG_SV__
+`ifndef __UVMT_{{ name.upper() }}_ST_PKG_SV__
+`define __UVMT_{{ name.upper() }}_ST_PKG_SV__
 
 
 // Pre-processor macros
@@ -56,4 +56,4 @@ endpackage : uvmt_{{ name }}_st_pkg
 `include "uvmt_{{ name }}_st_tb.sv"
 
 
-`endif // __UVMT_{{ upper(name) }}_ST_PKG_SV__
+`endif // __UVMT_{{ name.upper() }}_ST_PKG_SV__

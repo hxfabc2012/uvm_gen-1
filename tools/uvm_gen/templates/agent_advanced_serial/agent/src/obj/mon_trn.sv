@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_MON_TRN_SV__
-`define __UVMA_{{ upper(name) }}_MON_TRN_SV__
+`ifndef __UVMA_{{ name.upper() }}_MON_TRN_SV__
+`define __UVMA_{{ name.upper() }}_MON_TRN_SV__
 
 
 /**
@@ -65,10 +65,10 @@ function uvml_metadata_t uvma_{{ name }}_mon_trn_c::get_metadata();
    string tail_str = $sformatf("%b", tail);
    string data_str = $sformatf("%h", data);
 
-   if (header == UVMA_{{ upper(name) }}_HEADER_DATA) begin
+   if (header == UVMA_{{ name.upper() }}_HEADER_DATA) begin
       header_str = "DATA";
    end
-   else if (header == UVMA_{{ upper(name) }}_HEADER_IDLE) begin
+   else if (header == UVMA_{{ name.upper() }}_HEADER_IDLE) begin
       header_str = "IDLE";
    end
    else begin
@@ -106,25 +106,25 @@ function bit uvma_{{ name }}_mon_trn_c::self_check();
 
    self_check = 1;
    case (header)
-      UVMA_{{ upper(name) }}_HEADER_DATA: ;
-      UVMA_{{ upper(name) }}_HEADER_IDLE: ;
+      UVMA_{{ name.upper() }}_HEADER_DATA: ;
+      UVMA_{{ name.upper() }}_HEADER_IDLE: ;
       default: begin
-         `uvm_error("{{ upper(name) }}_MON_TRN", $sformatf("Invalid header: %b", header))
+         `uvm_error("{{ name.upper() }}_MON_TRN", $sformatf("Invalid header: %b", header))
          self_check = 0;
       end
    endcase
-   if (header == UVMA_{{ upper(name) }}_HEADER_IDLE) begin
+   if (header == UVMA_{{ name.upper() }}_HEADER_IDLE) begin
       if (data !== uvma_{{ name }}_idle_data) begin
-         `uvm_error("{{ upper(name) }}_MON_TRN", $sformatf("Invalid IDLE data: %b", data))
+         `uvm_error("{{ name.upper() }}_MON_TRN", $sformatf("Invalid IDLE data: %b", data))
          sself_check = 0;
       end
    end
    if (tail !== uvma_{{ name }}_tail_symbol) begin
-      `uvm_error("{{ upper(name) }}_MON_TRN", $sformatf("Invalid tail symbol: %b", data))
+      `uvm_error("{{ name.upper() }}_MON_TRN", $sformatf("Invalid tail symbol: %b", data))
       self_check = 0;
    end
 
 endfunction : self_check
 
 
-`endif // __UVMA_{{ upper(name) }}_MON_TRN_SV__
+`endif // __UVMA_{{ name.upper() }}_MON_TRN_SV__

@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMT_{{ upper(name) }}_ST_RAND_STIM_TEST_SV__
-`define __UVMT_{{ upper(name) }}_ST_RAND_STIM_TEST_SV__
+`ifndef __UVMT_{{ name.upper() }}_ST_RAND_STIM_TEST_SV__
+`define __UVMT_{{ name.upper() }}_ST_RAND_STIM_TEST_SV__
 
 
 /**
@@ -72,20 +72,20 @@ function void uvmt_{{ name }}_st_rand_stim_test_c::check_phase(uvm_phase phase);
    super.check_phase(phase);
    if (env_cfg.scoreboarding_enabled) begin
       if (env_cntxt.sb_{{ tx }}_cntxt.match_count < rand_stim_vseq.num_{{ tx }}_seq_items) begin
-         `uvm_error("TEST", $sformatf("{{ upper(tx) }} scoreboard saw less than %0d matches: %0d", rand_stim_vseq.num_{{ tx }}_seq_items, env_cntxt.sb_{{ tx }}_cntxt.match_count))
+         `uvm_error("TEST", $sformatf("{{ tx.upper() }} scoreboard saw less than %0d matches: %0d", rand_stim_vseq.num_{{ tx }}_seq_items, env_cntxt.sb_{{ tx }}_cntxt.match_count))
       end
       if (env_cntxt.sb_{{ rx }}_cntxt.match_count < rand_stim_vseq.num_{{ rx }}_seq_items) begin
-         `uvm_error("TEST", $sformatf("{{ upper(rx) }} scoreboard saw less than %0d matches: %0d", rand_stim_vseq.num_{{ rx }}_seq_items, env_cntxt.sb_{{ rx }}_cntxt.match_count))
+         `uvm_error("TEST", $sformatf("{{ rx.upper() }} scoreboard saw less than %0d matches: %0d", rand_stim_vseq.num_{{ rx }}_seq_items, env_cntxt.sb_{{ rx }}_cntxt.match_count))
       end
       if (env_cntxt.sb_{{ mode_1 }}_cntxt.match_count < rand_stim_vseq.num_{{ tx }}_seq_items) begin
-         `uvm_error("TEST", $sformatf("{{ upper(mode_1) }} scoreboard saw less than %0d matches: %0d", rand_stim_vseq.num_{{ tx }}_seq_items, env_cntxt.sb_{{ mode_1 }}_cntxt.match_count))
+         `uvm_error("TEST", $sformatf("{{ mode_1.upper() }} scoreboard saw less than %0d matches: %0d", rand_stim_vseq.num_{{ tx }}_seq_items, env_cntxt.sb_{{ mode_1 }}_cntxt.match_count))
       end
       if (env_cntxt.sb_{{ mode_2 }}_cntxt.match_count < rand_stim_vseq.num_{{ rx }}_seq_items) begin
-         `uvm_error("TEST", $sformatf("{{ upper(mode_2) }} scoreboard saw less than %0d matches: %0d", rand_stim_vseq.num_{{ rx }}_seq_items, env_cntxt.sb_{{ mode_2 }}_cntxt.match_count))
+         `uvm_error("TEST", $sformatf("{{ mode_2.upper() }} scoreboard saw less than %0d matches: %0d", rand_stim_vseq.num_{{ rx }}_seq_items, env_cntxt.sb_{{ mode_2 }}_cntxt.match_count))
       end
    end
 
 endfunction : check_phase
 
 
-`endif // __UVMT_{{ upper(name) }}_ST_RAND_STIM_TEST_SV__
+`endif // __UVMT_{{ name.upper() }}_ST_RAND_STIM_TEST_SV__

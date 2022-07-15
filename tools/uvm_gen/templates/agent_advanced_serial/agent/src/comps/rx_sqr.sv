@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_{{ upper(rx) }}_SQR_SV__
-`define __UVMA_{{ upper(name) }}_{{ upper(rx) }}_SQR_SV__
+`ifndef __UVMA_{{ name.upper() }}_{{ rx.upper() }}_SQR_SV__
+`define __UVMA_{{ name.upper() }}_{{ rx.upper() }}_SQR_SV__
 
 
 /**
@@ -71,7 +71,7 @@ function void uvma_{{ name }}_{{ rx }}_sqr_c::get_cfg();
 
    void'(uvm_config_db#(uvma_{{ name }}_cfg_c)::get(this, "", "cfg", cfg));
    if (cfg == null) begin
-      `uvm_fatal("{{ upper(name) }}_{{ upper(rx) }}_SQR", "Configuration handle is null")
+      `uvm_fatal("{{ name.upper() }}_{{ rx.upper() }}_SQR", "Configuration handle is null")
    end
 
 endfunction : get_cfg
@@ -81,10 +81,10 @@ function void uvma_{{ name }}_{{ rx }}_sqr_c::get_cntxt();
 
    void'(uvm_config_db#(uvma_{{ name }}_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (cntxt == null) begin
-      `uvm_fatal("{{ upper(name) }}_{{ upper(rx) }}_SQR", "Context handle is null")
+      `uvm_fatal("{{ name.upper() }}_{{ rx.upper() }}_SQR", "Context handle is null")
    end
 
 endfunction : get_cntxt
 
 
-`endif // __UVMA_{{ upper(name) }}_{{ upper(rx) }}_SQR_SV__
+`endif // __UVMA_{{ name.upper() }}_{{ rx.upper() }}_SQR_SV__

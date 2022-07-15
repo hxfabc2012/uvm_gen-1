@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_COV_MODEL_SV__
-`define __UVMA_{{ upper(name) }}_COV_MODEL_SV__
+`ifndef __UVMA_{{ name.upper() }}_COV_MODEL_SV__
+`define __UVMA_{{ name.upper() }}_COV_MODEL_SV__
 
 
 /**
@@ -202,7 +202,7 @@ function void uvme_{{ name }}_cov_model_c::get_cfg();
 
    void'(uvm_config_db#(uvme_{{ name }}_st_cfg_c)::get(this, "", "cfg", cfg));
    if (cfg == null) begin
-      `uvm_fatal("{{ upper(name) }}_ST_ENV", "Configuration handle is null")
+      `uvm_fatal("{{ name.upper() }}_ST_ENV", "Configuration handle is null")
    end
 
 endfunction : get_cfg
@@ -212,7 +212,7 @@ function void uvme_{{ name }}_cov_model_c::get_cntxt();
 
    void'(uvm_config_db#(uvme_{{ name }}_st_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (cntxt == null) begin
-      `uvm_fatal("{{ upper(name) }}_ST_ENV", "Context handle is null")
+      `uvm_fatal("{{ name.upper() }}_ST_ENV", "Context handle is null")
    end
 
 endfunction : get_cntxt
@@ -267,4 +267,4 @@ function void uvma_{{ name }}_cov_model_c::sample_{{ rx }}_phy_mon_trn();
 endfunction : sample_{{ rx }}_phy_mon_trn
 
 
-`endif // __UVMA_{{ upper(name) }}_COV_MODEL_SV__
+`endif // __UVMA_{{ name.upper() }}_COV_MODEL_SV__

@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVME_{{ upper(name) }}_ST_CNTXT_SV__
-`define __UVME_{{ upper(name) }}_ST_CNTXT_SV__
+`ifndef __UVME_{{ name.upper() }}_ST_CNTXT_SV__
+`define __UVME_{{ name.upper() }}_ST_CNTXT_SV__
 
 
 /**
@@ -87,4 +87,4 @@ function void uvme_{{ name }}_st_cntxt_c::reset();
 endfunction : reset
 
 
-`endif // __UVME_{{ upper(name) }}_ST_CNTXT_SV__
+`endif // __UVME_{{ name.upper() }}_ST_CNTXT_SV__

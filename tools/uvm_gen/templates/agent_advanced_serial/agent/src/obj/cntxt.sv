@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_CNTXT_SV__
-`define __UVMA_{{ upper(name) }}_CNTXT_SV__
+`ifndef __UVMA_{{ name.upper() }}_CNTXT_SV__
+`define __UVMA_{{ name.upper() }}_CNTXT_SV__
 
 
 /**
@@ -83,4 +83,4 @@ function void uvma_{{ name }}_cntxt_c::reset();
 endfunction : reset
 
 
-`endif // __UVMA_{{ upper(name) }}_CNTXT_SV__
+`endif // __UVMA_{{ name.upper() }}_CNTXT_SV__

@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_MON_SV__
-`define __UVMA_{{ upper(name) }}_MON_SV__
+`ifndef __UVMA_{{ name.upper() }}_MON_SV__
+`define __UVMA_{{ name.upper() }}_MON_SV__
 
 
 /**
@@ -172,7 +172,7 @@ function void uvma_{{ name }}_mon_c::get_cfg();
 
    void'(uvm_config_db#(uvma_{{ name }}_cfg_c)::get(this, "", "cfg", cfg));
    if (cfg == null) begin
-      `uvm_fatal("{{ upper(name) }}_MON", "Configuration handle is null")
+      `uvm_fatal("{{ name.upper() }}_MON", "Configuration handle is null")
    end
 
 endfunction : get_cfg
@@ -182,7 +182,7 @@ function void uvma_{{ name }}_mon_c::get_cntxt();
 
    void'(uvm_config_db#(uvma_{{ name }}_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (cntxt == null) begin
-      `uvm_fatal("{{ upper(name) }}_MON", "Context handle is null")
+      `uvm_fatal("{{ name.upper() }}_MON", "Context handle is null")
    end
 
 endfunction : get_cntxt
@@ -228,7 +228,7 @@ task uvma_{{ name }}_mon_c::mon_reset();
       UVML_RESET_TYPE_ASYNCHRONOUS: mon_reset_async();
 
       default: begin
-         `uvm_fatal("{{ upper(name) }}_MON", $sformatf("Illegal cfg.reset_type: %s", cfg.reset_type.name()))
+         `uvm_fatal("{{ name.upper() }}_MON", $sformatf("Illegal cfg.reset_type: %s", cfg.reset_type.name()))
       end
    endcase
 
@@ -243,7 +243,7 @@ task uvma_{{ name }}_mon_c::mon_reset_sync();
          wait (cntxt.vif.clk === 1);
       end
       cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
-      `uvm_info("{{ upper(name) }}_MON", "Entered IN_RESET state", UVM_MEDIUM)
+      `uvm_info("{{ name.upper() }}_MON", "Entered IN_RESET state", UVM_MEDIUM)
       cntxt.reset();
 
       while (cntxt.vif.reset_n !== 1'b1) begin
@@ -251,7 +251,7 @@ task uvma_{{ name }}_mon_c::mon_reset_sync();
          wait (cntxt.vif.clk === 1);
       end
       cntxt.reset_state = UVML_RESET_STATE_POST_RESET;
-      `uvm_info("{{ upper(name) }}_MON", "Entered POST_RESET state", UVM_MEDIUM)
+      `uvm_info("{{ name.upper() }}_MON", "Entered POST_RESET state", UVM_MEDIUM)
    end
 
 endtask : mon_reset_sync
@@ -262,12 +262,12 @@ task uvma_{{ name }}_mon_c::mon_reset_async();
    forever begin
       wait (cntxt.vif.reset_n === 0);
       cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
-      `uvm_info("{{ upper(name) }}_MON", "Entered IN_RESET state", UVM_MEDIUM)
+      `uvm_info("{{ name.upper() }}_MON", "Entered IN_RESET state", UVM_MEDIUM)
       cntxt.reset();
 
       wait (cntxt.vif.reset_n === 1);
       cntxt.reset_state = UVML_RESET_STATE_POST_RESET;
-      `uvm_info("{{ upper(name) }}_MON", "Entered POST_RESET state", UVM_MEDIUM)
+      `uvm_info("{{ name.upper() }}_MON", "Entered POST_RESET state", UVM_MEDIUM)
    end
 
 endtask : mon_reset_async
@@ -302,8 +302,8 @@ endtask : mon_{{ rx }}
 task uvma_{{ name }}_mon_c::mon_{{ tx }}_pre_reset();
 
    case (cfg.drv_mode)
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }}: @({{ mode_1 }}_{{ tx }}_mp.mon_{{ mode_1 }}_{{ tx }}_cb);
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }}: @({{ mode_2 }}_{{ tx }}_mp.mon_{{ mode_2 }}_{{ tx }}_cb);
+      UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }}: @({{ mode_1 }}_{{ tx }}_mp.mon_{{ mode_1 }}_{{ tx }}_cb);
+      UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }}: @({{ mode_2 }}_{{ tx }}_mp.mon_{{ mode_2 }}_{{ tx }}_cb);
    endcase
 
 endtask : mon_{{ tx }}_pre_reset
@@ -312,8 +312,8 @@ endtask : mon_{{ tx }}_pre_reset
 task uvma_{{ name }}_mon_c::mon_{{ rx }}_pre_reset();
 
    case (cfg.drv_mode)
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }}: @({{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb);
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }}: @({{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb);
+      UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }}: @({{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb);
+      UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }}: @({{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb);
    endcase
 
 endtask : mon_{{ rx }}_pre_reset
@@ -322,8 +322,8 @@ endtask : mon_{{ rx }}_pre_reset
 task uvma_{{ name }}_mon_c::mon_{{ tx }}_in_reset();
 
    case (cfg.drv_mode)
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }}: @({{ mode_1 }}_{{ tx }}_mp.mon_{{ mode_1 }}_{{ tx }}_cb);
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }}: @({{ mode_2 }}_{{ tx }}_mp.mon_{{ mode_2 }}_{{ tx }}_cb);
+      UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }}: @({{ mode_1 }}_{{ tx }}_mp.mon_{{ mode_1 }}_{{ tx }}_cb);
+      UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }}: @({{ mode_2 }}_{{ tx }}_mp.mon_{{ mode_2 }}_{{ tx }}_cb);
    endcase
 
 endtask : mon_{{ tx }}_in_reset
@@ -332,8 +332,8 @@ endtask : mon_{{ tx }}_in_reset
 task uvma_{{ name }}_mon_c::mon_{{ rx }}_in_reset();
 
    case (cfg.drv_mode)
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }}: @({{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb);
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }}: @({{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb);
+      UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }}: @({{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb);
+      UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }}: @({{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb);
    endcase
 
 endtask : mon_{{ rx }}_in_reset
@@ -367,9 +367,9 @@ endtask : mon_{{ rx }}_post_reset
 {% else %}task uvma_{{ name }}_mon_c::sample_{{ tx }}_trn(output uvma_{{ name }}_{{ tx }}_mon_trn_c trn);
 {% endif %}
    case (cfg.drv_mode)
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }}: begin
+      UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }}: begin
          @({{ mode_1 }}_{{ tx }}_mp.mon_{{ mode_1 }}_{{ tx }}_cb);
-         `uvm_info("{{ upper(name) }}_MON", "Sampling Tx transaction", UVM_DEBUG)
+         `uvm_info("{{ name.upper() }}_MON", "Sampling Tx transaction", UVM_DEBUG)
 {% if symmetric %}         trn = uvma_{{ name }}_phy_mon_trn_c::type_id::create("trn");
          trn.dxp = {{ mode_1 }}_{{ tx }}_mp.mon_{{ mode_1 }}_{{ tx }}_cb.txp;
          trn.dxn = {{ mode_1 }}_{{ tx }}_mp.mon_{{ mode_1 }}_{{ tx }}_cb.txn;
@@ -378,9 +378,9 @@ endtask : mon_{{ rx }}_post_reset
          trn.txn = {{ mode_1 }}_{{ tx }}_mp.mon_{{ mode_1 }}_{{ tx }}_cb.txn;
 {% endif %}      end
 
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }}: begin
+      UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }}: begin
          @({{ mode_2 }}_{{ tx }}_mp.mon_{{ mode_2 }}_{{ tx }}_cb);
-         `uvm_info("{{ upper(name) }}_MON", "Sampling Tx transaction", UVM_DEBUG)
+         `uvm_info("{{ name.upper() }}_MON", "Sampling Tx transaction", UVM_DEBUG)
 {% if symmetric %}         trn = uvma_{{ name }}_phy_mon_trn_c::type_id::create("trn");
          trn.dxp = {{ mode_2 }}_{{ tx }}_mp.mon_{{ mode_2 }}_{{ tx }}_cb.txp;
          trn.dxn = {{ mode_2 }}_{{ tx }}_mp.mon_{{ mode_2 }}_{{ tx }}_cb.txn;
@@ -397,9 +397,9 @@ endtask : sample_{{ tx }}_trn
 {% else %}task uvma_{{ name }}_mon_c::sample_{{ rx }}_trn(output uvma_{{ name }}_{{ rx }}_mon_trn_c trn);
 {% endif %}
    case (cfg.drv_mode)
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }}: begin
+      UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }}: begin
          @({{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb);
-         `uvm_info("{{ upper(name) }}_MON", "Sampling Tx transaction", UVM_DEBUG)
+         `uvm_info("{{ name.upper() }}_MON", "Sampling Tx transaction", UVM_DEBUG)
 {% if symmetric %}         trn = uvma_{{ name }}_phy_mon_trn_c::type_id::create("trn");
          trn.dp = {{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb.rxp;
          trn.dn = {{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb.rxn;
@@ -410,9 +410,9 @@ endtask : sample_{{ tx }}_trn
          trn.rx1n = {{ mode_1 }}_{{ rx }}_mp.mon_{{ mode_1 }}_{{ rx }}_cb.rx1n;
 {% endif %}      end
 
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }}: begin
+      UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }}: begin
          @({{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb);
-         `uvm_info("{{ upper(name) }}_MON", "Sampling Tx transaction", UVM_DEBUG)
+         `uvm_info("{{ name.upper() }}_MON", "Sampling Tx transaction", UVM_DEBUG)
 {% if symmetric %}         trn = uvma_{{ name }}_phy_mon_trn_c::type_id::create("trn");
          trn.dp = {{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb.rxp;
          trn.dn = {{ mode_2 }}_{{ rx }}_mp.mon_{{ mode_2 }}_{{ rx }}_cb.rxn;
@@ -431,10 +431,10 @@ endtask : sample_{{ rx }}_trn
 {% else %}task uvma_{{ name }}_mon_c::process_{{ tx }}_trn(ref uvma_{{ name }}_{{ tx }}_mon_trn_c trn);
 {% endif %}
    trn.cfg = cfg;
-   trn.direction = UVMA_{{ upper(name) }}_DIRECTION_{{ upper(tx) }};
+   trn.direction = UVMA_{{ name.upper() }}_DIRECTION_{{ tx.upper() }};
    trn.set_initiator(this);
    trn.set_timestamp_end($realtime());
-   `uvm_info("{{ upper(name) }}_MON", $sformatf("Sampled {{ upper(tx) }} transaction from the virtual interface:\n%s", trn.sprint()), UVM_DEBUG)
+   `uvm_info("{{ name.upper() }}_MON", $sformatf("Sampled {{ tx.upper() }} transaction from the virtual interface:\n%s", trn.sprint()), UVM_DEBUG)
 
 endfunction : process_{{ tx }}_trn
 
@@ -443,12 +443,12 @@ endfunction : process_{{ tx }}_trn
 {% else %}task uvma_{{ name }}_mon_c::process_{{ rx }}_trn(ref uvma_{{ name }}_{{ rx }}_mon_trn_c trn);
 {% endif %}
    trn.cfg = cfg;
-   trn.direction = UVMA_{{ upper(name) }}_DIRECTION_{{ upper(rx) }};
+   trn.direction = UVMA_{{ name.upper() }}_DIRECTION_{{ rx.upper() }};
    trn.set_initiator(this);
    trn.set_timestamp_end($realtime());
-   `uvm_info("{{ upper(name) }}_MON", $sformatf("Sampled {{ upper(rx) }} transaction from the virtual interface:\n%s", trn.sprint()), UVM_DEBUG)
+   `uvm_info("{{ name.upper() }}_MON", $sformatf("Sampled {{ rx.upper() }} transaction from the virtual interface:\n%s", trn.sprint()), UVM_DEBUG)
 
 endfunction : process_{{ rx }}_trn
 
 
-`endif // __UVMA_{{ upper(name) }}_MON_SV__
+`endif // __UVMA_{{ name.upper() }}_MON_SV__

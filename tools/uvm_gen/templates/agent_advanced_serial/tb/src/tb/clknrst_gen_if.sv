@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMT_{{ upper(name) }}_ST_CLKNRST_GEN_IF_SV__
-`define __UVMT_{{ upper(name) }}_ST_CLKNRST_GEN_IF_SV__
+`ifndef __UVMT_{{ name.upper() }}_ST_CLKNRST_GEN_IF_SV__
+`define __UVMT_{{ name.upper() }}_ST_CLKNRST_GEN_IF_SV__
 
 
 /**
@@ -72,4 +72,4 @@ interface uvmt_{{ name }}_st_clknrst_gen_if;
 endinterface : uvmt_{{ name }}_st_clknrst_gen_if
 
 
-`endif // __UVMT_{{ upper(name) }}_ST_CLKNRST_GEN_IF_SV__
+`endif // __UVMT_{{ name.upper() }}_ST_CLKNRST_GEN_IF_SV__

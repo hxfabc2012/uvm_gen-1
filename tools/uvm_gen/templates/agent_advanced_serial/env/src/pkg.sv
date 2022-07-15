@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVME_{{ upper(name) }}_ST_PKG_SV__
-`define __UVME_{{ upper(name) }}_ST_PKG_SV__
+`ifndef __UVME_{{ name.upper() }}_ST_PKG_SV__
+`define __UVME_{{ name.upper() }}_ST_PKG_SV__
 
 
 // Pre-processor macros
@@ -51,9 +51,9 @@ endpackage : uvme_{{ name }}_st_pkg
 
 
 // Module(s) / Checker(s)
-`ifdef UVME_{{ upper(name) }}_ST_INC_CHKR
+`ifdef UVME_{{ name.upper() }}_ST_INC_CHKR
 `include "uvme_{{ name }}_st_chkr.sv"
 `endif
 
 
-`endif // __UVME_{{ upper(name) }}_ST_PKG_SV__
+`endif // __UVME_{{ name.upper() }}_ST_PKG_SV__

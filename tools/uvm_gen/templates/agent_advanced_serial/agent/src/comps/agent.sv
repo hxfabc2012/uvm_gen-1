@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_AGENT_SV__
-`define __UVMA_{{ upper(name) }}_AGENT_SV__
+`ifndef __UVMA_{{ name.upper() }}_AGENT_SV__
+`define __UVMA_{{ name.upper() }}_AGENT_SV__
 
 
 /**
@@ -182,10 +182,10 @@ task uvma_{{ name }}_agent_c::run_phase(uvm_phase phase);
       if (cfg.is_active) begin
          start_idle_vseq();
          case (cfg.drv_mode)
-            UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }}: start_drv_vseq_{{ mode_1 }}();
-            UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }}: start_drv_vseq_{{ mode_2 }}();
+            UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }}: start_drv_vseq_{{ mode_1 }}();
+            UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }}: start_drv_vseq_{{ mode_2 }}();
             default: begin
-               `uvm_fatal("{{ upper(name) }}_AGENT", $sformatf("Invalid cfg.drv_mode: %s", cfg.drv_mode.name()))
+               `uvm_fatal("{{ name.upper() }}_AGENT", $sformatf("Invalid cfg.drv_mode: %s", cfg.drv_mode.name()))
             end
          endcase
       end
@@ -198,10 +198,10 @@ function void uvma_{{ name }}_agent_c::get_and_set_cfg();
 
    void'(uvm_config_db#(uvma_{{ name }}_cfg_c)::get(this, "", "cfg", cfg));
    if (cfg == null) begin
-      `uvm_fatal("{{ upper(name) }}_AGENT", "Configuration handle is null")
+      `uvm_fatal("{{ name.upper() }}_AGENT", "Configuration handle is null")
    end
    else begin
-      `uvm_info("{{ upper(name) }}_AGENT", $sformatf("Found configuration handle:\n%s", cfg.sprint()), UVM_DEBUG)
+      `uvm_info("{{ name.upper() }}_AGENT", $sformatf("Found configuration handle:\n%s", cfg.sprint()), UVM_DEBUG)
       uvm_config_db#(uvma_{{ name }}_cfg_c)::set(this, "*", "cfg", cfg);
    end
 
@@ -212,7 +212,7 @@ function void uvma_{{ name }}_agent_c::get_and_set_cntxt();
 
    void'(uvm_config_db#(uvma_{{ name }}_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (cntxt == null) begin
-      `uvm_info("{{ upper(name) }}_AGENT", "Context handle is null; creating.", UVM_DEBUG)
+      `uvm_info("{{ name.upper() }}_AGENT", "Context handle is null; creating.", UVM_DEBUG)
       cntxt = uvma_{{ name }}_cntxt_c::type_id::create("cntxt");
    end
    uvm_config_db#(uvma_{{ name }}_cntxt_c)::set(this, "*", "cntxt", cntxt);
@@ -223,10 +223,10 @@ endfunction : get_and_set_cntxt
 function void uvma_{{ name }}_agent_c::retrieve_vif();
 
    if (!uvm_config_db#(virtual uvma_{{ name }}_if)::get(this, "", "vif", cntxt.vif)) begin
-      `uvm_fatal("{{ upper(name) }}_AGENT", $sformatf("Could not find vif handle of type %s in uvm_config_db", $typename(cntxt.vif)))
+      `uvm_fatal("{{ name.upper() }}_AGENT", $sformatf("Could not find vif handle of type %s in uvm_config_db", $typename(cntxt.vif)))
    end
    else begin
-      `uvm_info("{{ upper(name) }}_AGENT", $sformatf("Found vif handle of type %s in uvm_config_db", $typename(cntxt.vif)), UVM_DEBUG)
+      `uvm_info("{{ name.upper() }}_AGENT", $sformatf("Found vif handle of type %s in uvm_config_db", $typename(cntxt.vif)), UVM_DEBUG)
    end
 
 endfunction : retrieve_vif
@@ -320,10 +320,10 @@ task uvma_{{ name }}_agent_c::start_mon_vseq();
 
    temp_obj = f.create_object_by_type(cfg.mon_vseq_type, get_full_name(), cfg.mon_vseq_type.get_type_name());
    if (!$cast(cntxt.mon_vseq, temp_obj)) begin
-      `uvm_fatal("{{ upper(name) }}_AGENT", $sformatf("Could not cast 'temp_obj' (%s) to 'cntxt.mon_vseq' (%s)", $typename(temp_obj), $typename(cntxt.mon_vseq)))
+      `uvm_fatal("{{ name.upper() }}_AGENT", $sformatf("Could not cast 'temp_obj' (%s) to 'cntxt.mon_vseq' (%s)", $typename(temp_obj), $typename(cntxt.mon_vseq)))
    end
    if (!cntxt.mon_vseq.randomize()) begin
-      `uvm_fatal("{{ upper(name) }}_AGENT", "Failed to randomize cntxt.mon_vseq")
+      `uvm_fatal("{{ name.upper() }}_AGENT", "Failed to randomize cntxt.mon_vseq")
    end
    fork
       cntxt.mon_vseq.start(vsequencer);
@@ -340,10 +340,10 @@ task uvma_{{ name }}_agent_c::start_idle_vseq();
 
    temp_obj = f.create_object_by_type(cfg.idle_vseq_type, get_full_name(), cfg.idle_vseq_type.get_type_name());
    if (!$cast(cntxt.idle_vseq, temp_obj)) begin
-      `uvm_fatal("{{ upper(name) }}_AGENT", $sformatf("Could not cast 'temp_obj' (%s) to 'cntxt.idle_vseq' (%s)", $typename(temp_obj), $typename(cntxt.idle_vseq)))
+      `uvm_fatal("{{ name.upper() }}_AGENT", $sformatf("Could not cast 'temp_obj' (%s) to 'cntxt.idle_vseq' (%s)", $typename(temp_obj), $typename(cntxt.idle_vseq)))
    end
    if (!cntxt.idle_vseq.randomize()) begin
-      `uvm_fatal("{{ upper(name) }}_AGENT", "Failed to randomize cntxt.idle_vseq")
+      `uvm_fatal("{{ name.upper() }}_AGENT", "Failed to randomize cntxt.idle_vseq")
    end
    fork
       cntxt.idle_vseq.start(vsequencer);
@@ -360,10 +360,10 @@ task uvma_{{ name }}_agent_c::start_drv_vseq_{{ mode_1 }}();
 
    temp_obj = f.create_object_by_type(cfg.{{ tx }}_drv_vseq_type, get_full_name(), cfg.{{ tx }}_drv_vseq_type.get_type_name());
    if (!$cast(cntxt.{{ tx }}_drv_vseq, temp_obj)) begin
-      `uvm_fatal("{{ upper(name) }}_AGENT", $sformatf("Could not cast 'temp_obj' (%s) to 'cntxt.{{ tx }}_drv_vseq' (%s)", $typename(temp_obj), $typename(cntxt.{{ tx }}_drv_vseq)))
+      `uvm_fatal("{{ name.upper() }}_AGENT", $sformatf("Could not cast 'temp_obj' (%s) to 'cntxt.{{ tx }}_drv_vseq' (%s)", $typename(temp_obj), $typename(cntxt.{{ tx }}_drv_vseq)))
    end
    if (!cntxt.{{ tx }}_drv_vseq.randomize()) begin
-      `uvm_fatal("{{ upper(name) }}_AGENT", "Failed to randomize cntxt.{{ tx }}_drv_vseq")
+      `uvm_fatal("{{ name.upper() }}_AGENT", "Failed to randomize cntxt.{{ tx }}_drv_vseq")
    end
    fork
       cntxt.{{ tx }}_drv_vseq.start(vsequencer);
@@ -380,10 +380,10 @@ task uvma_{{ name }}_agent_c::start_drv_vseq_{{ mode_2 }}();
 
    temp_obj = f.create_object_by_type(cfg.{{ rx }}_drv_vseq_type, get_full_name(), cfg.{{ rx }}_drv_vseq_type.get_type_name());
    if (!$cast(cntxt.{{ rx }}_drv_vseq, temp_obj)) begin
-      `uvm_fatal("{{ upper(name) }}_AGENT", $sformatf("Could not cast 'temp_obj' (%s) to 'cntxt.{{ rx }}_drv_vseq' (%s)", $typename(temp_obj), $typename(cntxt.{{ rx }}_drv_vseq)))
+      `uvm_fatal("{{ name.upper() }}_AGENT", $sformatf("Could not cast 'temp_obj' (%s) to 'cntxt.{{ rx }}_drv_vseq' (%s)", $typename(temp_obj), $typename(cntxt.{{ rx }}_drv_vseq)))
    end
    if (!cntxt.{{ rx }}_drv_vseq.randomize()) begin
-      `uvm_fatal("{{ upper(name) }}_AGENT", "Failed to randomize cntxt.{{ rx }}_drv_vseq")
+      `uvm_fatal("{{ name.upper() }}_AGENT", "Failed to randomize cntxt.{{ rx }}_drv_vseq")
    end
    fork
       cntxt.{{ rx }}_drv_vseq.start(vsequencer);
@@ -392,4 +392,4 @@ task uvma_{{ name }}_agent_c::start_drv_vseq_{{ mode_2 }}();
 endtask : start_drv_vseq_{{ mode_2 }}
 
 
-`endif // __UVMA_{{ upper(name) }}_AGENT_SV__
+`endif // __UVMA_{{ name.upper() }}_AGENT_SV__

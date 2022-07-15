@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_PHY_DRV_SV__
-`define __UVMA_{{ upper(name) }}_PHY_DRV_SV__
+`ifndef __UVMA_{{ name.upper() }}_PHY_DRV_SV__
+`define __UVMA_{{ name.upper() }}_PHY_DRV_SV__
 
 
 /**
@@ -119,7 +119,7 @@ function void uvma_{{ name }}_phy_drv_c::get_cfg();
 
    void'(uvm_config_db#(uvma_{{ name }}_cfg_c)::get(this, "", "cfg", cfg));
    if (cfg == null) begin
-      `uvm_fatal("{{ upper(name) }}_PHY_DRV", "Configuration handle is null")
+      `uvm_fatal("{{ name.upper() }}_PHY_DRV", "Configuration handle is null")
    end
 
 endfunction : get_cfg
@@ -129,7 +129,7 @@ function void uvma_{{ name }}_phy_drv_c::get_cntxt();
 
    void'(uvm_config_db#(uvma_{{ name }}_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (cntxt == null) begin
-      `uvm_fatal("{{ upper(name) }}_PHY_DRV", "Context handle is null")
+      `uvm_fatal("{{ name.upper() }}_PHY_DRV", "Context handle is null")
    end
 
 endfunction : get_cntxt
@@ -138,7 +138,7 @@ endfunction : get_cntxt
 function void uvma_{{ name }}_phy_drv_c::process_req(ref uvma_{{ name }}_phy_seq_item_c req);
 
    req.cfg = cfg;
-   `uvm_info("{{ upper(name) }}_{{ upper(rx) }}_PHY_DRV", $sformatf("Got new req from the sequencer:\n%s", req.sprint()), UVM_DEBUG)
+   `uvm_info("{{ name.upper() }}_{{ rx.upper() }}_PHY_DRV", $sformatf("Got new req from the sequencer:\n%s", req.sprint()), UVM_DEBUG)
 
 endfunction : process_req
 
@@ -148,7 +148,7 @@ task uvma_{{ name }}_phy_drv_c::drv_req(ref uvma_{{ name }}_phy_seq_item_c req);
    {% if ddr %}bit valid_edge = 0;
    do begin
       case (cfg.mode)
-         UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }}: begin
+         UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }}: begin
             @({{ tx }}_mp.drv_{{ tx }}_cb);
             if ({{ tx }}_mp.{{ tx }}_clk inside {0,1}) begin
                valid_edge = 1;
@@ -156,7 +156,7 @@ task uvma_{{ name }}_phy_drv_c::drv_req(ref uvma_{{ name }}_phy_seq_item_c req);
                {{ tx }}_mp.drv_{{ tx }}_cb.txn <= req.dn;
             end
          end
-         UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }}: begin
+         UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }}: begin
             @({{ rx }}_mp.drv_{{ rx }}_cb);
             if ({{ rx }}_mp.{{ rx }}_clk inside {0,1}) begin
                valid_edge = 1;
@@ -167,12 +167,12 @@ task uvma_{{ name }}_phy_drv_c::drv_req(ref uvma_{{ name }}_phy_seq_item_c req);
       endcase
    end while (!valid_edge);
 {% else %}   case (cfg.mode)
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_1) }}: begin
+      UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }}: begin
          @({{ tx }}_mp.drv_{{ tx }}_cb);
          {{ tx }}_mp.drv_{{ tx }}_cb.txp <= req.dp;
          {{ tx }}_mp.drv_{{ tx }}_cb.txn <= req.dn;
       end
-      UVMA_{{ upper(name) }}_DRV_MODE_{{ upper(mode_2) }}: begin
+      UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }}: begin
          @({{ rx }}_mp.drv_{{ rx }}_cb);
          {{ rx }}_mp.drv_{{ rx }}_cb.rxp <= req.dp;
          {{ rx }}_mp.drv_{{ rx }}_cb.rxn <= req.dn;
@@ -189,4 +189,4 @@ task uvma_{{ name }}_phy_drv_c::sample_post_clk(ref uvma_{{ name }}_phy_seq_item
 endtask : sample_post_clk
 
 
-`endif // __UVMA_{{ upper(name) }}_PHY_DRV_SV__
+`endif // __UVMA_{{ name.upper() }}_PHY_DRV_SV__

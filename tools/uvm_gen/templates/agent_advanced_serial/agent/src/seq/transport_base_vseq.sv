@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ upper(name) }}_TRANSPORT_BASE_VSEQ_SV__
-`define __UVMA_{{ upper(name) }}_TRANSPORT_BASE_VSEQ_SV__
+`ifndef __UVMA_{{ name.upper() }}_TRANSPORT_BASE_VSEQ_SV__
+`define __UVMA_{{ name.upper() }}_TRANSPORT_BASE_VSEQ_SV__
 
 
 /**
@@ -43,7 +43,7 @@ task uvma_{{ name }}_transport_base_vseq_c::body();
    
    uvm_sequence_item  payload;
    
-   `uvm_info("{{ upper(name) }}_TRANSPORT_BASE_VSEQ", "Transport base virtual sequence has started", UVM_HIGH)
+   `uvm_info("{{ name.upper() }}_TRANSPORT_BASE_VSEQ", "Transport base virtual sequence has started", UVM_HIGH)
    forever begin
       upstream_get_next_item(payload);
       process_payload       (payload);
@@ -60,4 +60,4 @@ task uvma_{{ name }}_transport_base_vseq_c::process_payload(uvm_sequence_item pa
 endtask : process_payload
 
 
-`endif // __UVMA_{{ upper(name) }}_TRANSPORT_BASE_VSEQ_SV__
+`endif // __UVMA_{{ name.upper() }}_TRANSPORT_BASE_VSEQ_SV__
