@@ -12,17 +12,21 @@
  * Managed by test cases.
  */
 interface uvmt_{{ name }}_st_clknrst_gen_if;
-   
-   // Signals
-   logic  clk     = 0;
-   logic  reset   = 0;
-   logic  reset_n = 1;
-   
-   // State variables
+
+   /// @defgroup Signals
+   /// @{
+   logic  clk     = 0; ///<
+   logic  reset   = 0; ///<
+   logic  reset_n = 1; ///<
+   /// @}
+
+   /// @defgroup State variables
+   /// @{
    bit       clk_started = 0;
    realtime  clk_period  = 10ns;
-   
-   
+   /// @}
+
+
    /**
     * Generates clk signal.
     */
@@ -34,21 +38,21 @@ interface uvmt_{{ name }}_st_clknrst_gen_if;
          end
       join_none
    end
-   
+
    /**
     * Sets clock period in ps.
     */
    function void set_clk_period(int unsigned period);
       clk_period = period * 1ps;
    endfunction : set_clk_period
-   
+
    /**
     * Triggers the generation of clk.
     */
    function void start_clk();
       clk_started = 1;
    endfunction : start_clk
-   
+
    /**
     * Asserts both reset signals.
     */
@@ -56,7 +60,7 @@ interface uvmt_{{ name }}_st_clknrst_gen_if;
       reset   = 1;
       reset_n = 0;
    endfunction : assert_reset
-   
+
    /**
     * De-asserts both reset signals.
     */
@@ -64,7 +68,7 @@ interface uvmt_{{ name }}_st_clknrst_gen_if;
       reset   = 0;
       reset_n = 1;
    endfunction : deassert_reset
-   
+
 endinterface : uvmt_{{ name }}_st_clknrst_gen_if
 
 

@@ -18,16 +18,16 @@ interface uvma_{{ name }}_if (
 
    /// @defgroup Signals
    /// @{
-{% if symmetric %}   wire  txp; ///<
-   wire  txn; ///<
-   wire  rxp; ///<
-   wire  rxn; ///<
-{% else %}   wire  txp; ///<
-   wire  txn; ///<
-   wire  rx0p; ///<
-   wire  rx0n; ///<
-   wire  rx1p; ///<
-   wire  rx1n; ///<
+{% if symmetric %}   wire  {{ tx }}p; ///<
+   wire  {{ tx }}n; ///<
+   wire  {{ rx }}p; ///<
+   wire  {{ rx }}n; ///<
+{% else %}   wire  {{ tx }}p; ///<
+   wire  {{ tx }}n; ///<
+   wire  {{ rx }}0p; ///<
+   wire  {{ rx }}0n; ///<
+   wire  {{ rx }}1p; ///<
+   wire  {{ rx }}1n; ///<
 {% endif %}   /// @}
 
 

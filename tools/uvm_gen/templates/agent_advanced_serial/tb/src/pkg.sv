@@ -44,7 +44,7 @@ package uvmt_{{ name }}_st_pkg;
    `include "uvmt_{{ name }}_st_test_cfg.sv"
    `include "uvmt_{{ name }}_st_base_test.sv"
 
-   // TODO Add tests
+   // Funtional Tests
    `include "uvmt_{{ name }}_st_rand_stim_test.sv"
 
 endpackage : uvmt_{{ name }}_st_pkg

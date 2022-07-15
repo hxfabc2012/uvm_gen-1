@@ -12,11 +12,12 @@
  */
 module uvmt_{{ name }}_st_dut_chkr (
    uvma_{{ name }}_if  {{ mode_1 }}_if,
-   uvma_{{ name }}_if  {{ mode_2 }}_if
+   uvma_{{ name }}_if  {{ mode_2 }}_if,
+   uvma_{{ name }}_if  passive_if
 );
-   
+
    // TODO Add assertions to uvmt_{{ name }}_st_dut_chkr
-   
+
 endmodule : uvmt_{{ name }}_st_dut_chkr
 
 

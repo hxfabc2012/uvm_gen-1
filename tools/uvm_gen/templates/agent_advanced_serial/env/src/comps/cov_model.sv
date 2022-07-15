@@ -16,54 +16,77 @@ class uvme_{{ name }}_st_cov_model_c extends uvma_{{ name }}_cov_model_c;
    `uvm_component_utils(uvme_{{ name }}_st_cov_model_c)
 
 
+   /**
+    *
+    */
    covergroup {{ name }}_st_cfg_cg;
-      // TODO Implement {{ name }}_st_cfg_cg
-      //      Ex: abc_cpt : coverpoint cfg.abc;
-      //          xyz_cpt : coverpoint cfg.xyz;
+      bypass_mode_cpt     : coverpoint cfg.bypass_mode    ;
+      is_active_cpt       : coverpoint cfg.is_active      ;
+      reset_type_cpt      : coverpoint cfg.reset_type     ;
+      trn_log_enabled_cpt : coverpoint cfg.trn_log_enabled;
+      big_endian_cpt      : coverpoint cfg.big_endian     ;
+      drv_mode_cpt        : coverpoint cfg.drv_mode       ;
    endgroup : {{ name }}_st_cfg_cg
 
+   /**
+    *
+    */
    covergroup {{ name }}_st_cntxt_cg;
-      // TODO Implement {{ name }}_st_cntxt_cg
-      //      Ex: abc_cpt : coverpoint cntxt.abc;
-      //          xyz_cpt : coverpoint cntxt.xyz;
+      {{ tx }}_cntxt_state_cpt : coverpoint cntxt.{{ tx }}_mon_fsm_cntxt.state;
+      {{ rx }}_cntxt_state_cpt : coverpoint cntxt.{{ rx }}_mon_fsm_cntxt.state;
    endgroup : {{ name }}_st_cntxt_cg
 
+   /**
+    *
+    */
    covergroup {{ name }}_st_seq_item_cg;
-      // TODO Implement {{ name }}_st_seq_item_cg
-      //      Ex: abc_cpt : coverpoint seq_item.abc;
-      //          xyz_cpt : coverpoint seq_item.xyz;
+      header_cpt : coverpoint seq_item.header;
    endgroup : {{ name }}_st_seq_item_cg
 
+   /**
+    *
+    */
    covergroup {{ name }}_st_{{ tx }}_mon_trn_cg;
-      // TODO Implement {{ name }}_st_{{ tx }}_mon_trn_cg
-      //      Ex: abc_cpt : coverpoint {{ tx }}_mon_trn.abc;
-      //          xyz_cpt : coverpoint {{ tx }}_mon_trn.xyz;
+      header_cpt : coverpoint {{ tx }}_mon_trn.header;
    endgroup : {{ name }}_st_{{ tx }}_mon_trn_cg
 
+   /**
+    *
+    */
    covergroup {{ name }}_st_{{ rx }}_mon_trn_cg;
-      // TODO Implement {{ name }}_st_{{ tx }}_mon_trn_cg
-      //      Ex: abc_cpt : coverpoint {{ rx }}_mon_trn.abc;
-      //          xyz_cpt : coverpoint {{ rx }}_mon_trn.xyz;
+      header_cpt : coverpoint {{ rx }}_mon_trn.header;
    endgroup : {{ name }}_st_{{ rx }}_mon_trn_cg
 
+   /**
+    *
+    */
    covergroup {{ name }}_st_{{ tx }}_phy_seq_item_cg;
       // TODO Implement {{ name }}_st_{{ tx }}_phy_seq_item_cg
       //      Ex: abc_cpt : coverpoint {{ tx }}_phy_seq_item.abc;
       //          xyz_cpt : coverpoint {{ tx }}_phy_seq_item.xyz;
    endgroup : {{ name }}_st_{{ tx }}_phy_seq_item_cg
 
+   /**
+    *
+    */
    covergroup {{ name }}_st_{{ rx }}_phy_seq_item_cg;
       // TODO Implement {{ name }}_st_{{ tx }}_phy_seq_item_cg
       //      Ex: abc_cpt : coverpoint {{ rx }}_phy_seq_item.abc;
       //          xyz_cpt : coverpoint {{ rx }}_phy_seq_item.xyz;
    endgroup : {{ name }}_st_{{ rx }}_phy_seq_item_cg
 
+   /**
+    *
+    */
    covergroup {{ name }}_st_{{ tx }}_phy_mon_trn_cg;
       // TODO Implement {{ name }}_st_{{ tx }}_phy_mon_trn_cg
       //      Ex: abc_cpt : coverpoint {{ tx }}_phy_mon_trn.abc;
       //          xyz_cpt : coverpoint {{ tx }}_phy_mon_trn.xyz;
    endgroup : {{ name }}_st_{{ tx }}_phy_mon_trn_cg
 
+   /**
+    *
+    */
    covergroup {{ name }}_st_{{ rx }}_phy_mon_trn_cg;
       // TODO Implement {{ name }}_st_{{ tx }}_phy_mon_trn_cg
       //      Ex: abc_cpt : coverpoint {{ rx }}_phy_mon_trn.abc;
@@ -75,6 +98,11 @@ class uvme_{{ name }}_st_cov_model_c extends uvma_{{ name }}_cov_model_c;
     * Default constructor.
     */
    extern function new(string name="uvme_{{ name }}_st_cov_model", uvm_component parent=null);
+
+   /**
+    * TODO Describe uvme_{{ name }}_st_cov_model_c::end_of_elaboration_phase()
+    */
+   extern virtual function void end_of_elaboration_phase(uvm_phase phase);
 
    /**
     * TODO Describe uvme_{{ name }}_st_cov_model_c::sample_cfg()
@@ -127,13 +155,25 @@ endclass : uvme_{{ name }}_st_cov_model_c
 function uvme_{{ name }}_st_cov_model_c::new(string name="uvme_{{ name }}_st_cov_model", uvm_component parent=null);
 
    super.new(name, parent);
-   {{ name }}_st_cfg_cg        = new();
-   {{ name }}_st_cntxt_cg      = new();
-   {{ name }}_st_tx_mon_trn_cg = new();
-   {{ name }}_st_rx_mon_trn_cg = new();
-   {{ name }}_st_seq_item_cg   = new();
+   {{ name }}_st_cfg_cg             = new();
+   {{ name }}_st_cntxt_cg           = new();
+   {{ name }}_st_seq_item_cg        = new();
+   {{ name }}_st_tx_mon_trn_cg      = new();
+   {{ name }}_st_rx_mon_trn_cg      = new();
+   {{ name }}_st_tx_phy_seq_item_cg = new();
+   {{ name }}_st_rx_phy_seq_item_cg = new();
+   {{ name }}_st_tx_phy_mon_trn_cg  = new();
+   {{ name }}_st_rx_phy_mon_trn_cg  = new();
 
 endfunction : new
+
+
+function void uvme_{{ name }}_st_cov_model_c::end_of_elaboration_phase(uvm_phase phase);
+
+   super.end_of_elaboration_phase(phase);
+   sample_cfg();
+
+endfunction : end_of_elaboration_phase
 
 
 function void uvme_{{ name }}_st_cov_model_c::sample_cfg();

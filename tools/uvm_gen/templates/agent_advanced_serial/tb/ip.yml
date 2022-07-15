@@ -15,22 +15,23 @@ ip:
   block-diagram: ""
   languages: ["sv"]
   simulators-supported:
-    - { name: "vivado", version: "{{ year }}.1" }
+    - { name: "vivado", version: "2022.1" }
   tags: []
   copyright-holders: ["Low Power Futures"]
 
 structure:
-   scripts-path :  "bin"
-   docs-path    :  "docs"
-   examples-path:  "examples"
-   src-path     :  "src"
+   scripts-path : "bin"
+   docs-path    : "docs"
+   examples-path: "examples"
+   src-path     : "src"
 
 dependencies:
   - { name: "uvm"      , version:  "1.2" }
   - { name: "uvml"     , version: "~1.0" }
   - { name: "uvml_logs", version: "~1.0" }
   - { name: "uvml_sb"  , version: "~1.0" }
-  - { name: "uvml_ral" , version: "~1.0" }
+  - { name: "uvma_{{ name }}"   , version: "1.0" }
+  - { name: "uvme_{{ name }}_st", version: "1.0" }
 
 hdl-src:
   top-constructs: ["uvmt_{{ name }}_st_tb", "uvml_logs_sim_summary"]

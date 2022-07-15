@@ -13,18 +13,20 @@
  */
 class uvmt_{{ name }}_st_base_test_c extends uvml_test_c;
 
-   // Objects
+   /// @defgroup Objects
+   /// @{
+   virtual uvmt_{{ name }}_st_clknrst_gen_if  clknrst_gen_vif; ///< Handle to clock generation interface
    rand uvmt_{{ name }}_st_test_cfg_c  test_cfg ; ///<
    rand uvme_{{ name }}_st_cfg_c       env_cfg  ; ///<
    uvme_{{ name }}_st_cntxt_c          env_cntxt; ///<
    uvml_logs_rs_text_c  rs;
+   /// @}
 
-   // Components
+   /// @defgroup Components
+   /// @{
    uvme_{{ name }}_st_env_c   env       ; ///<
    uvme_{{ name }}_st_vsqr_c  vsequencer; ///<
-
-   // Handle to clock generation interface
-   virtual uvmt_{{ name }}_st_clknrst_gen_if  clknrst_gen_vif;
+   /// @}
 
 
    `uvm_component_utils_begin(uvmt_{{ name }}_st_base_test_c)
@@ -34,6 +36,9 @@ class uvmt_{{ name }}_st_base_test_c extends uvml_test_c;
    `uvm_component_utils_end
 
 
+   /**
+    *
+    */
    constraint env_cfg_cons {
       env_cfg.enabled               == 1;
       env_cfg.is_active             == UVM_ACTIVE;
@@ -147,7 +152,6 @@ endfunction : new
 function void uvmt_{{ name }}_st_base_test_c::build_phase(uvm_phase phase);
 
    super.build_phase(phase);
-
    retrieve_clknrst_gen_vif();
    create_cfg              ();
    randomize_test          ();
@@ -180,7 +184,6 @@ endtask : run_phase
 task uvmt_{{ name }}_st_base_test_c::reset_phase(uvm_phase phase);
 
    super.reset_phase(phase);
-
    `uvm_info("TEST", $sformatf("Asserting reset for %0t", (test_cfg.reset_period * 1ns)), UVM_NONE)
    clknrst_gen_vif.assert_reset();
    `uvml_hrtbt()

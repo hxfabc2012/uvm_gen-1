@@ -257,6 +257,7 @@ function bit uvma_{{ name }}_mon_vseq_c::monitor_fsm(uvma_{{ name }}_mon_fsm_cnt
    endcase
 
    fsm_cntxt.state = next_state;
+   cntxt.sample_cntxt_e.trigger();
    return sample_trn;
 
 endfunction : monitor_fsm
