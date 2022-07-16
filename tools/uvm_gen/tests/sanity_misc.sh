@@ -36,9 +36,9 @@ cat ./tests/data/lib.spec | ./src/new_lib.py ../../dv/
 cd ../../sim
 shopt -s expand_aliases
 source ~/.bashrc
-mio install uvmt_ss -u admin -p Qc5SgRpk6cjsAjr
-mio cpel uvmt_misc_st
-mio sim  uvmt_misc_st -t smoke -s 1
+mio install uvmt_misc_st -u admin -p Qc5SgRpk6cjsAjr
+mio cpel    uvmt_misc_st
+mio sim     uvmt_misc_st -t smoke -s 1
 
 # 3. Gather sim results
 mio results uvmt_misc_st misc
