@@ -35,9 +35,10 @@ dependencies:
   - { name: "uvma_clk"  , version: "~1.0" }
   - { name: "uvma_reset", version: "~1.0" }
   - { name: "uvma_${ral_agent_type}", version: "~1.0" }
+#  - { name: "uvme_${name}", version: "^" }
 
 hdl-src:
-  top-constructs: ["uvmt_${name}_tb", "uvml_logs_summary"]
+  top-constructs: ["uvmt_${name}_tb", "uvml_sim_summary"]
   directories: [".", "tb", "tests"]
   test-paths: ["tests"]
   test-name-template: "uvmt_${name}_{{ name }}_test_c"

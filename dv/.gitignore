@@ -10,3 +10,6 @@ uvma_block_dp_in
 uvma_block_dp_out
 uvme_block
 uvmt_block
+uvma_bsb
+uvme_bsb_st
+uvmt_bsb_st

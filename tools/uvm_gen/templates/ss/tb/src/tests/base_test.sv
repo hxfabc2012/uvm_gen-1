@@ -217,9 +217,11 @@ task uvmt_${name}_base_test_c::configure_phase(uvm_phase phase);
 
    super.configure_phase(phase);
 
-   `uvm_info("TEST", $sformatf("Starting to update DUT with RAL contents:\n%s", reg_block.sprint()), UVM_NONE)
-   reg_block.update(status);
-   `uvm_info("TEST", "Finished updating DUT with RAL contents", UVM_NONE)
+   if (test_cfg.auto_ral_update) begin
+      `uvm_info("TEST", $sformatf("Starting to update DUT with RAL contents:\n%s", reg_block.sprint()), UVM_NONE)
+      reg_block.update(status);
+      `uvm_info("TEST", "Finished updating DUT with RAL contents", UVM_NONE)
+   end
 
 endtask : configure_phase
 
@@ -247,6 +249,7 @@ endfunction : create_cfg
 function void uvmt_${name}_base_test_c::randomize_test();
 
    test_cfg.process_cli_args();
+   `uvm_info("TEST", "Randomizing test ...", UVM_NONE)
    if (!this.randomize()) begin
       `uvm_fatal("TEST", "Failed to randomize test");
    end

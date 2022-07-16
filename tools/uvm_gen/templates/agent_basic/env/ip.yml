@@ -36,11 +36,11 @@ dependencies:
   - { name: "uvml"     , version: "~1.0" }
   - { name: "uvml_logs", version: "~1.0" }
   - { name: "uvml_sb"  , version: "~1.0" }
-  - { name: "uvma_${name}", version: "~1.0" }
+#  - { name: "uvma_${name}", version: "^" }
 
 hdl-src:
   directories: ["comps", "obj", "seq"]
-  flists:
+  flist:
     metrics : "uvme_${name}_st_pkg.flist"
     riviera : "uvme_${name}_st_pkg.flist"
     questa  : "uvme_${name}_st_pkg.flist"

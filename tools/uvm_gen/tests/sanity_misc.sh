@@ -1,8 +1,22 @@
 #! /bin/bash
 ########################################################################################################################
 ## Copyright 2022 Datum Technology Corporation
-## SPDX-License-Identifier: Apache-2.0 WITH SHL-2.1
+## All rights reserved.
 ########################################################################################################################
+
+
+# 0. Remove old code
+rm -rf ../../dv/uvml_math
+rm -rf ../../dv/uvmt_misc_st/src/tests/uvmt_misc_st_my_comp.sv
+rm -rf ../../dv/uvmt_misc_st/src/tests/uvmt_misc_st_my_obj.sv
+rm -rf ../../dv/uvmt_misc_st/src/tests/uvmt_misc_st_reg_adapter.sv
+rm -rf ../../dv/uvmt_misc_st/src/tests/uvmt_misc_st_status_reg.sv
+rm -rf ../../dv/uvmt_misc_st/src/tests/uvmt_misc_st_top_reg_block.sv
+rm -rf ../../dv/uvmt_misc_st/src/tests/uvmt_misc_st_smoke_test.sv
+rm -rf ../../dv/uvmt_misc_st/src/seq/uvmt_misc_st_traffic_seq.sv
+rm -rf ../../dv/uvmt_misc_st/src/seq/uvmt_misc_st_mstr_seq_lib.sv
+rm -rf ../../dv/uvmt_misc_st/src/seq/uvmt_misc_st_basic_access_vseq.sv
+rm -rf ../../dv/uvmt_misc_st/src/seq/uvmt_misc_st_cpu_vseq_lib.sv
 
 
 # 1. Create code from spec files
@@ -20,10 +34,10 @@ cat ./tests/data/lib.spec | ./src/new_lib.py ../../dv/
 
 # 2. Simulate
 cd ../../sim
-./setup_project.py
-source ./setup_terminal.sh
-../tools/.imports/mio/src/__main__.py cpel uvmt_misc_st
-../tools/.imports/mio/src/__main__.py sim uvmt_misc_st -t smoke -s 1
+shopt -s expand_aliases
+source ~/.bashrc
+mio cpel uvmt_misc_st
+mio sim  uvmt_misc_st -t smoke -s 1
 
 # 3. Gather sim results
-../tools/.imports/mio/src/__main__.py results uvmt_misc_st misc
+mio results uvmt_misc_st misc

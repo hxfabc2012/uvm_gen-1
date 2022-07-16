@@ -220,6 +220,7 @@ endfunction : create_cfg
 function void uvmt_${name}_st_base_test_c::randomize_test();
 
    test_cfg.process_cli_args();
+   `uvm_info("TEST", "Randomizing test ...", UVM_NONE)
    if (!this.randomize()) begin
       `uvm_fatal("TEST", "Failed to randomize test");
    end

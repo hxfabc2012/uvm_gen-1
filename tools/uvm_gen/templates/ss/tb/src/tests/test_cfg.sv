@@ -21,6 +21,7 @@ class uvmt_${name}_test_cfg_c extends uvml_test_cfg_c;
 
    /// @defparam Register tests knobs
    /// @{
+   rand bit       auto_ral_update   ; ///< Gates updating the DUT with the contents of the RAL during configure_phase()
    uvm_reg_block  selected_reg_block; ///< Register block to be tested.
    /// @}
 
@@ -52,6 +53,12 @@ class uvmt_${name}_test_cfg_c extends uvml_test_cfg_c;
       simulation_timeout == uvmt_${name}_default_simulation_timeout;
    }
 
+   /**
+    * Configuration for the register model.
+    */
+   constraint ral_defaults_cons {
+      soft auto_ral_update == 1;
+   }
 
    /**
     * Default constructor.
@@ -75,7 +82,7 @@ endfunction : new
 
 function void uvmt_${name}_test_cfg_c::process_cli_args();
 
-   if (uvm_cmdline_proc.get_arg_value("BLKNM=", cli_block_name_parsed_str)) begin
+   if (uvm_cmdline_proc.get_arg_value("BLKNM=%s", cli_block_name_parsed_str)) begin
       if (cli_block_name_parsed_str != "") begin
          cli_block_name_override = 1;
       end

@@ -4,7 +4,7 @@
 
 
 // Directories
-+incdir+${DV_UVML_${name_uppercase}_SRC_PATH}
++incdir+${UVML_${name_uppercase}_SRC_PATH}
 
 // Files
-${DV_UVML_${name_uppercase}_SRC_PATH}/uvml_${name}_pkg.sv
+${UVML_${name_uppercase}_SRC_PATH}/uvml_${name}_pkg.sv

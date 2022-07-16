@@ -4,27 +4,27 @@
 
 
 // Libraries
--f ${DV_UVM_SRC_PATH}/uvm_pkg.flist
--f ${DV_UVML_SRC_PATH}/uvml_pkg.flist
--f ${DV_UVML_LOGS_SRC_PATH}/uvml_logs_pkg.flist
--f ${DV_UVML_SB_SRC_PATH}/uvml_sb_pkg.flist
--f ${DV_UVML_RAL_SRC_PATH}/uvml_ral_pkg.flist
+-f ${UVM_SRC_PATH}/uvm_pkg.flist
+-f ${UVML_SRC_PATH}/uvml_pkg.flist
+-f ${UVML_LOGS_SRC_PATH}/uvml_logs_pkg.flist
+-f ${UVML_SB_SRC_PATH}/uvml_sb_pkg.flist
+-f ${UVML_RAL_SRC_PATH}/uvml_ral_pkg.flist
 
 // Agents
--f ${DV_UVMA_CLK_SRC_PATH}/uvma_clk_pkg.flist
--f ${DV_UVMA_RESET_SRC_PATH}/uvma_reset_pkg.flist
--f ${DV_UVMA_${name_uppercase}_CP_SRC_PATH}/uvma_${name}_cp_pkg.flist
--f ${DV_UVMA_${name_uppercase}_DP_IN_SRC_PATH}/uvma_${name}_dp_in_pkg.flist
--f ${DV_UVMA_${name_uppercase}_DP_OUT_SRC_PATH}/uvma_${name}_dp_out_pkg.flist
+-f ${UVMA_CLK_SRC_PATH}/uvma_clk_pkg.flist
+-f ${UVMA_RESET_SRC_PATH}/uvma_reset_pkg.flist
+-f ${UVMA_${name_uppercase}_CP_SRC_PATH}/uvma_${name}_cp_pkg.flist
+-f ${UVMA_${name_uppercase}_DP_IN_SRC_PATH}/uvma_${name}_dp_in_pkg.flist
+-f ${UVMA_${name_uppercase}_DP_OUT_SRC_PATH}/uvma_${name}_dp_out_pkg.flist
 
 // Environments
--f ${DV_UVME_${name_uppercase}_SRC_PATH}/uvme_${name}_pkg.flist
+-f ${UVME_${name_uppercase}_SRC_PATH}/uvme_${name}_pkg.flist
 
 // Directories
-+incdir+${DV_UVMT_${name_uppercase}_SRC_PATH}
-+incdir+${DV_UVMT_${name_uppercase}_SRC_PATH}/seq
-+incdir+${DV_UVMT_${name_uppercase}_SRC_PATH}/tb
-+incdir+${DV_UVMT_${name_uppercase}_SRC_PATH}/tests
++incdir+${UVMT_${name_uppercase}_SRC_PATH}
++incdir+${UVMT_${name_uppercase}_SRC_PATH}/seq
++incdir+${UVMT_${name_uppercase}_SRC_PATH}/tb
++incdir+${UVMT_${name_uppercase}_SRC_PATH}/tests
 
 // Files
-${DV_UVMT_${name_uppercase}_SRC_PATH}/uvmt_${name}_pkg.sv
+${UVMT_${name_uppercase}_SRC_PATH}/uvmt_${name}_pkg.sv

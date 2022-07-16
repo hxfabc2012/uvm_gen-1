@@ -15,7 +15,7 @@ ip:
   block-diagram: ""
   languages: ["sv"]
   simulators-supported:
-    - { name: "vivado", version: "2021.1" }
+    - { name: "vivado", version: "2022.1" }
   tags: []
   copyright-holders: ["${name_of_copyright_owner}"]
   licenses: ["SHL-2.1"]
@@ -34,9 +34,13 @@ dependencies:
   - { name: "uvml_sb"   , version: "~1.0" }
   - { name: "uvma_clk"  , version: "~1.0" }
   - { name: "uvma_reset", version: "~1.0" }
+#  - { name: "uvma_${name}_cp", version: "^" }
+#  - { name: "uvma_${name}_dp_in", version: "^" }
+#  - { name: "uvma_${name}_dp_out", version: "^" }
+#  - { name: "uvme_${name}", version: "^" }
   
 hdl-src:
-  top-constructs: ["uvmt_${name}_tb", "uvml_logs_summary"]
+  top-constructs: ["uvmt_${name}_tb", "uvml_sim_summary"]
   directories: [".", "tb", "tests"]
   test-paths: ["tests"]
   test-name-template: "uvmt_${name}_{{ name }}_test_c"

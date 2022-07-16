@@ -21,6 +21,14 @@ class uvmt_${name}_reg_base_test_c extends uvmt_${name}_base_test_c;
 
 
    /**
+    * Configuration for the register model.
+    */
+   constraint ral_defaults_cons {
+      test_cfg.auto_ral_update == 0;
+   }
+
+
+   /**
     * Default constructor.
     */
    extern function new(string name="uvmt_${name}_reg_base_test", uvm_component parent=null);
@@ -46,6 +54,9 @@ function void uvmt_${name}_reg_base_test_c::connect_phase(uvm_phase phase);
 
    if (test_cfg.cli_block_name_override) begin
       test_cfg.selected_reg_block = reg_block.get_block_by_name(test_cfg.cli_block_name_parsed_str);
+   end
+   else begin
+      test_cfg.selected_reg_block = reg_block;
    end
 
 endfunction : connect_phase
