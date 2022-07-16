@@ -149,17 +149,17 @@ task uvma_{{ name }}_{{ rx }}_drv_c::drv_req(ref uvma_{{ name }}_{{ rx }}_seq_it
       @(mp.drv_{{ rx }}_cb);
       if (mp.{{ rx }}_clk inside {0,1}) begin
          valid_edge = 1;
-         mp.drv_{{ rx }}_cb.rx0p <= req.rx0p;
-         mp.drv_{{ rx }}_cb.rx0n <= req.rx0n;
-         mp.drv_{{ rx }}_cb.rx1p <= req.rx1p;
-         mp.drv_{{ rx }}_cb.rx1n <= req.rx1n;
+         mp.drv_{{ rx }}_cb.{{ rx }}0p <= req.{{ rx }}0p;
+         mp.drv_{{ rx }}_cb.{{ rx }}0n <= req.{{ rx }}0n;
+         mp.drv_{{ rx }}_cb.{{ rx }}1p <= req.{{ rx }}1p;
+         mp.drv_{{ rx }}_cb.{{ rx }}1n <= req.{{ rx }}1n;
       end
    end while (!valid_edge);
 {% else %}   @(mp.drv_{{ rx }}_cb);
-   mp.drv_{{ rx }}_cb.rx0p <= req.rx0p;
-   mp.drv_{{ rx }}_cb.rx0n <= req.rx0n;
-   mp.drv_{{ rx }}_cb.rx1p <= req.rx1p;
-   mp.drv_{{ rx }}_cb.rx1n <= req.rx1n;
+   mp.drv_{{ rx }}_cb.{{ rx }}0p <= req.{{ rx }}0p;
+   mp.drv_{{ rx }}_cb.{{ rx }}0n <= req.{{ rx }}0n;
+   mp.drv_{{ rx }}_cb.{{ rx }}1p <= req.{{ rx }}1p;
+   mp.drv_{{ rx }}_cb.{{ rx }}1n <= req.{{ rx }}1n;
 {% endif %}
 endtask : drv_req
 

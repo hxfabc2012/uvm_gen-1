@@ -242,15 +242,31 @@ task uvma_{{ name }}_mon_c::mon_reset_sync();
 
    forever begin
       while (cntxt.vif.reset_n !== 1'b0) begin
-         wait (cntxt.vif.clk === 0);
-         wait (cntxt.vif.clk === 1);
+         fork
+            begin
+               wait (cntxt.vif.{{ tx }}_clk === 0);
+               wait (cntxt.vif.{{ tx }}_clk === 1);
+            end
+            begin
+               wait (cntxt.vif.{{ rx }}_clk === 0);
+               wait (cntxt.vif.{{ rx }}_clk === 1);
+            end
+         join
       end
       cntxt.reset_state = UVML_RESET_STATE_IN_RESET;
       `uvm_info("{{ name.upper() }}_MON", "Entered IN_RESET state", UVM_MEDIUM)
       cntxt.reset();
       while (cntxt.vif.reset_n !== 1'b1) begin
-         wait (cntxt.vif.clk === 0);
-         wait (cntxt.vif.clk === 1);
+         fork
+            begin
+               wait (cntxt.vif.{{ tx }}_clk === 0);
+               wait (cntxt.vif.{{ tx }}_clk === 1);
+            end
+            begin
+               wait (cntxt.vif.{{ rx }}_clk === 0);
+               wait (cntxt.vif.{{ rx }}_clk === 1);
+            end
+         join
       end
       cntxt.reset_state = UVML_RESET_STATE_POST_RESET;
       `uvm_info("{{ name.upper() }}_MON", "Entered POST_RESET state", UVM_MEDIUM)
@@ -380,7 +396,6 @@ endtask : sample_{{ rx }}_trn
 {% else %}function void uvma_{{ name }}_mon_c::process_{{ tx }}_trn(ref uvma_{{ name }}_{{ tx }}_mon_trn_c trn);
 {% endif %}
    trn.cfg = cfg;
-   trn.direction = UVMA_{{ name.upper() }}_DIRECTION_{{ tx.upper() }};
    trn.set_initiator(this);
    trn.set_timestamp_end($realtime());
    `uvm_info("{{ name.upper() }}_MON_{{ tx.upper() }}", $sformatf("Sampled Phy transaction from the virtual interface:\n%s", trn.sprint()), UVM_DEBUG)
@@ -392,7 +407,6 @@ endfunction : process_{{ tx }}_trn
 {% else %}function void uvma_{{ name }}_mon_c::process_{{ rx }}_trn(ref uvma_{{ name }}_{{ rx }}_mon_trn_c trn);
 {% endif %}
    trn.cfg = cfg;
-   trn.direction = UVMA_{{ name.upper() }}_DIRECTION_{{ rx.upper() }};
    trn.set_initiator(this);
    trn.set_timestamp_end($realtime());
    `uvm_info("{{ name.upper() }}_MON_{{ rx.upper() }}", $sformatf("Sampled Phy transaction from the virtual interface:\n%s", trn.sprint()), UVM_DEBUG)

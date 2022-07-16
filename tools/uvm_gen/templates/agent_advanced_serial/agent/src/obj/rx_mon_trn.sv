@@ -16,18 +16,18 @@ class uvma_{{ name }}_{{ rx }}_mon_trn_c extends uvml_mon_trn_c;
 
    /// @defgroup Data
    /// @{
-   logic  rx0p; ///<
-   logic  rx0n; ///<
-   logic  rx1p; ///<
-   logic  rx1n; ///<
+   logic  {{ rx }}0p; ///<
+   logic  {{ rx }}0n; ///<
+   logic  {{ rx }}1p; ///<
+   logic  {{ rx }}1n; ///<
    /// @}
 
 
    `uvm_object_utils_begin(uvma_{{ name }}_{{ rx }}_mon_trn_c)
-      `uvm_field_int(rx0p, UVM_DEFAULT)
-      `uvm_field_int(rx0n, UVM_DEFAULT)
-      `uvm_field_int(rx1p, UVM_DEFAULT)
-      `uvm_field_int(rx1n, UVM_DEFAULT)
+      `uvm_field_int({{ rx }}0p, UVM_DEFAULT)
+      `uvm_field_int({{ rx }}0n, UVM_DEFAULT)
+      `uvm_field_int({{ rx }}1p, UVM_DEFAULT)
+      `uvm_field_int({{ rx }}1n, UVM_DEFAULT)
    `uvm_object_utils_end
 
 
@@ -53,40 +53,40 @@ endfunction : new
 
 function uvml_metadata_t uvma_{{ name }}_{{ rx }}_mon_trn_c::get_metadata();
 
-   string rx0p_str = $sformatf("%h", rx0p);
-   string rx0n_str = $sformatf("%h", rx0n);
-   string rx1p_str = $sformatf("%h", rx1p);
-   string rx1n_str = $sformatf("%h", rx1n);
+   string {{ rx }}0p_str = $sformatf("%h", {{ rx }}0p);
+   string {{ rx }}0n_str = $sformatf("%h", {{ rx }}0n);
+   string {{ rx }}1p_str = $sformatf("%h", {{ rx }}1p);
+   string {{ rx }}1n_str = $sformatf("%h", {{ rx }}1n);
 
    get_metadata.push_back('{
       index     : 0,
-      value     : rx0p_str,
-      col_name  : "rx0p",
-      col_width : rx0p_str.len(),
+      value     : {{ rx }}0p_str,
+      col_name  : "{{ rx }}0p",
+      col_width : {{ rx }}0p_str.len(),
       col_align : UVML_TEXT_ALIGN_RIGHT,
       data_type : UVML_FIELD_INT
    });
    get_metadata.push_back('{
       index     : 0,
-      value     : rx0n_str,
-      col_name  : "rx0n",
-      col_width : rx0n_str.len(),
+      value     : {{ rx }}0n_str,
+      col_name  : "{{ rx }}0n",
+      col_width : {{ rx }}0n_str.len(),
       col_align : UVML_TEXT_ALIGN_RIGHT,
       data_type : UVML_FIELD_INT
    });
    get_metadata.push_back('{
       index     : 0,
-      value     : rx1p_str,
-      col_name  : "rx1p",
-      col_width : rx1p_str.len(),
+      value     : {{ rx }}1p_str,
+      col_name  : "{{ rx }}1p",
+      col_width : {{ rx }}1p_str.len(),
       col_align : UVML_TEXT_ALIGN_RIGHT,
       data_type : UVML_FIELD_INT
    });
    get_metadata.push_back('{
       index     : 0,
-      value     : rx1n_str,
-      col_name  : "rx1n",
-      col_width : rx1n_str.len(),
+      value     : {{ rx }}1n_str,
+      col_name  : "{{ rx }}1n",
+      col_width : {{ rx }}1n_str.len(),
       col_align : UVML_TEXT_ALIGN_RIGHT,
       data_type : UVML_FIELD_INT
    });

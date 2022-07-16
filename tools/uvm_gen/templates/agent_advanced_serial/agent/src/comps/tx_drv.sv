@@ -146,13 +146,13 @@ task uvma_{{ name }}_{{ tx }}_drv_c::drv_req(ref uvma_{{ name }}_{{ tx }}_seq_it
       @(mp.drv_{{ tx }}_cb);
       if (mp.drv_{{ tx }}_cb inside {0,1}) begin
          valid_edge = 1;
-         mp.drv_{{ tx }}_cb.txp <= req.txp;
-         mp.drv_{{ tx }}_cb.txn <= req.txn;
+         mp.drv_{{ tx }}_cb.{{ tx }}p <= req.{{ tx }}p;
+         mp.drv_{{ tx }}_cb.{{ tx }}n <= req.{{ tx }}n;
       end
    end while (!valid_edge);
 {% else %}   @(mp.drv_{{ tx }}_cb);
-   mp.drv_{{ tx }}_cb.txp <= req.txp;
-   mp.drv_{{ tx }}_cb.txn <= req.txn;
+   mp.drv_{{ tx }}_cb.{{ tx }}p <= req.{{ tx }}p;
+   mp.drv_{{ tx }}_cb.{{ tx }}n <= req.{{ tx }}n;
 {% endif %}
 endtask : drv_req
 

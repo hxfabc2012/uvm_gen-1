@@ -92,7 +92,7 @@ endtask : body
 task uvma_{{ name }}_{{ rx }}_drv_vseq_c::wait_for_reset();
 
    `uvm_info("{{ name.upper() }}_{{ rx.upper() }}_DRV_VSEQ", "Waiting for post_reset", UVM_HIGH)
-   wait (cnrxt.reset_state == UVML_RESET_STATE_POST_RESET);
+   wait (cntxt.reset_state == UVML_RESET_STATE_POST_RESET);
    `uvm_info("{{ name.upper() }}_{{ rx.upper() }}_DRV_VSEQ", "Done waiting for post_reset", UVM_HIGH)
 
 endtask : wait_for_reset
@@ -128,8 +128,8 @@ endtask : drv_loop
 
 task uvma_{{ name }}_{{ rx }}_drv_vseq_c::reset_trigger();
 
-   wait (cnrxt.reset_state == UVML_RESET_STATE_POST_RESET);
-   wait (cnrxt.reset_state != UVML_RESET_STATE_POST_RESET);
+   wait (cntxt.reset_state == UVML_RESET_STATE_POST_RESET);
+   wait (cntxt.reset_state != UVML_RESET_STATE_POST_RESET);
    `uvm_info("{{ name.upper() }}_{{ rx.upper() }}_DRV_VSEQ", "Mid-sim reset detected. Resetting main loop, this may kill some sequences.", UVM_NONE)
 
 endtask : reset_trigger
@@ -137,10 +137,9 @@ endtask : reset_trigger
 
 function void uvma_{{ name }}_{{ rx }}_drv_vseq_c::process_seq_item(ref uvma_{{ name }}_seq_item_c seq_item);
 
-   seq_item.cfg       = cfg;
-   seq_item.direction = UVMA_{{ name.upper() }}_DIRECTION_{{ rx.upper() }};
+   seq_item.cfg = cfg;
    `uvm_info("{{ name.upper() }}_{{ rx.upper() }}_DRV_VSEQ", $sformatf("Processed seq_item:\n%s", seq_item.sprint()), UVM_DEBUG)
-   if (!seq_item.is_idle) begin
+   if (seq_item.header == UVMA_{{ name.upper() }}_HEADER_DATA) begin
       `uvml_hrtbt_owner(p_sequencer)
    end
 
@@ -157,7 +156,7 @@ task uvma_{{ name }}_{{ rx }}_drv_vseq_c::drive(ref uvma_{{ name }}_seq_item_c s
    num_seq_item_bits = seq_item.pack(seq_item_bits);
    `uvm_info("{{ name.upper() }}_{{ rx.upper() }}_DRV_VSEQ", $sformatf("Driving %0d bits of serial data", num_seq_item_bits), UVM_DEBUG)
    for (int ii=num_seq_item_bits-1; ii>=1; ii-=2) begin
-      `uvm_create_on(req, p_sequencer.{{ rx }}_serial_sequencer)
+      `uvm_create_on(req, p_sequencer.{{ rx }}_sequencer)
       `uvm_rand_send_pri_with(req, `UVMA_{{ name.upper() }}_{{ rx.upper() }}_DRV_SEQ_ITEM_PRI, {
          {{ rx }}0p == seq_item_bits[ii-0];
          {{ rx }}1p == seq_item_bits[ii-1];
@@ -170,7 +169,7 @@ endtask : drive
 
 task uvma_{{ name }}_{{ rx }}_drv_vseq_c::wait_clk();
 
-   @(cnrxt.vif.drv_{{ rx }}_cb);
+   @(cntxt.vif.drv_{{ rx }}_cb);
 
 endtask : wait_clk
 

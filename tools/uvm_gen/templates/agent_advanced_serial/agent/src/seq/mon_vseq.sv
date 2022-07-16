@@ -25,14 +25,14 @@ class uvma_{{ name }}_mon_vseq_c extends uvma_{{ name }}_base_vseq_c;
    extern virtual task body();
 
    /**
-    * TODO Describe uvma_{{ name }}_mon_vseq_c::wait_for_reset_tx()
+    * TODO Describe uvma_{{ name }}_mon_vseq_c::wait_for_reset_{{ tx }}()
     */
-   extern virtual task wait_for_reset_tx();
+   extern virtual task wait_for_reset_{{ tx }}();
 
    /**
-    * TODO Describe uvma_{{ name }}_mon_vseq_c::monitor_tx()
+    * TODO Describe uvma_{{ name }}_mon_vseq_c::monitor_{{ tx }}()
     */
-   extern virtual task monitor_tx();
+   extern virtual task monitor_{{ tx }}();
 
    /**
     * TODO Describe uvma_{{ name }}_mon_vseq_c::wait_for_reset_{{ rx }}()
@@ -75,8 +75,8 @@ task uvma_{{ name }}_mon_vseq_c::body();
    forever begin
       fork
          begin : tx
-            wait_for_reset_tx();
-            monitor_tx       ();
+            wait_for_reset_{{ tx }}();
+            monitor_{{ tx }}       ();
          end
          begin : rx
             wait_for_reset_{{ rx }}();
@@ -92,16 +92,16 @@ task uvma_{{ name }}_mon_vseq_c::body();
 endtask : body
 
 
-task uvma_{{ name }}_mon_vseq_c::wait_for_reset_tx();
+task uvma_{{ name }}_mon_vseq_c::wait_for_reset_{{ tx }}();
 
    `uvm_info("{{ name.upper() }}_MON_VSEQ", "Waiting for post_reset on TX", UVM_HIGH)
    wait (cntxt.reset_state == UVML_RESET_STATE_POST_RESET);
    `uvm_info("{{ name.upper() }}_MON_VSEQ", "Done waiting for post_reset on TX", UVM_HIGH)
 
-endtask : wait_for_reset_tx
+endtask : wait_for_reset_{{ tx }}
 
 
-task uvma_{{ name }}_mon_vseq_c::monitor_tx();
+task uvma_{{ name }}_mon_vseq_c::monitor_{{ tx }}();
 
 {% if symmetric %}   uvma_{{ name }}_phy_mon_trn_c  phy_trn;
 {% else %}   uvma_{{ name }}_{{ tx }}_mon_trn_c  phy_trn;
@@ -113,10 +113,10 @@ task uvma_{{ name }}_mon_vseq_c::monitor_tx();
       get_{{ tx }}_phy_mon_trn(phy_trn);
       `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ tx.upper() }}", $sformatf("Got Phy Monitor Transaction:\n%s", phy_trn.sprint()), UVM_DEBUG)
 {% if symmetric %}      cntxt.{{ tx }}_mon_fsm_cntxt.data_q.push_back(diff_decode(phy_trn.dp, phy_trn.dn));
-{% else %}      cntxt.{{ tx }}_mon_fsm_cntxt.data_q.push_back(diff_decode(phy_trn.txp, phy_trn.txn));
-{% endif %}     cntxt.{{ tx }}_mon_fsm_cntxt.timestamps_q.push_back(phy_trn.get_timestamp_start());
-      `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ tx.upper() }}", $sformatf("Monitor has accumulated %0d bits", cnrxt.{{ tx }}_mon_fsm_cnrxt.trn_data.size()), UVM_DEBUG)
-      sample_trn = monitor_fsm(cntxt.mon_fsm_{{ tx }}_cntxt, UVMA_{{ name.upper() }}_DIRECTION_{{ tx.upper() }});
+{% else %}      cntxt.{{ tx }}_mon_fsm_cntxt.data_q.push_back(diff_decode(phy_trn.{{ tx }}p, phy_trn.{{ tx }}n));
+{% endif %}      cntxt.{{ tx }}_mon_fsm_cntxt.timestamps_q.push_back(phy_trn.get_timestamp_start());
+      `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ tx.upper() }}", $sformatf("Monitor has accumulated %0d bits", cntxt.{{ tx }}_mon_fsm_cntxt.trn_data.size()), UVM_DEBUG)
+      sample_trn = monitor_fsm(cntxt.{{ tx }}_mon_fsm_cntxt, UVMA_{{ name.upper() }}_DIRECTION_{{ tx.upper() }});
       if (sample_trn) begin
          `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ tx.upper() }}", $sformatf("Unpacking Monitor Transaction from %0d bits", cntxt.{{ tx }}_mon_fsm_cntxt.trn_data.size()), UVM_DEBUG)
          mon_trn = uvma_{{ name }}_mon_trn_c::type_id::create("mon_trn");
@@ -135,7 +135,7 @@ task uvma_{{ name }}_mon_vseq_c::monitor_tx();
       end
    end
 
-endtask : monitor_tx
+endtask : monitor_{{ tx }}
 
 
 task uvma_{{ name }}_mon_vseq_c::wait_for_reset_{{ rx }}();
@@ -158,16 +158,16 @@ task uvma_{{ name }}_mon_vseq_c::monitor_{{ rx }}();
    forever begin
       get_{{ rx }}_phy_mon_trn(phy_trn);
       `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", $sformatf("Got Phy Monitor Transaction:\n%s", phy_trn.sprint()), UVM_DEBUG)
-{% if symmetric %}      cnrxt.{{ rx }}_mon_fsm_cntxt.data_q.push_back(diff_decode(phy_trn.dp, phy_trn.dn));
-{% else %}      cnrxt.{{ rx }}_mon_fsm_cntxt.data_q.push_back(diff_decode(phy_trn.rx0p, phy_trn.rx0n));
-      cnrxt.{{ rx }}_mon_fsm_cntxt.data_q.push_back(diff_decode(phy_trn.rx1p, phy_trn.rx1n));
+{% if symmetric %}      cntxt.{{ rx }}_mon_fsm_cntxt.data_q.push_back(diff_decode(phy_trn.dp, phy_trn.dn));
+{% else %}      cntxt.{{ rx }}_mon_fsm_cntxt.data_q.push_back(diff_decode(phy_trn.{{ rx }}0p, phy_trn.{{ rx }}0n));
+      cntxt.{{ rx }}_mon_fsm_cntxt.data_q.push_back(diff_decode(phy_trn.{{ rx }}1p, phy_trn.{{ rx }}1n));
 {% endif %}      cntxt.{{ rx }}_mon_fsm_cntxt.timestamps_q.push_back(phy_trn.get_timestamp_start());
-      `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", $sformatf("Monitor has accumulated %0d bits", cnrxt.{{ rx }}_mon_fsm_cntxt.trn_data.size()), UVM_DEBUG)
-      sample_trn = monitor_fsm(cnrxt.mon_fsm_{{ rx }}_cntxt, UVMA_{{ name.upper() }}_DIRECTION_{{ rx.upper() }});
+      `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", $sformatf("Monitor has accumulated %0d bits", cntxt.{{ rx }}_mon_fsm_cntxt.trn_data.size()), UVM_DEBUG)
+      sample_trn = monitor_fsm(cntxt.{{ rx }}_mon_fsm_cntxt, UVMA_{{ name.upper() }}_DIRECTION_{{ rx.upper() }});
       if (sample_trn) begin
-         `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", $sformatf("Unpacking Monitor Transaction from %0d bits", cnrxt.{{ rx }}_mon_fsm_cntxt.trn_data.size()), UVM_DEBUG)
+         `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", $sformatf("Unpacking Monitor Transaction from %0d bits", cntxt.{{ rx }}_mon_fsm_cntxt.trn_data.size()), UVM_DEBUG)
          mon_trn = uvma_{{ name }}_mon_trn_c::type_id::create("mon_trn");
-         void'(mon_trn.unpack(cnrxt.{{ rx }}_mon_fsm_cntxt.trn_data));
+         void'(mon_trn.unpack(cntxt.{{ rx }}_mon_fsm_cntxt.trn_data));
          mon_trn.set_initiator(p_sequencer);
          mon_trn.direction = UVMA_{{ name.upper() }}_DIRECTION_{{ rx.upper() }};
          mon_trn.cfg = cfg;
@@ -207,10 +207,10 @@ endfunction : diff_decode
 
 function bit uvma_{{ name }}_mon_vseq_c::monitor_fsm(uvma_{{ name }}_mon_fsm_cntxt_c fsm_cntxt, uvma_{{ name }}_direction_enum direction);
 
-   string       direction_str = "";
-   bit          sample_trn = 0;
-   logic        new_bit;
-   logic [1:0]  header_bits;
+   string  direction_str = "";
+   bit     sample_trn = 0;
+   logic   new_bit;
+   uvma_{{ name }}_header_l_t    header_bits;
    uvma_{{ name }}_mon_fsm_enum  next_state;
 
    case (direction)
@@ -241,15 +241,28 @@ function bit uvma_{{ name }}_mon_vseq_c::monitor_fsm(uvma_{{ name }}_mon_fsm_cnt
 
       UVMA_{{ name.upper() }}_MON_FSM_SYNCING: begin
          next_state = UVMA_{{ name.upper() }}_MON_FSM_SYNCING;
-         if (fsm_cntxt.data_q.size() >= 2) begin
+         if (fsm_cntxt.data_q.size() >= uvma_{{ name }}_trn_length) begin
             header_bits = {fsm_cntxt.data_q[0],fsm_cntxt.data_q[1]};
             `uvm_info({"{{ name.upper() }}_MON_VSEQ_", direction_str}, $sformatf("%s - New potential header bits: %b", fsm_cntxt.state.name(), header_bits), UVM_DEBUG)
             if (header_bits inside {UVMA_{{ name.upper() }}_HEADER_DATA,UVMA_{{ name.upper() }}_HEADER_IDLE}) begin
-               next_state = UVMA_{{ name.upper() }}_MON_FSM_SYNCED;
-               `uvm_info({"{{ name.upper() }}_MON_VSEQ_", direction_str}, "Synced to bitstream", UVM_LOW)
+               fsm_cntxt.num_consecutive_edges++;
+               `uvm_info({"{{ name.upper() }}_MON_VSEQ_", direction_str}, $sformatf("%s - New valid header bits: %b. #%0d/%0d consecutive observed", fsm_cntxt.state.name(), header_bits, fsm_cntxt.num_consecutive_edges, uvma_{{ name }}_syncing_length), UVM_DEBUG)
+               if (fsm_cntxt.num_consecutive_edges >= uvma_{{ name }}_syncing_length) begin
+                  next_state = UVMA_{{ name.upper() }}_MON_FSM_SYNCED;
+                  `uvm_info({"{{ name.upper() }}_MON_VSEQ_", direction_str}, "Synced to bitstream", UVM_LOW)
+               end
+               else begin
+                  // Dump entire potentially valid frames until we're fully synced
+                  repeat (uvma_{{ name }}_trn_length) begin
+                     void'(fsm_cntxt.data_q      .pop_front());
+                     void'(fsm_cntxt.timestamps_q.pop_front());
+                  end
+               end
             end
             else begin
-               void'(fsm_cntxt.data_q.pop_front());
+               // Still hunting for that first edge of many
+               fsm_cntxt.num_consecutive_edges = 0;
+               void'(fsm_cntxt.data_q      .pop_front());
                void'(fsm_cntxt.timestamps_q.pop_front());
             end
          end

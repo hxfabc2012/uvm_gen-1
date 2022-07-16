@@ -260,11 +260,11 @@ endfunction : create_analysis_ports
 function void uvma_{{ name }}_agent_c::connect_sequencer();
 
    vsequencer.set_arbitration(cfg.sqr_arb_mode);
-   vsequencer.{{ tx }}_phy_sequencer.set_arbitration(UVM_SEQ_ARB_STRICT_FIFO);
-   vsequencer.{{ rx }}_phy_sequencer.set_arbitration(UVM_SEQ_ARB_STRICT_FIFO);
+   vsequencer.{{ tx }}_sequencer.set_arbitration(UVM_SEQ_ARB_STRICT_FIFO);
+   vsequencer.{{ rx }}_sequencer.set_arbitration(UVM_SEQ_ARB_STRICT_FIFO);
    if (!cfg.bypass_mode) begin
-      driver .{{ tx }}_driver.seq_item_port.connect(vsequencer.{{ tx }}_phy_sequencer.seq_item_export);
-      driver .{{ rx }}_driver.seq_item_port.connect(vsequencer.{{ rx }}_phy_sequencer.seq_item_export);
+      driver .{{ tx }}_driver.seq_item_port.connect(vsequencer.{{ tx }}_sequencer.seq_item_export);
+      driver .{{ rx }}_driver.seq_item_port.connect(vsequencer.{{ rx }}_sequencer.seq_item_export);
       monitor.{{ tx }}_ap.connect(vsequencer.{{ tx }}_phy_mon_trn_export);
       monitor.{{ rx }}_ap.connect(vsequencer.{{ rx }}_phy_mon_trn_export);
    end

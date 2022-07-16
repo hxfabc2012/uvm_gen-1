@@ -33,7 +33,7 @@ class uvma_{{ name }}_cov_model_c extends uvm_component;
    uvma_{{ name }}_{{ rx }}_mon_trn_c   {{ rx }}_phy_mon_trn  ; ///<
 {% endif %}   /// @}
 
-   /// @defgroup TLM
+   /// @defgroup TLM FIFOs
    /// @{
    uvm_tlm_analysis_fifo #(uvma_{{ name }}_seq_item_c   )  seq_item_fifo    ; ///<
    uvm_tlm_analysis_fifo #(uvma_{{ name }}_mon_trn_c    )  {{ tx }}_mon_trn_fifo  ; ///<
@@ -46,6 +46,21 @@ class uvma_{{ name }}_cov_model_c extends uvm_component;
    uvm_tlm_analysis_fifo #(uvma_{{ name }}_{{ rx }}_seq_item_c)  {{ rx }}_phy_seq_item_fifo ; ///<
    uvm_tlm_analysis_fifo #(uvma_{{ name }}_{{ tx }}_mon_trn_c )  {{ tx }}_phy_mon_trn_fifo  ; ///<
    uvm_tlm_analysis_fifo #(uvma_{{ name }}_{{ rx }}_mon_trn_c )  {{ rx }}_phy_mon_trn_fifo  ; ///<
+{% endif %}   /// @}
+
+   /// @defgroup TLM Exports
+   /// @{
+   uvm_analysis_export #(uvma_{{ name }}_seq_item_c)  seq_item_export   ; ///<
+   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_mon_trn_export ; ///< TODO Rename this
+   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_mon_trn_export ; ///< TODO Rename this
+{% if symmetric %}   uvm_analysis_export #(uvma_{{ name }}_phy_seq_item_c)  {{ tx }}_phy_seq_item_export; ///<
+   uvm_analysis_export #(uvma_{{ name }}_phy_seq_item_c)  {{ rx }}_phy_seq_item_export; ///<
+   uvm_analysis_export #(uvma_{{ name }}_phy_mon_trn_c )  {{ tx }}_phy_mon_trn_export ; ///<
+   uvm_analysis_export #(uvma_{{ name }}_phy_mon_trn_c )  {{ rx }}_phy_mon_trn_export ; ///<
+{% else %}   uvm_analysis_export #(uvma_{{ name }}_{{ tx }}_seq_item_c)  {{ tx }}_phy_seq_item_export; ///<
+   uvm_analysis_export #(uvma_{{ name }}_{{ rx }}_seq_item_c)  {{ rx }}_phy_seq_item_export; ///<
+   uvm_analysis_export #(uvma_{{ name }}_{{ tx }}_mon_trn_c )  {{ tx }}_phy_mon_trn_export ; ///<
+   uvm_analysis_export #(uvma_{{ name }}_{{ rx }}_mon_trn_c )  {{ rx }}_phy_mon_trn_export ; ///<
 {% endif %}   /// @}
 
 
@@ -67,6 +82,11 @@ class uvma_{{ name }}_cov_model_c extends uvm_component;
    extern virtual function void build_phase(uvm_phase phase);
 
    /**
+    * TODO Describe uvma_{{ name }}_cov_model_c::connect_phase()
+    */
+   extern virtual function void connect_phase(uvm_phase phase);
+
+   /**
     * Forks all sampling loops
     */
    extern virtual task run_phase(uvm_phase phase);
@@ -85,6 +105,11 @@ class uvma_{{ name }}_cov_model_c extends uvm_component;
     *
     */
    extern function void create_tlm_objects();
+
+   /**
+    *
+    */
+   extern function void connect_fifos();
 
    /**
     * TODO Describe uvma_{{ name }}_cov_model_c::sample_cfg()
@@ -149,6 +174,14 @@ function void uvma_{{ name }}_cov_model_c::build_phase(uvm_phase phase);
    create_tlm_objects();
 
 endfunction : build_phase
+
+
+function void uvma_{{ name }}_cov_model_c::connect_phase(uvm_phase phase);
+
+   super.connect_phase(phase);
+   connect_fifos();
+
+endfunction : connect_phase
 
 
 task uvma_{{ name }}_cov_model_c::run_phase(uvm_phase phase);
@@ -229,6 +262,19 @@ function void uvma_{{ name }}_cov_model_c::create_tlm_objects();
    {{ rx }}_phy_mon_trn_fifo  = new("{{ rx }}_phy_mon_trn_fifo" , this);
 
 endfunction : create_tlm_objects
+
+
+function void uvma_{{ name }}_cov_model_c::connect_fifos();
+
+   seq_item_export = seq_item_fifo.analysis_export;
+   {{ tx }}_mon_trn_export      = {{ tx }}_mon_trn_fifo     .analysis_export;
+   {{ rx }}_mon_trn_export      = {{ rx }}_mon_trn_fifo     .analysis_export;
+   {{ tx }}_phy_seq_item_export = {{ tx }}_phy_seq_item_fifo.analysis_export;
+   {{ rx }}_phy_seq_item_export = {{ rx }}_phy_seq_item_fifo.analysis_export;
+   {{ tx }}_phy_mon_trn_export  = {{ tx }}_phy_mon_trn_fifo .analysis_export;
+   {{ rx }}_phy_mon_trn_export  = {{ rx }}_phy_mon_trn_fifo .analysis_export;
+
+endfunction : connect_fifos
 
 
 function void uvma_{{ name }}_cov_model_c::sample_cfg();

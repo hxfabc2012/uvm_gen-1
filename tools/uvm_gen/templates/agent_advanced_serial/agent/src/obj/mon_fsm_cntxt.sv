@@ -15,9 +15,10 @@ class uvma_{{ name }}_mon_fsm_cntxt_c extends uvm_object;
    /// @defgroup Integrals
    /// @{
    uvma_{{ name }}_mon_fsm_enum  state; ///<
-   int unsigned  training_count; ///<
-   realtime      trn_start     ; ///<
-   realtime      trn_end       ; ///<
+   int unsigned  training_count       ; ///<
+   int unsigned  num_consecutive_edges; ///<
+   realtime      trn_start            ; ///<
+   realtime      trn_end              ; ///<
    /// @}
 
    /// @defgroup Data
@@ -30,7 +31,8 @@ class uvma_{{ name }}_mon_fsm_cntxt_c extends uvm_object;
 
    `uvm_object_utils_begin(uvma_{{ name }}_mon_fsm_cntxt_c)
       `uvm_field_enum(uvma_{{ name }}_mon_fsm_enum, state, UVM_DEFAULT)
-      `uvm_field_int(training_count, UVM_DEFAULT + UVM_DEC)
+      `uvm_field_int(training_count       , UVM_DEFAULT + UVM_DEC)
+      `uvm_field_int(num_consecutive_edges, UVM_DEFAULT + UVM_DEC)
       `uvm_field_real(trn_start    , UVM_DEFAULT)
       `uvm_field_real(trn_end      , UVM_DEFAULT)
       `uvm_field_queue_int(data_q  , UVM_DEFAULT)
@@ -60,10 +62,11 @@ endfunction : new
 
 function void uvma_{{ name }}_mon_fsm_cntxt_c::reset();
 
-   state          = UVMA_{{ name.upper() }}_MON_FSM_INIT;
-   training_count = 0;
-   trn_start      = 0;
-   trn_end        = 0;
+   state                 = UVMA_{{ name.upper() }}_MON_FSM_INIT;
+   training_count        = 0;
+   num_consecutive_edges = 0;
+   trn_start             = 0;
+   trn_end               = 0;
    data_q      .delete();
    timestamps_q.delete();
    trn_data = new[32];

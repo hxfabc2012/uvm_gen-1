@@ -8,8 +8,9 @@
 
 
 const int unsigned              uvma_{{ name }}_training_length =            64; ///<
+const int unsigned              uvma_{{ name }}_syncing_length  =            32; ///<
 const int unsigned              uvma_{{ name }}_trn_length      =    32 + 2 + 2; ///<
-const uvma_{{ name }}_sync_b_t  uvma_{{ name }}_tail_symbol     =         2'b11; ///<
+const uvma_{{ name }}_tail_b_t  uvma_{{ name }}_tail_symbol     =         2'b11; ///<
 const uvma_{{ name }}_data_b_t  uvma_{{ name }}_idle_data       = 32'h0707_0707; ///<
 
 

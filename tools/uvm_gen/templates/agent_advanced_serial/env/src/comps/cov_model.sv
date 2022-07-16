@@ -202,8 +202,8 @@ endfunction : sample_seq_item
 
 function void uvme_{{ name }}_st_cov_model_c::sample_{{ tx }}_mon_trn();
 
-   `uvm_info("UVME_{{ name.upper() }}_ST_COV_MODEL", $sformatf("Sampling {{ tx.upper() }} Monitor Transaction:\n%s", tx_mon_trn.sprint()), UVM_HIGH)
-   {{ name }}_st_tx_mon_trn_cg.sample();
+   `uvm_info("UVME_{{ name.upper() }}_ST_COV_MODEL", $sformatf("Sampling {{ tx.upper() }} Monitor Transaction:\n%s", {{ tx }}_mon_trn.sprint()), UVM_HIGH)
+   {{ name }}_st_{{ tx }}_mon_trn_cg.sample();
 
 endfunction : sample_{{ tx }}_mon_trn
 

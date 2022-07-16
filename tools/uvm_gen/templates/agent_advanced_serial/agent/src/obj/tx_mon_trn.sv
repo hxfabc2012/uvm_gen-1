@@ -16,14 +16,14 @@ class uvma_{{ name }}_{{ tx }}_mon_trn_c extends uvml_mon_trn_c;
 
    /// @defgroup Data
    /// @{
-   logic  txp; ///< TODO Describe uvma_{{ name }}_{{ tx }}_mon_trn_c::txd
-   logic  txn; ///< TODO Describe uvma_{{ name }}_{{ tx }}_mon_trn_c::txd
+   logic  {{ tx }}p; ///< TODO Describe uvma_{{ name }}_{{ tx }}_mon_trn_c::{{ tx }}p
+   logic  {{ tx }}n; ///< TODO Describe uvma_{{ name }}_{{ tx }}_mon_trn_c::{{ tx }}n
    /// @}
 
 
    `uvm_object_utils_begin(uvma_{{ name }}_{{ tx }}_mon_trn_c)
-      `uvm_field_int(txp, UVM_DEFAULT)
-      `uvm_field_int(txn, UVM_DEFAULT)
+      `uvm_field_int({{ tx }}p, UVM_DEFAULT)
+      `uvm_field_int({{ tx }}n, UVM_DEFAULT)
    `uvm_object_utils_end
 
 
@@ -49,23 +49,23 @@ endfunction : new
 
 function uvml_metadata_t uvma_{{ name }}_{{ tx }}_mon_trn_c::get_metadata();
 
-   string txp_str = $sformatf("%h", txp);
-   string txn_str = $sformatf("%h", txn);
+   string {{ tx }}p_str = $sformatf("%h", {{ tx }}p);
+   string {{ tx }}n_str = $sformatf("%h", {{ tx }}n);
 
    get_metadata.push_back('{
       index     : 0,
-      value     : txp_str,
-      col_name  : "txp",
-      col_width : txp_str.len(),
+      value     : {{ tx }}p_str,
+      col_name  : "{{ tx }}p",
+      col_width : {{ tx }}p_str.len(),
       col_align : UVML_TEXT_ALIGN_RIGHT,
       data_type : UVML_FIELD_INT
    });
 
    get_metadata.push_back('{
       index     : 0,
-      value     : txn_str,
-      col_name  : "txn",
-      col_width : txn_str.len(),
+      value     : {{ tx }}n_str,
+      col_name  : "{{ tx }}n",
+      col_width : {{ tx }}n_str.len(),
       col_align : UVML_TEXT_ALIGN_RIGHT,
       data_type : UVML_FIELD_INT
    });

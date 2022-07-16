@@ -32,19 +32,19 @@ interface uvma_{{ name }}_if (
 
 
    /**
-    * Used by DUT {{ tx.upper() }}.
+    * Used by {{ mode_1.upper() }} DUT {{ tx.upper() }}.
     */
-   {% if ddr %}clocking dut_{{ tx }}_cb @({{ tx }}_clk);
-   {% else %}clocking dut_{{ tx }}_cb @(posedge {{ tx }}_clk);{% endif %}
+   {% if ddr %}clocking dut_{{ mode_1 }}_{{ tx }}_cb @({{ tx }}_clk);
+   {% else %}clocking dut_{{ mode_1 }}_{{ tx }}_cb @(posedge {{ tx }}_clk);{% endif %}
       output  {{ tx }}p,
               {{ tx }}n;
-   endclocking : dut_{{ tx }}_cb
+   endclocking : dut_{{ mode_1 }}_{{ tx }}_cb
 
    /**
-    * Used by DUT {{ rx.upper() }}.
+    * Used by {{ mode_1.upper() }} DUT {{ rx.upper() }}.
     */
-   {% if ddr %}clocking dut_{{ rx }}_cb @({{ rx }}_clk);
-   {% else %}clocking dut_{{ rx }}_cb @(posedge {{ rx }}_clk);{% endif %}
+   {% if ddr %}clocking dut_{{ mode_1 }}_{{ rx }}_cb @({{ rx }}_clk);
+   {% else %}clocking dut_{{ mode_1 }}_{{ rx }}_cb @(posedge {{ rx }}_clk);{% endif %}
 {% if symmetric %}      input  {{ rx }}p,
              {{ rx }}n;
 {% else %}      input  {{ rx }}0p,
@@ -52,7 +52,30 @@ interface uvma_{{ name }}_if (
              {{ rx }}1p,
              {{ rx }}1n;
 {% endif %}
-   endclocking : dut_{{ rx }}_cb
+   endclocking : dut_{{ mode_1 }}_{{ rx }}_cb
+
+   /**
+    * Used by {{ mode_2.upper() }} DUT {{ tx.upper() }}.
+    */
+   {% if ddr %}clocking dut_{{ mode_2 }}_{{ tx }}_cb @({{ tx }}_clk);
+   {% else %}clocking dut_{{ mode_2 }}_{{ tx }}_cb @(posedge {{ tx }}_clk);{% endif %}
+      input  {{ tx }}p,
+             {{ tx }}n;
+   endclocking : dut_{{ mode_2 }}_{{ tx }}_cb
+
+   /**
+    * Used by {{ mode_2.upper() }} DUT {{ rx.upper() }}.
+    */
+   {% if ddr %}clocking dut_{{ mode_2 }}_{{ rx }}_cb @({{ rx }}_clk);
+   {% else %}clocking dut_{{ mode_2 }}_{{ rx }}_cb @(posedge {{ rx }}_clk);{% endif %}
+{% if symmetric %}      output  {{ rx }}p,
+              {{ rx }}n;
+{% else %}      output  {{ rx }}0p,
+              {{ rx }}0n,
+              {{ rx }}1p,
+              {{ rx }}1n;
+{% endif %}
+   endclocking : dut_{{ mode_2 }}_{{ rx }}_cb
 
    /**
     * Used by uvma_{{ name }}_drv_{{ tx }}_c.
@@ -68,8 +91,10 @@ interface uvma_{{ name }}_if (
     */
    {% if ddr %}clocking drv_{{ rx }}_cb @({{ rx }}_clk);
    {% else %}clocking drv_{{ rx }}_cb @(posedge {{ rx }}_clk);{% endif %}
-      output  {{ tx }}p,
-              {{ tx }}n;
+      output {{ rx }}0p,
+             {{ rx }}0n,
+             {{ rx }}1p,
+             {{ rx }}1n;
    endclocking : drv_{{ rx }}_cb
 
    /**
@@ -97,19 +122,37 @@ interface uvma_{{ name }}_if (
 
 
    /**
-    * Used by  DUT {{ tx.upper() }}.
+    * Used by {{ mode_1.upper() }} DUT {{ tx.upper() }}.
     */
-   modport dut_{{ tx }}_mp (
-      clocking dut_{{ tx }}_cb,{% if ddr %}
+   modport dut_{{ mode_1 }}_{{ tx }}_mp (
+      clocking dut_{{ mode_1 }}_{{ tx }}_cb,{% if ddr %}
       input    {{ tx }}_clk ,{% endif %}
       input    reset_n
    );
 
    /**
-    * Used by DUT {{ rx.upper() }}.
+    * Used by {{ mode_1.upper() }} DUT {{ rx.upper() }}.
     */
-   modport dut_{{ rx }}_mp (
-      clocking dut_{{ rx }}_cb,{% if ddr %}
+   modport dut_{{ mode_1 }}_{{ rx }}_mp (
+      clocking dut_{{ mode_1 }}_{{ rx }}_cb,{% if ddr %}
+      input    {{ rx }}_clk ,{% endif %}
+      input    reset_n
+   );
+
+   /**
+    * Used by {{ mode_2.upper() }} DUT {{ tx.upper() }}.
+    */
+   modport dut_{{ mode_2 }}_{{ tx }}_mp (
+      clocking dut_{{ mode_2 }}_{{ tx }}_cb,{% if ddr %}
+      input    {{ tx }}_clk ,{% endif %}
+      input    reset_n
+   );
+
+   /**
+    * Used by {{ mode_2.upper() }} DUT {{ rx.upper() }}.
+    */
+   modport dut_{{ mode_2 }}_{{ rx }}_mp (
+      clocking dut_{{ mode_2 }}_{{ rx }}_cb,{% if ddr %}
       input    {{ rx }}_clk ,{% endif %}
       input    reset_n
    );

@@ -137,10 +137,9 @@ endtask : reset_trigger
 
 function void uvma_{{ name }}_{{ tx }}_drv_vseq_c::process_seq_item(ref uvma_{{ name }}_seq_item_c seq_item);
 
-   seq_item.cfg       = cfg;
-   seq_item.direction = UVMA_{{ name.upper() }}_DIRECTION_{{ tx.upper() }};
+   seq_item.cfg = cfg;
    `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", $sformatf("Processed seq_item:\n%s", seq_item.sprint()), UVM_DEBUG)
-   if (!seq_item.is_idle) begin
+   if (seq_item.header == UVMA_{{ name.upper() }}_HEADER_DATA) begin
       `uvml_hrtbt_owner(p_sequencer)
    end
 
@@ -157,7 +156,7 @@ task uvma_{{ name }}_{{ tx }}_drv_vseq_c::drive(ref uvma_{{ name }}_seq_item_c s
    num_seq_item_bits = seq_item.pack(seq_item_bits);
    `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", $sformatf("Driving %0d bits of serial data", num_seq_item_bits), UVM_DEBUG)
    for (int ii=num_seq_item_bits-1; ii>=0; ii--) begin
-      `uvm_create_on(req, p_sequencer.{{ tx }}_serial_sequencer)
+      `uvm_create_on(req, p_sequencer.{{ tx }}_sequencer)
       `uvm_rand_send_pri_with(req, `UVMA_{{ name.upper() }}_{{ tx.upper() }}_DRV_SEQ_ITEM_PRI, {
          {{ tx }}p == seq_item_bits[ii];
       })

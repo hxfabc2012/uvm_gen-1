@@ -34,7 +34,7 @@ dependencies:
 #  - { name: "uvme_{{ name }}_st", version: "^" }
 
 hdl-src:
-  top-constructs: ["uvmt_{{ name }}_st_tb", "uvml_logs_sim_summary"]
+  top-constructs: ["uvmt_{{ name }}_st_tb", "uvml_sim_summary"]
   directories: [".", "tb", "tests"]
   test-paths: ["tests"]
   test-name-template: "uvmt_{{ name }}_st_{{ name }}_test_c"
