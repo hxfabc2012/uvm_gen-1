@@ -198,27 +198,27 @@ task uvma_{{ name }}_cov_model_c::run_phase(uvm_phase phase);
 endtask : run_phase
 
 
-function void uvme_{{ name }}_cov_model_c::get_cfg();
+function void uvma_{{ name }}_cov_model_c::get_cfg();
 
-   void'(uvm_config_db#(uvme_{{ name }}_st_cfg_c)::get(this, "", "cfg", cfg));
+   void'(uvm_config_db#(uvma_{{ name }}_cfg_c)::get(this, "", "cfg", cfg));
    if (cfg == null) begin
-      `uvm_fatal("{{ name.upper() }}_ST_ENV", "Configuration handle is null")
+      `uvm_fatal("{{ name.upper() }}_COV_MODEL", "Configuration handle is null")
    end
 
 endfunction : get_cfg
 
 
-function void uvme_{{ name }}_cov_model_c::get_cntxt();
+function void uvma_{{ name }}_cov_model_c::get_cntxt();
 
-   void'(uvm_config_db#(uvme_{{ name }}_st_cntxt_c)::get(this, "", "cntxt", cntxt));
+   void'(uvm_config_db#(uvma_{{ name }}_cntxt_c)::get(this, "", "cntxt", cntxt));
    if (cntxt == null) begin
-      `uvm_fatal("{{ name.upper() }}_ST_ENV", "Context handle is null")
+      `uvm_fatal("{{ name.upper() }}_COV_MODEL", "Context handle is null")
    end
 
 endfunction : get_cntxt
 
 
-function void uvme_{{ name }}_cov_model_c::create_tlm_objects();
+function void uvma_{{ name }}_cov_model_c::create_tlm_objects();
 
    seq_item_fifo = new("seq_item_fifo", this);
    {{ tx }}_mon_trn_fifo      = new("{{ tx }}_mon_trn_fifo"     , this);

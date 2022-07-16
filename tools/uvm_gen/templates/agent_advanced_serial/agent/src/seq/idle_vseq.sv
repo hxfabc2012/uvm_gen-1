@@ -51,9 +51,9 @@ task uvma_{{ name }}_idle_vseq_c::idle_loop();
 
    uvma_{{ name }}_seq_item_c  idle_seq_item;
 
-   forever begi
+   forever begin
       `uvm_create_on(idle_seq_item, p_sequencer)
-      idle_seq_item.sync = UVMA_{{ name.upper() }}_SYNC_IDLE;
+      idle_seq_item.header = UVMA_{{ name.upper() }}_HEADER_IDLE;
       `uvm_send_pri(idle_seq_item, `UVMA_{{ name.upper() }}_IDLE_SEQ_ITEM_PRI)
    end
 

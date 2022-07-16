@@ -42,8 +42,8 @@ class uvma_{{ name }}_cntxt_c extends uvm_object;
    `uvm_object_utils_begin(uvma_{{ name }}_cntxt_c)
       `uvm_field_enum(uvml_reset_state_enum, reset_state, UVM_DEFAULT)
 
-      `uvm_field_object(mon_fsm_{{ tx }}_cntxt, UVM_DEFAULT)
-      `uvm_field_object(mon_fsm_{{ rx }}_cntxt, UVM_DEFAULT)
+      `uvm_field_object({{ tx }}_mon_fsm_cntxt, UVM_DEFAULT)
+      `uvm_field_object({{ rx }}_mon_fsm_cntxt, UVM_DEFAULT)
 
       `uvm_field_event(sample_cfg_e  , UVM_DEFAULT)
       `uvm_field_event(sample_cntxt_e, UVM_DEFAULT)
@@ -77,8 +77,8 @@ endfunction : new
 
 function void uvma_{{ name }}_cntxt_c::reset();
 
-   mon_fsm_{{ tx }}_cntxt.reset();
-   mon_fsm_{{ rx }}_cntxt.reset();
+   {{ tx }}_mon_fsm_cntxt.reset();
+   {{ rx }}_mon_fsm_cntxt.reset();
 
 endfunction : reset
 

@@ -131,6 +131,7 @@ env_files = {
     "agent_advanced_serial/env/src/comps/cov_model.sv"            : "uvme_{{ name }}_st/src/comps/uvme_{{ name }}_st_cov_model.sv",
     "agent_advanced_serial/env/src/comps/env.sv"                  : "uvme_{{ name }}_st/src/comps/uvme_{{ name }}_st_env.sv",
     "agent_advanced_serial/env/src/comps/prd.sv"                  : "uvme_{{ name }}_st/src/comps/uvme_{{ name }}_st_prd.sv",
+    "agent_advanced_serial/env/src/comps/sb.sv"                   : "uvme_{{ name }}_st/src/comps/uvme_{{ name }}_st_sb.sv",
     "agent_advanced_serial/env/src/comps/vsqr.sv"                 : "uvme_{{ name }}_st/src/comps/uvme_{{ name }}_st_vsqr.sv",
     "agent_advanced_serial/env/src/obj/cfg.sv"                    : "uvme_{{ name }}_st/src/obj/uvme_{{ name }}_st_cfg.sv",
     "agent_advanced_serial/env/src/obj/cntxt.sv"                  : "uvme_{{ name }}_st/src/obj/uvme_{{ name }}_st_cntxt.sv",

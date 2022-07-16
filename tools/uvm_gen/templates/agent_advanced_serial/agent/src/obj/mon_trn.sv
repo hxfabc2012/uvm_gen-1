@@ -116,7 +116,7 @@ function bit uvma_{{ name }}_mon_trn_c::self_check();
    if (header == UVMA_{{ name.upper() }}_HEADER_IDLE) begin
       if (data !== uvma_{{ name }}_idle_data) begin
          `uvm_error("{{ name.upper() }}_MON_TRN", $sformatf("Invalid IDLE data: %b", data))
-         sself_check = 0;
+         self_check = 0;
       end
    end
    if (tail !== uvma_{{ name }}_tail_symbol) begin

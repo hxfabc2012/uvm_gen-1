@@ -67,6 +67,31 @@ class uvma_{{ name }}_vsqr_c extends uvml_vsqr_c #(
     */
    extern virtual function void connect_phase(uvm_phase phase);
 
+   /**
+    * Uses uvm_config_db to retrieve cfg.
+    */
+   extern function void get_cfg();
+
+   /**
+    * Uses uvm_config_db to retrieve cntxt.
+    */
+   extern function void get_cntxt();
+
+   /**
+    *
+    */
+   extern function void create_components();
+
+   /**
+    *
+    */
+   extern function void create_ports();
+
+   /**
+    *
+    */
+   extern function void connect_fifos();
+
 endclass : uvma_{{ name }}_vsqr_c
 
 
@@ -80,7 +105,6 @@ endfunction : new
 function void uvma_{{ name }}_vsqr_c::build_phase(uvm_phase phase);
 
    super.build_phase(phase);
-
    get_cfg          ();
    get_cntxt        ();
    create_components();
@@ -92,7 +116,6 @@ endfunction : build_phase
 function void uvma_{{ name }}_vsqr_c::connect_phase(uvm_phase phase);
 
    super.connect_phase(phase);
-
    connect_fifos();
 
 endfunction : connect_phase

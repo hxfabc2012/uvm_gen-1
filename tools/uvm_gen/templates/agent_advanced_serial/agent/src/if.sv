@@ -3,8 +3,8 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-`ifndef __UVMA_{{ name.upper() }}_SV__
-`define __UVMA_{{ name.upper() }}_SV__
+`ifndef __UVMA_{{ name.upper() }}_IF_SV__
+`define __UVMA_{{ name.upper() }}_IF_SV__
 
 
 /**
@@ -32,58 +32,35 @@ interface uvma_{{ name }}_if (
 
 
    /**
-    * Used by {{ mode_1 }} DUT Tx.
+    * Used by DUT {{ tx.upper() }}.
     */
-   {% if ddr %}clocking dut_{{ mode_1 }}_{{ tx }}_cb @({{ tx }}_clk);
-   {% else %}clocking dut_{{ mode_1 }}_{{ tx }}_cb @(posedge {{ tx }}_clk);{% endif %}
-      output  txp,
-              txn;
-   endclocking : dut_{{ mode_1 }}_{{ tx }}_cb
+   {% if ddr %}clocking dut_{{ tx }}_cb @({{ tx }}_clk);
+   {% else %}clocking dut_{{ tx }}_cb @(posedge {{ tx }}_clk);{% endif %}
+      output  {{ tx }}p,
+              {{ tx }}n;
+   endclocking : dut_{{ tx }}_cb
 
    /**
-    * Used by {{ mode_1 }} DUT Rx.
+    * Used by DUT {{ rx.upper() }}.
     */
-   {% if ddr %}clocking dut_{{ mode_1 }}_{{ rx }}_cb @({{ rx }}_clk);
-   {% else %}clocking dut_{{ mode_1 }}_{{ rx }}_cb @(posedge {{ rx }}_clk);{% endif %}
-{% if symmetric %}      input  rxp,
-             rxn;
-{% else %}      input  rx0p,
-             rx0n,
-             rx1p,
-             rx1n;
+   {% if ddr %}clocking dut_{{ rx }}_cb @({{ rx }}_clk);
+   {% else %}clocking dut_{{ rx }}_cb @(posedge {{ rx }}_clk);{% endif %}
+{% if symmetric %}      input  {{ rx }}p,
+             {{ rx }}n;
+{% else %}      input  {{ rx }}0p,
+             {{ rx }}0n,
+             {{ rx }}1p,
+             {{ rx }}1n;
 {% endif %}
-   endclocking : dut_{{ mode_1 }}_{{ rx }}_cb
-
-   /**
-    * Used by {{ mode_2 }} DUT Tx.
-    */
-   {% if ddr %}clocking dut_{{ mode_2 }}_{{ tx }}_cb @({{ tx }}_clk);
-   {% else %}clocking dut_{{ mode_2 }}_{{ tx }}_cb @(posedge {{ tx }}_clk);{% endif %}
-      output  txp,
-              txn;
-   endclocking : dut_{{ mode_2 }}_{{ tx }}_cb
-
-   /**
-    * Used by {{ mode_2 }} DUT Rx.
-    */
-   {% if ddr %}clocking dut_{{ mode_2 }}_{{ rx }}_cb @({{ rx }}_clk);
-   {% else %}clocking dut_{{ mode_2 }}_{{ rx }}_cb @(posedge {{ rx }}_clk);{% endif %}
-{% if symmetric %}      input  rxp,
-             rxn;
-{% else %}      input  rx0p,
-             rx0n,
-             rx1p,
-             rx1n;
-{% endif %}
-   endclocking : dut_{{ mode_2 }}_{{ rx }}_cb
+   endclocking : dut_{{ rx }}_cb
 
    /**
     * Used by uvma_{{ name }}_drv_{{ tx }}_c.
     */
    {% if ddr %}clocking drv_{{ tx }}_cb @({{ tx }}_clk);
    {% else %}clocking drv_{{ tx }}_cb @(posedge {{ tx }}_clk);{% endif %}
-      output  txp,
-              txn;
+      output  {{ tx }}p,
+              {{ tx }}n;
    endclocking : drv_{{ tx }}_cb
 
    /**
@@ -91,89 +68,48 @@ interface uvma_{{ name }}_if (
     */
    {% if ddr %}clocking drv_{{ rx }}_cb @({{ rx }}_clk);
    {% else %}clocking drv_{{ rx }}_cb @(posedge {{ rx }}_clk);{% endif %}
-      output  txp,
-              txn;
+      output  {{ tx }}p,
+              {{ tx }}n;
    endclocking : drv_{{ rx }}_cb
 
    /**
-    * Used by uvma_{{ name }}_mon_c.
+    * Used by uvma_{{ name }}_mon_c {{ tx.upper() }}.
     */
-   {% if ddr %}clocking mon_{{ mode_1 }}_{{ tx }}_cb @({{ tx }}_clk);
-   {% else %}clocking mon_{{ mode_1 }}_{{ tx }}_cb @(posedge {{ tx }}_clk);{% endif %}
-      input  txp,
-             txn;
-   endclocking : mon_{{ mode_1 }}_{{ tx }}_cb
+   {% if ddr %}clocking mon_{{ tx }}_cb @({{ tx }}_clk);
+   {% else %}clocking mon_{{ tx }}_cb @(posedge {{ tx }}_clk);{% endif %}
+      input  {{ tx }}p,
+             {{ tx }}n;
+   endclocking : mon_{{ tx }}_cb
 
    /**
-    * Used by uvma_{{ name }}_mon_c.
+    * Used by uvma_{{ name }}_mon_c {{ rx.upper() }}.
     */
-   {% if ddr %}clocking mon_{{ mode_1 }}_{{ rx }}_cb @({{ rx }}_clk);
-   {% else %}clocking mon_{{ mode_1 }}_{{ rx }}_cb @(posedge {{ rx }}_clk);{% endif %}
-{% if symmetric %}      input  rxp,
-             rxn;
-{% else %}      input  rx0p,
-             rx0n,
-             rx1p,
-             rx1n;
+   {% if ddr %}clocking mon_{{ rx }}_cb @({{ rx }}_clk);
+   {% else %}clocking mon_{{ rx }}_cb @(posedge {{ rx }}_clk);{% endif %}
+{% if symmetric %}      input  {{ rx }}p,
+             {{ rx }}n;
+{% else %}      input  {{ rx }}0p,
+             {{ rx }}0n,
+             {{ rx }}1p,
+             {{ rx }}1n;
 {% endif %}
-   endclocking : mon_{{ mode_1 }}_{{ rx }}_cb
-
-   /**
-    * Used by uvma_{{ name }}_mon_c.
-    */
-   {% if ddr %}clocking mon_{{ mode_2 }}_{{ tx }}_cb @({{ tx }}_clk);
-   {% else %}clocking mon_{{ mode_2 }}_{{ tx }}_cb @(posedge {{ tx }}_clk);{% endif %}
-      input  txp,
-             txn;
-   endclocking : mon_{{ mode_2 }}_{{ tx }}_cb
-
-   /**
-    * Used by uvma_{{ name }}_mon_c.
-    */
-   {% if ddr %}clocking mon_{{ mode_2 }}_{{ rx }}_cb @({{ rx }}_clk);
-   {% else %}clocking mon_{{ mode_2 }}_{{ rx }}_cb @(posedge {{ rx }}_clk);{% endif %}
-{% if symmetric %}      input  rxp,
-             rxn;
-{% else %}      input  rx0p,
-             rx0n,
-             rx1p,
-             rx1n;
-{% endif %}
-   endclocking : mon_{{ mode_2 }}_{{ rx }}_cb
+   endclocking : mon_{{ rx }}_cb
 
 
    /**
-    * Used by {{ mode_1 }} DUT Tx.
+    * Used by  DUT {{ tx.upper() }}.
     */
-   modport dut_{{ mode_1 }}_mp (
-      clocking dut_{{ mode_1 }}_{{ tx }}_cb,{% if ddr %}
+   modport dut_{{ tx }}_mp (
+      clocking dut_{{ tx }}_cb,{% if ddr %}
       input    {{ tx }}_clk ,{% endif %}
       input    reset_n
    );
 
    /**
-    * Used by {{ mode_1 }} DUT Rx.
+    * Used by DUT {{ rx.upper() }}.
     */
-   modport dut_{{ mode_1 }}_mp (
-      clocking dut_{{ mode_1 }}_{{ rx }}_cb,{% if ddr %}
-      input    {{ rx }}_clk ,{% endif %}
-      input    reset_n
-   );
-
-   /**
-    * Used by {{ mode_2 }} DUT Tx.
-    */
-   modport dut_{{ mode_2 }}_mp (
-      clocking dut_{{ mode_2 }}_{{ tx }}_cb,{% if ddr %}
-      input    {{ tx }}_clk ,{% endif %}
-      input    reset_n
-   );
-
-   /**
-    * Used by {{ mode_2 }} DUT Rx.
-    */
-   modport dut_{{ mode_2 }}_mp (
-      clocking dut_{{ mode_2 }}_{{ rx }}_cb,{% if ddr %}
+   modport dut_{{ rx }}_mp (
+      clocking dut_{{ rx }}_cb,{% if ddr %}
       input    {{ rx }}_clk ,{% endif %}
       input    reset_n
    );
@@ -197,37 +133,19 @@ interface uvma_{{ name }}_if (
    );
 
    /**
-    * Used by uvma_{{ name }}_mon_c.
+    * Used by uvma_{{ name }}_mon_c {{ tx.upper() }}.
     */
-   modport mon_{{ mode_1 }}_{{ tx }}_mp (
-      clocking mon_{{ mode_1 }}_{{ tx }}_cb,{% if ddr %}
+   modport mon_{{ tx }}_mp (
+      clocking mon_{{ tx }}_cb,{% if ddr %}
       input    {{ tx }}_clk ,{% endif %}
       input    reset_n
    );
 
    /**
-    * Used by uvma_{{ name }}_mon_c.
+    * Used by uvma_{{ name }}_mon_c {{ rx.upper() }}.
     */
-   modport mon_{{ mode_1 }}_{{ rx }}_mp (
-      clocking mon_{{ mode_1 }}_{{ rx }}_cb,{% if ddr %}
-      input    {{ rx }}_clk ,{% endif %}
-      input    reset_n
-   );
-
-   /**
-    * Used by uvma_{{ name }}_mon_c.
-    */
-   modport mon_{{ mode_2 }}_{{ tx }}_mp (
-      clocking mon_{{ mode_2 }}_{{ tx }}_cb,{% if ddr %}
-      input    {{ tx }}_clk ,{% endif %}
-      input    reset_n
-   );
-
-   /**
-    * Used by uvma_{{ name }}_mon_c.
-    */
-   modport mon_{{ mode_2 }}_{{ rx }}_mp (
-      clocking mon_{{ mode_2 }}_{{ rx }}_cb,{% if ddr %}
+   modport mon_{{ rx }}_mp (
+      clocking mon_{{ rx }}_cb,{% if ddr %}
       input    {{ rx }}_clk ,{% endif %}
       input    reset_n
    );
@@ -235,4 +153,4 @@ interface uvma_{{ name }}_if (
 endinterface : uvma_{{ name }}_if
 
 
-`endif // __UVMA_{{ name.upper() }}_SV__
+`endif // __UVMA_{{ name.upper() }}_IF_SV__

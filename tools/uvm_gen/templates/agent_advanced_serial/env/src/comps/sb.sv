@@ -112,12 +112,12 @@ function void uvme_{{ name }}_st_sb_c::build_phase(uvm_phase phase);
 endfunction : build_phase
 
 
-function void uvme_{{ name }}_st_prd_c::connect_phase(uvm_phase phase);
+function void uvme_{{ name }}_st_sb_c::connect_phase(uvm_phase phase);
 
    super.connect_phase(phase);
    connect_ports();
 
-endfunction: connect_phase
+endfunction : connect_phase
 
 
 function void uvme_{{ name }}_st_sb_c::get_cfg();

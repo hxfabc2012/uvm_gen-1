@@ -1,8 +1,12 @@
 #! /bin/bash
 ########################################################################################################################
 ## Copyright 2022 Datum Technology Corporation
-## All rights reserved
+## All rights reserved.
 ########################################################################################################################
+
+
+shopt -s expand_aliases
+source ~/.bashrc
 
 
 # 0. Remove old code
@@ -13,11 +17,10 @@ cat ./tests/data/agent_advanced_serial.spec | ./src/new_agent_advanced_serial.py
 
 # 2. Simulate
 cd ../../sim
-./setup_project.py
-source ./setup_terminal.sh
-../tools/.imports/mio/src/__main__.py cmp  uvmt_bsb_st
-#../tools/.imports/mio/src/__main__.py cpel uvmt_bsb_st
-#../tools/.imports/mio/src/__main__.py sim  uvmt_bsb_st -t rand_stim -s 1
+#mio install uvmt_bsb_st -u admin -p Qc5SgRpk6cjsAjr
+mio cmp  uvmt_bsb_st
+#mio cpel uvmt_bsb_st
+#mio sim  uvmt_bsb_st -t rand_stim -s 1
 
 # 3. Gather sim results
-#../tools/.imports/mio/src/__main__.py results uvmt_bsb_st tb_st
+#mio results uvmt_bsb_st advanced_agent_serial

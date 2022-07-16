@@ -33,9 +33,8 @@ class uvma_{{ name }}_mon_fsm_cntxt_c extends uvm_object;
       `uvm_field_int(training_count, UVM_DEFAULT + UVM_DEC)
       `uvm_field_real(trn_start    , UVM_DEFAULT)
       `uvm_field_real(trn_end      , UVM_DEFAULT)
-      `uvm_field_queue_int (data_q      , UVM_DEFAULT)
-      `uvm_field_queue_real(timestamps_q, UVM_DEFAULT)
-      `uvm_field_array_int (trn_data    , UVM_DEFAULT)
+      `uvm_field_queue_int(data_q  , UVM_DEFAULT)
+      `uvm_field_array_int(trn_data, UVM_DEFAULT)
    `uvm_object_utils_end
 
 

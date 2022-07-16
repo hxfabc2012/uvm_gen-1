@@ -9,7 +9,7 @@
 
 // Pre-processor macros
 `include "uvm_macros.svh"
-`include "uvml_macros.sv"
+`include "uvml_macros.svh"
 `include "uvml_logs_macros.svh"
 `include "uvml_sb_macros.svh"
 `include "uvma_{{ name }}_macros.svh"

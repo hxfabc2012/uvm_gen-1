@@ -32,7 +32,7 @@ dependencies:
   - { name: "uvml_logs", version: "~1.0" }
   - { name: "uvml_sb"  , version: "~1.0" }
   - { name: "uvml_ral" , version: "~1.0" }
-  - { name: "uvma_{{ name }}" , version: "~1.0" }
+#  - { name: "uvma_{{ name }}" , version: "^" }
 
 hdl-src:
   directories: [".", "comps", "obj", "seq"]

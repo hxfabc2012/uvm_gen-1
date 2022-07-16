@@ -155,15 +155,15 @@ endclass : uvme_{{ name }}_st_cov_model_c
 function uvme_{{ name }}_st_cov_model_c::new(string name="uvme_{{ name }}_st_cov_model", uvm_component parent=null);
 
    super.new(name, parent);
-   {{ name }}_st_cfg_cg             = new();
-   {{ name }}_st_cntxt_cg           = new();
-   {{ name }}_st_seq_item_cg        = new();
-   {{ name }}_st_tx_mon_trn_cg      = new();
-   {{ name }}_st_rx_mon_trn_cg      = new();
-   {{ name }}_st_tx_phy_seq_item_cg = new();
-   {{ name }}_st_rx_phy_seq_item_cg = new();
-   {{ name }}_st_tx_phy_mon_trn_cg  = new();
-   {{ name }}_st_rx_phy_mon_trn_cg  = new();
+   {{ name }}_st_cfg_cg      = new();
+   {{ name }}_st_cntxt_cg    = new();
+   {{ name }}_st_seq_item_cg = new();
+   {{ name }}_st_{{ tx }}_mon_trn_cg      = new();
+   {{ name }}_st_{{ rx }}_mon_trn_cg      = new();
+   {{ name }}_st_{{ tx }}_phy_seq_item_cg = new();
+   {{ name }}_st_{{ rx }}_phy_seq_item_cg = new();
+   {{ name }}_st_{{ tx }}_phy_mon_trn_cg  = new();
+   {{ name }}_st_{{ rx }}_phy_mon_trn_cg  = new();
 
 endfunction : new
 

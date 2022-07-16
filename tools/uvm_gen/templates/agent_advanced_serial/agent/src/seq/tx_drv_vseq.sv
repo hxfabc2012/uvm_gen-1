@@ -100,7 +100,7 @@ endtask : wait_for_reset
 
 task uvma_{{ name }}_{{ tx }}_drv_vseq_c::post_reset_init();
 
-   rand uvma_{{ name }}_training_vseq_c  training_vseq;
+   uvma_{{ name }}_training_vseq_c  training_vseq;
    `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", {"Starting training sequence:\n", training_vseq.sprint()}, UVM_HIGH)
    `uvm_do_on(training_vseq, p_sequencer)
    `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", {"Finished training sequence:\n", training_vseq.sprint()}, UVM_HIGH)

@@ -23,8 +23,8 @@ class uvmt_{{ name }}_st_rand_stim_test_c extends uvmt_{{ name }}_st_base_test_c
     */
    constraint rand_stim_vseq_cons {
       if (test_cfg.cli_num_seq_items_override) {
-         rand_stim_vseq.num_{{ tx }}_seq_items == cli_num_seq_items_parsed;
-         rand_stim_vseq.num_{{ rx }}_seq_items == cli_num_seq_items_parsed;
+         rand_stim_vseq.num_{{ tx }}_seq_items == test_cfg.cli_num_seq_items_parsed;
+         rand_stim_vseq.num_{{ rx }}_seq_items == test_cfg.cli_num_seq_items_parsed;
       }
    }
 

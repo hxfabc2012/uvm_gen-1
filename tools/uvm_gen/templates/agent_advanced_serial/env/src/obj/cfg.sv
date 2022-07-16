@@ -17,6 +17,7 @@ class uvme_{{ name }}_st_cfg_c extends uvml_cfg_c;
    rand bit                      enabled              ; ///<
    rand uvm_active_passive_enum  is_active            ; ///<
    rand uvml_reset_type_enum     reset_type           ; ///< TODO Describe uvme_{{ name }}_st_cfg_c::reset_type
+   rand bit                      big_endian           ; ///<
    rand bit                      scoreboarding_enabled; ///<
    rand bit                      cov_model_enabled    ; ///<
    rand bit                      trn_log_enabled      ; ///<
@@ -70,6 +71,7 @@ class uvme_{{ name }}_st_cfg_c extends uvml_cfg_c;
       {{ mode_1 }}_cfg.drv_mode == UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }};
       {{ mode_1 }}_cfg.bypass_mode == 0;
       {{ mode_1 }}_cfg.reset_type == reset_type;
+      {{ mode_1 }}_cfg.big_endian == big_endian;
       if (enabled) {
          {{ mode_1 }}_cfg.enabled == 1;
       }
@@ -103,6 +105,7 @@ class uvme_{{ name }}_st_cfg_c extends uvml_cfg_c;
       {{ mode_2 }}_cfg.drv_mode == UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }};
       {{ mode_2 }}_cfg.bypass_mode == 0;
       {{ mode_2 }}_cfg.reset_type == reset_type;
+      {{ mode_2 }}_cfg.big_endian == big_endian;
       if (enabled) {
          {{ mode_2 }}_cfg.enabled == 1;
       }
@@ -135,6 +138,7 @@ class uvme_{{ name }}_st_cfg_c extends uvml_cfg_c;
    constraint agent_passive_cfg_cons {
       passive_cfg.bypass_mode == 0;
       passive_cfg.reset_type  == reset_type;
+      passive_cfg.big_endian  == big_endian;
       passive_cfg.is_active   == UVM_PASSIVE;
       if (enabled) {
          passive_cfg.enabled == 1;

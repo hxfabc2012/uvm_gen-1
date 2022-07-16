@@ -61,6 +61,16 @@ class uvme_{{ name }}_st_env_c extends uvml_env_c;
    extern virtual function void connect_phase(uvm_phase phase);
 
    /**
+    * Uses uvm_config_db to retrieve cfg.
+    */
+   extern function void get_cfg();
+
+   /**
+    * Uses uvm_config_db to retrieve cntxt.
+    */
+   extern function void get_cntxt();
+
+   /**
     * Assigns configuration handles to components using UVM Configuration Database.
     */
    extern function void assign_cfg();
@@ -162,20 +172,20 @@ endfunction : get_cntxt
 
 function void uvme_{{ name }}_st_env_c::assign_cfg();
 
-   uvm_config_db#(uvme_{{ name }}_st_cfg_c )::set(this, "*", "cfg", cfg);
-   uvm_config_db#(uvma_{{ name }}_cfg_c    )::set(this, "{{ mode_1 }}_agent", "cfg", cfg.{{ mode_1 }}_cfg);
-   uvm_config_db#(uvma_{{ name }}_cfg_c    )::set(this, "{{ mode_2 }}_agent", "cfg", cfg.{{ mode_2 }}_cfg);
-   uvm_config_db#(uvma_{{ name }}_cfg_c    )::set(this, "passive_agent", "cfg", cfg.passive_cfg);
+   uvm_config_db#(uvme_{{ name }}_st_cfg_c)::set(this, "*", "cfg", cfg);
+   uvm_config_db#(uvma_{{ name }}_cfg_c   )::set(this, "{{ mode_1 }}_agent", "cfg", cfg.{{ mode_1 }}_cfg);
+   uvm_config_db#(uvma_{{ name }}_cfg_c   )::set(this, "{{ mode_2 }}_agent", "cfg", cfg.{{ mode_2 }}_cfg);
+   uvm_config_db#(uvma_{{ name }}_cfg_c   )::set(this, "passive_agent", "cfg", cfg.passive_cfg);
 
 endfunction: assign_cfg
 
 
 function void uvme_{{ name }}_st_env_c::assign_cntxt();
 
-   uvm_config_db#(uvme_{{ name }}_st_cntxt_c )::set(this, "*" "cntxt", cntxt);
-   uvm_config_db#(uvma_{{ name }}_cntxt_c    )::set(this, "{{ mode_1 }}_agent", "cntxt", cntxt.{{ mode_1 }}_cntxt);
-   uvm_config_db#(uvma_{{ name }}_cntxt_c    )::set(this, "{{ mode_2 }}_agent", "cntxt", cntxt.{{ mode_2 }}_cntxt);
-   uvm_config_db#(uvma_{{ name }}_cntxt_c    )::set(this, "passive_agent", "cntxt", cntxt.passive_cntxt);
+   uvm_config_db#(uvme_{{ name }}_st_cntxt_c)::set(this, "*", "cntxt", cntxt);
+   uvm_config_db#(uvma_{{ name }}_cntxt_c   )::set(this, "{{ mode_1 }}_agent", "cntxt", cntxt.{{ mode_1 }}_cntxt);
+   uvm_config_db#(uvma_{{ name }}_cntxt_c   )::set(this, "{{ mode_2 }}_agent", "cntxt", cntxt.{{ mode_2 }}_cntxt);
+   uvm_config_db#(uvma_{{ name }}_cntxt_c   )::set(this, "passive_agent", "cntxt", cntxt.passive_cntxt);
 
 endfunction: assign_cntxt
 
