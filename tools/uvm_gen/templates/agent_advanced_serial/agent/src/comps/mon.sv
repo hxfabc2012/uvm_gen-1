@@ -8,7 +8,8 @@
 
 
 /**
- * Component sampling transactions from an {{ full_name }} (uvma_{{ name }}_if).
+ * Monitor sampling Phy Monitor Transactions from {{ full_name }} Interface (uvma_{{ name }}_if).
+ * Also observes reset and updates the reset state in #cntxt.
  */
 class uvma_{{ name }}_mon_c extends uvml_mon_c;
 
@@ -20,16 +21,16 @@ class uvma_{{ name }}_mon_c extends uvml_mon_c;
 
    /// @defgroup Virtual Interface handles
    /// @{
-   virtual uvma_{{ name }}_if.mon_{{ tx }}_mp  {{ tx }}_mp; ///< Handle to {{ mode_1 }} TX modport
-   virtual uvma_{{ name }}_if.mon_{{ rx }}_mp  {{ rx }}_mp; ///< Handle to {{ mode_1 }} RX modport
+   virtual uvma_{{ name }}_if.mon_{{ tx }}_mp  {{ tx }}_mp; ///< Handle to {{ tx.upper() }} modport
+   virtual uvma_{{ name }}_if.mon_{{ rx }}_mp  {{ rx }}_mp; ///< Handle to {{ rx.upper() }} modport
    /// @}
 
    /// @defgroup TLM
    /// @{
-{% if symmetric %}   uvm_analysis_port #(uvma_{{ name }}_phy_mon_trn_c)  {{ tx }}_ap; ///< TODO Describe uvma_{{ name }}_mon_c::{{ tx }}_ap
-   uvm_analysis_port #(uvma_{{ name }}_phy_mon_trn_c)  {{ rx }}_ap; ///< TODO Describe uvma_{{ name }}_mon_c::{{ rx }}_ap
-{% else %}   uvm_analysis_port #(uvma_{{ name }}_{{ tx }}_mon_trn_c)  {{ tx }}_ap; ///< TODO Describe uvma_{{ name }}_mon_c::{{ tx }}_ap
-   uvm_analysis_port #(uvma_{{ name }}_{{ rx }}_mon_trn_c)  {{ rx }}_ap; ///< TODO Describe uvma_{{ name }}_mon_c::{{ rx }}_ap
+{% if symmetric %}   uvm_analysis_port #(uvma_{{ name }}_phy_mon_trn_c)  {{ tx }}_ap; ///< Port outputting {{ tx.upper() }} Phy Monitor transactions.
+   uvm_analysis_port #(uvma_{{ name }}_phy_mon_trn_c)  {{ rx }}_ap; ///< Port outputting {{ rx.upper() }} Phy Monitor transactions.
+{% else %}   uvm_analysis_port #(uvma_{{ name }}_{{ tx }}_mon_trn_c)  {{ tx }}_ap; ///< Port outputting {{ tx.upper() }} Phy Monitor transactions.
+   uvm_analysis_port #(uvma_{{ name }}_{{ rx }}_mon_trn_c)  {{ rx }}_ap; ///< Port outputting {{ rx.upper() }} Phy Monitor transactions.
 {% endif %}   /// @}
 
 
@@ -45,13 +46,14 @@ class uvma_{{ name }}_mon_c extends uvml_mon_c;
    extern function new(string name="uvma_{{ name }}_mon", uvm_component parent=null);
 
    /**
-    * 1. Ensures cfg & cntxt handles are not null.
-    * 2. Builds ap.
+    * 1. Ensures #cfg & #cntxt handles are not null.
+    * 2. Builds TLM Ports.
+    * 3. Retrieves modport handles from #cntxt.
     */
    extern virtual function void build_phase(uvm_phase phase);
 
    /**
-    * Oversees monitoring, depending on the reset state, by calling mon_<pre|in|post>_reset() tasks.
+    * Infinite loop sampling a Phy Monitor Transaction in each direction at each clock cycle.
     */
    extern virtual task run_phase(uvm_phase phase);
 
@@ -66,14 +68,14 @@ class uvma_{{ name }}_mon_c extends uvml_mon_c;
    extern function void get_cntxt();
 
    /**
-    *
+    * Creates #{{ tx }}_ap & #{{ rx }}_ap.
     */
-   extern function void retrieve_modports();
+   extern function void create_tlm_ports();
 
    /**
-    *
+    * Retrieves #{{ tx }}_mp & #{{ rx }}_mp from #cntxt.
     */
-   extern function void create_ports();
+   extern function void retrieve_modports();
 
    /**
     * Updates the context's reset state.
@@ -91,65 +93,65 @@ class uvma_{{ name }}_mon_c extends uvml_mon_c;
    extern task mon_reset_async();
 
    /**
-    *
+    * Infinite loop that monitors #{{ tx }}_mp during run_phase().
     */
    extern task mon_{{ tx }}();
 
    /**
-    *
+    * Infinite loop that monitors #{{ rx }}_mp during run_phase().
     */
    extern task mon_{{ rx }}();
 
    /**
-    * Called by run_phase() while agent is in pre-reset state.
+    * Waits out each {{ tx.upper() }} clock cycle before reset.
     */
    extern task mon_{{ tx }}_pre_reset();
 
    /**
-    * Called by run_phase() while agent is in pre-reset state.
+    * Waits out each {{ rx.upper() }} clock cycle before reset.
     */
    extern task mon_{{ rx }}_pre_reset();
 
    /**
-    * Called by run_phase() while agent is in reset state.
+    * Waits out each {{ tx.upper() }} clock cycle during reset.
     */
    extern task mon_{{ tx }}_in_reset();
 
    /**
-    * Called by run_phase() while agent is in reset state.
+    * Waits out each {{ rx.upper() }} clock cycle during reset.
     */
    extern task mon_{{ rx }}_in_reset();
 
    /**
-    * Called by run_phase() while agent is in post-reset state.
+    * Samples #{{ tx }}_mp after reset.
     */
    extern task mon_{{ tx }}_post_reset();
 
    /**
-    * Called by run_phase() while agent is in post-reset state.
+    * Samples #{{ rx }}_mp after reset.
     */
    extern task mon_{{ rx }}_post_reset();
 
    /**
-    * Creates trn by sampling the virtual interface's (cntxt.vif) signals.
+    * Creates {{ tx.upper() }} Phy Monitor Transaction by sampling #{{ tx }}_mp signals.
     */
 {% if symmetric %}   extern task sample_{{ tx }}_trn(output uvma_{{ name }}_phy_mon_trn_c trn);
 {% else %}   extern task sample_{{ tx }}_trn(output uvma_{{ name }}_{{ tx }}_mon_trn_c trn);
 {% endif %}
    /**
-    * Creates trn by sampling the virtual interface's (cntxt.vif) signals.
+    * Creates {{ rx.upper() }} Phy Monitor Transaction by sampling #{{ rx }}_mp signals.
     */
 {% if symmetric %}   extern task sample_{{ rx }}_trn(output uvma_{{ name }}_phy_mon_trn_c trn);
 {% else %}   extern task sample_{{ rx }}_trn(output uvma_{{ name }}_{{ rx }}_mon_trn_c trn);
 {% endif %}
    /**
-    * Appends cfg, prints out trn and issues heartbeat.
+    * Appends #cfg to #trn and prints it out.
     */
 {% if symmetric %}   extern function void process_{{ tx }}_trn(ref uvma_{{ name }}_phy_mon_trn_c trn);
 {% else %}   extern function void process_{{ tx }}_trn(ref uvma_{{ name }}_{{ tx }}_mon_trn_c trn);
 {% endif %}
    /**
-    * Appends cfg, prints out trn and issues heartbeat.
+    * Appends #cfg to #trn and prints it out.
     */
 {% if symmetric %}   extern function void process_{{ rx }}_trn(ref uvma_{{ name }}_phy_mon_trn_c trn);
 {% else %}   extern function void process_{{ rx }}_trn(ref uvma_{{ name }}_{{ rx }}_mon_trn_c trn);
@@ -169,8 +171,8 @@ function void uvma_{{ name }}_mon_c::build_phase(uvm_phase phase);
    super.build_phase(phase);
    get_cfg          ();
    get_cntxt        ();
+   create_tlm_ports ();
    retrieve_modports();
-   create_ports     ();
 
 endfunction : build_phase
 
@@ -209,20 +211,20 @@ function void uvma_{{ name }}_mon_c::get_cntxt();
 endfunction : get_cntxt
 
 
+function void uvma_{{ name }}_mon_c::create_tlm_ports();
+
+   {{ tx }}_ap = new("{{ tx }}_ap", this);
+   {{ rx }}_ap = new("{{ rx }}_ap", this);
+
+endfunction : create_tlm_ports
+
+
 function void uvma_{{ name }}_mon_c::retrieve_modports();
 
    {{ tx }}_mp = cntxt.vif.mon_{{ tx }}_mp;
    {{ rx }}_mp = cntxt.vif.mon_{{ rx }}_mp;
 
 endfunction : retrieve_modports
-
-
-function void uvma_{{ name }}_mon_c::create_ports();
-
-   {{ tx }}_ap = new("{{ tx }}_ap", this);
-   {{ rx }}_ap = new("{{ rx }}_ap", this);
-
-endfunction : create_ports
 
 
 task uvma_{{ name }}_mon_c::mon_reset();

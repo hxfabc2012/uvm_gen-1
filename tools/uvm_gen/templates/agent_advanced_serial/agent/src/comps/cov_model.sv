@@ -8,59 +8,59 @@
 
 
 /**
- * Component encapsulating {{ full_name }} functional coverage model.
+ * Abstract component providing a base for {{ full_name }} Agent functional coverage models.
  */
 class uvma_{{ name }}_cov_model_c extends uvm_component;
 
    /// @defgroup Objects
    /// @{
-   uvma_{{ name }}_cfg_c       cfg  ; ///<
-   uvma_{{ name }}_cntxt_c     cntxt; ///<
+   uvma_{{ name }}_cfg_c       cfg  ; ///< Agent configuration handle
+   uvma_{{ name }}_cntxt_c     cntxt; ///< Agent context handle
    /// @}
 
-   /// @defgroup Covergroup variables
+   /// @defgroup Covergroup Variables
    /// @{
-   uvma_{{ name }}_seq_item_c     seq_item    ; ///<
-   uvma_{{ name }}_mon_trn_c      {{ tx }}_mon_trn  ; ///<
-   uvma_{{ name }}_mon_trn_c      {{ rx }}_mon_trn  ; ///<
-{% if symmetric %}   uvma_{{ name }}_phy_seq_item_c  {{ tx }}_phy_seq_item ; ///<
-   uvma_{{ name }}_phy_seq_item_c  {{ rx }}_phy_seq_item ; ///<
-   uvma_{{ name }}_phy_mon_trn_c   {{ tx }}_phy_mon_trn  ; ///<
-   uvma_{{ name }}_phy_mon_trn_c   {{ rx }}_phy_mon_trn  ; ///<
-{% else %}   uvma_{{ name }}_{{ tx }}_seq_item_c  {{ tx }}_phy_seq_item ; ///<
-   uvma_{{ name }}_{{ rx }}_seq_item_c  {{ rx }}_phy_seq_item ; ///<
-   uvma_{{ name }}_{{ tx }}_mon_trn_c   {{ tx }}_phy_mon_trn  ; ///<
-   uvma_{{ name }}_{{ rx }}_mon_trn_c   {{ rx }}_phy_mon_trn  ; ///<
+   uvma_{{ name }}_seq_item_c     seq_item    ; ///< Sequence Item currently being sampled.
+   uvma_{{ name }}_mon_trn_c      {{ tx }}_mon_trn  ; ///< {{ tx.upper() }} Monitor Transaction currently being sampled.
+   uvma_{{ name }}_mon_trn_c      {{ rx }}_mon_trn  ; ///< {{ rx.upper() }} Monitor Transaction currently being sampled.
+{% if symmetric %}   uvma_{{ name }}_phy_seq_item_c  {{ tx }}_phy_seq_item ; ///< {{ tx.upper() }} Phy Sequence Item currently being sampled.
+   uvma_{{ name }}_phy_seq_item_c  {{ rx }}_phy_seq_item ; ///< {{ rx.upper() }} Phy Sequence Item currently being sampled.
+   uvma_{{ name }}_phy_mon_trn_c   {{ tx }}_phy_mon_trn  ; ///< {{ tx.upper() }} Phy Monitor Transaction currently being sampled.
+   uvma_{{ name }}_phy_mon_trn_c   {{ rx }}_phy_mon_trn  ; ///< {{ rx.upper() }} Phy Monitor Transaction currently being sampled.
+{% else %}   uvma_{{ name }}_{{ tx }}_seq_item_c  {{ tx }}_phy_seq_item ; ///< {{ tx.upper() }} Phy Sequence Item currently being sampled.
+   uvma_{{ name }}_{{ rx }}_seq_item_c  {{ rx }}_phy_seq_item ; ///< {{ rx.upper() }} Phy Sequence Item currently being sampled.
+   uvma_{{ name }}_{{ tx }}_mon_trn_c   {{ tx }}_phy_mon_trn  ; ///< {{ tx.upper() }} Phy Monitor Transaction currently being sampled.
+   uvma_{{ name }}_{{ rx }}_mon_trn_c   {{ rx }}_phy_mon_trn  ; ///< {{ rx.upper() }} Phy Monitor Transaction currently being sampled.
 {% endif %}   /// @}
 
    /// @defgroup TLM FIFOs
    /// @{
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_seq_item_c   )  seq_item_fifo    ; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_mon_trn_c    )  {{ tx }}_mon_trn_fifo  ; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_mon_trn_c    )  {{ rx }}_mon_trn_fifo  ; ///<
-{% if symmetric %}   uvm_tlm_analysis_fifo #(uvma_{{ name }}_phy_seq_item_c)  {{ tx }}_phy_seq_item_fifo ; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_phy_seq_item_c)  {{ rx }}_phy_seq_item_fifo ; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_phy_mon_trn_c )  {{ tx }}_phy_mon_trn_fifo  ; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_phy_mon_trn_c )  {{ rx }}_phy_mon_trn_fifo  ; ///<
-{% else %}   uvm_tlm_analysis_fifo #(uvma_{{ name }}_{{ tx }}_seq_item_c)  {{ tx }}_phy_seq_item_fifo ; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_{{ rx }}_seq_item_c)  {{ rx }}_phy_seq_item_fifo ; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_{{ tx }}_mon_trn_c )  {{ tx }}_phy_mon_trn_fifo  ; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_{{ rx }}_mon_trn_c )  {{ rx }}_phy_mon_trn_fifo  ; ///<
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_seq_item_c   )  seq_item_fifo    ; ///< FIFO of Sequence Items to be sampled.
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_mon_trn_c    )  {{ tx }}_mon_trn_fifo  ; ///< FIFO of {{ tx.upper() }} Monitor Transactions to be sampled.
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_mon_trn_c    )  {{ rx }}_mon_trn_fifo  ; ///< FIFO of {{ rx.upper() }} Monitor Transactions to be sampled.
+{% if symmetric %}   uvm_tlm_analysis_fifo #(uvma_{{ name }}_phy_seq_item_c)  {{ tx }}_phy_seq_item_fifo ; ///< FIFO of {{ tx.upper() }} Phy Sequence Items to be sampled.
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_phy_seq_item_c)  {{ rx }}_phy_seq_item_fifo ; ///< FIFO of {{ rx.upper() }} Phy Sequence Item to be sampled.
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_phy_mon_trn_c )  {{ tx }}_phy_mon_trn_fifo  ; ///< FIFO of {{ tx.upper() }} Phy Monitor Transactions to be sampled.
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_phy_mon_trn_c )  {{ rx }}_phy_mon_trn_fifo  ; ///< FIFO of {{ rx.upper() }} Phy Monitor Transactions to be sampled.
+{% else %}   uvm_tlm_analysis_fifo #(uvma_{{ name }}_{{ tx }}_seq_item_c)  {{ tx }}_phy_seq_item_fifo ; ///< FIFO of {{ tx.upper() }} Phy Sequence Items to be sampled.
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_{{ rx }}_seq_item_c)  {{ rx }}_phy_seq_item_fifo ; ///< FIFO of {{ rx.upper() }} Phy Sequence Item to be sampled.
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_{{ tx }}_mon_trn_c )  {{ tx }}_phy_mon_trn_fifo  ; ///< FIFO of {{ tx.upper() }} Phy Monitor Transactions to be sampled.
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_{{ rx }}_mon_trn_c )  {{ rx }}_phy_mon_trn_fifo  ; ///< FIFO of {{ rx.upper() }} Phy Monitor Transactions to be sampled.
 {% endif %}   /// @}
 
    /// @defgroup TLM Exports
    /// @{
-   uvm_analysis_export #(uvma_{{ name }}_seq_item_c)  seq_item_export   ; ///<
-   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_mon_trn_export ; ///< TODO Rename this
-   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_mon_trn_export ; ///< TODO Rename this
-{% if symmetric %}   uvm_analysis_export #(uvma_{{ name }}_phy_seq_item_c)  {{ tx }}_phy_seq_item_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_phy_seq_item_c)  {{ rx }}_phy_seq_item_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_phy_mon_trn_c )  {{ tx }}_phy_mon_trn_export ; ///<
-   uvm_analysis_export #(uvma_{{ name }}_phy_mon_trn_c )  {{ rx }}_phy_mon_trn_export ; ///<
-{% else %}   uvm_analysis_export #(uvma_{{ name }}_{{ tx }}_seq_item_c)  {{ tx }}_phy_seq_item_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_{{ rx }}_seq_item_c)  {{ rx }}_phy_seq_item_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_{{ tx }}_mon_trn_c )  {{ tx }}_phy_mon_trn_export ; ///<
-   uvm_analysis_export #(uvma_{{ name }}_{{ rx }}_mon_trn_c )  {{ rx }}_phy_mon_trn_export ; ///<
+   uvm_analysis_export #(uvma_{{ name }}_seq_item_c)  seq_item_export   ; ///< Port for Sequence Items to be sampled.
+   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_mon_trn_export ; ///< Port for {{ tx.upper() }} Monitor Transactions to be sampled.
+   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_mon_trn_export ; ///< Port for {{ rx.upper() }} Monitor Transactions to be sampled.
+{% if symmetric %}   uvm_analysis_export #(uvma_{{ name }}_phy_seq_item_c)  {{ tx }}_phy_seq_item_export; ///< Port for {{ tx.upper() }} Phy Sequence Items to be sampled.
+   uvm_analysis_export #(uvma_{{ name }}_phy_seq_item_c)  {{ rx }}_phy_seq_item_export; ///< Port for {{ rx.upper() }} Phy Sequence Items to be sampled.
+   uvm_analysis_export #(uvma_{{ name }}_phy_mon_trn_c )  {{ tx }}_phy_mon_trn_export ; ///< Port for {{ tx.upper() }} Phy Monitor Transactions to be sampled.
+   uvm_analysis_export #(uvma_{{ name }}_phy_mon_trn_c )  {{ rx }}_phy_mon_trn_export ; ///< Port for {{ rx.upper() }} Phy Monitor Transactions to be sampled.
+{% else %}   uvm_analysis_export #(uvma_{{ name }}_{{ tx }}_seq_item_c)  {{ tx }}_phy_seq_item_export; ///< Port for {{ tx.upper() }} Phy Sequence Items to be sampled.
+   uvm_analysis_export #(uvma_{{ name }}_{{ rx }}_seq_item_c)  {{ rx }}_phy_seq_item_export; ///< Port for {{ rx.upper() }} Phy Sequence Items to be sampled.
+   uvm_analysis_export #(uvma_{{ name }}_{{ tx }}_mon_trn_c )  {{ tx }}_phy_mon_trn_export ; ///< Port for {{ tx.upper() }} Phy Monitor Transactions to be sampled.
+   uvm_analysis_export #(uvma_{{ name }}_{{ rx }}_mon_trn_c )  {{ rx }}_phy_mon_trn_export ; ///< Port for {{ rx.upper() }} Phy Monitor Transactions to be sampled.
 {% endif %}   /// @}
 
 
@@ -76,18 +76,18 @@ class uvma_{{ name }}_cov_model_c extends uvm_component;
    extern function new(string name="uvma_{{ name }}_cov_model", uvm_component parent=null);
 
    /**
-    * 1. Ensures cfg & cntxt handles are not null.
-    * 2. Builds fifos.
+    * 1. Ensures #cfg & #cntxt handles are not null.
+    * 2. Builds FIFOs.
     */
    extern virtual function void build_phase(uvm_phase phase);
 
    /**
-    * TODO Describe uvma_{{ name }}_cov_model_c::connect_phase()
+    * Connects TLM Objects.
     */
    extern virtual function void connect_phase(uvm_phase phase);
 
    /**
-    * Forks all sampling loops
+    * Forks all sampling loops.
     */
    extern virtual task run_phase(uvm_phase phase);
 
@@ -102,57 +102,66 @@ class uvma_{{ name }}_cov_model_c extends uvm_component;
    extern function void get_cntxt();
 
    /**
-    *
+    * Creates Exports and FIFOs.
     */
    extern function void create_tlm_objects();
 
    /**
-    *
+    * Connects Exports to FIFOs.
     */
    extern function void connect_fifos();
 
    /**
-    * TODO Describe uvma_{{ name }}_cov_model_c::sample_cfg()
+    * User hook for sampling #cfg.
+    * Pure virtual.
     */
    extern virtual function void sample_cfg();
 
    /**
-    * TODO Describe uvma_{{ name }}_cov_model_c::sample_cntxt()
+    * User hook for sampling #cntxt.
+    * Pure virtual.
     */
    extern virtual function void sample_cntxt();
 
    /**
-    * TODO Describe uvma_{{ name }}_cov_model_c::sample_seq_item()
+    * User hook for sampling #seq_item.
+    * Pure virtual.
     */
    extern virtual function void sample_seq_item();
 
    /**
-    * TODO Describe uvma_{{ name }}_cov_model_c::sample_{{ tx }}_mon_trn()
+    * User hook for sampling #{{ tx }}_mon_trn.
+    * Pure virtual.
     */
    extern virtual function void sample_{{ tx }}_mon_trn();
 
    /**
-    * TODO Describe uvma_{{ name }}_cov_model_c::sample_{{ rx }}_mon_trn()
+    * User hook for sampling #{{ rx }}_mon_trn.
+    * Pure virtual.
     */
    extern virtual function void sample_{{ rx }}_mon_trn();
 
    /**
-    * TODO Describe uvma_{{ name }}_cov_model_c::sample_{{ tx }}_phy_seq_item()
+    * User hook for sampling #{{ tx }}_phy_seq_item.
+    * Pure virtual.
     */
    extern virtual function void sample_{{ tx }}_phy_seq_item();
 
    /**
-    * TODO Describe uvma_{{ name }}_cov_model_c::sample_{{ rx }}_phy_seq_item()
+    * User hook for sampling #{{ rx }}_phy_seq_item.
+    * Pure virtual.
     */
    extern virtual function void sample_{{ rx }}_phy_seq_item();
 
    /**
-    * TODO Describe uvma_{{ name }}_cov_model_c::sample_{{ tx }}_phy_mon_trn()
+    * User hook for sampling #{{ tx }}_phy_mon_trn.
+    * Pure virtual.
     */
    extern virtual function void sample_{{ tx }}_phy_mon_trn();
 
    /**
-    * TODO Describe uvma_{{ name }}_cov_model_c::sample_{{ rx }}_phy_mon_trn()
+    * User hook for sampling #{{ rx }}_phy_mon_trn.
+    * Pure virtual.
     */
    extern virtual function void sample_{{ rx }}_phy_mon_trn();
 

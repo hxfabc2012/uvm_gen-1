@@ -8,7 +8,7 @@
 
 
 /**
- * TODO Describe uvma_{{ name }}_logger_c
+ * Component which logs to disk information of the transactions generated and monitored by uvma_{{ name }}_agent_c.
  */
 class uvma_{{ name }}_logger_c extends uvm_component;
 
@@ -20,32 +20,32 @@ class uvma_{{ name }}_logger_c extends uvm_component;
 
    /// @defgroup Components
    /// @{
-   uvml_logs_metadata_logger_c #(uvma_{{ name }}_seq_item_c)  seq_item_logger; ///<
-   uvml_logs_metadata_logger_c #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_mon_trn_logger; ///<
-   uvml_logs_metadata_logger_c #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_mon_trn_logger; ///<
-{% if symmetric %}   uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_seq_item_c)  {{ tx }}_phy_seq_item_logger ; ///<
-   uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_seq_item_c)  {{ rx }}_phy_seq_item_logger ; ///<
-   uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_mon_trn_c )  {{ tx }}_phy_mon_trn_logger  ; ///<
-   uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_mon_trn_c )  {{ rx }}_phy_mon_trn_logger  ; ///<
-{% else %}   uvml_logs_metadata_logger_c #(uvma_{{ name }}_{{ tx }}_seq_item_c)  {{ tx }}_phy_seq_item_logger ; ///<
-   uvml_logs_metadata_logger_c #(uvma_{{ name }}_{{ rx }}_seq_item_c)  {{ rx }}_phy_seq_item_logger ; ///<
-   uvml_logs_metadata_logger_c #(uvma_{{ name }}_{{ tx }}_mon_trn_c )  {{ tx }}_phy_mon_trn_logger  ; ///<
-   uvml_logs_metadata_logger_c #(uvma_{{ name }}_{{ rx }}_mon_trn_c )  {{ rx }}_phy_mon_trn_logger  ; ///<
+   uvml_logs_metadata_logger_c #(uvma_{{ name }}_seq_item_c)  seq_item_logger; ///< Logs DATA Sequence Items from vsequencer.
+   uvml_logs_metadata_logger_c #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_mon_trn_logger; ///< Logs {{ tx.upper() }} DATA Monitor Transactions from vsequencer.
+   uvml_logs_metadata_logger_c #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_mon_trn_logger; ///< Logs {{ rx.upper() }} DATA Monitor Transactions from vsequencer.
+{% if symmetric %}   uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_seq_item_c)  {{ tx }}_phy_seq_item_logger ; ///< Logs Phy Sequence Items from {{ tx.upper() }} Driver.
+   uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_seq_item_c)  {{ rx }}_phy_seq_item_logger ; ///< Logs Phy Sequence Items from {{ rx.upper() }} Driver.
+   uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_mon_trn_c )  {{ tx }}_phy_mon_trn_logger  ; ///< Logs {{ tx.upper() }} Phy Monitor Transactions from Monitor.
+   uvml_logs_metadata_logger_c #(uvma_{{ name }}_phy_mon_trn_c )  {{ rx }}_phy_mon_trn_logger  ; ///< Logs {{ rx.upper() }} Phy Monitor Transactions from Monitor.
+{% else %}   uvml_logs_metadata_logger_c #(uvma_{{ name }}_{{ tx }}_seq_item_c)  {{ tx }}_phy_seq_item_logger ; ///< Logs Phy Sequence Items from {{ tx.upper() }} Driver.
+   uvml_logs_metadata_logger_c #(uvma_{{ name }}_{{ rx }}_seq_item_c)  {{ rx }}_phy_seq_item_logger ; ///< Logs Phy Sequence Items from {{ rx.upper() }} Driver.
+   uvml_logs_metadata_logger_c #(uvma_{{ name }}_{{ tx }}_mon_trn_c )  {{ tx }}_phy_mon_trn_logger  ; ///< Logs {{ tx.upper() }} Phy Monitor Transactions from Monitor.
+   uvml_logs_metadata_logger_c #(uvma_{{ name }}_{{ rx }}_mon_trn_c )  {{ rx }}_phy_mon_trn_logger  ; ///< Logs {{ rx.upper() }} Phy Monitor Transactions from Monitor.
 {% endif %}   /// @}
 
    /// @defgroup TLM
    /// @{
-   uvm_analysis_export #(uvma_{{ name }}_seq_item_c)  seq_item_export   ; ///<
-   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_mon_trn_export ; ///< TODO Rename this
-   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_mon_trn_export ; ///< TODO Rename this
-{% if symmetric %}   uvm_analysis_export #(uvma_{{ name }}_phy_seq_item_c)  {{ tx }}_phy_seq_item_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_phy_seq_item_c)  {{ rx }}_phy_seq_item_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_phy_mon_trn_c )  {{ tx }}_phy_mon_trn_export ; ///<
-   uvm_analysis_export #(uvma_{{ name }}_phy_mon_trn_c )  {{ rx }}_phy_mon_trn_export ; ///<
-{% else %}   uvm_analysis_export #(uvma_{{ name }}_{{ tx }}_seq_item_c)  {{ tx }}_phy_seq_item_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_{{ rx }}_seq_item_c)  {{ rx }}_phy_seq_item_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_{{ tx }}_mon_trn_c )  {{ tx }}_phy_mon_trn_export ; ///<
-   uvm_analysis_export #(uvma_{{ name }}_{{ rx }}_mon_trn_c )  {{ rx }}_phy_mon_trn_export ; ///<
+   uvm_analysis_export #(uvma_{{ name }}_seq_item_c)  seq_item_export   ; ///< Port for #seq_item_logger.
+   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_mon_trn_export ; ///< Port for #seq_item_logger.
+   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_mon_trn_export ; ///< Port for #seq_item_logger.
+{% if symmetric %}   uvm_analysis_export #(uvma_{{ name }}_phy_seq_item_c)  {{ tx }}_phy_seq_item_export; ///< Port for #{{ tx }}_phy_seq_item_logger.
+   uvm_analysis_export #(uvma_{{ name }}_phy_seq_item_c)  {{ rx }}_phy_seq_item_export; ///< Port for #{{ rx }}_phy_seq_item_logger.
+   uvm_analysis_export #(uvma_{{ name }}_phy_mon_trn_c )  {{ tx }}_phy_mon_trn_export ; ///< Port for #{{ tx }}_phy_mon_trn_logger.
+   uvm_analysis_export #(uvma_{{ name }}_phy_mon_trn_c )  {{ rx }}_phy_mon_trn_export ; ///< Port for #{{ rx }}_phy_mon_trn_logger.
+{% else %}   uvm_analysis_export #(uvma_{{ name }}_{{ tx }}_seq_item_c)  {{ tx }}_phy_seq_item_export; ///< Port for #{{ tx }}_phy_seq_item_logger.
+   uvm_analysis_export #(uvma_{{ name }}_{{ rx }}_seq_item_c)  {{ rx }}_phy_seq_item_export; ///< Port for #{{ rx }}_phy_seq_item_logger.
+   uvm_analysis_export #(uvma_{{ name }}_{{ tx }}_mon_trn_c )  {{ tx }}_phy_mon_trn_export ; ///< Port for #{{ tx }}_phy_mon_trn_logger.
+   uvm_analysis_export #(uvma_{{ name }}_{{ rx }}_mon_trn_c )  {{ rx }}_phy_mon_trn_export ; ///< Port for #{{ rx }}_phy_mon_trn_logger.
 {% endif %}   /// @}
 
 
@@ -61,37 +61,38 @@ class uvma_{{ name }}_logger_c extends uvm_component;
    extern function new(string name="uvma_{{ name }}_logger", uvm_component parent=null);
 
    /**
-    * TODO Describe uvma_{{ name }}_logger_c::build_phase()
+    * 1. Ensures #cfg & #cntxt handles are not null.
+    * 2. Builds loggers.
     */
    extern virtual function void build_phase(uvm_phase phase);
 
    /**
-    * TODO Describe uvma_{{ name }}_logger_c::connect_phase()
+    * Connects TLM ports.
     */
    extern virtual function void connect_phase(uvm_phase phase);
 
    /**
-    * Uses uvm_config_db to retrieve cfg and hand out to sub-components.
+    * Uses uvm_config_db to retrieve cfg.
     */
    extern function void get_cfg();
 
    /**
-    * Uses uvm_config_db to retrieve cntxt and hand out to sub-components.
+    * Uses uvm_config_db to retrieve cntxt.
     */
    extern function void get_cntxt();
 
    /**
-    *
+    * Creates logger components.
     */
    extern function void create_components();
 
    /**
-    *
+    * Sets filenames for logger components.
     */
    extern function void configure_loggers();
 
    /**
-    *
+    * Connects TLM ports to logger components.
     */
    extern function void connect_loggers();
 

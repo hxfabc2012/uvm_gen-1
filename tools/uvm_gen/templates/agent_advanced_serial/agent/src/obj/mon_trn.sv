@@ -8,21 +8,22 @@
 
 
 /**
- * Object rebuilt from the {{ full_name }} monitor.  Analog of uvma_{{ name }}_seq_item_c.
+ * Monitor Transaction rebuilt by the Monitor Virtual Sequence (uvma_{{ name }}_mon_vseq_c).
+ * Analog of uvma_{{ name }}_seq_item_c.
  */
 class uvma_{{ name }}_mon_trn_c extends uvml_mon_trn_c;
 
    /// @defgroup Metadata
    /// @{
-   uvma_{{ name }}_cfg_c  cfg;
-   uvma_{{ name }}_direction_enum  direction; ///<
+   uvma_{{ name }}_cfg_c  cfg; ///< Agent configuration handle
+   uvma_{{ name }}_direction_enum  direction; ///< Data path from which this transaction was sampled.
    /// @}
 
    /// @defgroup Data
    /// @{
-   uvma_{{ name }}_header_enum  header; ///<
-   uvma_{{ name }}_data_l_t     data ; ///<
-   uvma_{{ name }}_tail_l_t     tail ; ///<
+   uvma_{{ name }}_header_enum  header; ///< Sync bits indicating IDLE or DATA contents.
+   uvma_{{ name }}_data_l_t     data ; ///< 'Payload' data.
+   uvma_{{ name }}_tail_l_t     tail ; ///< Bits indicating the end to the 'payload' data.
    /// @}
 
 
@@ -40,12 +41,13 @@ class uvma_{{ name }}_mon_trn_c extends uvml_mon_trn_c;
    extern function new(string name="uvma_{{ name }}_mon_trn");
 
    /**
-    * TODO Describe uvma_{{ name }}_mon_trn_c::get_metadata()
+    * Describes transaction as metadata for uvml_logs_metadata_logger_c.
     */
    extern function uvml_metadata_t get_metadata();
 
    /**
-    * TODO Describe uvma_{{ name }}_mon_trn_c::self_check()
+    * Performs self-consistency checks on data.
+    * Returns '1' if all is OK.  '0' otherwise.
     */
    extern function bit self_check();
 

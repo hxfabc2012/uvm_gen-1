@@ -23,25 +23,25 @@ class uvma_{{ name }}_cfg_c extends uvm_object;
 
    /// @defgroup Generic options
    /// @{
-   rand bit                      enabled          ; ///< TODO Describe uvma_{{ name }}_cfg_c::enabled
-   rand bit                      bypass_mode      ; ///<
-   rand uvm_active_passive_enum  is_active        ; ///< TODO Describe uvma_{{ name }}_cfg_c::is_active
-   rand uvml_reset_type_enum     reset_type       ; ///< TODO Describe uvma_{{ name }}_cfg_c::reset_type
-   rand bit                      cov_model_enabled; ///< TODO Describe uvma_{{ name }}_cfg_c::cov_model_enabled
-   rand bit                      trn_log_enabled  ; ///< TODO Describe uvma_{{ name }}_cfg_c::trn_log_enabled
+   rand bit                      enabled          ; ///< Sub-components are not created if '0'.
+   rand bit                      bypass_mode      ; ///< Does not drive interface when '1' (only TLM).
+   rand uvm_active_passive_enum  is_active        ; ///< Driver is not created if 'UVM_PASSIVE'.
+   rand uvml_reset_type_enum     reset_type       ; ///< Sets whether the monitor is sensitive to a/synchronous reset.
+   rand bit                      cov_model_enabled; ///< Gates the creation of the functional coverage model.
+   rand bit                      trn_log_enabled  ; ///< Gates the creation of the transaction logger.
    /// @}
 
    /// @defgroup Protocol Options
    /// @{
-   rand uvma_{{ name }}_mode_enum  drv_mode; ///< TODO Describe uvma_{{ name }}_cfg_c::drv_mode
+   rand uvma_{{ name }}_mode_enum  drv_mode; ///< Specifies which data stream to drive when in active mode.
    /// @}
 
-   /// @defgroup Sequence Types
+   /// @defgroup Objects
    /// @{
-   uvm_object_wrapper  mon_vseq_type   ; ///< TODO Describe uvma_{{ name }}_cfg_c::mon_vseq_type
-   uvm_object_wrapper  idle_vseq_type  ; ///< TODO Describe uvma_{{ name }}_cfg_c::idle_vseq_type
-   uvm_object_wrapper  {{ tx }}_drv_vseq_type; ///< TODO Describe uvma_{{ name }}_cfg_c::mstr_drv_vseq_type
-   uvm_object_wrapper  {{ rx }}_drv_vseq_type; ///< TODO Describe uvma_{{ name }}_cfg_c::slv_drv_vseq_type
+   uvm_object_wrapper  mon_vseq_type   ; ///< Type for Monitor Virtual Sequence to be started by agent at start of run_phase().
+   uvm_object_wrapper  idle_vseq_type  ; ///< Type for Idle Virtual Sequence to be started by agent at start of run_phase().
+   uvm_object_wrapper  {{ tx }}_drv_vseq_type; ///< Type for {{ tx.upper() }} Driver Virtual Sequence to be started by agent at start of run_phase().
+   uvm_object_wrapper  {{ rx }}_drv_vseq_type; ///< Type for {{ rx.upper() }} Driver Virtual Sequence to be started by agent at start of run_phase().
    /// @}
 
 
@@ -56,6 +56,9 @@ class uvma_{{ name }}_cfg_c extends uvm_object;
    `uvm_object_utils_end
 
 
+   /**
+    * Sets usual values for generic options.
+    */
    constraint defaults_cons {
       soft enabled           == 1;
       soft bypass_mode       == 0;
@@ -67,7 +70,7 @@ class uvma_{{ name }}_cfg_c extends uvm_object;
 
 
    /**
-    * Default constructor.
+    * Creates objects.
     */
    extern function new(string name="uvma_{{ name }}_cfg");
 

@@ -14,18 +14,18 @@ class uvma_{{ name }}_mon_fsm_cntxt_c extends uvm_object;
 
    /// @defgroup Integrals
    /// @{
-   uvma_{{ name }}_mon_fsm_enum  state; ///<
-   int unsigned  training_count       ; ///<
-   int unsigned  num_consecutive_edges; ///<
-   realtime      trn_start            ; ///<
-   realtime      trn_end              ; ///<
+   uvma_{{ name }}_mon_fsm_enum  state; ///< Current state for this FSM.
+   int unsigned  training_count       ; ///< Count of correct consecutive bits of the training sequence observed.
+   int unsigned  num_consecutive_edges; ///< Count of bit transitions seen at the correct intervals.
+   realtime      trn_start            ; ///< Timestamp for bit 0 of currently sampled transaction.
+   realtime      trn_end              ; ///< Timestamp for last bit of currently sampled transaction.
    /// @}
 
    /// @defgroup Data
    /// @{
-   logic     data_q      [$]; ///<
-   realtime  timestamps_q[$]; ///<
-   bit       trn_data    [] ; ///<
+   logic     data_q      [$]; ///< Queue of decoded bits obtained from monitor.
+   realtime  timestamps_q[$]; ///< Timestamp for each bit in #data_q.
+   bit       trn_data    [] ; ///< Data ready to be unpacked.
    /// @}
 
 
@@ -46,7 +46,7 @@ class uvma_{{ name }}_mon_fsm_cntxt_c extends uvm_object;
    extern function new(string name="uvma_{{ name }}_mon_fsm_cntxt");
 
    /**
-    * TODO Describe uvma_{{ name }}_mon_fsm_cntxt_c::reset()
+    * Returns all state variables to initial values.
     */
    extern function void reset();
 

@@ -8,7 +8,7 @@
 
 
 /**
- * TODO Describe uvma_{{ name }}_training_vseq_c
+ * Virtual Sequence generating the {{ full_name }} link Phy training data.
  */
 class uvma_{{ name }}_training_vseq_c extends uvma_{{ name }}_base_vseq_c;
 
@@ -20,17 +20,17 @@ class uvma_{{ name }}_training_vseq_c extends uvma_{{ name }}_base_vseq_c;
    extern function new(string name="uvma_{{ name }}_training_vseq");
 
    /**
-    * TODO Describe uvma_{{ name }}_training_vseq_c::body()
+    * Calls do_training_<x>().
     */
    extern virtual task body();
 
    /**
-    * TODO Describe uvma_{{ name }}_training_vseq_c::do_training_{{ tx }}()
+    * Generates training data Sequence Items for {{ tx.upper() }}.
     */
    extern task do_training_{{ tx }}();
 
    /**
-    * TODO Describe uvma_{{ name }}_training_vseq_c::do_training_{{ rx }}()
+    * Generates training data Sequence Items for {{ rx.upper() }}.
     */
    extern task do_training_{{ rx }}();
 
@@ -46,7 +46,7 @@ endfunction : new
 
 task uvma_{{ name }}_training_vseq_c::body();
 
-   `uvm_info("{{ name.upper() }}_TRAINING_VSEQ", "Training virtual sequence has started", UVM_HIGH)
+   `uvm_info("{{ name.upper() }}_TRAINING_VSEQ", "Training Virtual Sequence has started", UVM_HIGH)
    case (cfg.drv_mode)
       UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }}: do_training_{{ tx }}();
       UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }}: do_training_{{ rx }}();

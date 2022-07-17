@@ -8,7 +8,8 @@
 
 
 /**
- * TODO Describe uvma_{{ name }}_mon_vseq_c
+ * Virtual Sequence taking in Phy Monitor Transactions and creating {{ full_name }} transactions (uvma_{{ name }}_mon_trn_c).
+ * Includes {{ full_name }} monitor Finite State Machine implementation.
  */
 class uvma_{{ name }}_mon_vseq_c extends uvma_{{ name }}_base_vseq_c;
 
@@ -20,77 +21,80 @@ class uvma_{{ name }}_mon_vseq_c extends uvma_{{ name }}_base_vseq_c;
    extern function new(string name="uvma_{{ name }}_mon_vseq");
 
    /**
-    * TODO Describe uvma_{{ name }}_mon_vseq_c::body()
+    * Infinite loop maintaining 3 threads:
+    * 1. {{ tx.upper() }} main sequence: wait for reset, link training, rebuild traffic from Phy transactions
+    * 2. {{ rx.upper() }} main sequence: wait for reset, link training, rebuild traffic from Phy transactions
+    * 3. Reset trigger for mid-sim reset which resets main sequences.
     */
    extern virtual task body();
 
    /**
-    * TODO Describe uvma_{{ name }}_mon_vseq_c::wait_for_reset_{{ tx }}()
+    * Wait for reset state change in #cntxt.
     */
    extern task wait_for_reset_{{ tx }}();
 
    /**
-    * TODO Describe uvma_{{ name }}_mon_vseq_c::monitor_{{ tx }}()
-    */
-   extern task monitor_{{ tx }}();
-
-   /**
-    * TODO Describe uvma_{{ name }}_mon_vseq_c::wait_for_reset_{{ rx }}()
+    * Wait for reset state change in #cntxt.
     */
    extern task wait_for_reset_{{ rx }}();
 
    /**
-    * TODO Describe uvma_{{ name }}_mon_vseq_c::monitor_{{ rx }}()
+    * Infinite loop taking in Phy Monitor Transactions and generating Monitor Transactions for {{ tx.upper() }}.
+    */
+   extern task monitor_{{ tx }}();
+
+   /**
+    * Infinite loop taking in Phy Monitor Transactions and generating Monitor Transactions for {{ rx.upper() }}.
     */
    extern task monitor_{{ rx }}();
 
    /**
-    * TODO Describe uvma_{{ name }}_mon_vseq_c::reset_trigger()
+    * Waits for mid-sim reset state change in #cntxt.
     */
    extern task reset_trigger();
 
    /**
-    * TODO Describe uvma_{{ name }}_mon_vseq_c::decode_bit()
+    * Performs differential decoding on #p & #n.
     */
    extern function logic decode_bit(logic p, logic n);
 
    /**
-    *
+    * Returns short string for use in `uvm_info() IDs.
     */
    extern function string get_direction_str(uvma_{{ name }}_direction_enum direction);
 
    /**
-    * TODO Describe uvma_{{ name }}_mon_vseq_c::fsm()
+    * Monitor Finite State Machine entry point. Returns '1' if enough data is present in #fsm_cntxt for a transaction.
     */
    extern function bit fsm(uvma_{{ name }}_mon_fsm_cntxt_c fsm_cntxt, uvma_{{ name }}_direction_enum direction);
 
    /**
-    *
+    * Unpacks Monitor Transaction from bits in {{ tx.upper() }} #cntxt.
     */
    extern function void unpack_{{ tx }}_trn(output uvma_{{ name }}_mon_trn_c mon_trn);
 
    /**
-    *
+    * Unpacks Monitor Transaction from bits in {{ rx.upper() }} #cntxt.
     */
    extern function void unpack_{{ rx }}_trn(output uvma_{{ name }}_mon_trn_c mon_trn);
 
    /**
-    *
+    * INIT FSM evaluation function.
     */
    extern function uvma_{{ name }}_mon_fsm_enum fsm_init(uvma_{{ name }}_mon_fsm_cntxt_c fsm_cntxt, uvma_{{ name }}_direction_enum direction, output bit unpack_trn);
 
    /**
-    *
+    * TRAINING FSM evaluation function.
     */
    extern function uvma_{{ name }}_mon_fsm_enum fsm_training(uvma_{{ name }}_mon_fsm_cntxt_c fsm_cntxt, uvma_{{ name }}_direction_enum direction, output bit unpack_trn);
 
    /**
-    *
+    * SYNCING FSM evaluation function.
     */
    extern function uvma_{{ name }}_mon_fsm_enum fsm_syncing(uvma_{{ name }}_mon_fsm_cntxt_c fsm_cntxt, uvma_{{ name }}_direction_enum direction, output bit unpack_trn);
 
    /**
-    *
+    * SYNCED FSM evaluation function.
     */
    extern function uvma_{{ name }}_mon_fsm_enum fsm_synced(uvma_{{ name }}_mon_fsm_cntxt_c fsm_cntxt, uvma_{{ name }}_direction_enum direction, output bit unpack_trn);
 
@@ -136,6 +140,15 @@ task uvma_{{ name }}_mon_vseq_c::wait_for_reset_{{ tx }}();
 endtask : wait_for_reset_{{ tx }}
 
 
+task uvma_{{ name }}_mon_vseq_c::wait_for_reset_{{ rx }}();
+
+   `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", "Waiting for post_reset on {{ rx.upper() }}", UVM_HIGH)
+   wait (cntxt.reset_state == UVML_RESET_STATE_POST_RESET);
+   `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", "Done waiting for post_reset on {{ rx.upper() }}", UVM_HIGH)
+
+endtask : wait_for_reset_{{ rx }}
+
+
 task uvma_{{ name }}_mon_vseq_c::monitor_{{ tx }}();
 
 {% if symmetric %}   uvma_{{ name }}_phy_mon_trn_c  phy_trn;
@@ -165,15 +178,6 @@ task uvma_{{ name }}_mon_vseq_c::monitor_{{ tx }}();
 endtask : monitor_{{ tx }}
 
 
-task uvma_{{ name }}_mon_vseq_c::wait_for_reset_{{ rx }}();
-
-   `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", "Waiting for post_reset on {{ rx.upper() }}", UVM_HIGH)
-   wait (cntxt.reset_state == UVML_RESET_STATE_POST_RESET);
-   `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", "Done waiting for post_reset on {{ rx.upper() }}", UVM_HIGH)
-
-endtask : wait_for_reset_{{ rx }}
-
-
 task uvma_{{ name }}_mon_vseq_c::monitor_{{ rx }}();
 
 {% if symmetric %}   uvma_{{ name }}_phy_mon_trn_c  phy_trn;
@@ -188,8 +192,8 @@ task uvma_{{ name }}_mon_vseq_c::monitor_{{ rx }}();
 {% if symmetric %}      cntxt.{{ rx }}_mon_fsm_cntxt.data_q.push_back(decode_bit(phy_trn.dp, phy_trn.dn));
 {% else %}      cntxt.{{ rx }}_mon_fsm_cntxt.data_q.push_back(decode_bit(phy_trn.{{ rx }}0p, phy_trn.{{ rx }}0n));
       cntxt.{{ rx }}_mon_fsm_cntxt.data_q.push_back(decode_bit(phy_trn.{{ rx }}1p, phy_trn.{{ rx }}1n));
-{% endif %}      cntxt.{{ rx }}_mon_fsm_cntxt.timestamps_q.push_back(phy_trn.get_timestamp_start());
       cntxt.{{ rx }}_mon_fsm_cntxt.timestamps_q.push_back(phy_trn.get_timestamp_start());
+{% endif %}      cntxt.{{ rx }}_mon_fsm_cntxt.timestamps_q.push_back(phy_trn.get_timestamp_start());
       `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", $sformatf("Monitor has accumulated %0d bits", cntxt.{{ rx }}_mon_fsm_cntxt.trn_data.size()), UVM_DEBUG)
       unpack_trn = fsm(cntxt.{{ rx }}_mon_fsm_cntxt, UVMA_{{ name.upper() }}_DIRECTION_{{ rx.upper() }});
       if (unpack_trn) begin

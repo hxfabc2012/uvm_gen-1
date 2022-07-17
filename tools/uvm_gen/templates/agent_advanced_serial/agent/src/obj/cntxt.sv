@@ -8,55 +8,55 @@
 
 
 /**
- * Object encapsulating all state variables for all {{ full_name }} agent (uvma_{{ name }}_agent_c) components.
+ * Object encapsulating all state variables for all {{ full_name }} Agent (uvma_{{ name }}_agent_c) components.
  */
 class uvma_{{ name }}_cntxt_c extends uvm_object;
 
+   virtual uvma_{{ name }}_if  vif; ///< Handle to agent interface.
+
+   /// @defgroup Integrals
+   /// @{
+   uvml_reset_state_enum  reset_state; ///< Reset state as observed by monitor (uvma_{{ name }}_mon_c).
+   /// @}
+
    /// @defgroup Objects
    /// @{
-   virtual uvma_{{ name }}_if  vif; ///< Handle to agent interface
-   uvml_reset_state_enum   reset_state; ///< TODO Describe uvma_{{ name }}_cntxt_c::reset_state
+   uvm_event  sample_cfg_e  ; ///< Triggers sampling of the agent configuration by the functional coverage model.
+   uvm_event  sample_cntxt_e; ///< Triggers sampling of the agent context by the functional coverage model.
    /// @}
 
    /// @defgroup Sequences
    /// @{
-   uvm_sequence_base  mon_vseq   ; ///<
-   uvm_sequence_base  idle_vseq  ; ///<
-   uvm_sequence_base  {{ tx }}_drv_vseq; ///<
-   uvm_sequence_base  {{ rx }}_drv_vseq; ///<
+   uvm_sequence_base  mon_vseq   ; ///< Monitor Virtual Sequence instance.
+   uvm_sequence_base  idle_vseq  ; ///< Idle Generating Virtual Sequence instance.
+   uvm_sequence_base  {{ tx }}_drv_vseq; ///< {{ tx.upper() }} Driver Phy Virtual Sequence instance.
+   uvm_sequence_base  {{ rx }}_drv_vseq; ///< {{ rx.upper() }} Driver Phy Virtual Sequence instance.
    /// @}
 
    /// @defgroup FSM
    /// @{
-   uvma_{{ name }}_mon_fsm_cntxt_c  {{ tx }}_mon_fsm_cntxt;
-   uvma_{{ name }}_mon_fsm_cntxt_c  {{ rx }}_mon_fsm_cntxt;
-   /// @}
-
-   /// @defgroup Events
-   /// @{
-   uvm_event  sample_cfg_e  ; ///<
-   uvm_event  sample_cntxt_e; ///<
+   uvma_{{ name }}_mon_fsm_cntxt_c  {{ tx }}_mon_fsm_cntxt; ///< Monitor {{ tx.upper() }} FSM data.
+   uvma_{{ name }}_mon_fsm_cntxt_c  {{ rx }}_mon_fsm_cntxt; ///< Monitor {{ rx.upper() }} FSM data.
    /// @}
 
 
    `uvm_object_utils_begin(uvma_{{ name }}_cntxt_c)
       `uvm_field_enum(uvml_reset_state_enum, reset_state, UVM_DEFAULT)
-
-      `uvm_field_object({{ tx }}_mon_fsm_cntxt, UVM_DEFAULT)
-      `uvm_field_object({{ rx }}_mon_fsm_cntxt, UVM_DEFAULT)
-
       `uvm_field_event(sample_cfg_e  , UVM_DEFAULT)
       `uvm_field_event(sample_cntxt_e, UVM_DEFAULT)
+      `uvm_field_object({{ tx }}_mon_fsm_cntxt, UVM_DEFAULT)
+      `uvm_field_object({{ rx }}_mon_fsm_cntxt, UVM_DEFAULT)
    `uvm_object_utils_end
 
 
    /**
-    * Builds events.
+    * Builds objects.
     */
    extern function new(string name="uvma_{{ name }}_cntxt");
 
    /**
-    * TODO Describe uvma_{{ name }}_cntxt_c::reset()
+    * Returns all state variables to initial values.
+    * Called by monitor (uvma_${name}_mon_c) when it observes a reset pulse.
     */
    extern function void reset();
 

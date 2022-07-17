@@ -18,7 +18,7 @@
 
 
 /**
- * Encapsulates all the types needed for an UVM agent capable of driving and/or monitoring {{ full_name }}.
+ * Encapsulates all the types needed for an UVM agent capable of driving and/or monitoring {{ full_name }} serial interface.
  */
 package uvma_{{ name }}_pkg;
 

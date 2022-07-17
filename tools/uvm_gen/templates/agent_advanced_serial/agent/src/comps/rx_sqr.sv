@@ -8,7 +8,7 @@
 
 
 /**
- * Component running {{ full_name }} sequences extending uvma_{{ name }}_vseq_base_c.
+ * Sequencer running {{ rx.upper() }} Phy Sequence Items (uvma_{{ name }}_{{ tx }}_seq_item_c).
  */
 class uvma_{{ name }}_{{ rx }}_sqr_c extends uvml_sqr_c #(
    .REQ(uvma_{{ name }}_{{ rx }}_seq_item_c),
@@ -34,17 +34,17 @@ class uvma_{{ name }}_{{ rx }}_sqr_c extends uvml_sqr_c #(
    extern function new(string name="uvma_{{ name }}_{{ rx }}_sqr", uvm_component parent=null);
 
    /**
-    * Ensures cfg & cntxt handles are not null
+    * Ensures #cfg & #cntxt handles are not null
     */
    extern virtual function void build_phase(uvm_phase phase);
 
    /**
-    * Uses uvm_config_db to retrieve cfg and hand out to sub-components.
+    * Uses uvm_config_db to retrieve cfg.
     */
    extern function void get_cfg();
 
    /**
-    * Uses uvm_config_db to retrieve cntxt and hand out to sub-components.
+    * Uses uvm_config_db to retrieve cntxt.
     */
    extern function void get_cntxt();
 

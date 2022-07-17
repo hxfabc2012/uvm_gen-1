@@ -8,7 +8,7 @@
 
 
 /**
- * TODO Describe uvma_{{ name }}_idle_vseq_c
+ * Virtual Sequence generating IDLE Sequence Items at the lowest sequencer priority possible.
  */
 class uvma_{{ name }}_idle_vseq_c extends uvma_{{ name }}_base_vseq_c;
 
@@ -20,12 +20,12 @@ class uvma_{{ name }}_idle_vseq_c extends uvma_{{ name }}_base_vseq_c;
    extern function new(string name="uvma_{{ name }}_idle_vseq");
 
    /**
-    * TODO Describe uvma_{{ name }}_idle_vseq_c::body()
+    * Launches #idle_loop().
     */
    extern virtual task body();
 
    /**
-    * TODO Describe uvma_{{ name }}_idle_vseq_c::idle_loop()
+    * Infinite loop generating IDLE Sequence Items.
     */
    extern task idle_loop();
 

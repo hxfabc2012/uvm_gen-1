@@ -8,20 +8,17 @@
 
 
 /**
- * Object created by {{ full_name }} agent sequences extending uvma_{{ name }}_seq_base_c.
+ * Sequence Item created by {{ full_name }} Sequences.
  */
 class uvma_{{ name }}_seq_item_c extends uvml_seq_item_c;
 
-   /// @defgroup Metadata
-   /// @{
-   uvma_{{ name }}_cfg_c  cfg;
-   /// @}
+   uvma_{{ name }}_cfg_c  cfg; ///< Agent configuration handle
 
    /// @defgroup Data
    /// @{
-   rand uvma_{{ name }}_header_enum  header; ///<
-   rand uvma_{{ name }}_data_b_t     data  ; ///<
-   rand uvma_{{ name }}_tail_b_t     tail  ; ///<
+   rand uvma_{{ name }}_header_enum  header; ///< Sync bits indicating IDLE or DATA contents.
+   rand uvma_{{ name }}_data_b_t     data  ; ///< 'Payload' data.
+   rand uvma_{{ name }}_tail_b_t     tail  ; ///< Bits indicating the end to the 'payload' data.
    /// @}
 
 
@@ -33,6 +30,9 @@ class uvma_{{ name }}_seq_item_c extends uvml_seq_item_c;
    `uvm_object_utils_end
 
 
+   /**
+    * Adds tail data and fills in IDLE data if needed.
+    */
    constraint limits_cons {
       tail == uvma_{{ name }}_tail_symbol;
       if (header == UVMA_{{ name.upper() }}_HEADER_IDLE) {
@@ -47,7 +47,7 @@ class uvma_{{ name }}_seq_item_c extends uvml_seq_item_c;
    extern function new(string name="uvma_{{ name }}_seq_item");
 
    /**
-    * TODO Describe uvma_{{ name }}_seq_item_c::get_metadata()
+    * Describes transaction as metadata for uvml_logs_metadata_logger_c.
     */
    extern function uvml_metadata_t get_metadata();
 

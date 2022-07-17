@@ -11,11 +11,11 @@
  * Encapsulates assertions targeting uvma_{{ name }}_if.
  */
 module uvma_{{ name }}_chkr(
-   uvma_{{ name }}_if  {{ name }}_if
+   uvma_{{ name }}_if  {{ name }}_if ///< Target interface handle
 );
-   
+
    // TODO Add assertions to uvma_{{ name }}_chkr
-   
+
 endmodule : uvma_{{ name }}_chkr
 
 

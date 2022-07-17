@@ -8,21 +8,25 @@
 
 
 /**
- * Component driving a {{ full_name }} virtual interface (uvma_{{ name }}_if).
+ * Driver driving {{ full_name }} Virtual Interface (uvma_{{ name }}_if) {{ tx.upper() }}.
  */
 class uvma_{{ name }}_{{ tx }}_drv_c extends uvml_drv_c #(
    .REQ(uvma_{{ name }}_{{ tx }}_seq_item_c),
    .RSP(uvma_{{ name }}_{{ tx }}_seq_item_c)
 );
 
-   virtual uvma_{{ name }}_if.drv_{{ tx }}_mp  mp; ///< Handle to virtual interface modport
+   virtual uvma_{{ name }}_if.drv_{{ tx }}_mp  mp; ///< Handle to Virtual Interface {{ tx.upper() }} modport
 
-   // Objects
+   /// @defgroup Objects
+   /// @{
    uvma_{{ name }}_cfg_c    cfg  ; ///< Agent configuration handle
    uvma_{{ name }}_cntxt_c  cntxt; ///< Agent context handle
+   /// @}
 
-   // TLM
-   uvm_analysis_port#(uvma_{{ name }}_{{ tx }}_seq_item_c)  ap; ///<
+   /// @defgroup TLM Ports
+   /// @{
+   uvm_analysis_port#(uvma_{{ name }}_{{ tx }}_seq_item_c)  ap; ///< Port outputting {{ tx }} Phy Sequence Items after they've been used to drive #mp.
+   /// @}
 
 
    `uvm_component_utils_begin(uvma_{{ name }}_{{ tx }}_drv_c)
@@ -37,40 +41,46 @@ class uvma_{{ name }}_{{ tx }}_drv_c extends uvml_drv_c #(
    extern function new(string name="uvma_{{ name }}_{{ tx }}_drv", uvm_component parent=null);
 
    /**
-    * 1. Ensures cfg & cntxt handles are not null.
-    * 2. Builds ap.
+    * 1. Ensures #cfg & #cntxt handles are not null.
+    * 2. Builds TLM Ports.
+    * 3. Retrieves modport handles from #cntxt.
     */
    extern virtual function void build_phase(uvm_phase phase);
 
    /**
-    * Oversees driving, depending on the reset state, by calling drv_<pre|in|post>_reset() tasks.
+    * Infinite loop taking in #req and driving #mp on each clock cycle.
     */
    extern virtual task run_phase(uvm_phase phase);
 
    /**
-    * Uses uvm_config_db to retrieve cfg and hand out to sub-components.
+    * Uses uvm_config_db to retrieve cfg.
     */
    extern function void get_cfg();
 
    /**
-    * Uses uvm_config_db to retrieve cntxt and hand out to sub-components.
+    * Uses uvm_config_db to retrieve cntxt.
     */
    extern function void get_cntxt();
 
    /**
-    * Appends cfg, prints out trn and issues heartbeat.
+    * Creates #ap.
     */
-   extern virtual function void process_req(ref uvma_{{ name }}_{{ tx }}_seq_item_c req);
+   extern function void create_tlm_ports();
 
    /**
-    * Drives the virtual interface's (cntxt.vif) signals using req's contents.
+    * Retrieves #mp from #cntxt.
     */
-   extern virtual task drv_req(ref uvma_{{ name }}_{{ tx }}_seq_item_c req);
+   extern function void retrieve_modports();
 
    /**
-    * TODO Describe uvma_{{ name }}_{{ tx }}_drv_c::sample_post_clk()
+    * Appends #cfg to #req and prints it out.
     */
-   extern virtual task sample_post_clk(ref uvma_{{ name }}_{{ tx }}_seq_item_c req);
+   extern function void process_req(ref uvma_{{ name }}_{{ tx }}_seq_item_c req);
+
+   /**
+    * Drives #mp signals using #req's contents on the next clock cycle.
+    */
+   extern task drv_req(ref uvma_{{ name }}_{{ tx }}_seq_item_c req);
 
 endclass : uvma_{{ name }}_{{ tx }}_drv_c
 
@@ -85,11 +95,10 @@ endfunction : new
 function void uvma_{{ name }}_{{ tx }}_drv_c::build_phase(uvm_phase phase);
 
    super.build_phase(phase);
-   get_cfg  ();
-   get_cntxt();
-
-   ap = new("ap", this);
-   mp = cntxt.vif.drv_{{ tx }}_mp;
+   get_cfg          ();
+   get_cntxt        ();
+   create_tlm_ports ();
+   retrieve_modports();
 
 endfunction : build_phase
 
@@ -97,7 +106,6 @@ endfunction : build_phase
 task uvma_{{ name }}_{{ tx }}_drv_c::run_phase(uvm_phase phase);
 
    super.run_phase(phase);
-
    if (cfg.enabled && cfg.is_active && (cfg.drv_mode == UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }})) begin
       forever begin
          seq_item_port.get_next_item(req);
@@ -131,6 +139,20 @@ function void uvma_{{ name }}_{{ tx }}_drv_c::get_cntxt();
 endfunction : get_cntxt
 
 
+function void uvma_{{ name }}_{{ tx }}_drv_c::create_tlm_ports();
+
+   ap = new("ap", this);
+
+endfunction : create_tlm_ports
+
+
+function void uvma_{{ name }}_{{ tx }}_drv_c::retrieve_modports();
+
+   mp = cntxt.vif.drv_{{ tx }}_mp;
+
+endfunction : retrieve_modports
+
+
 function void uvma_{{ name }}_{{ tx }}_drv_c::process_req(ref uvma_{{ name }}_{{ tx }}_seq_item_c req);
 
    req.cfg = cfg;
@@ -155,13 +177,6 @@ task uvma_{{ name }}_{{ tx }}_drv_c::drv_req(ref uvma_{{ name }}_{{ tx }}_seq_it
    mp.drv_{{ tx }}_cb.{{ tx }}n <= req.{{ tx }}n;
 {% endif %}
 endtask : drv_req
-
-
-task uvma_{{ name }}_{{ tx }}_drv_c::sample_post_clk(ref uvma_{{ name }}_{{ tx }}_seq_item_c req);
-
-
-
-endtask : sample_post_clk
 
 
 `endif // __UVMA_{{ name.upper() }}_{{ tx.upper() }}_DRV_SV__

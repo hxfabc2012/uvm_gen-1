@@ -11,23 +11,23 @@
  * Encapsulates all signals and clocking of the {{ full_name }}.
  */
 interface uvma_{{ name }}_if (
-   input  {{ tx }}_clk , ///< The bus clock times all bus transfers. All signal timings are related to the rising edge of clk.
-   input  {{ rx }}_clk , ///< The bus clock times all bus transfers. All signal timings are related to the rising edge of clk.
-   input  reset_n  ///< The bus reset signal is active LOW and resets the system and the bus. This is the only active LOW signal.
+   input  {{ tx }}_clk , ///< All {{ tx.upper() }} signal timings are related to the rising edge of this signal.
+   input  {{ rx }}_clk , ///< All {{ rx.upper() }} signal timings are related to the rising edge of this signal.
+   input  reset_n  ///< Active LOW reset signal.
 );
 
    /// @defgroup Signals
    /// @{
-{% if symmetric %}   wire  {{ tx }}p; ///<
-   wire  {{ tx }}n; ///<
-   wire  {{ rx }}p; ///<
-   wire  {{ rx }}n; ///<
-{% else %}   wire  {{ tx }}p; ///<
-   wire  {{ tx }}n; ///<
-   wire  {{ rx }}0p; ///<
-   wire  {{ rx }}0n; ///<
-   wire  {{ rx }}1p; ///<
-   wire  {{ rx }}1n; ///<
+{% if symmetric %}   wire  {{ tx }}p; ///< Positive {{ tx.upper() }} differential signal
+   wire  {{ tx }}n; ///< Negative {{ tx.upper() }} differential signal
+   wire  {{ rx }}p; ///< Positive {{ rx.upper() }} differential signal
+   wire  {{ rx }}n; ///< Negative {{ rx.upper() }} differential signal
+{% else %}   wire  {{ tx }}p; ///< Positive {{ tx.upper() }} differential signal
+   wire  {{ tx }}n; ///< Negative {{ tx.upper() }} differential signal
+   wire  {{ rx }}0p; ///< Positive {{ rx.upper() }} differential signal 0
+   wire  {{ rx }}0n; ///< Negative {{ rx.upper() }} differential signal 0
+   wire  {{ rx }}1p; ///< Positive {{ rx.upper() }} differential signal 1
+   wire  {{ rx }}1n; ///< Negative {{ rx.upper() }} differential signal 1
 {% endif %}   /// @}
 
 

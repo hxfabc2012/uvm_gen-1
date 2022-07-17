@@ -8,7 +8,7 @@
 
 
 /**
- * Object created by {{ full_name }} agent sequences extending uvma_{{ name }}_seq_base_c.
+ * Sequence Item created by {{ full_name }} sequences for driving uvma_{{ name }}_phy_drv_c.
  */
 class uvma_{{ name }}_phy_seq_item_c extends uvml_seq_item_c;
 
@@ -16,8 +16,8 @@ class uvma_{{ name }}_phy_seq_item_c extends uvml_seq_item_c;
 
    /// @defgroup Data
    /// @{
-   rand bit  dp; ///<
-   rand bit  dn; ///<
+   rand bit  dp; ///< Positive differential signal.
+   rand bit  dn; ///< Negative differential signal.
    /// @}
 
 
@@ -27,6 +27,9 @@ class uvma_{{ name }}_phy_seq_item_c extends uvml_seq_item_c;
    `uvm_object_utils_end
 
 
+   /**
+    * Implements differential encoding.
+    */
    constraint limits_cons {
       dp != dn;
    }
@@ -38,7 +41,7 @@ class uvma_{{ name }}_phy_seq_item_c extends uvml_seq_item_c;
    extern function new(string name="uvma_{{ name }}_phy_seq_item");
 
    /**
-    * TODO Describe uvma_{{ name }}_phy_seq_item_c::get_metadata()
+    * Describes transaction as metadata for uvml_logs_metadata_logger_c.
     */
    extern function uvml_metadata_t get_metadata();
 

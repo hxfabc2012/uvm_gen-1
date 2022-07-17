@@ -8,7 +8,8 @@
 
 
 /**
- * Object rebuilt by the {{ full_name }} monitor.  Analog of uvma_{{ name }}_{{ rx }}_seq_item_c.
+ * {{ rx.upper() }} Phy Monitor Transaction sampled by monitor (uvma_{{ name }}_mon_c).
+ * Analog of uvma_{{ name }}_{{ rx }}_seq_item_c.
  */
 class uvma_{{ name }}_{{ rx }}_mon_trn_c extends uvml_mon_trn_c;
 
@@ -16,10 +17,10 @@ class uvma_{{ name }}_{{ rx }}_mon_trn_c extends uvml_mon_trn_c;
 
    /// @defgroup Data
    /// @{
-   logic  {{ rx }}0p; ///<
-   logic  {{ rx }}0n; ///<
-   logic  {{ rx }}1p; ///<
-   logic  {{ rx }}1n; ///<
+   logic  {{ rx }}0p; ///< Positive {{ rx.upper() }} differential signal 0
+   logic  {{ rx }}0n; ///< Negative {{ rx.upper() }} differential signal 0
+   logic  {{ rx }}1p; ///< Positive {{ rx.upper() }} differential signal 1
+   logic  {{ rx }}1n; ///< Negative {{ rx.upper() }} differential signal 1
    /// @}
 
 
@@ -37,7 +38,7 @@ class uvma_{{ name }}_{{ rx }}_mon_trn_c extends uvml_mon_trn_c;
    extern function new(string name="uvma_{{ name }}_{{ rx }}_mon_trn");
 
    /**
-    * TODO Describe uvma_{{ name }}_{{ rx }}_mon_trn_c::get_metadata()
+    * Describes transaction as metadata for uvml_logs_metadata_logger_c.
     */
    extern function uvml_metadata_t get_metadata();
 

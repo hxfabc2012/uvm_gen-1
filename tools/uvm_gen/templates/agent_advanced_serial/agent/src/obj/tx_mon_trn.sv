@@ -8,7 +8,8 @@
 
 
 /**
- * Object rebuilt by the {{ full_name }} monitor's A Channel Master.  Analog of uvma_{{ name }}_{{ mode_1 }}_seq_item_c.
+ * {{ tx.upper() }} Phy Monitor Transaction sampled by monitor (uvma_{{ name }}_mon_c).
+ * Analog of uvma_{{ name }}_{{ tx }}_seq_item_c.
  */
 class uvma_{{ name }}_{{ tx }}_mon_trn_c extends uvml_mon_trn_c;
 
@@ -16,8 +17,8 @@ class uvma_{{ name }}_{{ tx }}_mon_trn_c extends uvml_mon_trn_c;
 
    /// @defgroup Data
    /// @{
-   logic  {{ tx }}p; ///< TODO Describe uvma_{{ name }}_{{ tx }}_mon_trn_c::{{ tx }}p
-   logic  {{ tx }}n; ///< TODO Describe uvma_{{ name }}_{{ tx }}_mon_trn_c::{{ tx }}n
+   logic  {{ tx }}p; ///< Positive {{ tx.upper() }} differential signal
+   logic  {{ tx }}n; ///< Negative {{ tx.upper() }} differential signal
    /// @}
 
 
@@ -33,7 +34,7 @@ class uvma_{{ name }}_{{ tx }}_mon_trn_c extends uvml_mon_trn_c;
    extern function new(string name="uvma_{{ name }}_{{ tx }}_mon_trn");
 
    /**
-    * TODO Describe uvma_{{ name }}_{{ tx }}_mon_trn_c::get_metadata()
+    * Describes transaction as metadata for uvml_logs_metadata_logger_c.
     */
    extern function uvml_metadata_t get_metadata();
 

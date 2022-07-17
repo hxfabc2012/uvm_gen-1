@@ -8,7 +8,8 @@
 
 
 /**
- * TODO Describe uvma_{{ name }}_{{ tx }}_drv_vseq_c
+ * Virtual Sequence taking in uvma_{{ name }}_seq_item_c instances and driving uvma_{{ name }}_{{ tx }}_drv_c with
+ * {{ tx.upper() }} Sequence Items (uvma_{{ name }}_{{ tx }}_seq_item_c).
  */
 class uvma_{{ name }}_{{ tx }}_drv_vseq_c extends uvma_{{ name }}_base_vseq_c;
 
@@ -20,42 +21,44 @@ class uvma_{{ name }}_{{ tx }}_drv_vseq_c extends uvma_{{ name }}_base_vseq_c;
    extern function new(string name="uvma_{{ name }}_{{ tx }}_drv_vseq");
 
    /**
-    * TODO Describe uvma_{{ name }}_{{ tx }}_drv_vseq_c::body()
+    * Infinite loop maintaining 2 threads:
+    * 1. Main sequence: wait for reset, link training, drive traffic
+    * 2. Reset trigger for mid-sim reset which resets the main sequence.
     */
    extern virtual task body();
 
    /**
-    * TODO Describe uvma_{{ name }}_{{ tx }}_drv_vseq_c::wait_for_reset()
+    * Wait for reset state change in #cntxt.
     */
    extern task wait_for_reset();
 
    /**
-    * TODO Describe uvma_{{ name }}_{{ tx }}_drv_vseq_c::post_reset_init()
+    * Waits for monitor to be ready for {{ tx.upper() }} bitstream.
     */
    extern task post_reset_init();
 
    /**
-    * TODO Describe uvma_{{ name }}_{{ tx }}_drv_vseq_c::drv_loop()
+    * Infinite loop taking in and converting uvma_{{ name }}_seq_item_c instances to uvma_{{ name }}_{{ tx }}_seq_item_c.
     */
    extern task drv_loop();
 
    /**
-    * TODO Describe uvma_{{ name }}_{{ tx }}_drv_vseq_c::reset_trigger()
+    * Waits for mid-sim reset state change in #cntxt.
     */
    extern task reset_trigger();
 
    /**
-    * TODO Describe uvma_{{ name }}_{{ tx }}_drv_vseq_c::process_seq_item()
+    * Modifies #seq_item before packing it.
     */
    extern function void process_seq_item(ref uvma_{{ name }}_seq_item_c seq_item);
 
    /**
-    * TODO Describe uvma_{{ name }}_{{ tx }}_drv_vseq_c::drive()
+    * Packs #seq_item and produces a uvma_{{ name }}_{{ tx }}_seq_item_c instance for each packed bit.
     */
    extern virtual task drive(ref uvma_{{ name }}_seq_item_c seq_item);
 
    /**
-    * TODO Describe uvma_{{ name }}_{{ tx }}_drv_vseq_c::wait_clk()
+    * Waits for the next {{ tx.upper() }} virtual interface clock edge.
     */
    extern task wait_clk();
 

@@ -8,25 +8,21 @@
 
 
 /**
- * Object rebuilt by the {{ full_name }} monitor.  Analog of uvma_{{ name }}_phy_seq_item_c.
+ * Phy Monitor Transaction sampled by monitor (uvma_{{ name }}_mon_c).
+ * Analog of uvma_{{ name }}_phy_seq_item_c.
  */
 class uvma_{{ name }}_phy_mon_trn_c extends uvml_mon_trn_c;
 
-   /// @defgroup Metadata
-   /// @{
-   uvma_{{ name }}_cfg_c           cfg      ; ///< Agent configuration handle
-   uvma_{{ name }}_direction_enum  direction; ///<
-   /// @}
+   uvma_{{ name }}_cfg_c  cfg; ///< Agent configuration handle
 
    /// @defgroup Data
    /// @{
-   logic  dp; ///<
-   logic  dn; ///<
+   logic  dp; ///< Positive differential signal
+   logic  dn; ///< Negative differential signal
    /// @}
 
 
    `uvm_object_utils_begin(uvma_{{ name }}_phy_mon_trn_c)
-      `uvm_field_enum(uvma_{{ name }}_direction_enum, direction, UVM_DEFAULT)
       `uvm_field_int(dp, UVM_DEFAULT)
       `uvm_field_int(dn, UVM_DEFAULT)
    `uvm_object_utils_end
@@ -38,7 +34,7 @@ class uvma_{{ name }}_phy_mon_trn_c extends uvml_mon_trn_c;
    extern function new(string name="uvma_{{ name }}_phy_mon_trn");
 
    /**
-    * TODO Describe uvma_{{ name }}_phy_mon_trn_c::get_metadata()
+    * Describes transaction as metadata for uvml_logs_metadata_logger_c.
     */
    extern function uvml_metadata_t get_metadata();
 

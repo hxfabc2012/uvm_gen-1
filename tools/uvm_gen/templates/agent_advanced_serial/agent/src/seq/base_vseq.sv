@@ -8,8 +8,8 @@
 
 
 /**
- * Abstract object from which all other {{ full_name }} agent sequences must extend.  Subclasses must be run on
- * {{ full_name }} Virtual Sequencer (uvma_{{ name }}_vsqr_c) instance.
+ * Abstract Virtual Sequence from which all other {{ full_name }} Virtual Sequences must extend.
+ * Classes extending this one must be run on {{ full_name }} Virtual Sequencer (uvma_{{ name }}_vsqr_c) instance.
  */
 class uvma_{{ name }}_base_vseq_c extends uvm_sequence #(
    .REQ(uvma_{{ name }}_seq_item_c),
@@ -38,39 +38,39 @@ class uvma_{{ name }}_base_vseq_c extends uvm_sequence #(
    extern virtual task pre_start();
 
    /**
-    * TODO Describe uvma_{{ name }}_base_vseq_c::upstream_get_next_item()
+    * Gets the next #req for transport sequences.
     */
    extern task upstream_get_next_item(ref uvm_sequence_item req);
 
    /**
-    * TODO Describe uvma_{{ name }}_base_vseq_c::upstream_item_done()
+    * Signals to the upstream sequencer that we're done driving #req.
     */
    extern task upstream_item_done(ref uvm_sequence_item req);
 
    /**
-    * TODO Describe uvma_{{ name }}_base_vseq_c::write_{{ tx }}_mon_trn()
+    * Writes #trn to #p_sequencer's {{ tx.upper() }} analysis port.
     */
    extern task write_{{ tx }}_mon_trn(ref uvma_{{ name }}_mon_trn_c trn);
 
    /**
-    * TODO Describe uvma_{{ name }}_base_vseq_c::write_{{ rx }}_mon_trn()
+    * Writes #trn to #p_sequencer's {{ rx.upper() }} analysis port.
     */
    extern task write_{{ rx }}_mon_trn(ref uvma_{{ name }}_mon_trn_c trn);
 
    /**
-    * TODO Describe uvma_{{ name }}_base_vseq_c::get_{{ tx }}_phy_mon_trn()
+    * Gets the next {{ tx.upper() }} Phy transaction from the Monitor.
     */
 {% if symmetric %}   extern task get_{{ tx }}_phy_mon_trn(output uvma_{{ name }}_phy_mon_trn_c trn);
 {% else %}   extern task get_{{ tx }}_phy_mon_trn(output uvma_{{ name }}_{{ tx }}_mon_trn_c trn);
 {% endif %}
    /**
-    * TODO Describe uvma_{{ name }}_base_vseq_c::get_{{ rx }}_phy_mon_trn()
+    * Gets the next {{ rx.upper() }} Phy transaction from the Monitor.
     */
 {% if symmetric %}   extern task get_{{ rx }}_phy_mon_trn(output uvma_{{ name }}_phy_mon_trn_c trn);
 {% else %}   extern task get_{{ rx }}_phy_mon_trn(output uvma_{{ name }}_{{ rx }}_mon_trn_c trn);
 {% endif %}
    /**
-    * TODO Describe uvma_{{ name }}_{{ rx }}_drv_vseq_c::wait_clk()
+   * Waits for the next virtual interface clock edge.{% if !symmetric %}  Pure virtual.{% endif %}
     */
    extern task wait_clk();
 

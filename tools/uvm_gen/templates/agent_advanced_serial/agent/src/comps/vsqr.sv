@@ -8,7 +8,7 @@
 
 
 /**
- * Component running {{ full_name }} sequences extending uvma_{{ name }}_base_vseq_c.
+ * Virtual Sequencer running {{ full_name }} Virtual Sequences extending uvma_{{ name }}_base_vseq_c.
  */
 class uvma_{{ name }}_vsqr_c extends uvml_vsqr_c #(
    .REQ(uvma_{{ name }}_seq_item_c),
@@ -23,26 +23,26 @@ class uvma_{{ name }}_vsqr_c extends uvml_vsqr_c #(
 
    /// @defgroup Components
    /// @{
-{% if symmetric %}   uvma_{{ name }}_phy_sqr_c  {{ tx }}_sequencer; ///< TODO Describe uvma_{{ name }}_vsqr_c::{{ tx }}_sequencer
-   uvma_{{ name }}_phy_sqr_c  {{ rx }}_sequencer; ///< TODO Describe uvma_{{ name }}_vsqr_c::{{ rx }}_sequencer
-{% else %}   uvma_{{ name }}_{{ tx }}_sqr_c  {{ tx }}_sequencer; ///< TODO Describe uvma_{{ name }}_vsqr_c::{{ tx }}_sequencer
-   uvma_{{ name }}_{{ rx }}_sqr_c  {{ rx }}_sequencer; ///< TODO Describe uvma_{{ name }}_vsqr_c::{{ rx }}_sequencer
+{% if symmetric %}   uvma_{{ name }}_phy_sqr_c  {{ tx }}_sequencer; ///< Sequencer handle for {{ tx.upper() }} Driver.
+   uvma_{{ name }}_phy_sqr_c  {{ rx }}_sequencer; ///< Sequencer handle for {{ rx.upper() }} Driver.
+{% else %}   uvma_{{ name }}_{{ tx }}_sqr_c  {{ tx }}_sequencer; ///< Sequencer handle for {{ tx.upper() }} Driver.
+   uvma_{{ name }}_{{ rx }}_sqr_c  {{ rx }}_sequencer; ///< Sequencer handle for {{ rx.upper() }} Driver.
 {% endif %}   /// @}
 
    /// @defgroup TLM
    /// @{
-   uvm_seq_item_pull_port #(uvm_sequence_item)  upstream_sqr_port; ///< TODO Describe uvma_{{ name }}_vsqr_c::upstream_sqr_port
-   uvm_analysis_port      #(uvma_{{ name }}_seq_item_c)  seq_item_ap ; ///< TODO Describe uvma_{{ name }}_vswr_c::seq_item_ap
-   uvm_analysis_port      #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_mon_trn_ap; ///< TODO Rename this
-   uvm_analysis_port      #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_mon_trn_ap; ///< TODO Rename this
-{% if symmetric %}   uvm_tlm_analysis_fifo  #(uvma_{{ name }}_phy_mon_trn_c)  {{ tx }}_phy_mon_trn_fifo  ; ///< TODO Describe uvma_{{ name }}_vswr_c::{{ tx }}_phy_mon_trn_fifo
-   uvm_tlm_analysis_fifo  #(uvma_{{ name }}_phy_mon_trn_c)  {{ rx }}_phy_mon_trn_fifo  ; ///< TODO Describe uvma_{{ name }}_vswr_c::{{ rx }}_phy_mon_trn_fifo
-   uvm_analysis_export    #(uvma_{{ name }}_phy_mon_trn_c)  {{ tx }}_phy_mon_trn_export; ///< TODO Describe uvma_{{ name }}_vswr_c::{{ tx }}_phy_mon_trn_export
-   uvm_analysis_export    #(uvma_{{ name }}_phy_mon_trn_c)  {{ rx }}_phy_mon_trn_export; ///< TODO Describe uvma_{{ name }}_vswr_c::{{ rx }}_phy_mon_trn_export
-{% else %}   uvm_tlm_analysis_fifo  #(uvma_{{ name }}_{{ tx }}_mon_trn_c)  {{ tx }}_phy_mon_trn_fifo  ; ///< TODO Describe uvma_{{ name }}_vswr_c::{{ tx }}_phy_mon_trn_fifo
-   uvm_tlm_analysis_fifo  #(uvma_{{ name }}_{{ rx }}_mon_trn_c)  {{ rx }}_phy_mon_trn_fifo  ; ///< TODO Describe uvma_{{ name }}_vswr_c::{{ rx }}_phy_mon_trn_fifo
-   uvm_analysis_export    #(uvma_{{ name }}_{{ tx }}_mon_trn_c)  {{ tx }}_phy_mon_trn_export; ///< TODO Describe uvma_{{ name }}_vswr_c::{{ tx }}_phy_mon_trn_export
-   uvm_analysis_export    #(uvma_{{ name }}_{{ rx }}_mon_trn_c)  {{ rx }}_phy_mon_trn_export; ///< TODO Describe uvma_{{ name }}_vswr_c::{{ rx }}_phy_mon_trn_export
+   uvm_seq_item_pull_port #(uvm_sequence_item)  upstream_sqr_port; ///< Upstream Sequencer Port for transport sequences.
+   uvm_analysis_port      #(uvma_{{ name }}_seq_item_c)  seq_item_ap ; ///< Port outputting DATA Sequence Items.
+   uvm_analysis_port      #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_mon_trn_ap; ///< Port outputting {{ tx.upper() }} Monitor Transactions.
+   uvm_analysis_port      #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_mon_trn_ap; ///< Port outputting {{ rx.upper() }} Monitor Transactions.
+{% if symmetric %}   uvm_tlm_analysis_fifo  #(uvma_{{ name }}_phy_mon_trn_c)  {{ tx }}_phy_mon_trn_fifo  ; ///< FIFO of {{ tx.upper() }} Phy Monitor Transactions obtained from uvma_{{ name }}_mon_c.
+   uvm_tlm_analysis_fifo  #(uvma_{{ name }}_phy_mon_trn_c)  {{ rx }}_phy_mon_trn_fifo  ; ///< FIFO of {{ rx.upper() }} Phy Monitor Transactions obtained from uvma_{{ name }}_mon_c.
+   uvm_analysis_export    #(uvma_{{ name }}_phy_mon_trn_c)  {{ tx }}_phy_mon_trn_export; ///< Port for {{ tx.upper() }} Phy Monitor Transactions obtained from uvma_{{ name }}_mon_c.
+   uvm_analysis_export    #(uvma_{{ name }}_phy_mon_trn_c)  {{ rx }}_phy_mon_trn_export; ///< Port for {{ rx.upper() }} Phy Monitor Transactions obtained from uvma_{{ name }}_mon_c.
+{% else %}   uvm_tlm_analysis_fifo  #(uvma_{{ name }}_{{ tx }}_mon_trn_c)  {{ tx }}_phy_mon_trn_fifo  ; ///< FIFO of {{ tx.upper() }} Phy Monitor Transactions obtained from uvma_{{ name }}_mon_c.
+   uvm_tlm_analysis_fifo  #(uvma_{{ name }}_{{ rx }}_mon_trn_c)  {{ rx }}_phy_mon_trn_fifo  ; ///< FIFO of {{ rx.upper() }} Phy Monitor Transactions obtained from uvma_{{ name }}_mon_c.
+   uvm_analysis_export    #(uvma_{{ name }}_{{ tx }}_mon_trn_c)  {{ tx }}_phy_mon_trn_export; ///< Port for {{ tx.upper() }} Phy Monitor Transactions obtained from uvma_{{ name }}_mon_c.
+   uvm_analysis_export    #(uvma_{{ name }}_{{ rx }}_mon_trn_c)  {{ rx }}_phy_mon_trn_export; ///< Port for {{ rx.upper() }} Phy Monitor Transactions obtained from uvma_{{ name }}_mon_c.
 {% endif %}   /// @}
 
 
@@ -58,12 +58,12 @@ class uvma_{{ name }}_vsqr_c extends uvml_vsqr_c #(
    extern function new(string name="uvma_{{ name }}_vsqr", uvm_component parent=null);
 
    /**
-    * Ensures cfg & cntxt handles are not null
+    * Ensures #cfg & #cntxt handles are not null
     */
    extern virtual function void build_phase(uvm_phase phase);
 
    /**
-    * TODO Describe uvma_{{ name }}_vsqr_c::connect_phase()
+    * Connects TLM Objects.
     */
    extern virtual function void connect_phase(uvm_phase phase);
 
@@ -78,17 +78,17 @@ class uvma_{{ name }}_vsqr_c extends uvml_vsqr_c #(
    extern function void get_cntxt();
 
    /**
-    *
+    * Creates sub-Components.
     */
    extern function void create_components();
 
    /**
-    *
+    * Creates TLM Ports.
     */
    extern function void create_ports();
 
    /**
-    *
+    * Connects TLM Ports to FIFOs.
     */
    extern function void connect_fifos();
 

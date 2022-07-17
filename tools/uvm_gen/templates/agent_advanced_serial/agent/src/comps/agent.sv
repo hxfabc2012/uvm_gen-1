@@ -14,33 +14,33 @@ class uvma_{{ name }}_agent_c extends uvml_agent_c;
 
    /// @defgroup Objects
    /// @{
-   uvma_{{ name }}_cfg_c    cfg  ; ///< Agent configuration handle
-   uvma_{{ name }}_cntxt_c  cntxt; ///< Agent context handle
+   uvma_{{ name }}_cfg_c    cfg  ; ///< Configuration handle.  Must be provided by component instantiating this Agent.
+   uvma_{{ name }}_cntxt_c  cntxt; ///< Context handle.  Can be provided by component instantiating this Agent.
    /// @}
 
    /// @defgroup Components
    /// @{
-   uvma_{{ name }}_vsqr_c       vsequencer; ///< TODO Describe uvma_{{ name }}_agent_c::vsequencer
-   uvma_{{ name }}_drv_c        driver    ; ///< TODO Describe uvma_{{ name }}_agent_c::driver
-   uvma_{{ name }}_mon_c        monitor   ; ///< TODO Describe uvma_{{ name }}_agent_c::monitor
-   uvma_{{ name }}_cov_model_c  cov_model ; ///< TODO Describe uvma_{{ name }}_agent_c::cov_model
-   uvma_{{ name }}_logger_c     logger    ; ///< TODO Describe uvma_{{ name }}_agent_c::logger
+   uvma_{{ name }}_vsqr_c       vsequencer; ///< Provides sequence items for #driver.
+   uvma_{{ name }}_drv_c        driver    ; ///< Drives Virtual Interface (uvma_{{ name }}_if) with stimulus obtained from #sequencer.
+   uvma_{{ name }}_mon_c        monitor   ; ///< Samples transactions from Virtual Interface (uvma_{{ name }}_if).
+   uvma_{{ name }}_cov_model_c  cov_model ; ///< Functional coverage model sampling #cfg, #cntxt and all transactions.
+   uvma_{{ name }}_logger_c     logger    ; ///< Transaction logger for #vsequencer, #driver and #monitor.
    /// @}
 
    /// @defgroup TLM
    /// @{
-   uvm_seq_item_pull_port #(uvm_sequence_item)  upstream_sqr_port; ///< TODO Describe uvma_{{ name }}_vsqr_c::upstream_sqr_port
-   uvm_analysis_port  #(uvma_{{ name }}_seq_item_c)  seq_item_ap  ; ///< TODO Describe uvma_{{ name }}_agent_c::seq_item_ap
-   uvm_analysis_port  #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_mon_trn_ap; ///< TODO Describe uvma_{{ name }}_agent_c::{{ tx }}_mon_trn_ap
-   uvm_analysis_port  #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_mon_trn_ap; ///< TODO Describe uvma_{{ name }}_agent_c::{{ rx }}_mon_trn_ap
-{% if symmetric %}   uvm_analysis_port  #(uvma_{{ name }}_phy_seq_item_c)  {{ tx }}_phy_seq_item_ap; ///< TODO Describe uvma_{{ name }}_agent_c::drv_{{ tx }}_a_ap
-   uvm_analysis_port  #(uvma_{{ name }}_phy_seq_item_c)  {{ rx }}_phy_seq_item_ap; ///< TODO Describe uvma_{{ name }}_agent_c::drv_{{ rx }}_a_ap
-   uvm_analysis_port  #(uvma_{{ name }}_phy_mon_trn_c )  {{ tx }}_phy_mon_trn_ap; ///< TODO Describe uvma_{{ name }}_agent_c::mon_{{ tx }}_a_ap
-   uvm_analysis_port  #(uvma_{{ name }}_phy_mon_trn_c )  {{ rx }}_phy_mon_trn_ap; ///< TODO Describe uvma_{{ name }}_agent_c::mon_{{ rx }}_a_ap
-{% else %}   uvm_analysis_port  #(uvma_{{ name }}_{{ tx }}_seq_item_c)  {{ tx }}_phy_seq_item_ap; ///< TODO Describe uvma_{{ name }}_agent_c::drv_{{ tx }}_a_ap
-   uvm_analysis_port  #(uvma_{{ name }}_{{ rx }}_seq_item_c)  {{ rx }}_phy_seq_item_ap; ///< TODO Describe uvma_{{ name }}_agent_c::drv_{{ rx }}_a_ap
-   uvm_analysis_port  #(uvma_{{ name }}_{{ tx }}_mon_trn_c )  {{ tx }}_phy_mon_trn_ap; ///< TODO Describe uvma_{{ name }}_agent_c::mon_{{ tx }}_a_ap
-   uvm_analysis_port  #(uvma_{{ name }}_{{ rx }}_mon_trn_c )  {{ rx }}_phy_mon_trn_ap; ///< TODO Describe uvma_{{ name }}_agent_c::mon_{{ rx }}_a_ap
+   uvm_seq_item_pull_port #(uvm_sequence_item)  upstream_sqr_port; ///< Upstream Sequencer Port for transport sequences.
+   uvm_analysis_port  #(uvma_{{ name }}_seq_item_c)  seq_item_ap  ; ///< Port outputting DATA Sequence Items.
+   uvm_analysis_port  #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_mon_trn_ap; ///< Port outputting {{ tx.upper() }} Monitor Transactions.
+   uvm_analysis_port  #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_mon_trn_ap; ///< Port outputting {{ rx.upper() }} Monitor Transactions.
+{% if symmetric %}   uvm_analysis_port  #(uvma_{{ name }}_phy_seq_item_c)  {{ tx }}_phy_seq_item_ap; ///< Port outputting {{ tx.upper() }} Phy Sequence Items from #driver.
+   uvm_analysis_port  #(uvma_{{ name }}_phy_seq_item_c)  {{ rx }}_phy_seq_item_ap; ///< Port outputting {{ rx.upper() }} Phy Sequence Items from #driver.
+   uvm_analysis_port  #(uvma_{{ name }}_phy_mon_trn_c )  {{ tx }}_phy_mon_trn_ap; ///< Port outputting {{ tx.upper() }} Phy Monitor Transactions from #monitor.
+   uvm_analysis_port  #(uvma_{{ name }}_phy_mon_trn_c )  {{ rx }}_phy_mon_trn_ap; ///< Port outputting {{ rx.upper() }} Phy Monitor Transactions from #monitor.
+{% else %}   uvm_analysis_port  #(uvma_{{ name }}_{{ tx }}_seq_item_c)  {{ tx }}_phy_seq_item_ap; ///< Port outputting {{ tx.upper() }} Phy Sequence Items from #driver.
+   uvm_analysis_port  #(uvma_{{ name }}_{{ rx }}_seq_item_c)  {{ rx }}_phy_seq_item_ap; ///< Port outputting {{ rx.upper() }} Phy Sequence Items from #driver.
+   uvm_analysis_port  #(uvma_{{ name }}_{{ tx }}_mon_trn_c )  {{ tx }}_phy_mon_trn_ap; ///< Port outputting {{ tx.upper() }} Phy Monitor Transactions from #monitor.
+   uvm_analysis_port  #(uvma_{{ name }}_{{ rx }}_mon_trn_c )  {{ rx }}_phy_mon_trn_ap; ///< Port outputting {{ rx.upper() }} Phy Monitor Transactions from #monitor.
 {% endif %}   /// @}
 
 
@@ -68,7 +68,7 @@ class uvma_{{ name }}_agent_c extends uvml_agent_c;
    extern virtual function void connect_phase(uvm_phase phase);
 
    /**
-    * TODO Describe uvma_{{ name }}_agent_c::run_phase()
+    * Starts Virtual Sequences on #vsequencer vital both for driving and monitoring.
     */
    extern virtual task run_phase(uvm_phase phase);
 
@@ -83,7 +83,7 @@ class uvma_{{ name }}_agent_c extends uvml_agent_c;
    extern function void get_and_set_cntxt();
 
    /**
-    * Uses uvm_config_db to retrieve the Virtual Interface (vif) associated with this agent.
+    * Uses uvm_config_db to retrieve the Virtual Interface (vif) assigned to this agent.
     */
    extern function void retrieve_vif();
 
@@ -93,47 +93,42 @@ class uvma_{{ name }}_agent_c extends uvml_agent_c;
    extern function void create_components();
 
    /**
-    * TODO Describe uvma_{{ name }}_agent_c::create_analysis_ports()
-    */
-    extern function void create_analysis_ports();
-
-   /**
-    * Connects sequencer to monitor and driver's TLM ports.
+    * Connects #vsequencer to #monitor and #driver's TLM ports.
     */
    extern function void connect_sequencer;
 
    /**
-    * Connects agent's TLM ports to driver's and monitor's.
+    * Connects agent's TLM ports to #driver's and #monitor's.
     */
    extern function void connect_analysis_ports();
 
    /**
-    * Connects coverage model to monitor and driver's analysis ports.
+    * Connects #cov_model to #monitor and #driver's analysis ports.
     */
    extern function void connect_cov_model();
 
    /**
-    * Connects transaction logger to monitor and driver's analysis ports.
+    * Connects #logger to #monitor and #driver's analysis ports.
     */
    extern function void connect_logger();
 
    /**
-    * TODO Describe uvma_{{ name }}_agent_c::start_mon_vseq()
+    * Starts Monitoring Virtual Sequence.
     */
    extern task start_mon_vseq();
 
    /**
-    * TODO Describe uvma_{{ name }}_agent_c::start_idle_vseq()
+    * Starts IDLE Generating Virtual Sequence.
     */
    extern task start_idle_vseq();
 
    /**
-    * TODO Describe uvma_{{ name }}_agent_c::start_drv_vseq_{{ mode_1 }}()
+    * Starts {{ tx.upper() }} Driver Virtual Sequence.
     */
    extern task start_drv_vseq_{{ mode_1 }}();
 
    /**
-    * TODO Describe uvma_{{ name }}_agent_c::start_drv_vseq_{{ mode_2 }}()
+    * Starts {{ rx.upper() }} Driver Virtual Sequence.
     */
    extern task start_drv_vseq_{{ mode_2 }}();
 
@@ -150,11 +145,10 @@ endfunction : new
 function void uvma_{{ name }}_agent_c::build_phase(uvm_phase phase);
 
    super.build_phase(phase);
-   get_and_set_cfg      ();
-   get_and_set_cntxt    ();
-   retrieve_vif         ();
-   create_components    ();
-   create_analysis_ports();
+   get_and_set_cfg  ();
+   get_and_set_cntxt();
+   retrieve_vif     ();
+   create_components();
 
 endfunction : build_phase
 
@@ -241,20 +235,6 @@ function void uvma_{{ name }}_agent_c::create_components();
    logger     = uvma_{{ name }}_logger_c   ::type_id::create("logger"    , this);
 
 endfunction : create_components
-
-
-function void uvma_{{ name }}_agent_c::create_analysis_ports();
-
-   upstream_sqr_port = new("upstream_sqr_port", this);
-   seq_item_ap       = new("seq_item_ap"      , this);
-   {{ tx }}_mon_trn_ap      = new("{{ tx }}_mon_trn_ap"     , this);
-   {{ rx }}_mon_trn_ap      = new("{{ rx }}_mon_trn_ap"     , this);
-   {{ tx }}_phy_mon_trn_ap  = new("{{ tx }}_phy_mon_trn_ap" , this);
-   {{ rx }}_phy_mon_trn_ap  = new("{{ rx }}_phy_mon_trn_ap" , this);
-   {{ tx }}_phy_seq_item_ap = new("{{ tx }}_phy_seq_item_ap", this);
-   {{ rx }}_phy_seq_item_ap = new("{{ rx }}_phy_seq_item_ap", this);
-
-endfunction : create_analysis_ports
 
 
 function void uvma_{{ name }}_agent_c::connect_sequencer();
