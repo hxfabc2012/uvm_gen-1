@@ -42,6 +42,7 @@ dependencies:
 hdl-src:
   top-constructs: ["uvmt_${name}_tb", "uvml_sim_summary"]
   directories: [".", "tb", "tests"]
+  top-files: [ "uvmt_${name}_pkg.sv" ]
   test-paths: ["tests"]
   test-name-template: "uvmt_${name}_{{ name }}_test_c"
   flist:

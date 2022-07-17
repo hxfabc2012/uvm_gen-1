@@ -34,7 +34,7 @@ dependencies:
 
 hdl-src:
   directories: [".", "comps", "obj", "seq"]
-  tests-name-template: ""
+  top-files: [ "uvma_{{ name }}_pkg.sv" ]
   flist:
     metrics : "uvma_{{ name }}_pkg.flist"
     riviera : "uvma_{{ name }}_pkg.flist"

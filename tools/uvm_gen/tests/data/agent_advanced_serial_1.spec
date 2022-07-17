@@ -1,7 +1,7 @@
 Datum Technology Corporation
 
-bsb
-Basic Serial Bus
+aas1
+Advanced Agent Serial Template Test - Serial Symmetric SDR
 y
 n
 mstr

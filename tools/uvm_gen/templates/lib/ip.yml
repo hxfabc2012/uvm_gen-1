@@ -15,7 +15,7 @@ ip:
   block-diagram: ""
   languages: ["sv"]
   simulators-supported:
-    - { name: "vivado", version: "2021.1" }
+    - { name: "vivado", version: "2022.1" }
   tags: []
   copyright-holders: ["${name_of_copyright_owner}"]
   licenses: ["SHL-2.1"]
@@ -32,7 +32,7 @@ dependencies:
 
 hdl-src:
   directories: [ ".", "comps", "obj", "seq" ]
-  tests-name-template: ""
+  top-files: [ "uvml_${name}_pkg.sv" ]
   flist:
     metrics : "uvml_${name}_pkg.flist"
     riviera : "uvml_${name}_pkg.flist"

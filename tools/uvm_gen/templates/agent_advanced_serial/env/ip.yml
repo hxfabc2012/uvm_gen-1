@@ -36,6 +36,7 @@ dependencies:
 
 hdl-src:
   directories: [".", "comps", "obj", "seq"]
+  top-files: [ "uvme_{{ name }}_st_pkg.sv" ]
   flist:
     metrics : "uvme_{{ name }}_st_pkg.flist"
     riviera : "uvme_{{ name }}_st_pkg.flist"
