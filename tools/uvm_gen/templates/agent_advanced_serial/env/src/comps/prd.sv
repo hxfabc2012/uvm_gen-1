@@ -164,10 +164,6 @@ endfunction : get_cntxt
 
 function void uvme_{{ name }}_st_prd_c::create_tlm_objects();
 
-   {{ tx }}_in_export = new("{{ tx }}_in_export", this);
-   {{ rx }}_in_export = new("{{ rx }}_in_export", this);
-   {{ mode_1 }}_in_export = new("{{ mode_1 }}_in_export", this);
-   {{ mode_2 }}_in_export = new("{{ mode_2 }}_in_export", this);
    {{ tx }}_in_fifo = new("{{ tx }}_in_fifo", this);
    {{ rx }}_in_fifo = new("{{ rx }}_in_fifo", this);
    {{ mode_1 }}_in_fifo = new("{{ mode_1 }}_in_fifo", this);
@@ -182,10 +178,10 @@ endfunction : create_tlm_objects
 
 function void uvme_{{ name }}_st_prd_c::connect_ports();
 
-   {{ tx }}_in_export.connect({{ tx }}_in_fifo.analysis_export);
-   {{ rx }}_in_export.connect({{ rx }}_in_fifo.analysis_export);
-   {{ mode_1 }}_in_export.connect({{ mode_1 }}_in_fifo.analysis_export);
-   {{ mode_2 }}_in_export.connect({{ mode_2 }}_in_fifo.analysis_export);
+   {{ tx }}_in_export = {{ tx }}_in_fifo.analysis_export;
+   {{ rx }}_in_export = {{ rx }}_in_fifo.analysis_export;
+   {{ mode_1 }}_in_export = {{ mode_1 }}_in_fifo.analysis_export;
+   {{ mode_2 }}_in_export = {{ mode_2 }}_in_fifo.analysis_export;
 
 endfunction : connect_ports
 
@@ -198,13 +194,15 @@ task uvme_{{ name }}_st_prd_c::process_{{ tx }}();
       {{ tx }}_out_trn = uvma_{{ name }}_mon_trn_c::type_id::create("{{ tx }}_out_trn");
       {{ tx }}_out_trn.copy({{ tx }}_in_trn);
       {{ tx }}_out_trn.set_initiator(this);
-      if (cntxt.{{ mode_1 }}_cntxt.reset_state != UVML_RESET_STATE_POST_RESET) begin
-         {{ tx }}_out_trn.set_may_drop(1);
+      if ({{ tx }}_out_trn.header == UVMA_{{ name.upper() }}_HEADER_DATA) begin
+         if (cntxt.{{ mode_1 }}_cntxt.reset_state != UVML_RESET_STATE_POST_RESET) begin
+            {{ tx }}_out_trn.set_may_drop(1);
+         end
+         if ({{ tx }}_in_trn.has_error()) begin
+            {{ tx }}_out_trn.set_may_drop(1);
+         end
+         {{ tx }}_out_ap.write({{ tx }}_out_trn);
       end
-      if ({{ tx }}_out_trn.header == UVMA_{{ name.upper() }}_HEADER_IDLE) begin
-         {{ tx }}_out_trn.set_may_drop(1);
-      end
-      {{ tx }}_out_ap.write({{ tx }}_out_trn);
    end
 
 endtask : process_{{ tx }}
@@ -218,13 +216,15 @@ task uvme_{{ name }}_st_prd_c::process_{{ rx }}();
       {{ rx }}_out_trn = uvma_{{ name }}_mon_trn_c::type_id::create("{{ rx }}_out_trn");
       {{ rx }}_out_trn.copy({{ rx }}_in_trn);
       {{ rx }}_out_trn.set_initiator(this);
-      if (cntxt.{{ mode_2 }}_cntxt.reset_state != UVML_RESET_STATE_POST_RESET) begin
-         {{ rx }}_out_trn.set_may_drop(1);
+      if ({{ rx }}_out_trn.header == UVMA_{{ name.upper() }}_HEADER_DATA) begin
+         if (cntxt.{{ mode_2 }}_cntxt.reset_state != UVML_RESET_STATE_POST_RESET) begin
+            {{ rx }}_out_trn.set_may_drop(1);
+         end
+         if ({{ rx }}_in_trn.has_error()) begin
+            {{ rx }}_out_trn.set_may_drop(1);
+         end
+         {{ rx }}_out_ap.write({{ rx }}_out_trn);
       end
-      if ({{ rx }}_out_trn.header == UVMA_{{ name.upper() }}_HEADER_IDLE) begin
-         {{ rx }}_out_trn.set_may_drop(1);
-      end
-      {{ rx }}_out_ap.write({{ rx }}_out_trn);
    end
 
 endtask : process_{{ rx }}
@@ -241,13 +241,15 @@ task uvme_{{ name }}_st_prd_c::process_{{ mode_1 }}();
       {{ mode_1 }}_out_trn.data   = {{ mode_1 }}_in_trn.data  ;
       {{ mode_1 }}_out_trn.tail   = {{ mode_1 }}_in_trn.tail  ;
       {{ mode_1 }}_out_trn.set_initiator(this);
-      if (cntxt.passive_cntxt.reset_state != UVML_RESET_STATE_POST_RESET) begin
-         {{ mode_1 }}_out_trn.set_may_drop(1);
+      if ({{ mode_1 }}_out_trn.header == UVMA_{{ name.upper() }}_HEADER_DATA) begin
+         if (cntxt.passive_cntxt.reset_state != UVML_RESET_STATE_POST_RESET) begin
+            {{ mode_1 }}_out_trn.set_may_drop(1);
+         end
+         if ({{ mode_1 }}_in_trn.has_error()) begin
+            {{ mode_1 }}_out_trn.set_may_drop(1);
+         end
+         {{ mode_1 }}_out_ap.write({{ mode_1 }}_out_trn);
       end
-      if ({{ mode_1 }}_out_trn.header == UVMA_{{ name.upper() }}_HEADER_IDLE) begin
-         {{ mode_1 }}_out_trn.set_may_drop(1);
-      end
-      {{ mode_1 }}_out_ap.write({{ mode_1 }}_out_trn);
    end
 
 endtask : process_{{ mode_1 }}
@@ -264,13 +266,15 @@ task uvme_{{ name }}_st_prd_c::process_{{ mode_2 }}();
       {{ mode_2 }}_out_trn.data   = {{ mode_2 }}_in_trn.data  ;
       {{ mode_2 }}_out_trn.tail   = {{ mode_2 }}_in_trn.tail  ;
       {{ mode_2 }}_out_trn.set_initiator(this);
-      if (cntxt.passive_cntxt.reset_state != UVML_RESET_STATE_POST_RESET) begin
-         {{ mode_2 }}_out_trn.set_may_drop(1);
+      if ({{ mode_2 }}_out_trn.header == UVMA_{{ name.upper() }}_HEADER_DATA) begin
+         if (cntxt.passive_cntxt.reset_state != UVML_RESET_STATE_POST_RESET) begin
+            {{ mode_2 }}_out_trn.set_may_drop(1);
+         end
+         if ({{ mode_2 }}_in_trn.has_error()) begin
+            {{ mode_2 }}_out_trn.set_may_drop(1);
+         end
+         {{ mode_2 }}_out_ap.write({{ mode_2 }}_out_trn);
       end
-      if ({{ mode_2 }}_out_trn.header == UVMA_{{ name.upper() }}_HEADER_IDLE) begin
-         {{ mode_2 }}_out_trn.set_may_drop(1);
-      end
-      {{ mode_2 }}_out_ap.write({{ mode_2 }}_out_trn);
    end
 
 endtask : process_{{ mode_2 }}

@@ -53,8 +53,9 @@ task uvma_{{ name }}_idle_vseq_c::idle_loop();
 
    forever begin
       `uvm_create_on(idle_seq_item, p_sequencer)
-      idle_seq_item.header = UVMA_{{ name.upper() }}_HEADER_IDLE;
-      `uvm_send_pri(idle_seq_item, `UVMA_{{ name.upper() }}_IDLE_SEQ_ITEM_PRI)
+      `uvm_rand_send_pri_with(idle_seq_item, `UVMA_{{ name.upper() }}_IDLE_SEQ_ITEM_PRI, {
+         header == UVMA_{{ name.upper() }}_HEADER_IDLE;
+      })
    end
 
 endtask : idle_loop

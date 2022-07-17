@@ -62,20 +62,20 @@ task uvme_{{ name }}_st_rand_stim_vseq_c::body();
 
    `uvm_info("{{ name.upper() }}_ST_RAND_STIM_VSEQ", "Starting sequence", UVM_MEDIUM)
    fork
-      begin : {{ tx }}
+      begin
          `uvm_info("{{ name.upper() }}_ST_RAND_STIM_VSEQ_{{ tx.upper() }}", "Starting stimulus", UVM_LOW)
          for (int unsigned ii=0; ii<num_{{ tx }}_seq_items; ii++) begin
-            `uvm_info("{{ name.upper() }}_ST_RAND_STIM_VSEQ_{{ tx.upper() }}", $sformatf("Starting item %0d of %0d", (ii+1), num_{{ tx }}_seq_items), UVM_HIGH)
+            `uvm_info("{{ name.upper() }}_ST_RAND_STIM_VSEQ_{{ tx.upper() }}", $sformatf("Starting item %0d/%0d", (ii+1), num_{{ tx }}_seq_items), UVM_HIGH)
             `uvm_do_on_pri({{ tx }}_seq_item, p_sequencer.{{ mode_1 }}_vsequencer, sqr_priority)
-            `uvm_info("{{ name.upper() }}_ST_RAND_STIM_VSEQ_{{ tx.upper() }}", $sformatf("Finished item %0d of %0d", (ii+1), num_{{ tx }}_seq_items), UVM_HIGH)
+            `uvm_info("{{ name.upper() }}_ST_RAND_STIM_VSEQ_{{ tx.upper() }}", $sformatf("Finished item %0d/%0d", (ii+1), num_{{ tx }}_seq_items), UVM_HIGH)
          end
       end
-      begin : {{ rx }}
+      begin
          `uvm_info("{{ name.upper() }}_ST_RAND_STIM_VSEQ_{{ rx.upper() }}", "Starting stimulus", UVM_LOW)
-         for (int unsigned ii=0; ii<num_{{ rx }}_seq_items; ii++) begin
-            `uvm_info("{{ name.upper() }}_ST_RAND_STIM_VSEQ_{{ rx.upper() }}", $sformatf("Starting item %0d of %0d", (ii+1), num_{{ rx }}_seq_items), UVM_HIGH)
+         for (int unsigned jj=0; jj<num_{{ rx }}_seq_items; jj++) begin
+            `uvm_info("{{ name.upper() }}_ST_RAND_STIM_VSEQ_{{ rx.upper() }}", $sformatf("Starting item %0d/%0d", (jj+1), num_{{ rx }}_seq_items), UVM_HIGH)
             `uvm_do_on_pri({{ rx }}_seq_item, p_sequencer.{{ mode_2 }}_vsequencer, sqr_priority)
-            `uvm_info("{{ name.upper() }}_ST_RAND_STIM_VSEQ_{{ rx.upper() }}", $sformatf("Finished item %0d of %0d", (ii+1), num_{{ rx }}_seq_items), UVM_HIGH)
+            `uvm_info("{{ name.upper() }}_ST_RAND_STIM_VSEQ_{{ rx.upper() }}", $sformatf("Finished item %0d/%0d", (jj+1), num_{{ rx }}_seq_items), UVM_HIGH)
          end
       end
    join

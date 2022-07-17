@@ -27,8 +27,8 @@ class uvme_{{ name }}_st_env_c extends uvml_env_c;
 
    /// @defgroup Components
    /// @{
-   uvme_{{ name }}_st_prd_c   predictor; ///<
-   uvme_{{ name }}_st_sb_c    sb; ///<
+   uvme_{{ name }}_st_prd_c   predictor ; ///<
+   uvme_{{ name }}_st_sb_c    sb        ; ///<
    uvme_{{ name }}_st_vsqr_c  vsequencer; ///<
    /// @}
 

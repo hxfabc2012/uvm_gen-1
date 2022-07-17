@@ -7,7 +7,7 @@
 `define __UVME_{{ name.upper() }}_ST_CONSTANTS_SV__
 
 
-const int unsigned uvme_{{ name }}_st_rand_stim_default_num_seq_items =   100; ///<
+const int unsigned uvme_{{ name }}_st_rand_stim_default_num_seq_items =    10; ///<
 const int unsigned uvme_{{ name }}_st_rand_stim_default_sqr_priority  = 1_000; ///<
 
 

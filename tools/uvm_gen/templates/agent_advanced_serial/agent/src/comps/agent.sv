@@ -302,12 +302,12 @@ endfunction : connect_cov_model
 function void uvma_{{ name }}_agent_c::connect_logger();
 
    seq_item_ap.connect(logger.seq_item_export);
-   {{ tx }}_mon_trn_ap     .connect(cov_model.{{ tx }}_mon_trn_export     );
-   {{ rx }}_mon_trn_ap     .connect(cov_model.{{ rx }}_mon_trn_export     );
-   {{ tx }}_phy_seq_item_ap.connect(cov_model.{{ tx }}_phy_seq_item_export);
-   {{ rx }}_phy_seq_item_ap.connect(cov_model.{{ rx }}_phy_seq_item_export);
-   {{ tx }}_phy_mon_trn_ap .connect(cov_model.{{ tx }}_phy_mon_trn_export );
-   {{ rx }}_phy_mon_trn_ap .connect(cov_model.{{ rx }}_phy_mon_trn_export );
+   {{ tx }}_mon_trn_ap     .connect(logger.{{ tx }}_mon_trn_export     );
+   {{ rx }}_mon_trn_ap     .connect(logger.{{ rx }}_mon_trn_export     );
+   {{ tx }}_phy_seq_item_ap.connect(logger.{{ tx }}_phy_seq_item_export);
+   {{ rx }}_phy_seq_item_ap.connect(logger.{{ rx }}_phy_seq_item_export);
+   {{ tx }}_phy_mon_trn_ap .connect(logger.{{ tx }}_phy_mon_trn_export );
+   {{ rx }}_phy_mon_trn_ap .connect(logger.{{ rx }}_phy_mon_trn_export );
 
 endfunction : connect_logger
 

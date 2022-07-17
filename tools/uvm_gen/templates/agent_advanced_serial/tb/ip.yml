@@ -37,7 +37,7 @@ hdl-src:
   top-constructs: ["uvmt_{{ name }}_st_tb", "uvml_sim_summary"]
   directories: [".", "tb", "tests"]
   test-paths: ["tests"]
-  test-name-template: "uvmt_{{ name }}_st_{{ name }}_test_c"
+  test-name-template: "uvmt_{{ name }}_st_{{ '{{' }} name {{ '}}' }}_test_c"
   flist:
     metrics : "uvmt_{{ name }}_st_pkg.flist"
     riviera : "uvmt_{{ name }}_st_pkg.flist"

@@ -69,7 +69,7 @@ function void uvma_{{ name }}_mon_fsm_cntxt_c::reset();
    trn_end               = 0;
    data_q      .delete();
    timestamps_q.delete();
-   trn_data = new[32];
+   trn_data = new[uvma_{{ name }}_trn_length];
 
 endfunction : reset
 

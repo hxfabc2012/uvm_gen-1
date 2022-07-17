@@ -64,7 +64,7 @@ task uvma_{{ name }}_training_vseq_c::do_training_{{ tx }}();
       `uvm_rand_send_pri_with({{ tx }}_seq_item, `UVMA_{{ name.upper() }}_{{ tx.upper() }}_DRV_SEQ_ITEM_PRI, {
          dp == 0;
       })
-   end while (cntxt.{{ tx }}_mon_fsm_cntxt.state != UVMA_{{ name.upper() }}_MON_FSM_SYNCED);
+   end while (cntxt.{{ tx }}_mon_fsm_cntxt.state != UVMA_{{ name.upper() }}_MON_FSM_SYNCING);
 {% else %}   uvma_{{ name }}_{{ tx }}_seq_item_c  {{ tx }}_seq_item;
 
    do begin
@@ -72,7 +72,7 @@ task uvma_{{ name }}_training_vseq_c::do_training_{{ tx }}();
       `uvm_rand_send_pri_with({{ tx }}_seq_item, `UVMA_{{ name.upper() }}_{{ tx.upper() }}_DRV_SEQ_ITEM_PRI, {
          {{ tx }}p == 0;
       })
-   end while (cntxt.{{ tx }}_mon_fsm_cntxt.state != UVMA_{{ name.upper() }}_MON_FSM_SYNCED);
+   end while (cntxt.{{ tx }}_mon_fsm_cntxt.state != UVMA_{{ name.upper() }}_MON_FSM_SYNCING);
 {% endif %}
 endtask : do_training_{{ tx }}
 
@@ -86,7 +86,7 @@ task uvma_{{ name }}_training_vseq_c::do_training_{{ rx }}();
       `uvm_rand_send_pri_with({{ rx }}_seq_item, `UVMA_{{ name.upper() }}_{{ rx.upper() }}_DRV_SEQ_ITEM_PRI, {
          dp == 0;
       })
-   end while (cntxt.{{ rx }}_mon_fsm_cntxt.state != UVMA_{{ name.upper() }}_MON_FSM_SYNCED);
+   end while (cntxt.{{ rx }}_mon_fsm_cntxt.state != UVMA_{{ name.upper() }}_MON_FSM_SYNCING);
 {% else %}   uvma_{{ name }}_{{ rx }}_seq_item_c  {{ rx }}_seq_item;
 
    do begin
@@ -95,7 +95,7 @@ task uvma_{{ name }}_training_vseq_c::do_training_{{ rx }}();
          {{ rx }}0p == 0;
          {{ rx }}1p == 0;
       })
-   end while (cntxt.{{ rx }}_mon_fsm_cntxt.state != UVMA_{{ name.upper() }}_MON_FSM_SYNCED);
+   end while (cntxt.{{ rx }}_mon_fsm_cntxt.state != UVMA_{{ name.upper() }}_MON_FSM_SYNCING);
 {% endif %}
 endtask : do_training_{{ rx }}
 

@@ -24,7 +24,6 @@ class uvme_{{ name }}_st_cov_model_c extends uvma_{{ name }}_cov_model_c;
       is_active_cpt       : coverpoint cfg.is_active      ;
       reset_type_cpt      : coverpoint cfg.reset_type     ;
       trn_log_enabled_cpt : coverpoint cfg.trn_log_enabled;
-      big_endian_cpt      : coverpoint cfg.big_endian     ;
       drv_mode_cpt        : coverpoint cfg.drv_mode       ;
    endgroup : {{ name }}_st_cfg_cg
 

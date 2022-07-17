@@ -172,14 +172,14 @@ endfunction: create_components
 
 function void uvme_{{ name }}_st_sb_c::connect_ports();
 
-   {{ tx }}_act_export.connect(sb_{{ tx }}.act_export);
-   {{ tx }}_exp_export.connect(sb_{{ tx }}.exp_export);
-   {{ rx }}_act_export.connect(sb_{{ rx }}.act_export);
-   {{ rx }}_exp_export.connect(sb_{{ rx }}.exp_export);
-   {{ mode_1 }}_act_export.connect(sb_{{ mode_1 }}.act_export);
-   {{ mode_1 }}_exp_export.connect(sb_{{ mode_1 }}.exp_export);
-   {{ mode_2 }}_act_export.connect(sb_{{ mode_2 }}.act_export);
-   {{ mode_2 }}_exp_export.connect(sb_{{ mode_2 }}.exp_export);
+   {{ tx }}_act_export = sb_{{ tx }}.act_export;
+   {{ tx }}_exp_export = sb_{{ tx }}.exp_export;
+   {{ rx }}_act_export = sb_{{ rx }}.act_export;
+   {{ rx }}_exp_export = sb_{{ rx }}.exp_export;
+   {{ mode_1 }}_act_export = sb_{{ mode_1 }}.act_export;
+   {{ mode_1 }}_exp_export = sb_{{ mode_1 }}.exp_export;
+   {{ mode_2 }}_act_export = sb_{{ mode_2 }}.act_export;
+   {{ mode_2 }}_exp_export = sb_{{ mode_2 }}.exp_export;
 
 endfunction: connect_ports
 

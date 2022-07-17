@@ -27,10 +27,10 @@ class uvma_{{ name }}_mon_trn_c extends uvml_mon_trn_c;
 
 
    `uvm_object_utils_begin(uvma_{{ name }}_mon_trn_c)
-      `uvm_field_enum(uvma_{{ name }}_direction_enum, direction, UVM_DEFAULT)
+      `uvm_field_enum(uvma_{{ name }}_direction_enum, direction, UVM_DEFAULT + UVM_NOCOMPARE + UVM_NOPACK)
       `uvm_field_enum(uvma_{{ name }}_header_enum, header, UVM_DEFAULT)
-      `uvm_field_int(data , UVM_DEFAULT          )
-      `uvm_field_int(tail , UVM_DEFAULT + UVM_BIN)
+      `uvm_field_int(data, UVM_DEFAULT          )
+      `uvm_field_int(tail, UVM_DEFAULT + UVM_BIN)
    `uvm_object_utils_end
 
 
@@ -120,7 +120,7 @@ function bit uvma_{{ name }}_mon_trn_c::self_check();
       end
    end
    if (tail !== uvma_{{ name }}_tail_symbol) begin
-      `uvm_error("{{ name.upper() }}_MON_TRN", $sformatf("Invalid tail symbol: %b", data))
+      `uvm_error("{{ name.upper() }}_MON_TRN", $sformatf("Invalid tail symbol: %b", tail))
       self_check = 0;
    end
 

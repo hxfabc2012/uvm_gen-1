@@ -34,7 +34,6 @@ class uvma_{{ name }}_cfg_c extends uvm_object;
 
    /// @defgroup Protocol Options
    /// @{
-   rand bit  big_endian; ///<
    rand uvma_{{ name }}_mode_enum  drv_mode; ///< TODO Describe uvma_{{ name }}_cfg_c::drv_mode
    /// @}
 
@@ -55,9 +54,7 @@ class uvma_{{ name }}_cfg_c extends uvm_object;
       `uvm_field_enum(uvm_sequencer_arb_mode , sqr_arb_mode     , UVM_DEFAULT)
       `uvm_field_int (                         cov_model_enabled, UVM_DEFAULT)
       `uvm_field_int (                         trn_log_enabled  , UVM_DEFAULT)
-
-      `uvm_field_int (                           big_endian, UVM_DEFAULT)
-      `uvm_field_enum(uvma_{{ name }}_mode_enum, drv_mode  , UVM_DEFAULT)
+      `uvm_field_enum(uvma_{{ name }}_mode_enum, drv_mode, UVM_DEFAULT)
    `uvm_object_utils_end
 
 

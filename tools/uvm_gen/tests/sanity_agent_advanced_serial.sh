@@ -20,7 +20,7 @@ cd ../../sim
 #mio install uvmt_bsb_st -u admin -p Qc5SgRpk6cjsAjr
 mio cmp  uvmt_bsb_st
 mio elab uvmt_bsb_st
-#mio sim  uvmt_bsb_st -t rand_stim -s 1
+mio sim  uvmt_bsb_st -t rand_stim -s 1 -v medium -w -c
 
 # 3. Gather sim results
 #mio results uvmt_bsb_st advanced_agent_serial

@@ -101,9 +101,14 @@ endtask : wait_for_reset
 task uvma_{{ name }}_{{ tx }}_drv_vseq_c::post_reset_init();
 
    uvma_{{ name }}_training_vseq_c  training_vseq;
+   `uvm_create_on(training_vseq, p_sequencer)
    `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", {"Starting training sequence:\n", training_vseq.sprint()}, UVM_HIGH)
-   `uvm_do_on(training_vseq, p_sequencer)
+   `uvm_do(training_vseq)
    `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", {"Finished training sequence:\n", training_vseq.sprint()}, UVM_HIGH)
+   `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", "Waiting for SYNCING state", UVM_HIGH)
+   wait (cntxt.{{ tx }}_mon_fsm_cntxt.state == UVMA_{{ name.upper() }}_MON_FSM_SYNCING);
+   `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", "Done waiting for SYNCING state", UVM_HIGH)
+
 
 endtask : post_reset_init
 
@@ -152,10 +157,10 @@ task uvma_{{ name }}_{{ tx }}_drv_vseq_c::drive(ref uvma_{{ name }}_seq_item_c s
    bit           seq_item_bits[];
    int unsigned  num_seq_item_bits;
 
-   uvm_default_packer.big_endian = cfg.big_endian;
+   uvm_default_packer.big_endian = uvma_{{ name }}_big_endian;
    num_seq_item_bits = seq_item.pack(seq_item_bits);
    `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", $sformatf("Driving %0d bits of serial data", num_seq_item_bits), UVM_DEBUG)
-   for (int ii=num_seq_item_bits-1; ii>=0; ii--) begin
+   for (int unsigned ii=0; ii<num_seq_item_bits; ii++) begin
       `uvm_create_on(req, p_sequencer.{{ tx }}_sequencer)
       `uvm_rand_send_pri_with(req, `UVMA_{{ name.upper() }}_{{ tx.upper() }}_DRV_SEQ_ITEM_PRI, {
          {{ tx }}p == seq_item_bits[ii];

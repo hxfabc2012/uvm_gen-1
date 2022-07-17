@@ -34,7 +34,7 @@ class uvma_{{ name }}_seq_item_c extends uvml_seq_item_c;
 
 
    constraint limits_cons {
-      soft tail == uvma_{{ name }}_tail_symbol;
+      tail == uvma_{{ name }}_tail_symbol;
       if (header == UVMA_{{ name.upper() }}_HEADER_IDLE) {
          data == uvma_{{ name }}_idle_data;
       }
@@ -67,39 +67,38 @@ function uvml_metadata_t uvma_{{ name }}_seq_item_c::get_metadata();
    string tail_str = $sformatf("%b", tail);
    string data_str = $sformatf("%h", data);
 
-   if (header == UVMA_{{ name.upper() }}_HEADER_DATA) begin
-      header_str = "DATA";
+   if (header != UVMA_{{ name.upper() }}_HEADER_IDLE) begin
+      if (header == UVMA_{{ name.upper() }}_HEADER_DATA) begin
+         header_str = "DATA";
+      end
+      else begin
+         header_str = $sformatf("? %b", header);
+      end
+      get_metadata.push_back('{
+         index     : 0,
+         value     : header_str,
+         col_name  : "header",
+         col_width : header_str.len(),
+         col_align : UVML_TEXT_ALIGN_RIGHT,
+         data_type : UVML_FIELD_INT
+      });
+      get_metadata.push_back('{
+         index     : 0,
+         value     : tail_str,
+         col_name  : "tail",
+         col_width : tail_str.len(),
+         col_align : UVML_TEXT_ALIGN_RIGHT,
+         data_type : UVML_FIELD_INT
+      });
+      get_metadata.push_back('{
+         index     : 0,
+         value     : data_str,
+         col_name  : "data",
+         col_width : data_str.len(),
+         col_align : UVML_TEXT_ALIGN_RIGHT,
+         data_type : UVML_FIELD_INT
+      });
    end
-   else if (header == UVMA_{{ name.upper() }}_HEADER_IDLE) begin
-      header_str = "IDLE";
-   end
-   else begin
-      header_str = $sformatf("? %b", header);
-   end
-   get_metadata.push_back('{
-      index     : 0,
-      value     : header_str,
-      col_name  : "header",
-      col_width : header_str.len(),
-      col_align : UVML_TEXT_ALIGN_RIGHT,
-      data_type : UVML_FIELD_INT
-   });
-   get_metadata.push_back('{
-      index     : 0,
-      value     : tail_str,
-      col_name  : "tail",
-      col_width : tail_str.len(),
-      col_align : UVML_TEXT_ALIGN_RIGHT,
-      data_type : UVML_FIELD_INT
-   });
-   get_metadata.push_back('{
-      index     : 0,
-      value     : data_str,
-      col_name  : "data",
-      col_width : data_str.len(),
-      col_align : UVML_TEXT_ALIGN_RIGHT,
-      data_type : UVML_FIELD_INT
-   });
 
 endfunction : get_metadata
 

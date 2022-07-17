@@ -44,8 +44,8 @@ typedef enum {
  *
  */
 typedef enum bit [1:0] {
-   UVMA_{{ name.upper() }}_HEADER_DATA = 2'b01, ///<
-   UVMA_{{ name.upper() }}_HEADER_IDLE = 2'b10  ///<
+   UVMA_{{ name.upper() }}_HEADER_IDLE = 2'b01, ///<
+   UVMA_{{ name.upper() }}_HEADER_DATA = 2'b10  ///<
 } uvma_{{ name }}_header_enum;
 
 

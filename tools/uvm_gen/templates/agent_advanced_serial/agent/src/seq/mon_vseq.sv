@@ -94,9 +94,9 @@ endtask : body
 
 task uvma_{{ name }}_mon_vseq_c::wait_for_reset_{{ tx }}();
 
-   `uvm_info("{{ name.upper() }}_MON_VSEQ", "Waiting for post_reset on TX", UVM_HIGH)
+   `uvm_info("{{ name.upper() }}_MON_VSEQ", "Waiting for post_reset on {{ tx.upper() }}", UVM_HIGH)
    wait (cntxt.reset_state == UVML_RESET_STATE_POST_RESET);
-   `uvm_info("{{ name.upper() }}_MON_VSEQ", "Done waiting for post_reset on TX", UVM_HIGH)
+   `uvm_info("{{ name.upper() }}_MON_VSEQ", "Done waiting for post_reset on {{ tx.upper() }}", UVM_HIGH)
 
 endtask : wait_for_reset_{{ tx }}
 
@@ -106,7 +106,7 @@ task uvma_{{ name }}_mon_vseq_c::monitor_{{ tx }}();
 {% if symmetric %}   uvma_{{ name }}_phy_mon_trn_c  phy_trn;
 {% else %}   uvma_{{ name }}_{{ tx }}_mon_trn_c  phy_trn;
 {% endif %}   uvma_{{ name }}_mon_trn_c  mon_trn;
-   bit  sample_trn;
+   bit  unpack_trn;
    bit  trn_data[];
 
    forever begin
@@ -116,10 +116,11 @@ task uvma_{{ name }}_mon_vseq_c::monitor_{{ tx }}();
 {% else %}      cntxt.{{ tx }}_mon_fsm_cntxt.data_q.push_back(diff_decode(phy_trn.{{ tx }}p, phy_trn.{{ tx }}n));
 {% endif %}      cntxt.{{ tx }}_mon_fsm_cntxt.timestamps_q.push_back(phy_trn.get_timestamp_start());
       `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ tx.upper() }}", $sformatf("Monitor has accumulated %0d bits", cntxt.{{ tx }}_mon_fsm_cntxt.trn_data.size()), UVM_DEBUG)
-      sample_trn = monitor_fsm(cntxt.{{ tx }}_mon_fsm_cntxt, UVMA_{{ name.upper() }}_DIRECTION_{{ tx.upper() }});
-      if (sample_trn) begin
+      unpack_trn = monitor_fsm(cntxt.{{ tx }}_mon_fsm_cntxt, UVMA_{{ name.upper() }}_DIRECTION_{{ tx.upper() }});
+      if (unpack_trn) begin
          `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ tx.upper() }}", $sformatf("Unpacking Monitor Transaction from %0d bits", cntxt.{{ tx }}_mon_fsm_cntxt.trn_data.size()), UVM_DEBUG)
          mon_trn = uvma_{{ name }}_mon_trn_c::type_id::create("mon_trn");
+         uvm_default_packer.big_endian = uvma_{{ name }}_big_endian;
          void'(mon_trn.unpack(cntxt.{{ tx }}_mon_fsm_cntxt.trn_data));
          mon_trn.set_initiator(p_sequencer);
          mon_trn.direction = UVMA_{{ name.upper() }}_DIRECTION_{{ tx.upper() }};
@@ -140,9 +141,9 @@ endtask : monitor_{{ tx }}
 
 task uvma_{{ name }}_mon_vseq_c::wait_for_reset_{{ rx }}();
 
-   `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", "Waiting for post_reset on RX", UVM_HIGH)
+   `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", "Waiting for post_reset on {{ rx.upper() }}", UVM_HIGH)
    wait (cntxt.reset_state == UVML_RESET_STATE_POST_RESET);
-   `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", "Done waiting for post_reset on RX", UVM_HIGH)
+   `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", "Done waiting for post_reset on {{ rx.upper() }}", UVM_HIGH)
 
 endtask : wait_for_reset_{{ rx }}
 
@@ -152,7 +153,7 @@ task uvma_{{ name }}_mon_vseq_c::monitor_{{ rx }}();
 {% if symmetric %}   uvma_{{ name }}_phy_mon_trn_c  phy_trn;
 {% else %}   uvma_{{ name }}_{{ rx }}_mon_trn_c  phy_trn;
 {% endif %}   uvma_{{ name }}_mon_trn_c  mon_trn;
-   bit  sample_trn;
+   bit  unpack_trn;
    bit  trn_data[];
 
    forever begin
@@ -162,11 +163,13 @@ task uvma_{{ name }}_mon_vseq_c::monitor_{{ rx }}();
 {% else %}      cntxt.{{ rx }}_mon_fsm_cntxt.data_q.push_back(diff_decode(phy_trn.{{ rx }}0p, phy_trn.{{ rx }}0n));
       cntxt.{{ rx }}_mon_fsm_cntxt.data_q.push_back(diff_decode(phy_trn.{{ rx }}1p, phy_trn.{{ rx }}1n));
 {% endif %}      cntxt.{{ rx }}_mon_fsm_cntxt.timestamps_q.push_back(phy_trn.get_timestamp_start());
+      cntxt.{{ rx }}_mon_fsm_cntxt.timestamps_q.push_back(phy_trn.get_timestamp_start());
       `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", $sformatf("Monitor has accumulated %0d bits", cntxt.{{ rx }}_mon_fsm_cntxt.trn_data.size()), UVM_DEBUG)
-      sample_trn = monitor_fsm(cntxt.{{ rx }}_mon_fsm_cntxt, UVMA_{{ name.upper() }}_DIRECTION_{{ rx.upper() }});
-      if (sample_trn) begin
+      unpack_trn = monitor_fsm(cntxt.{{ rx }}_mon_fsm_cntxt, UVMA_{{ name.upper() }}_DIRECTION_{{ rx.upper() }});
+      if (unpack_trn) begin
          `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", $sformatf("Unpacking Monitor Transaction from %0d bits", cntxt.{{ rx }}_mon_fsm_cntxt.trn_data.size()), UVM_DEBUG)
          mon_trn = uvma_{{ name }}_mon_trn_c::type_id::create("mon_trn");
+         uvm_default_packer.big_endian = uvma_{{ name }}_big_endian;
          void'(mon_trn.unpack(cntxt.{{ rx }}_mon_fsm_cntxt.trn_data));
          mon_trn.set_initiator(p_sequencer);
          mon_trn.direction = UVMA_{{ name.upper() }}_DIRECTION_{{ rx.upper() }};
@@ -208,14 +211,14 @@ endfunction : diff_decode
 function bit uvma_{{ name }}_mon_vseq_c::monitor_fsm(uvma_{{ name }}_mon_fsm_cntxt_c fsm_cntxt, uvma_{{ name }}_direction_enum direction);
 
    string  direction_str = "";
-   bit     sample_trn = 0;
+   bit     unpack_trn = 0;
    logic   new_bit;
    uvma_{{ name }}_header_l_t    header_bits;
    uvma_{{ name }}_mon_fsm_enum  next_state;
 
    case (direction)
-      UVMA_{{ name.upper() }}_DIRECTION_{{ tx.upper() }} : direction_str = "TX";
-      UVMA_{{ name.upper() }}_DIRECTION_{{ rx.upper() }} : direction_str = "RX";
+      UVMA_{{ name.upper() }}_DIRECTION_{{ tx.upper() }} : direction_str = "{{ tx.upper() }}";
+      UVMA_{{ name.upper() }}_DIRECTION_{{ rx.upper() }} : direction_str = "{{ rx.upper() }}";
    endcase
 
    case (fsm_cntxt.state)
@@ -234,8 +237,8 @@ function bit uvma_{{ name }}_mon_vseq_c::monitor_fsm(uvma_{{ name }}_mon_fsm_cnt
             `uvm_info({"{{ name.upper() }}_MON_VSEQ_", direction_str}, $sformatf("%s - Seen %0d consecutive 1'b0", fsm_cntxt.state.name(), fsm_cntxt.training_count), UVM_DEBUG)
          end
          if (fsm_cntxt.training_count >= uvma_{{ name }}_training_length) begin
-            `uvm_info({"{{ name.upper() }}_MON_VSEQ_", direction_str}, $sformatf("%s - Training complete after %0d consecutive 0s", fsm_cntxt.state.name(), fsm_cntxt.training_count), UVM_DEBUG)
-            next_state = UVMA_{{ name.upper() }}_MON_FSM_SYNCED;
+            `uvm_info({"{{ name.upper() }}_MON_VSEQ_", direction_str}, $sformatf("%s - Training complete after %0d consecutive 0s", fsm_cntxt.state.name(), fsm_cntxt.training_count), UVM_LOW)
+            next_state = UVMA_{{ name.upper() }}_MON_FSM_SYNCING;
          end
       end
 
@@ -244,19 +247,17 @@ function bit uvma_{{ name }}_mon_vseq_c::monitor_fsm(uvma_{{ name }}_mon_fsm_cnt
          if (fsm_cntxt.data_q.size() >= uvma_{{ name }}_trn_length) begin
             header_bits = {fsm_cntxt.data_q[0],fsm_cntxt.data_q[1]};
             `uvm_info({"{{ name.upper() }}_MON_VSEQ_", direction_str}, $sformatf("%s - New potential header bits: %b", fsm_cntxt.state.name(), header_bits), UVM_DEBUG)
-            if (header_bits inside {UVMA_{{ name.upper() }}_HEADER_DATA,UVMA_{{ name.upper() }}_HEADER_IDLE}) begin
+            if (header_bits == UVMA_{{ name.upper() }}_HEADER_IDLE) begin
                fsm_cntxt.num_consecutive_edges++;
                `uvm_info({"{{ name.upper() }}_MON_VSEQ_", direction_str}, $sformatf("%s - New valid header bits: %b. #%0d/%0d consecutive observed", fsm_cntxt.state.name(), header_bits, fsm_cntxt.num_consecutive_edges, uvma_{{ name }}_syncing_length), UVM_DEBUG)
                if (fsm_cntxt.num_consecutive_edges >= uvma_{{ name }}_syncing_length) begin
                   next_state = UVMA_{{ name.upper() }}_MON_FSM_SYNCED;
-                  `uvm_info({"{{ name.upper() }}_MON_VSEQ_", direction_str}, "Synced to bitstream", UVM_LOW)
+                  `uvm_info({"{{ name.upper() }}_MON_VSEQ_", direction_str}, $sformatf("Synced to bitstream after %0d consecutive headers at %0d-bit intervals", fsm_cntxt.num_consecutive_edges, uvma_{{ name }}_trn_length), UVM_LOW)
                end
-               else begin
-                  // Dump entire potentially valid frames until we're fully synced
-                  repeat (uvma_{{ name }}_trn_length) begin
-                     void'(fsm_cntxt.data_q      .pop_front());
-                     void'(fsm_cntxt.timestamps_q.pop_front());
-                  end
+               // Dump entire potentially valid frames until we're fully synced
+               repeat (uvma_{{ name }}_trn_length) begin
+                  void'(fsm_cntxt.data_q      .pop_front());
+                  void'(fsm_cntxt.timestamps_q.pop_front());
                end
             end
             else begin
@@ -272,8 +273,8 @@ function bit uvma_{{ name }}_mon_vseq_c::monitor_fsm(uvma_{{ name }}_mon_fsm_cnt
          next_state = UVMA_{{ name.upper() }}_MON_FSM_SYNCED;
          if (fsm_cntxt.data_q.size() >= uvma_{{ name }}_trn_length) begin
             `uvm_info({"{{ name.upper() }}_MON_VSEQ_", direction_str}, $sformatf("%s - Have enough bits (%0d) to unpack trn", fsm_cntxt.state.name(), fsm_cntxt.data_q.size()), UVM_DEBUG)
-            sample_trn = 1;
-            fsm_cntxt.trn_start = fsm_cntxt.data_q[0];
+            unpack_trn = 1;
+            fsm_cntxt.trn_start = fsm_cntxt.timestamps_q[0];
             for (int unsigned ii=0; ii<uvma_{{ name }}_trn_length; ii++) begin
                fsm_cntxt.trn_data[ii] = fsm_cntxt.data_q      .pop_front();
                fsm_cntxt.trn_end      = fsm_cntxt.timestamps_q.pop_front();
@@ -289,7 +290,7 @@ function bit uvma_{{ name }}_mon_vseq_c::monitor_fsm(uvma_{{ name }}_mon_fsm_cnt
 
    fsm_cntxt.state = next_state;
    cntxt.sample_cntxt_e.trigger();
-   return sample_trn;
+   return unpack_trn;
 
 endfunction : monitor_fsm
 
