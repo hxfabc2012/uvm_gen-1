@@ -112,7 +112,7 @@ function void uvma_{{ name }}_drv_c::get_and_set_cfg();
    end
    uvm_config_db#(uvma_{{ name }}_cfg_c)::set(this, "*", "cfg", cfg);
 
-endfunction : get_cfg
+endfunction : get_and_set_cfg
 
 
 function void uvma_{{ name }}_drv_c::get_and_set_cntxt();
@@ -123,7 +123,7 @@ function void uvma_{{ name }}_drv_c::get_and_set_cntxt();
    end
    uvm_config_db#(uvma_{{ name }}_cntxt_c)::set(this, "*", "cntxt", cntxt);
 
-endfunction : get_cntxt
+endfunction : get_and_set_cntxt
 
 
 function void uvma_{{ name }}_drv_c::create_components();

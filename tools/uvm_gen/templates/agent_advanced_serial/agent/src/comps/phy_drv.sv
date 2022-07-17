@@ -140,14 +140,14 @@ function void uvma_{{ name }}_phy_drv_c::get_cntxt();
 endfunction : get_cntxt
 
 
-function void uvma_{{ name }}_{{ rx }}_drv_c::create_tlm_ports();
+function void uvma_{{ name }}_phy_drv_c::create_tlm_ports();
 
    ap = new("ap", this);
 
 endfunction : create_tlm_ports
 
 
-function void uvma_{{ name }}_{{ rx }}_drv_c::retrieve_modports();
+function void uvma_{{ name }}_phy_drv_c::retrieve_modports();
 
    {{ tx }}_mp = cntxt.vif.drv_{{ tx }}_mp;
    {{ rx }}_mp = cntxt.vif.drv_{{ rx }}_mp;

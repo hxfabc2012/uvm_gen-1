@@ -11,7 +11,7 @@
  * Abstract Virtual Sequence from which all other {{ full_name }} Virtual Sequences must extend.
  * Classes extending this one must be run on {{ full_name }} Virtual Sequencer (uvma_{{ name }}_vsqr_c) instance.
  */
-class uvma_{{ name }}_base_vseq_c extends uvm_sequence #(
+class uvma_{{ name }}_base_vseq_c extends uvml_vseq_c #(
    .REQ(uvma_{{ name }}_seq_item_c),
    .RSP(uvma_{{ name }}_seq_item_c)
 );
@@ -70,7 +70,7 @@ class uvma_{{ name }}_base_vseq_c extends uvm_sequence #(
 {% else %}   extern task get_{{ rx }}_phy_mon_trn(output uvma_{{ name }}_{{ rx }}_mon_trn_c trn);
 {% endif %}
    /**
-   * Waits for the next virtual interface clock edge.{% if !symmetric %}  Pure virtual.{% endif %}
+   * Waits for the next virtual interface clock edge.{% if not symmetric %}  Pure virtual.{% endif %}
     */
    extern task wait_clk();
 
@@ -146,4 +146,4 @@ task uvma_{{ name }}_base_vseq_c::wait_clk();
 endtask : wait_clk
 
 
-`endif // __UVMA_{{ name.upper() }}_BASE_SEQ_SV__
+`endif // __UVMA_{{ name.upper() }}_BASE_VSEQ_SV__
