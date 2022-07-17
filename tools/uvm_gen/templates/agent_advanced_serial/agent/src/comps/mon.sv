@@ -366,8 +366,8 @@ endtask : mon_{{ rx }}_post_reset
    @({{ tx }}_mp.mon_{{ tx }}_cb);
    `uvm_info("{{ name.upper() }}_MON_{{ tx.upper() }}", "Sampling Phy transaction", UVM_DEBUG)
 {% if symmetric %}   trn = uvma_{{ name }}_phy_mon_trn_c::type_id::create("trn");
-   trn.dxp = {{ tx }}_mp.mon_{{ tx }}_cb.{{ tx }}p;
-   trn.dxn = {{ tx }}_mp.mon_{{ tx }}_cb.{{ tx }}n;
+   trn.dp = {{ tx }}_mp.mon_{{ tx }}_cb.{{ tx }}p;
+   trn.dn = {{ tx }}_mp.mon_{{ tx }}_cb.{{ tx }}n;
 {% else %}   trn = uvma_{{ name }}_{{ tx }}_mon_trn_c::type_id::create("trn");
    trn.{{ tx }}p = {{ tx }}_mp.mon_{{ tx }}_cb.{{ tx }}p;
    trn.{{ tx }}n = {{ tx }}_mp.mon_{{ tx }}_cb.{{ tx }}n;

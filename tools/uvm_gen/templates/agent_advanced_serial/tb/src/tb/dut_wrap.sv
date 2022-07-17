@@ -59,8 +59,8 @@ module uvmt_{{ name }}_st_dut_wrap(
 {% endif %}
 {% if ddr %}   always @({{ mode_2 }}_if.{{ rx }}_clk) begin
 {% else %}   always @(posedge {{ mode_1 }}_if.{{ rx }}_clk) begin
-{% endif %}{% if symmetric %}   {{ rx }}0p <= {{ mode_2 }}_if.{{ rx }}p;
-      {{ rx }}p <= {{ mode_2 }}_if.{{ rx }}p;
+{% endif %}{% if symmetric %}      {{ rx }}p <= {{ mode_2 }}_if.{{ rx }}p;
+      {{ rx }}n <= {{ mode_2 }}_if.{{ rx }}n;
 {% else %}      {{ rx }}0p <= {{ mode_2 }}_if.{{ rx }}0p;
       {{ rx }}0n <= {{ mode_2 }}_if.{{ rx }}0n;
       {{ rx }}1p <= {{ mode_2 }}_if.{{ rx }}1p;

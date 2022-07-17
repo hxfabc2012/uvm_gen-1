@@ -40,14 +40,19 @@ class uvma_{{ name }}_phy_drv_vseq_c extends uvma_{{ name }}_base_vseq_c;
    extern task drv_loop();
 
    /**
-    * TODO Describe uvma_{{ name }}_phy_drv_vseq_c::process_req()
+    * TODO Describe uvma_{{ name }}_phy_drv_vseq_c::reset_trigger()
     */
-   extern function void process_req(ref uvma_{{ name }}_seq_item_c seq_item);
+   extern task reset_trigger();
+
+   /**
+    * TODO Describe uvma_{{ name }}_phy_drv_vseq_c::process_seq_item()
+    */
+   extern function void process_seq_item(ref uvma_{{ name }}_seq_item_c seq_item);
 
    /**
     * TODO Describe uvma_{{ name }}_phy_drv_vseq_c::drive()
     */
-   extern virtual task drive(ref uvma_{{ name }}_seq_item_c frame);
+   extern virtual task drive(ref uvma_{{ name }}_seq_item_c seq_item);
 
 endclass : uvma_{{ name }}_phy_drv_vseq_c
 
@@ -91,10 +96,20 @@ endtask : wait_for_reset
 
 task uvma_{{ name }}_phy_drv_vseq_c::post_reset_init();
 
-   rand uvma_{{ name }}_training_vseq_c  training_vseq;
+    uvma_{{ name }}_training_vseq_c  training_vseq;
    `uvm_info("{{ name.upper() }}_PHY_DRV_VSEQ", {"Starting training sequence:\n", training_vseq.sprint()}, UVM_HIGH)
    `uvm_do_on(training_vseq, p_sequencer)
    `uvm_info("{{ name.upper() }}_PHY_DRV_VSEQ", {"Finished training sequence:\n", training_vseq.sprint()}, UVM_HIGH)
+   `uvm_info("{{ name.upper() }}_PHY_DRV_VSEQ", "Waiting for SYNCING state", UVM_HIGH)
+   case (cfg.drv_mode)
+      UVMA_{{ name.upper() }}_DIRECTION_{{ tx.upper() }} : begin
+         wait (cntxt.{{ tx }}_mon_fsm_cntxt.state == UVMA_{{ name.upper() }}_MON_FSM_SYNCING);
+      end
+      UVMA_{{ name.upper() }}_DIRECTION_{{ rx.upper() }} : begin
+         wait (cntxt.{{ rx }}_mon_fsm_cntxt.state == UVMA_{{ name.upper() }}_MON_FSM_SYNCING);
+      end
+   endcase
+   `uvm_info("{{ name.upper() }}_PHY_DRV_VSEQ", "Done waiting for SYNCING state", UVM_HIGH)
 
 endtask : post_reset_init
 
@@ -130,7 +145,7 @@ function void uvma_{{ name }}_phy_drv_vseq_c::process_seq_item(ref uvma_{{ name 
 
    seq_item.cfg = cfg;
    `uvm_info("{{ name.upper() }}_PHY_DRV_VSEQ", $sformatf("Processed seq_item:\n%s", seq_item.sprint()), UVM_DEBUG)
-   if (!seq_item.is_idle) begin
+   if (seq_item.header == UVMA_{{ name.upper() }}_HEADER_DATA) begin
       `uvml_hrtbt_owner(p_sequencer)
    end
 
@@ -143,21 +158,21 @@ task uvma_{{ name }}_phy_drv_vseq_c::drive(ref uvma_{{ name }}_seq_item_c seq_it
    bit           seq_item_bits[];
    int unsigned  num_seq_item_bits;
 
-   uvm_default_packer.big_endian = cfg.big_endian;
+   uvm_default_packer.big_endian = uvma_{{ name }}_big_endian;
    num_seq_item_bits = seq_item.pack(seq_item_bits);
    `uvm_info("{{ name.upper() }}_PHY_DRV_VSEQ", $sformatf("Driving %0d bits of serial data", num_seq_item_bits), UVM_DEBUG)
-   for (int ii=num_seq_item_bits-1; ii>=0; ii--) begin
+   for (int unsigned ii=0; ii<num_seq_item_bits; ii++) begin
       case (cfg.drv_mode)
          UVMA_{{ name.upper() }}_DIRECTION_{{ tx.upper() }} : begin
-            `uvm_create_on(req, p_sequencer.{{ tx }}_serial_sequencer)
+            `uvm_create_on(req, p_sequencer.{{ tx }}_sequencer)
             `uvm_rand_send_pri_with(req, `UVMA_{{ name.upper() }}_{{ tx.upper() }}_DRV_SEQ_ITEM_PRI, {
-               dp == frame_bits[ii];
+               dp == seq_item_bits[ii];
             })
          end
          UVMA_{{ name.upper() }}_DIRECTION_{{ rx.upper() }} : begin
-            `uvm_create_on(req, p_sequencer.{{ rx }}_serial_sequencer)
+            `uvm_create_on(req, p_sequencer.{{ rx }}_sequencer)
             `uvm_rand_send_pri_with(req, `UVMA_{{ name.upper() }}_{{ rx.upper() }}_DRV_SEQ_ITEM_PRI, {
-               dp == frame_bits[ii];
+               dp == seq_item_bits[ii];
             })
          end
       endcase

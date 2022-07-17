@@ -109,7 +109,6 @@ task uvma_{{ name }}_{{ tx }}_drv_vseq_c::post_reset_init();
    wait (cntxt.{{ tx }}_mon_fsm_cntxt.state == UVMA_{{ name.upper() }}_MON_FSM_SYNCING);
    `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", "Done waiting for SYNCING state", UVM_HIGH)
 
-
 endtask : post_reset_init
 
 

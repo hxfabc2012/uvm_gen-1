@@ -50,8 +50,7 @@ interface uvma_{{ name }}_if (
 {% else %}      input  {{ rx }}0p,
              {{ rx }}0n,
              {{ rx }}1p,
-             {{ rx }}1n;
-{% endif %}
+             {{ rx }}1n;{% endif %}
    endclocking : dut_{{ mode_1 }}_{{ rx }}_cb
 
    /**
@@ -73,8 +72,7 @@ interface uvma_{{ name }}_if (
 {% else %}      output  {{ rx }}0p,
               {{ rx }}0n,
               {{ rx }}1p,
-              {{ rx }}1n;
-{% endif %}
+              {{ rx }}1n;{% endif %}
    endclocking : dut_{{ mode_2 }}_{{ rx }}_cb
 
    /**
@@ -91,10 +89,12 @@ interface uvma_{{ name }}_if (
     */
    {% if ddr %}clocking drv_{{ rx }}_cb @({{ rx }}_clk);
    {% else %}clocking drv_{{ rx }}_cb @(posedge {{ rx }}_clk);{% endif %}
-      output {{ rx }}0p,
+{% if symmetric %}      output {{ rx }}p,
+             {{ rx }}n;
+{% else %}      output {{ rx }}0p,
              {{ rx }}0n,
              {{ rx }}1p,
-             {{ rx }}1n;
+             {{ rx }}1n;{% endif %}
    endclocking : drv_{{ rx }}_cb
 
    /**
@@ -116,8 +116,7 @@ interface uvma_{{ name }}_if (
 {% else %}      input  {{ rx }}0p,
              {{ rx }}0n,
              {{ rx }}1p,
-             {{ rx }}1n;
-{% endif %}
+             {{ rx }}1n;{% endif %}
    endclocking : mon_{{ rx }}_cb
 
 

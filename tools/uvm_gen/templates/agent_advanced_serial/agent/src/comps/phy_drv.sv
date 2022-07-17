@@ -94,7 +94,8 @@ function void uvma_{{ name }}_phy_drv_c::build_phase(uvm_phase phase);
    get_cntxt();
 
    ap = new("ap", this);
-   mp = cntxt.vif.drv_{{ rx }}_mp;
+   {{ tx }}_mp = cntxt.vif.drv_{{ tx }}_mp;
+   {{ rx }}_mp = cntxt.vif.drv_{{ rx }}_mp;
 
 endfunction : build_phase
 
@@ -147,35 +148,35 @@ task uvma_{{ name }}_phy_drv_c::drv_req(ref uvma_{{ name }}_phy_seq_item_c req);
 
    {% if ddr %}bit valid_edge = 0;
    do begin
-      case (cfg.mode)
+      case (cfg.drv_mode)
          UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }}: begin
             @({{ tx }}_mp.drv_{{ tx }}_cb);
             if ({{ tx }}_mp.{{ tx }}_clk inside {0,1}) begin
                valid_edge = 1;
-               {{ tx }}_mp.drv_{{ tx }}_cb.txp <= req.dp;
-               {{ tx }}_mp.drv_{{ tx }}_cb.txn <= req.dn;
+               {{ tx }}_mp.drv_{{ tx }}_cb.{{ tx }}p <= req.dp;
+               {{ tx }}_mp.drv_{{ tx }}_cb.{{ tx }}n <= req.dn;
             end
          end
          UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }}: begin
             @({{ rx }}_mp.drv_{{ rx }}_cb);
             if ({{ rx }}_mp.{{ rx }}_clk inside {0,1}) begin
                valid_edge = 1;
-               {{ rx }}_mp.drv_{{ rx }}_cb.rxp <= req.dp;
-               {{ rx }}_mp.drv_{{ rx }}_cb.rxn <= req.dn;
+               {{ rx }}_mp.drv_{{ rx }}_cb.{{ rx }}p <= req.dp;
+               {{ rx }}_mp.drv_{{ rx }}_cb.{{ rx }}n <= req.dn;
             end
          end
       endcase
    end while (!valid_edge);
-{% else %}   case (cfg.mode)
+{% else %}   case (cfg.drv_mode)
       UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }}: begin
          @({{ tx }}_mp.drv_{{ tx }}_cb);
-         {{ tx }}_mp.drv_{{ tx }}_cb.txp <= req.dp;
-         {{ tx }}_mp.drv_{{ tx }}_cb.txn <= req.dn;
+         {{ tx }}_mp.drv_{{ tx }}_cb.{{ tx }}p <= req.dp;
+         {{ tx }}_mp.drv_{{ tx }}_cb.{{ tx }}n <= req.dn;
       end
       UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }}: begin
          @({{ rx }}_mp.drv_{{ rx }}_cb);
-         {{ rx }}_mp.drv_{{ rx }}_cb.rxp <= req.dp;
-         {{ rx }}_mp.drv_{{ rx }}_cb.rxn <= req.dn;
+         {{ rx }}_mp.drv_{{ rx }}_cb.{{ rx }}p <= req.dp;
+         {{ rx }}_mp.drv_{{ rx }}_cb.{{ rx }}n <= req.dn;
       end
    endcase
 {% endif %}
