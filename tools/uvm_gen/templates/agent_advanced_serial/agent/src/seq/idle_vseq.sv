@@ -50,7 +50,6 @@ endtask : body
 task uvma_{{ name }}_idle_vseq_c::idle_loop();
 
    uvma_{{ name }}_seq_item_c  idle_seq_item;
-
    forever begin
       `uvm_create_on(idle_seq_item, p_sequencer)
       `uvm_rand_send_pri_with(idle_seq_item, `UVMA_{{ name.upper() }}_IDLE_SEQ_ITEM_PRI, {

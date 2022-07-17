@@ -16,7 +16,6 @@ class uvme_{{ name }}_st_rand_stim_vseq_c extends uvme_{{ name }}_st_base_vseq_c
    /// @{
    rand int unsigned  num_{{ tx }}_seq_items; ///<
    rand int unsigned  num_{{ rx }}_seq_items; ///<
-   rand int unsigned  sqr_priority;
    /// @{
 
 
@@ -32,7 +31,6 @@ class uvme_{{ name }}_st_rand_stim_vseq_c extends uvme_{{ name }}_st_base_vseq_c
    constraint defaults_cons {
       soft num_{{ tx }}_seq_items == uvme_{{ name }}_st_rand_stim_default_num_seq_items;
       soft num_{{ rx }}_seq_items == uvme_{{ name }}_st_rand_stim_default_num_seq_items;
-      soft sqr_priority == uvme_{{ name }}_st_rand_stim_default_sqr_priority;
    }
 
 
@@ -66,7 +64,9 @@ task uvme_{{ name }}_st_rand_stim_vseq_c::body();
          `uvm_info("{{ name.upper() }}_ST_RAND_STIM_VSEQ_{{ tx.upper() }}", "Starting stimulus", UVM_LOW)
          for (int unsigned ii=0; ii<num_{{ tx }}_seq_items; ii++) begin
             `uvm_info("{{ name.upper() }}_ST_RAND_STIM_VSEQ_{{ tx.upper() }}", $sformatf("Starting item %0d/%0d", (ii+1), num_{{ tx }}_seq_items), UVM_HIGH)
-            `uvm_do_on_pri({{ tx }}_seq_item, p_sequencer.{{ mode_1 }}_vsequencer, sqr_priority)
+            `uvm_do_on_pri_with({{ tx }}_seq_item, p_sequencer.{{ mode_1 }}_vsequencer, uvme_{{ name }}_st_rand_stim_sqr_priority, {
+               header == UVMA_{{ name.upper() }}_HEADER_DATA;
+            })
             `uvm_info("{{ name.upper() }}_ST_RAND_STIM_VSEQ_{{ tx.upper() }}", $sformatf("Finished item %0d/%0d", (ii+1), num_{{ tx }}_seq_items), UVM_HIGH)
          end
       end
@@ -74,7 +74,9 @@ task uvme_{{ name }}_st_rand_stim_vseq_c::body();
          `uvm_info("{{ name.upper() }}_ST_RAND_STIM_VSEQ_{{ rx.upper() }}", "Starting stimulus", UVM_LOW)
          for (int unsigned jj=0; jj<num_{{ rx }}_seq_items; jj++) begin
             `uvm_info("{{ name.upper() }}_ST_RAND_STIM_VSEQ_{{ rx.upper() }}", $sformatf("Starting item %0d/%0d", (jj+1), num_{{ rx }}_seq_items), UVM_HIGH)
-            `uvm_do_on_pri({{ rx }}_seq_item, p_sequencer.{{ mode_2 }}_vsequencer, sqr_priority)
+            `uvm_do_on_pri_with({{ rx }}_seq_item, p_sequencer.{{ mode_2 }}_vsequencer, uvme_{{ name }}_st_rand_stim_sqr_priority, {
+               header == UVMA_{{ name.upper() }}_HEADER_DATA;
+            })
             `uvm_info("{{ name.upper() }}_ST_RAND_STIM_VSEQ_{{ rx.upper() }}", $sformatf("Finished item %0d/%0d", (jj+1), num_{{ rx }}_seq_items), UVM_HIGH)
          end
       end

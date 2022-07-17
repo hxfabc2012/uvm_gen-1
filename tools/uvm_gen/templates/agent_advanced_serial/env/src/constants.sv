@@ -8,7 +8,7 @@
 
 
 const int unsigned uvme_{{ name }}_st_rand_stim_default_num_seq_items =    10; ///<
-const int unsigned uvme_{{ name }}_st_rand_stim_default_sqr_priority  = 1_000; ///<
+const int unsigned uvme_{{ name }}_st_rand_stim_sqr_priority          = 1_000; ///<
 
 
 `endif // __UVME_{{ name.upper() }}_ST_CONSTANTS_SV__

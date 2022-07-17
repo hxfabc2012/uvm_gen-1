@@ -129,7 +129,7 @@ task uvma_{{ name }}_mon_vseq_c::monitor_{{ tx }}();
          mon_trn.set_timestamp_start(cntxt.{{ tx }}_mon_fsm_cntxt.trn_start);
          mon_trn.set_timestamp_end  (cntxt.{{ tx }}_mon_fsm_cntxt.trn_end  );
          if (mon_trn.header != UVMA_{{ name.upper() }}_HEADER_IDLE) begin
-            `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ tx.upper() }}", $sformatf("Unpacked Data Monitor Transaction:\n%s", mon_trn.sprint()), UVM_DEBUG)
+            `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ tx.upper() }}", $sformatf("Unpacked Data Monitor Transaction:\n%s", mon_trn.sprint()), UVM_HIGH)
             `uvml_hrtbt_owner(p_sequencer)
             write_{{ tx }}_mon_trn(mon_trn);
          end
@@ -178,7 +178,7 @@ task uvma_{{ name }}_mon_vseq_c::monitor_{{ rx }}();
          mon_trn.set_timestamp_start(cntxt.{{ rx }}_mon_fsm_cntxt.trn_start);
          mon_trn.set_timestamp_end  (cntxt.{{ rx }}_mon_fsm_cntxt.trn_end  );
          if (mon_trn.header != UVMA_{{ name.upper() }}_HEADER_IDLE) begin
-            `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", $sformatf("Unpacked Data Monitor Transaction:\n%s", mon_trn.sprint()), UVM_DEBUG)
+            `uvm_info("{{ name.upper() }}_MON_VSEQ_{{ rx.upper() }}", $sformatf("Unpacked Data Monitor Transaction:\n%s", mon_trn.sprint()), UVM_HIGH)
             `uvml_hrtbt_owner(p_sequencer)
             write_{{ rx }}_mon_trn(mon_trn);
          end

@@ -27,7 +27,6 @@ class uvma_{{ name }}_cfg_c extends uvm_object;
    rand bit                      bypass_mode      ; ///<
    rand uvm_active_passive_enum  is_active        ; ///< TODO Describe uvma_{{ name }}_cfg_c::is_active
    rand uvml_reset_type_enum     reset_type       ; ///< TODO Describe uvma_{{ name }}_cfg_c::reset_type
-   rand uvm_sequencer_arb_mode   sqr_arb_mode     ; ///< TODO Describe uvma_{{ name }}_cfg_c::sqr_arb_mode
    rand bit                      cov_model_enabled; ///< TODO Describe uvma_{{ name }}_cfg_c::cov_model_enabled
    rand bit                      trn_log_enabled  ; ///< TODO Describe uvma_{{ name }}_cfg_c::trn_log_enabled
    /// @}
@@ -51,7 +50,6 @@ class uvma_{{ name }}_cfg_c extends uvm_object;
       `uvm_field_int (                         bypass_mode      , UVM_DEFAULT)
       `uvm_field_enum(uvm_active_passive_enum, is_active        , UVM_DEFAULT)
       `uvm_field_enum(uvml_reset_type_enum   , reset_type       , UVM_DEFAULT)
-      `uvm_field_enum(uvm_sequencer_arb_mode , sqr_arb_mode     , UVM_DEFAULT)
       `uvm_field_int (                         cov_model_enabled, UVM_DEFAULT)
       `uvm_field_int (                         trn_log_enabled  , UVM_DEFAULT)
       `uvm_field_enum(uvma_{{ name }}_mode_enum, drv_mode, UVM_DEFAULT)
@@ -63,7 +61,6 @@ class uvma_{{ name }}_cfg_c extends uvm_object;
       soft bypass_mode       == 0;
       soft is_active         == UVM_PASSIVE;
       soft reset_type        == UVML_RESET_TYPE_SYNCHRONOUS;
-      soft sqr_arb_mode      == UVM_SEQ_ARB_FIFO;
       soft cov_model_enabled == 0;
       soft trn_log_enabled   == 1;
    }

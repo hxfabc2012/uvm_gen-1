@@ -85,6 +85,11 @@ class uvmt_{{ name }}_st_base_test_c extends uvml_test_c;
    extern virtual task reset_phase(uvm_phase phase);
 
    /**
+    * Waits for agents to sync.
+    */
+   extern virtual task post_reset_phase(uvm_phase phase);
+
+   /**
     * Retrieves clknrst_gen_vif from UVM configuration database.
     */
    extern function void retrieve_clknrst_gen_vif();
@@ -193,6 +198,25 @@ task uvmt_{{ name }}_st_base_test_c::reset_phase(uvm_phase phase);
    `uvm_info("TEST", "De-asserted reset", UVM_NONE)
 
 endtask : reset_phase
+
+
+task uvmt_{{ name }}_st_base_test_c::post_reset_phase(uvm_phase phase);
+
+   super.post_reset_phase(phase);
+   phase.raise_objection(this);
+   `uvm_info("TEST", "Waiting for all agents to sync", UVM_NONE)
+   fork
+      wait(env_cntxt.{{ mode_1 }}_cntxt.{{ tx }}_mon_fsm_cntxt.state == UVMA_{{ name.upper() }}_MON_FSM_SYNCED);
+      wait(env_cntxt.{{ mode_1 }}_cntxt.{{ rx }}_mon_fsm_cntxt.state == UVMA_{{ name.upper() }}_MON_FSM_SYNCED);
+      wait(env_cntxt.{{ mode_2 }}_cntxt.{{ tx }}_mon_fsm_cntxt.state == UVMA_{{ name.upper() }}_MON_FSM_SYNCED);
+      wait(env_cntxt.{{ mode_2 }}_cntxt.{{ rx }}_mon_fsm_cntxt.state == UVMA_{{ name.upper() }}_MON_FSM_SYNCED);
+      wait(env_cntxt.passive_cntxt.{{ tx }}_mon_fsm_cntxt.state == UVMA_{{ name.upper() }}_MON_FSM_SYNCED);
+      wait(env_cntxt.passive_cntxt.{{ rx }}_mon_fsm_cntxt.state == UVMA_{{ name.upper() }}_MON_FSM_SYNCED);
+   join
+   `uvm_info("TEST", "Done waiting for all agents to sync", UVM_NONE)
+   phase.drop_objection(this);
+
+endtask : post_reset_phase
 
 
 function void uvmt_{{ name }}_st_base_test_c::retrieve_clknrst_gen_vif();

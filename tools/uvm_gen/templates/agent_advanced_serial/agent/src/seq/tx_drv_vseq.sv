@@ -116,11 +116,10 @@ endtask : post_reset_init
 task uvma_{{ name }}_{{ tx }}_drv_vseq_c::drv_loop();
 
    uvma_{{ name }}_seq_item_c  seq_item;
-
    forever begin
       `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", "Waiting for next seq_item", UVM_DEBUG)
       p_sequencer.get_next_item(seq_item);
-      `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", $sformatf("Received seq_item:\n%s", seq_item.sprint()), UVM_DEBUG)
+      `uvm_info("{{ name.upper() }}_{{ tx.upper() }}_DRV_VSEQ", $sformatf("Received seq_item:\n%s", seq_item.sprint()), UVM_HIGH)
       process_seq_item             (seq_item);
       drive                        (seq_item);
       p_sequencer.seq_item_ap.write(seq_item);
