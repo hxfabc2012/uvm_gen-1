@@ -37,7 +37,9 @@ parameters = { }
 
 symmetric_phy_agent_files = {
     #              SRC                                 DST
-    "agent_advanced_serial/agent/bin/doxygen.cfg"                  : "uvma_{{ name }}/bin/doxygen.cfg",
+    "agent_advanced_serial/agent/bin/doxygen.cfg"                 : "uvma_{{ name }}/bin/doxygen.cfg",
+    "agent_advanced_serial/agent/docs/quick_start_guide.md"       : "uvma_{{ name }}/docs/quick_start_guide.md",
+    "agent_advanced_serial/agent/docs/user_guide.md"              : "uvma_{{ name }}/docs/user_guide.md",
     #"agent_advanced_serial/agent/docs/agent_block_diagram.svg"    : "uvma_${name}/docs/agent_block_diagram.svg",
     "agent_advanced_serial/agent/examples/instantiation.sv"       : "uvma_{{ name }}/examples/instantiation.sv",
     "agent_advanced_serial/agent/examples/sequence.sv"            : "uvma_{{ name }}/examples/sequence.sv",
@@ -78,7 +80,9 @@ symmetric_phy_agent_files = {
 
 asymmetric_phy_agent_files = {
     #              SRC                                 DST
-    "agent_advanced_serial/agent/bin/doxygen.cfg"                  : "uvma_{{ name }}/bin/doxygen.cfg",
+    "agent_advanced_serial/agent/bin/doxygen.cfg"                 : "uvma_{{ name }}/bin/doxygen.cfg",
+    "agent_advanced_serial/agent/docs/quick_start_guide.md"       : "uvma_{{ name }}/docs/quick_start_guide.md",
+    "agent_advanced_serial/agent/docs/user_guide.md"              : "uvma_{{ name }}/docs/user_guide.md",
     #"agent_advanced_serial/agent/docs/agent_block_diagram.svg"    : "uvma_{{ name }}/docs/agent_block_diagram.svg",
     "agent_advanced_serial/agent/examples/instantiation.sv"       : "uvma_{{ name }}/examples/instantiation.sv",
     "agent_advanced_serial/agent/examples/sequence.sv"            : "uvma_{{ name }}/examples/sequence.sv",

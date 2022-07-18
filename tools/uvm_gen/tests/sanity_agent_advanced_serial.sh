@@ -21,7 +21,7 @@ mio install uvmt_aas0_st -u admin -p Qc5SgRpk6cjsAjr
 mio cmp  uvmt_aas0_st
 mio elab uvmt_aas0_st
 mio sim  uvmt_aas0_st -t rand_stim -s 1 -v medium -w -c
-mio cov  uvmt_aas0_st
+mio dox  uvma_aas0
 cd ../tools/uvm_gen
 
 
@@ -37,7 +37,7 @@ mio install uvmt_aas1_st -u admin -p Qc5SgRpk6cjsAjr
 mio cmp  uvmt_aas1_st
 mio elab uvmt_aas1_st
 mio sim  uvmt_aas1_st -t rand_stim -s 1 -v medium -w -c
-mio cov  uvmt_aas1_st
+mio dox  uvma_aas1
 cd ../tools/uvm_gen
 
 
@@ -53,7 +53,7 @@ mio install uvmt_aas2_st -u admin -p Qc5SgRpk6cjsAjr
 mio cmp  uvmt_aas2_st
 mio elab uvmt_aas2_st
 mio sim  uvmt_aas2_st -t rand_stim -s 1 -v medium -w -c
-mio cov  uvmt_aas2_st
+mio dox  uvma_aas2
 cd ../tools/uvm_gen
 
 
@@ -69,7 +69,7 @@ mio install uvmt_aas3_st -u admin -p Qc5SgRpk6cjsAjr
 mio cmp  uvmt_aas3_st
 mio elab uvmt_aas3_st
 mio sim  uvmt_aas3_st -t rand_stim -s 1 -v medium -w -c
-mio cov  uvmt_aas3_st
+mio dox  uvma_aas3
 
 
 # 12. Gather sim results
