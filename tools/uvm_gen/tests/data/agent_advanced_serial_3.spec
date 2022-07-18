@@ -1,7 +1,7 @@
 Datum Technology Corporation
 
 aas3
-Advanced Agent Serial Template Test - Serial Symmetric DDR
+Advanced Agent Serial Template Test - Symmetric DDR
 y
 y
 mstr

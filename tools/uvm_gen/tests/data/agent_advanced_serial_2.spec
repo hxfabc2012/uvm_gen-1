@@ -1,7 +1,7 @@
 Datum Technology Corporation
 
 aas2
-Advanced Agent Serial Template Test - Serial Asymmetric DDR
+Advanced Agent Serial Template Test - Asymmetric DDR
 n
 y
 mstr

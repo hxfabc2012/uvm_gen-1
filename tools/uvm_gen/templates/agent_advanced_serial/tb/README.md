@@ -1,31 +1,23 @@
-# {{ name_of_copyright_owner }} {{ full_name }} Self-Test UVM Environment
-This package contains the {{ name_of_copyright_owner }} {{ full_name }} Self-Test UVM Environment.
-
-
-
-# {{ name_of_copyright_owner }} {{ full_name }} Self-Test UVM Environment
-
+# {{ name_of_copyright_owner }} {{ full_name }} UVM Agent Self-Test Bench
 
 # About
-This package contains the {{ name_of_copyright_owner }} {{ full_name }} Self-Test UVM Environment.
-
-TODO Describe {{ full_name }}
-
+This IP contains the {{ name_of_copyright_owner }} {{ full_name }} UVM Agent Self-Test Bench.
 
 # Block Diagram
-![alt text](./docs/env_block_diagram.svg "{{ full_name }} Self-Test UVM Environment")
+![alt text](./docs/tb_block_diagram.svg "{{ full_name }} UVM Agent Self-Test Bench")
 
 # Directory Structure
 * `bin` - Scripts, metadata and other miscellaneous files
-* `docs` - Documents describing the {{ name_of_copyright_owner }} {{ full_name }} Self-Test UVM Environment
-* `examples` - Samples for users
-* `src` - Source code for this package
+* `docs` - Documents describing the {{ full_name }} UVM Agent Self-Test Bench
+* `examples` - Code samples for extending this Test Bench
+* `src` - Source code
 
 
 # Dependencies
-It is dependent on the following packages:
+It IP is dependent on the following packages:
 
 * `uvm_pkg`
 * `uvml_pkg`
 * `uvml_logs_pkg`
-* TODO Add {{ full_name }} dependencies
+* `uvma_{{ name }}_pkg`
+* `uvme{{ name }}_st_pkg`

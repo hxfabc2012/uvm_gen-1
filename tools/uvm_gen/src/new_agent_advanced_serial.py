@@ -37,7 +37,7 @@ parameters = { }
 
 symmetric_phy_agent_files = {
     #              SRC                                 DST
-    #"agent_advanced_serial/agent/bin/package.py"                  : "uvma_${name}/bin/package.py",
+    "agent_advanced_serial/agent/bin/doxygen.cfg"                  : "uvma_{{ name }}/bin/doxygen.cfg",
     #"agent_advanced_serial/agent/docs/agent_block_diagram.svg"    : "uvma_${name}/docs/agent_block_diagram.svg",
     "agent_advanced_serial/agent/examples/instantiation.sv"       : "uvma_{{ name }}/examples/instantiation.sv",
     "agent_advanced_serial/agent/examples/sequence.sv"            : "uvma_{{ name }}/examples/sequence.sv",
@@ -73,13 +73,12 @@ symmetric_phy_agent_files = {
     "agent_advanced_serial/agent/src/tdefs.sv"                    : "uvma_{{ name }}/src/uvma_{{ name }}_tdefs.sv",
     "agent_advanced_serial/agent/gitignore"                       : "uvma_{{ name }}/.gitignore",
     "agent_advanced_serial/agent/ip.yml"                          : "uvma_{{ name }}/ip.yml",
-    #"LICENSE_solderpad_v2p1.md"                         : "uvma_{{ name }}/LICENSE.md",
     "agent_advanced_serial/agent/README.md"                       : "uvma_{{ name }}/README.md"
 }
 
 asymmetric_phy_agent_files = {
     #              SRC                                 DST
-    #"agent_advanced_serial/agent/bin/package.py"                  : "uvma_{{ name }}/bin/package.py",
+    "agent_advanced_serial/agent/bin/doxygen.cfg"                  : "uvma_{{ name }}/bin/doxygen.cfg",
     #"agent_advanced_serial/agent/docs/agent_block_diagram.svg"    : "uvma_{{ name }}/docs/agent_block_diagram.svg",
     "agent_advanced_serial/agent/examples/instantiation.sv"       : "uvma_{{ name }}/examples/instantiation.sv",
     "agent_advanced_serial/agent/examples/sequence.sv"            : "uvma_{{ name }}/examples/sequence.sv",
@@ -120,12 +119,11 @@ asymmetric_phy_agent_files = {
     "agent_advanced_serial/agent/src/tdefs.sv"                    : "uvma_{{ name }}/src/uvma_{{ name }}_tdefs.sv",
     "agent_advanced_serial/agent/gitignore"                       : "uvma_{{ name }}/.gitignore",
     "agent_advanced_serial/agent/ip.yml"                          : "uvma_{{ name }}/ip.yml",
-    #"LICENSE_solderpad_v2p1.md"                         : "uvma_{{ name }}/LICENSE.md",
     "agent_advanced_serial/agent/README.md"                       : "uvma_{{ name }}/README.md"
 }
 
 env_files = {
-    #"agent_advanced_serial/env/bin/package.py"                    : "uvme_{{ name }}_st/bin/package.py",
+    #"agent_advanced_serial/env/bin/doxygen.cfg"                  : "uvme_{{ name }}_st/bin/doxygen.cfg",
     #"agent_advanced_serial/env/docs/env_block_diagram.svg"        : "uvme_{{ name }}_st/docs/env_block_diagram.svg",
     "agent_advanced_serial/env/examples/virtual_sequence.sv"      : "uvme_{{ name }}_st/examples/virtual_sequence.sv",
     "agent_advanced_serial/env/src/comps/cov_model.sv"            : "uvme_{{ name }}_st/src/comps/uvme_{{ name }}_st_cov_model.sv",
@@ -147,12 +145,11 @@ env_files = {
     "agent_advanced_serial/env/src/tdefs.sv"                      : "uvme_{{ name }}_st/src/uvme_{{ name }}_st_tdefs.sv",
     "agent_advanced_serial/env/gitignore"                         : "uvme_{{ name }}_st/.gitignore",
     "agent_advanced_serial/env/ip.yml"                            : "uvme_{{ name }}_st/ip.yml",
-    #"LICENSE_solderpad_v2p1.md"                         : "uvme_{{ name }}_st/LICENSE.md",
     "agent_advanced_serial/env/README.md"                         : "uvme_{{ name }}_st/README.md"
 }
 
 tb_files = {
-    #"agent_advanced_serial/tb/bin/package.py"                     : "uvmt_{{ name }}_st/bin/package.py",
+    #"agent_advanced_serial/tb/bin/doxygen.cfg"                  : "uvmt_{{ name }}_st/bin/doxygen.cfg",
     #"agent_advanced_serial/tb/docs/tb_block_diagram.svg"          : "uvmt_{{ name }}_st/docs/tb_block_diagram.svg",
     "agent_advanced_serial/tb/examples/test.sv"                   : "uvmt_{{ name }}_st/examples/test.sv",
     "agent_advanced_serial/tb/src/tb/clknrst_gen_if.sv"           : "uvmt_{{ name }}_st/src/tb/uvmt_{{ name }}_st_clknrst_gen_if.sv",
@@ -171,8 +168,7 @@ tb_files = {
     "agent_advanced_serial/tb/src/tdefs.sv"                       : "uvmt_{{ name }}_st/src/uvmt_{{ name }}_st_tdefs.sv",
     "agent_advanced_serial/tb/gitignore"                          : "uvmt_{{ name }}_st/.gitignore",
     "agent_advanced_serial/tb/ip.yml"                             : "uvmt_{{ name }}_st/ip.yml",
-    #"LICENSE_solderpad_v2p1.md"                         : "uvmt_{{ name }}_st/LICENSE.md",
-    #"agent_advanced_serial/tb/README.md"                          : "uvmt_{{ name }}_st/README.md"
+    "agent_advanced_serial/tb/README.md"                          : "uvmt_{{ name }}_st/README.md"
 }
 
 directories = [

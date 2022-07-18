@@ -1,7 +1,7 @@
 Datum Technology Corporation
 
 aas0
-Advanced Agent Serial Template Test - Serial Asymmetric DDR
+Advanced Agent Serial Template Test - Asymmetric SDR
 n
 n
 mstr
