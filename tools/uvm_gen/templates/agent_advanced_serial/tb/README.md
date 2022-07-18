@@ -20,4 +20,4 @@ It IP is dependent on the following packages:
 * `uvml_pkg`
 * `uvml_logs_pkg`
 * `uvma_{{ name }}_pkg`
-* `uvme{{ name }}_st_pkg`
+* `uvme_{{ name }}_st_pkg`
