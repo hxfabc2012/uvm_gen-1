@@ -39,8 +39,8 @@ symmetric_phy_agent_files = {
     #              SRC                                 DST
     #"agent_advanced_serial/agent/bin/package.py"                  : "uvma_${name}/bin/package.py",
     #"agent_advanced_serial/agent/docs/agent_block_diagram.svg"    : "uvma_${name}/docs/agent_block_diagram.svg",
-    "agent_advanced_serial/agent/examples/instantiation.sv"       : "uvma_${name}/examples/instantiation.sv",
-    "agent_advanced_serial/agent/examples/sequence.sv"            : "uvma_${name}/examples/sequence.sv",
+    "agent_advanced_serial/agent/examples/instantiation.sv"       : "uvma_{{ name }}/examples/instantiation.sv",
+    "agent_advanced_serial/agent/examples/sequence.sv"            : "uvma_{{ name }}/examples/sequence.sv",
     "agent_advanced_serial/agent/src/comps/agent.sv"              : "uvma_{{ name }}/src/comps/uvma_{{ name }}_agent.sv",
     "agent_advanced_serial/agent/src/comps/cov_model.sv"          : "uvma_{{ name }}/src/comps/uvma_{{ name }}_cov_model.sv",
     "agent_advanced_serial/agent/src/comps/drv.sv"                : "uvma_{{ name }}/src/comps/uvma_{{ name }}_drv.sv",
