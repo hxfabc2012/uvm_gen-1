@@ -39,8 +39,8 @@ symmetric_phy_agent_files = {
     #              SRC                                 DST
     #"agent_advanced_serial/agent/bin/package.py"                  : "uvma_${name}/bin/package.py",
     #"agent_advanced_serial/agent/docs/agent_block_diagram.svg"    : "uvma_${name}/docs/agent_block_diagram.svg",
-    #"agent_advanced_serial/agent/examples/instantiation.sv"       : "uvma_${name}/examples/instantiation.sv",
-    #"agent_advanced_serial/agent/examples/sequence.sv"            : "uvma_${name}/examples/sequence.sv",
+    "agent_advanced_serial/agent/examples/instantiation.sv"       : "uvma_${name}/examples/instantiation.sv",
+    "agent_advanced_serial/agent/examples/sequence.sv"            : "uvma_${name}/examples/sequence.sv",
     "agent_advanced_serial/agent/src/comps/agent.sv"              : "uvma_{{ name }}/src/comps/uvma_{{ name }}_agent.sv",
     "agent_advanced_serial/agent/src/comps/cov_model.sv"          : "uvma_{{ name }}/src/comps/uvma_{{ name }}_cov_model.sv",
     "agent_advanced_serial/agent/src/comps/drv.sv"                : "uvma_{{ name }}/src/comps/uvma_{{ name }}_drv.sv",
@@ -81,8 +81,8 @@ asymmetric_phy_agent_files = {
     #              SRC                                 DST
     #"agent_advanced_serial/agent/bin/package.py"                  : "uvma_{{ name }}/bin/package.py",
     #"agent_advanced_serial/agent/docs/agent_block_diagram.svg"    : "uvma_{{ name }}/docs/agent_block_diagram.svg",
-    #"agent_advanced_serial/agent/examples/instantiation.sv"       : "uvma_{{ name }}/examples/instantiation.sv",
-    #"agent_advanced_serial/agent/examples/sequence.sv"            : "uvma_{{ name }}/examples/sequence.sv",
+    "agent_advanced_serial/agent/examples/instantiation.sv"       : "uvma_{{ name }}/examples/instantiation.sv",
+    "agent_advanced_serial/agent/examples/sequence.sv"            : "uvma_{{ name }}/examples/sequence.sv",
     "agent_advanced_serial/agent/src/comps/agent.sv"              : "uvma_{{ name }}/src/comps/uvma_{{ name }}_agent.sv",
     "agent_advanced_serial/agent/src/comps/cov_model.sv"          : "uvma_{{ name }}/src/comps/uvma_{{ name }}_cov_model.sv",
     "agent_advanced_serial/agent/src/comps/drv.sv"                : "uvma_{{ name }}/src/comps/uvma_{{ name }}_drv.sv",
@@ -127,7 +127,7 @@ asymmetric_phy_agent_files = {
 env_files = {
     #"agent_advanced_serial/env/bin/package.py"                    : "uvme_{{ name }}_st/bin/package.py",
     #"agent_advanced_serial/env/docs/env_block_diagram.svg"        : "uvme_{{ name }}_st/docs/env_block_diagram.svg",
-    #"agent_advanced_serial/env/examples/virtual_sequence.sv"      : "uvme_{{ name }}_st/examples/virtual_sequence.sv",
+    "agent_advanced_serial/env/examples/virtual_sequence.sv"      : "uvme_{{ name }}_st/examples/virtual_sequence.sv",
     "agent_advanced_serial/env/src/comps/cov_model.sv"            : "uvme_{{ name }}_st/src/comps/uvme_{{ name }}_st_cov_model.sv",
     "agent_advanced_serial/env/src/comps/env.sv"                  : "uvme_{{ name }}_st/src/comps/uvme_{{ name }}_st_env.sv",
     "agent_advanced_serial/env/src/comps/prd.sv"                  : "uvme_{{ name }}_st/src/comps/uvme_{{ name }}_st_prd.sv",
@@ -154,7 +154,7 @@ env_files = {
 tb_files = {
     #"agent_advanced_serial/tb/bin/package.py"                     : "uvmt_{{ name }}_st/bin/package.py",
     #"agent_advanced_serial/tb/docs/tb_block_diagram.svg"          : "uvmt_{{ name }}_st/docs/tb_block_diagram.svg",
-    #"agent_advanced_serial/tb/examples/test.sv"                   : "uvmt_{{ name }}_st/examples/test.sv",
+    "agent_advanced_serial/tb/examples/test.sv"                   : "uvmt_{{ name }}_st/examples/test.sv",
     "agent_advanced_serial/tb/src/tb/clknrst_gen_if.sv"           : "uvmt_{{ name }}_st/src/tb/uvmt_{{ name }}_st_clknrst_gen_if.sv",
     "agent_advanced_serial/tb/src/tb/dut_chkr.sv"                 : "uvmt_{{ name }}_st/src/tb/uvmt_{{ name }}_st_dut_chkr.sv",
     "agent_advanced_serial/tb/src/tb/dut_wrap.sv"                 : "uvmt_{{ name }}_st/src/tb/uvmt_{{ name }}_st_dut_wrap.sv",
