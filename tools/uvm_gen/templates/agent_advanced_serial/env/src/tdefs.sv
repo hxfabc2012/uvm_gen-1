@@ -7,7 +7,9 @@
 `define __UVME_{{ name.upper() }}_ST_TDEFS_SV__
 
 
-// Scoreboard specialization
+/**
+ * Scoreboard specialization for {{ full_name }} Monitor Transactions.
+ */
 typedef uvml_sb_simplex_c #(
    .T_ACT_TRN(uvma_{{ name }}_mon_trn_c)
 ) uvme_{{ name }}_st_sb_simplex_c;

@@ -9,6 +9,7 @@
 
 /**
  * Encapsulates assertions targeting uvma_{{ name }}_if.
+ * This module must be bound to an interface in a test bench.
  */
 module uvma_{{ name }}_chkr(
    uvma_{{ name }}_if  {{ name }}_if ///< Target interface handle

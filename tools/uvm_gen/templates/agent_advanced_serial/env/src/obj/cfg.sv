@@ -8,29 +8,30 @@
 
 
 /**
- * Object encapsulating all parameters for creating, connecting and running {{ full_name }} Self-Testing Environment (uvme_{{ name }}_st_env_c) components.
+ * Object encapsulating all parameters for creating, connecting and running {{ full_name }} UVM Agent Self-Testing
+ * Environment (uvme_{{ name }}_st_env_c) components.
  */
 class uvme_{{ name }}_st_cfg_c extends uvml_cfg_c;
 
    /// @defgroup Integrals
    /// @{
-   rand bit                      enabled              ; ///<
-   rand uvm_active_passive_enum  is_active            ; ///<
-   rand uvml_reset_type_enum     reset_type           ; ///< TODO Describe uvme_{{ name }}_st_cfg_c::reset_type
-   rand bit                      scoreboarding_enabled; ///<
-   rand bit                      cov_model_enabled    ; ///<
-   rand bit                      trn_log_enabled      ; ///<
+   rand bit                      enabled              ; ///< Enables/disables creation of all sub-components.
+   rand uvm_active_passive_enum  is_active            ; ///< Sets all agents as active/passive.
+   rand uvml_reset_type_enum     reset_type           ; ///< Sets the type of reset the agent is sensitive to.
+   rand bit                      scoreboarding_enabled; ///< Enables/disables creation of predictor and scoreboard.
+   rand bit                      cov_model_enabled    ; ///< Enables/disables functional coverage models.
+   rand bit                      trn_log_enabled      ; ///< Enables/disables transaction logging.
    /// @}
 
    /// @defgroup Objects
    /// @{
-   rand uvma_{{ name }}_cfg_c  {{ mode_1 }}_cfg  ; ///<
-   rand uvma_{{ name }}_cfg_c  {{ mode_2 }}_cfg  ; ///<
-   rand uvma_{{ name }}_cfg_c  passive_cfg  ; ///<
-   rand uvml_sb_simplex_cfg_c  sb_{{ tx }}_cfg; ///<
-   rand uvml_sb_simplex_cfg_c  sb_{{ rx }}_cfg; ///<
-   rand uvml_sb_simplex_cfg_c  sb_{{ mode_1 }}_cfg; ///<
-   rand uvml_sb_simplex_cfg_c  sb_{{ mode_2 }}_cfg; ///<
+   rand uvma_{{ name }}_cfg_c  {{ mode_1 }}_cfg  ; ///< {{ mode_1.upper() }} Agent configuration handle.
+   rand uvma_{{ name }}_cfg_c  {{ mode_2 }}_cfg  ; ///< {{ mode_2.upper() }} Agent configuration handle.
+   rand uvma_{{ name }}_cfg_c  passive_cfg  ; ///< Passive Agent configuration handle.
+   rand uvml_sb_simplex_cfg_c  sb_{{ tx }}_cfg; ///< {{ tx.upper() }} Scoreboard configuration handle.
+   rand uvml_sb_simplex_cfg_c  sb_{{ rx }}_cfg; ///< {{ rx.upper() }} Scoreboard configuration handle.
+   rand uvml_sb_simplex_cfg_c  sb_{{ mode_1 }}_cfg; ///< {{ mode_1.upper() }} Scoreboard configuration handle.
+   rand uvml_sb_simplex_cfg_c  sb_{{ mode_2 }}_cfg; ///< {{ mode_2.upper() }} Scoreboard configuration handle.
    /// @}
 
 
@@ -41,7 +42,6 @@ class uvme_{{ name }}_st_cfg_c extends uvml_cfg_c;
       `uvm_field_int (                         scoreboarding_enabled, UVM_DEFAULT)
       `uvm_field_int (                         cov_model_enabled    , UVM_DEFAULT)
       `uvm_field_int (                         trn_log_enabled      , UVM_DEFAULT)
-
       `uvm_field_object({{ mode_1 }}_cfg  , UVM_DEFAULT)
       `uvm_field_object({{ mode_2 }}_cfg  , UVM_DEFAULT)
       `uvm_field_object(passive_cfg  , UVM_DEFAULT)
@@ -53,7 +53,7 @@ class uvme_{{ name }}_st_cfg_c extends uvml_cfg_c;
 
 
    /**
-    *
+    * Sets safe defaults.
     */
    constraint defaults_cons {
       soft enabled                == 0;
@@ -64,7 +64,7 @@ class uvme_{{ name }}_st_cfg_c extends uvml_cfg_c;
    }
 
    /**
-    *
+    * Sets all configuration fields for {{ mode_1.upper() }} agent.
     */
    constraint agent_{{ mode_1 }}_cfg_cons {
       {{ mode_1 }}_cfg.drv_mode == UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_1.upper() }};
@@ -97,7 +97,7 @@ class uvme_{{ name }}_st_cfg_c extends uvml_cfg_c;
    }
 
    /**
-    *
+    * Sets all configuration fields for {{ mode_2.upper() }} agent.
     */
    constraint agent_{{ mode_2 }}_cfg_cons {
       {{ mode_2 }}_cfg.drv_mode == UVMA_{{ name.upper() }}_DRV_MODE_{{ mode_2.upper() }};
@@ -130,7 +130,7 @@ class uvme_{{ name }}_st_cfg_c extends uvml_cfg_c;
    }
 
    /**
-    *
+    * Sets all configuration fields for passive agent.
     */
    constraint agent_passive_cfg_cons {
       passive_cfg.bypass_mode == 0;
@@ -157,7 +157,7 @@ class uvme_{{ name }}_st_cfg_c extends uvml_cfg_c;
    }
 
    /**
-    *
+    * Sets all scoreboard configuration fields.
     */
    constraint sb_cfg_cons {
       sb_{{ tx }}_cfg.mode == UVML_SB_MODE_IN_ORDER;

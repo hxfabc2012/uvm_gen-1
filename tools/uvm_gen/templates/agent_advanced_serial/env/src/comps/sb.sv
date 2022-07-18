@@ -8,34 +8,34 @@
 
 
 /**
- * TODO Describe uvme_{{ name }}_st_sb_c
+ * Component encapsulating scoreboarding components for {{ full_name }} UVM Agent Self-Testing Environment.
  */
 class uvme_{{ name }}_st_sb_c extends uvm_component;
 
    /// @defgroup Objects
    /// @{
-   uvme_{{ name }}_st_cfg_c    cfg  ; ///<
-   uvme_{{ name }}_st_cntxt_c  cntxt; ///<
+   uvme_{{ name }}_st_cfg_c    cfg  ; ///< Environment configuration handle
+   uvme_{{ name }}_st_cntxt_c  cntxt; ///< Environment context handle
    /// @}
 
    /// @defgroup Components
    /// @{
-   uvme_{{ name }}_st_sb_simplex_c  sb_{{ tx }}; ///<
-   uvme_{{ name }}_st_sb_simplex_c  sb_{{ rx }}; ///<
-   uvme_{{ name }}_st_sb_simplex_c  sb_{{ mode_1 }}; ///<
-   uvme_{{ name }}_st_sb_simplex_c  sb_{{ mode_2 }}; ///<
+   uvme_{{ name }}_st_sb_simplex_c  sb_{{ tx }}; ///< {{ tx.upper() }} Scoreboard.
+   uvme_{{ name }}_st_sb_simplex_c  sb_{{ rx }}; ///< {{ rx.upper() }} Scoreboard.
+   uvme_{{ name }}_st_sb_simplex_c  sb_{{ mode_1 }}; ///< {{ mode_1.upper() }} Scoreboard.
+   uvme_{{ name }}_st_sb_simplex_c  sb_{{ mode_2 }}; ///< {{ mode_2.upper() }} Scoreboard.
    /// @}
 
    /// @defgroup TLM
    /// @{
-   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c)  {{ tx }}_act_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c)  {{ tx }}_exp_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c)  {{ rx }}_act_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c)  {{ rx }}_exp_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c)  {{ mode_1 }}_act_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c)  {{ mode_1 }}_exp_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c)  {{ mode_2 }}_act_export; ///<
-   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c)  {{ mode_2 }}_exp_export; ///<
+   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c)  {{ tx }}_act_export; ///< Port for #sb_{{ tx }} Actual Transactions.
+   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c)  {{ tx }}_exp_export; ///< Port for #sb_{{ tx }} Expected Transactions.
+   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c)  {{ rx }}_act_export; ///< Port for #sb_{{ rx }} Actual Transactions.
+   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c)  {{ rx }}_exp_export; ///< Port for #sb_{{ rx }} Expected Transactions.
+   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c)  {{ mode_1 }}_act_export; ///< Port for #sb_{{ mode_1 }} Actual Transactions.
+   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c)  {{ mode_1 }}_exp_export; ///< Port for #sb_{{ mode_1 }} Expected Transactions.
+   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c)  {{ mode_2 }}_act_export; ///< Port for #sb_{{ mode_2 }} Actual Transactions.
+   uvm_analysis_export #(uvma_{{ name }}_mon_trn_c)  {{ mode_2 }}_exp_export; ///< Port for #sb_{{ mode_2 }} Expected Transactions.
    /// @}
 
 
@@ -51,7 +51,7 @@ class uvme_{{ name }}_st_sb_c extends uvm_component;
    extern function new(string name="uvme_{{ name }}_st_sb", uvm_component parent=null);
 
    /**
-    * Ensures cfg & cntxt handles are not null.
+    * Ensures #cfg & #cntxt handles are not null.
     */
    extern virtual function void build_phase(uvm_phase phase);
 
@@ -71,12 +71,12 @@ class uvme_{{ name }}_st_sb_c extends uvm_component;
    extern function void get_cntxt();
 
    /**
-    * Assigns configuration handles to components using UVM Configuration Database.
+    * Assigns configuration handles to components using uvm_config_db.
     */
    extern function void assign_cfg();
 
    /**
-    * Assigns context handles to components using UVM Configuration Database.
+    * Assigns context handles to components using uvm_config_db.
     */
    extern function void assign_cntxt();
 
@@ -86,7 +86,7 @@ class uvme_{{ name }}_st_sb_c extends uvm_component;
    extern function void create_components();
 
    /**
-    * Conect scoreboard TLM ports.
+    * Connects scoreboard TLM ports.
     */
    extern function void connect_ports();
 

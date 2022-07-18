@@ -8,7 +8,7 @@
 
 
 /**
- * Component on which all {{ full_name }} Self-Test virtual sequences are run.
+ * Component on which all {{ full_name }} UVM Agent Self-Test Virtual Sequences are run.
  */
 class uvme_{{ name }}_st_vsqr_c extends uvml_vsqr_c #(
    .REQ(uvm_sequence_item),
@@ -17,15 +17,15 @@ class uvme_{{ name }}_st_vsqr_c extends uvml_vsqr_c #(
 
    /// @defgroup Objects
    /// @{
-   uvme_{{ name }}_st_cfg_c    cfg  ; ///<
-   uvme_{{ name }}_st_cntxt_c  cntxt; ///<
+   uvme_{{ name }}_st_cfg_c    cfg  ; ///< Environment configuration handle
+   uvme_{{ name }}_st_cntxt_c  cntxt; ///< Environment context handle
    /// @}
 
    /// @defgroup Sequencer handles
    /// @{
-   uvma_{{ name }}_vsqr_c  {{ mode_1 }}_vsequencer; ///<
-   uvma_{{ name }}_vsqr_c  {{ mode_2 }}_vsequencer; ///<
-   uvma_{{ name }}_vsqr_c  passive_vsequencer; ///<
+   uvma_{{ name }}_vsqr_c  {{ mode_1 }}_vsequencer; ///< Handle to {{ mode_1.upper() }} Agent's Virtual Sequencer.
+   uvma_{{ name }}_vsqr_c  {{ mode_2 }}_vsequencer; ///< Handle to {{ mode_2.upper() }} Agent's Virtual Sequencer.
+   uvma_{{ name }}_vsqr_c  passive_vsequencer; ///< Handle to passive Agent's Virtual Sequencer.
    /// @}
 
 
@@ -41,7 +41,7 @@ class uvme_{{ name }}_st_vsqr_c extends uvml_vsqr_c #(
    extern function new(string name="uvme_{{ name }}_st_sqr", uvm_component parent=null);
 
    /**
-    * Ensures cfg & cntxt handles are not null.
+    * Ensures #cfg & #cntxt handles are not null.
     */
    extern virtual function void build_phase(uvm_phase phase);
 

@@ -8,28 +8,29 @@
 
 
 /**
- * Top-level component that encapsulates, builds and connects all other {{ full_name }} environment components.
+ * Top-level component that encapsulates, builds and connects all other {{ full_name }} UVM Agent Self-Test Environment
+ * (uvme_${name}_st_env_c) components.
  */
 class uvme_{{ name }}_st_env_c extends uvml_env_c;
 
    /// @defgroup Objects
    /// @{
-   uvme_{{ name }}_st_cfg_c    cfg  ; ///<
-   uvme_{{ name }}_st_cntxt_c  cntxt; ///<
+   uvme_{{ name }}_st_cfg_c    cfg  ; ///< Configuration handle.  Must be provided by component instantiating this environment.
+   uvme_{{ name }}_st_cntxt_c  cntxt; ///< Context handle.  Can be provided by component instantiating this environment.
    /// @}
 
    /// @defgroup Agents
    /// @{
-   uvma_{{ name }}_agent_c  {{ mode_1 }}_agent; ///<
-   uvma_{{ name }}_agent_c  {{ mode_2 }}_agent; ///<
-   uvma_{{ name }}_agent_c  passive_agent; ///<
+   uvma_{{ name }}_agent_c  {{ mode_1 }}_agent; ///< {{ mode_1.upper() }} Agent instance.
+   uvma_{{ name }}_agent_c  {{ mode_2 }}_agent; ///< {{ mode_2.upper() }} Agent instance.
+   uvma_{{ name }}_agent_c  passive_agent; ///< Passive Agent instance.
    /// @}
 
    /// @defgroup Components
    /// @{
-   uvme_{{ name }}_st_prd_c   predictor ; ///<
-   uvme_{{ name }}_st_sb_c    sb        ; ///<
-   uvme_{{ name }}_st_vsqr_c  vsequencer; ///<
+   uvme_{{ name }}_st_vsqr_c  vsequencer; ///< Virtual Sequencer on which Virtual Sequences are run.
+   uvme_{{ name }}_st_prd_c   predictor ; ///< Feeds #sb's expected ports with monitor transactions
+   uvme_{{ name }}_st_sb_c    sb        ; ///< Ensures that monitored transactions from data streams match.
    /// @}
 
 
@@ -45,9 +46,8 @@ class uvme_{{ name }}_st_env_c extends uvml_env_c;
    extern function new(string name="uvme_{{ name }}_st_env", uvm_component parent=null);
 
    /**
-    * 1. Ensures cfg & cntxt handles are not null
-    * 2. Retrieves cntxt.clk_vif from UVM configuration database via retrieve_clk_vif()
-    * 3. Assigns cfg and cntxt handles via assign_cfg() & assign_cntxt()
+    * 1. Ensures #cfg & #cntxt handles are not null
+    * 2. Assigns #cfg and #cntxt sub-handles via assign_cfg() & assign_cntxt()
     * 4. Builds all components via create_<x>()
     */
    extern virtual function void build_phase(uvm_phase phase);
@@ -71,12 +71,12 @@ class uvme_{{ name }}_st_env_c extends uvml_env_c;
    extern function void get_cntxt();
 
    /**
-    * Assigns configuration handles to components using UVM Configuration Database.
+    * Assigns configuration handles to components using uvm_config_db.
     */
    extern function void assign_cfg();
 
    /**
-    * Assigns context handles to components using UVM Configuration Database.
+    * Assigns context handles to components using uvm_config_db.
     */
    extern function void assign_cntxt();
 
@@ -91,7 +91,7 @@ class uvme_{{ name }}_st_env_c extends uvml_env_c;
    extern function void create_env_components();
 
    /**
-    * Creates environment's virtual sequencer.
+    * Creates Virtual Sequencer.
     */
    extern function void create_vsequencer();
 
@@ -101,7 +101,7 @@ class uvme_{{ name }}_st_env_c extends uvml_env_c;
    extern function void connect_predictor();
 
    /**
-    * Connects scoreboards components to agents/predictor.
+    * Connects scoreboards to agents/predictor.
     */
    extern function void connect_scoreboard();
 

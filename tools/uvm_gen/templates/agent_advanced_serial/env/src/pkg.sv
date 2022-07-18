@@ -19,14 +19,14 @@
 
 
  /**
- * Encapsulates all the types needed for an UVM environment capable of self-testing the {{ full_name }}.
+ * Encapsulates all the types of the {{ full_name }} UVM Agent Self-Test environment.
  */
 package uvme_{{ name }}_st_pkg;
 
-   import uvm_pkg         ::*;
-   import uvml_pkg        ::*;
-   import uvml_logs_pkg   ::*;
-   import uvml_sb_pkg     ::*;
+   import uvm_pkg      ::*;
+   import uvml_pkg     ::*;
+   import uvml_logs_pkg::*;
+   import uvml_sb_pkg  ::*;
    import uvma_{{ name }}_pkg::*;
 
    // Constants / Structs / Enums

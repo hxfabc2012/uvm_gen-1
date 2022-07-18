@@ -8,14 +8,14 @@
 
 
 /**
- * TODO Describe uvme_{{ name }}_st_rand_stim_vseq_c
+ * Virtual Sequence sending a fixed number of completely random sequence items to {{ mode_1 }} and {{ mode_1 }} Virtual Sequencers.
  */
 class uvme_{{ name }}_st_rand_stim_vseq_c extends uvme_{{ name }}_st_base_vseq_c;
 
    /// @defgroup Knobs
    /// @{
-   rand int unsigned  num_{{ tx }}_seq_items; ///<
-   rand int unsigned  num_{{ rx }}_seq_items; ///<
+   rand int unsigned  num_{{ tx }}_seq_items; ///< Number of {{ tx.upper() }} Sequence Items to generate.
+   rand int unsigned  num_{{ rx }}_seq_items; ///< Number of {{ rx.upper() }} Sequence Items to generate.
    /// @{
 
 
@@ -26,7 +26,7 @@ class uvme_{{ name }}_st_rand_stim_vseq_c extends uvme_{{ name }}_st_base_vseq_c
 
 
    /**
-    *
+    * Sets safe defaults.
     */
    constraint defaults_cons {
       soft num_{{ tx }}_seq_items == uvme_{{ name }}_st_rand_stim_default_num_seq_items;
@@ -40,7 +40,7 @@ class uvme_{{ name }}_st_rand_stim_vseq_c extends uvme_{{ name }}_st_base_vseq_c
    extern function new(string name="uvme_{{ name }}_st_rand_stim_vseq");
 
    /**
-    * TODO Describe uvme_{{ name }}_st_rand_stim_vseq_c::body()
+    * Generates Sequence Items in both directions.
     */
    extern virtual task body();
 

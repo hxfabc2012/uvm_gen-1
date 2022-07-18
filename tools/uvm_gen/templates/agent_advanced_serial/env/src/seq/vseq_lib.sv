@@ -12,7 +12,7 @@
 
 
 /**
- * Object cataloging the {{ full_name }} self-test environment's virtual sequences.
+ * Object cataloging {{ full_name }} self-test environment's virtual sequences.
  */
 class uvme_{{ name }}_st_vseq_lib_c extends uvml_seq_lib_c #(
    .REQ(uvm_sequence_item),
@@ -23,7 +23,8 @@ class uvme_{{ name }}_st_vseq_lib_c extends uvml_seq_lib_c #(
    `uvm_sequence_library_utils(uvme_{{ name }}_st_vseq_lib_c)
 
    /**
-    * Initializes sequence library
+    * 1. Initializes sequence library
+    * 2. Adds sequences to library
     */
    extern function new(string name="uvme_{{ name }}_st_vseq_lib");
 

@@ -8,7 +8,7 @@
 
 
 /**
- * Component encapsulating {{ full_name }} Self-Test Environment functional coverage model.
+ * Component encapsulating {{ name_normal_case }} UVM Agent Self-Test Functional Coverage Model.
  */
 class uvme_{{ name }}_st_cov_model_c extends uvma_{{ name }}_cov_model_c;
 
@@ -17,7 +17,7 @@ class uvme_{{ name }}_st_cov_model_c extends uvma_{{ name }}_cov_model_c;
 
 
    /**
-    *
+    * Agent configuration functional coverage.
     */
    covergroup {{ name }}_st_cfg_cg;
       bypass_mode_cpt     : coverpoint cfg.bypass_mode    ;
@@ -28,7 +28,7 @@ class uvme_{{ name }}_st_cov_model_c extends uvma_{{ name }}_cov_model_c;
    endgroup : {{ name }}_st_cfg_cg
 
    /**
-    *
+    * Agent context functional coverage.
     */
    covergroup {{ name }}_st_cntxt_cg;
       {{ tx }}_cntxt_state_cpt : coverpoint cntxt.{{ tx }}_mon_fsm_cntxt.state;
@@ -36,28 +36,28 @@ class uvme_{{ name }}_st_cov_model_c extends uvma_{{ name }}_cov_model_c;
    endgroup : {{ name }}_st_cntxt_cg
 
    /**
-    *
+    * Sequence item functional coverage.
     */
    covergroup {{ name }}_st_seq_item_cg;
       header_cpt : coverpoint seq_item.header;
    endgroup : {{ name }}_st_seq_item_cg
 
    /**
-    *
+    * {{ tx.upper() }} Monitor Transaction functional coverage.
     */
    covergroup {{ name }}_st_{{ tx }}_mon_trn_cg;
       header_cpt : coverpoint {{ tx }}_mon_trn.header;
    endgroup : {{ name }}_st_{{ tx }}_mon_trn_cg
 
    /**
-    *
+    *{{ rx.upper() }} Monitor Transaction functional coverage.
     */
    covergroup {{ name }}_st_{{ rx }}_mon_trn_cg;
       header_cpt : coverpoint {{ rx }}_mon_trn.header;
    endgroup : {{ name }}_st_{{ rx }}_mon_trn_cg
 
    /**
-    *
+    * {{ tx.upper() }} Phy Sequence Item functional coverage.
     */
    covergroup {{ name }}_st_{{ tx }}_phy_seq_item_cg;
       // TODO Implement {{ name }}_st_{{ tx }}_phy_seq_item_cg
@@ -66,7 +66,7 @@ class uvme_{{ name }}_st_cov_model_c extends uvma_{{ name }}_cov_model_c;
    endgroup : {{ name }}_st_{{ tx }}_phy_seq_item_cg
 
    /**
-    *
+    * {{ rx.upper() }} Phy Sequence Item functional coverage.
     */
    covergroup {{ name }}_st_{{ rx }}_phy_seq_item_cg;
       // TODO Implement {{ name }}_st_{{ tx }}_phy_seq_item_cg
@@ -75,7 +75,7 @@ class uvme_{{ name }}_st_cov_model_c extends uvma_{{ name }}_cov_model_c;
    endgroup : {{ name }}_st_{{ rx }}_phy_seq_item_cg
 
    /**
-    *
+    * {{ tx.upper() }} Phy Monitor Transaction functional coverage.
     */
    covergroup {{ name }}_st_{{ tx }}_phy_mon_trn_cg;
       // TODO Implement {{ name }}_st_{{ tx }}_phy_mon_trn_cg
@@ -84,7 +84,7 @@ class uvme_{{ name }}_st_cov_model_c extends uvma_{{ name }}_cov_model_c;
    endgroup : {{ name }}_st_{{ tx }}_phy_mon_trn_cg
 
    /**
-    *
+    * {{ rx.upper() }} Phy Monitor Transaction functional coverage.
     */
    covergroup {{ name }}_st_{{ rx }}_phy_mon_trn_cg;
       // TODO Implement {{ name }}_st_{{ tx }}_phy_mon_trn_cg
@@ -99,52 +99,52 @@ class uvme_{{ name }}_st_cov_model_c extends uvma_{{ name }}_cov_model_c;
    extern function new(string name="uvme_{{ name }}_st_cov_model", uvm_component parent=null);
 
    /**
-    * TODO Describe uvme_{{ name }}_st_cov_model_c::end_of_elaboration_phase()
+    * Samples #cfg.
     */
    extern virtual function void end_of_elaboration_phase(uvm_phase phase);
 
    /**
-    * TODO Describe uvme_{{ name }}_st_cov_model_c::sample_cfg()
+    * Samples {{ name }}_st_cfg_cg.
     */
    extern virtual function void sample_cfg();
 
    /**
-    * TODO Describe uvme_{{ name }}_st_cov_model_c::sample_cntxt()
+    * Samples {{ name }}_st_cntxt_cg.
     */
    extern virtual function void sample_cntxt();
 
    /**
-    * TODO Describe uvma_{{ name }}_st_cov_model_c::sample_seq_item()
+    * Samples {{ name }}_st_seq_item_cg.
     */
    extern virtual function void sample_seq_item();
 
    /**
-    * TODO Describe uvma_{{ name }}_st_cov_model_c::sample_{{ tx }}_mon_trn()
+    * Samples {{ name }}_st_{{ tx }}_mon_trn_cg.
     */
    extern virtual function void sample_{{ tx }}_mon_trn();
 
    /**
-    * TODO Describe uvma_{{ name }}_st_cov_model_c::sample_{{ rx }}_mon_trn()
+    * Samples {{ name }}_st_{{ rx }}_mon_trn_cg.
     */
    extern virtual function void sample_{{ rx }}_mon_trn();
 
    /**
-    * TODO Describe uvma_{{ name }}_st_cov_model_c::sample_{{ tx }}_phy_seq_item()
+    * Samples {{ name }}_st_{{ tx }}_phy_seq_item_cg.
     */
    extern virtual function void sample_{{ tx }}_phy_seq_item();
 
    /**
-    * TODO Describe uvma_{{ name }}_st_cov_model_c::sample_{{ rx }}_phy_seq_item()
+    * Samples {{ name }}_st_{{ rx }}_phy_seq_item_cg.
     */
    extern virtual function void sample_{{ rx }}_phy_seq_item();
 
    /**
-    * TODO Describe uvma_{{ name }}_st_cov_model_c::sample_{{ tx }}_phy_mon_trn()
+    * Samples {{ name }}_st_{{ tx }}_phy_mon_trn_cg.
     */
    extern virtual function void sample_{{ tx }}_phy_mon_trn();
 
    /**
-    * TODO Describe uvma_{{ name }}_st_cov_model_c::sample_{{ rx }}_phy_mon_trn()
+    * Samples {{ name }}_st_{{ rx }}_phy_mon_trn_cg.
     */
    extern virtual function void sample_{{ rx }}_phy_mon_trn();
 

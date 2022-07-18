@@ -8,30 +8,31 @@
 
 
 /**
- * Component implementing transaction-based software model of {{ full_name }} Self-Testing DUT.
+ * Component implementing transaction-based prediction for ${name_normal_case} UVM Agent Self-Testing Environment.
+ * Predicts how the Passive Agent will observe stimulus from {{ mode_1.upper() }} & {{ mode_2.upper() }} Agents.
  */
 class uvme_{{ name }}_st_prd_c extends uvm_component;
 
    /// @defgroup Objects
    /// @{
-   uvme_{{ name }}_st_cfg_c    cfg  ; ///<
-   uvme_{{ name }}_st_cntxt_c  cntxt; ///<
+   uvme_{{ name }}_st_cfg_c    cfg  ; ///< Environment configuration handle
+   uvme_{{ name }}_st_cntxt_c  cntxt; ///< Environment context handle
    /// @}
 
    /// @defgroup TLM
    /// @{
-   uvm_analysis_export   #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_in_export; ///<
-   uvm_analysis_export   #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_in_export; ///<
-   uvm_analysis_export   #(uvma_{{ name }}_seq_item_c)  {{ mode_1 }}_in_export; ///<
-   uvm_analysis_export   #(uvma_{{ name }}_seq_item_c)  {{ mode_2 }}_in_export; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_in_fifo; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_in_fifo; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_seq_item_c)  {{ mode_1 }}_in_fifo; ///<
-   uvm_tlm_analysis_fifo #(uvma_{{ name }}_seq_item_c)  {{ mode_2 }}_in_fifo; ///<
-   uvm_analysis_port     #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_out_ap; ///<
-   uvm_analysis_port     #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_out_ap; ///<
-   uvm_analysis_port     #(uvma_{{ name }}_mon_trn_c )  {{ mode_1 }}_out_ap; ///<
-   uvm_analysis_port     #(uvma_{{ name }}_mon_trn_c )  {{ mode_2 }}_out_ap; ///<
+   uvm_analysis_export   #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_in_export; ///< Port for Monitor Transactions from {{ mode_1.upper() }} Agent {{ tx.upper() }}.
+   uvm_analysis_export   #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_in_export; ///< Port for Monitor Transactions from {{ mode_2.upper() }} Agent {{ rx.upper() }}.
+   uvm_analysis_export   #(uvma_{{ name }}_seq_item_c)  {{ mode_1 }}_in_export; ///< Port for Sequence Items from {{ mode_1.upper() }} Agent {{ tx.upper() }}.
+   uvm_analysis_export   #(uvma_{{ name }}_seq_item_c)  {{ mode_2 }}_in_export; ///<  Port for Sequence Items from {{ mode_2.upper() }} Agent {{ rx.upper() }}.
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_in_fifo; ///< FIFO of Monitor Transactions from {{ mode_1.upper() }} Agent {{ tx.upper() }}.
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_in_fifo; ///< FIFO of Monitor Transactions from {{ mode_2.upper() }} Agent {{ rx.upper() }}.
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_seq_item_c)  {{ mode_1 }}_in_fifo; ///< FIFO of Sequence Items from {{ mode_1.upper() }} Agent {{ tx.upper() }}.
+   uvm_tlm_analysis_fifo #(uvma_{{ name }}_seq_item_c)  {{ mode_2 }}_in_fifo; ///< FIFO of Sequence Items from {{ mode_2.upper() }} Agent {{ rx.upper() }}.
+   uvm_analysis_port     #(uvma_{{ name }}_mon_trn_c )  {{ tx }}_out_ap; ///< Port outputting Monitor Transactions for Scoreboard {{ tx.upper() }} Expected.
+   uvm_analysis_port     #(uvma_{{ name }}_mon_trn_c )  {{ rx }}_out_ap; ///< Port outputting Monitor Transactions for Scoreboard {{ rx.upper() }} Expected.
+   uvm_analysis_port     #(uvma_{{ name }}_mon_trn_c )  {{ mode_1 }}_out_ap; ///< Port outputting Monitor Transactions for Scoreboard {{ mode_1.upper() }} Expected.
+   uvm_analysis_port     #(uvma_{{ name }}_mon_trn_c )  {{ mode_2 }}_out_ap; ///< Port outputting Monitor Transactions for Scoreboard {{ mode_2.upper() }} Expected.
    /// @}
 
 
@@ -47,17 +48,18 @@ class uvme_{{ name }}_st_prd_c extends uvm_component;
    extern function new(string name="uvme_{{ name }}_st_prd", uvm_component parent=null);
 
    /**
-    * TODO Describe uvme_{{ name }}_st_prd_c::build_phase()
+    * 1. Ensures #cfg & #cntxt handles are not null
+    * 2. Creates TLM objects
     */
    extern virtual function void build_phase(uvm_phase phase);
 
    /**
-    * TODO Describe uvme_{{ name }}_st_prd_c::connect_phase()
+    * Connects Exports to FIFOs.
     */
    extern virtual function void connect_phase(uvm_phase phase);
 
    /**
-    * TODO Describe uvme_{{ name }}_st_prd_c::run_phase()
+    * Forks all processing tasks.
     */
    extern virtual task run_phase(uvm_phase phase);
 
@@ -72,34 +74,34 @@ class uvme_{{ name }}_st_prd_c extends uvm_component;
    extern function void get_cntxt();
 
    /**
-    *
+    * Creates TLM FIFOs and Analysis Ports.
     */
    extern function void create_tlm_objects();
 
    /**
-    *
+    * Connects Exports to FIFOs.
     */
    extern function void connect_ports();
 
    /**
-    * TODO Describe uvme_{{ name }}_st_prd_c::process_{{ tx }}()
+    * Predicts {{ tx.upper() }} data path.
     */
-   extern virtual task process_{{ tx }}();
+   extern task process_{{ tx }}();
 
    /**
-    * TODO Describe uvme_{{ name }}_st_prd_c::process_{{ rx }}()
+    * Predicts {{ rx.upper() }} data path.
     */
-   extern virtual task process_{{ rx }}();
+   extern task process_{{ rx }}();
 
    /**
-    * TODO Describe uvme_{{ name }}_st_prd_c::process_{{ mode_1 }}()
+    * Predicts {{ mode_1.upper() }} data path.
     */
-   extern virtual task process_{{ mode_1 }}();
+   extern task process_{{ mode_1 }}();
 
    /**
-    * TODO Describe uvme_{{ name }}_st_prd_c::process_{{ mode_2 }}()
+    * Predicts {{ mode_1.upper() }} data path.
     */
-   extern virtual task process_{{ mode_2 }}();
+   extern task process_{{ mode_2 }}();
 
 endclass : uvme_{{ name }}_st_prd_c
 
