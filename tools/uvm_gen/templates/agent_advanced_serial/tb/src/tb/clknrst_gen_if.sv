@@ -8,22 +8,21 @@
 
 
 /**
- * Interface providing clock and reset signals to all other interfaces used by {{ full_name }} Self-Test Bench (uvmt_{{ name }}_st_tb).
- * Managed by test cases.
+ * Interface providing clock and reset signals to all other interfaces used by the {{ full_name }} UVM Agent
+ * Self-Test Bench (uvmt_${name}_st_tb).  Managed by test cases.
  */
 interface uvmt_{{ name }}_st_clknrst_gen_if;
 
    /// @defgroup Signals
    /// @{
-   logic  clk     = 0; ///<
-   logic  reset   = 0; ///<
-   logic  reset_n = 1; ///<
+   logic  clk     = 0; ///< Clock.
+   logic  reset_n = 1; ///< Reset.
    /// @}
 
    /// @defgroup State variables
    /// @{
-   bit       clk_started = 0;
-   realtime  clk_period  = 10ns;
+   bit       clk_started =    0; ///< Gates clock generation.
+   realtime  clk_period  = 10ns; ///< Clock period.
    /// @}
 
 
@@ -57,7 +56,6 @@ interface uvmt_{{ name }}_st_clknrst_gen_if;
     * Asserts both reset signals.
     */
    function void assert_reset();
-      reset   = 1;
       reset_n = 0;
    endfunction : assert_reset
 
@@ -65,7 +63,6 @@ interface uvmt_{{ name }}_st_clknrst_gen_if;
     * De-asserts both reset signals.
     */
    function void deassert_reset();
-      reset   = 0;
       reset_n = 1;
    endfunction : deassert_reset
 

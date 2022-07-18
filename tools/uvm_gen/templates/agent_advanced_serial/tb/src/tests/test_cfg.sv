@@ -8,23 +8,23 @@
 
 
 /**
- * Object encapsulating configuration parameters common to most if not all tests extending from uvmt_{{ name }}_st_base_test_c.
+ * Object encapsulating common configuration parameters for {{ name }} UVM Agent Self-Tests.
  */
 class uvmt_{{ name }}_st_test_cfg_c extends uvml_test_cfg_c;
 
    /// @defgroup Knobs
    /// @{
-   rand int unsigned  clk_period        ; ///< Specified in picoseconds (ps)
-   rand int unsigned  reset_period      ; ///< Specified in nanoseconds (ns)
-   rand int unsigned  startup_timeout   ; ///< Specified in nanoseconds (ns)
-   rand int unsigned  heartbeat_period  ; ///< Specified in nanoseconds (ns)
-   rand int unsigned  simulation_timeout; ///< Specified in nanoseconds (ns)
+   rand int unsigned  clk_period        ; ///< Test bench clock period (ps)
+   rand int unsigned  reset_period      ; ///< Test bench reset pulse duration (ns)
+   rand int unsigned  startup_timeout   ; ///< Timer ending test if no heartbeat is detected from start of simulation (ns)
+   rand int unsigned  heartbeat_period  ; ///< Timer ending phase if no heartbeat is detected from start of a phase (ns)
+   rand int unsigned  simulation_timeout; ///< Timer ending simulation (ns)
    /// @}
 
    /// @defgroup Command line arguments
    /// @{
-   bit           cli_num_seq_items_override = 0; ///<
-   int unsigned  cli_num_seq_items_parsed; ///<
+   bit           cli_num_seq_items_override = 0; ///< Set to '1' if argument was found for #num_seq_items.
+   int unsigned  cli_num_seq_items_parsed; ///< Parsed integer value from the CLI for #num_seq_items.
    /// @}
 
 
@@ -41,7 +41,7 @@ class uvmt_{{ name }}_st_test_cfg_c extends uvml_test_cfg_c;
 
 
    /**
-    *
+    * Sets safe defaults for all simulation timing parameters.
     */
    constraint defaults_cons {
       clk_period         == uvmt_{{ name }}_st_default_clk_period        ;
@@ -58,7 +58,7 @@ class uvmt_{{ name }}_st_test_cfg_c extends uvml_test_cfg_c;
    extern function new(string name="uvmt_{{ name }}_st_test_cfg");
 
    /**
-    * TODO Describe uvmt_{{ name }}_st_test_cfg_c::process_cli_args()
+    * Processes command line interface arguments.
     */
    extern function void process_cli_args();
 

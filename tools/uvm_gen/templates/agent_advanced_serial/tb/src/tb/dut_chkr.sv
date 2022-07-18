@@ -11,9 +11,9 @@
  * Module encapsulating assertions for {{ full_name }} Self-Test DUT wrapper (uvmt_{{ name }}_st_dut_wrap).
  */
 module uvmt_{{ name }}_st_dut_chkr (
-   uvma_{{ name }}_if  {{ mode_1 }}_if,
-   uvma_{{ name }}_if  {{ mode_2 }}_if,
-   uvma_{{ name }}_if  passive_if
+   uvma_{{ name }}_if  {{ mode_1 }}_if, ///< {{ mode_1.upper() }} Agent interface
+   uvma_{{ name }}_if  {{ mode_2 }}_if, ///< {{ mode_2.upper() }} Agent interface
+   uvma_{{ name }}_if  passive_if       ///< Passive Agent interface
 );
 
    // TODO Add assertions to uvmt_{{ name }}_st_dut_chkr

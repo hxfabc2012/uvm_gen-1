@@ -8,7 +8,7 @@
 
 
 /**
- * Module encapsulating the {{ full_name }} Self-Test DUT wrapper, agents and clock generating interfaces.
+ * Module encapsulating the {{ full_name }} UVM Agent Self-Test "DUT" wrapper, agents and clock generating interfaces.
  */
 module uvmt_{{ name }}_st_tb;
 

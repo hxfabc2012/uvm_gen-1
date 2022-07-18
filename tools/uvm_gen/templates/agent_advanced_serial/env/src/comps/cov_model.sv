@@ -50,7 +50,7 @@ class uvme_{{ name }}_st_cov_model_c extends uvma_{{ name }}_cov_model_c;
    endgroup : {{ name }}_st_{{ tx }}_mon_trn_cg
 
    /**
-    *{{ rx.upper() }} Monitor Transaction functional coverage.
+    * {{ rx.upper() }} Monitor Transaction functional coverage.
     */
    covergroup {{ name }}_st_{{ rx }}_mon_trn_cg;
       header_cpt : coverpoint {{ rx }}_mon_trn.header;

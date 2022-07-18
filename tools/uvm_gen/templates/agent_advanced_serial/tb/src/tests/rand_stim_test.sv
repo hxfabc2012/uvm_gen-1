@@ -8,18 +8,18 @@
 
 
 /**
- * TODO Describe uvmt_{{ name }}_st_rand_stim_test_c
+ * Test running uvme_${name}_st_rand_stim_vseq_c with default parameters and scoreboarding enabled.
  */
 class uvmt_{{ name }}_st_rand_stim_test_c extends uvmt_{{ name }}_st_base_test_c;
 
-   rand uvme_{{ name }}_st_rand_stim_vseq_c  rand_stim_vseq; ///<
+   rand uvme_{{ name }}_st_rand_stim_vseq_c  rand_stim_vseq; ///< Virtual Sequence to be run during #main_phase()
 
 
    `uvm_component_utils(uvmt_{{ name }}_st_rand_stim_test_c)
 
 
    /**
-    * Describe rand_stim_vseq_cons
+    * Overrides number of stimulus items to drive with CLI argument (if present).
     */
    constraint rand_stim_vseq_cons {
       if (test_cfg.cli_num_seq_items_override) {
@@ -40,7 +40,7 @@ class uvmt_{{ name }}_st_rand_stim_test_c extends uvmt_{{ name }}_st_base_test_c
    extern virtual task main_phase(uvm_phase phase);
 
    /**
-    * TODO Describe uvmt_{{ name }}_st_rand_stim_test_c::check_phase()
+    * Checks that all scoreboards have number of matches equal to number of Sequence Items specified to be generated.
     */
    extern virtual function void check_phase(uvm_phase phase);
 

@@ -12,9 +12,9 @@
  * All ports are SV interfaces.
  */
 module uvmt_{{ name }}_st_dut_wrap(
-   uvma_{{ name }}_if  {{ mode_1 }}_if,
-   uvma_{{ name }}_if  {{ mode_2 }}_if,
-   uvma_{{ name }}_if  passive_if
+   uvma_{{ name }}_if  {{ mode_1 }}_if, ///< {{ mode_1.upper() }} Agent interface
+   uvma_{{ name }}_if  {{ mode_2 }}_if, ///< {{ mode_2.upper() }} Agent interface
+   uvma_{{ name }}_if  passive_if       ///< Passive Agent interface
 );
 
    /// @defgroup {{ tx.upper() }}

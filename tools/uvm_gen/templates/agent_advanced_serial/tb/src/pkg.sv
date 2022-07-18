@@ -25,7 +25,7 @@ timeprecision  1ps;
 
 
 /**
- * Encapsulates all the types and test cases for self-testing {{ full_name }}.
+ * Encapsulates the test library of the {{ full_name }} UVM Agent Self-Test Bench.
  */
 package uvmt_{{ name }}_st_pkg;
 

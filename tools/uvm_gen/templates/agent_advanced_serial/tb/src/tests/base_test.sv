@@ -13,19 +13,20 @@
  */
 class uvmt_{{ name }}_st_base_test_c extends uvml_test_c;
 
+   virtual uvmt_{{ name }}_st_clknrst_gen_if  clknrst_gen_vif; ///< Handle to clock and reset generation interface.
+
    /// @defgroup Objects
    /// @{
-   virtual uvmt_{{ name }}_st_clknrst_gen_if  clknrst_gen_vif; ///< Handle to clock generation interface
-   rand uvmt_{{ name }}_st_test_cfg_c  test_cfg ; ///<
-   rand uvme_{{ name }}_st_cfg_c       env_cfg  ; ///<
-   uvme_{{ name }}_st_cntxt_c          env_cntxt; ///<
-   uvml_logs_rs_text_c  rs;
+   rand uvmt_{{ name }}_st_test_cfg_c  test_cfg ; ///< Test configuration handle
+   rand uvme_{{ name }}_st_cfg_c       env_cfg  ; ///< Environment configuration handle.
+   uvme_{{ name }}_st_cntxt_c          env_cntxt; ///< Environment context handle.
+   uvml_logs_rs_text_c  rs; ///< Custom UVM report server.
    /// @}
 
    /// @defgroup Components
    /// @{
-   uvme_{{ name }}_st_env_c   env       ; ///<
-   uvme_{{ name }}_st_vsqr_c  vsequencer; ///<
+   uvme_{{ name }}_st_env_c   env       ; ///< Target environment.
+   uvme_{{ name }}_st_vsqr_c  vsequencer; ///< Target environment virtual sequencer handle.
    /// @}
 
 
@@ -37,7 +38,7 @@ class uvmt_{{ name }}_st_base_test_c extends uvml_test_c;
 
 
    /**
-    *
+    * Sets safe default options for #env_cfg.
     */
    constraint env_cfg_cons {
       env_cfg.enabled               == 1;
@@ -58,49 +59,50 @@ class uvmt_{{ name }}_st_base_test_c extends uvml_test_c;
    extern function new(string name="uvmt_{{ name }}_st_base_test", uvm_component parent=null);
 
    /**
-    * 1. Builds test_cfg & env_cfg via create_cfg()
-    * 2. Randomizes entire test class via randomize_test()
-    * 3. Passes env_cfg to env via uvm_config_db via assign_cfg()
-    * 4. Builds env_cntxt via create_cntxt()
-    * 5. Passes env_cntxt to env using UVM Configuration Database via assign_cntxt()
-    * 6. Builds env via create_env()
-    * 7. Builds the rest of the components/objects via create_components()
+    * 1. Retrieves clknrst_gen_vif handle via uvm_config_db.
+    * 2. Builds test_cfg & env_cfg
+    * 3. Randomizes test
+    * 4. Configures simulation monitors
+    * 5. Passes env_cfg to env via uvm_config_db
+    * 6. Builds env_cntxt
+    * 7. Passes env_cntxt to env via uvm_config_db
+    * 8. Builds env
+    * 9. Builds the rest of the components/objects
     */
    extern virtual function void build_phase(uvm_phase phase);
 
    /**
-    * 1. Assigns environment's virtual sequencer handle to vsequencer.
-    * 2. Add register callback (reg_cbs) to all registers & fields.
+    * Assigns Environment's Virtual Sequencer handle to #vsequencer.
     */
    extern virtual function void connect_phase(uvm_phase phase);
 
    /**
-    * Triggers the start of clock generation via start_clk()
+    * Triggers the start of clock generation.
     */
    extern virtual task run_phase(uvm_phase phase);
 
    /**
-    * Asserts & de-asserts reset via clknrst_vif.
+    * Asserts & de-asserts reset.
     */
    extern virtual task reset_phase(uvm_phase phase);
 
    /**
-    * Waits for agents to sync.
+    * Waits for all agents to sync.
     */
    extern virtual task post_reset_phase(uvm_phase phase);
 
    /**
-    * Retrieves clknrst_gen_vif from UVM configuration database.
+    * Retrieves clknrst_gen_vif from uvm_config_db.
     */
    extern function void retrieve_clknrst_gen_vif();
 
    /**
-    * Creates test_cfg and env_cfg.
+    * Creates #test_cfg and #env_cfg.
     */
    extern function void create_cfg();
 
    /**
-    * 1. Calls test_cfg's process_cli_args()
+    * 1. Calls #test_cfg's process_cli_args()
     * 2. Calls randomize on 'this' and fatals out if it fails.
     */
    extern function void randomize_test();
@@ -111,34 +113,32 @@ class uvmt_{{ name }}_st_base_test_c extends uvml_test_c;
    extern function void cfg_hrtbt_monitor();
 
    /**
-    * Assigns environment configuration (env_cfg) handle to environment (env)
-    * using UVM Configuration Database.
+    * Assigns Environment Configuration (#env_cfg) handle to Environment (#env) using uvm_config_db.
     */
    extern function void assign_cfg();
 
    /**
-    * Creates env_cntxt.
+    * Creates #env_cntxt.
     */
    extern function void create_cntxt();
 
    /**
-    * Assigns environment context (env_cntxt) handle to environment (env) using
-    * UVM Configuration Database.
+    * Assigns Environment Context (env_cntxt) handle to Environment (#env) using uvm_config_db.
     */
    extern function void assign_cntxt();
 
    /**
-    * Creates env.
+    * Creates #env.
     */
    extern function void create_env();
 
    /**
-    * Creates additional (non-environment) components (and objects).
+    * Creates additional (non-Environment) components (and objects).
     */
    extern function void create_components();
 
    /**
-    * Starts clock generation via clknrst_gen_vif functions.
+    * Starts clock generation.
     */
    extern task start_clk();
 
